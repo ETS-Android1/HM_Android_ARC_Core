@@ -1,5 +1,6 @@
 package com.healthymedium.arc.study;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -207,6 +208,28 @@ public class StudyStateMachine {
         fragments.add(new SetupWelcome());
         fragments.add(new SetupParticipant());
         fragments.add(new SetupParticipantConfirm());
+        fragments.add(new SetupSite());
+
+        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
+        enableTransition(segment,false);
+        state.segments.add(segment);
+    }
+
+    public void setPathSetupParticipant(int firstDigits, int secondDigits) {
+        List<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new SetupWelcome());
+
+        SetupParticipant setupParticipantFragment = new SetupParticipant();
+        Bundle setupDigitsBundle = new Bundle();
+        setupDigitsBundle.putInt("firstDigits", firstDigits);
+        setupDigitsBundle.putInt("secondDigits", secondDigits);
+        setupParticipantFragment.setArguments(setupDigitsBundle);
+        fragments.add(setupParticipantFragment);
+
+        SetupParticipantConfirm setupParticipantConfirmFragment = new SetupParticipantConfirm();
+        setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
+        fragments.add(setupParticipantConfirmFragment);
+
         fragments.add(new SetupSite());
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);

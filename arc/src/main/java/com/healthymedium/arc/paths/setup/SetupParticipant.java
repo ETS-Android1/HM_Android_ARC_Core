@@ -37,7 +37,9 @@ import java.util.List;
 
 public class SetupParticipant extends StandardTemplate {
 
-    final int maxDigits = 8;
+    int maxDigits = 8;
+    int firstDigits = 5;
+    int secondDigits = 3;
 
     CharSequence characterSequence;
     int focusedIndex=0;
@@ -56,6 +58,20 @@ public class SetupParticipant extends StandardTemplate {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
+
+        // This isn't quite as safe as I would like
+        // It still assumes all of the keys exist in the bundle
+        if (getArguments() != null) {
+            if (getArguments().containsKey("firstDigits")) {
+                firstDigits = getArguments().getInt("firstDigits");
+            }
+
+            if (getArguments().containsKey("secondDigits")) {
+                secondDigits = getArguments().getInt("secondDigits");
+            }
+        }
+
+        maxDigits = firstDigits + secondDigits;
 
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,20 +101,22 @@ public class SetupParticipant extends StandardTemplate {
         content.setPadding(0,50,0,50);
 
         digits = new ArrayList<>();
-        for(int i=0; i<5;i++){
+        for(int i=0; i<firstDigits;i++){
             DigitView digitInput = new DigitView(getContext());
             digitInput.setOnClickListener(clickListener);
             digits.add(digitInput);
             inputLayout.addView(digitInput);
         }
 
-        addSpacer(16);
+        if (secondDigits > 0) {
+            addSpacer(16);
 
-        for(int i=0;i<3;i++){
-            DigitView digitInput = new DigitView(getContext());
-            digitInput.setOnClickListener(clickListener);
-            digits.add(digitInput);
-            inputLayout.addView(digitInput);
+            for(int i=0;i<secondDigits;i++){
+                DigitView digitInput = new DigitView(getContext());
+                digitInput.setOnClickListener(clickListener);
+                digits.add(digitInput);
+                inputLayout.addView(digitInput);
+            }
         }
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
