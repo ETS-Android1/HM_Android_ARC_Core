@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.Pair;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
@@ -100,6 +102,21 @@ public class CircadianClock {
         return true;
     }
 
+    public static DateTime getCorrectedTime(LocalTime localTime, LocalDate startDate) {
+        DateTimeZone timeZone = DateTimeZone.getDefault();
+
+        LocalDateTime startDateTime = startDate.toLocalDateTime(localTime);
+
+        if(timeZone.isLocalDateTimeGap(startDateTime)) {
+            //correct the time by moving it to the end of the gap
+            long dayStartMillis = startDateTime.toLocalDate().toDateTimeAtStartOfDay().getMillis();
+            long endOfGapMillis = timeZone.nextTransition(dayStartMillis);
+            return new DateTime(endOfGapMillis, timeZone);
+        }
+
+        return startDate.toDateTime(localTime);
+    }
+
 
     // this outputs a list of pairs<wake,sleep>
     // the list starts with the date provided and provides a weeks worth of pairs
@@ -122,11 +139,15 @@ public class CircadianClock {
             DateTime bed;
 
             if(rhythms.get(i).isNocturnal()){
-                wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = startDate.toDateTime(rhythms.get(i).getBedTime()).plusDays(1);
+                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
+                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
+                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate).plusDays(1);
+                //bed = startDate.toDateTime(rhythms.get(i).getBedTime()).plusDays(1);
             } else {
-                wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = startDate.toDateTime(rhythms.get(i).getBedTime());
+                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
+                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
+                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate);
+                //bed = startDate.toDateTime(rhythms.get(i).getBedTime());
             }
             instant.setWakeTime(wake);
             instant.setBedTime(bed);
@@ -141,11 +162,15 @@ public class CircadianClock {
             DateTime bed;
 
             if(rhythms.get(i).isNocturnal()){
-                wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = startDate.toDateTime(rhythms.get(i).getBedTime()).plusDays(1);
+                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
+                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
+                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate).plusDays(1);
+                //bed = startDate.toDateTime(rhythms.get(i).getBedTime()).plusDays(1);
             } else {
-                wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = startDate.toDateTime(rhythms.get(i).getBedTime());
+                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
+                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
+                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate);
+                //bed = startDate.toDateTime(rhythms.get(i).getBedTime());
             }
             instant.setWakeTime(wake);
             instant.setBedTime(bed);
