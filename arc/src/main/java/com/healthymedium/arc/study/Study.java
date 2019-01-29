@@ -7,8 +7,10 @@ import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.models.Heartbeat;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
+import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 import com.healthymedium.arc.utilities.MigrationUtil;
+import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -269,4 +271,21 @@ public class Study{
         return stateMachine.openPrevious(skips);
     }
 
+
+    // Mark the current test as abandoned, and setup the stateMachine so that it knows what to
+    // display next.
+    
+    public static void abandonTest()
+    {
+        LoadingDialog dialog = new LoadingDialog();
+        dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
+
+        stateMachine.abandonTest();
+
+        dialog.dismiss();
+
+        stateMachine.decidePath();
+        stateMachine.setupPath();
+        stateMachine.openNext();
+    }
 }

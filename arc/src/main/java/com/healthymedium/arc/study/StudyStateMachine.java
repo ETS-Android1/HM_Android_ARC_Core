@@ -93,6 +93,10 @@ public class StudyStateMachine {
 
     }
 
+    public void abandonTest(){
+
+    }
+
     protected void setupPath(){
 
     }
