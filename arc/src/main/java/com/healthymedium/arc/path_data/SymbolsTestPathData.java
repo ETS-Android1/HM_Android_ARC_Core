@@ -38,19 +38,30 @@ public class SymbolsTestPathData extends PathSegmentData {
     @Override
     protected Object onProcess() {
         SymbolTest test = new SymbolTest();
-        test.date = JodaUtil.toUtcDouble(start);
+
         test.sections = new ArrayList<>();
 
-        long startTime = start.getMillis();
+        long startTime = 0;
+
+        if(start != null)
+        {
+            test.date = JodaUtil.toUtcDouble(start);
+            startTime = start.getMillis();
+        }
 
         for(Section section : sections){
             SymbolTestSection testSection = new SymbolTestSection();
-            testSection.appearanceTime = Double.valueOf((section.appearanceTime - startTime) / (double)1000);
-            testSection.selectionTime = Double.valueOf((section.selectionTime - startTime) / (double)1000);
             testSection.selected = section.selected;
             testSection.correct = section.correct;
             testSection.choices = section.choices;
             testSection.options = section.options;
+
+            if(start != null)
+            {
+                testSection.appearanceTime = Double.valueOf((section.appearanceTime - startTime) / (double)1000);
+                testSection.selectionTime = Double.valueOf((section.selectionTime - startTime) / (double)1000);
+            }
+
             test.sections.add(testSection);
         }
 

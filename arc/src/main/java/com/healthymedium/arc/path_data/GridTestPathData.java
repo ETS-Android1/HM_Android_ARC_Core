@@ -52,16 +52,19 @@ public class GridTestPathData extends PathSegmentData {
     @Override
     protected Object onProcess() {
         GridTest test = new GridTest();
-        test.date = JodaUtil.toUtcDouble(start);
+
         test.sections = new ArrayList<>();
 
-        long startTime = start.getMillis();
+        long startTime = 0;
+
+        if(start != null)
+        {
+            test.date = JodaUtil.toUtcDouble(start);
+            startTime = start.getMillis();
+        }
 
         for(Section section : sections){
             GridTestSection testSection = new GridTestSection();
-            testSection.displayDistraction = Double.valueOf((section.displayTimeDistraction - startTime) / (double)1000);
-            testSection.displayTestGrid = Double.valueOf((section.displayTimeTestGrid - startTime) / (double)1000);
-            testSection.displaySymbols = Double.valueOf((section.displayTimeSymbols - startTime) / (double)1000);
             testSection.eCount = section.eCount;
             testSection.fCount = section.fCount;
 
@@ -79,10 +82,19 @@ public class GridTestPathData extends PathSegmentData {
                 GridTestTap testTap = new GridTestTap();
                 testTap.x = tap.x;
                 testTap.y = tap.y;
-                testTap.selectionTime = Double.valueOf((tap.selectionTime - startTime) / (double)1000);
+                if(start != null)
+                {
+                    testTap.selectionTime = Double.valueOf((tap.selectionTime - startTime) / (double) 1000);
+                }
                 testSection.choices.add(testTap);
             }
 
+            if(start != null)
+            {
+                testSection.displayDistraction = Double.valueOf((section.displayTimeDistraction - startTime) / (double)1000);
+                testSection.displayTestGrid = Double.valueOf((section.displayTimeTestGrid - startTime) / (double)1000);
+                testSection.displaySymbols = Double.valueOf((section.displayTimeSymbols - startTime) / (double)1000);
+            }
             test.sections.add(testSection);
         }
 
