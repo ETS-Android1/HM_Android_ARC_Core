@@ -170,8 +170,11 @@ public class NotificationManager {
                 scheduleNotification(nodes.get(i).id,nodes.get(i).type,time);
             } else {
                 nodes.remove(i);
+                size--;
+                i--;
             }
         }
+        saveNodes();
     }
 
     public void scheduleNotification(int sessionId, int type, DateTime timeStamp) {

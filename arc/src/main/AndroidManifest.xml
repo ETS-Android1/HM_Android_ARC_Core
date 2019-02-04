@@ -18,7 +18,7 @@
         <receiver android:name="com.healthymedium.arc.notifications.NotificationReceiver">
         </receiver>
 
-        <service android:name="com.healthymedium.arc.notifications.NotificationJobService"
+        <service android:name="com.healthymedium.arc.notifications.NotificationNotifyJob"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:exported="true"/>
 

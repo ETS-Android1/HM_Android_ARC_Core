@@ -10,11 +10,11 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 
 import java.util.Locale;
 
-public class NotificationJobService extends JobService {
+public class NotificationNotifyJob extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.i("NotificationJobService","onStartJob");
+        Log.i("NotificationNotifyJob","onStartJob");
 
         if(PreferencesManager.getInstance()==null){
             PreferencesManager.initialize(this);
@@ -53,7 +53,7 @@ public class NotificationJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        Log.i("NotificationJobService","onStopJob");
+        Log.i("NotificationNotifyJob","onStopJob");
         return false;
     }
 
