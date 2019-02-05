@@ -219,7 +219,7 @@ public class StudyStateMachine {
         state.segments.add(segment);
     }
 
-    public void setPathSetupParticipant(int firstDigits, int secondDigits) {
+    public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new SetupWelcome());
 
@@ -234,7 +234,11 @@ public class StudyStateMachine {
         setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
         fragments.add(setupParticipantConfirmFragment);
 
-        fragments.add(new SetupSite());
+        SetupSite setupSiteFragment = new SetupSite();
+        Bundle setupSiteBundle = new Bundle();
+        setupSiteBundle.putInt("siteDigits", siteDigits);
+        setupSiteFragment.setArguments(setupSiteBundle);
+        fragments.add(setupSiteFragment);
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);

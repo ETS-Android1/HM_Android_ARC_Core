@@ -41,7 +41,7 @@ import java.util.List;
 public class SetupSite extends StandardTemplate {
 
     String defaultError = "Sorry, our app is currently experiencing issues. Please try again later.";
-    final int maxDigits = 5;
+    int maxDigits = 5;
 
     CharSequence characterSequence;
     int focusedIndex=0;
@@ -65,6 +65,12 @@ public class SetupSite extends StandardTemplate {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view = super.onCreateView(inflater,container,savedInstanceState);
+
+        if (getArguments() != null) {
+            if (getArguments().containsKey("siteDigits")) {
+                maxDigits = getArguments().getInt("siteDigits");
+            }
+        }
 
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
