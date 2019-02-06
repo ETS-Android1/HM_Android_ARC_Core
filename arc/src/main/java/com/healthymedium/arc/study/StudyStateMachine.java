@@ -48,10 +48,15 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.LocalTime;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class StudyStateMachine {
 
@@ -297,10 +302,37 @@ public class StudyStateMachine {
         workingDayCountOptions.add("7");
         fragments.add(new QuestionRadioButtons(true,"Normally, how many days a week do you work?","Select one",workingDayCountOptions));
 
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",null));
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",null));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",null));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",null));
+        CircadianClock clock;
+        String weekday;
+        LocalTime wakeTime = null;
+        LocalTime bedTime = null;
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        weekday = dayFormat.format(calendar.getTime());
+
+        clock = Study.getParticipant().getCircadianClock();
+
+        // Get previously entered wake time for today
+        if(wakeTime==null && !clock.hasWakeRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            wakeTime = clock.getRhythm(index).getWakeTime();
+        } else if(wakeTime==null){
+            wakeTime = clock.getRhythm(weekday).getWakeTime();
+        }
+
+        // Get previously entered bed time for today
+        if(bedTime==null && !clock.hasBedRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            bedTime = clock.getRhythm(index).getBedTime();
+        } else if(bedTime==null){
+            bedTime = clock.getRhythm(weekday).getBedTime();
+        }
+
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
@@ -316,11 +348,38 @@ public class StudyStateMachine {
                 "The following questions will ask you about sleep specific to last night and waking this morning.",
                 "BEGIN"));
 
-        fragments.add(new QuestionTime(true,"What time did you get in bed last night?","",null));
+        CircadianClock clock;
+        String weekday;
+        LocalTime wakeTime = null;
+        LocalTime bedTime = null;
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        weekday = dayFormat.format(calendar.getTime());
+
+        clock = Study.getParticipant().getCircadianClock();
+
+        // Get previously entered wake time for today
+        if(wakeTime==null && !clock.hasWakeRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            wakeTime = clock.getRhythm(index).getWakeTime();
+        } else if(wakeTime==null){
+            wakeTime = clock.getRhythm(weekday).getWakeTime();
+        }
+
+        // Get previously entered bed time for today
+        if(bedTime==null && !clock.hasBedRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            bedTime = clock.getRhythm(index).getBedTime();
+        } else if(bedTime==null){
+            bedTime = clock.getRhythm(weekday).getBedTime();
+        }
+
+        fragments.add(new QuestionTime(true,"What time did you get in bed last night?","",bedTime));
         fragments.add(new QuestionDuration(true,"How long did it take you to fall asleep last night?"," "));
         fragments.add(new QuestionInteger(true,"How many times did you wake up for 5 minutes or longer?","Number of times",2));
-        fragments.add(new QuestionTime(true,"What time did you wake up this morning?"," ",null));
-        fragments.add(new QuestionTime(true,"What time did you get out of bed this morning?"," ",null));
+        fragments.add(new QuestionTime(true,"What time did you wake up this morning?"," ",wakeTime));
+        fragments.add(new QuestionTime(true,"What time did you get out of bed this morning?"," ",wakeTime));
         fragments.add(new QuestionRating(true,"How would you rate the quality of your sleep?","On a scale of poor to excellent.","Poor","Excellent"));
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
