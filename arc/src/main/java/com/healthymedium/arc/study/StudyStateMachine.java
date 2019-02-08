@@ -299,7 +299,7 @@ public class StudyStateMachine {
         workingDayCountOptions.add("5");
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
-        fragments.add(new QuestionRadioButtons(true,"Normally, how many days a week do you work?","Select one",workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,false,"Normally, how many days a week do you work?","Select one",workingDayCountOptions));
 
         fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",null));
         fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",null));
@@ -359,7 +359,7 @@ public class StudyStateMachine {
         where.add("Vehicle");
         where.add("Outside");
         where.add("Other");
-        fragments.add(new QuestionRadioButtons(true,"Where are you right now?","Select One",where));
+        fragments.add(new QuestionRadioButtons(true,false,"Where are you right now?","Select One",where));
 
         fragments.add(new QuestionRating(true,"How would you rate <b>your overall mood</b> right now?","On a scale of bad to good.","Bad","Good"));
         fragments.add(new QuestionRating(true,"How would you rate <b>how you feel</b> right now?","On a scale of sleepy/tired to active/alert.","Sleepy/Tired","Active/Alert"));
@@ -375,7 +375,7 @@ public class StudyStateMachine {
         what.add("Personal Care");
         what.add("Resting");
         what.add("Other");
-        fragments.add(new QuestionRadioButtons(true,"In the past 5 minutes, what were you mostly doing?","Select One",what));
+        fragments.add(new QuestionRadioButtons(true,false,"In the past 5 minutes, what were you mostly doing?","Select One",what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);

@@ -21,17 +21,19 @@ public class QuestionRadioButtons extends QuestionTemplate {
     List<String> options;
     String selection;
     int lastIndex = -1;
+    boolean allowHelp;
 
-    public QuestionRadioButtons(boolean allowBack, String header, String subheader, List<String> options) {
+    public QuestionRadioButtons(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options) {
         super(allowBack,header,subheader);
         this.options = options;
+        this.allowHelp = allowHelp;
         type = "choice";
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
-        setHelpVisible(false);
+        setHelpVisible(allowHelp);
 
         buttons = new ArrayList<>();
         int index=0;
