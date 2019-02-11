@@ -1,5 +1,6 @@
 package com.healthymedium.arc.study;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -47,10 +48,15 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.LocalTime;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class StudyStateMachine {
 
@@ -89,6 +95,10 @@ public class StudyStateMachine {
     }
 
     public void decidePath(){
+
+    }
+
+    public void abandonTest(){
 
     }
 
@@ -214,6 +224,28 @@ public class StudyStateMachine {
         state.segments.add(segment);
     }
 
+    public void setPathSetupParticipant(int firstDigits, int secondDigits) {
+        List<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new SetupWelcome());
+
+        SetupParticipant setupParticipantFragment = new SetupParticipant();
+        Bundle setupDigitsBundle = new Bundle();
+        setupDigitsBundle.putInt("firstDigits", firstDigits);
+        setupDigitsBundle.putInt("secondDigits", secondDigits);
+        setupParticipantFragment.setArguments(setupDigitsBundle);
+        fragments.add(setupParticipantFragment);
+
+        SetupParticipantConfirm setupParticipantConfirmFragment = new SetupParticipantConfirm();
+        setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
+        fragments.add(setupParticipantConfirmFragment);
+
+        fragments.add(new SetupSite());
+
+        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
+        enableTransition(segment,false);
+        state.segments.add(segment);
+    }
+
     public void setPathSetupAvailability(){
         List<BaseFragment> fragments = new ArrayList<>();
 
@@ -270,10 +302,37 @@ public class StudyStateMachine {
         workingDayCountOptions.add("7");
         fragments.add(new QuestionRadioButtons(true,"Normally, how many days a week do you work?","Select one",workingDayCountOptions));
 
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",null));
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",null));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",null));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",null));
+        CircadianClock clock;
+        String weekday;
+        LocalTime wakeTime = null;
+        LocalTime bedTime = null;
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        weekday = dayFormat.format(calendar.getTime());
+
+        clock = Study.getParticipant().getCircadianClock();
+
+        // Get previously entered wake time for today
+        if(wakeTime==null && !clock.hasWakeRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            wakeTime = clock.getRhythm(index).getWakeTime();
+        } else if(wakeTime==null){
+            wakeTime = clock.getRhythm(weekday).getWakeTime();
+        }
+
+        // Get previously entered bed time for today
+        if(bedTime==null && !clock.hasBedRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            bedTime = clock.getRhythm(index).getBedTime();
+        } else if(bedTime==null){
+            bedTime = clock.getRhythm(weekday).getBedTime();
+        }
+
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
@@ -289,11 +348,38 @@ public class StudyStateMachine {
                 "The following questions will ask you about sleep specific to last night and waking this morning.",
                 "BEGIN"));
 
-        fragments.add(new QuestionTime(true,"What time did you get in bed last night?","",null));
+        CircadianClock clock;
+        String weekday;
+        LocalTime wakeTime = null;
+        LocalTime bedTime = null;
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        weekday = dayFormat.format(calendar.getTime());
+
+        clock = Study.getParticipant().getCircadianClock();
+
+        // Get previously entered wake time for today
+        if(wakeTime==null && !clock.hasWakeRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            wakeTime = clock.getRhythm(index).getWakeTime();
+        } else if(wakeTime==null){
+            wakeTime = clock.getRhythm(weekday).getWakeTime();
+        }
+
+        // Get previously entered bed time for today
+        if(bedTime==null && !clock.hasBedRhythmChanged(weekday)){
+            int index = clock.getRhythmIndex(weekday)-1;
+            bedTime = clock.getRhythm(index).getBedTime();
+        } else if(bedTime==null){
+            bedTime = clock.getRhythm(weekday).getBedTime();
+        }
+
+        fragments.add(new QuestionTime(true,"What time did you get in bed last night?","",bedTime));
         fragments.add(new QuestionDuration(true,"How long did it take you to fall asleep last night?"," "));
         fragments.add(new QuestionInteger(true,"How many times did you wake up for 5 minutes or longer?","Number of times",2));
-        fragments.add(new QuestionTime(true,"What time did you wake up this morning?"," ",null));
-        fragments.add(new QuestionTime(true,"What time did you get out of bed this morning?"," ",null));
+        fragments.add(new QuestionTime(true,"What time did you wake up this morning?"," ",wakeTime));
+        fragments.add(new QuestionTime(true,"What time did you get out of bed this morning?"," ",wakeTime));
         fragments.add(new QuestionRating(true,"How would you rate the quality of your sleep?","On a scale of poor to excellent.","Poor","Excellent"));
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);

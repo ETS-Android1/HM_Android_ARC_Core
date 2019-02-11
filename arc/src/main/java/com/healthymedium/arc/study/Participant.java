@@ -50,10 +50,7 @@ public class Participant {
 
     protected void checkForTestAbandonment(){
         if(state.lastPauseTime.plusMinutes(5).isBeforeNow()){
-            getCurrentTestSession().markAbandoned();
-            save();
-
-            Study.getInstance().openNextFragment();
+            Study.getInstance().abandonTest();
         }
     }
 

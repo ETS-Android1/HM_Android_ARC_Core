@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.PersistableBundle;
 
-import com.healthymedium.arc.notifications.NotificationJobService;
-
 import static com.healthymedium.arc.notifications.NotificationManager.NOTIFICATION_ID;
 import static com.healthymedium.arc.notifications.NotificationManager.NOTIFICATION_TYPE;
 
@@ -26,7 +24,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         extras.putInt(NOTIFICATION_ID, id);
         extras.putInt(NOTIFICATION_TYPE, type);
 
-        ComponentName serviceComponent = new ComponentName(context, NotificationJobService.class);
+        ComponentName serviceComponent = new ComponentName(context, NotificationNotifyJob.class);
         JobInfo.Builder builder = new JobInfo.Builder((id+1)*type, serviceComponent);
         builder.setRequiresDeviceIdle(false); // device should be idle
         builder.setRequiresCharging(false); // we don't care if the device is charging or not

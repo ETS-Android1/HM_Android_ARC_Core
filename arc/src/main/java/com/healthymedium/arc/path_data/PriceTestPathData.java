@@ -49,23 +49,35 @@ public class PriceTestPathData extends PathSegmentData {
 
     @Override
     protected Object onProcess() {
+
         PriceTest test = new PriceTest();
-        test.date = JodaUtil.toUtcDouble(start);
+
         test.sections = new ArrayList<>();
 
-        long startTime = start.getMillis();
+        long startTime = 0;
+
+        if(start != null)
+        {
+            test.date = JodaUtil.toUtcDouble(start);
+            startTime = start.getMillis();
+        }
 
         for(Section section : sections){
             PriceTestSection testSection = new PriceTestSection();
-            testSection.stimulusDisplayTime = Double.valueOf((section.stimulusDisplayTime - startTime) / (double)1000);
-            testSection.questionDisplayTime = Double.valueOf((section.questionDisplayTime - startTime) / (double)1000);
-            testSection.selectionTime = Double.valueOf((section.selectionTime - startTime) / (double)1000);
             testSection.selectedIndex = section.selectedIndex;
             testSection.correctIndex = section.correctIndex;
             testSection.goodPrice = section.goodPrice;
             testSection.altPrice = section.altPrice;
             testSection.price = section.price;
             testSection.item = section.item;
+
+            if(start != null)
+            {
+                testSection.stimulusDisplayTime = Double.valueOf((section.stimulusDisplayTime - startTime) / (double)1000);
+                testSection.questionDisplayTime = Double.valueOf((section.questionDisplayTime - startTime) / (double)1000);
+                testSection.selectionTime = Double.valueOf((section.selectionTime - startTime) / (double)1000);
+            }
+
             test.sections.add(testSection);
         }
 
