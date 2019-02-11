@@ -288,4 +288,10 @@ public class Study{
         stateMachine.setupPath();
         stateMachine.openNext();
     }
+
+    public static void updateAvailability()
+    {
+        stateMachine.setPathSetupAvailability();
+        stateMachine.openNext();
+    }
 }
