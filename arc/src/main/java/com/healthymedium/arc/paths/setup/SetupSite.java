@@ -175,8 +175,7 @@ public class SetupSite extends StandardTemplate {
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrivacyScreen privacyScreen = new PrivacyScreen();
-                NavigationManager.getInstance().open(privacyScreen);
+                Study.getPrivacyPolicy().show(getContext());
             }
         });
         linearLayout.addView(textViewPolicyLink);
