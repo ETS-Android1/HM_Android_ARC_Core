@@ -277,13 +277,12 @@ public class Study{
     
     public static void abandonTest()
     {
-        LoadingDialog dialog = new LoadingDialog();
-        dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
+        //TODO: move the dialog to somewhere further up this chain
+//        LoadingDialog dialog = new LoadingDialog();
+//        dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
 
+//        dialog.dismiss();
         stateMachine.abandonTest();
-
-        dialog.dismiss();
-
         stateMachine.decidePath();
         stateMachine.setupPath();
         stateMachine.openNext();

@@ -1,5 +1,6 @@
 package com.healthymedium.arc.path_data;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.GridTest;
 import com.healthymedium.arc.api.tests.data.GridTestImage;
 import com.healthymedium.arc.api.tests.data.GridTestSection;
@@ -50,7 +51,7 @@ public class GridTestPathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
         GridTest test = new GridTest();
 
         test.sections = new ArrayList<>();

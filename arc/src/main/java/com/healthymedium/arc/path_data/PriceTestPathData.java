@@ -1,5 +1,6 @@
 package com.healthymedium.arc.path_data;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.PriceTest;
 import com.healthymedium.arc.api.tests.data.PriceTestSection;
 import com.healthymedium.arc.study.PathSegmentData;
@@ -48,7 +49,7 @@ public class PriceTestPathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
 
         PriceTest test = new PriceTest();
 

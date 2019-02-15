@@ -1,6 +1,7 @@
 package com.healthymedium.arc.path_data;
 
 import com.google.gson.annotations.SerializedName;
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.ChronotypeSurvey;
 import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
 import com.healthymedium.arc.study.PathSegmentData;
@@ -19,7 +20,7 @@ public class ChronotypePathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
 
         ChronotypeSurvey survey = new ChronotypeSurvey();
         survey.questions = new ArrayList<>();

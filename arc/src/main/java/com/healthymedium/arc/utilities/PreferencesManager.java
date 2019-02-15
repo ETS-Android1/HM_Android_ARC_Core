@@ -19,6 +19,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.PathSegmentTypeAdapter;
 import com.healthymedium.arc.time.DateTimeTypeAdapter;
@@ -60,6 +61,7 @@ public class PreferencesManager {
                 //.registerTypeAdapter(LocalDate.class, new LocalTimeTypeAdapter())
                 .registerTypeAdapter(LocalTime.class, new LocalTimeTypeAdapter())
                 .registerTypeAdapter(PathSegment.class,new PathSegmentTypeAdapter())
+                .registerTypeAdapter(BaseData.class, new BaseDataTypeAdapter())
                 .create();
     }
 
@@ -203,6 +205,43 @@ public class PreferencesManager {
             return list;
         }
 
+    }
+
+    public class BaseDataTypeAdapter implements JsonDeserializer<BaseData>, JsonSerializer<BaseData>
+    {
+        @Override
+        public BaseData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+            JsonObject obj = json.getAsJsonObject();
+
+
+            try {
+                Class actualClass = null;
+                actualClass = Class.forName(obj.get("actual_class").getAsString());
+                Object data = objectGson.fromJson(obj.get("data"), actualClass);
+
+                if(BaseData.class.isAssignableFrom(data.getClass()))
+                {
+                    return (BaseData) data;
+                }
+
+            } catch (ClassNotFoundException e) {
+
+                e.printStackTrace();
+            }
+
+
+            return new BaseData();
+        }
+
+        @Override
+        public JsonElement serialize(BaseData src, Type typeOfSrc, JsonSerializationContext context) {
+
+            JsonObject result = new JsonObject();
+            result.add("data", objectGson.toJsonTree(src));
+            result.addProperty("actual_class",  src.getClass().getName());
+            return result;
+        }
     }
 
 }

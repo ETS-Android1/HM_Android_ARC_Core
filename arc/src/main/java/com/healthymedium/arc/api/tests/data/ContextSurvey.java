@@ -2,7 +2,7 @@ package com.healthymedium.arc.api.tests.data;
 
 import java.util.List;
 
-public class ContextSurvey {
+public class ContextSurvey extends BaseData {
 
     public List<ContextSurveySection> questions;
     public String type = "context";

@@ -1,5 +1,6 @@
 package com.healthymedium.arc.path_data;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
 import com.healthymedium.arc.api.tests.data.WakeSurvey;
 import com.healthymedium.arc.api.tests.data.WakeSurveySection;
@@ -16,7 +17,7 @@ public class WakePathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
         WakeSurvey survey = new WakeSurvey();
         survey.questions = new ArrayList<>();
 

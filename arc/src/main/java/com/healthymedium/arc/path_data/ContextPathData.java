@@ -1,5 +1,6 @@
 package com.healthymedium.arc.path_data;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
 import com.healthymedium.arc.api.tests.data.ContextSurvey;
 import com.healthymedium.arc.api.tests.data.ContextSurveySection;
@@ -16,7 +17,7 @@ public class ContextPathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
 
         ContextSurvey survey = new ContextSurvey();
         survey.questions = new ArrayList<>();

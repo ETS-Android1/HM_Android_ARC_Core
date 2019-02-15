@@ -13,6 +13,7 @@ import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.study.AbandonmentJobService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -155,7 +156,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         paused = false;
         if(Study.isValid()){
-            Study.getInstance().getParticipant().markResumed();
+            AbandonmentJobService.unscheduleSelf(getApplicationContext());
+            Study.getParticipant().markResumed();
         }
     }
 
@@ -164,7 +166,11 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         paused = true;
         if(Study.isValid()){
-            Study.getInstance().getParticipant().markPaused();
+            Study.getParticipant().markPaused();
+            Study.getStateMachine().save();
+            if(Study.getParticipant().isCurrentlyInTestSession()) {
+                AbandonmentJobService.scheduleSelf(getApplicationContext());
+            }
         }
     }
 

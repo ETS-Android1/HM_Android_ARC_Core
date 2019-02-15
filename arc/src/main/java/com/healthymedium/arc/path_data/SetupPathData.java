@@ -1,5 +1,6 @@
 package com.healthymedium.arc.path_data;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.study.PathSegmentData;
 
 public class SetupPathData extends PathSegmentData {
@@ -11,7 +12,7 @@ public class SetupPathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
         return null;
     }
 }

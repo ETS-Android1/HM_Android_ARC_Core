@@ -40,20 +40,25 @@ public class Participant {
 
     public void markResumed(){
         if(isCurrentlyInTestSession()){
-            checkForTestAbandonment();
+            if(checkForTestAbandonment())
+            {
+                Study.getInstance().abandonTest();
+            }
         } else if(shouldCurrentlyBeInTestSession()){
             if(!Study.getStateMachine().isCurrentlyInTestPath()){
                 Study.skipToNextSegment();
             }
         }
-    }
-
-    protected void checkForTestAbandonment(){
-        if(state.lastPauseTime.plusMinutes(5).isBeforeNow()){
-            Study.getInstance().abandonTest();
+        else if(Study.getStateMachine().isCurrentlyInTestPath()){
+            Study.getStateMachine().decidePath();
+            Study.getStateMachine().setupPath();
+            Study.getStateMachine().openNext();
         }
     }
 
+    protected boolean checkForTestAbandonment(){
+        return state.lastPauseTime.plusMinutes(5).isBeforeNow();
+    }
     public boolean isCurrentlyInTestSession(){
         if(state.visits.size()==0){
             return false;

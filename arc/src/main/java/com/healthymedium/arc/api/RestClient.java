@@ -255,6 +255,41 @@ public class RestClient <Api>{
         if(Config.REST_BLACKHOLE) {
             return;
         }
+        TestSubmission test  = createTestSubmission(session);
+        submitTest(test);
+    }
+
+    public void submitTest(TestSubmission test) {
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","submitTest(id="+test.session_id+")");
+        if(uploading){
+            uploadQueue.add(test);
+            saveUploadQueue();
+        } else {
+            markUploadStarted();
+            JsonObject json = serialize(test);
+            Call<ResponseBody> call = getService().submitTest(Device.getId(), json);
+            call.enqueue(createDataCallback(test));
+        }
+    }
+
+    public void enqueueTest(TestSession session)
+    {
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+
+        TestSubmission test = createTestSubmission(session);
+        uploadQueue.add(test);
+        saveUploadQueue();
+    }
+
+    // utility functions ---------------------------------------------------------------------------
+
+    protected TestSubmission createTestSubmission(TestSession session)
+    {
         TestSubmission test  = new TestSubmission();
         test.app_version = VersionUtil.getAppVersionName();
         test.device_id = Device.getId();
@@ -285,26 +320,8 @@ public class RestClient <Api>{
         test.interrupted = session.wasInterrupted() ? 1 : 0;
         test.tests = session.getTestData();
 
-        submitTest(test);
+        return test;
     }
-
-    public void submitTest(TestSubmission test) {
-        if(Config.REST_BLACKHOLE) {
-            return;
-        }
-        Log.i("RestClient","submitTest(id="+test.session_id+")");
-        if(uploading){
-            uploadQueue.add(test);
-            saveUploadQueue();
-        } else {
-            markUploadStarted();
-            JsonObject json = serialize(test);
-            Call<ResponseBody> call = getService().submitTest(Device.getId(), json);
-            call.enqueue(createDataCallback(test));
-        }
-    }
-
-    // utility functions ---------------------------------------------------------------------------
 
     protected Response parseResponse(retrofit2.Response<ResponseBody> retrofitResponse){
         Response response = new Response();

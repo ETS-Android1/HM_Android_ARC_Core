@@ -3,6 +3,7 @@ package com.healthymedium.arc.study;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
@@ -99,7 +100,26 @@ public class StudyStateMachine {
     }
 
     public void abandonTest(){
+        Participant participant = Study.getParticipant();
 
+        Log.i("StudyStateMachine", "loading in the middle of an indexed test, marking it abandoned");
+        participant.getCurrentTestSession().markAbandoned();
+
+        Log.i("StudyStateMachine", "collecting data from each existing segment");
+        for(PathSegment segment : state.segments){
+            BaseData object = segment.collectData();
+            if(object!=null){
+                state.cache.add(object);
+            }
+        }
+
+        loadTestDataFromCache();
+        state.segments.clear();
+        state.cache.clear();
+
+        Study.getRestClient().submitTest(participant.getCurrentTestSession());
+        participant.moveOnToNextTestSession(true);
+        save();
     }
 
     protected void setupPath(){
@@ -112,7 +132,7 @@ public class StudyStateMachine {
     }
 
     public boolean skipToNextSegment(){
-        Object object = state.segments.get(0).collectData();
+        BaseData object = state.segments.get(0).collectData();
         if(object!=null){
             state.cache.add(object);
         }
@@ -138,6 +158,7 @@ public class StudyStateMachine {
     }
 
     public boolean openNext(int skips){
+        save();
         if(state.segments.size()>0){
             if(state.segments.get(0).openNext(skips)) {
                 return true;
@@ -151,7 +172,7 @@ public class StudyStateMachine {
 
     protected boolean endOfSegment(){
         // else at the end of segment
-        Object object = state.segments.get(0).collectData();
+        BaseData object = state.segments.get(0).collectData();
         if(object!=null){
             state.cache.add(object);
         }
@@ -557,7 +578,7 @@ public class StudyStateMachine {
     public void addInterruptedPage(){
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new QuestionInterrupted(false,"Thanks!<br><br>Were you interrupted or did you have to stop while taking any of these tests?",""));
-        PathSegment segment = new PathSegment(fragments,SinglePageData.class);
+        PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);
     }
 
@@ -624,6 +645,12 @@ public class StudyStateMachine {
 
     public StudyState getState(){
         return state;
+    }
+
+    // loadTestDataFromCache() is called from abandonTest().
+    // Override this method to handle loading test data from cache.
+    public void loadTestDataFromCache() {
+
     }
 
 

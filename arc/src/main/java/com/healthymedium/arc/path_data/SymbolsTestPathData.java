@@ -1,5 +1,6 @@
 package com.healthymedium.arc.path_data;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.SymbolTest;
 import com.healthymedium.arc.api.tests.data.SymbolTestSection;
 import com.healthymedium.arc.study.PathSegmentData;
@@ -36,7 +37,7 @@ public class SymbolsTestPathData extends PathSegmentData {
     }
 
     @Override
-    protected Object onProcess() {
+    protected BaseData onProcess() {
         SymbolTest test = new SymbolTest();
 
         test.sections = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.util.Log;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.utilities.NavigationManager;
 
@@ -85,7 +86,7 @@ public class PathSegment {
         return true;
     }
 
-    public Object collectData(){
+    public BaseData collectData(){
         int size = fragments.size();
         for(int i=0;i<size;i++){
             Object obj = fragments.get(i).onDataCollection();
