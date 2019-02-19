@@ -44,6 +44,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.HttpUrl;
@@ -63,7 +64,7 @@ public class RestClient <Api>{
     private Api serviceExtension;
     protected Gson gson;
 
-    private List<Object> uploadQueue = new ArrayList<>();
+    private List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
     private UploadListener uploadListener = null;
     private boolean uploading = false;
     private Handler handler;
@@ -106,10 +107,10 @@ public class RestClient <Api>{
 
         if(PreferencesManager.getInstance().contains("uploadQueue")) {
             List uploadData = Arrays.asList(PreferencesManager.getInstance().getObject("uploadQueue", Object[].class));
-            uploadQueue = new ArrayList<>(uploadData);
+            uploadQueue = Collections.synchronizedList(new ArrayList<>(uploadData));
             Log.i("RestClient", "uploadQueue="+uploadQueue.toString());
         } else {
-            uploadQueue = new ArrayList<>();
+            uploadQueue = Collections.synchronizedList(new ArrayList<>());
         }
     }
 
