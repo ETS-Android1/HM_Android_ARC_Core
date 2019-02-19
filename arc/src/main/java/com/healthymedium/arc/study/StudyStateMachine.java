@@ -132,15 +132,18 @@ public class StudyStateMachine {
     }
 
     public boolean skipToNextSegment(){
-        BaseData object = state.segments.get(0).collectData();
-        if(object!=null){
-            state.cache.add(object);
-        }
-        state.segments.remove(0);
 
-        NavigationManager.getInstance().clearBackStack();
-        Study.getInstance().getParticipant().save();
-        save();
+        if(state.segments.size() > 0) {
+            BaseData object = state.segments.get(0).collectData();
+            if (object != null) {
+                state.cache.add(object);
+            }
+            state.segments.remove(0);
+
+            NavigationManager.getInstance().clearBackStack();
+            Study.getInstance().getParticipant().save();
+            save();
+        }
 
         if(state.segments.size()>0){
             return openNext();
