@@ -81,6 +81,12 @@ public class StudyStateMachine {
         }
     }
 
+    protected void enableTransitionGrids(PathSegment segment, boolean animateEntry){
+        if (animateEntry) {
+            segment.fragments.get(3).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+        }
+    }
+
     public void initialize(){
         state = new StudyState();
     }
@@ -528,6 +534,7 @@ public class StudyStateMachine {
         fragments.add(gridTestFragment);
 
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
+        enableTransitionGrids(segment,true);
         state.segments.add(segment);
     }
 
