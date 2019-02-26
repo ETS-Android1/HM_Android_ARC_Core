@@ -1,5 +1,7 @@
 package com.healthymedium.arc.study;
 
+import android.util.Log;
+
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
@@ -39,15 +41,23 @@ public class Participant {
     }
 
     public void markResumed(){
+
+        /*
+        We're checking three situations here:
+        - Are we currently in a test?
+            If so check and see if we should abandon it
+        - Should we be in a test, but the state machine is not set to a test path?
+            If so let's skip to the next segment
+        - Else are we currently in a test path?
+            If so, have the state machine decide where to go next
+         */
         if(isCurrentlyInTestSession()){
             if(checkForTestAbandonment())
             {
                 Study.getInstance().abandonTest();
             }
-        } else if(shouldCurrentlyBeInTestSession()){
-            if(!Study.getStateMachine().isCurrentlyInTestPath()){
-                Study.skipToNextSegment();
-            }
+        } else if(shouldCurrentlyBeInTestSession() && !Study.getStateMachine().isCurrentlyInTestPath()){
+            Study.skipToNextSegment();
         }
         else if(Study.getStateMachine().isCurrentlyInTestPath()){
             Study.getStateMachine().decidePath();
@@ -56,7 +66,7 @@ public class Participant {
         }
     }
 
-    protected boolean checkForTestAbandonment(){
+    public boolean checkForTestAbandonment(){
         return state.lastPauseTime.plusMinutes(5).isBeforeNow();
     }
     public boolean isCurrentlyInTestSession(){
@@ -82,6 +92,7 @@ public class Participant {
     }
 
     public void moveOnToNextTestSession(boolean scheduleNotifications){
+        Log.i("Participant", "moveOnToNextTestSession");
         state.currentTestSession++;
         if(state.currentTestSession>=state.visits.get(state.currentVisit).testSessions.size()){
             state.currentTestSession = 0;
