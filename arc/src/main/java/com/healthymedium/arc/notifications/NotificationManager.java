@@ -163,6 +163,7 @@ public class NotificationManager {
     }
 
     public void scheduleAllNotifications(){
+        Log.i("NotificationManager", "scheduleAllNotifications");
         int size = nodes.size();
         for(int i=0;i<size;i++){
             DateTime time = new DateTime(nodes.get(i).time);
@@ -297,9 +298,11 @@ public class NotificationManager {
                     break;
             }
 
+            int notificationId = makeNotificationId(id, type);
+
             Notification notification = buildNotification(node,channel);
             android.app.NotificationManager notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(node.id, notification);
+            notificationManager.notify(notificationId, notification);
         }
     }
 
@@ -317,4 +320,14 @@ public class NotificationManager {
         }
     }
 
+    // We need to make sure that notification id's are unique, but we also need to be able to
+    // recreate a notification id for a given session.
+    // This should separate notification ids for the different notification types into their own
+    // sections, so as long as we're not going over 10,000 sessions, we shouldn't run into any
+    // collisions.
+
+    public int makeNotificationId(int sessionId, int type)
+    {
+        return (type * 10000) + sessionId;
+    }
 }
