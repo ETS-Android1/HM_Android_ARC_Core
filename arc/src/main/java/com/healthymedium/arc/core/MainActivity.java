@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.time.TimeChangeReceiver;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 Config.OPENED_FROM_NOTIFICATION = bundle.getBoolean("OPENED_FROM_NOTIFICATION",false);
             }
         }
+
+        TimeChangeReceiver.registerSelf(getApplicationContext());
 
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
