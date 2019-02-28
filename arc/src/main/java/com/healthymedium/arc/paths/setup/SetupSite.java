@@ -387,9 +387,9 @@ public class SetupSite extends StandardTemplate {
             case 400:
                 return defaultError;
             case 401:
-                return "Invalid Subject ID or Site Code";
+                return getResources().getString(R.string.error_401);
             case 409:
-                return "Already enrolled on another device";
+                return getResources().getString(R.string.error_409);
         }
         if(response.errors.keySet().size()>0){
             String key = response.errors.keySet().toArray()[0].toString();
