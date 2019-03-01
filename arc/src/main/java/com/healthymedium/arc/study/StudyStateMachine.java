@@ -313,7 +313,7 @@ public class StudyStateMachine {
                         "Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.",
                 "BEGIN"));
 
-        fragments.add(new QuestionPolar(true,"Have you been a shift worker in the past month?",""));
+        fragments.add(new QuestionPolar(true,"I have been a shift- or night-worker in the past three months.",""));
 
         List<String> workingDayCountOptions = new ArrayList<>();
         workingDayCountOptions.add("0");
@@ -324,7 +324,15 @@ public class StudyStateMachine {
         workingDayCountOptions.add("5");
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
-        fragments.add(new QuestionRadioButtons(true,"Normally, how many days a week do you work?","Select one",workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,"Normally, I work ____\n\n" + "days/week.","Select one",workingDayCountOptions));
+
+        fragments.add(new InfoTemplate(
+                false,
+                "Chronotype" ,
+                "",
+                "Please answer all of the following questions even if you do not work 7 days per week.\n\n" +
+                        "Please don't forget to indicate AM or PM.",
+                "NEXT"));
 
         CircadianClock clock;
         String weekday;
@@ -353,10 +361,10 @@ public class StudyStateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);

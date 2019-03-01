@@ -63,6 +63,20 @@ public class InfoTemplate extends BaseFragment {
         textViewBody = view.findViewById(R.id.textViewBody);
         textViewBody.setText(stringBody);
 
+        if (stringSubHeader == "") {
+            textViewSubheader.setVisibility(View.GONE);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            float dpRatio = getResources().getDisplayMetrics().density;
+            int side = (int)(32 * dpRatio);
+            int top = (int)(15 * dpRatio);
+
+            params.setMargins(side,top,side,0);
+            textViewBody.setLayoutParams(params);
+        }
+
+
+
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
