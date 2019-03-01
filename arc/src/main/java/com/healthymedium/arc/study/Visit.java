@@ -22,7 +22,7 @@ public class Visit {
     private boolean hasScheduledNotifications;  // a flag indicating whether notifications have been scheduled for the SubmitTest Sessions
     boolean valid;
 
-    List<TestSession> testSessions;
+    public List<TestSession> testSessions;
 
     public Visit(int id){
         this.id = id;

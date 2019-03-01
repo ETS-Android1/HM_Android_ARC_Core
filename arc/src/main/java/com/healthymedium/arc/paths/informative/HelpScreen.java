@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -64,8 +65,7 @@ public class HelpScreen extends BaseFragment {
         textViewPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrivacyScreen privacyScreen = new PrivacyScreen();
-                NavigationManager.getInstance().open(privacyScreen);
+                Study.getPrivacyPolicy().show(getContext());
             }
         });
 

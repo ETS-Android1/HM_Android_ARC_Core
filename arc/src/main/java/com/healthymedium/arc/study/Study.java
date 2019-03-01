@@ -9,6 +9,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
+//import com.healthymedium.arc.study.PrivacyPolicy;
 import com.healthymedium.arc.utilities.MigrationUtil;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -27,6 +28,7 @@ public class Study{
     static Participant participant;
     static RestClient restClient;
     static MigrationUtil migrationUtil;
+    static PrivacyPolicy privacyPolicy;
 
     public static synchronized void initialize(Context context) {
         instance = new Study(context);
@@ -151,6 +153,25 @@ public class Study{
         return true;
     }
 
+    public boolean registerPrivacyPolicy(Class tClass){
+        if(tClass==null){
+            return false;
+        }
+        if(!PrivacyPolicy.class.isAssignableFrom(tClass)){
+            return false;
+        }
+        try {
+            privacyPolicy = (PrivacyPolicy) tClass.newInstance();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return false;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public void checkRegistrations(){
         if(participant==null){
             participant = new Participant();
@@ -166,6 +187,9 @@ public class Study{
         }
         if(migrationUtil==null){
             migrationUtil = new MigrationUtil();
+        }
+        if(privacyPolicy==null){
+            privacyPolicy = new PrivacyPolicy();
         }
     }
 
@@ -226,6 +250,8 @@ public class Study{
         return restClient;
     }
 
+    public static PrivacyPolicy getPrivacyPolicy() { return privacyPolicy; }
+
     // commonly used accessors ---------------------------------------------------------------------
 
     public static Visit getCurrentVisit(){
@@ -285,6 +311,12 @@ public class Study{
         stateMachine.abandonTest();
         stateMachine.decidePath();
         stateMachine.setupPath();
+        stateMachine.openNext();
+    }
+
+    public static void updateAvailability()
+    {
+        stateMachine.setPathSetupAvailability();
         stateMachine.openNext();
     }
 }

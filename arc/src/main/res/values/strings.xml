@@ -184,5 +184,7 @@ Created by: Jason J. Hassenstab, PhD
 3.	Except to the extent prohibited by law, You agree to indemnify, defend, reimburse and hold harmless WU, WU personnel, WU’s Affiliates, and each of their respective trustees, faculty, staff, employees, students, directors, officers, agents, successors and assigns (altogether the “WU Indemnitees”) from, for and against any and all judgments, settlements, losses, expenses, damages and/or liabilities and any and all court costs, attorneys’ fees, and expert witness fees and expenses that a WU Indemnitee may incur from any and all allegations, claims, suits, actions or proceedings (the “Claims”) arising out of, relating to, or incidental to Your breach of this Agreement or Your use, development, commercialization, or other exploitation of the Software, whether by or through You, and including all Claims for infringement, injury to business, personal injury, and product liability.  The obligations set forth in this Section shall survive termination of this Agreement, shall continue even after assignment of rights and responsibilities, and shall not be limited by any provision of this Agreement outside this Section.
 \n\n
 4.	You may not use the trademarks or name of WU for any commercial, advertisement, or promotional purposes without the prior consent of WU.
-</string>
+	</string>
+    <string name="error_401">Invalid Subject ID or Site Code</string>
+    <string name="error_409">Already enrolled on another device</string>
 </resources>

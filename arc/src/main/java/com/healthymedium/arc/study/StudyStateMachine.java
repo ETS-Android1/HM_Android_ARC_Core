@@ -82,6 +82,12 @@ public class StudyStateMachine {
         }
     }
 
+    protected void enableTransitionGrids(PathSegment segment, boolean animateEntry){
+        if (animateEntry) {
+            segment.fragments.get(3).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+        }
+    }
+
     public void initialize(){
         state = new StudyState();
     }
@@ -248,7 +254,7 @@ public class StudyStateMachine {
         state.segments.add(segment);
     }
 
-    public void setPathSetupParticipant(int firstDigits, int secondDigits) {
+    public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new SetupWelcome());
 
@@ -263,7 +269,11 @@ public class StudyStateMachine {
         setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
         fragments.add(setupParticipantConfirmFragment);
 
-        fragments.add(new SetupSite());
+        SetupSite setupSiteFragment = new SetupSite();
+        Bundle setupSiteBundle = new Bundle();
+        setupSiteBundle.putInt("siteDigits", siteDigits);
+        setupSiteFragment.setArguments(setupSiteBundle);
+        fragments.add(setupSiteFragment);
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
@@ -324,7 +334,8 @@ public class StudyStateMachine {
         workingDayCountOptions.add("5");
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
-        fragments.add(new QuestionRadioButtons(true,"Normally, I work ____\n\n" + "days/week.","Select one",workingDayCountOptions));
+
+        fragments.add(new QuestionRadioButtons(true,false, "Normally, I work ____\n\n" + "days/week.","Select one",workingDayCountOptions));
 
         fragments.add(new InfoTemplate(
                 false,
@@ -446,7 +457,7 @@ public class StudyStateMachine {
         where.add("Vehicle");
         where.add("Outside");
         where.add("Other");
-        fragments.add(new QuestionRadioButtons(true,"Where are you right now?","Select One",where));
+        fragments.add(new QuestionRadioButtons(true,false,"Where are you right now?","Select One",where));
 
         fragments.add(new QuestionRating(true,"How would you rate <b>your overall mood</b> right now?","On a scale of bad to good.","Bad","Good"));
         fragments.add(new QuestionRating(true,"How would you rate <b>how you feel</b> right now?","On a scale of sleepy/tired to active/alert.","Sleepy/Tired","Active/Alert"));
@@ -462,7 +473,7 @@ public class StudyStateMachine {
         what.add("Personal Care");
         what.add("Resting");
         what.add("Other");
-        fragments.add(new QuestionRadioButtons(true,"In the past 5 minutes, what were you mostly doing?","Select One",what));
+        fragments.add(new QuestionRadioButtons(true,false,"In the past 5 minutes, what were you mostly doing?","Select One",what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);
@@ -583,6 +594,7 @@ public class StudyStateMachine {
         fragments.add(gridTestFragment);
 
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
+        enableTransitionGrids(segment,true);
         state.segments.add(segment);
     }
 

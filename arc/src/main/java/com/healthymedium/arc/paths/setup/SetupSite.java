@@ -41,7 +41,7 @@ import java.util.List;
 public class SetupSite extends StandardTemplate {
 
     String defaultError = "Sorry, our app is currently experiencing issues. Please try again later.";
-    final int maxDigits = 5;
+    int maxDigits = 5;
 
     CharSequence characterSequence;
     int focusedIndex=0;
@@ -65,6 +65,12 @@ public class SetupSite extends StandardTemplate {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view = super.onCreateView(inflater,container,savedInstanceState);
+
+        if (getArguments() != null) {
+            if (getArguments().containsKey("siteDigits")) {
+                maxDigits = getArguments().getInt("siteDigits");
+            }
+        }
 
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,8 +175,7 @@ public class SetupSite extends StandardTemplate {
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrivacyScreen privacyScreen = new PrivacyScreen();
-                NavigationManager.getInstance().open(privacyScreen);
+                Study.getPrivacyPolicy().show(getContext());
             }
         });
         linearLayout.addView(textViewPolicyLink);
@@ -382,9 +387,9 @@ public class SetupSite extends StandardTemplate {
             case 400:
                 return defaultError;
             case 401:
-                return "Invalid Subject ID or Site Code";
+                return getResources().getString(R.string.error_401);
             case 409:
-                return "Already enrolled on another device";
+                return getResources().getString(R.string.error_409);
         }
         if(response.errors.keySet().size()>0){
             String key = response.errors.keySet().toArray()[0].toString();
