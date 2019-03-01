@@ -309,8 +309,8 @@ public class StudyStateMachine {
                 false,
                 "Chronotype" ,
                 "Six Questions",
-                "Please answer all of the following questions even if you do not work 7 days per week.\n\n" +
-                        "Please don’t forget to indicate AM or PM.",
+                "The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\n" +
+                        "Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.",
                 "BEGIN"));
 
         fragments.add(new QuestionPolar(true,"Have you been a shift worker in the past month?",""));
