@@ -277,8 +277,8 @@ public class StudyStateMachine {
                 false,
                 "Availability" ,
                 "A Few Questions",
-                "The following section will ask you questions in regard to your sleep and wake behavior on weekdays and weekends." + "\n\n"
-                        + "Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.",
+                "First, we'll ask you a few questions to help us determine when to send you those notifications." + "\n\n"
+                        + "You will only receive notifications during your waking hours.",
                 "BEGIN"));
 
         fragments.add(new AvailabilityMondayWake());
