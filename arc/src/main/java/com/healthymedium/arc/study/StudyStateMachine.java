@@ -84,7 +84,14 @@ public class StudyStateMachine {
 
     protected void enableTransitionGrids(PathSegment segment, boolean animateEntry){
         if (animateEntry) {
+            segment.fragments.get(1).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+            segment.fragments.get(1).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+
+            segment.fragments.get(2).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+            segment.fragments.get(2).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+
             segment.fragments.get(3).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+            segment.fragments.get(3).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
         }
     }
 
