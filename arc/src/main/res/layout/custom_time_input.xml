@@ -23,7 +23,7 @@
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
         android:textColor="@color/red"
-        android:text="Please set a minimum of 4 hours of wake time."
+        android:text="@string/time_input_error"
         android:textSize="18dp"
         android:visibility="gone"/>
 

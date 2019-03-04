@@ -135,8 +135,32 @@ public class TimeInput extends FrameLayout {
         setValidity(!notValid);
     }
 
-    public void placeRestrictions(LocalTime blockoutBegin, Hours duration){
-        placeRestrictions(blockoutBegin,blockoutBegin.plus(duration));
+    public void placeRestrictions(LocalTime blockoutBegin, int duration){
+        Hours durationHours;
+
+        if (duration == 0) {
+            durationHours = Hours.ZERO;
+        } else if (duration == 1) {
+            durationHours = Hours.ONE;
+        } else if (duration == 2) {
+            durationHours = Hours.TWO;
+        } else if (duration == 3) {
+            durationHours = Hours.THREE;
+        } else if (duration == 4) {
+            durationHours = Hours.FOUR;
+        } else if (duration == 5) {
+            durationHours = Hours.FIVE;
+        } else if (duration == 6) {
+            durationHours = Hours.SIX;
+        } else if (duration == 7) {
+            durationHours = Hours.SEVEN;
+        } else if (duration == 8) {
+            durationHours = Hours.EIGHT;
+        } else {
+            durationHours = Hours.FOUR;
+        }
+
+        placeRestrictions(blockoutBegin,blockoutBegin.plus(durationHours));
     }
 
     public void setListener(Listener listener){

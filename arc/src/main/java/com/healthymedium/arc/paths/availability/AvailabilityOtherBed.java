@@ -19,6 +19,7 @@ public class AvailabilityOtherBed extends QuestionTime {
 
     CircadianClock clock;
     String weekday;
+    int endTimeRestriction = 4;
 
     @SuppressLint("ValidFragment")
     public AvailabilityOtherBed(String weekday) {
@@ -32,6 +33,13 @@ public class AvailabilityOtherBed extends QuestionTime {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
 
+        if (getArguments() != null) {
+            if (getArguments().containsKey("availabilityWindow")) {
+                endTimeRestriction = getArguments().getInt("availabilityWindow");
+            }
+        }
+
+
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged(weekday)){
             int index = clock.getRhythmIndex(weekday)-1;
@@ -41,7 +49,7 @@ public class AvailabilityOtherBed extends QuestionTime {
         }
 
         LocalTime wakeTime = clock.getRhythm(weekday).getWakeTime();
-        timeInput.placeRestrictions(wakeTime, Hours.FOUR);
+        timeInput.placeRestrictions(wakeTime, endTimeRestriction);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -315,9 +315,9 @@ public class Study{
         stateMachine.openNext();
     }
 
-    public static void updateAvailability()
+    public static void updateAvailability(int window)
     {
-        stateMachine.setPathSetupAvailability();
+        stateMachine.setPathSetupAvailability(window);
         stateMachine.openNext();
     }
 }

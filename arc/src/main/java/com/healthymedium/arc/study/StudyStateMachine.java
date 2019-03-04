@@ -288,6 +288,69 @@ public class StudyStateMachine {
         state.segments.add(segment);
     }
 
+    public void setPathSetupAvailability(int availabilityWindow){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new InfoTemplate(
+                false,
+                "Availability" ,
+                "A Few Questions",
+                "The following section will ask you questions in regard to your sleep and wake behavior on weekdays and weekends." + "\n\n"
+                        + "Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.",
+                "BEGIN"));
+
+        Bundle windowBundle = new Bundle();
+        windowBundle.putInt("availabilityWindow", availabilityWindow);
+
+        fragments.add(new AvailabilityMondayWake());
+
+        AvailabilityMondayBed mondayBed = new AvailabilityMondayBed();
+        mondayBed.setArguments(windowBundle);
+        fragments.add(mondayBed);
+
+        fragments.add(new AvailabilityWeekdayConfirm());
+
+        fragments.add(new AvailabilityOtherWake("Tuesday"));
+
+        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed("Tuesday");
+        tuesdayBed.setArguments(windowBundle);
+        fragments.add(tuesdayBed);
+
+        fragments.add(new AvailabilityOtherWake("Wednesday"));
+
+        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed("Wednesday");
+        wednesdayBed.setArguments(windowBundle);
+        fragments.add(wednesdayBed);
+
+        fragments.add(new AvailabilityOtherWake("Thursday"));
+
+        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed("Thursday");
+        thursdayBed.setArguments(windowBundle);
+        fragments.add(thursdayBed);
+
+        fragments.add(new AvailabilityOtherWake("Friday"));
+
+        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed("Friday");
+        fridayBed.setArguments(windowBundle);
+        fragments.add(fridayBed);
+
+        fragments.add(new AvailabilitySaturdayWake());
+
+        AvailabilitySaturdayBed saturdayBed = new AvailabilitySaturdayBed();
+        saturdayBed.setArguments(windowBundle);
+        fragments.add(saturdayBed);
+
+        fragments.add(new AvailabilitySundayWake());
+
+        AvailabilitySundayBed sundayBed = new AvailabilitySundayBed();
+        sundayBed.setArguments(windowBundle);
+        fragments.add(sundayBed);
+
+        PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
+        enableTransition(segment,true);
+        state.segments.add(segment);
+    }
+
     public void addChronotypeSurvey(){
         List<BaseFragment> fragments = new ArrayList<>();
 

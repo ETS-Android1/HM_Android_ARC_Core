@@ -16,6 +16,7 @@ import org.joda.time.LocalTime;
 public class AvailabilitySaturdayBed extends QuestionTime {
 
     CircadianClock clock;
+    int endTimeRestriction = 4;
 
     public AvailabilitySaturdayBed() {
         super(true,"When do you usually<br/><b>go to bed</b> on <b>Saturday</b>?","",null);
@@ -27,6 +28,12 @@ public class AvailabilitySaturdayBed extends QuestionTime {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
 
+        if (getArguments() != null) {
+            if (getArguments().containsKey("availabilityWindow")) {
+                endTimeRestriction = getArguments().getInt("availabilityWindow");
+            }
+        }
+
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged("Saturday")){
             time = clock.getRhythm("Friday").getBedTime();
@@ -35,7 +42,7 @@ public class AvailabilitySaturdayBed extends QuestionTime {
         }
 
         LocalTime wakeTime = clock.getRhythm("Saturday").getWakeTime();
-        timeInput.placeRestrictions(wakeTime, Hours.FOUR);
+        timeInput.placeRestrictions(wakeTime, endTimeRestriction);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
