@@ -20,6 +20,7 @@ public class AvailabilitySundayBed extends QuestionTime {
 
     CircadianClock clock;
     int endTimeRestriction = 4;
+    boolean reschedule = false;
 
     public AvailabilitySundayBed() {
         super(true,"When do you usually<br/><b>go to bed</b> on <b>Sunday</b>?","",null);
@@ -34,6 +35,10 @@ public class AvailabilitySundayBed extends QuestionTime {
         if (getArguments() != null) {
             if (getArguments().containsKey("availabilityWindow")) {
                 endTimeRestriction = getArguments().getInt("availabilityWindow");
+            }
+
+            if (getArguments().containsKey("reschedule")) {
+                reschedule = getArguments().getBoolean("reschedule");
             }
         }
 
@@ -80,7 +85,12 @@ public class AvailabilitySundayBed extends QuestionTime {
             if(start==null){
                 start = DateTime.now();
             }
-            Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
+
+            if (reschedule == true) {
+                Study.getScheduler().rescheduleTests(start,Study.getInstance().getParticipant());
+            } else {
+                Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
+            }
             Study.getRestClient().submitTestSchedule();
             Study.getScheduler().scheduleNotifications(Study.getCurrentVisit());
             return null;
