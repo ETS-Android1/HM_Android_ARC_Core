@@ -24,6 +24,7 @@ import com.healthymedium.arc.api.models.WakeSleepSchedule;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Participant;
@@ -320,7 +321,7 @@ public class RestClient <Api>{
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                response.errors.addProperty("show","Sorry, our app is currently experiencing issues. Please try again later.");
+                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error_default));
                 response.errors.addProperty("format","Invalid response format received");
                 response.successful = retrofitResponse.isSuccessful();
                 return response;
@@ -330,7 +331,7 @@ public class RestClient <Api>{
             try {
                 json = new JsonParser().parse(responseData).getAsJsonObject();
             } catch (JsonSyntaxException e) {
-                response.errors.addProperty("show","Sorry, our app is currently experiencing issues. Please try again later.");
+                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error_default));
                 response.errors.addProperty("unknown","Server Error "+response.code);
                 return response;
             }
@@ -358,7 +359,7 @@ public class RestClient <Api>{
             response.errors.addProperty("network","No Network Connection");
         }
         if(throwable!=null) {
-            response.errors.addProperty("show","Sorry, our app is currently experiencing issues. Please try again later.");
+            response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error_default));
             response.errors.addProperty(throwable.getClass().getSimpleName(),throwable.getMessage());
         }
         return response;

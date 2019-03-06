@@ -385,7 +385,7 @@ public class SetupSite extends StandardTemplate {
         int code = response.code;
         switch (code){
             case 400:
-                return defaultError;
+                return getResources().getString(R.string.error_default);
             case 401:
                 return getResources().getString(R.string.error_401);
             case 409:
@@ -396,7 +396,7 @@ public class SetupSite extends StandardTemplate {
             return response.errors.get(key).getAsString();
         }
         if(!response.successful || failed){
-            return defaultError;
+            return getResources().getString(R.string.error_default);
         }
         return null;
     }

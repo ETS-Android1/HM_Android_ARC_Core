@@ -170,6 +170,7 @@
     <string name="times">times</string>
     <string name="test">TEST </string>
     <string name="version">Version</string>
+    <string name="error_default">Sorry, our app is currently experiencing issues. Please try again later.</string>
     <string name="error_401">Invalid Subject ID or Site Code</string>
     <string name="error_409">Already enrolled on another device</string>
     <string name="time_input_error">Please set a minimum of 4 hours of wake time.</string>
