@@ -315,9 +315,9 @@ public class Study{
         stateMachine.openNext();
     }
 
-    public static void updateAvailability(int window)
+    public static void updateAvailability(int minWakeTime, int maxWakeTime)
     {
-        stateMachine.setPathSetupAvailability(window, true);
+        stateMachine.setPathSetupAvailability(minWakeTime, maxWakeTime, true);
         stateMachine.openNext();
     }
 }

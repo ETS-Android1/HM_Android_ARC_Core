@@ -288,7 +288,7 @@ public class StudyStateMachine {
         state.segments.add(segment);
     }
 
-    public void setPathSetupAvailability(int availabilityWindow, boolean reschedule){
+    public void setPathSetupAvailability(int minWakeTime, int maxWakeTime, boolean reschedule){
         List<BaseFragment> fragments = new ArrayList<>();
 
         fragments.add(new InfoTemplate(
@@ -300,7 +300,8 @@ public class StudyStateMachine {
                 "BEGIN"));
 
         Bundle windowBundle = new Bundle();
-        windowBundle.putInt("availabilityWindow", availabilityWindow);
+        windowBundle.putInt("minWakeTime", minWakeTime);
+        windowBundle.putInt("maxWakeTime", maxWakeTime);
         windowBundle.putBoolean("reschedule", reschedule);
 
         fragments.add(new AvailabilityMondayWake());

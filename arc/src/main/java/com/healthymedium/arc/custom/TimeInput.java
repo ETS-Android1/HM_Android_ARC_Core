@@ -33,6 +33,9 @@ public class TimeInput extends FrameLayout {
     LocalTime blockoutEnd;
     LocalTime time;
 
+    int minWakeTime = 4;
+    int maxWakeTime = 24;
+
     Listener listener;
     TimePicker timePicker;
     TextView errorText;
@@ -89,6 +92,14 @@ public class TimeInput extends FrameLayout {
                 if(restrictTime){
                     time = new LocalTime(hourOfDay,minute*15);
                     if(time.isAfter(blockoutBegin) && time.isBefore(blockoutEnd)){
+                        errorText.setText("Please set a minimum of " + Integer.toString(minWakeTime) +" hours of wake time.");
+                        setValidity(false);
+                        return;
+                    }
+
+                    Hours hoursDiff = Hours.hoursBetween(blockoutBegin, time);
+                    if (hoursDiff.getHours() > 18) {
+                        errorText.setText("Please set a maximum of " + Integer.toString(maxWakeTime) + " hours of wake time.");
                         setValidity(false);
                         return;
                     }
@@ -135,32 +146,35 @@ public class TimeInput extends FrameLayout {
         setValidity(!notValid);
     }
 
-    public void placeRestrictions(LocalTime blockoutBegin, int duration){
-        Hours durationHours;
+    public void placeRestrictions(LocalTime blockoutBegin, int minDuration, int maxDuration){
+        Hours minDurationHours;
 
-        if (duration == 0) {
-            durationHours = Hours.ZERO;
-        } else if (duration == 1) {
-            durationHours = Hours.ONE;
-        } else if (duration == 2) {
-            durationHours = Hours.TWO;
-        } else if (duration == 3) {
-            durationHours = Hours.THREE;
-        } else if (duration == 4) {
-            durationHours = Hours.FOUR;
-        } else if (duration == 5) {
-            durationHours = Hours.FIVE;
-        } else if (duration == 6) {
-            durationHours = Hours.SIX;
-        } else if (duration == 7) {
-            durationHours = Hours.SEVEN;
-        } else if (duration == 8) {
-            durationHours = Hours.EIGHT;
+        minWakeTime = minDuration;
+        maxWakeTime = maxDuration;
+
+        if (minDuration == 0) {
+            minDurationHours = Hours.ZERO;
+        } else if (minDuration == 1) {
+            minDurationHours = Hours.ONE;
+        } else if (minDuration == 2) {
+            minDurationHours = Hours.TWO;
+        } else if (minDuration == 3) {
+            minDurationHours = Hours.THREE;
+        } else if (minDuration == 4) {
+            minDurationHours = Hours.FOUR;
+        } else if (minDuration == 5) {
+            minDurationHours = Hours.FIVE;
+        } else if (minDuration == 6) {
+            minDurationHours = Hours.SIX;
+        } else if (minDuration == 7) {
+            minDurationHours = Hours.SEVEN;
+        } else if (minDuration == 8) {
+            minDurationHours = Hours.EIGHT;
         } else {
-            durationHours = Hours.FOUR;
+            minDurationHours = Hours.FOUR;
         }
 
-        placeRestrictions(blockoutBegin,blockoutBegin.plus(durationHours));
+        placeRestrictions(blockoutBegin,blockoutBegin.plus(minDurationHours));
     }
 
     public void setListener(Listener listener){
