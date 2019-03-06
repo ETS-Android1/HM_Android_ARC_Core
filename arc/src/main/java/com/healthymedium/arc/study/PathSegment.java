@@ -75,6 +75,15 @@ public class PathSegment {
         if(currentIndex-skips < 0){
             return false;
         }
+
+        // There is a rare situation where this method is getting called, despite there not actually
+        // being any fragments in this PathSegment. Since we obviously can't pop nonexistent fragments,
+        // we just have to bail.
+        if(fragments.size() - skips <= 0)
+        {
+            return false;
+        }
+
         for(int i=0;i<skips+1;i++){
             if(!fragments.get(currentIndex).isBackAllowed()){
                 return false;
