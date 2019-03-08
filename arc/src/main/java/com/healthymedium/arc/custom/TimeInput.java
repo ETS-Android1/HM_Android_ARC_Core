@@ -33,6 +33,9 @@ public class TimeInput extends FrameLayout {
     LocalTime blockoutEnd;
     LocalTime time;
 
+    int minWakeTime = 4;
+    int maxWakeTime = 24;
+
     Listener listener;
     TimePicker timePicker;
     TextView errorText;
@@ -89,6 +92,14 @@ public class TimeInput extends FrameLayout {
                 if(restrictTime){
                     time = new LocalTime(hourOfDay,minute*15);
                     if(time.isAfter(blockoutBegin) && time.isBefore(blockoutEnd)){
+                        errorText.setText("Please set a minimum of " + Integer.toString(minWakeTime) +" hours of wake time.");
+                        setValidity(false);
+                        return;
+                    }
+
+                    Hours hoursDiff = Hours.hoursBetween(blockoutBegin, time);
+                    if (hoursDiff.getHours() > 18) {
+                        errorText.setText("Please set a maximum of " + Integer.toString(maxWakeTime) + " hours of wake time.");
                         setValidity(false);
                         return;
                     }
@@ -135,8 +146,35 @@ public class TimeInput extends FrameLayout {
         setValidity(!notValid);
     }
 
-    public void placeRestrictions(LocalTime blockoutBegin, Hours duration){
-        placeRestrictions(blockoutBegin,blockoutBegin.plus(duration));
+    public void placeRestrictions(LocalTime blockoutBegin, int minDuration, int maxDuration){
+        Hours minDurationHours;
+
+        minWakeTime = minDuration;
+        maxWakeTime = maxDuration;
+
+        if (minDuration == 0) {
+            minDurationHours = Hours.ZERO;
+        } else if (minDuration == 1) {
+            minDurationHours = Hours.ONE;
+        } else if (minDuration == 2) {
+            minDurationHours = Hours.TWO;
+        } else if (minDuration == 3) {
+            minDurationHours = Hours.THREE;
+        } else if (minDuration == 4) {
+            minDurationHours = Hours.FOUR;
+        } else if (minDuration == 5) {
+            minDurationHours = Hours.FIVE;
+        } else if (minDuration == 6) {
+            minDurationHours = Hours.SIX;
+        } else if (minDuration == 7) {
+            minDurationHours = Hours.SEVEN;
+        } else if (minDuration == 8) {
+            minDurationHours = Hours.EIGHT;
+        } else {
+            minDurationHours = Hours.FOUR;
+        }
+
+        placeRestrictions(blockoutBegin,blockoutBegin.plus(minDurationHours));
     }
 
     public void setListener(Listener listener){

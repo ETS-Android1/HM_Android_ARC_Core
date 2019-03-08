@@ -19,6 +19,9 @@ import org.joda.time.LocalTime;
 public class AvailabilitySundayBed extends QuestionTime {
 
     CircadianClock clock;
+    int minWakeTime = 4;
+    int maxWakeTime = 24;
+    boolean reschedule = false;
 
     public AvailabilitySundayBed() {
         super(true,"When do you usually<br/><b>go to bed</b> on <b>Sunday</b>?","",null);
@@ -30,6 +33,20 @@ public class AvailabilitySundayBed extends QuestionTime {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
 
+        if (getArguments() != null) {
+            if (getArguments().containsKey("minWakeTime")) {
+                minWakeTime = getArguments().getInt("minWakeTime");
+            }
+
+            if (getArguments().containsKey("maxWakeTime")) {
+                maxWakeTime = getArguments().getInt("maxWakeTime");
+            }
+
+            if (getArguments().containsKey("reschedule")) {
+                reschedule = getArguments().getBoolean("reschedule");
+            }
+        }
+
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged("Sunday")){
             time = clock.getRhythm("Saturday").getBedTime();
@@ -38,7 +55,7 @@ public class AvailabilitySundayBed extends QuestionTime {
         }
 
         LocalTime wakeTime = clock.getRhythm("Sunday").getWakeTime();
-        timeInput.placeRestrictions(wakeTime, Hours.FOUR);
+        timeInput.placeRestrictions(wakeTime, minWakeTime, maxWakeTime);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +90,12 @@ public class AvailabilitySundayBed extends QuestionTime {
             if(start==null){
                 start = DateTime.now();
             }
-            Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
+
+            if (reschedule == true) {
+                Study.getScheduler().rescheduleTests(start,Study.getInstance().getParticipant());
+            } else {
+                Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
+            }
             Study.getRestClient().submitTestSchedule();
             Study.getScheduler().scheduleNotifications(Study.getCurrentVisit());
             return null;
