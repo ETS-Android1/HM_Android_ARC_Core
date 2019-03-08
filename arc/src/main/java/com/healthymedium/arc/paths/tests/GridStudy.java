@@ -101,6 +101,9 @@ public class GridStudy extends BaseFragment {
             dialog.setOnDialogDismissListener(null);
             dialog.dismiss();
         }
+        if(handler != null) {
+            handler.removeCallbacks(runnable);
+        }
         paused = true;
     }
 

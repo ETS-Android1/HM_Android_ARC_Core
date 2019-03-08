@@ -1,34 +1,31 @@
 package com.healthymedium.arc.path_data;
 
-import com.google.gson.annotations.SerializedName;
-import com.healthymedium.arc.api.tests.data.BaseData;
-import com.healthymedium.arc.api.tests.data.ChronotypeSurvey;
-import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
-import com.healthymedium.arc.study.PathSegmentData;
-import com.healthymedium.arc.time.JodaUtil;
+import android.location.Location;
 
-import org.joda.time.DateTime;
+import com.healthymedium.arc.api.tests.data.BaseData;
+import com.healthymedium.arc.api.tests.data.LocationSurvey;
+import com.healthymedium.arc.api.tests.data.LocationSurveySection;
+import com.healthymedium.arc.study.PathSegmentData;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-public class ChronotypePathData extends PathSegmentData {
+public class LocationPathData extends PathSegmentData {
 
-    public ChronotypePathData(){
+    public LocationPathData(){
         super();
     }
 
     @Override
     protected BaseData onProcess() {
 
-        ChronotypeSurvey survey = new ChronotypeSurvey();
+        LocationSurvey survey = new LocationSurvey();
         survey.questions = new ArrayList<>();
 
         int size = objects.size();
         for (int i=0;i<size;i++) {
             Map<String, Object> response = (Map<String, Object>) objects.get(i);
-            ChronotypeSurveySection surveySection = processHashMap(response,ChronotypeSurveySection.class);
+            LocationSurveySection surveySection = processHashMap(response, LocationSurveySection.class);
 
             if(i==0){
                 survey.start_date = surveySection.display_time;
@@ -36,7 +33,7 @@ public class ChronotypePathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "chronotype_" + Integer.toString(i+1);
+            surveySection.question_id = "location " + Integer.toString(i+1);
             survey.questions.add(surveySection);
         }
 

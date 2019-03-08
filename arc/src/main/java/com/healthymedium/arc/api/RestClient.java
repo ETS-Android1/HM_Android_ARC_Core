@@ -44,6 +44,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.HttpUrl;
@@ -63,7 +64,7 @@ public class RestClient <Api>{
     private Api serviceExtension;
     protected Gson gson;
 
-    private List<Object> uploadQueue = new ArrayList<>();
+    private List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
     private UploadListener uploadListener = null;
     private boolean uploading = false;
     private Handler handler;
@@ -106,10 +107,10 @@ public class RestClient <Api>{
 
         if(PreferencesManager.getInstance().contains("uploadQueue")) {
             List uploadData = Arrays.asList(PreferencesManager.getInstance().getObject("uploadQueue", Object[].class));
-            uploadQueue = new ArrayList<>(uploadData);
+            uploadQueue = Collections.synchronizedList(new ArrayList<>(uploadData));
             Log.i("RestClient", "uploadQueue="+uploadQueue.toString());
         } else {
-            uploadQueue = new ArrayList<>();
+            uploadQueue = Collections.synchronizedList(new ArrayList<>());
         }
     }
 
@@ -255,6 +256,41 @@ public class RestClient <Api>{
         if(Config.REST_BLACKHOLE) {
             return;
         }
+        TestSubmission test  = createTestSubmission(session);
+        submitTest(test);
+    }
+
+    public void submitTest(TestSubmission test) {
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","submitTest(id="+test.session_id+")");
+        if(uploading){
+            uploadQueue.add(test);
+            saveUploadQueue();
+        } else {
+            markUploadStarted();
+            JsonObject json = serialize(test);
+            Call<ResponseBody> call = getService().submitTest(Device.getId(), json);
+            call.enqueue(createDataCallback(test));
+        }
+    }
+
+    public void enqueueTest(TestSession session)
+    {
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+
+        TestSubmission test = createTestSubmission(session);
+        uploadQueue.add(test);
+        saveUploadQueue();
+    }
+
+    // utility functions ---------------------------------------------------------------------------
+
+    protected TestSubmission createTestSubmission(TestSession session)
+    {
         TestSubmission test  = new TestSubmission();
         test.app_version = VersionUtil.getAppVersionName();
         test.device_id = Device.getId();
@@ -285,26 +321,8 @@ public class RestClient <Api>{
         test.interrupted = session.wasInterrupted() ? 1 : 0;
         test.tests = session.getTestData();
 
-        submitTest(test);
+        return test;
     }
-
-    public void submitTest(TestSubmission test) {
-        if(Config.REST_BLACKHOLE) {
-            return;
-        }
-        Log.i("RestClient","submitTest(id="+test.session_id+")");
-        if(uploading){
-            uploadQueue.add(test);
-            saveUploadQueue();
-        } else {
-            markUploadStarted();
-            JsonObject json = serialize(test);
-            Call<ResponseBody> call = getService().submitTest(Device.getId(), json);
-            call.enqueue(createDataCallback(test));
-        }
-    }
-
-    // utility functions ---------------------------------------------------------------------------
 
     protected Response parseResponse(retrofit2.Response<ResponseBody> retrofitResponse){
         Response response = new Response();

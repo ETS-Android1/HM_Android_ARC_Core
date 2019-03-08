@@ -26,7 +26,6 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.templates.StandardTemplate;
 import com.healthymedium.arc.paths.informative.HelpScreen;
-import com.healthymedium.arc.paths.informative.PrivacyScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
@@ -149,8 +148,7 @@ public class SetupParticipant extends StandardTemplate {
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrivacyScreen privacyScreen = new PrivacyScreen();
-                NavigationManager.getInstance().open(privacyScreen);
+                Study.getPrivacyPolicy().show(getContext());
             }
         });
         linearLayout.addView(textViewPolicyLink);

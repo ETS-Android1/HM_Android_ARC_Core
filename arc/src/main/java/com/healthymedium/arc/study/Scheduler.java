@@ -28,8 +28,9 @@ public class Scheduler {
         int testCount = visit.getNumberOfTests();
         List<TestSession> testSessions = visit.getTestSessions();
         for(TestSession session: testSessions) {
-                NotificationManager.getInstance().removeNotification(session.getIndex(), NotificationManager.TEST_TAKE);
-                NotificationManager.getInstance().removeNotification(testCount+session.getIndex(), NotificationManager.TEST_MISSED);
+                Log.i("Scheduler", "Unscheduling notifications for " + visit.getId() + "." + session.getId());
+                NotificationManager.getInstance().removeNotification(session.getId(), NotificationManager.TEST_TAKE);
+                NotificationManager.getInstance().removeNotification(testCount+session.getId(), NotificationManager.TEST_MISSED);
         }
     }
 
@@ -41,8 +42,9 @@ public class Scheduler {
         List<TestSession> testSessions = visit.getTestSessions();
         for (TestSession session : testSessions) {
             if (session.getScheduledTime().isAfterNow()) {
-                NotificationManager.getInstance().scheduleNotification(session.getIndex(), NotificationManager.TEST_TAKE, session.getScheduledTime());
-                NotificationManager.getInstance().scheduleNotification(testCount+session.getIndex(), NotificationManager.TEST_MISSED, session.getExpirationTime());
+                Log.i("Scheduler", "Scheduling notifications for " + visit.getId() + "." + session.getId());
+                NotificationManager.getInstance().scheduleNotification(session.getId(), NotificationManager.TEST_TAKE, session.getScheduledTime());
+                NotificationManager.getInstance().scheduleNotification(session.getId(), NotificationManager.TEST_MISSED, session.getExpirationTime());
             }
         }
         visit.confirmNotificationsScheduled();

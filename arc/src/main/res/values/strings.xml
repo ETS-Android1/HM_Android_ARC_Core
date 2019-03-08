@@ -170,4 +170,8 @@
     <string name="times">times</string>
     <string name="test">TEST </string>
     <string name="version">Version</string>
+    <string name="about_app"></string>
+    <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
+    <string name="error_401">Invalid Subject ID or Site Code</string>
+    <string name="error_409">Already enrolled on another device</string>
 </resources>

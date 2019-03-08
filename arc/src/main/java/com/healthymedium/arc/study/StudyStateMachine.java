@@ -3,6 +3,7 @@ package com.healthymedium.arc.study;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
@@ -81,6 +82,19 @@ public class StudyStateMachine {
         }
     }
 
+    protected void enableTransitionGrids(PathSegment segment, boolean animateEntry){
+        if (animateEntry) {
+            segment.fragments.get(1).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+            segment.fragments.get(1).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+
+            segment.fragments.get(2).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+            segment.fragments.get(2).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+
+            segment.fragments.get(3).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+            segment.fragments.get(3).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        }
+    }
+
     public void initialize(){
         state = new StudyState();
     }
@@ -99,7 +113,26 @@ public class StudyStateMachine {
     }
 
     public void abandonTest(){
+        Participant participant = Study.getParticipant();
 
+        Log.i("StudyStateMachine", "loading in the middle of an indexed test, marking it abandoned");
+        participant.getCurrentTestSession().markAbandoned();
+
+        Log.i("StudyStateMachine", "collecting data from each existing segment");
+        for(PathSegment segment : state.segments){
+            BaseData object = segment.collectData();
+            if(object!=null){
+                state.cache.add(object);
+            }
+        }
+
+        loadTestDataFromCache();
+        state.segments.clear();
+        state.cache.clear();
+
+        Study.getRestClient().submitTest(participant.getCurrentTestSession());
+        participant.moveOnToNextTestSession(true);
+        save();
     }
 
     protected void setupPath(){
@@ -112,15 +145,18 @@ public class StudyStateMachine {
     }
 
     public boolean skipToNextSegment(){
-        Object object = state.segments.get(0).collectData();
-        if(object!=null){
-            state.cache.add(object);
-        }
-        state.segments.remove(0);
 
-        NavigationManager.getInstance().clearBackStack();
-        Study.getInstance().getParticipant().save();
-        save();
+        if(state.segments.size() > 0) {
+            BaseData object = state.segments.get(0).collectData();
+            if (object != null) {
+                state.cache.add(object);
+            }
+            state.segments.remove(0);
+
+            NavigationManager.getInstance().clearBackStack();
+            Study.getInstance().getParticipant().save();
+            save();
+        }
 
         if(state.segments.size()>0){
             return openNext();
@@ -138,6 +174,7 @@ public class StudyStateMachine {
     }
 
     public boolean openNext(int skips){
+        save();
         if(state.segments.size()>0){
             if(state.segments.get(0).openNext(skips)) {
                 return true;
@@ -151,7 +188,7 @@ public class StudyStateMachine {
 
     protected boolean endOfSegment(){
         // else at the end of segment
-        Object object = state.segments.get(0).collectData();
+        BaseData object = state.segments.get(0).collectData();
         if(object!=null){
             state.cache.add(object);
         }
@@ -224,7 +261,7 @@ public class StudyStateMachine {
         state.segments.add(segment);
     }
 
-    public void setPathSetupParticipant(int firstDigits, int secondDigits) {
+    public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new SetupWelcome());
 
@@ -239,7 +276,11 @@ public class StudyStateMachine {
         setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
         fragments.add(setupParticipantConfirmFragment);
 
-        fragments.add(new SetupSite());
+        SetupSite setupSiteFragment = new SetupSite();
+        Bundle setupSiteBundle = new Bundle();
+        setupSiteBundle.putInt("siteDigits", siteDigits);
+        setupSiteFragment.setArguments(setupSiteBundle);
+        fragments.add(setupSiteFragment);
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
@@ -253,8 +294,8 @@ public class StudyStateMachine {
                 false,
                 "Availability" ,
                 "A Few Questions",
-                "The following section will ask you questions in regard to your sleep and wake behavior on weekdays and weekends." + "\n\n"
-                        + "Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.",
+                "First, we'll ask you a few questions to help us determine when to send you those notifications." + "\n\n"
+                        + "You will only receive notifications during your waking hours.",
                 "BEGIN"));
 
         fragments.add(new AvailabilityMondayWake());
@@ -285,11 +326,11 @@ public class StudyStateMachine {
                 false,
                 "Chronotype" ,
                 "Six Questions",
-                "Please answer all of the following questions even if you do not work 7 days per week.\n\n" +
-                        "Please don’t forget to indicate AM or PM.",
+                "The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\n" +
+                        "Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.",
                 "BEGIN"));
 
-        fragments.add(new QuestionPolar(true,"Have you been a shift worker in the past month?",""));
+        fragments.add(new QuestionPolar(true,"I have been a shift- or night-worker in the past three months.",""));
 
         List<String> workingDayCountOptions = new ArrayList<>();
         workingDayCountOptions.add("0");
@@ -300,7 +341,16 @@ public class StudyStateMachine {
         workingDayCountOptions.add("5");
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
-        fragments.add(new QuestionRadioButtons(true,"Normally, how many days a week do you work?","Select one",workingDayCountOptions));
+
+        fragments.add(new QuestionRadioButtons(true,false, "Normally, I work ____\n\n" + "days/week.","Select one",workingDayCountOptions));
+
+        fragments.add(new InfoTemplate(
+                false,
+                "Chronotype" ,
+                "",
+                "Please answer all of the following questions even if you do not work 7 days per week.\n\n" +
+                        "Please don't forget to indicate AM or PM.",
+                "NEXT"));
 
         CircadianClock clock;
         String weekday;
@@ -329,10 +379,10 @@ public class StudyStateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>fall asleep</b>?","This is not when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b>, when do you <b>wake up</b>?","This is not when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
+        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
@@ -414,7 +464,7 @@ public class StudyStateMachine {
         where.add("Vehicle");
         where.add("Outside");
         where.add("Other");
-        fragments.add(new QuestionRadioButtons(true,"Where are you right now?","Select One",where));
+        fragments.add(new QuestionRadioButtons(true,false,"Where are you right now?","Select One",where));
 
         fragments.add(new QuestionRating(true,"How would you rate <b>your overall mood</b> right now?","On a scale of bad to good.","Bad","Good"));
         fragments.add(new QuestionRating(true,"How would you rate <b>how you feel</b> right now?","On a scale of sleepy/tired to active/alert.","Sleepy/Tired","Active/Alert"));
@@ -430,7 +480,7 @@ public class StudyStateMachine {
         what.add("Personal Care");
         what.add("Resting");
         what.add("Other");
-        fragments.add(new QuestionRadioButtons(true,"In the past 5 minutes, what were you mostly doing?","Select One",what));
+        fragments.add(new QuestionRadioButtons(true,false,"In the past 5 minutes, what were you mostly doing?","Select One",what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);
@@ -551,13 +601,14 @@ public class StudyStateMachine {
         fragments.add(gridTestFragment);
 
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
+        enableTransitionGrids(segment,true);
         state.segments.add(segment);
     }
 
     public void addInterruptedPage(){
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new QuestionInterrupted(false,"Thanks!<br><br>Were you interrupted or did you have to stop while taking any of these tests?",""));
-        PathSegment segment = new PathSegment(fragments,SinglePageData.class);
+        PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);
     }
 
@@ -624,6 +675,12 @@ public class StudyStateMachine {
 
     public StudyState getState(){
         return state;
+    }
+
+    // loadTestDataFromCache() is called from abandonTest().
+    // Override this method to handle loading test data from cache.
+    public void loadTestDataFromCache() {
+
     }
 
 

@@ -58,8 +58,7 @@ public class SetupWelcome extends BaseFragment {
         textViewPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrivacyScreen privacyScreen = new PrivacyScreen();
-                NavigationManager.getInstance().open(privacyScreen);
+                Study.getPrivacyPolicy().show(getContext());
             }
         });
 

@@ -3,6 +3,7 @@ package com.healthymedium.arc.study;
 import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.api.tests.data.BaseData;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -20,13 +21,13 @@ public class PathSegmentData {
     }
 
 
-    public Object process() {
-        Object object = onProcess();
+    public BaseData process() {
+        BaseData object = onProcess();
         return object;
     }
 
     // Override this
-    protected Object onProcess() {
+    protected BaseData onProcess() {
         return null;
     }
 

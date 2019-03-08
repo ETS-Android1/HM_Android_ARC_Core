@@ -76,9 +76,9 @@ public class NotificationManager {
 
         if(PreferencesManager.getInstance().contains(NOTIFICATION_NODES)) {
             Node[] nodeArrays = PreferencesManager.getInstance().getObject(NOTIFICATION_NODES,Node[].class);
-            nodes = new ArrayList<>(Arrays.asList(nodeArrays));
+            nodes = Collections.synchronizedList(new ArrayList<>(Arrays.asList(nodeArrays)));
         } else {
-            nodes = new ArrayList<>();
+            nodes = Collections.synchronizedList(new ArrayList<NotificationManager.Node>());
         }
         requestIndex = PreferencesManager.getInstance().getInt(NOTIFICATION_REQUEST_INDEX,0);
 
@@ -163,16 +163,32 @@ public class NotificationManager {
     }
 
     public void scheduleAllNotifications(){
-        int size = nodes.size();
-        for(int i=0;i<size;i++){
-            DateTime time = new DateTime(nodes.get(i).time);
-            if(time.isAfterNow()) {
-                scheduleNotification(nodes.get(i).id,nodes.get(i).type,time);
-            } else {
-                nodes.remove(i);
-                size--;
-                i--;
+        Log.i("NotificationManager", "scheduleAllNotifications");
+
+        // We're occasionally seeing exceptions when accessing nodes by index (nodes.get()).
+        // So, let's try stepping stepping through the list, checking to make sure we haven't
+        // reached the end on each iteration.
+        
+        int i = 0;
+
+        while(i < nodes.size())
+        {
+            try {
+                Node node = nodes.get(i);
+                DateTime time = new DateTime(node.time);
+                if(time.isAfterNow()) {
+                    scheduleNotification(node.id,node.type,time);
+                    i++;
+                } else {
+                    nodes.remove(i);
+                }
             }
+            catch (java.lang.IndexOutOfBoundsException e)
+            {
+                Log.i("NotificationManager", e.toString());
+                break;
+            }
+
         }
         saveNodes();
     }
@@ -297,9 +313,11 @@ public class NotificationManager {
                     break;
             }
 
+            int notificationId = makeNotificationId(id, type);
+
             Notification notification = buildNotification(node,channel);
             android.app.NotificationManager notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.notify(node.id, notification);
+            notificationManager.notify(notificationId, notification);
         }
     }
 
@@ -317,4 +335,14 @@ public class NotificationManager {
         }
     }
 
+    // We need to make sure that notification id's are unique, but we also need to be able to
+    // recreate a notification id for a given session.
+    // This should separate notification ids for the different notification types into their own
+    // sections, so as long as we're not going over 10,000 sessions, we shouldn't run into any
+    // collisions.
+
+    public int makeNotificationId(int sessionId, int type)
+    {
+        return (type * 10000) + sessionId;
+    }
 }
