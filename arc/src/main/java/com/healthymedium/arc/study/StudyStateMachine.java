@@ -398,12 +398,11 @@ public class StudyStateMachine {
         fragments.add(new InfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
-                "Six Questions",
-                "The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\n" +
-                        "Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.",
+                res.getString(R.string.chronotype_subheader),
+                res.getString(R.string.chronotype_0_body),
                 res.getString(R.string.button_begin)));
 
-        fragments.add(new QuestionPolar(true,"I have been a shift- or night-worker in the past three months.",""));
+        fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_1_q1),""));
 
         List<String> workingDayCountOptions = new ArrayList<>();
         workingDayCountOptions.add("0");
@@ -415,14 +414,13 @@ public class StudyStateMachine {
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
 
-        fragments.add(new QuestionRadioButtons(true,false, "Normally, I work ____\n\n" + "days/week.","Select one",workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.chronotype_1_q2_sub ),workingDayCountOptions));
 
         fragments.add(new InfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
                 "",
-                "Please answer all of the following questions even if you do not work 7 days per week.\n\n" +
-                        "Please don't forget to indicate AM or PM.",
+                res.getString(R.string.chronotype_2_body),
                 res.getString(R.string.button_next)));
 
         CircadianClock clock;
@@ -452,10 +450,10 @@ public class StudyStateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_work_days_sleep), res.getString(R.string.chronotype_body_sleep), bedTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_work_days_wake), res.getString(R.string.chronotype_body_wake), wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_sleep), res.getString(R.string.chronotype_body_sleep), bedTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_wake), res.getString(R.string.chronotype_body_wake), wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
@@ -501,12 +499,12 @@ public class StudyStateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true,"What time did you get in bed last night?","",bedTime));
-        fragments.add(new QuestionDuration(true,"How long did it take you to fall asleep last night?"," "));
-        fragments.add(new QuestionInteger(true,"How many times did you wake up for 5 minutes or longer?","Number of times",2));
-        fragments.add(new QuestionTime(true,"What time did you wake up this morning?"," ",wakeTime));
-        fragments.add(new QuestionTime(true,"What time did you get out of bed this morning?"," ",wakeTime));
-        fragments.add(new QuestionRating(true,"How would you rate the quality of your sleep?","On a scale of poor to excellent.","Poor","Excellent"));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_0_q1),"",bedTime));
+        fragments.add(new QuestionDuration(true, res.getString(R.string.wake_0_q2)," "));
+        fragments.add(new QuestionInteger(true, res.getString(R.string.wake_0_q3a), res.getString(R.string.wake_0_q3b),2));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q1)," ",wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q2)," ",wakeTime));
+        fragments.add(new QuestionRating(true, res.getString(R.string.wake_1_q3), res.getString(R.string.wake_drag), res.getString(R.string.wake_poor), res.getString(R.string.wake_excellent)));
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
         enableTransition(segment,true);
@@ -545,8 +543,8 @@ public class StudyStateMachine {
         where.add(res.getString(R.string.context_q2_answers7));
         fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.context_q2_sub), where));
 
-        fragments.add(new QuestionRating(true,"How would you rate <b>your overall mood</b> right now?","On a scale of bad to good.", res.getString(R.string.context_bad), res.getString(R.string.context_good)));
-        fragments.add(new QuestionRating(true,"How would you rate <b>how you feel</b> right now?","On a scale of sleepy/tired to active/alert.", res.getString(R.string.context_tired), res.getString(R.string.context_active)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), res.getString(R.string.context_q3_sub), res.getString(R.string.context_bad), res.getString(R.string.context_good)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), res.getString(R.string.context_q4_sub), res.getString(R.string.context_tired), res.getString(R.string.context_active)));
 
         List<String> what = new ArrayList<>();
         what.add(res.getString(R.string.context_q5_answers1));
@@ -609,7 +607,7 @@ public class StudyStateMachine {
                 false,
                 "Test "+(index+1)+" of 3" ,
                 res.getString(R.string.price_header),
-                "We’ll show you some shopping items and prices.\n\nPlease decide if the displayed price is a good bargain for that item. The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.",
+                res.getString(R.string.price_body),
                 res.getString(R.string.button_begin));
         fragments.add(info);
 
@@ -640,7 +638,7 @@ public class StudyStateMachine {
                 false,
                 "Test "+(index+1)+" of 3" ,
                 res.getString(R.string.symbols_header),
-                "You will see three pairs of symbols at the top of the screen and two pairs at the bottom.\n\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.",
+                res.getString(R.string.symbols_body),
                 res.getString(R.string.button_begin));
         fragments.add(info);
 
@@ -659,7 +657,7 @@ public class StudyStateMachine {
                 false,
                 "Test "+(index+1)+" of 3" ,
                 res.getString(R.string.grid_header),
-                "In this test you will see a 5 x 5 grid with three items placed in that grid.\n\nStudy the grid and try to remember the location of the three items.",
+                res.getString(R.string.grid_body1),
                 res.getString(R.string.button_next));
         fragments.add(info0);
 
@@ -667,7 +665,7 @@ public class StudyStateMachine {
                 true,
                 "Test "+(index+1)+" of 3" ,
                 res.getString(R.string.grid_header),
-                "You will then do a different task where you will touch all the letter “F”s that you find as quickly as you can.",
+                res.getString(R.string.grid_body2),
                 res.getString(R.string.button_next));
         fragments.add(info1);
 
@@ -675,7 +673,7 @@ public class StudyStateMachine {
                 true,
                 "Test "+(index+1)+" of 3" ,
                 res.getString(R.string.grid_header),
-                "Finally, you will be shown a blank grid. Tap the boxes where the items were previously located.\n\nPress Begin to start the test.",
+                res.getString(R.string.grid_body3),
                 res.getString(R.string.button_begin));
         fragments.add(info2);
 
@@ -694,8 +692,11 @@ public class StudyStateMachine {
     }
 
     public void addInterruptedPage(){
+
+        Resources res = Application.getInstance().getResources();
+
         List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new QuestionInterrupted(false,"Thanks!<br><br>Were you interrupted or did you have to stop while taking any of these tests?",""));
+        fragments.add(new QuestionInterrupted(false, res.getString(R.string.interrupted_body),""));
         PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);
     }
@@ -710,16 +711,16 @@ public class StudyStateMachine {
         String body;
 
         // Default
-        header = "Thank You";
-        subheader = "Test Complete";
-        body = "You'll get a notification later today when your next test is available.";
+        header = res.getString(R.string.thankyou_header1);
+        subheader = res.getString(R.string.thankyou_testcomplete_subhead1);
+        body = res.getString(R.string.thankyou_testcomplete_body1);
 
         // Finished with study
         if(!Study.getParticipant().isStudyRunning()){
             //at the end of the line
-            header = "Congratulations";
-            subheader = "You've Finished the Study!";
-            body = "There are no more tests to take.";
+            header = res.getString(R.string.thankyou_header3);
+            subheader = res.getString(R.string.thankyou_finished_subhead3);
+            body = res.getString(R.string.thankyou_body3);
         }
         else {
             ParticipantState participantState = Study.getParticipant().getState();
@@ -729,15 +730,19 @@ public class StudyStateMachine {
             if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
                 String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
                 String date = visit.getActualStartDate().toString(format);
-                header = "Great Job";
-                subheader = "You've Finished This Cycle!";
-                body = "There are no tests available at this time. You'll receive a notification on "+date+", when the next testing cycle begins.";
+                header = res.getString(R.string.thankyou_header2);
+                subheader = res.getString(R.string.thankyou_cycle_subhead2);
+
+                String body2_1 = res.getString(R.string.thankyou_cycle_body2_1);
+                String body2_2 = res.getString(R.string.thankyou_cycle_body2_2);
+
+                body = body2_1 + date + body2_2;
             }
             // After the 4th test of the day
             else if (visit.getNumberOfTestsLeftForToday() == 0) {
-                header = "Thank You";
-                subheader = "All Done for Today!";
-                body = "Thanks for your hard work. We'll notify you tomorrow with your next test.";
+                header = res.getString(R.string.thankyou_header1);
+                subheader = res.getString(R.string.thankyou_alldone_subhead1);
+                body = res.getString(R.string.thankyou_alldone_body1);
             }
 
         }

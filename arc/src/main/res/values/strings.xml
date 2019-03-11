@@ -10,12 +10,22 @@
     <string name="button_next">NEXT</string>
     <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
 
-    <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behavior on work- and work-free days. Please estimate an average of your \"normal\" sleep behavior over the past 6 weeks when you were able to follow your usual routines.</string>
+    <string name="chronotype_subheader">Six Questions</string>
+    <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\nPlease estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>
     <string name="chronotype_1_q1">I have been a shift- or night-worker in the past three months.</string>
-    <string name="chronotype_1_q2">Normally, I work ____ days/week</string>
-    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work or work 7 days/week. Please don\'t forget to indicate AM or PM.</string>
-    <string name="chronotype_body_sleep">I normally fall asleep at (this is NOT when you go to bed):</string>
-    <string name="chronotype_body_wake">I normally wake up at (this is NOT when you get out of bed):</string>
+    <string name="chronotype_1_q2">Normally, I work ____\n\ndays/week.</string>
+    <string name="chronotype_1_q2_sub">Select one</string>
+
+    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work 7 days per week.\n\nPlease don't forget to indicate AM or PM.</string>
+
+    <string name="chronotype_body_sleep">This is NOT when you go to bed.</string>
+    <string name="chronotype_body_wake">This is NOT when you get out of bed.</string>
+
+    <string name="chronotype_work_days_sleep">On <b>workdays</b>, I normally <b>fall asleep</b> at:</string>
+    <string name="chronotype_work_days_wake">On <b>workdays</b>, I normally <b>wake up</b> at:</string>
+
+    <string name="chronotype_workfree_sleep">On <b>work-free days</b> when I don't use an alarm clock, I normally <b>fall asleep</b> at:</string>
+    <string name="chronotype_workfree_wake">On <b>work-free days</b> when I don't use an alarm clock, I normally <b>wake up</b> at:</string>
 
     <string name="sleepwakesurvey_header">Wake Survey</string>
     <string name="sleepwakesurvey_subhead">Six Questions</string>
@@ -58,8 +68,11 @@
     <string name="context_q2_answers6">Outside</string>
     <string name="context_q2_answers7">Other</string>
 
-    <string name="context_q3">Which of these best describes your overall mood right now?</string>
-    <string name="context_q4">Which of these best describes how you feel right now?</string>
+    <string name="context_q3">How would you rate <b>your overall mood</b> right now?</string>
+    <string name="context_q3_sub">On a scale of bad to good.</string>
+
+    <string name="context_q4">How would you rate <b>how you feel</b> right now?</string>
+    <string name="context_q4_sub">On a scale of sleepy/tired to active/alert.</string>
 
     <string name="context_q5">In the past 5 minutes, what were you mostly doing?</string>
     <string name="context_q5_sub">Select One</string>
@@ -80,9 +93,9 @@
     <string name="done">Done</string>
 
     <string name="grid_header">Grids</string>
-    <string name="grid_body1">In this test, you will see a 5 x 5 grid. \n\nThere will be three items placed in that grid. \n\nTry to remember where the items are located.</string>
-    <string name="grid_body2">You will then do a different task where you will touch all the letter \'F\'s that you find as quickly as you can.</string>
-    <string name="grid_body3">Then, you\'ll be shown a blank grid. Tap the boxes where that items were located previously. Press Start to begin.</string>
+    <string name="grid_body1">In this test you will see a 5 x 5 grid with three items placed in that grid.\n\nStudy the grid and try to remember the location of the three items.</string>
+    <string name="grid_body2">You will then do a different task where you will touch all the letter “F”s that you find as quickly as you can.</string>
+    <string name="grid_body3">Finally, you will be shown a blank grid. Tap the boxes where the items were previously located.\n\nPress Begin to start the test.</string>
     <string name="grid_transition">Try to remember the location of the items!</string>
     <string name="grid_example_test">EXAMPLE GRID EXCERPT</string>
     <string name="grid_example_letters">EXAMPLE TASK EXCERPT</string>
@@ -93,8 +106,23 @@
     <string name="idverification_body2">By signing my initials on the line below, I attest that I completed these tests.</string>
     <string name="idverification_header">Id Verification</string>
 
-    <string name="interrupted_body">Were you interrupted or did you have to stop while taking any of these tests?</string>
+    <string name="interrupted_body">Thanks!\n\nWere you interrupted or did you have to stop while taking any of these tests?</string>
     <string name="interrupted_header">Final Questions</string>
+
+    <string name="thankyou_header1">Thank You</string>
+    <string name="thankyou_testcomplete_subhead1">Test Complete</string>
+    <string name="thankyou_testcomplete_body1">You\'ll get a notification later today when your next test is available.</string>
+    <string name="thankyou_header2">Great Job</string>
+    <string name="thankyou_header3">Congratulations</string>
+    <string name="thankyou_finished_subhead3">You\'ve Finished the Study!</string>
+    <string name="thankyou_body3">There are no more tests to take.</string>
+
+    <string name="thankyou_cycle_subhead2">You\'ve Finished This Cycle!</string>
+    <string name="thankyou_cycle_body2_1">There are no tests available at this time. You\'ll receive a notification on </string>
+    <string name="thankyou_cycle_body2_2">, when the next testing cycle begins.</string>
+
+    <string name="thankyou_alldone_subhead1">All Done for Today!</string>
+    <string name="thankyou_alldone_body1">Thanks for your hard work. We\'ll notify you tomorrow with your next test.</string>
 
     <string name="list_selectall">Select all that apply:</string>
     <string name="list_selectone">Select one:</string>
@@ -154,7 +182,7 @@
     <string name="startdate_header">SET START DATE</string>
 
     <string name="symbols_header">Symbols</string>
-    <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom. \n\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.\n \nPress Start to begin.</string>
+    <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom.\n\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
     <string name="symbols_match">Which pair below matches one of the pairs on the top?</string>
     <string name="symbols_or">Or</string>
     <string name="symbols_subheader">Symbols Instructions</string>
@@ -165,15 +193,17 @@
 
     <string name="undo">Undo</string>
 
-    <string name="wakeup_0_q1">What time did you get in bed last night?</string>
-    <string name="wakeup_0_q2">How long did it take you to fall asleep?</string>
-    <string name="wakeup_0_q3">How many times did you wake up for 5 minutes or longer?</string>
-    <string name="wakeup_1_q1">What time did you wake up in the morning?</string>
-    <string name="wakeup_1_q2">What time did you get out of bed?</string>
-    <string name="wakeup_1_q3">How would you rate the quality of your sleep?</string>
-    <string name="wakeup_excellent">EXCELLENT</string>
-    <string name="wakeup_header">WAKE SURVEY</string>
-    <string name="wakeup_poor">POOR</string>
+    <string name="wake_0_q1">What time did you get in bed last night?</string>
+    <string name="wake_0_q2">How long did it take you to fall asleep last night?</string>
+    <string name="wake_0_q3a">How many times did you wake up for 5 minutes or longer?</string>
+    <string name="wake_0_q3b">Number of times</string>
+    <string name="wake_1_q1">What time did you wake up this morning?</string>
+    <string name="wake_1_q2">What time did you get out of bed this morning?</string>
+    <string name="wake_1_q3">How would you rate the quality of your sleep?</string>
+    <string name="wake_drag">On a scale of poor to excellent.</string>
+    <string name="wake_excellent">Excellent</string>
+    <string name="wake_header">WAKE SURVEY</string>
+    <string name="wake_poor">Poor</string>
 
     <string name="weekday_sunday">Sunday</string>
     <string name="weekday_monday">Monday</string>
@@ -219,7 +249,7 @@
     <string name="confirm_body2">Please confirm or adjust the start date.</string>
 
     <string name="baseline_sitecoordinator">Site Coordinator</string>
-    <string name="price_body">In this task, we’ll show you some shopping items and prices. \n\nPlease decide if the displayed price is a \"good bargain\" for that item.\n \nThe pair will only remain on the screen for a short time so please make your decision quickly and pay careful attention.\n\nAfter you see 10 pairs of shopping items and prices, you will be asked to match the correct price with each item so try to remember the prices.\n\nPress Start to begin.</string>
+    <string name="price_body">We’ll show you some shopping items and prices.\n\nPlease decide if the displayed price is a good bargain for that item. The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
     <string name="notification_next">Your next test will be on {DATE}.</string>
 
     <string name="time_hours">hours</string>
