@@ -24,8 +24,8 @@
     <string name="chronotype_work_days_sleep">On <b>workdays</b>, I normally <b>fall asleep</b> at:</string>
     <string name="chronotype_work_days_wake">On <b>workdays</b>, I normally <b>wake up</b> at:</string>
 
-    <string name="chronotype_workfree_sleep">On <b>work-free days</b> when I don't use an alarm clock, I normally <b>fall asleep</b> at:</string>
-    <string name="chronotype_workfree_wake">On <b>work-free days</b> when I don't use an alarm clock, I normally <b>wake up</b> at:</string>
+    <string name="chronotype_workfree_sleep">On <b>work-free days</b> when I don\'t use an alarm clock, I normally <b>fall asleep</b> at:</string>
+    <string name="chronotype_workfree_wake">On <b>work-free days</b> when I don\'t use an alarm clock, I normally <b>wake up</b> at:</string>
 
     <string name="sleepwakesurvey_header">Wake Survey</string>
     <string name="sleepwakesurvey_subhead">Six Questions</string>
