@@ -319,4 +319,10 @@ public class Study{
         stateMachine.setPathSetupAvailability(minWakeTime, maxWakeTime, true);
         stateMachine.openNext();
     }
+
+    public static void adjustSchedule()
+    {
+        stateMachine.setPathAdjustSchedule();
+        stateMachine.openNext();
+    }
 }
