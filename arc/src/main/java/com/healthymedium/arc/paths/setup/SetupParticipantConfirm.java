@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.custom.DigitView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -54,7 +55,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
     TextView textViewPolicy;
 
     public SetupParticipantConfirm() {
-        super(true,"For confirmation<br/>purposes, please<br/><b>re-enter the Subject ID</b>.","");
+        super(true, Application.getInstance().getResources().getString(R.string.login_confirm_raterID),"");
         disableScrollBehavior();
     }
 
@@ -223,7 +224,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
                     if(charSequence.toString().equals(previousCharacterSequence.toString())){
                         buttonNext.setEnabled(true);
                     } else {
-                        showError("Subject ID doesn’t match");
+                        showError(Application.getInstance().getResources().getString(R.string.error_id_mismatch));
                     }
                 } else if(buttonNext.isEnabled()){
                     buttonNext.setEnabled(false);

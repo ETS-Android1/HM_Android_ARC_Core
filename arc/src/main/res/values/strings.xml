@@ -6,6 +6,10 @@
     <string name="baseline_body">There are no tests available at this time. Your schedule will be determined at your baseline visit.</string>
     <string name="baseline_header">BASELINE</string>
 
+    <string name="login_enter_raterID">Please enter the\n<b>Subject ID</b> below.</string>
+    <string name="login_confirm_raterID">For confirmation\n purposes, please\n<b>re-enter the Subject ID</b>.</string>
+    <string name="login_enter_ARCID">Please enter the\n <b>Site Code</b> below.</string>
+
     <string name="button_begin">BEGIN</string>
     <string name="button_next">NEXT</string>
     <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
@@ -269,6 +273,7 @@
     <string name="about_app"></string>
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
 
+    <string name="error_id_mismatch">Subject ID doesn’t match</string>
     <string name="error_default">Sorry, our app is currently experiencing issues. Please try again later.</string>
     <string name="error_401">Invalid Subject ID or Site Code</string>
     <string name="error_409">Already enrolled on another device</string>

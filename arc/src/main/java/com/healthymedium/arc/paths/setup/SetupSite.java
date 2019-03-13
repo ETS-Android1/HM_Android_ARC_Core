@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.DigitView;
@@ -59,7 +60,7 @@ public class SetupSite extends StandardTemplate {
     LoadingDialog loadingDialog;
 
     public SetupSite() {
-        super(true,"Please enter the<br/><b>Site Code</b> below.","");
+        super(true, Application.getInstance().getResources().getString(R.string.login_enter_ARCID),"");
         disableScrollBehavior();
     }
 
