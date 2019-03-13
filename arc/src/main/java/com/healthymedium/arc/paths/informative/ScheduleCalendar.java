@@ -111,64 +111,220 @@ public class ScheduleCalendar extends BaseFragment {
         TextView saturday1 = view.findViewById(R.id.saturday1);
         TextView saturday2 = view.findViewById(R.id.saturday2);
 
-
-
         DateTimeFormatter fmt = DateTimeFormat.forPattern("E");
         String startDay = fmt.print(startTime);
-        String endDay = fmt.print(endTime);
 
         fmt = DateTimeFormat.forPattern("d");
-        String startDayNum = fmt.print(startTime);
 
         if (startDay.equals("Mon")) {
             // start
-            monday1.setText(startDayNum);
+            monday1.setText(fmt.print(startTime));
 
             // end
-            sunday2.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            sunday2.setText(fmt.print(startTime.plusDays(6)));
+
+            // everything else
+            sunday1.setText(fmt.print(startTime.minusDays(1)));
+            tuesday1.setText(fmt.print(startTime.plusDays(1)));
+            wednesday1.setText(fmt.print(startTime.plusDays(2)));
+            thursday1.setText(fmt.print(startTime.plusDays(3)));
+            friday1.setText(fmt.print(startTime.plusDays(4)));
+            saturday1.setText(fmt.print(startTime.plusDays(5)));
+            monday2.setText(fmt.print(startTime.plusDays(7)));
+            tuesday2.setText(fmt.print(startTime.plusDays(8)));
+            wednesday2.setText(fmt.print(startTime.plusDays(9)));
+            thursday2.setText(fmt.print(startTime.plusDays(10)));
+            friday2.setText(fmt.print(startTime.plusDays(11)));
+            saturday2.setText(fmt.print(startTime.plusDays(12)));
+
+            // update backgrounds
+            monday1.setBackgroundResource(R.color.primary);
+            tuesday1.setBackgroundResource(R.color.primary);
+            wednesday1.setBackgroundResource(R.color.primary);
+            thursday1.setBackgroundResource(R.color.primary);
+            friday1.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.primary);
+            sunday2.setBackgroundResource(R.color.primary);
 
         } else if (startDay.equals("Tue")) {
             // start
-            tuesday1.setText(startDayNum);
+            tuesday1.setText(fmt.print(startTime));
 
             // end
-            monday2.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            monday2.setText(fmt.print(startTime.plusDays(6)));
+
+            // everything else
+            sunday1.setText(fmt.print(startTime.minusDays(2)));
+            monday1.setText(fmt.print(startTime.minusDays(1)));
+            wednesday1.setText(fmt.print(startTime.plusDays(1)));
+            thursday1.setText(fmt.print(startTime.plusDays(2)));
+            friday1.setText(fmt.print(startTime.plusDays(3)));
+            saturday1.setText(fmt.print(startTime.plusDays(4)));
+            sunday2.setText(fmt.print(startTime.plusDays(5)));
+            tuesday2.setText(fmt.print(startTime.plusDays(7)));
+            wednesday2.setText(fmt.print(startTime.plusDays(8)));
+            thursday2.setText(fmt.print(startTime.plusDays(9)));
+            friday2.setText(fmt.print(startTime.plusDays(10)));
+            saturday2.setText(fmt.print(startTime.plusDays(11)));
+
+            // update backgrounds
+            tuesday1.setBackgroundResource(R.color.primary);
+            wednesday1.setBackgroundResource(R.color.primary);
+            thursday1.setBackgroundResource(R.color.primary);
+            friday1.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.primary);
+            sunday2.setBackgroundResource(R.color.primary);
+            monday2.setBackgroundResource(R.color.primary);
 
         } else if (startDay.equals("Wed")) {
             // start
-            wednesday1.setText(startDayNum);
+            wednesday1.setText(fmt.print(startTime));
 
             // end
-            tuesday2.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            tuesday2.setText(fmt.print(startTime.plusDays(6)));
+
+            // everything else
+            sunday1.setText(fmt.print(startTime.minusDays(3)));
+            monday1.setText(fmt.print(startTime.minusDays(2)));
+            tuesday1.setText(fmt.print(startTime.minusDays(1)));
+            thursday1.setText(fmt.print(startTime.plusDays(1)));
+            friday1.setText(fmt.print(startTime.plusDays(2)));
+            saturday1.setText(fmt.print(startTime.plusDays(3)));
+            sunday2.setText(fmt.print(startTime.plusDays(4)));
+            monday2.setText(fmt.print(startTime.plusDays(5)));
+            wednesday2.setText(fmt.print(startTime.plusDays(7)));
+            thursday2.setText(fmt.print(startTime.plusDays(8)));
+            friday2.setText(fmt.print(startTime.plusDays(9)));
+            saturday2.setText(fmt.print(startTime.plusDays(10)));
+
+            // update backgrounds
+            wednesday1.setBackgroundResource(R.color.primary);
+            thursday1.setBackgroundResource(R.color.primary);
+            friday1.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.primary);
+            sunday2.setBackgroundResource(R.color.primary);
+            monday2.setBackgroundResource(R.color.primary);
+            tuesday2.setBackgroundResource(R.color.primary);
 
         } else if (startDay.equals("Thur")) {
             // start
-            thursday1.setText(startDayNum);
+            thursday1.setText(fmt.print(startTime));
 
             // end
-            wednesday2.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            wednesday2.setText(fmt.print(startTime.plusDays(6)));
+
+            // everything else
+            sunday1.setText(fmt.print(startTime.minusDays(4)));
+            monday1.setText(fmt.print(startTime.minusDays(3)));
+            tuesday1.setText(fmt.print(startTime.minusDays(2)));
+            wednesday1.setText(fmt.print(startTime.minusDays(1)));
+            friday1.setText(fmt.print(startTime.plusDays(1)));
+            saturday1.setText(fmt.print(startTime.plusDays(2)));
+            sunday2.setText(fmt.print(startTime.plusDays(3)));
+            monday2.setText(fmt.print(startTime.plusDays(4)));
+            tuesday2.setText(fmt.print(startTime.plusDays(5)));
+            thursday2.setText(fmt.print(startTime.plusDays(7)));
+            friday2.setText(fmt.print(startTime.plusDays(8)));
+            saturday2.setText(fmt.print(startTime.plusDays(9)));
+
+            // update backgrounds
+            thursday1.setBackgroundResource(R.color.primary);
+            friday1.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.primary);
+            sunday2.setBackgroundResource(R.color.primary);
+            monday2.setBackgroundResource(R.color.primary);
+            tuesday2.setBackgroundResource(R.color.primary);
+            wednesday2.setBackgroundResource(R.color.primary);
 
         } else if (startDay.equals("Fri")) {
             // start
-            friday1.setText(startDayNum);
+            friday1.setText(fmt.print(startTime));
 
             // end
-            thursday2.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            thursday2.setText(fmt.print(startTime.plusDays(6)));
+
+            // everything else
+            sunday1.setText(fmt.print(startTime.minusDays(5)));
+            monday1.setText(fmt.print(startTime.minusDays(4)));
+            tuesday1.setText(fmt.print(startTime.minusDays(3)));
+            wednesday1.setText(fmt.print(startTime.minusDays(2)));
+            thursday1.setText(fmt.print(startTime.minusDays(1)));
+            saturday1.setText(fmt.print(startTime.plusDays(1)));
+            sunday2.setText(fmt.print(startTime.plusDays(2)));
+            monday2.setText(fmt.print(startTime.plusDays(3)));
+            tuesday2.setText(fmt.print(startTime.plusDays(4)));
+            wednesday2.setText(fmt.print(startTime.plusDays(5)));
+            friday2.setText(fmt.print(startTime.plusDays(7)));
+            saturday2.setText(fmt.print(startTime.plusDays(8)));
+
+            // update backgrounds
+            friday1.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.primary);
+            sunday2.setBackgroundResource(R.color.primary);
+            monday2.setBackgroundResource(R.color.primary);
+            tuesday2.setBackgroundResource(R.color.primary);
+            wednesday2.setBackgroundResource(R.color.primary);
+            thursday2.setBackgroundResource(R.color.primary);
 
         } else if (startDay.equals("Sat")) {
             // start
-            saturday1.setText(startDayNum);
+            saturday1.setText(fmt.print(startTime));
 
             // end
-            friday2.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            friday2.setText(fmt.print(startTime.plusDays(6)));
+
+            // everything else
+            sunday1.setText(fmt.print(startTime.minusDays(6)));
+            monday1.setText(fmt.print(startTime.minusDays(5)));
+            tuesday1.setText(fmt.print(startTime.minusDays(4)));
+            wednesday1.setText(fmt.print(startTime.minusDays(3)));
+            thursday1.setText(fmt.print(startTime.minusDays(2)));
+            friday1.setText(fmt.print(startTime.minusDays(1)));
+            sunday2.setText(fmt.print(startTime.plusDays(1)));
+            monday2.setText(fmt.print(startTime.plusDays(2)));
+            tuesday2.setText(fmt.print(startTime.plusDays(3)));
+            wednesday2.setText(fmt.print(startTime.plusDays(4)));
+            thursday2.setText(fmt.print(startTime.plusDays(5)));
+            saturday2.setText(fmt.print(startTime.plusDays(7)));
+
+            // update backgrounds
+            saturday1.setBackgroundResource(R.color.primary);
+            sunday2.setBackgroundResource(R.color.primary);
+            monday2.setBackgroundResource(R.color.primary);
+            tuesday2.setBackgroundResource(R.color.primary);
+            wednesday2.setBackgroundResource(R.color.primary);
+            thursday2.setBackgroundResource(R.color.primary);
+            friday2.setBackgroundResource(R.color.primary);
 
         } else if (startDay.equals("Sun")) {
             // start
-            sunday1.setText(startDayNum);
+            sunday1.setText(fmt.print(startTime));
 
             // end
-            saturday1.setText(Integer.toString(Integer.parseInt(startDayNum) + 6));
+            saturday1.setText(fmt.print(startTime.plusDays(6)));
 
+            // everything else
+            monday1.setText(fmt.print(startTime.plusDays(1)));
+            tuesday1.setText(fmt.print(startTime.plusDays(2)));
+            wednesday1.setText(fmt.print(startTime.plusDays(3)));
+            thursday1.setText(fmt.print(startTime.plusDays(4)));
+            friday1.setText(fmt.print(startTime.plusDays(5)));
+            sunday2.setText(fmt.print(startTime.plusDays(7)));
+            monday2.setText(fmt.print(startTime.plusDays(8)));
+            tuesday2.setText(fmt.print(startTime.plusDays(9)));
+            wednesday2.setText(fmt.print(startTime.plusDays(10)));
+            thursday2.setText(fmt.print(startTime.plusDays(11)));
+            friday2.setText(fmt.print(startTime.plusDays(12)));
+            saturday2.setText(fmt.print(startTime.plusDays(13)));
+
+            // update backgrounds
+            sunday1.setBackgroundResource(R.color.primary);
+            monday1.setBackgroundResource(R.color.primary);
+            tuesday1.setBackgroundResource(R.color.primary);
+            wednesday1.setBackgroundResource(R.color.primary);
+            thursday1.setBackgroundResource(R.color.primary);
+            friday1.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.primary);
         }
     }
 }
