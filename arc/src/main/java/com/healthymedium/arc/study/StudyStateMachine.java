@@ -27,6 +27,7 @@ import com.healthymedium.arc.paths.availability.AvailabilitySaturdayWake;
 import com.healthymedium.arc.paths.availability.AvailabilitySundayBed;
 import com.healthymedium.arc.paths.availability.AvailabilitySundayWake;
 import com.healthymedium.arc.paths.availability.AvailabilityWeekdayConfirm;
+import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.questions.QuestionAdjustSchedule;
 import com.healthymedium.arc.paths.templates.InfoTemplate;
 import com.healthymedium.arc.paths.questions.QuestionCheckBoxes;
@@ -764,8 +765,7 @@ public class StudyStateMachine {
 
         fragments.add(new QuestionAdjustSchedule(true, true, "What week are you able to test?", ""));
 
-        // TODO
-        // Add calendar fragment here
+        fragments.add(new ScheduleCalendar());
 
         PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);

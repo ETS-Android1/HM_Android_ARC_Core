@@ -55,8 +55,16 @@ public class Visit {
         return scheduledStartDate;
     }
 
+    public void setScheduledStartDate(DateTime scheduledStartDate) {
+        this.scheduledStartDate = scheduledStartDate;
+    }
+
     public DateTime getScheduledEndDate() {
         return scheduledEndDate;
+    }
+
+    public void setScheduledEndDate(DateTime scheduledEndDate) {
+        this.scheduledEndDate = scheduledEndDate;
     }
 
     public DateTime getActualStartDate() {

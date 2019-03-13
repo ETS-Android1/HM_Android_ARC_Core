@@ -162,35 +162,35 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         // 7 is no change
         // 14 is +7 days
 
-        if (shiftDays == 0) {
+        if (index == 0) {
             return -7;
-        } else if (shiftDays == 1) {
+        } else if (index == 1) {
             return -6;
-        } else if (shiftDays == 2) {
+        } else if (index == 2) {
             return -5;
-        } else if (shiftDays == 3) {
+        } else if (index == 3) {
             return -4;
-        } else if (shiftDays == 4) {
+        } else if (index == 4) {
             return -3;
-        } else if (shiftDays == 5) {
+        } else if (index == 5) {
             return -2;
-        } else if (shiftDays == 6) {
+        } else if (index == 6) {
             return -1;
-        } else if (shiftDays == 7) {
+        } else if (index == 7) {
             return 0;
-        } else if (shiftDays == 8) {
+        } else if (index == 8) {
             return 1;
-        } else if (shiftDays == 9) {
+        } else if (index == 9) {
             return 2;
-        } else if (shiftDays == 10) {
+        } else if (index == 10) {
             return 3;
-        } else if (shiftDays == 11) {
+        } else if (index == 11) {
             return 4;
-        } else if (shiftDays == 12) {
+        } else if (index == 12) {
             return 5;
-        } else if (shiftDays == 13) {
+        } else if (index == 13) {
             return 6;
-        } else if (shiftDays == 14) {
+        } else if (index == 14) {
             return 7;
         }
 
@@ -211,12 +211,24 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
                 TestSession temp = visit.testSessions.get(i);
                 temp.setScheduledTime(temp.getScheduledTime().minusDays(shiftDays));
                 visit.testSessions.set(i, temp);
+
+                if (i == 0) {
+                    visit.setScheduledStartDate(temp.getScheduledTime());
+                } else if (i == visit.testSessions.size()-1) {
+                    visit.setScheduledEndDate(temp.getScheduledTime());
+                }
             }
         } else {
             for (int i = 0; i < visit.testSessions.size(); i++) {
                 TestSession temp = visit.testSessions.get(i);
                 temp.setScheduledTime(temp.getScheduledTime().plusDays(shiftDays));
                 visit.testSessions.set(i, temp);
+
+                if (i == 0) {
+                    visit.setScheduledStartDate(temp.getScheduledTime());
+                } else if (i == visit.testSessions.size()-1) {
+                    visit.setScheduledEndDate(temp.getScheduledTime());
+                }
             }
         }
     }
