@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -91,24 +92,38 @@ public class ScheduleCalendar extends BaseFragment {
 
         // Get calendar components
         TextView sunday1 = view.findViewById(R.id.sunday1);
+        FrameLayout sunday1_left = view.findViewById(R.id.sunday1_left);
         TextView sunday2 = view.findViewById(R.id.sunday2);
+        FrameLayout sunday2_right = view.findViewById(R.id.sunday2_right);
 
         TextView monday1 = view.findViewById(R.id.monday1);
+        FrameLayout monday1_left = view.findViewById(R.id.monday1_left);
         TextView monday2 = view.findViewById(R.id.monday2);
+        FrameLayout monday2_right = view.findViewById(R.id.monday2_right);
 
         TextView tuesday1 = view.findViewById(R.id.tuesday1);
+        FrameLayout tuesday1_left = view.findViewById(R.id.tuesday1_left);
         TextView tuesday2 = view.findViewById(R.id.tuesday2);
+        FrameLayout tuesday2_right = view.findViewById(R.id.tuesday2_right);
 
         TextView wednesday1 = view.findViewById(R.id.wednesday1);
+        FrameLayout wednesday1_left = view.findViewById(R.id.wednesday1_left);
         TextView wednesday2 = view.findViewById(R.id.wednesday2);
+        FrameLayout wednesday2_right = view.findViewById(R.id.wednesday2_right);
 
         TextView thursday1 = view.findViewById(R.id.thursday1);
+        FrameLayout thursday1_left = view.findViewById(R.id.thursday1_left);
         TextView thursday2 = view.findViewById(R.id.thursday2);
+        FrameLayout thursday2_right = view.findViewById(R.id.thursday2_right);
 
         TextView friday1 = view.findViewById(R.id.friday1);
+        FrameLayout friday1_left = view.findViewById(R.id.friday1_left);
         TextView friday2 = view.findViewById(R.id.friday2);
+        FrameLayout friday2_right = view.findViewById(R.id.friday2_right);
 
         TextView saturday1 = view.findViewById(R.id.saturday1);
+        FrameLayout saturday1_left = view.findViewById(R.id.saturday1_left);
+        FrameLayout saturday1_right = view.findViewById(R.id.saturday1_right);
         TextView saturday2 = view.findViewById(R.id.saturday2);
 
         DateTimeFormatter fmt = DateTimeFormat.forPattern("E");
@@ -119,9 +134,11 @@ public class ScheduleCalendar extends BaseFragment {
         if (startDay.equals("Mon")) {
             // start
             monday1.setText(fmt.print(startTime));
+            monday1_left.setVisibility(View.VISIBLE);
 
             // end
             sunday2.setText(fmt.print(startTime.plusDays(6)));
+            sunday2_right.setVisibility(View.VISIBLE);
 
             // everything else
             sunday1.setText(fmt.print(startTime.minusDays(1)));
@@ -138,20 +155,34 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(12)));
 
             // update backgrounds
-            monday1.setBackgroundResource(R.color.primary);
-            tuesday1.setBackgroundResource(R.color.primary);
-            wednesday1.setBackgroundResource(R.color.primary);
-            thursday1.setBackgroundResource(R.color.primary);
-            friday1.setBackgroundResource(R.color.primary);
-            saturday1.setBackgroundResource(R.color.primary);
-            sunday2.setBackgroundResource(R.color.primary);
+            monday1.setBackgroundResource(R.color.light);
+            monday1.setTextColor(getResources().getColor(R.color.black));
 
+            tuesday1.setBackgroundResource(R.color.light);
+            tuesday1.setTextColor(getResources().getColor(R.color.black));
+
+            wednesday1.setBackgroundResource(R.color.light);
+            wednesday1.setTextColor(getResources().getColor(R.color.black));
+
+            thursday1.setBackgroundResource(R.color.light);
+            thursday1.setTextColor(getResources().getColor(R.color.black));
+
+            friday1.setBackgroundResource(R.color.light);
+            friday1.setTextColor(getResources().getColor(R.color.black));
+
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
+
+            sunday2.setBackgroundResource(R.color.light);
+            sunday2.setTextColor(getResources().getColor(R.color.black));
         } else if (startDay.equals("Tue")) {
             // start
             tuesday1.setText(fmt.print(startTime));
+            tuesday1_left.setVisibility(View.VISIBLE);
 
             // end
             monday2.setText(fmt.print(startTime.plusDays(6)));
+            monday2_right.setVisibility(View.VISIBLE);
 
             // everything else
             sunday1.setText(fmt.print(startTime.minusDays(2)));
@@ -168,20 +199,34 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(11)));
 
             // update backgrounds
-            tuesday1.setBackgroundResource(R.color.primary);
-            wednesday1.setBackgroundResource(R.color.primary);
-            thursday1.setBackgroundResource(R.color.primary);
-            friday1.setBackgroundResource(R.color.primary);
-            saturday1.setBackgroundResource(R.color.primary);
-            sunday2.setBackgroundResource(R.color.primary);
-            monday2.setBackgroundResource(R.color.primary);
+            tuesday1.setBackgroundResource(R.color.light);
+            tuesday1.setTextColor(getResources().getColor(R.color.black));
 
+            wednesday1.setBackgroundResource(R.color.light);
+            wednesday1.setTextColor(getResources().getColor(R.color.black));
+
+            thursday1.setBackgroundResource(R.color.light);
+            thursday1.setTextColor(getResources().getColor(R.color.black));
+
+            friday1.setBackgroundResource(R.color.light);
+            friday1.setTextColor(getResources().getColor(R.color.black));
+
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
+
+            sunday2.setBackgroundResource(R.color.light);
+            sunday2.setTextColor(getResources().getColor(R.color.black));
+
+            monday2.setBackgroundResource(R.color.light);
+            monday2.setTextColor(getResources().getColor(R.color.black));
         } else if (startDay.equals("Wed")) {
             // start
             wednesday1.setText(fmt.print(startTime));
+            wednesday1_left.setVisibility(View.VISIBLE);
 
             // end
             tuesday2.setText(fmt.print(startTime.plusDays(6)));
+            tuesday2_right.setVisibility(View.VISIBLE);
 
             // everything else
             sunday1.setText(fmt.print(startTime.minusDays(3)));
@@ -198,20 +243,34 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(10)));
 
             // update backgrounds
-            wednesday1.setBackgroundResource(R.color.primary);
-            thursday1.setBackgroundResource(R.color.primary);
-            friday1.setBackgroundResource(R.color.primary);
-            saturday1.setBackgroundResource(R.color.primary);
-            sunday2.setBackgroundResource(R.color.primary);
-            monday2.setBackgroundResource(R.color.primary);
-            tuesday2.setBackgroundResource(R.color.primary);
+            wednesday1.setBackgroundResource(R.color.light);
+            wednesday1.setTextColor(getResources().getColor(R.color.black));
 
+            thursday1.setBackgroundResource(R.color.light);
+            thursday1.setTextColor(getResources().getColor(R.color.black));
+
+            friday1.setBackgroundResource(R.color.light);
+            friday1.setTextColor(getResources().getColor(R.color.black));
+
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
+
+            sunday2.setBackgroundResource(R.color.light);
+            sunday2.setTextColor(getResources().getColor(R.color.black));
+
+            monday2.setBackgroundResource(R.color.light);
+            monday2.setTextColor(getResources().getColor(R.color.black));
+
+            tuesday2.setBackgroundResource(R.color.light);
+            tuesday2.setTextColor(getResources().getColor(R.color.black));
         } else if (startDay.equals("Thur")) {
             // start
             thursday1.setText(fmt.print(startTime));
+            thursday1_left.setVisibility(View.VISIBLE);
 
             // end
             wednesday2.setText(fmt.print(startTime.plusDays(6)));
+            wednesday2_right.setVisibility(View.VISIBLE);
 
             // everything else
             sunday1.setText(fmt.print(startTime.minusDays(4)));
@@ -228,20 +287,34 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(9)));
 
             // update backgrounds
-            thursday1.setBackgroundResource(R.color.primary);
-            friday1.setBackgroundResource(R.color.primary);
-            saturday1.setBackgroundResource(R.color.primary);
-            sunday2.setBackgroundResource(R.color.primary);
-            monday2.setBackgroundResource(R.color.primary);
-            tuesday2.setBackgroundResource(R.color.primary);
-            wednesday2.setBackgroundResource(R.color.primary);
+            thursday1.setBackgroundResource(R.color.light);
+            thursday1.setTextColor(getResources().getColor(R.color.black));
 
+            friday1.setBackgroundResource(R.color.light);
+            friday1.setTextColor(getResources().getColor(R.color.black));
+
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
+
+            sunday2.setBackgroundResource(R.color.light);
+            sunday2.setTextColor(getResources().getColor(R.color.black));
+
+            monday2.setBackgroundResource(R.color.light);
+            monday2.setTextColor(getResources().getColor(R.color.black));
+
+            tuesday2.setBackgroundResource(R.color.light);
+            tuesday2.setTextColor(getResources().getColor(R.color.black));
+
+            wednesday2.setBackgroundResource(R.color.light);
+            wednesday2.setTextColor(getResources().getColor(R.color.black));
         } else if (startDay.equals("Fri")) {
             // start
             friday1.setText(fmt.print(startTime));
+            friday1_left.setVisibility(View.VISIBLE);
 
             // end
             thursday2.setText(fmt.print(startTime.plusDays(6)));
+            thursday2_right.setVisibility(View.VISIBLE);
 
             // everything else
             sunday1.setText(fmt.print(startTime.minusDays(5)));
@@ -258,20 +331,34 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(8)));
 
             // update backgrounds
-            friday1.setBackgroundResource(R.color.primary);
-            saturday1.setBackgroundResource(R.color.primary);
-            sunday2.setBackgroundResource(R.color.primary);
-            monday2.setBackgroundResource(R.color.primary);
-            tuesday2.setBackgroundResource(R.color.primary);
-            wednesday2.setBackgroundResource(R.color.primary);
-            thursday2.setBackgroundResource(R.color.primary);
+            friday1.setBackgroundResource(R.color.light);
+            friday1.setTextColor(getResources().getColor(R.color.black));
 
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
+
+            sunday2.setBackgroundResource(R.color.light);
+            sunday2.setTextColor(getResources().getColor(R.color.black));
+
+            monday2.setBackgroundResource(R.color.light);
+            monday2.setTextColor(getResources().getColor(R.color.black));
+
+            tuesday2.setBackgroundResource(R.color.light);
+            tuesday2.setTextColor(getResources().getColor(R.color.black));
+
+            wednesday2.setBackgroundResource(R.color.light);
+            wednesday2.setTextColor(getResources().getColor(R.color.black));
+
+            thursday2.setBackgroundResource(R.color.light);
+            thursday2.setTextColor(getResources().getColor(R.color.black));
         } else if (startDay.equals("Sat")) {
             // start
             saturday1.setText(fmt.print(startTime));
+            saturday1_left.setVisibility(View.VISIBLE);
 
             // end
             friday2.setText(fmt.print(startTime.plusDays(6)));
+            friday2_right.setVisibility(View.VISIBLE);
 
             // everything else
             sunday1.setText(fmt.print(startTime.minusDays(6)));
@@ -288,20 +375,34 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(7)));
 
             // update backgrounds
-            saturday1.setBackgroundResource(R.color.primary);
-            sunday2.setBackgroundResource(R.color.primary);
-            monday2.setBackgroundResource(R.color.primary);
-            tuesday2.setBackgroundResource(R.color.primary);
-            wednesday2.setBackgroundResource(R.color.primary);
-            thursday2.setBackgroundResource(R.color.primary);
-            friday2.setBackgroundResource(R.color.primary);
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
 
+            sunday2.setBackgroundResource(R.color.light);
+            sunday2.setTextColor(getResources().getColor(R.color.black));
+
+            monday2.setBackgroundResource(R.color.light);
+            monday2.setTextColor(getResources().getColor(R.color.black));
+
+            tuesday2.setBackgroundResource(R.color.light);
+            tuesday2.setTextColor(getResources().getColor(R.color.black));
+
+            wednesday2.setBackgroundResource(R.color.light);
+            wednesday2.setTextColor(getResources().getColor(R.color.black));
+
+            thursday2.setBackgroundResource(R.color.light);
+            thursday2.setTextColor(getResources().getColor(R.color.black));
+
+            friday2.setBackgroundResource(R.color.light);
+            friday2.setTextColor(getResources().getColor(R.color.black));
         } else if (startDay.equals("Sun")) {
             // start
             sunday1.setText(fmt.print(startTime));
+            sunday1_left.setVisibility(View.VISIBLE);
 
             // end
             saturday1.setText(fmt.print(startTime.plusDays(6)));
+            saturday1_right.setVisibility(View.VISIBLE);
 
             // everything else
             monday1.setText(fmt.print(startTime.plusDays(1)));
@@ -318,13 +419,26 @@ public class ScheduleCalendar extends BaseFragment {
             saturday2.setText(fmt.print(startTime.plusDays(13)));
 
             // update backgrounds
-            sunday1.setBackgroundResource(R.color.primary);
-            monday1.setBackgroundResource(R.color.primary);
-            tuesday1.setBackgroundResource(R.color.primary);
-            wednesday1.setBackgroundResource(R.color.primary);
-            thursday1.setBackgroundResource(R.color.primary);
-            friday1.setBackgroundResource(R.color.primary);
-            saturday1.setBackgroundResource(R.color.primary);
+            sunday1.setBackgroundResource(R.color.light);
+            sunday1.setTextColor(getResources().getColor(R.color.black));
+
+            monday1.setBackgroundResource(R.color.light);
+            monday1.setTextColor(getResources().getColor(R.color.black));
+
+            tuesday1.setBackgroundResource(R.color.light);
+            tuesday1.setTextColor(getResources().getColor(R.color.black));
+
+            wednesday1.setBackgroundResource(R.color.light);
+            wednesday1.setTextColor(getResources().getColor(R.color.black));
+
+            thursday1.setBackgroundResource(R.color.light);
+            thursday1.setTextColor(getResources().getColor(R.color.black));
+
+            friday1.setBackgroundResource(R.color.light);
+            friday1.setTextColor(getResources().getColor(R.color.black));
+
+            saturday1.setBackgroundResource(R.color.light);
+            saturday1.setTextColor(getResources().getColor(R.color.black));
         }
     }
 }

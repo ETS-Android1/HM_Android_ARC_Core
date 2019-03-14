@@ -188,75 +188,154 @@
                     android:paddingTop="15dp"
                     android:paddingBottom="15dp">
 
+                    <FrameLayout
+                        android:id="@+id/sunday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
+
                     <TextView
                         android:id="@+id/sunday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="3"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/monday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/monday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="4"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/tuesday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/tuesday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="5"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/wednesday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/wednesday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="6"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/thursday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/thursday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="7"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/friday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/friday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="8"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/saturday1_left"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/saturday1"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="9"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/saturday1_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                 </LinearLayout>
 
@@ -268,71 +347,132 @@
                         android:id="@+id/sunday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="10"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/sunday2_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/monday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="11"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/monday2_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/tuesday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="12"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/tuesday2_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/wednesday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="13"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/wednesday2_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/thursday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="14"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/thursday2_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/friday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="15"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
+
+                    <FrameLayout
+                        android:id="@+id/friday2_right"
+                        android:layout_width="3dp"
+                        android:layout_height="60dp"
+                        android:background="@color/primary"
+                        android:visibility="gone">
+
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/saturday2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:text="16"
                         android:textSize="26dp"
                         android:textStyle="bold"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@color/grey" />
 
                 </LinearLayout>
 
