@@ -19,6 +19,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SuppressLint("ValidFragment")
 public class QuestionAdjustSchedule extends QuestionTemplate {
 
@@ -68,79 +71,79 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         // Back 7 days
         start = fmt.print(visitStart.minusDays(7));
-        end = fmt.print(visitEnd.minusDays(7));
+        end = fmt.print(visitEnd.minusDays(8));
         range = start + "-" + end;
         data[0] = range;
 
         start = fmt.print(visitStart.minusDays(6));
-        end = fmt.print(visitEnd.minusDays(6));
+        end = fmt.print(visitEnd.minusDays(7));
         range = start + "-" + end;
         data[1] = range;
 
         start = fmt.print(visitStart.minusDays(5));
-        end = fmt.print(visitEnd.minusDays(5));
+        end = fmt.print(visitEnd.minusDays(6));
         range = start + "-" + end;
         data[2] = range;
 
         start = fmt.print(visitStart.minusDays(4));
-        end = fmt.print(visitEnd.minusDays(4));
+        end = fmt.print(visitEnd.minusDays(5));
         range = start + "-" + end;
         data[3] = range;
 
         start = fmt.print(visitStart.minusDays(3));
-        end = fmt.print(visitEnd.minusDays(3));
+        end = fmt.print(visitEnd.minusDays(4));
         range = start + "-" + end;
         data[4] = range;
 
         start = fmt.print(visitStart.minusDays(2));
-        end = fmt.print(visitEnd.minusDays(2));
+        end = fmt.print(visitEnd.minusDays(3));
         range = start + "-" + end;
         data[5] = range;
 
         start = fmt.print(visitStart.minusDays(1));
-        end = fmt.print(visitEnd.minusDays(1));
+        end = fmt.print(visitEnd.minusDays(2));
         range = start + "-" + end;
         data[6] = range;
 
         // Original range
         start = fmt.print(visitStart);
-        end = fmt.print(visitEnd);
+        end = fmt.print(visitEnd.minusDays(1));
         range = start + "-" + end;
         data[7] = range;
 
         // Forward 7 days
         start = fmt.print(visitStart.plusDays(1));
-        end = fmt.print(visitEnd.plusDays(1));
+        end = fmt.print(visitEnd);
         range = start + "-" + end;
         data[8] = range;
 
         start = fmt.print(visitStart.plusDays(2));
-        end = fmt.print(visitEnd.plusDays(2));
+        end = fmt.print(visitEnd.plusDays(1));
         range = start + "-" + end;
         data[9] = range;
 
         start = fmt.print(visitStart.plusDays(3));
-        end = fmt.print(visitEnd.plusDays(3));
+        end = fmt.print(visitEnd.plusDays(2));
         range = start + "-" + end;
         data[10] = range;
 
         start = fmt.print(visitStart.plusDays(4));
-        end = fmt.print(visitEnd.plusDays(4));
+        end = fmt.print(visitEnd.plusDays(3));
         range = start + "-" + end;
         data[11] = range;
 
         start = fmt.print(visitStart.plusDays(5));
-        end = fmt.print(visitEnd.plusDays(5));
+        end = fmt.print(visitEnd.plusDays(4));
         range = start + "-" + end;
         data[12] = range;
 
         start = fmt.print(visitStart.plusDays(6));
-        end = fmt.print(visitEnd.plusDays(6));
+        end = fmt.print(visitEnd.plusDays(5));
         range = start + "-" + end;
         data[13] = range;
 
         start = fmt.print(visitStart.plusDays(7));
-        end = fmt.print(visitEnd.plusDays(7));
+        end = fmt.print(visitEnd.plusDays(6));
         range = start + "-" + end;
         data[14] = range;
 
@@ -204,33 +207,39 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         Participant participant = Study.getParticipant();
         Visit visit = participant.getCurrentVisit();
+        //DateTime visitStart = visit.getScheduledStartDate();
+
+        List<TestSession> testSessions = new ArrayList<> ();
 
         if (shiftDays < 0) {
             shiftDays = Math.abs(shiftDays);
             for (int i = 0; i < visit.testSessions.size(); i++) {
                 TestSession temp = visit.testSessions.get(i);
-                temp.setScheduledTime(temp.getScheduledTime().minusDays(shiftDays));
-                visit.testSessions.set(i, temp);
+                temp.setScheduledTime(temp.getUserChangeableTime().minusDays(shiftDays));
+                testSessions.add(temp);
 
                 if (i == 0) {
-                    visit.setScheduledStartDate(temp.getScheduledTime());
+                    visit.setActualStartDate(temp.getScheduledTime());
                 } else if (i == visit.testSessions.size()-1) {
-                    visit.setScheduledEndDate(temp.getScheduledTime());
+                    visit.setActualEndDate(temp.getScheduledTime());
                 }
             }
         } else {
             for (int i = 0; i < visit.testSessions.size(); i++) {
                 TestSession temp = visit.testSessions.get(i);
-                temp.setScheduledTime(temp.getScheduledTime().plusDays(shiftDays));
+                temp.setScheduledTime(temp.getUserChangeableTime().plusDays(shiftDays));
                 visit.testSessions.set(i, temp);
+                testSessions.add(temp);
 
                 if (i == 0) {
-                    visit.setScheduledStartDate(temp.getScheduledTime());
+                    visit.setActualStartDate(temp.getScheduledTime());
                 } else if (i == visit.testSessions.size()-1) {
-                    visit.setScheduledEndDate(temp.getScheduledTime());
+                    visit.setActualEndDate(temp.getScheduledTime());
                 }
             }
         }
+
+        visit.updateTestSessions(testSessions);
     }
 
     public void enableNextButton() {

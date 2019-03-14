@@ -46,8 +46,8 @@ public class ScheduleCalendar extends BaseFragment {
         Participant participant = Study.getParticipant();
         Visit visit = participant.getCurrentVisit();
 
-        DateTime visitStart = visit.getScheduledStartDate();
-        DateTime visitEnd = visit.getScheduledEndDate();
+        DateTime visitStart = visit.getActualStartDate();
+        DateTime visitEnd = visit.getActualEndDate();
 
         DateTimeFormatter fmt = DateTimeFormat.forPattern("E, MMM d");
 
