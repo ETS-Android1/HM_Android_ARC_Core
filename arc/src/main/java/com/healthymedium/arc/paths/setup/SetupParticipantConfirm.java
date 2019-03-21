@@ -55,7 +55,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
     TextView textViewPolicy;
 
     public SetupParticipantConfirm() {
-        super(true, Application.getInstance().getResources().getString(R.string.login_confirm_raterID),"");
+        super(true, Application.getInstance().getResources().getString(R.string.login_confirm_participantID),"");
         disableScrollBehavior();
     }
 

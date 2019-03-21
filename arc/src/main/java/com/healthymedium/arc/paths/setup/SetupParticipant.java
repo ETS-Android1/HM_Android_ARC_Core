@@ -53,7 +53,7 @@ public class SetupParticipant extends StandardTemplate {
     TextView textViewPolicy;
 
     public SetupParticipant() {
-        super(true, Application.getInstance().getResources().getString(R.string.login_enter_raterID),"");
+        super(true, Application.getInstance().getResources().getString(R.string.login_enter_participantID),"");
         disableScrollBehavior();
     }
 
