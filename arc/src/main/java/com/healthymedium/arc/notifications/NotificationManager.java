@@ -16,6 +16,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
@@ -54,6 +55,21 @@ public class NotificationManager {
     static public final String CHANNEL_TEST_NEXT_NAME = "Next Test Date";
     static public final String CHANNEL_TEST_NEXT_DESC = "Notifies user of the next test date";
 
+    public static final int VISIT_NEXT_MONTH = 5;
+    static public final String CHANNEL_VISIT_NEXT_MONTH_ID = "VISIT_NEXT_MONTH";
+    static public final String CHANNEL_VISIT_NEXT_MONTH_NAME = "Next Testing Cycle Date";
+    static public final String CHANNEL_VISIT_NEXT_MONTH_DESC = "Notifies the user 1 month before their next testing cycle";
+
+    public static final int VISIT_NEXT_WEEK = 6;
+    static public final String CHANNEL_VISIT_NEXT_WEEK_ID = "VISIT_NEXT_WEEK";
+    static public final String CHANNEL_VISIT_NEXT_WEEK_NAME = "Next Testing Cycle Date";
+    static public final String CHANNEL_VISIT_NEXT_WEEK_DESC = "Notifies the user 1 week before their next testing cycle";
+
+    public static final int VISIT_NEXT_DAY = 7;
+    static public final String CHANNEL_VISIT_NEXT_DAY_ID = "VISIT_NEXT_DAY";
+    static public final String CHANNEL_VISIT_NEXT_DAY_NAME = "Next Testing Cycle Date";
+    static public final String CHANNEL_VISIT_NEXT_DAY_DESC = "Notifies the user 1 day before their next testing cycle";
+
     private List<Node> nodes;
     private int requestIndex;
     private Context context;
@@ -71,6 +87,9 @@ public class NotificationManager {
             createNotificationChannel(context,CHANNEL_TEST_MISSED_ID,CHANNEL_TEST_MISSED_NAME,CHANNEL_TEST_MISSED_DESC);
             createNotificationChannel(context,CHANNEL_TEST_CONFIRM_ID,CHANNEL_TEST_CONFIRM_NAME,CHANNEL_TEST_CONFIRM_DESC);
             createNotificationChannel(context,CHANNEL_TEST_NEXT_ID,CHANNEL_TEST_NEXT_NAME,CHANNEL_TEST_NEXT_DESC);
+            createNotificationChannel(context,CHANNEL_VISIT_NEXT_MONTH_ID,CHANNEL_VISIT_NEXT_MONTH_NAME,CHANNEL_VISIT_NEXT_MONTH_DESC);
+            createNotificationChannel(context,CHANNEL_VISIT_NEXT_WEEK_ID,CHANNEL_VISIT_NEXT_WEEK_NAME,CHANNEL_VISIT_NEXT_WEEK_DESC);
+            createNotificationChannel(context,CHANNEL_VISIT_NEXT_DAY_ID,CHANNEL_VISIT_NEXT_DAY_NAME,CHANNEL_VISIT_NEXT_DAY_DESC);
             PreferencesManager.getInstance().putBoolean(NOTIFICATION_CHANNELS_CREATED,true);
         }
 
@@ -212,6 +231,28 @@ public class NotificationManager {
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
     }
 
+    // Did literally the same thing as scheduleNotification
+    // Can probably maybe just use scheduleNotification with visitId for sessionId
+    public void scheduleVisitNotification(Visit visit, int type, DateTime timeStamp) {
+        Log.i("NotificationManager","scheduleVisitNotification(type="+type+" ,id="+visit.getId()+")");
+        Intent notificationIntent = new Intent(context, NotificationReceiver.class);
+
+        Node node = getNode(type, visit.getId());
+        if(node==null){
+            requestIndex++;
+            node = new Node(visit.getId(), type, requestIndex, timeStamp);
+            addNode(node);
+        }
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
+
+        // https://stackoverflow.com/questions/26608627/how-to-open-fragment-page-when-pressed-a-notification-in-android
+        // update MainActivity
+        // update StateMachine
+    }
+
     public boolean removeNotification(int sessionId,int type) {
         Log.i("NotificationManager","removeNotification(id="+sessionId+", type="+type);
         Node node = getNode(type, sessionId);
@@ -250,6 +291,16 @@ public class NotificationManager {
             case TEST_NEXT:
                 // Your next session will be on 12/31/18
                 content = context.getString(R.string.notification_next).replace("{DATE}",Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate().toString(context.getString(R.string.format_date)));
+                break;
+            case VISIT_NEXT_MONTH:
+                String temp = "Your next week of testing begins in one month, on {DATE}".replace("{DATE}", Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate().toString(context.getString(R.string.format_date)));
+                content = temp + " You may adjust this schedule up to 7 days.";
+                break;
+            case VISIT_NEXT_WEEK:
+                content = "Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.";
+                break;
+            case VISIT_NEXT_DAY:
+                content = "Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.";
                 break;
         }
         return content;
@@ -310,6 +361,15 @@ public class NotificationManager {
                     break;
                 case TEST_NEXT:
                     channel = CHANNEL_TEST_NEXT_ID;
+                    break;
+                case VISIT_NEXT_MONTH:
+                    channel = CHANNEL_VISIT_NEXT_MONTH_ID;
+                    break;
+                case VISIT_NEXT_WEEK:
+                    channel = CHANNEL_VISIT_NEXT_WEEK_ID;
+                    break;
+                case VISIT_NEXT_DAY:
+                    channel = CHANNEL_VISIT_NEXT_DAY_ID;
                     break;
             }
 
