@@ -278,4 +278,10 @@
     <string name="error_401">Invalid Subject ID or Site Code</string>
     <string name="error_409">Already enrolled on another device</string>
     <string name="time_input_error">Please set a minimum of 4 hours of wake time.</string>
+
+    <string name="notification_confirm_adjust_1">Your next testing cycle will be {START} through {END}.</string>
+    <string name="notification_confirm_adjust_2">Please confirm these testing dates or adjust your schedule.</string>
+    <string name="notification_1month">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
+    <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
+    <string name="notification_1day">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
 </resources>

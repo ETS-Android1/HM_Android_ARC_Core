@@ -21,6 +21,8 @@ import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -231,28 +233,6 @@ public class NotificationManager {
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
     }
 
-    // Did literally the same thing as scheduleNotification
-    // Can probably maybe just use scheduleNotification with visitId for sessionId
-    public void scheduleVisitNotification(Visit visit, int type, DateTime timeStamp) {
-        Log.i("NotificationManager","scheduleVisitNotification(type="+type+" ,id="+visit.getId()+")");
-        Intent notificationIntent = new Intent(context, NotificationReceiver.class);
-
-        Node node = getNode(type, visit.getId());
-        if(node==null){
-            requestIndex++;
-            node = new Node(visit.getId(), type, requestIndex, timeStamp);
-            addNode(node);
-        }
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
-
-        // https://stackoverflow.com/questions/26608627/how-to-open-fragment-page-when-pressed-a-notification-in-android
-        // update MainActivity
-        // update StateMachine
-    }
-
     public boolean removeNotification(int sessionId,int type) {
         Log.i("NotificationManager","removeNotification(id="+sessionId+", type="+type);
         Node node = getNode(type, sessionId);
@@ -293,14 +273,16 @@ public class NotificationManager {
                 content = context.getString(R.string.notification_next).replace("{DATE}",Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate().toString(context.getString(R.string.format_date)));
                 break;
             case VISIT_NEXT_MONTH:
-                String temp = "Your next week of testing begins in one month, on {DATE}".replace("{DATE}", Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate().toString(context.getString(R.string.format_date)));
-                content = temp + " You may adjust this schedule up to 7 days.";
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d");
+                DateTime startDate = Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate();
+                String start = fmt.print(startDate);
+                content = context.getString(R.string.notification_1month).replace("{DATE}", start);
                 break;
             case VISIT_NEXT_WEEK:
-                content = "Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.";
+                content = context.getString(R.string.notification_1week);
                 break;
             case VISIT_NEXT_DAY:
-                content = "Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.";
+                content = context.getString(R.string.notification_1day);
                 break;
         }
         return content;
