@@ -6,9 +6,9 @@
     <string name="baseline_body">There are no tests available at this time. Your schedule will be determined at your baseline visit.</string>
     <string name="baseline_header">BASELINE</string>
 
-    <string name="login_enter_participantID">Please enter the\n<b>Subject ID</b> below.</string>
-    <string name="login_confirm_participantID">For confirmation\n purposes, please\n<b>re-enter the Subject ID</b>.</string>
-    <string name="login_enter_siteID">Please enter the\n <b>Site Code</b> below.</string>
+    <string name="login_enter_participantID">Please enter the\n&lt;b>Subject ID&lt;/b> below.</string>
+    <string name="login_confirm_participantID">For confirmation\n purposes, please\n&lt;b>re-enter the Subject ID&lt;/b>.</string>
+    <string name="login_enter_siteID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
 
     <string name="button_begin">BEGIN</string>
     <string name="button_next">NEXT</string>
@@ -25,11 +25,11 @@
     <string name="chronotype_body_sleep">This is NOT when you go to bed.</string>
     <string name="chronotype_body_wake">This is NOT when you get out of bed.</string>
 
-    <string name="chronotype_work_days_sleep">On <b>workdays</b>, I normally <b>fall asleep</b> at:</string>
-    <string name="chronotype_work_days_wake">On <b>workdays</b>, I normally <b>wake up</b> at:</string>
+    <string name="chronotype_work_days_sleep">On &lt;b>workdays&lt;/b>, I normally &lt;b>fall asleep&lt;/b> at:</string>
+    <string name="chronotype_work_days_wake">On &lt;b>workdays&lt;/b>, I normally &lt;b>wake up&lt;/b> at:</string>
 
-    <string name="chronotype_workfree_sleep">On <b>work-free days</b> when I don\'t use an alarm clock, I normally <b>fall asleep</b> at:</string>
-    <string name="chronotype_workfree_wake">On <b>work-free days</b> when I don\'t use an alarm clock, I normally <b>wake up</b> at:</string>
+    <string name="chronotype_workfree_sleep">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>fall asleep&lt;/b> at:</string>
+    <string name="chronotype_workfree_wake">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>wake up&lt;/b> at:</string>
 
     <string name="sleepwakesurvey_header">Wake Survey</string>
     <string name="sleepwakesurvey_subhead">Six Questions</string>
@@ -72,10 +72,10 @@
     <string name="context_q2_answers6">Outside</string>
     <string name="context_q2_answers7">Other</string>
 
-    <string name="context_q3">How would you rate <b>your overall mood</b> right now?</string>
+    <string name="context_q3">How would you rate &lt;b>your overall mood&lt;/b> right now?</string>
     <string name="context_q3_sub">On a scale of bad to good.</string>
 
-    <string name="context_q4">How would you rate <b>how you feel</b> right now?</string>
+    <string name="context_q4">How would you rate &lt;b>how you feel&lt;/b> right now?</string>
     <string name="context_q4_sub">On a scale of sleepy/tired to active/alert.</string>
 
     <string name="context_q5">In the past 5 minutes, what were you mostly doing?</string>
