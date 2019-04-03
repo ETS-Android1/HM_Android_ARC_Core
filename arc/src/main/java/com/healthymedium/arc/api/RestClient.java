@@ -65,9 +65,9 @@ public class RestClient <Api>{
     private Api serviceExtension;
     protected Gson gson;
 
-    private List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
+    protected List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
     private UploadListener uploadListener = null;
-    private boolean uploading = false;
+    protected boolean uploading = false;
     private Handler handler;
 
     public RestClient(Class<Api> type) {
@@ -518,7 +518,7 @@ public class RestClient <Api>{
         });
     }
 
-    private void markUploadStarted(){
+    protected void markUploadStarted(){
         if(!uploading) {
             Log.i("RestClient","upload started");
             uploading = true;
