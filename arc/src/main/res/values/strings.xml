@@ -273,6 +273,9 @@
     <string name="about_app"></string>
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
 
+    <string name="help_header">Help</string>
+    <string name="help_body">If you have questions about this app, difficulties using the app, or any concerns about the study, please contact the study Investigator at the telephone number listed on the first page of your informed consent document.</string>
+
     <string name="error_id_mismatch">Subject ID doesn’t match</string>
     <string name="error_default">Sorry, our app is currently experiencing issues. Please try again later.</string>
     <string name="error_401">Invalid Subject ID or Site Code</string>

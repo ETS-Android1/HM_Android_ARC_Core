@@ -48,7 +48,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="26dp"
-                android:text="Help" />
+                android:text="@string/help_header" />
 
             <TextView
                 android:id="@+id/textViewSubHeader"
@@ -60,7 +60,7 @@
                 android:paddingBottom="45dp"
                 android:textColor="@color/white"
                 android:textSize="18dp"
-                android:text="If you have questions about this app, difficulties using the app, or any concerns about the study, please contact the study Investigator at the telephone number listed on the first page of your informed consent document." />
+                android:text="@string/help_body" />
 
 
         </LinearLayout>
