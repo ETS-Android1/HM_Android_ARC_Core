@@ -1,5 +1,6 @@
 package com.healthymedium.arc.paths.informative;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -49,15 +51,23 @@ public class AboutScreen extends BaseFragment {
 
         textViewBack.setVisibility(View.VISIBLE);
 
+        Resources res = Application.getInstance().getResources();
+        String name = res.getString(R.string.app_name);
+
         button3rdParty = view.findViewById(R.id.button3rdParty);
 
-        button3rdParty.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ThirdPartyMaterialsScreen thirdPartyScreen = new ThirdPartyMaterialsScreen();
-                NavigationManager.getInstance().open(thirdPartyScreen);
-            }
-        });
+        if (!name.equals("TU ARC")) {
+            button3rdParty.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ThirdPartyMaterialsScreen thirdPartyScreen = new ThirdPartyMaterialsScreen();
+                    NavigationManager.getInstance().open(thirdPartyScreen);
+                }
+            });
+        } else {
+            button3rdParty.setVisibility(View.GONE);
+        }
+
         return view;
     }
 
