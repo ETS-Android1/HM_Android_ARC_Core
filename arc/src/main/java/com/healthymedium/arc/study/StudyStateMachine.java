@@ -300,8 +300,7 @@ public class StudyStateMachine {
                 false,
                 res.getString(R.string.setup_avail_header) ,
                 res.getString(R.string.setup_avail_subheader),
-                "First, we'll ask you a few questions to help us determine when to send you those notifications." + "\n\n"
-                        + "You will only receive notifications during your waking hours.",
+                res.getString(R.string.setup_avail_body),
                 res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
@@ -334,8 +333,7 @@ public class StudyStateMachine {
                 false,
                 res.getString(R.string.setup_avail_header),
                 res.getString(R.string.setup_avail_subheader),
-                "The following section will ask you questions in regard to your sleep and wake behavior on weekdays and weekends." + "\n\n"
-                        + "Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.",
+                res.getString(R.string.setup_avail_body),
                 res.getString(R.string.button_begin)));
 
         Bundle windowBundle = new Bundle();
