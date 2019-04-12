@@ -1,6 +1,7 @@
 package com.healthymedium.arc.api;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -251,6 +252,11 @@ public class RestClient <Api>{
             Call<ResponseBody> call = getService().submitTestSchedule(Device.getId(), json);
             call.enqueue(createDataCallback(schedule));
         }
+    }
+
+    // For now override in app module
+    public void submitSignature(Bitmap s) {
+
     }
 
     public void submitTest(TestSession session) {
