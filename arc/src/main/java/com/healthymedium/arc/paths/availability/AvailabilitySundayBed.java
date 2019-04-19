@@ -97,7 +97,7 @@ public class AvailabilitySundayBed extends QuestionTime {
                 Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
             }
             Study.getRestClient().submitTestSchedule();
-            Study.getScheduler().scheduleNotifications(Study.getCurrentVisit());
+            Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), reschedule);
             return null;
         }
 

@@ -100,7 +100,7 @@ public class Participant {
             if(state.currentVisit>=state.visits.size()){
                 state.isStudyRunning = false;
             } else if(scheduleNotifications){
-                Study.getScheduler().scheduleNotifications(getCurrentVisit());
+                Study.getScheduler().scheduleNotifications(getCurrentVisit(), false);
             }
         }
         save();

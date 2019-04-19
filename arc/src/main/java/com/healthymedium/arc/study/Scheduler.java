@@ -50,6 +50,10 @@ public class Scheduler {
         visit.confirmNotificationsScheduled();
     }
 
+    public void scheduleNotifications(Visit visit, Boolean reschedule) {
+        scheduleNotifications(visit);
+    }
+
     public void scheduleTests(DateTime now, Participant participant){
         ParticipantState state = participant.getState();
         if(state.visits.size()==0){
