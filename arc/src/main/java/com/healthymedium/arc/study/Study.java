@@ -218,8 +218,8 @@ public class Study{
             migrationUtil.checkForUpdate();
             migrationUtil = null; // not needed after this
 
-            stateMachine.load();
             participant.load();
+            stateMachine.load();
         }
 
         valid = true;
