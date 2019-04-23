@@ -16,6 +16,7 @@ import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.study.Visit;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -29,6 +30,8 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
     int index = 0;
     int shiftDays = 0;
+    int[] shiftAmount = new int[15];
+
 
     public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
         super(allowBack,header,subheader,"SUBMIT");
@@ -60,92 +63,61 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         String start;
         String end;
 
-        String[] data = new String[15];
+        List<String> dataList = new ArrayList<String>();
+
         String range;
 
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d");
 
-        // TODO
-        // Generalize this at some point
-        // Should allow arbitrary ranges
+        int visitAdjustIndex = 0;
 
-        // Back 7 days
-        start = fmt.print(visitStart.minusDays(7));
-        end = fmt.print(visitEnd.minusDays(8));
-        range = start + "-" + end;
-        data[0] = range;
 
-        start = fmt.print(visitStart.minusDays(6));
-        end = fmt.print(visitEnd.minusDays(7));
-        range = start + "-" + end;
-        data[1] = range;
 
-        start = fmt.print(visitStart.minusDays(5));
-        end = fmt.print(visitEnd.minusDays(6));
-        range = start + "-" + end;
-        data[2] = range;
+        // Build the adjustment ranges
 
-        start = fmt.print(visitStart.minusDays(4));
-        end = fmt.print(visitEnd.minusDays(5));
-        range = start + "-" + end;
-        data[3] = range;
-
-        start = fmt.print(visitStart.minusDays(3));
-        end = fmt.print(visitEnd.minusDays(4));
-        range = start + "-" + end;
-        data[4] = range;
-
-        start = fmt.print(visitStart.minusDays(2));
-        end = fmt.print(visitEnd.minusDays(3));
-        range = start + "-" + end;
-        data[5] = range;
-
-        start = fmt.print(visitStart.minusDays(1));
-        end = fmt.print(visitEnd.minusDays(2));
-        range = start + "-" + end;
-        data[6] = range;
+        // Back
+        int daysBack = 7;
+        while (daysBack > 0) {
+            if (!visitStart.minusDays(daysBack).isBeforeNow()) {
+                start = fmt.print(visitStart.minusDays(daysBack));
+                end = fmt.print(visitEnd.minusDays(daysBack+1));
+                range = start + "-" + end;
+                dataList.add(range);
+                shiftAmount[visitAdjustIndex] = 0 - daysBack;
+                visitAdjustIndex++;
+            }
+            daysBack--;
+        }
 
         // Original range
-        start = fmt.print(visitStart);
-        end = fmt.print(visitEnd.minusDays(1));
-        range = start + "-" + end;
-        data[7] = range;
+        if (!visitStart.isBeforeNow()) {
+            start = fmt.print(visitStart);
+            end = fmt.print(visitEnd.minusDays(1));
+            range = start + "-" + end;
+            dataList.add(range);
+            shiftAmount[visitAdjustIndex] = 0;
+            visitAdjustIndex++;
+        }
 
-        // Forward 7 days
-        start = fmt.print(visitStart.plusDays(1));
-        end = fmt.print(visitEnd);
-        range = start + "-" + end;
-        data[8] = range;
+        // Forward
+        int daysForward = 7;
+        int count = 1;
+        while (count <= daysForward) {
+            if (!visitStart.plusDays(count).isBeforeNow()) {
+                start = fmt.print(visitStart.plusDays(count));
+                end = fmt.print(visitEnd.plusDays(count-1));
+                range = start + "-" + end;
+                dataList.add(range);
+                shiftAmount[visitAdjustIndex] = count;
+                visitAdjustIndex++;
+            }
+            count++;
+        }
 
-        start = fmt.print(visitStart.plusDays(2));
-        end = fmt.print(visitEnd.plusDays(1));
-        range = start + "-" + end;
-        data[9] = range;
-
-        start = fmt.print(visitStart.plusDays(3));
-        end = fmt.print(visitEnd.plusDays(2));
-        range = start + "-" + end;
-        data[10] = range;
-
-        start = fmt.print(visitStart.plusDays(4));
-        end = fmt.print(visitEnd.plusDays(3));
-        range = start + "-" + end;
-        data[11] = range;
-
-        start = fmt.print(visitStart.plusDays(5));
-        end = fmt.print(visitEnd.plusDays(4));
-        range = start + "-" + end;
-        data[12] = range;
-
-        start = fmt.print(visitStart.plusDays(6));
-        end = fmt.print(visitEnd.plusDays(5));
-        range = start + "-" + end;
-        data[13] = range;
-
-        start = fmt.print(visitStart.plusDays(7));
-        end = fmt.print(visitEnd.plusDays(6));
-        range = start + "-" + end;
-        data[14] = range;
+        String[] data = new String[dataList.size()];
+        for (int i = 0; i < dataList.size(); i++) {
+            data[i] = dataList.get(i);
+        }
 
         picker.setMinValue(0);
         picker.setMaxValue(data.length-1);
@@ -157,53 +129,14 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     @Override
     public Object onValueCollection(){
 
-        // TODO
-        // Make this not gross
+        return shiftAmount[index];
 
-        // Return the number of days shifted
-        // 0 is -7 days
-        // 7 is no change
-        // 14 is +7 days
-
-        if (index == 0) {
-            return -7;
-        } else if (index == 1) {
-            return -6;
-        } else if (index == 2) {
-            return -5;
-        } else if (index == 3) {
-            return -4;
-        } else if (index == 4) {
-            return -3;
-        } else if (index == 5) {
-            return -2;
-        } else if (index == 6) {
-            return -1;
-        } else if (index == 7) {
-            return 0;
-        } else if (index == 8) {
-            return 1;
-        } else if (index == 9) {
-            return 2;
-        } else if (index == 10) {
-            return 3;
-        } else if (index == 11) {
-            return 4;
-        } else if (index == 12) {
-            return 5;
-        } else if (index == 13) {
-            return 6;
-        } else if (index == 14) {
-            return 7;
-        }
-
-        return null;
     }
 
     public void updateDates() {
-        if (shiftDays == 0) {
-            return;
-        }
+//        if (shiftDays == 0) {
+//            return;
+//        }
 
         Participant participant = Study.getParticipant();
         Visit visit = participant.getCurrentVisit();
@@ -211,7 +144,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         List<TestSession> testSessions = new ArrayList<> ();
 
-        if (shiftDays < 0) {
+        if (shiftDays <= 0) {
             shiftDays = Math.abs(shiftDays);
             for (int i = 0; i < visit.testSessions.size(); i++) {
                 TestSession temp = visit.testSessions.get(i);
