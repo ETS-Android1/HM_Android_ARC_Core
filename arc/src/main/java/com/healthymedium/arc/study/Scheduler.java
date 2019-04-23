@@ -21,7 +21,7 @@ public class Scheduler {
 
     }
 
-    private void unscheduleNotifications(Visit visit) {
+    public void unscheduleNotifications(Visit visit) {
         if(visit==null){
             return;
         }
@@ -50,7 +50,7 @@ public class Scheduler {
         visit.confirmNotificationsScheduled();
     }
 
-    public void scheduleNotifications(Visit visit, Boolean reschedule) {
+    public void scheduleNotifications(Visit visit, Boolean rescheduleDuringVisit) {
         scheduleNotifications(visit);
     }
 

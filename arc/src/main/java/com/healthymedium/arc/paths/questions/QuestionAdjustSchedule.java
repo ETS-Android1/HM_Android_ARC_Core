@@ -173,6 +173,10 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         }
 
         visit.updateTestSessions(testSessions);
+
+        // Reschedule notifications
+        Study.getScheduler().unscheduleNotifications(Study.getCurrentVisit());
+        Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), false);
     }
 
     public void enableNextButton() {
