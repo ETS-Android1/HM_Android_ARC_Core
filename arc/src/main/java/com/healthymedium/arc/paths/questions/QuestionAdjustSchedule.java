@@ -64,6 +64,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         String end;
 
         List<String> dataList = new ArrayList<String>();
+        int[] tempShiftAmount = new int[15];
 
         String range;
 
@@ -71,6 +72,10 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         int visitAdjustIndex = 0;
 
+
+        String currStart = fmt.print(visit.getActualStartDate());
+        String currEnd = fmt.print(visit.getActualEndDate());
+        String currRange = currStart + "-" + currEnd;
 
 
         // Build the adjustment ranges
@@ -83,7 +88,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
                 end = fmt.print(visitEnd.minusDays(daysBack+1));
                 range = start + "-" + end;
                 dataList.add(range);
-                shiftAmount[visitAdjustIndex] = 0 - daysBack;
+                tempShiftAmount[visitAdjustIndex] = 0 - daysBack;
                 visitAdjustIndex++;
             }
             daysBack--;
@@ -95,7 +100,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             end = fmt.print(visitEnd.minusDays(1));
             range = start + "-" + end;
             dataList.add(range);
-            shiftAmount[visitAdjustIndex] = 0;
+            tempShiftAmount[visitAdjustIndex] = 0;
             visitAdjustIndex++;
         }
 
@@ -108,15 +113,41 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
                 end = fmt.print(visitEnd.plusDays(count-1));
                 range = start + "-" + end;
                 dataList.add(range);
-                shiftAmount[visitAdjustIndex] = count;
+                tempShiftAmount[visitAdjustIndex] = count;
                 visitAdjustIndex++;
             }
             count++;
         }
 
+        int curr = dataList.indexOf(currRange);
+
         String[] data = new String[dataList.size()];
-        for (int i = 0; i < dataList.size(); i++) {
-            data[i] = dataList.get(i);
+//        for (int i = 0; i < dataList.size(); i++) {
+//            data[i] = dataList.get(i);
+//        }
+
+        // Start at the currently schedule window
+        data[0] = dataList.get(curr);
+
+        // Need to change all of the shiftAmount values
+        // They're not guaranteed to be in the same order they were created
+        // This is because we don't know at which date we're starting
+        shiftAmount[0] = tempShiftAmount[curr];
+        int dataIndex = 1;
+
+
+        // Get the indices after current
+        for (int i = curr+1; i < dataList.size(); i++) {
+            data[dataIndex] = dataList.get(i);
+            shiftAmount[dataIndex] = tempShiftAmount[i];
+            dataIndex++;
+        }
+
+        // And lastly get those before current
+        for (int j = 0; j < curr; j++) {
+            data[dataIndex] = dataList.get(j);
+            shiftAmount[dataIndex] = tempShiftAmount[j];
+            dataIndex++;
         }
 
         picker.setMinValue(0);
