@@ -16,6 +16,8 @@ import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.study.Visit;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -75,6 +77,12 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String currStart = fmt.print(visit.getActualStartDate());
         String currEnd = fmt.print(visit.getActualEndDate());
+
+        int daysRange = Days.daysBetween(visit.getActualStartDate().toLocalDate(), visit.getActualEndDate().toLocalDate()).getDays();
+        if (daysRange == 6) {
+            currEnd = fmt.print(visit.getActualEndDate().plusDays(1));
+        }
+
         String currRange = currStart + "-" + currEnd;
 
 
@@ -85,7 +93,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         while (daysBack > 0) {
             if (!visitStart.minusDays(daysBack).isBeforeNow()) {
                 start = fmt.print(visitStart.minusDays(daysBack));
-                end = fmt.print(visitEnd.minusDays(daysBack+1));
+                end = fmt.print(visitEnd.minusDays(daysBack));
                 range = start + "-" + end;
                 dataList.add(range);
                 tempShiftAmount[visitAdjustIndex] = 0 - daysBack;
@@ -97,7 +105,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         // Original range
         if (!visitStart.isBeforeNow()) {
             start = fmt.print(visitStart);
-            end = fmt.print(visitEnd.minusDays(1));
+            end = fmt.print(visitEnd);
             range = start + "-" + end;
             dataList.add(range);
             tempShiftAmount[visitAdjustIndex] = 0;
@@ -110,7 +118,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         while (count <= daysForward) {
             if (!visitStart.plusDays(count).isBeforeNow()) {
                 start = fmt.print(visitStart.plusDays(count));
-                end = fmt.print(visitEnd.plusDays(count-1));
+                end = fmt.print(visitEnd.plusDays(count));
                 range = start + "-" + end;
                 dataList.add(range);
                 tempShiftAmount[visitAdjustIndex] = count;
