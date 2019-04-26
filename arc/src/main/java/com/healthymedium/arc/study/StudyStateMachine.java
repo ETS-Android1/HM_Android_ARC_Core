@@ -761,7 +761,7 @@ public class StudyStateMachine {
     public void addSchedulePicker() {
         List<BaseFragment> fragments = new ArrayList<>();
 
-        fragments.add(new QuestionAdjustSchedule(true, true, "What week are you able to test?", ""));
+        fragments.add(new QuestionAdjustSchedule(false, true, "What week are you able to test?", ""));
 
         fragments.add(new ScheduleCalendar());
 
