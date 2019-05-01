@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:paddingBottom="48dp"
         android:orientation="horizontal">
 
         <TextView
@@ -58,7 +59,7 @@
             android:gravity="right"
             android:paddingTop="32dp"
             android:paddingRight="14dp"
-            android:paddingBottom="48dp"
+            android:paddingBottom="32dp"
             android:text="About This App"
             android:textColor="@color/primary"
             android:textSize="15dp" />
@@ -71,9 +72,19 @@
             android:gravity="left"
             android:paddingLeft="14dp"
             android:paddingTop="32dp"
-            android:paddingBottom="48dp"
+            android:paddingBottom="32dp"
             android:text="Privacy Policy"
             android:textColor="@color/primary"
             android:textSize="15dp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="v1.0.0"
+        android:textSize="12dp" />
 </RelativeLayout>

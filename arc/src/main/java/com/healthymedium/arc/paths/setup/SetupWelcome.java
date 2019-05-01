@@ -18,6 +18,7 @@ import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.PrivacyScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.VersionUtil;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SetupWelcome extends BaseFragment {
@@ -27,6 +28,7 @@ public class SetupWelcome extends BaseFragment {
     TextView textViewAboutApp;
     TextView textViewPrivacyPolicy;
     TextView textViewAppName;
+    TextView textViewVersion;
 
     public SetupWelcome() {
 
@@ -61,6 +63,10 @@ public class SetupWelcome extends BaseFragment {
                 Study.getPrivacyPolicy().show(getContext());
             }
         });
+
+        textViewVersion = view.findViewById(R.id.textViewVersion);
+        String ver = "v"+VersionUtil.getAppVersionName();
+        textViewVersion.setText(ver);
 
         button = view.findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
