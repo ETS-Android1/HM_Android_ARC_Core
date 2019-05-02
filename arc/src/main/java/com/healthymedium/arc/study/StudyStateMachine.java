@@ -565,6 +565,8 @@ public class StudyStateMachine {
     }
 
     public void addTests(){
+        PreferencesManager.getInstance().putInt("test_missed_count", 0);
+
         List<BaseFragment> fragments = new ArrayList<>();
 
         Resources res = Application.getInstance().getResources();
