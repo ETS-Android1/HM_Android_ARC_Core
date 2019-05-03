@@ -32,10 +32,12 @@ public class HeartbeatJobService extends JobService {
             HeartbeatManager.initialize(this);
         }
 
-        Log.i("HeartbeatJobService","initializing study");
-        Study.initialize(getApplicationContext());
-        Application.getInstance().registerStudyComponents();
-        Study.getInstance().load();
+        if(!Study.isValid()) {
+            Log.i("HeartbeatJobService", "initializing study");
+            Study.initialize(getApplicationContext());
+            Application.getInstance().registerStudyComponents();
+            Study.getInstance().load();
+        }
 
         if(!Study.getStateMachine().isIdle()){
             return false;
