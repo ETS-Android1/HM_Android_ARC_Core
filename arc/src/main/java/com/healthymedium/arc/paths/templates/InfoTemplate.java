@@ -21,13 +21,11 @@ import com.healthymedium.arc.study.Study;
 public class InfoTemplate extends BaseFragment {
 
     String stringHeader;
-    String stringSubHeader;
     String stringBody;
     String stringButton;
 
     TextView textViewBack;
     TextView textViewHeader;
-    TextView textViewSubheader;
     TextView textViewBody;
 
     LinearLayout content;
@@ -35,10 +33,9 @@ public class InfoTemplate extends BaseFragment {
     Button button;
     boolean allowBack;
 
-    public InfoTemplate(boolean allowBack, String header, String subheader, String body, @Nullable String buttonText) {
+    public InfoTemplate(boolean allowBack, String header, String body, @Nullable String buttonText) {
         this.allowBack = allowBack;
         stringHeader = header;
-        stringSubHeader = subheader;
         stringBody = body;
         stringButton = buttonText;
 
@@ -57,23 +54,18 @@ public class InfoTemplate extends BaseFragment {
         textViewHeader.setTypeface(Fonts.georgiaItalic);
         textViewHeader.setText(stringHeader);
 
-        textViewSubheader = view.findViewById(R.id.textViewSubHeader);
-        textViewSubheader.setText(stringSubHeader);
 
         textViewBody = view.findViewById(R.id.textViewBody);
         textViewBody.setText(stringBody);
 
-        if (stringSubHeader == "") {
-            textViewSubheader.setVisibility(View.GONE);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-            float dpRatio = getResources().getDisplayMetrics().density;
-            int side = (int)(32 * dpRatio);
-            int top = (int)(15 * dpRatio);
+        float dpRatio = getResources().getDisplayMetrics().density;
+        int side = (int)(32 * dpRatio);
+        int top = (int)(15 * dpRatio);
 
-            params.setMargins(side,top,side,0);
-            textViewBody.setLayoutParams(params);
-        }
+        params.setMargins(side,top,side,0);
+        textViewBody.setLayoutParams(params);
 
 
 
