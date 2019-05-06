@@ -41,6 +41,7 @@ import com.healthymedium.arc.paths.setup.SetupParticipant;
 import com.healthymedium.arc.paths.setup.SetupParticipantConfirm;
 import com.healthymedium.arc.paths.setup.SetupSite;
 import com.healthymedium.arc.paths.setup.SetupWelcome;
+import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.tests.GridLetters;
 import com.healthymedium.arc.paths.tests.GridStudy;
 import com.healthymedium.arc.paths.tests.GridTest;
@@ -296,12 +297,12 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        fragments.add(new InfoTemplate(
-//                false,
-//                res.getString(R.string.setup_avail_header) ,
-//                res.getString(R.string.setup_avail_subheader),
-//                res.getString(R.string.setup_avail_body),
-//                res.getString(R.string.button_begin)));
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.availability_header) ,
+                null,
+                res.getString(R.string.availability_body),
+                res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
         fragments.add(new AvailabilityMondayBed());
@@ -329,12 +330,12 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        fragments.add(new InfoTemplate(
-//                false,
-//                res.getString(R.string.setup_avail_header),
-//                res.getString(R.string.setup_avail_subheader),
-//                res.getString(R.string.setup_avail_body),
-//                res.getString(R.string.button_begin)));
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.availability_header),
+                null,
+                res.getString(R.string.availability_body),
+                res.getString(R.string.button_begin)));
 
         Bundle windowBundle = new Bundle();
         windowBundle.putInt("minWakeTime", minWakeTime);
@@ -395,12 +396,12 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        fragments.add(new InfoTemplate(
-//                false,
-//                res.getString(R.string.chronotype_header),
-//                res.getString(R.string.chronotype_subheader),
-//                res.getString(R.string.chronotype_0_body),
-//                res.getString(R.string.button_begin)));
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.chronotype_header),
+                res.getString(R.string.chronotype_subheader),
+                res.getString(R.string.chronotype_0_body),
+                res.getString(R.string.button_begin)));
 
         fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_1_q1),""));
 
@@ -416,12 +417,12 @@ public class StudyStateMachine {
 
         fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.chronotype_1_q2_sub ),workingDayCountOptions));
 
-//        fragments.add(new InfoTemplate(
-//                false,
-//                res.getString(R.string.chronotype_header),
-//                "",
-//                res.getString(R.string.chronotype_2_body),
-//                res.getString(R.string.button_next)));
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.chronotype_header),
+                "",
+                res.getString(R.string.chronotype_2_body),
+                res.getString(R.string.button_next)));
 
         CircadianClock clock;
         String weekday;
@@ -465,12 +466,12 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        fragments.add(new InfoTemplate(
-//                false,
-//                res.getString(R.string.sleepwakesurvey_header),
-//                res.getString(R.string.sleepwakesurvey_subhead),
-//                res.getString(R.string.sleepwakesurvey_body),
-//                res.getString(R.string.button_begin)));
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.sleepwakesurvey_header),
+                res.getString(R.string.sleepwakesurvey_subhead),
+                res.getString(R.string.sleepwakesurvey_body),
+                res.getString(R.string.button_begin)));
 
         CircadianClock clock;
         String weekday;
@@ -516,12 +517,12 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        fragments.add(new InfoTemplate(
-//                false,
-//                res.getString(R.string.context_header),
-//                res.getString(R.string.context_subhead),
-//                res.getString(R.string.context_body),
-//                res.getString(R.string.button_begin)));
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.context_header),
+                res.getString(R.string.context_subhead),
+                res.getString(R.string.context_body),
+                res.getString(R.string.button_begin)));
 
         List<String> who = new ArrayList<>();
         who.add(res.getString(R.string.context_q1_answers1));
@@ -571,14 +572,14 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        InfoTemplate info = new InfoTemplate(
-//                false,
-//                res.getString(R.string.testing_intro_header),
-//                res.getString(R.string.testing_intro_subhead),
-//                res.getString(R.string.testing_intro_body),
-//                res.getString(R.string.button_next));
+        StateInfoTemplate info = new StateInfoTemplate(
+                false,
+                res.getString(R.string.testing_intro_header),
+                res.getString(R.string.testing_intro_subhead),
+                res.getString(R.string.testing_intro_body),
+                res.getString(R.string.button_next));
         //info.setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-        //fragments.add(info);
+        fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);
 
@@ -605,13 +606,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        InfoTemplate info = new InfoTemplate(
-//                false,
-//                "Test "+(index+1)+" of 3" ,
-//                res.getString(R.string.price_header),
-//                res.getString(R.string.price_body),
-//                res.getString(R.string.button_begin));
-        //fragments.add(info);
+        StateInfoTemplate info = new StateInfoTemplate(
+                false,
+                "Test "+(index+1)+" of 3" ,
+                res.getString(R.string.price_header),
+                res.getString(R.string.price_body),
+                res.getString(R.string.button_begin));
+        fragments.add(info);
 
         int size = PriceManager.getInstance().getPriceSet().size();
         for(int i=0;i<size;i++){
@@ -636,13 +637,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        InfoTemplate info = new InfoTemplate(
-//                false,
-//                "Test "+(index+1)+" of 3" ,
-//                res.getString(R.string.symbols_header),
-//                res.getString(R.string.symbols_body),
-//                res.getString(R.string.button_begin));
-        //fragments.add(info);
+        StateInfoTemplate info = new StateInfoTemplate(
+                false,
+                "Test "+(index+1)+" of 3" ,
+                res.getString(R.string.symbols_header),
+                res.getString(R.string.symbols_body),
+                res.getString(R.string.button_begin));
+        fragments.add(info);
 
         fragments.add(new SymbolTest());
 
@@ -655,29 +656,29 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-//        InfoTemplate info0 = new InfoTemplate(
-//                false,
-//                "Test "+(index+1)+" of 3" ,
-//                res.getString(R.string.grid_header),
-//                res.getString(R.string.grid_body1),
-//                res.getString(R.string.button_next));
-        //fragments.add(info0);
+        StateInfoTemplate info0 = new StateInfoTemplate(
+                false,
+                "Test "+(index+1)+" of 3" ,
+                res.getString(R.string.grid_header),
+                res.getString(R.string.grid_body1),
+                res.getString(R.string.button_next));
+        fragments.add(info0);
 
-//        InfoTemplate info1 = new InfoTemplate(
-//                true,
-//                "Test "+(index+1)+" of 3" ,
-//                res.getString(R.string.grid_header),
-//                res.getString(R.string.grid_body2),
-//                res.getString(R.string.button_next));
-        //fragments.add(info1);
+        StateInfoTemplate info1 = new StateInfoTemplate(
+                true,
+                "Test "+(index+1)+" of 3" ,
+                res.getString(R.string.grid_header),
+                res.getString(R.string.grid_body2),
+                res.getString(R.string.button_next));
+        fragments.add(info1);
 
-//        InfoTemplate info2 = new InfoTemplate(
-//                true,
-//                "Test "+(index+1)+" of 3" ,
-//                res.getString(R.string.grid_header),
-//                res.getString(R.string.grid_body3),
-//                res.getString(R.string.button_begin));
-        //fragments.add(info2);
+        StateInfoTemplate info2 = new StateInfoTemplate(
+                true,
+                "Test "+(index+1)+" of 3" ,
+                res.getString(R.string.grid_header),
+                res.getString(R.string.grid_body3),
+                res.getString(R.string.button_begin));
+        fragments.add(info2);
 
         fragments.add(new GridStudy());
         fragments.add(new GridLetters());
@@ -749,13 +750,13 @@ public class StudyStateMachine {
 
         }
 
-//        InfoTemplate info = new InfoTemplate(
-//                false,
-//                header ,
-//                subheader,
-//                body,
-//                res.getString(R.string.thankyou_button_return_to_home));
-        //fragments.add(info);
+        StateInfoTemplate info = new StateInfoTemplate(
+                false,
+                header ,
+                subheader,
+                body,
+                res.getString(R.string.thankyou_button_return_to_home));
+        fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);
     }

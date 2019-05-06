@@ -227,12 +227,8 @@
 
     <string name="yes">Yes</string>
 
-
-
-    <string name="setup_avail_header">Availability</string>
-    <string name="setup_avail_subheader">A Few Questions</string>
-    <string name="setup_avail_body">First, we\'ll ask you a few questions to help us determine when to send you those notifications.\n\nYou will only receive notifications during your waking hours.</string>
-
+    <string name="availability_header">Availability</string>
+    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br /&gt;&lt;br /&gt;You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.</string>
 
     <string name="between_edit_availability">Edit Availability</string>
     <string name="between_header">HOME</string>
