@@ -10,6 +10,7 @@
     <color name="gridNormal">#40066187</color>
     <color name="gridSelected">#066187</color>
     <color name="infoBackButtonBackground">#287798</color>
+    <color name="btnBorderUnselected">#bfd4df</color>
 
     <!-- these are discrete colors, they should be close no matter the application -->
     <color name="black">#000000</color>
