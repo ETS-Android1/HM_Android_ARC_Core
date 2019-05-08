@@ -29,9 +29,9 @@ public class InfoTemplate extends BaseFragment {
     TextView textViewHeader;
     TextView textViewBody;
 
-    LinearLayout content;
+    protected LinearLayout content;
 
-    Button button;
+    protected Button button;
     boolean allowBack;
 
     public InfoTemplate(boolean allowBack, String header, String body, @Nullable String buttonText) {
