@@ -11,6 +11,7 @@
     <string name="login_enter_siteID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
 
     <string name="button_begin">BEGIN</string>
+    <string name="button_begin_survey">BEGIN SURVEY</string>
     <string name="button_next">NEXT</string>
     <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
 
@@ -228,7 +229,7 @@
     <string name="yes">Yes</string>
 
     <string name="availability_header">Availability</string>
-    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br /&gt;&lt;br /&gt;You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.</string>
+    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br /&gt;&lt;br /&gt;&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
 
     <string name="between_edit_availability">Edit Availability</string>
     <string name="between_header">HOME</string>

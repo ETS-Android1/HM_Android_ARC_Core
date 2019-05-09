@@ -15,7 +15,7 @@ public class AvailabilityMondayWake extends QuestionTime {
     CircadianClock clock;
 
     public AvailabilityMondayWake() {
-        super(true,"When do you usually<br/><b>wake up</b> on <b>Monday</b>?","",null);
+        super(true,"What time should we <b>start</b> your notifications each day?","",null);
     }
 
     @Nullable

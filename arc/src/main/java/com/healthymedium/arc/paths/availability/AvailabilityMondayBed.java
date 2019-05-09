@@ -20,7 +20,7 @@ public class AvailabilityMondayBed extends QuestionTime {
     int maxWakeTime = 24;
 
     public AvailabilityMondayBed() {
-        super(true,"When do you usually<br/><b>go to bed</b> on <b>Monday</b>?","",null);
+        super(true,"What time should we <b>stop</b> your notifications each day?","",null);
     }
 
     @Nullable
@@ -51,6 +51,24 @@ public class AvailabilityMondayBed extends QuestionTime {
             @Override
             public void onClick(View view) {
                 clock.getRhythm("Monday").setBedTime(timeInput.getTime());
+
+                // Set all of the remaining days to the same wake and sleep times
+                LocalTime bedTime = clock.getRhythm("Monday").getBedTime();
+                clock.getRhythm("Tuesday").setBedTime(bedTime);
+                clock.getRhythm("Wednesday").setBedTime(bedTime);
+                clock.getRhythm("Thursday").setBedTime(bedTime);
+                clock.getRhythm("Friday").setBedTime(bedTime);
+                clock.getRhythm("Saturday").setBedTime(bedTime);
+                clock.getRhythm("Sunday").setBedTime(bedTime);
+
+                LocalTime wakeTime = clock.getRhythm("Monday").getWakeTime();
+                clock.getRhythm("Tuesday").setWakeTime(wakeTime);
+                clock.getRhythm("Wednesday").setWakeTime(wakeTime);
+                clock.getRhythm("Thursday").setWakeTime(wakeTime);
+                clock.getRhythm("Friday").setWakeTime(wakeTime);
+                clock.getRhythm("Saturday").setWakeTime(wakeTime);
+                clock.getRhythm("Sunday").setWakeTime(wakeTime);
+
                 Study.openNextFragment();
             }
         });

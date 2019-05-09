@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- these are thematic colors, they can change fairly widely between applications -->
-    <color name="primary">#066187</color>
+    <color name="primary">#005780</color>
     <color name="accent">#40066187</color>
     <color name="light">#1a066187</color>
     <color name="splash">#066187</color>

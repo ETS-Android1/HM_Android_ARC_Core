@@ -48,7 +48,7 @@
                 android:layout_marginTop="88dp"
                 android:layout_marginRight="32dp"
                 android:textColor="@color/white"
-                android:textSize="22dp"
+                android:textSize="28dp"
                 tools:text="Test 3 of 3" />
 
             <TextView
@@ -79,6 +79,7 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="32dp"
+                    android:gravity="center_horizontal"
                     android:layout_weight="1"
                     android:lineSpacingExtra="3dp"
                     android:textColor="@color/white"
