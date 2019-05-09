@@ -31,6 +31,26 @@
                 android:textSize="26dp"
                 tools:text="This is a header" />
 
+            <TextView
+                android:id="@+id/yellowBar"
+                android:layout_width="50dp"
+                android:layout_height="2dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:background="@color/yellow" />
+
+            <TextView
+                android:id="@+id/textViewSubHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:textSize="26dp"
+                tools:text="This is a subheader" />
+
             <LinearLayout
                 android:id="@+id/linearLayoutContent"
                 android:layout_width="match_parent"

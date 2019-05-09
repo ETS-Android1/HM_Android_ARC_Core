@@ -16,8 +16,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class LandingTestReady extends LandingTemplate {
 
-    public LandingTestReady(String header) {
-        super(header);
+    public LandingTestReady(String header, String subheader) {
+        super(header, subheader);
     }
 
     @Override

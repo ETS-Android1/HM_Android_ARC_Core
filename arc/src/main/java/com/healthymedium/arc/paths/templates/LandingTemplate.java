@@ -22,14 +22,17 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class LandingTemplate extends BaseFragment {
 
     String stringHeader;
+    String stringSubheader;
 
     protected TextView textViewHeader;
+    protected TextView textViewSubheader;
     protected LinearLayout content;
     protected FrameLayout frameLayoutContact;
     protected TextView textViewContact;
 
-    public LandingTemplate(String header) {
+    public LandingTemplate(String header, String subheader) {
         stringHeader = header;
+        stringSubheader = subheader;
     }
 
     @Override
@@ -38,6 +41,9 @@ public class LandingTemplate extends BaseFragment {
         content = view.findViewById(R.id.linearLayoutContent);
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
+
+        textViewSubheader = view.findViewById(R.id.textViewSubHeader);
+        textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
         textViewContact = view.findViewById(R.id.textViewContact);
         ViewUtil.underlineTextView(textViewContact);
