@@ -1,14 +1,18 @@
 package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
@@ -17,11 +21,10 @@ import com.healthymedium.arc.study.Visit;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.Duration;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +49,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         setHelpVisible(allowHelp);
 
         NumberPicker picker = new NumberPicker(Application.getInstance());
+        setNumberPickerTextColor(picker, ContextCompat.getColor(Application.getInstance(), R.color.text));
         content.addView(picker);
 
         picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -233,4 +237,27 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             });
         }
     }
+
+    public void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+
+        try{
+            Field selectorWheelPaintField = numberPicker.getClass().getDeclaredField("mSelectorWheelPaint");
+            selectorWheelPaintField.setAccessible(true);
+            ((Paint)selectorWheelPaintField.get(numberPicker)).setColor(color);
+        }
+        catch(Exception e){
+            // nothing
+        }
+
+        final int count = numberPicker.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = numberPicker.getChildAt(i);
+            if (child instanceof EditText) {
+                ((EditText) child).setTextColor(color);
+            }
+        }
+        numberPicker.invalidate();
+
+    }
+
 }
