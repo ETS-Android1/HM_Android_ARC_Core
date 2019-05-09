@@ -124,8 +124,18 @@ public class NotificationManager {
 
         Config.OPENED_FROM_NOTIFICATION = true; // in case the app is already running
 
+        if (channel.equals("VISIT_NEXT_DAY") || channel.equals("VISIT_NEXT_MONTH") || channel.equals("VISIT_NEXT_WEEK")) {
+            Config.OPENED_FROM_VISIT_NOTIFICATION = true;
+        }
+
         Intent main = new Intent(context, MainActivity.class);
-        main.putExtra("OPENED_FROM_NOTIFICATION",true);
+
+        if (channel.equals("VISIT_NEXT_DAY") || channel.equals("VISIT_NEXT_MONTH") || channel.equals("VISIT_NEXT_WEEK")) {
+            main.putExtra("OPENED_FROM_VISIT_NOTIFICATION", true);
+        } else {
+            main.putExtra("OPENED_FROM_NOTIFICATION",true);
+        }
+
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, 0);
 

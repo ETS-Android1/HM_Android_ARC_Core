@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             if(bundle!=null){
                 Config.OPENED_FROM_NOTIFICATION = bundle.getBoolean("OPENED_FROM_NOTIFICATION",false);
+                Config.OPENED_FROM_VISIT_NOTIFICATION = bundle.getBoolean("OPENED_FROM_VISIT_NOTIFICATION",false);
             }
         }
 

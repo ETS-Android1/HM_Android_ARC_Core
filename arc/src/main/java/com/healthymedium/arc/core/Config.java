@@ -20,4 +20,6 @@ public class Config {
     // Runtime
     public static boolean OPENED_FROM_NOTIFICATION = false; //
 
+    public static boolean OPENED_FROM_VISIT_NOTIFICATION = false;
+
 }
