@@ -86,7 +86,10 @@ public class SplashScreen extends BaseFragment {
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
             }
-            Study.getInstance().load();
+
+            if(!Study.isValid()) {
+                Study.getInstance().load();
+            }
             Study.getInstance().run();
 
             //MigrationUtil.checkForUpdate(context);
