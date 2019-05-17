@@ -177,49 +177,21 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     }
 
     public void updateDates() {
-//        if (shiftDays == 0) {
-//            return;
-//        }
 
-        Participant participant = Study.getParticipant();
-        Visit visit = participant.getCurrentVisit();
-        //DateTime visitStart = visit.getScheduledStartDate();
+        Visit visit = Study.getCurrentVisit();
 
-        List<TestSession> testSessions = new ArrayList<> ();
+        Study.getScheduler().unscheduleNotifications(visit);
 
-        if (shiftDays <= 0) {
-            shiftDays = Math.abs(shiftDays);
-            for (int i = 0; i < visit.testSessions.size(); i++) {
-                TestSession temp = visit.testSessions.get(i);
-                temp.setScheduledTime(temp.getUserChangeableTime().minusDays(shiftDays));
-                testSessions.add(temp);
-
-                if (i == 0) {
-                    visit.setActualStartDate(temp.getScheduledTime());
-                } else if (i == visit.testSessions.size()-1) {
-                    visit.setActualEndDate(temp.getScheduledTime());
-                }
-            }
-        } else {
-            for (int i = 0; i < visit.testSessions.size(); i++) {
-                TestSession temp = visit.testSessions.get(i);
-                temp.setScheduledTime(temp.getUserChangeableTime().plusDays(shiftDays));
-                visit.testSessions.set(i, temp);
-                testSessions.add(temp);
-
-                if (i == 0) {
-                    visit.setActualStartDate(temp.getScheduledTime());
-                } else if (i == visit.testSessions.size()-1) {
-                    visit.setActualEndDate(temp.getScheduledTime());
-                }
-            }
+        for (int i = 0; i < visit.testSessions.size(); i++) {
+            DateTime time = visit.testSessions.get(i).getUserChangeableTime().plusDays(shiftDays);
+            visit.testSessions.get(i).setScheduledTime(time);
         }
 
-        visit.updateTestSessions(testSessions);
+        int last = visit.testSessions.size()-1;
+        visit.setActualStartDate(visit.testSessions.get(0).getScheduledTime());
+        visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime());
 
-        // Reschedule notifications
-        Study.getScheduler().unscheduleNotifications(Study.getCurrentVisit());
-        Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), false);
+        Study.getScheduler().scheduleNotifications(visit, false);
     }
 
     public void enableNextButton() {
