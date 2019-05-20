@@ -255,7 +255,7 @@ public class NotificationManager {
         notificationIntent.putExtra(NOTIFICATION_ID, node.id);
         notificationIntent.putExtra(NOTIFICATION_TYPE, node.type);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
 
