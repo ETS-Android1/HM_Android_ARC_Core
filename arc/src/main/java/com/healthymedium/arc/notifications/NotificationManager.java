@@ -244,7 +244,7 @@ public class NotificationManager {
     }
 
     public boolean removeNotification(int sessionId,int type) {
-        Log.i("NotificationManager","removeNotification(id="+sessionId+", type="+type);
+        Log.i("NotificationManager","removeNotification(id="+sessionId+", type="+type+")");
         Node node = getNode(type, sessionId);
         if(node==null){
             return false;
