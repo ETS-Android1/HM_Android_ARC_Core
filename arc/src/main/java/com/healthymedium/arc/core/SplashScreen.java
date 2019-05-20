@@ -24,6 +24,7 @@ public class SplashScreen extends BaseFragment {
 
     boolean paused = false;
     boolean ready = false;
+    boolean skipSegment = false;
 
     public SplashScreen() {
     }
@@ -78,18 +79,40 @@ public class SplashScreen extends BaseFragment {
             FontFactory.initialize(context);
             if(Study.isValid() == false) {
                 Study.initialize(context);
+                getApplication().registerStudyComponents();
             }
             NotificationManager.initialize(context);
 
-            getApplication().registerStudyComponents();
+
 
             if(!Fonts.areLoaded()){
                 Fonts.load();
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
             }
-            Study.getInstance().load();
-            Study.getInstance().run();
+
+            if(Study.isValid() == false) {
+                Study.getInstance().load();
+            }
+
+            // We need to check to see if we're currently in the middle of a test session.
+            // If we are, and if the state machine has valid fragments, we should let it continue
+            // displaying those.
+            // Otherwise, just run the Study instance, and let it figure out where it needs to be.
+
+            if(Study.getParticipant().isCurrentlyInTestSession()
+                && Study.getParticipant().checkForTestAbandonment() == false
+                && Study.getStateMachine().doesStateHaveValidFragments()
+            )
+            {
+                skipSegment = true;
+            }
+            else
+            {
+                skipSegment = false;
+                Study.getInstance().run();
+            }
+
 
             //MigrationUtil.checkForUpdate(context);
             //SignatureManager.initialize(context);
@@ -115,7 +138,16 @@ public class SplashScreen extends BaseFragment {
     private void exit(){
         if(getFragmentManager() != null) {
             getFragmentManager().popBackStack();
-            Study.getInstance().openNextFragment();
+            if(skipSegment)
+            {
+                Study.getInstance().skipToNextSegment();
+            }
+            else
+            {
+                Study.getInstance().openNextFragment();
+            }
+
+
         }
     }
 

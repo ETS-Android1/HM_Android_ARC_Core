@@ -250,6 +250,23 @@ public class StudyStateMachine {
         return false;
     }
 
+
+    public boolean doesStateHaveValidFragments() {
+        if(state.segments.size() == 0)
+        {
+            return false;
+        }
+
+        for(int i = 0; i < state.segments.size(); i++)
+        {
+            if(state.segments.get(i).fragments.size() == 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
     // -----------------------------------------------------------------
 
 
