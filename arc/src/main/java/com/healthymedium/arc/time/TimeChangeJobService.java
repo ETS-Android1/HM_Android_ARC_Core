@@ -10,6 +10,7 @@ import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
+import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.StudyStateMachine;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -33,7 +34,8 @@ public class TimeChangeJobService extends JobService {
 
         if(!Study.isValid()) {
             Log.i(tag, "initializing study");
-            Study.initialize(getApplicationContext());
+            Study.initialize(Application.getInstance());
+            NotificationManager.initialize(Application.getInstance());
             Application.getInstance().registerStudyComponents();
             Study.getInstance().load();
         }
