@@ -43,18 +43,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(new Bundle());
 
         Intent intent = getIntent();
-        if(intent!=null) {
-            Bundle bundle = getIntent().getExtras();
-            if(bundle!=null){
-                Config.OPENED_FROM_NOTIFICATION = bundle.getBoolean("OPENED_FROM_NOTIFICATION",false);
-                Config.OPENED_FROM_VISIT_NOTIFICATION = bundle.getBoolean("OPENED_FROM_VISIT_NOTIFICATION",false);
-            }
-        }
+        parseIntent(intent);
 
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
 
         setup();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.i("MainActivity","onNewIntent");
+        parseIntent(intent);
+        Study.getInstance().run();
+        Study.getInstance().skipToNextSegment();
+    }
+
+    private void parseIntent(Intent intent){
+        Log.i("MainActivity","parseIntent");
+        if(intent!=null) {
+            Config.OPENED_FROM_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION,false);
+            Config.OPENED_FROM_VISIT_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION,false);
+        }
+        Log.i("MainActivity","OPENED_FROM_NOTIFICATION = "+Config.OPENED_FROM_NOTIFICATION);
+        Log.i("MainActivity","OPENED_FROM_VISIT_NOTIFICATION = "+Config.OPENED_FROM_VISIT_NOTIFICATION);
     }
 
     public void setup(){

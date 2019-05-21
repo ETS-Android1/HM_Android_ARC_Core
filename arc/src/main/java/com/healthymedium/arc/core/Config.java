@@ -18,8 +18,10 @@ public class Config {
     public static boolean DEBUG_DIALOGS = true; // click the header on most screens a couple times and a debug dialog will appear
 
     // Runtime
-    public static boolean OPENED_FROM_NOTIFICATION = false; //
+    public static final String INTENT_EXTRA_OPENED_FROM_NOTIFICATION = "OPENED_FROM_NOTIFICATION";
+    public static boolean OPENED_FROM_NOTIFICATION = false;
 
+    public static final String INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION = "OPENED_FROM_VISIT_NOTIFICATION";
     public static boolean OPENED_FROM_VISIT_NOTIFICATION = false;
 
 }
