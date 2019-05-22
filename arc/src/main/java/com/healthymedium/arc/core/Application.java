@@ -1,6 +1,8 @@
 package com.healthymedium.arc.core;
 
 import android.content.res.Configuration;
+
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -19,6 +21,7 @@ public class Application extends android.app.Application {
         VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
         PreferencesManager.initialize(this);
+        CacheManager.initialize(this);
         Device.initialize(this);
     }
 

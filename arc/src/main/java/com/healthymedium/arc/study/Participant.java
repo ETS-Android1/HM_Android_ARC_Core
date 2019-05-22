@@ -6,8 +6,6 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-
 public class Participant {
 
     protected ParticipantState state;

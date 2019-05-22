@@ -2,16 +2,10 @@ package com.healthymedium.arc.study;
 
 import android.content.Context;
 
-import com.healthymedium.arc.api.RestAPI;
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.api.models.Heartbeat;
-import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.core.Device;
-import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 //import com.healthymedium.arc.study.PrivacyPolicy;
 import com.healthymedium.arc.utilities.MigrationUtil;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -263,11 +257,11 @@ public class Study{
     }
 
     public static PathSegmentData getCurrentSegmentData() {
-        return stateMachine.state.segments.get(0).dataObject;
+        return stateMachine.cache.segments.get(0).dataObject;
     }
 
     public static void setCurrentSegmentData(Object object) {
-        stateMachine.state.segments.get(0).dataObject = (PathSegmentData) object;
+        stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
     }
 
 
