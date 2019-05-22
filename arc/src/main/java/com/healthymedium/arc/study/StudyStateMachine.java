@@ -65,8 +65,8 @@ import java.util.Locale;
 
 public class StudyStateMachine {
 
-    protected static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
-    protected static final String TAG_STUDY_STATE = "StudyState";
+    public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
+    public static final String TAG_STUDY_STATE = "StudyState";
 
     protected String tag = getClass().getSimpleName();
 
