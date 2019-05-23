@@ -58,7 +58,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="45dp"
-                android:text="@string/about_app"
+                android:text="@string/aboutapp_body"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
 

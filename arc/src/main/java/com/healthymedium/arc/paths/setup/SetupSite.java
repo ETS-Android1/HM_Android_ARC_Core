@@ -60,7 +60,7 @@ public class SetupSite extends StandardTemplate {
     LoadingDialog loadingDialog;
 
     public SetupSite() {
-        super(true, Application.getInstance().getResources().getString(R.string.login_enter_siteID),"");
+        super(true, Application.getInstance().getResources().getString(R.string.login_enter_raterID),"");
         disableScrollBehavior();
     }
 

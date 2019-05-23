@@ -53,7 +53,10 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -323,14 +326,14 @@ public class StudyStateMachine {
         fragments.add(new AvailabilityMondayWake());
         fragments.add(new AvailabilityMondayBed());
         fragments.add(new AvailabilityWeekdayConfirm());
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_tuesday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_tuesday)));
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_wednesday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_wednesday)));
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_thursday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_thursday)));
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_friday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_friday)));
+        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
+        fragments.add(new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday)));
+        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
+        fragments.add(new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday)));
+        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
+        fragments.add(new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday)));
+        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
+        fragments.add(new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday)));
         fragments.add(new AvailabilitySaturdayWake());
         fragments.add(new AvailabilitySaturdayBed());
         fragments.add(new AvailabilitySundayWake());
@@ -366,27 +369,27 @@ public class StudyStateMachine {
 
         fragments.add(new AvailabilityWeekdayConfirm());
 
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_tuesday)));
+        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
 
-        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_tuesday));
+        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday));
         tuesdayBed.setArguments(windowBundle);
         fragments.add(tuesdayBed);
 
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_wednesday)));
+        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
 
-        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_wednesday));
+        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday));
         wednesdayBed.setArguments(windowBundle);
         fragments.add(wednesdayBed);
 
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_thursday)));
+        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
 
-        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_thursday));
+        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday));
         thursdayBed.setArguments(windowBundle);
         fragments.add(thursdayBed);
 
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_friday)));
+        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
 
-        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_friday));
+        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday));
         fridayBed.setArguments(windowBundle);
         fragments.add(fridayBed);
 
@@ -730,7 +733,7 @@ public class StudyStateMachine {
         String body;
 
         // Default
-        header = res.getString(R.string.thankyou_header1);
+        header = res.getString(R.string.thank_you_header1);
         subheader = res.getString(R.string.thankyou_testcomplete_subhead1);
         body = res.getString(R.string.thankyou_testcomplete_body1);
 
@@ -752,14 +755,18 @@ public class StudyStateMachine {
                 header = res.getString(R.string.thankyou_header2);
                 subheader = res.getString(R.string.thankyou_cycle_subhead2);
 
-                String body2_1 = res.getString(R.string.thankyou_cycle_body2_1);
-                String body2_2 = res.getString(R.string.thankyou_cycle_body2_2);
+                String body2 = res.getString(R.string.thank_you_cycle_body2);
 
-                body = body2_1 + date + body2_2;
+                String startDate = visit.getActualStartDate().toString(format);
+                String endDate = visit.getActualEndDate().toString(format);
+                body2 = body2.replace("{DATE1}", startDate);
+                body2 = body2.replace("{DATE2}", endDate);
+
+                body = body2;
             }
             // After the 4th test of the day
             else if (visit.getNumberOfTestsLeftForToday() == 0) {
-                header = res.getString(R.string.thankyou_header1);
+                header = res.getString(R.string.thank_you_header1);
                 subheader = res.getString(R.string.thankyou_alldone_subhead1);
                 body = res.getString(R.string.thankyou_alldone_body1);
             }

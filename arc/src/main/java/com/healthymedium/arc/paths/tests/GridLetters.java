@@ -42,7 +42,7 @@ public class GridLetters extends BaseFragment {
         @Override
         public void run() {
             if(isVisible()){
-                dialog = new TimedDialog(getString(R.string.ready),1000);
+                dialog = new TimedDialog(getString(R.string.grids_popup1),1000);
                 dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
                     @Override
                     public void dismiss() {

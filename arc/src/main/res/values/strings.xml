@@ -4,9 +4,9 @@
     <string name="country_key">US</string>
     <string name="language_key">en</string>
 
-    <string name="login_enter_participantID">Please enter the\n&lt;b>Subject ID&lt;/b> below.</string>
-    <string name="login_confirm_participantID">For confirmation\n purposes, please\n&lt;b>re-enter the Subject ID&lt;/b>.</string>
-    <string name="login_enter_siteID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
+    <string name="login_enter_ARCID">Please enter the\n&lt;b>Subject ID&lt;/b> below.</string>
+    <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter the Subject ID&lt;/b>.</string>
+    <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
 
     <string name="button_begin">BEGIN</string>
     <string name="button_next">NEXT</string>
@@ -33,10 +33,6 @@
     <string name="sleepwakesurvey_body">The following questions will ask you about sleep specific to last night and waking this morning.</string>
 
     <string name="chronotype_header">Chronotype</string>
-    <string name="chronotype_subheader_work">On workdays...</string>
-    <string name="chronotype_subheader_workfree">On work-free days when I don\'t use an alarm clock...</string>
-
-    <string name="confirm">Confirm</string>
 
     <string name="context_bad">Bad</string>
     <string name="context_good">Good</string>
@@ -91,11 +87,11 @@
     <string name="grid_body1">In this test you will see a 5 x 5 grid with three items placed in that grid.\n\nStudy the grid and try to remember the location of the three items.</string>
     <string name="grid_body2">You will then do a different task where you will touch all the letter “F”s that you find as quickly as you can.</string>
     <string name="grid_body3">Finally, you will be shown a blank grid. Tap the boxes where the items were previously located.\n\nPress Begin to start the test.</string>
-    <string name="grid_transition">Try to remember the location of the items!</string>
+    <string name="grid_transition_overlay">Try to remember the location of the items!</string>
     <string name="grid_example_test">EXAMPLE GRID EXCERPT</string>
     <string name="grid_example_letters">EXAMPLE TASK EXCERPT</string>
     <string name="grid_subheader">Grids Instructions</string>
-    <string name="grid_tap">Tap On the F\'s</string>
+    <string name="grid_tap_instructions">Tap On the F\'s</string>
 
     <string name="idverification_body">Please sign your initials on the line below to verify your identity.</string>
     <string name="idverification_body2">By signing my initials on the line below, I attest that I completed these tests.</string>
@@ -104,7 +100,7 @@
     <string name="interrupted_body">Thanks!\n\nWere you interrupted or did you have to stop while taking any of these tests?</string>
     <string name="interrupted_header">Final Questions</string>
 
-    <string name="thankyou_header1">Thank You</string>
+    <string name="thank_you_header1">Thank You</string>
     <string name="thankyou_testcomplete_subhead1">Test Complete</string>
     <string name="thankyou_testcomplete_body1">You\'ll get a notification later today when your next test is available.</string>
     <string name="thankyou_header2">Great Job</string>
@@ -113,8 +109,7 @@
     <string name="thankyou_body3">There are no more tests to take.</string>
 
     <string name="thankyou_cycle_subhead2">You\'ve Finished This Cycle!</string>
-    <string name="thankyou_cycle_body2_1">There are no tests available at this time. You\'ll receive a notification on </string>
-    <string name="thankyou_cycle_body2_2">, when the next testing cycle begins.</string>
+    <string name="thank_you_cycle_body2">There are no tests available at this time. Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule below.</string>
 
     <string name="thankyou_alldone_subhead1">All Done for Today!</string>
     <string name="thankyou_alldone_body1">Thanks for your hard work. We\'ll notify you tomorrow with your next test.</string>
@@ -138,8 +133,7 @@
     <string name="month_november">November</string>
     <string name="month_december">December</string>
 
-    <string name="next">Next</string>
-    <string name="no">No</string>
+    <string name="NO">NO</string>
     <string name="okay">Okay</string>
 
     <string name="popup_first">You finished this test, ready for the next one?</string>
@@ -150,12 +144,7 @@
     <string name="price_test_isgood">Is this a good price?</string>
     <string name="price_test_wasprice">What was the price of the</string>
 
-    <string name="ready">Ready</string>
-
-    <string name="setup_a_header">SET UP PARTICIPANT</string>
-    <string name="setup_a_inputbox1">Enter Participant ID</string>
-    <string name="setup_a_inputbox2">Confirm Participant ID</string>
-    <string name="setup_a_inputbox3">Rater ID Number</string>
+    <string name="grids_popup1">Ready</string>
 
     <string name="startdate_header">SET START DATE</string>
 
@@ -178,12 +167,18 @@
     <string name="wake_excellent">Excellent</string>
     <string name="wake_poor">Poor</string>
 
-    <string name="weekday_tuesday">Tuesday</string>
-    <string name="weekday_wednesday">Wednesday</string>
-    <string name="weekday_thursday">Thursday</string>
-    <string name="weekday_friday">Friday</string>
+    <string name="availability_wake_tuesday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Tuesday?&lt;/b></string>
+    <string name="availability_sleep_tuesday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Tuesday?&lt;/b></string>
+    <string name="availability_wake_wednesday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Wednesday&lt;/b>?</string>
+    <string name="availability_sleep_wednesday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Wednesday&lt;/b>?</string>
 
-    <string name="yes">Yes</string>
+    <string name="availability_wake_thursday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Thursday&lt;/b>?</string>
+    <string name="availability_sleep_thursday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Thursday&lt;/b>?</string>
+
+    <string name="availability_wake_friday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Friday?&lt;/b></string>
+    <string name="availability_sleep_friday">When do you usually &lt;b>go to bed &lt;/b>on &lt;b>Friday?&lt;/b></string>
+
+    <string name="YES">YES</string>
 
 
 
@@ -212,8 +207,7 @@
     <string name="testing_intro_subhead">You Will Now Complete 3 Quick Tests</string>
     <string name="testing_intro_body">You cannot pause a test once it has been started. You cannot go back to the previous screen.</string>
 
-    <string name="version">Version</string>
-    <string name="about_app"></string>
+    <string name="aboutapp_body"></string>
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
 
     <string name="help_header">Help</string>

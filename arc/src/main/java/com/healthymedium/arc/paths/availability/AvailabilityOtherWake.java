@@ -18,8 +18,8 @@ public class AvailabilityOtherWake extends QuestionTime {
     String weekday;
 
     @SuppressLint("ValidFragment")
-    public AvailabilityOtherWake(String weekday) {
-        super(true,"When do you usually<br/><b>wake up</b> on <b>"+weekday+"</b>?","",null);
+    public AvailabilityOtherWake(String weekday, String header) {
+        super(true, header,"",null);
         this.weekday = weekday;
     }
 
