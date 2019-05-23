@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     boolean paused = false;
     boolean backAllowed = false;
     boolean backInStudy = false;
+    boolean hasNewIntent = false;
     int backInStudySkips = 0;
 
     boolean checkAbandonment = false;
@@ -32,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(hasNewIntent){
+            hasNewIntent = false;
+            if(!Study.getStateMachine().isCurrentlyInTestPath()){
+                Study.openNextFragment();
+            }
+        }
     }
 
     @Override
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(new Bundle());
+        Log.i("MainActivity","onCreate");
 
         Intent intent = getIntent();
         parseIntent(intent);
@@ -56,16 +64,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         Log.i("MainActivity","onNewIntent");
         parseIntent(intent);
+        hasNewIntent = true;
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                Study.getInstance().run();
-                Study.getInstance().skipToNextSegment();
-            }
-        };
-        Handler handler = new Handler();
-        handler.post(runnable);
     }
 
     private void parseIntent(Intent intent){
@@ -79,10 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setup(){
-
-        PreferencesManager.initialize(this);
         NavigationManager.initializeInstance(getSupportFragmentManager());
-
         if(PreferencesManager.getInstance().contains("language") || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
         } else {
@@ -162,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.i("MainActivity","onDestroy");
         if(homeWatcher != null){
             homeWatcher.stopWatch();
             homeWatcher = null;

@@ -32,12 +32,8 @@ public class TimeChangeJobService extends JobService {
         this.params = jobParameters;
         Log.i(tag,"onStartJob");
 
-        if(!Study.isValid()) {
-            Log.i(tag, "initializing study");
-            Study.initialize(Application.getInstance());
-            NotificationManager.initialize(Application.getInstance());
-            Application.getInstance().registerStudyComponents();
-            Study.getInstance().load();
+        if(NotificationManager.getInstance()==null){
+            NotificationManager.initialize(getApplicationContext());
         }
 
         // if cache is present, set callback in rest client to end job afterward

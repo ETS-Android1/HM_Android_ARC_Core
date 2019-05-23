@@ -16,7 +16,14 @@ public class Participant {
         state = new ParticipantState();
     }
 
-    public void load(){
+    public void load() {
+        load(false);
+    }
+
+    public void load(boolean overwrite){
+        if(state!=null && !overwrite){
+            return;
+        }
         state = PreferencesManager.getInstance().getObject("ParticipantState",ParticipantState.class);
     }
 

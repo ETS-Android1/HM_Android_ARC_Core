@@ -66,7 +66,6 @@ import java.util.Locale;
 public class StudyStateMachine {
 
     protected StudyState state;
-    protected boolean notificationAcknowledged = false;
     protected boolean currentlyInTestPath = false;
 
     public StudyStateMachine() {
@@ -104,6 +103,13 @@ public class StudyStateMachine {
     }
 
     public void load(){
+        load(false);
+    }
+
+    public void load(boolean overwrite){
+        if(state!=null && !overwrite){
+            return;
+        }
         state = PreferencesManager.getInstance().getObject("StudyState",StudyState.class);
     }
 
@@ -251,22 +257,20 @@ public class StudyStateMachine {
     }
 
 
-    public boolean doesStateHaveValidFragments() {
-        if(state.segments.size() == 0)
-        {
+    public boolean hasValidFragments() {
+        if(state.segments.size() == 0) {
             return false;
         }
 
-        for(int i = 0; i < state.segments.size(); i++)
-        {
-            if(state.segments.get(i).fragments.size() == 0)
-            {
+        for(int i = 0; i < state.segments.size(); i++) {
+            if(state.segments.get(i).fragments.size() == 0) {
                 return false;
             }
         }
 
         return true;
     }
+
     // -----------------------------------------------------------------
 
 

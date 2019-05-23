@@ -1,6 +1,9 @@
 package com.healthymedium.arc.core;
 
 import android.content.res.Configuration;
+import android.util.Log;
+
+import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -10,16 +13,26 @@ import java.util.List;
 
 public class Application extends android.app.Application {
 
+    private static final String tag = "Application";
     static Application instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Log.i(tag,"onCreate");
+
         VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
         PreferencesManager.initialize(this);
         Device.initialize(this);
+        initializeStudy();
+    }
+
+    public void initializeStudy() {
+        Study.initialize(this);
+        registerStudyComponents();
+        Study.getInstance().load();
     }
 
     // register different behaviors here
@@ -40,6 +53,7 @@ public class Application extends android.app.Application {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
+        Log.i(tag,"onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
         if(PreferencesManager.getInstance() != null){
             if(PreferencesManager.getInstance().contains("language")){
@@ -49,6 +63,12 @@ public class Application extends android.app.Application {
                 getBaseContext().getResources().updateConfiguration(newConfig, getResources().getDisplayMetrics());
             }
         }
+    }
+
+    @Override
+    public void onLowMemory() {
+        Log.w(tag,"onLowMemory");
+        super.onLowMemory();
     }
 
     public static Application getInstance(){

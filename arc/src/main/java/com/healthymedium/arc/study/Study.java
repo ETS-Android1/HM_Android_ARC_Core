@@ -2,16 +2,10 @@ package com.healthymedium.arc.study;
 
 import android.content.Context;
 
-import com.healthymedium.arc.api.RestAPI;
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.api.models.Heartbeat;
-import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.core.Device;
-import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 //import com.healthymedium.arc.study.PrivacyPolicy;
 import com.healthymedium.arc.utilities.MigrationUtil;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -31,15 +25,18 @@ public class Study{
     static PrivacyPolicy privacyPolicy;
 
     public static synchronized void initialize(Context context) {
-        instance = new Study(context);
+        if(instance==null) {
+            instance = new Study();
+        }
+        instance.context = context;
     }
 
     public static synchronized Study getInstance() {
         return instance;
     }
 
-    protected Study(Context context) {
-        this.context = context;
+    protected Study() {
+
     }
 
     public static boolean isValid(){
@@ -52,6 +49,9 @@ public class Study{
     // class registrations -------------------------------------------------------------------------
 
     public boolean registerParticipantType(Class tClass){
+        if(participant!=null){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -75,6 +75,9 @@ public class Study{
     }
 
     public boolean registerRestApi(Class clientClass, Class apiClass){
+        if(restClient!=null){
+            return false;
+        }
         if(clientClass==null){
             return false;
         }
@@ -96,6 +99,9 @@ public class Study{
     }
 
     public  boolean registerStateMachine(Class tClass){
+        if(stateMachine!=null){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -116,6 +122,9 @@ public class Study{
 
 
     public boolean registerScheduler(Class tClass){
+        if(scheduler!=null){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -135,6 +144,9 @@ public class Study{
     }
 
     public boolean registerMigrationUtil(Class tClass){
+        if(migrationUtil!=null){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -154,6 +166,9 @@ public class Study{
     }
 
     public boolean registerPrivacyPolicy(Class tClass){
+        if(privacyPolicy!=null){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
