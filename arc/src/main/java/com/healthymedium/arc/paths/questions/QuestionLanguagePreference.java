@@ -36,6 +36,7 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         }
         else if (selection.equals("Español")) {
             PreferencesManager.getInstance().putString("language", "es");
+            PreferencesManager.getInstance().putString("country", "ES");
         }
 
         return response;

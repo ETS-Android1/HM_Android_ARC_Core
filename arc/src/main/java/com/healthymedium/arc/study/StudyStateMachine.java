@@ -418,7 +418,7 @@ public class StudyStateMachine {
         fragments.add(new InfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
-                res.getString(R.string.chronotype_subheader),
+                res.getString(R.string.chronotype_subhead),
                 res.getString(R.string.chronotype_0_body),
                 res.getString(R.string.button_begin)));
 
@@ -434,7 +434,7 @@ public class StudyStateMachine {
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
 
-        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.chronotype_1_q2_sub ),workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.list_selectone ),workingDayCountOptions));
 
         fragments.add(new InfoTemplate(
                 false,

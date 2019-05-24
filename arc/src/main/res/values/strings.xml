@@ -180,8 +180,6 @@
 
     <string name="YES">YES</string>
 
-
-
     <string name="setup_avail_header">Availability</string>
     <string name="setup_avail_subheader">A Few Questions</string>
     <string name="setup_avail_body">First, we\'ll ask you a few questions to help us determine when to send you those notifications.\n\nYou will only receive notifications during your waking hours.</string>
