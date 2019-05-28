@@ -8,6 +8,9 @@
     <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter the Subject ID&lt;/b>.</string>
     <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
 
+    <string name="bysigning_key">By signing in you agree to our Privacy Policy.</string>
+    <string name="privacy_linked">Privacy Policy</string>
+
     <string name="button_begin">BEGIN</string>
     <string name="button_next">NEXT</string>
     <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
@@ -205,6 +208,7 @@
     <string name="testing_intro_subhead">You Will Now Complete 3 Quick Tests</string>
     <string name="testing_intro_body">You cannot pause a test once it has been started. You cannot go back to the previous screen.</string>
 
+    <string name="aboutapp_header">About this App</string>
     <string name="aboutapp_body"></string>
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
 

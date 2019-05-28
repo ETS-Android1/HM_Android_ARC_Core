@@ -60,7 +60,7 @@ public class SetupSite extends StandardTemplate {
     LoadingDialog loadingDialog;
 
     public SetupSite() {
-        super(true, Application.getInstance().getResources().getString(R.string.login_enter_raterID),"");
+        super(true, ViewUtil.getString(R.string.login_enter_raterID),"");
         disableScrollBehavior();
     }
 
@@ -162,7 +162,7 @@ public class SetupSite extends StandardTemplate {
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         textViewPolicy = new TextView(getContext());
-        textViewPolicy.setText("By signing in you agree to our");
+        textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);
 
@@ -171,7 +171,7 @@ public class SetupSite extends StandardTemplate {
         ViewUtil.underlineTextView(textViewPolicyLink);
         textViewPolicyLink.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
         textViewPolicyLink.setGravity(Gravity.CENTER_HORIZONTAL);
-        textViewPolicyLink.setText("Privacy Policy");
+        textViewPolicyLink.setText(getResources().getString(com.healthymedium.arc.library.R.string.privacy_linked));
         textViewPolicyLink.setTextSize(15);
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
