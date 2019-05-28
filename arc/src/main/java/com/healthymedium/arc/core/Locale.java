@@ -18,12 +18,11 @@ public class Locale {
     private String language;
 
 
-/*
-    addListItem("","es","ES",false);
-    addListItem("","es","US",false);
-    */
-
-
+    public Locale(String country, String language, String label){
+        this.label = label;
+        this.country = country;
+        this.language = language;
+    }
 
     public Locale(String country, String language){
         if(language==LANGUAGE_ENGLISH){

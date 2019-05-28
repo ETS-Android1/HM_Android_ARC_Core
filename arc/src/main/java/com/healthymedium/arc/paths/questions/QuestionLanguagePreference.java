@@ -1,23 +1,25 @@
 package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.core.Locale;
+import com.healthymedium.arc.core.SplashScreen;
+import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @SuppressLint("ValidFragment")
 public class QuestionLanguagePreference extends QuestionRadioButtons {
 
-    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options) {
+    public List<Locale> locales;
+
+    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<Locale> locales) {
         super(allowBack, allowHelp, header, subheader, options);
+        this.locales = locales;
     }
 
     @Override
@@ -30,31 +32,23 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
             response.put("value", value);
         }
 
-        String language = "en";
-        String country = "US";
+        String language = Locale.LANGUAGE_ENGLISH;
+        String country = Locale.COUNTRY_UNITED_STATES;
 
         selection = options.get((int)value);
 
-        if (selection.equals("English")) {
-            language = "en";
-            country = "US";
-        }
-        else if (selection.equals("Français")) {
-            language = "fr";
-            country = "FR";
-        }
-        else if (selection.equals("Español")) {
-            language = "es";
-            country = "ES";
+        for(Locale locale : locales){
+            if(locale.getLabel().equals(selection)){
+                language = locale.getLanguage();
+                country = locale.getCountry();
+                break;
+            }
         }
 
         PreferencesManager.getInstance().putString("language", language);
         PreferencesManager.getInstance().putString("country", country);
 
-        Resources res = getContext().getResources();
-        Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(language,country);
-        res.updateConfiguration(conf, res.getDisplayMetrics());
+        Application.getInstance().updateLocale(getContext());
 
         return response;
     }
@@ -63,6 +57,6 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
     @Override
     protected void onNextRequested() {
         onDataCollection();
-        Study.getInstance().openNextFragment();
+        NavigationManager.getInstance().open(new SplashScreen());
     }
 }

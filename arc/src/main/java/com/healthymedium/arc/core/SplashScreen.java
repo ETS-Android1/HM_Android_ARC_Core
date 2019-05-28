@@ -69,13 +69,6 @@ public class SplashScreen extends BaseFragment {
             getMainActivity().setupHomeWatcher();
             getMainActivity().setupKeyboardWatcher();
 
-            String language = PreferencesManager.getInstance().getString("language","en");
-            String country = PreferencesManager.getInstance().getString("country","US");
-            Resources res = getResources();
-            Configuration conf = res.getConfiguration();
-            conf.setLocale(new Locale(language,country));
-            res.updateConfiguration(conf, res.getDisplayMetrics());
-
             FontFactory.initialize(context);
             if(Study.isValid() == false) {
                 Study.initialize(context);

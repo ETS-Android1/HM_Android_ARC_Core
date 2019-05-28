@@ -1,5 +1,6 @@
 package com.healthymedium.arc.core;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +9,16 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.study.AbandonmentJobService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +70,19 @@ public class MainActivity extends AppCompatActivity {
         if(PreferencesManager.getInstance().contains("language") || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
         } else {
-            //NavigationManager.getInstance().open(new SetupLocaleFragment());
+            List<Locale> locales = Application.getInstance().getLocaleOptions();
+            List<String> options = new ArrayList<>();
+            for(Locale locale : locales) {
+                options.add(locale.getLabel());
+            }
+            QuestionLanguagePreference fragment = new QuestionLanguagePreference(
+                    false,
+                    true,
+                    "Please select your <b>preferred language.</b>",
+                    "",
+                    options,
+                    locales);
+            NavigationManager.getInstance().open(fragment);
         }
     }
 
@@ -177,6 +194,14 @@ public class MainActivity extends AppCompatActivity {
                 AbandonmentJobService.scheduleSelf(getApplicationContext());
             }
         }
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        Log.i("MainActivity","attachBaseContext");
+        super.attachBaseContext(context);
+        Application.getInstance().updateLocale(context);
     }
 
     public boolean isVisible() {

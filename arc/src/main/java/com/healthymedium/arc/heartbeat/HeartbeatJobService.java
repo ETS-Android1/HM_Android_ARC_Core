@@ -43,14 +43,6 @@ public class HeartbeatJobService extends JobService {
             return false;
         }
 
-        Log.i("HeartbeatJobService","setting locale");
-        String language = PreferencesManager.getInstance().getString("language","en");
-        String country = PreferencesManager.getInstance().getString("country","US");
-        Resources res = getResources();
-        Configuration conf = res.getConfiguration();
-        conf.setLocale(new Locale(language,country));
-        res.updateConfiguration(conf, res.getDisplayMetrics());
-
         HeartbeatManager.getInstance().startNotification();
 
         if(!Config.REST_HEARTBEAT){
