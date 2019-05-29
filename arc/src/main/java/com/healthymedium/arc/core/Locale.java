@@ -10,7 +10,7 @@ public class Locale {
     public static String COUNTRY_UNITED_STATES = "US";
 
     public static String LANGUAGE_ENGLISH = "en";
-    public static String LANGUAGE_FRENCH = "CA";
+    public static String LANGUAGE_FRENCH = "fr";
     public static String LANGUAGE_SPANISH = "es";
 
     private String label;
@@ -67,9 +67,9 @@ public class Locale {
 
     private String getFrenchLabel(String country){
         if(country==COUNTRY_FRANCE){
-            return "France - Francais";
+            return "France - Français";
         } else if(country==COUNTRY_CANADA){
-            return "Canada - Francais";
+            return "Canada - Français";
         } else {
             return "";
         }

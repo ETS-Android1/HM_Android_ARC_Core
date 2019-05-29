@@ -4,6 +4,8 @@
     <string name="country_key">US</string>
     <string name="language_key">en</string>
 
+    <string name="gen_welcome_key">Welcome to the app</string>
+
     <string name="login_enter_ARCID">Please enter the\n&lt;b>Subject ID&lt;/b> below.</string>
     <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter the Subject ID&lt;/b>.</string>
     <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
@@ -11,9 +13,19 @@
     <string name="bysigning_key">By signing in you agree to our Privacy Policy.</string>
     <string name="privacy_linked">Privacy Policy</string>
 
+    <string name="Button_signin">SIGN IN</string>
     <string name="button_begin">BEGIN</string>
     <string name="button_next">NEXT</string>
     <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
+    <string name="button_submit">SUBMIT TIME</string>
+    <string name="button_back">BACK</string>
+    <string name="button_continue">CONTINUE</string>
+    <string name="help">HELP</string>
+    <string name="change_button">CHANGE</string>
+    <string name="button_confirm">CONFIRM</string>
+
+    <string name="home_availability_reset_link">Change My Availability</string>
+    <string name="home_contact_link">Contact and About</string>
 
     <string name="chronotype_subhead">Six Questions</string>
     <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\nPlease estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>
@@ -45,7 +57,7 @@
     <string name="context_body">These questions will briefly ask you about what is happening around you right now in this moment.</string>
 
     <string name="context_q1">Who is with you right now?</string>
-    <string name="context_q1_sub">Select all that apply</string>
+    <string name="Context_q1_sub">Select all that apply</string>
     <string name="context_q1_answers1">Nobody</string>
     <string name="context_q1_answers2">Partner/spouse</string>
     <string name="context_q1_answers3">Family</string>
@@ -55,7 +67,7 @@
     <string name="context_q1_answers7">Other</string>
 
     <string name="context_q2">Where are you right now?</string>
-    <string name="context_q2_sub">Select One</string>
+    <string name="Context_q2_sub">Select One</string>
     <string name="context_q2_answers1">My Home</string>
     <string name="context_q2_answers2">My Work</string>
     <string name="context_q2_answers3">School</string>
@@ -65,13 +77,10 @@
     <string name="context_q2_answers7">Other</string>
 
     <string name="context_q3">How would you rate &lt;b>your overall mood&lt;/b> right now?</string>
-    <string name="context_q3_sub">On a scale of bad to good.</string>
 
     <string name="context_q4">How would you rate &lt;b>how you feel&lt;/b> right now?</string>
-    <string name="context_q4_sub">On a scale of sleepy/tired to active/alert.</string>
 
     <string name="context_q5">In the past 5 minutes, what were you mostly doing?</string>
-    <string name="context_q5_sub">Select One</string>
     <string name="context_q5_answers1">Sitting at a Desk</string>
     <string name="context_q5_answers2">Watching Television</string>
     <string name="context_q5_answers3">Eating</string>
@@ -166,12 +175,18 @@
     <string name="wake_1_q1">What time did you wake up this morning?</string>
     <string name="wake_1_q2">What time did you get out of bed this morning?</string>
     <string name="wake_1_q3">How would you rate the quality of your sleep?</string>
-    <string name="wake_drag">On a scale of poor to excellent.</string>
+    <string name="wake_drag">Drag to select</string>
     <string name="wake_excellent">Excellent</string>
     <string name="wake_poor">Poor</string>
 
+    <string name="availability_wake_monday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Monday&lt;/b>?</string>
+    <string name="availability_sleep_monday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Monday&lt;/b>?</string>
+
+    <string name="availability_same_tuesday_friday">Do you usually wake up around &lt;b>{TIME1}&lt;/b> and go to bed around &lt;b>{TIME2}&lt;/b> on &lt;b>Tuesday - Friday&lt;/b> ?</string>
+
     <string name="availability_wake_tuesday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Tuesday?&lt;/b></string>
     <string name="availability_sleep_tuesday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Tuesday?&lt;/b></string>
+
     <string name="availability_wake_wednesday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Wednesday&lt;/b>?</string>
     <string name="availability_sleep_wednesday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Wednesday&lt;/b>?</string>
 
@@ -180,6 +195,12 @@
 
     <string name="availability_wake_friday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Friday?&lt;/b></string>
     <string name="availability_sleep_friday">When do you usually &lt;b>go to bed &lt;/b>on &lt;b>Friday?&lt;/b></string>
+
+    <string name="availability_wake_saturday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Saturday&lt;/b>?</string>
+    <string name="availability_sleep_saturday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Saturday&lt;/b>?</string>
+
+    <string name="availability_wake_sunday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Sunday&lt;/b>?</string>
+    <string name="availability_sleep_sunday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Sunday&lt;/b>?</string>
 
     <string name="YES">YES</string>
 
@@ -226,4 +247,6 @@
     <string name="notification_1month">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
     <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
     <string name="notification_1day">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
+
+    <string name="ChangeAvail_date_picker_body"></string>
 </resources>

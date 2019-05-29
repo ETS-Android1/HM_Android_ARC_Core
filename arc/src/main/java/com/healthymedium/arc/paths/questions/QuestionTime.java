@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.healthymedium.arc.custom.TimeInput;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.LocalTime;
 
@@ -22,7 +24,7 @@ public class QuestionTime extends QuestionTemplate {
     boolean enabled;
 
     public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime) {
-        super(allowBack,header,subheader,"SUBMIT TIME");
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submit));
         time = defaultTime;
         type = "time";
     }

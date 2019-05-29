@@ -551,7 +551,7 @@ public class StudyStateMachine {
         who.add(res.getString(R.string.context_q1_answers5));
         who.add(res.getString(R.string.context_q1_answers6));
         who.add(res.getString(R.string.context_q1_answers7));
-        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.context_q1_sub), who, res.getString(R.string.context_q1_answers1)));
+        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.Context_q1_sub), who, res.getString(R.string.context_q1_answers1)));
 
         List<String> where = new ArrayList<>();
         where.add(res.getString(R.string.context_q2_answers1));
@@ -561,10 +561,10 @@ public class StudyStateMachine {
         where.add(res.getString(R.string.context_q2_answers5));
         where.add(res.getString(R.string.context_q2_answers6));
         where.add(res.getString(R.string.context_q2_answers7));
-        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.context_q2_sub), where));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.Context_q2_sub), where));
 
-        fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), res.getString(R.string.context_q3_sub), res.getString(R.string.context_bad), res.getString(R.string.context_good)));
-        fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), res.getString(R.string.context_q4_sub), res.getString(R.string.context_tired), res.getString(R.string.context_active)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), "", res.getString(R.string.context_bad), res.getString(R.string.context_good)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), "", res.getString(R.string.context_tired), res.getString(R.string.context_active)));
 
         List<String> what = new ArrayList<>();
         what.add(res.getString(R.string.context_q5_answers1));
@@ -577,7 +577,7 @@ public class StudyStateMachine {
         what.add(res.getString(R.string.context_q5_answers8));
         what.add(res.getString(R.string.context_q5_answers9));
         what.add(res.getString(R.string.context_q5_answers10));
-        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q5), res.getString(R.string.context_q5_sub), what));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q5), "", what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);
@@ -787,7 +787,7 @@ public class StudyStateMachine {
     public void addSchedulePicker() {
         List<BaseFragment> fragments = new ArrayList<>();
 
-        fragments.add(new QuestionAdjustSchedule(false, true, "What week are you able to test?", ""));
+        fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.ChangeAvail_date_picker_body), ""));
 
         fragments.add(new ScheduleCalendar());
 

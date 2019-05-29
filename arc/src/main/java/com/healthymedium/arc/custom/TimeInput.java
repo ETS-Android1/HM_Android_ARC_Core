@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Hours;
@@ -92,7 +93,7 @@ public class TimeInput extends FrameLayout {
                 if(restrictTime){
                     time = new LocalTime(hourOfDay,minute*15);
                     if(time.isAfter(blockoutBegin) && time.isBefore(blockoutEnd)){
-                        errorText.setText("Please set a minimum of " + Integer.toString(minWakeTime) +" hours of wake time.");
+                        errorText.setText(ViewUtil.getString(R.string.error4));
                         setValidity(false);
                         return;
                     }

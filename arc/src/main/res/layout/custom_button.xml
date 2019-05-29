@@ -10,7 +10,7 @@
         android:layout_gravity="center"
         android:background="@drawable/button_normal"
         android:gravity="center"
-        android:text="NEXT"
+        android:text="@string/button_next"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:textStyle="bold" />

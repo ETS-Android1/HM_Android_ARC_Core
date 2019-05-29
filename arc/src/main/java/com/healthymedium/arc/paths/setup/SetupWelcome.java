@@ -27,7 +27,7 @@ public class SetupWelcome extends BaseFragment {
     TextView textViewHeader;
     TextView textViewAboutApp;
     TextView textViewPrivacyPolicy;
-    TextView textViewAppName;
+    // TextView textViewAppName;
     TextView textViewVersion;
 
     public SetupWelcome() {
@@ -39,8 +39,8 @@ public class SetupWelcome extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_setup_welcome, container, false);
         textViewHeader = view.findViewById(R.id.textViewHeader);
 
-        textViewAppName = view.findViewById(R.id.textViewAppName);
-        textViewAppName.setText(ViewUtil.getString(R.string.app_name)+" app");
+        // textViewAppName = view.findViewById(R.id.textViewAppName);
+        // textViewAppName.setText(ViewUtil.getString(R.string.app_name)+" app");
 
         textViewAboutApp = view.findViewById(R.id.textViewAboutApp);
         textViewAboutApp.setTypeface(Fonts.robotoMedium);
