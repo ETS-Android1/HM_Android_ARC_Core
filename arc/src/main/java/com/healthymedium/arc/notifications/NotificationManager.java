@@ -232,7 +232,7 @@ public class NotificationManager {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,timeStamp.getMillis(), pendingIntent);
     }
 
     public boolean removeNotification(int sessionId,int type) {
