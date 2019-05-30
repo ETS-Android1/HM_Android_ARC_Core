@@ -18,6 +18,7 @@ import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -39,7 +40,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
 
     public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
-        super(allowBack,header,subheader,"SUBMIT");
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_confirm));
         this.allowHelp = allowHelp;
     }
 

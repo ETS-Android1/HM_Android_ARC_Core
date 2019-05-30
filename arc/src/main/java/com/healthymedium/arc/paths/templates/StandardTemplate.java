@@ -55,7 +55,7 @@ public class StandardTemplate extends BaseFragment {
 
     public StandardTemplate(boolean allowBack, String header, String subheader) {
         this.allowBack = allowBack;
-        stringButton = "NEXT";
+        stringButton = ViewUtil.getString(R.string.button_next);
         stringHeader = header;
         stringSubHeader = subheader;
 

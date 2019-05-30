@@ -56,7 +56,12 @@ public class ScheduleCalendar extends BaseFragment {
         String end = fmt.print(visitEnd);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(Html.fromHtml("Great! Your next testing cycle will be <b>" + start + "</b> through <b>" + end + "</b>."));
+
+        String header = ViewUtil.getString(R.string.ChangeAvail_date_picker_confirm_body);
+        header = header.replace("{DATE1}", start);
+        header = header.replace("{DATE2}", end);
+
+        textViewHeader.setText(Html.fromHtml(header));
 
         updateCalendar(visitStart, visitEnd);
 

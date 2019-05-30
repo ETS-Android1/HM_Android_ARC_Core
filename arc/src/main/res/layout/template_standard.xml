@@ -118,7 +118,7 @@
         android:background="@drawable/ic_rating_scroll_indicator"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="Scroll"
+        android:text="@string/scroll"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:visibility="gone" />
