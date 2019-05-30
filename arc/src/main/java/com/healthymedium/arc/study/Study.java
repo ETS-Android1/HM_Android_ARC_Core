@@ -48,8 +48,12 @@ public class Study{
 
     // class registrations -------------------------------------------------------------------------
 
-    public boolean registerParticipantType(Class tClass){
-        if(participant!=null){
+    public boolean registerParticipantType(Class tClass) {
+        return registerParticipantType(tClass,false);
+    }
+
+    public boolean registerParticipantType(Class tClass, boolean overwrite){
+        if(participant!=null && !overwrite){
             return false;
         }
         if(tClass==null){
@@ -71,11 +75,15 @@ public class Study{
     }
 
     public boolean registerRestApi(Class clientClass){
-        return registerRestApi(clientClass, null);
+        return registerRestApi(clientClass, null,false);
     }
 
-    public boolean registerRestApi(Class clientClass, Class apiClass){
-        if(restClient!=null){
+    public boolean registerRestApi(Class clientClass,Class apiClass){
+        return registerRestApi(clientClass, apiClass,false);
+    }
+
+    public boolean registerRestApi(Class clientClass, Class apiClass, boolean overwrite){
+        if(restClient!=null && !overwrite){
             return false;
         }
         if(clientClass==null){
@@ -98,8 +106,12 @@ public class Study{
         return true;
     }
 
-    public  boolean registerStateMachine(Class tClass){
-        if(stateMachine!=null){
+    public  boolean registerStateMachine(Class tClass) {
+        return registerStateMachine(tClass,false);
+    }
+
+    public  boolean registerStateMachine(Class tClass, boolean overwrite){
+        if(stateMachine!=null && !overwrite){
             return false;
         }
         if(tClass==null){
@@ -120,9 +132,12 @@ public class Study{
         return true;
     }
 
-
     public boolean registerScheduler(Class tClass){
-        if(scheduler!=null){
+        return registerScheduler(tClass,false);
+    }
+
+    public boolean registerScheduler(Class tClass, boolean overwrite){
+        if(scheduler!=null && !overwrite){
             return false;
         }
         if(tClass==null){
@@ -144,7 +159,11 @@ public class Study{
     }
 
     public boolean registerMigrationUtil(Class tClass){
-        if(migrationUtil!=null){
+        return registerMigrationUtil(tClass,false);
+    }
+
+    public boolean registerMigrationUtil(Class tClass, boolean overwrite){
+        if(migrationUtil!=null && !overwrite){
             return false;
         }
         if(tClass==null){
@@ -164,9 +183,12 @@ public class Study{
         }
         return true;
     }
-
     public boolean registerPrivacyPolicy(Class tClass){
-        if(privacyPolicy!=null){
+        return registerPrivacyPolicy(tClass,false);
+    }
+
+    public boolean registerPrivacyPolicy(Class tClass, boolean overwrite){
+        if(privacyPolicy!=null && !overwrite){
             return false;
         }
         if(tClass==null){
