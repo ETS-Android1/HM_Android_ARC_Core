@@ -87,6 +87,10 @@ public class PreferencesManager {
         sharedPreferences.edit().remove(key).apply();
     }
 
+    public void removeAll() {
+        sharedPreferences.edit().clear().commit();
+    }
+
     public boolean getBoolean(String key, boolean defValue) {
         return sharedPreferences.getBoolean(key, defValue);
     }
