@@ -100,7 +100,8 @@ public class TimeInput extends FrameLayout {
 
                     Hours hoursDiff = Hours.hoursBetween(blockoutBegin, time);
                     if (hoursDiff.getHours() > 18) {
-                        errorText.setText("Please set a maximum of " + Integer.toString(maxWakeTime) + " hours of wake time.");
+                        //errorText.setText("Please set a maximum of " + Integer.toString(maxWakeTime) + " hours of wake time.");
+                        errorText.setText("");
                         setValidity(false);
                         return;
                     }
