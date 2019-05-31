@@ -790,7 +790,7 @@ public class StudyStateMachine {
                 header ,
                 subheader,
                 body,
-                res.getString(R.string.thankyou_button_return_to_home));
+                ViewUtil.getDrawable(R.drawable.ic_home_active));
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
         state.segments.add(segment);
