@@ -248,6 +248,8 @@
     <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
     <string name="notification_1day">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
 
+    <string name="testing_header_one">Test {Value1} of {Value2}</string>
+
     <string name="scroll">Scroll</string>
 
     <string name="ChangeAvail_date_picker_body"></string>

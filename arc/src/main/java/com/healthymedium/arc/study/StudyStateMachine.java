@@ -625,9 +625,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         InfoTemplate info = new InfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
                 res.getString(R.string.button_begin));
@@ -656,9 +660,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         InfoTemplate info = new InfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
                 res.getString(R.string.button_begin));
@@ -675,9 +683,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         InfoTemplate info0 = new InfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
                 res.getString(R.string.button_next));
@@ -685,7 +697,7 @@ public class StudyStateMachine {
 
         InfoTemplate info1 = new InfoTemplate(
                 true,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body2),
                 res.getString(R.string.button_next));
@@ -693,7 +705,7 @@ public class StudyStateMachine {
 
         InfoTemplate info2 = new InfoTemplate(
                 true,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body3),
                 res.getString(R.string.button_begin));
