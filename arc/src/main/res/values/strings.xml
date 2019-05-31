@@ -252,4 +252,6 @@
 
     <string name="ChangeAvail_date_picker_body"></string>
     <string name="ChangeAvail_date_picker_confirm_body"></string>
+    <string name="Contact_header"></string>
+    <string name="contact_body"></string>
 </resources>

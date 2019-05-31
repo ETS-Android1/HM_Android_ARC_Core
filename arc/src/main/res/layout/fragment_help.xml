@@ -94,7 +94,7 @@
             android:paddingTop="19dp"
             android:paddingRight="38dp"
             android:paddingBottom="22dp"
-            android:text="About"
+            android:text="@string/about"
             android:textStyle="bold"
             android:textColor="@color/white" />
 
@@ -110,7 +110,7 @@
             android:gravity="center"
             android:paddingTop="19dp"
             android:paddingBottom="22dp"
-            android:text="Privacy Policy"
+            android:text="@string/privacy_linked"
             android:textStyle="bold"
             android:textColor="@color/white" />
     </LinearLayout>
