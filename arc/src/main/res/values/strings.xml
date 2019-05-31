@@ -109,7 +109,7 @@
     <string name="idverification_body2">By signing my initials on the line below, I attest that I completed these tests.</string>
     <string name="idverification_header">Id Verification</string>
 
-    <string name="interrupted_body">Thanks!\n\nWere you interrupted or did you have to stop while taking any of these tests?</string>
+    <string name="interrupted_body">Thanks! &lt;br /&gt; &lt;br /&gt; Were you interrupted or did you have to stop while taking any of these tests?</string>
     <string name="interrupted_header">Final Questions</string>
 
     <string name="thank_you_header1">Thank You</string>
