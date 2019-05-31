@@ -16,12 +16,15 @@ import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 import com.healthymedium.arc.custom.Button;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+
+import java.util.Locale;
 
 public class ScheduleCalendar extends BaseFragment {
 
@@ -50,7 +53,10 @@ public class ScheduleCalendar extends BaseFragment {
         DateTime visitStart = visit.getActualStartDate();
         DateTime visitEnd = visit.getActualEndDate();
 
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("E, MMM d");
+        String language = PreferencesManager.getInstance().getString("language", "en");
+        String country = PreferencesManager.getInstance().getString("country", "US");
+        Locale locale = new Locale(language, country);
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("E, MMM d").withLocale(locale);
 
         String start = fmt.print(visitStart);
         String end = fmt.print(visitEnd);
