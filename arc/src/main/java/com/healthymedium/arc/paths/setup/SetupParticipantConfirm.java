@@ -225,7 +225,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
                     if(charSequence.toString().equals(previousCharacterSequence.toString())){
                         buttonNext.setEnabled(true);
                     } else {
-                        showError(Application.getInstance().getResources().getString(R.string.error_id_mismatch));
+                        showError(Application.getInstance().getResources().getString(R.string.error1));
                     }
                 } else if(buttonNext.isEnabled()){
                     buttonNext.setEnabled(false);
