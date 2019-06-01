@@ -3,6 +3,7 @@ package com.healthymedium.arc.core;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,10 +110,10 @@ public class TwoBtnDialog extends android.support.v4.app.DialogFragment {
 
 
         textViewHeader = view.findViewById(R.id.textviewHeaderText);
-        textViewHeader.setText(headerText);
+        textViewHeader.setText(Html.fromHtml(headerText));
 
         textViewBody = view.findViewById(R.id.textviewBodyText);
-        textViewBody.setText(bodyText);
+        textViewBody.setText(Html.fromHtml(bodyText));
 
         return view;
     }
