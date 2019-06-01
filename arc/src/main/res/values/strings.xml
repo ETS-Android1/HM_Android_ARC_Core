@@ -121,7 +121,7 @@
     <string name="thankyou_body3">There are no more tests to take.</string>
 
     <string name="thankyou_cycle_subhead2">You\'ve Finished This Cycle!</string>
-    <string name="thank_you_cycle_body2">There are no tests available at this time. Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule below.</string>
+    <string name="thankyou_cycle_body2">There are no tests available at this time. Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule below.</string>
 
     <string name="thankyou_alldone_subhead1">All Done for Today!</string>
     <string name="thankyou_alldone_body1">Thanks for your hard work. We\'ll notify you tomorrow with your next test.</string>

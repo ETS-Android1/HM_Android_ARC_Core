@@ -762,15 +762,24 @@ public class StudyStateMachine {
 
             // After the cycle but before the next session
             if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
-                String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
-                String date = visit.getActualStartDate().toString(format);
+
+                String language = PreferencesManager.getInstance().getString("language", "en");
+                String country = PreferencesManager.getInstance().getString("country", "US");
+                Locale locale = new Locale(language, country);
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/dd/yy").withLocale(locale);
+
+                //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
                 header = res.getString(R.string.thankyou_header2);
                 subheader = res.getString(R.string.thankyou_cycle_subhead2);
 
-                String body2 = res.getString(R.string.thank_you_cycle_body2);
+                String body2 = res.getString(R.string.thankyou_cycle_body2);
 
-                String startDate = visit.getActualStartDate().toString(format);
-                String endDate = visit.getActualEndDate().toString(format);
+                // String startDate = visit.getActualStartDate().toString(format);
+                // String endDate = visit.getActualEndDate().toString(format);
+
+                String startDate = fmt.print(visit.getActualStartDate());
+                String endDate = fmt.print(visit.getActualEndDate());
+
                 body2 = body2.replace("{DATE1}", startDate);
                 body2 = body2.replace("{DATE2}", endDate);
 

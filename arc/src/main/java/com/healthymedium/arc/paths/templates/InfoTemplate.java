@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,7 +77,7 @@ public class InfoTemplate extends BaseFragment {
         textViewSubheader.setText(stringSubHeader);
 
         textViewBody = view.findViewById(R.id.textViewBody);
-        textViewBody.setText(stringBody);
+        textViewBody.setText(Html.fromHtml(stringBody));
 
         if (stringSubHeader == "") {
             textViewSubheader.setVisibility(View.GONE);
