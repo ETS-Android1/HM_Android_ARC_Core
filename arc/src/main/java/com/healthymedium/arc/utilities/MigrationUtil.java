@@ -54,17 +54,16 @@ public class MigrationUtil {
 
         boolean successful = true;
 
-        // change this as necessary when merging the branch
-        if(oldVersion < 1010000){
+        if(oldVersion < 1000214){
             successful = migratePreferencesToCache();
         }
-
-
 
         return successful;
     }
 
     private boolean migratePreferencesToCache(){
+
+        CacheManager.getInstance().removeAll();
 
         JsonObject json = PreferencesManager.getInstance().getObject("StateMachine", JsonObject.class);
         PreferencesManager.getInstance().remove("StateMachine");
