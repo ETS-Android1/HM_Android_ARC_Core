@@ -4,6 +4,8 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import com.healthymedium.arc.study.Study;
+
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -25,6 +27,7 @@ public class Application extends android.app.Application {
         VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
         PreferencesManager.initialize(this);
+        CacheManager.initialize(this);
         Device.initialize(this);
         initializeStudy();
     }

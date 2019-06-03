@@ -300,11 +300,11 @@ public class Study{
     }
 
     public static PathSegmentData getCurrentSegmentData() {
-        return stateMachine.state.segments.get(0).dataObject;
+        return stateMachine.cache.segments.get(0).dataObject;
     }
 
     public static void setCurrentSegmentData(Object object) {
-        stateMachine.state.segments.get(0).dataObject = (PathSegmentData) object;
+        stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
     }
 
 

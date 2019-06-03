@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
         paused = true;
         if(Study.isValid()){
             Study.getParticipant().markPaused();
-            Study.getStateMachine().save();
+            Study.getStateMachine().save(true);
             if(Study.getParticipant().isCurrentlyInTestSession()) {
                 AbandonmentJobService.scheduleSelf(getApplicationContext());
             }

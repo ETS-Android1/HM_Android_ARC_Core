@@ -15,7 +15,6 @@ import com.healthymedium.arc.path_data.ContextPathData;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.path_data.SinglePageData;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.path_data.WakePathData;
 import com.healthymedium.arc.paths.availability.AvailabilityMondayBed;
@@ -48,6 +47,7 @@ import com.healthymedium.arc.paths.tests.PriceTestCompareFragment;
 import com.healthymedium.arc.paths.tests.PriceTestMatchFragment;
 import com.healthymedium.arc.paths.tests.QuestionInterrupted;
 import com.healthymedium.arc.paths.tests.SymbolTest;
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
@@ -65,7 +65,13 @@ import java.util.Locale;
 
 public class StudyStateMachine {
 
+    public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
+    public static final String TAG_STUDY_STATE = "StudyState";
+
+    protected String tag = getClass().getSimpleName();
+
     protected StudyState state;
+    protected StudyStateCache cache;
     protected boolean currentlyInTestPath = false;
 
     public StudyStateMachine() {
@@ -100,10 +106,12 @@ public class StudyStateMachine {
 
     public void initialize(){
         state = new StudyState();
+        cache = new StudyStateCache();
     }
 
     public void load(){
-        load(false);
+        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
+        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
     }
 
     public void load(boolean overwrite){
@@ -113,9 +121,17 @@ public class StudyStateMachine {
         state = PreferencesManager.getInstance().getObject("StudyState",StudyState.class);
     }
 
-
     public void save(){
-        PreferencesManager.getInstance().putObject("StudyState", state);
+        save(false);
+    }
+
+    public void save(boolean saveCache){
+        Log.i(tag,"save");
+        PreferencesManager.getInstance().putObject(TAG_STUDY_STATE, state);
+        CacheManager.getInstance().putObject(TAG_STUDY_STATE_CACHE,cache);
+        if(saveCache){
+            CacheManager.getInstance().save(TAG_STUDY_STATE_CACHE);
+        }
     }
 
     public void decidePath(){
@@ -125,20 +141,20 @@ public class StudyStateMachine {
     public void abandonTest(){
         Participant participant = Study.getParticipant();
 
-        Log.i("StudyStateMachine", "loading in the middle of an indexed test, marking it abandoned");
+        Log.i(tag, "loading in the middle of an indexed test, marking it abandoned");
         participant.getCurrentTestSession().markAbandoned();
 
-        Log.i("StudyStateMachine", "collecting data from each existing segment");
-        for(PathSegment segment : state.segments){
+        Log.i(tag, "collecting data from each existing segment");
+        for(PathSegment segment : cache.segments){
             BaseData object = segment.collectData();
             if(object!=null){
-                state.cache.add(object);
+                cache.data.add(object);
             }
         }
 
         loadTestDataFromCache();
-        state.segments.clear();
-        state.cache.clear();
+        cache.segments.clear();
+        cache.data.clear();
 
         Study.getRestClient().submitTest(participant.getCurrentTestSession());
         participant.moveOnToNextTestSession(true);
@@ -156,23 +172,23 @@ public class StudyStateMachine {
 
     public boolean skipToNextSegment(){
 
-        if(state.segments.size() > 0) {
-            BaseData object = state.segments.get(0).collectData();
+        if(cache.segments.size() > 0) {
+            BaseData object = cache.segments.get(0).collectData();
             if (object != null) {
-                state.cache.add(object);
+                cache.data.add(object);
             }
-            state.segments.remove(0);
+            cache.segments.remove(0);
 
             NavigationManager.getInstance().clearBackStack();
             Study.getInstance().getParticipant().save();
             save();
         }
 
-        if(state.segments.size()>0){
+        if(cache.segments.size()>0){
             return openNext();
         } else {
             endOfPath();
-            state.cache.clear();
+            cache.data.clear();
             decidePath();
             setupPath();
             return openNext();
@@ -185,8 +201,8 @@ public class StudyStateMachine {
 
     public boolean openNext(int skips){
         save();
-        if(state.segments.size()>0){
-            if(state.segments.get(0).openNext(skips)) {
+        if(cache.segments.size()>0){
+            if(cache.segments.get(0).openNext(skips)) {
                 return true;
             } else {
                 return endOfSegment();
@@ -198,17 +214,17 @@ public class StudyStateMachine {
 
     protected boolean endOfSegment(){
         // else at the end of segment
-        BaseData object = state.segments.get(0).collectData();
+        BaseData object = cache.segments.get(0).collectData();
         if(object!=null){
-            state.cache.add(object);
+            cache.data.add(object);
         }
-        state.segments.remove(0);
+        cache.segments.remove(0);
 
         NavigationManager.getInstance().clearBackStack();
         Study.getInstance().getParticipant().save();
         save();
 
-        if(state.segments.size()>0){
+        if(cache.segments.size()>0){
             return openNext();
         } else {
             endOfPath();
@@ -217,7 +233,7 @@ public class StudyStateMachine {
     }
 
     protected boolean moveOn(){
-        state.cache.clear();
+        cache.data.clear();
         decidePath();
         setupPath();
         Study.getInstance().getParticipant().save();
@@ -230,8 +246,8 @@ public class StudyStateMachine {
     }
 
     public boolean openPrevious(int skips){
-        if(state.segments.size()>0){
-            return state.segments.get(0).openPrevious(skips);
+        if(cache.segments.size()>0){
+            return cache.segments.get(0).openPrevious(skips);
         }
         return false;
     }
@@ -240,7 +256,7 @@ public class StudyStateMachine {
 
 
     protected void setTestCompleteFlag(boolean complete){
-        Log.i("StudyStateMachine", "setTestCompleteFlag("+complete+")");
+        Log.i(tag, "setTestCompleteFlag("+complete+")");
         PreferencesManager.getInstance().putBoolean("TestCompleteFlag",complete);
     }
 
@@ -283,7 +299,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
@@ -309,7 +325,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupAvailability(){
@@ -342,7 +358,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupAvailability(int minWakeTime, int maxWakeTime, boolean reschedule){
@@ -408,7 +424,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addChronotypeSurvey(){
@@ -478,7 +494,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addWakeSurvey(){
@@ -529,7 +545,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addContextSurvey(){
@@ -582,7 +598,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addTests(){
@@ -601,7 +617,7 @@ public class StudyStateMachine {
         //info.setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
 
         Integer[] orderArray = new Integer[]{1,2,3};
         List<Integer> order = Arrays.asList(orderArray);
@@ -649,7 +665,7 @@ public class StudyStateMachine {
         fragments.add(new PriceTestMatchFragment());
 
         PathSegment segment = new PathSegment(fragments,PriceTestPathData.class);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addSymbolsTest(int index){
@@ -668,7 +684,7 @@ public class StudyStateMachine {
         fragments.add(new SymbolTest());
 
         PathSegment segment = new PathSegment(fragments,SymbolsTestPathData.class);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addGridTest(int index){
@@ -711,7 +727,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
         enableTransitionGrids(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addInterruptedPage(){
@@ -721,7 +737,7 @@ public class StudyStateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new QuestionInterrupted(false, res.getString(R.string.interrupted_body),""));
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addFinishedPage(){
@@ -778,7 +794,7 @@ public class StudyStateMachine {
                 res.getString(R.string.thankyou_button_return_to_home));
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addSchedulePicker() {
@@ -789,7 +805,7 @@ public class StudyStateMachine {
         fragments.add(new ScheduleCalendar());
 
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathAdjustSchedule() {

@@ -14,9 +14,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DeviceRegistration;
 import com.healthymedium.arc.api.models.Heartbeat;
 import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.api.models.CachedSignature;
 import com.healthymedium.arc.api.models.TestSchedule;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.api.models.TestSubmission;
@@ -31,6 +33,7 @@ import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
@@ -53,6 +56,7 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -255,7 +259,28 @@ public class RestClient <Api>{
     }
 
     // For now override in app module
-    public void submitSignature(Bitmap s) {
+    public void submitSignature(Bitmap bitmap) {
+        Log.i("RestClient","submitSignature");
+        if(Config.REST_BLACKHOLE) {
+  //          return;
+        }
+
+        String key = "signature_" + DateTime.now().getMillis();
+        CacheManager.getInstance().putBitmap(key,bitmap,100);
+
+        CachedSignature signature = new CachedSignature();
+        signature.filename = key;
+        signature.participant_id = Study.getParticipant().getId();
+        signature.session_id = String.valueOf(Study.getCurrentTestSession().getId());
+
+        if(uploading) {
+            uploadQueue.add(signature);
+            saveUploadQueue();
+        } else {
+            markUploadStarted();
+            Call<ResponseBody> call = getService().submitSignature(signature.getRequestBody(),Device.getId());
+            call.enqueue(createCachedCallback(signature));
+        }
 
     }
 
@@ -448,6 +473,32 @@ public class RestClient <Api>{
         });
     }
 
+    protected Callback createCachedCallback(final CachedObject object) {
+        Log.i("RestClient","createDataCallback");
+        return createCallback(new Listener() {
+            @Override
+            public void onSuccess(Response response) {
+                Log.i("RestClient","data callback success");
+                if(uploadQueue.contains(object)) {
+                    uploadQueue.remove(object);
+                    saveUploadQueue();
+                }
+                CacheManager.getInstance().remove(object.filename);
+                popQueue();
+            }
+
+            @Override
+            public void onFailure(Response response) {
+                Log.i("RestClient","data callback failure");
+                if(!uploadQueue.contains(object)){
+                    uploadQueue.add(object);
+                    saveUploadQueue();
+                }
+                markUploadStopped();
+            }
+        });
+    }
+
     public void popQueue() {
         if(uploadQueue.size()>0){
             Object object = uploadQueue.get(0);
@@ -461,12 +512,20 @@ public class RestClient <Api>{
                 call = getService().submitWakeSleepSchedule(deviceId,json);
             } else if(TestSubmission.class.isInstance(object)) {
                 call = getService().submitTest(deviceId,json);
+            } else if(CachedSignature.class.isInstance(object)) {
+                RequestBody requestBody = ((CachedSignature)object).getRequestBody();
+                call = getService().submitSignature(requestBody,deviceId);
             }
 
             if(call!=null) {
                 Log.i("RestClient", "popQueue("+object.getClass().getName()+")");
                 markUploadStarted();
-                call.enqueue(createDataCallback(object));
+                if(!CachedObject.class.isAssignableFrom(object.getClass())){
+                    call.enqueue(createCachedCallback((CachedObject) object));
+                } else {
+                    call.enqueue(createDataCallback(object));
+                }
+
             } else {
                 uploadQueue.remove(object);
                 saveUploadQueue();

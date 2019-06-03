@@ -50,4 +50,5 @@ dependencies {
     api 'net.danlew:android.joda:2.9.9'
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
     api 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.github.gcacace:signature-pad:1.2.1'
 }

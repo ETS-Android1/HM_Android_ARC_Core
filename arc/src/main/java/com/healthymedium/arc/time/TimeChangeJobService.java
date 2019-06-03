@@ -2,22 +2,12 @@ package com.healthymedium.arc.time;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.heartbeat.HeartbeatManager;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.StudyStateMachine;
-import com.healthymedium.arc.utilities.PreferencesManager;
-
-import java.util.Locale;
-
-import static com.healthymedium.arc.study.Study.getRestClient;
 
 public class TimeChangeJobService extends JobService {
 
@@ -60,7 +50,7 @@ public class TimeChangeJobService extends JobService {
         Study.getStateMachine().decidePath();
 
         Log.i(tag, "saving");
-        Study.getStateMachine().save();
+        Study.getStateMachine().save(true);
         Study.getParticipant().save();
 
         done = true;

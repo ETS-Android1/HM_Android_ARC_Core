@@ -2,6 +2,7 @@ package com.healthymedium.arc.api;
 
 import com.google.gson.JsonObject;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,5 +29,8 @@ public interface RestAPI {
 
     @GET("get-session-info")
     Call<ResponseBody> getSessionInfo(@Query("device_id") String deviceId);
+
+    @POST("signature-data")
+    Call<ResponseBody> submitSignature(@Body RequestBody singatureData, @Query("device_id") String deviceId);
 
 }
