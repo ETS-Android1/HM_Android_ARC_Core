@@ -1,6 +1,8 @@
 package com.healthymedium.arc.utilities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 
@@ -27,6 +29,9 @@ import org.joda.time.LocalTime;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -58,6 +63,7 @@ public class CacheManager {
         }
     }
 
+    private Map<String, File> bitmaps = new HashMap<>();
     private Map<String, Cache> map = new HashMap<>();
 
     private File cacheDir;
@@ -66,15 +72,42 @@ public class CacheManager {
     private CacheManager(Context context) {
 
         cacheDir = context.getCacheDir();
-        File[] files = cacheDir.listFiles();
+
+        // collect bitmaps
+        FileFilter bitmapFilter = new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getName().contains(".png");
+            }
+        };
+
+        File[] bitampFiles = cacheDir.listFiles(bitmapFilter);
+        int bitmapCount = bitampFiles.length;
+
+        for(int i=0;i<bitmapCount;i++) {
+            File file = bitampFiles[i];
+            String name = file.getName().replace(".png","");
+            Log.d(tag,"found bitmap = "+name);
+            bitmaps.put(name,file);
+        }
+
+        // everthing else should be json objects
+        FileFilter objectFilter = new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return !pathname.getName().contains(".png");
+            }
+        };
+        File[] files = cacheDir.listFiles(objectFilter);
         int count = files.length;
 
         for(int i=0;i<count;i++) {
             File file = files[i];
-
             Cache cache = new Cache();
             cache.file = file;
-            map.put(file.getName(),cache);
+            String name  = file.getName();
+            Log.d(tag,"found object = "+name);
+            map.put(file.getName(), cache);
         }
 
         buildObjectGson();
@@ -109,9 +142,15 @@ public class CacheManager {
 
     public void remove(String key) {
         Log.i(tag,"remove "+key);
-        File file = map.get(key).file;
-        file.delete();
-        map.remove(key);
+        if(map.containsKey(key)){
+            File file = map.get(key).file;
+            file.delete();
+            map.remove(key);
+        } else if(bitmaps.containsKey(key)){
+            File file = bitmaps.get(key);
+            file.delete();
+            bitmaps.remove(key);
+        }
     }
 
     public void removeAll() {
@@ -120,6 +159,10 @@ public class CacheManager {
             entry.getValue().file.delete();
         }
         map.clear();
+        for(Map.Entry<String,File> entry : bitmaps.entrySet()){
+            entry.getValue().delete();
+        }
+        bitmaps.clear();
     }
 
     public void save(String key) {
@@ -128,7 +171,7 @@ public class CacheManager {
             if(cache.saved){
                return;
             }
-            boolean written = writeFile(cache.file,cache.content);
+            boolean written = writeTextFile(cache.file,cache.content);
             Log.i(tag,"key("+key+") save = "+written);
             if(written){
                 cache.saved = true;
@@ -141,7 +184,7 @@ public class CacheManager {
         for(Map.Entry<String,Cache> entry : map.entrySet()){
             Cache cache = entry.getValue();
             if(!cache.saved) {
-                boolean written = writeFile(cache.file, cache.content);
+                boolean written = writeTextFile(cache.file, cache.content);
                 Log.i(tag,"key( "+entry.getKey()+") save = "+written);
                 if(written){
                     cache.saved = true;
@@ -161,7 +204,7 @@ public class CacheManager {
             if(!file.exists()){
                 try {
                     file.createNewFile();
-                    writeFile(file,"{}");
+                    writeTextFile(file,"{}");
                 } catch (IOException e) {
                     e.printStackTrace();
                     return;
@@ -188,18 +231,68 @@ public class CacheManager {
         }
         Cache cache = map.get(key);
         if(!cache.read){
-            cache.content = readFile(cache.file);
+            cache.content = readTextFile(cache.file);
             cache.read = true;
         }
         return objectGson.fromJson(cache.content, clazz);
     }
 
-    private boolean writeFile(File file, String string){
-        Log.i(tag,"writeFile("+file.getName()+")");
+    public File getFile(String key) {
+        Log.i(tag,"getFile("+key+")");
+        if(map.containsKey(key)){
+            return map.get(key).file;
+        }
+        if(bitmaps.containsKey(key)){
+            return bitmaps.get(key);
+        }
+        return null;
+    }
+
+    public Bitmap getBitmap(String key) {
+        Log.i(tag,"getBitmap("+key+")");
+        if(!bitmaps.containsKey(key)){
+            return null;
+        }
+        return readBitmap(bitmaps.get(key));
+    }
+
+    public boolean putBitmap(String key, Bitmap bitmap, int quality) {
+        Log.i(tag, "putBitmap(" + key + ")");
+        if (!bitmaps.containsKey(key)) {
+            File file = new File(cacheDir, key+".png");
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            bitmaps.put(key, file);
+        }
+        return writeBitmap(bitmaps.get(key), bitmap, quality);
+    }
+
+    private String readTextFile(File file){
+        Log.i(tag,"readTextFile("+file.getName()+")");
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            String currentLine;
+            while ((currentLine = bufferedReader.readLine()) != null) {
+                contentBuilder.append(currentLine).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "{}";
+        }
+        return contentBuilder.toString();
+    }
+
+    private boolean writeTextFile(File file, String string){
+        Log.i(tag,"writeTextFile("+file.getName()+")");
         try {
             RandomAccessFile stream = new RandomAccessFile(file, "rw");
             stream.setLength(0);
-
             FileChannel channel = stream.getChannel();
             byte[] strBytes = string.getBytes();
             ByteBuffer buffer = ByteBuffer.allocate(strBytes.length);
@@ -215,20 +308,33 @@ public class CacheManager {
         return true;
     }
 
-    private String readFile(File file){
-        Log.i(tag,"readFile("+file.getName()+")");
-        StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String currentLine;
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                contentBuilder.append(currentLine).append("\n");
-            }
+    private Bitmap readBitmap(File file){
+        Log.i(tag,"readBitmap("+file.getName()+")");
+        String path =  file.getPath();
+        return BitmapFactory.decodeFile(path);
+    }
+
+    private boolean writeBitmap(File file, Bitmap bitmap, int quality){
+        Log.i(tag,"writeBitmap("+file.getName()+")");
+
+        FileOutputStream fileOutputStream = null;
+        boolean compressed = false;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            compressed = bitmap.compress(Bitmap.CompressFormat.PNG, quality, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
-            return "{}";
         }
-        return contentBuilder.toString();
+
+        return compressed;
     }
+
+
 
 
     private class UriAdapter extends TypeAdapter<Uri> {
@@ -260,7 +366,6 @@ public class CacheManager {
                     list.add(context.deserialize(element,type));
                 }
             }
-
             return list;
         }
 
@@ -270,32 +375,24 @@ public class CacheManager {
     {
         @Override
         public BaseData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-
             JsonObject obj = json.getAsJsonObject();
-
-
             try {
                 Class actualClass = null;
                 actualClass = Class.forName(obj.get("actual_class").getAsString());
                 Object data = objectGson.fromJson(obj.get("data"), actualClass);
 
-                if(BaseData.class.isAssignableFrom(data.getClass()))
-                {
+                if(BaseData.class.isAssignableFrom(data.getClass())) {
                     return (BaseData) data;
                 }
 
             } catch (ClassNotFoundException e) {
-
                 e.printStackTrace();
             }
-
-
             return new BaseData();
         }
 
         @Override
         public JsonElement serialize(BaseData src, Type typeOfSrc, JsonSerializationContext context) {
-
             JsonObject result = new JsonObject();
             result.add("data", objectGson.toJsonTree(src));
             result.addProperty("actual_class",  src.getClass().getName());
