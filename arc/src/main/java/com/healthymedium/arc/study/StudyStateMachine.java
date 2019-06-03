@@ -110,15 +110,16 @@ public class StudyStateMachine {
     }
 
     public void load(){
-        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
-        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
+        load(false);
     }
 
     public void load(boolean overwrite){
+        Log.d(tag,"load(overwrite = "+overwrite+")");
         if(state!=null && !overwrite){
             return;
         }
-        state = PreferencesManager.getInstance().getObject("StudyState",StudyState.class);
+        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
+        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
     }
 
     public void save(){
@@ -126,7 +127,7 @@ public class StudyStateMachine {
     }
 
     public void save(boolean saveCache){
-        Log.i(tag,"save");
+        Log.d(tag,"save(saveCache = "+saveCache+")");
         PreferencesManager.getInstance().putObject(TAG_STUDY_STATE, state);
         CacheManager.getInstance().putObject(TAG_STUDY_STATE_CACHE,cache);
         if(saveCache){
@@ -274,12 +275,12 @@ public class StudyStateMachine {
 
 
     public boolean hasValidFragments() {
-        if(state.segments.size() == 0) {
+        if(cache.segments.size() == 0) {
             return false;
         }
 
-        for(int i = 0; i < state.segments.size(); i++) {
-            if(state.segments.get(i).fragments.size() == 0) {
+        for(int i = 0; i < cache.segments.size(); i++) {
+            if(cache.segments.get(i).fragments.size() == 0) {
                 return false;
             }
         }
