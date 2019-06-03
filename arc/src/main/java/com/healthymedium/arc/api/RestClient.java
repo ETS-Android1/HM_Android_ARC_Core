@@ -274,9 +274,11 @@ public class RestClient <Api>{
         signature.session_id = String.valueOf(Study.getCurrentTestSession().getId());
 
         if(uploading) {
+            Log.i("RestClient","adding signature to upload queue");
             uploadQueue.add(signature);
             saveUploadQueue();
         } else {
+            Log.i("RestClient","uploading signature now");
             markUploadStarted();
             Call<ResponseBody> call = getService().submitSignature(signature.getRequestBody(),Device.getId());
             call.enqueue(createCachedCallback(signature));
@@ -474,11 +476,11 @@ public class RestClient <Api>{
     }
 
     protected Callback createCachedCallback(final CachedObject object) {
-        Log.i("RestClient","createDataCallback");
+        Log.i("RestClient","createCachedCallback");
         return createCallback(new Listener() {
             @Override
             public void onSuccess(Response response) {
-                Log.i("RestClient","data callback success");
+                Log.i("RestClient","cached callback success");
                 if(uploadQueue.contains(object)) {
                     uploadQueue.remove(object);
                     saveUploadQueue();
@@ -489,7 +491,7 @@ public class RestClient <Api>{
 
             @Override
             public void onFailure(Response response) {
-                Log.i("RestClient","data callback failure");
+                Log.i("RestClient","cached callback failure");
                 if(!uploadQueue.contains(object)){
                     uploadQueue.add(object);
                     saveUploadQueue();
@@ -520,7 +522,7 @@ public class RestClient <Api>{
             if(call!=null) {
                 Log.i("RestClient", "popQueue("+object.getClass().getName()+")");
                 markUploadStarted();
-                if(!CachedObject.class.isAssignableFrom(object.getClass())){
+                if(CachedObject.class.isAssignableFrom(object.getClass())){
                     call.enqueue(createCachedCallback((CachedObject) object));
                 } else {
                     call.enqueue(createDataCallback(object));

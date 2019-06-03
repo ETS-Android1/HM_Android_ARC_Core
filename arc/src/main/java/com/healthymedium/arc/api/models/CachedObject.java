@@ -1,7 +1,5 @@
 package com.healthymedium.arc.api.models;
 
-import android.content.Intent;
-
 import com.healthymedium.arc.utilities.CacheManager;
 
 import java.io.File;
@@ -50,27 +48,10 @@ public class CachedObject {
             return "";
         }
 
-        Class fieldClass = field.getType();
         Object value = null;
         try {
             field.setAccessible(true);
-
             value = field.get(this);
-
-            /*
-            if(fieldClass.equals(String.class)){
-                value = field.get(new String());
-            } else if (fieldClass.equals(Integer.class)) {
-                value = field.get(new Integer(0));
-            } else if (fieldClass.equals(Long.class)) {
-                value = field.get(new Long(0));
-            } else if (fieldClass.equals(Double.class)) {
-                value = field.get(new Double(0));
-            } else if (fieldClass.equals(Float.class)) {
-                value = field.get(new Float(0));
-            }
-            */
-
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
