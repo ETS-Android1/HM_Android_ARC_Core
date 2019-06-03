@@ -262,7 +262,7 @@ public class RestClient <Api>{
     public void submitSignature(Bitmap bitmap) {
         Log.i("RestClient","submitSignature");
         if(Config.REST_BLACKHOLE) {
-  //          return;
+            return;
         }
 
         String key = "signature_" + DateTime.now().getMillis();
