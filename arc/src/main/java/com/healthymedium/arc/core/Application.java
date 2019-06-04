@@ -48,7 +48,7 @@ public class Application extends android.app.Application {
     }
 
     // list all locale options offered by the app
-    protected List<Locale> getLocaleOptions() {
+    public List<Locale> getLocaleOptions() {
         List<Locale> locales = new ArrayList<>();
         locales.add(new Locale(Locale.COUNTRY_UNITED_STATES,Locale.LANGUAGE_ENGLISH));
         return locales;
