@@ -63,6 +63,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@SuppressWarnings("unchecked")
 public class RestClient <Api>{
 
     private Class<Api> type;
