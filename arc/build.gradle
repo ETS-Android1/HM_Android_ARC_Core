@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
-def versionMajor = 1 // max=2000 // bump to mark substantial changes
-def versionMinor = 1 // max=99   // bump for small changes (features, changes in intended behavior, etc)
-def versionPatch = 3 // max=99   // bump for fixes (crashes, unintended behavior, etc)
+def versionMajor = 2 // max=2000 // bump to mark substantial changes
+def versionMinor = 0 // max=99   // bump for small changes (features, changes in intended behavior, etc)
+def versionPatch = 0 // max=99   // bump for fixes (crashes, unintended behavior, etc)
 def versionBuild = 0 // max=99   // bump for qa builds
 
 android {
