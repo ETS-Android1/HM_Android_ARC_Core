@@ -74,8 +74,6 @@
                 android:layout_marginLeft="32dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
-                android:elevation="3dp"
-                android:background="@drawable/btn_shadow"
                 app:inverted="true"
                 app:text="CALL" />
 

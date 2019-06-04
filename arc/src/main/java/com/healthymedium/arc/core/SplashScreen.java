@@ -69,23 +69,25 @@ public class SplashScreen extends BaseFragment {
             getMainActivity().setupHomeWatcher();
             getMainActivity().setupKeyboardWatcher();
 
-            FontFactory.initialize(context);
-            if(Study.isValid() == false) {
-                Study.initialize(context);
-                getApplication().registerStudyComponents();
+            String language = PreferencesManager.getInstance().getString("language","en");
+            String country = PreferencesManager.getInstance().getString("country","US");
+            Resources res = getResources();
+            Configuration conf = res.getConfiguration();
+            conf.setLocale(new Locale(language,country));
+            res.updateConfiguration(conf, res.getDisplayMetrics());
+
+            if(NotificationManager.getInstance()==null){
+                NotificationManager.initialize(context);
             }
-            NotificationManager.initialize(context);
 
-
+            if(FontFactory.getInstance()==null) {
+                FontFactory.initialize(context);
+            }
 
             if(!Fonts.areLoaded()){
                 Fonts.load();
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
-            }
-
-            if(Study.isValid() == false) {
-                Study.getInstance().load();
             }
 
             // We need to check to see if we're currently in the middle of a test session.
@@ -95,21 +97,14 @@ public class SplashScreen extends BaseFragment {
 
             if(Study.getParticipant().isCurrentlyInTestSession()
                 && Study.getParticipant().checkForTestAbandonment() == false
-                && Study.getStateMachine().doesStateHaveValidFragments()
-            )
-            {
+                && Study.getStateMachine().hasValidFragments()
+            ) {
                 skipSegment = true;
-            }
-            else
-            {
+            } else {
                 skipSegment = false;
                 Study.getInstance().run();
             }
 
-
-            //MigrationUtil.checkForUpdate(context);
-            //SignatureManager.initialize(context);
-            //PriceManager.initialize(getContext());
             ready = true;
             return null;
         }
@@ -131,16 +126,11 @@ public class SplashScreen extends BaseFragment {
     private void exit(){
         if(getFragmentManager() != null) {
             getFragmentManager().popBackStack();
-            if(skipSegment)
-            {
+            if(skipSegment) {
                 Study.getInstance().skipToNextSegment();
-            }
-            else
-            {
+            } else {
                 Study.getInstance().openNextFragment();
             }
-
-
         }
     }
 

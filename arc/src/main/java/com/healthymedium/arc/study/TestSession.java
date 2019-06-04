@@ -102,7 +102,7 @@ public class TestSession {
     }
 
     public boolean isOver(){
-        return (wasFinished() || wasMissed());
+        return (completeTime!=null || wasMissed());
     }
 
     public boolean isOngoing() {

@@ -3,6 +3,7 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     boolean paused = false;
     boolean backAllowed = false;
     boolean backInStudy = false;
+    boolean hasNewIntent = false;
     int backInStudySkips = 0;
 
     boolean checkAbandonment = false;
@@ -36,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(hasNewIntent){
+            hasNewIntent = false;
+            if(!Study.getStateMachine().isCurrentlyInTestPath()){
+                Study.openNextFragment();
+            }
+        }
     }
 
     @Override
@@ -46,15 +54,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(new Bundle());
+        Log.i("MainActivity","onCreate");
 
         Intent intent = getIntent();
-        if(intent!=null) {
-            Bundle bundle = getIntent().getExtras();
-            if(bundle!=null){
-                Config.OPENED_FROM_NOTIFICATION = bundle.getBoolean("OPENED_FROM_NOTIFICATION",false);
-                Config.OPENED_FROM_VISIT_NOTIFICATION = bundle.getBoolean("OPENED_FROM_VISIT_NOTIFICATION",false);
-            }
-        }
+        parseIntent(intent);
 
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
@@ -62,11 +65,26 @@ public class MainActivity extends AppCompatActivity {
         setup();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.i("MainActivity","onNewIntent");
+        parseIntent(intent);
+        hasNewIntent = true;
+
+    }
+
+    private void parseIntent(Intent intent){
+        Log.i("MainActivity","parseIntent");
+        if(intent!=null) {
+            Config.OPENED_FROM_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION,false);
+            Config.OPENED_FROM_VISIT_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION,false);
+        }
+        Log.i("MainActivity","OPENED_FROM_NOTIFICATION = "+Config.OPENED_FROM_NOTIFICATION);
+        Log.i("MainActivity","OPENED_FROM_VISIT_NOTIFICATION = "+Config.OPENED_FROM_VISIT_NOTIFICATION);
+    }
+
     public void setup(){
-
-        PreferencesManager.initialize(this);
         NavigationManager.initializeInstance(getSupportFragmentManager());
-
         if(PreferencesManager.getInstance().contains("language") || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
         } else {
@@ -158,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.i("MainActivity","onDestroy");
         if(homeWatcher != null){
             homeWatcher.stopWatch();
             homeWatcher = null;
@@ -189,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         paused = true;
         if(Study.isValid()){
             Study.getParticipant().markPaused();
-            Study.getStateMachine().save();
+            Study.getStateMachine().save(true);
             if(Study.getParticipant().isCurrentlyInTestSession()) {
                 AbandonmentJobService.scheduleSelf(getApplicationContext());
             }

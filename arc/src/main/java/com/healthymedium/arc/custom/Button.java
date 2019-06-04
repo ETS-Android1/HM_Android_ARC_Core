@@ -21,6 +21,8 @@ public class Button extends FrameLayout {
     ImageView imageView;
     View view;
     boolean inverted;
+    Drawable shadow;
+    int elevation;
 
     public Button(Context context) {
         super(context);
@@ -43,6 +45,8 @@ public class Button extends FrameLayout {
         view = inflate(context,R.layout.custom_button,this);
         textView = view.findViewById(R.id.textView);
         imageView = view.findViewById(R.id.imageView);
+        shadow = ViewUtil.getDrawable(R.drawable.btn_shadow);
+        elevation = ViewUtil.dpToPx(3);
     }
 
 
@@ -52,7 +56,7 @@ public class Button extends FrameLayout {
             textView.setText(a.getString(R.styleable.Button_text));
             inverted = a.getBoolean(R.styleable.Button_inverted,false);
             if(inverted){
-                textView.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
+                textView.setTextColor(ViewUtil.getColor(R.color.primary));
                 textView.setBackgroundResource(R.drawable.button_inverted);
             }
             setIcon(a.getDrawable(R.styleable.Button_icon));
@@ -69,7 +73,15 @@ public class Button extends FrameLayout {
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        textView.setAlpha(enabled ? 1.0f : 0.5f);
+        if(enabled) {
+            view.setElevation(elevation);
+            textView.setAlpha(1.0f);
+            view.setBackground(shadow);
+        } else {
+            view.setBackgroundResource(0);
+            textView.setAlpha(0.5f);
+            view.setElevation(0);
+        }
     }
 
     public void clearText() {

@@ -6,6 +6,10 @@ import android.content.res.Resources;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+
+import com.healthymedium.arc.study.Study;
+
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -15,16 +19,27 @@ import java.util.List;
 
 public class Application extends android.app.Application {
 
+    private static final String tag = "Application";
     static Application instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Log.i(tag,"onCreate");
+
         VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
         PreferencesManager.initialize(this);
+        CacheManager.initialize(this);
         Device.initialize(this);
+        initializeStudy();
+    }
+
+    public void initializeStudy() {
+        Study.initialize(this);
+        registerStudyComponents();
+        Study.getInstance().load();
     }
 
     // register different behaviors here
@@ -78,8 +93,13 @@ public class Application extends android.app.Application {
                 Resources activityResources = context.getResources();
                 activityResources.updateConfiguration(config, activityResources.getDisplayMetrics());
             }
-
         }
+    }
+
+    @Override
+    public void onLowMemory() {
+        Log.w(tag,"onLowMemory");
+        super.onLowMemory();
     }
 
     public static Application getInstance(){

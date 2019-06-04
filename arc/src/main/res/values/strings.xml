@@ -234,6 +234,7 @@
     <string name="aboutapp_header">About this App</string>
     <string name="aboutapp_body"></string>
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
+    <string name="about">About</string>
 
     <string name="help_header">Help</string>
     <string name="help_body">If you have questions about this app, difficulties using the app, or any concerns about the study, please contact the study Investigator at the telephone number listed on the first page of your informed consent document.</string>
@@ -244,7 +245,7 @@
     <string name="error2">Already enrolled on another device</string>
     <string name="error4">Please set a minimum of 4 hours of wake time.</string>
 
-    <string name="notification_confirm_adjust_1">Your next testing cycle will be {START} through {END}.</string>
+    <string name="notification_confirm_adjust_1">&lt;b>Your next testing cycle will be {START} through {END}.&lt;/b></string>
     <string name="notification_confirm_adjust_2">Please confirm these testing dates or adjust your schedule.</string>
     <string name="notification_1month">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
     <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>

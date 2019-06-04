@@ -106,9 +106,6 @@ public class TwoBtnDialog extends android.support.v4.app.DialogFragment {
             buttonBottom.setText(buttonTextBottom);
         }
 
-
-
-
         textViewHeader = view.findViewById(R.id.textviewHeaderText);
         textViewHeader.setText(Html.fromHtml(headerText));
 

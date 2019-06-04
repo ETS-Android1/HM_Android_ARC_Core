@@ -4,7 +4,6 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
@@ -30,13 +29,6 @@ public class HeartbeatJobService extends JobService {
         Log.i("HeartbeatJobService","initializing manager");
         if(HeartbeatManager.getInstance()==null){
             HeartbeatManager.initialize(this);
-        }
-
-        if(!Study.isValid()) {
-            Log.i("HeartbeatJobService", "initializing study");
-            Study.initialize(getApplicationContext());
-            Application.getInstance().registerStudyComponents();
-            Study.getInstance().load();
         }
 
         if(!Study.getStateMachine().isIdle()){
@@ -104,7 +96,7 @@ public class HeartbeatJobService extends JobService {
         Log.i("HeartbeatJobService","checkState");
         StudyStateMachine stateMachine = Study.getStateMachine();
         stateMachine.decidePath();
-        stateMachine.save();
+        stateMachine.save(true);
     }
 
 }

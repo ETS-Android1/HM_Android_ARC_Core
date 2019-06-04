@@ -122,22 +122,16 @@ public class NotificationManager {
     public Notification buildNotification(Node content, String channel) {
         Log.i("NotificationManager","buildNotification(channel=\""+channel+"\")");
 
-        Config.OPENED_FROM_NOTIFICATION = true; // in case the app is already running
-
-        if (channel.equals("VISIT_NEXT_DAY") || channel.equals("VISIT_NEXT_MONTH") || channel.equals("VISIT_NEXT_WEEK")) {
-            Config.OPENED_FROM_VISIT_NOTIFICATION = true;
-        }
-
         Intent main = new Intent(context, MainActivity.class);
 
-        if (channel.equals("VISIT_NEXT_DAY") || channel.equals("VISIT_NEXT_MONTH") || channel.equals("VISIT_NEXT_WEEK")) {
-            main.putExtra("OPENED_FROM_VISIT_NOTIFICATION", true);
+        if (channel.equals(CHANNEL_VISIT_NEXT_DAY_ID) || channel.equals(CHANNEL_VISIT_NEXT_MONTH_ID) || channel.equals(CHANNEL_VISIT_NEXT_WEEK_ID)) {
+            main.putExtra(Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION, true);
         } else {
-            main.putExtra("OPENED_FROM_NOTIFICATION",true);
+            main.putExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION,true);
         }
 
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.pluck);
 
@@ -159,12 +153,10 @@ public class NotificationManager {
     public Notification buildNotification(String content, String channel) {
         Log.i("NotificationManager","buildNotification");
 
-        Config.OPENED_FROM_NOTIFICATION = true; // in case the app is already running
-
         Intent main = new Intent(context, MainActivity.class);
-        main.putExtra("OPENED_FROM_NOTIFICATION", true);
+        main.putExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION, true);
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.pluck);
 
@@ -240,7 +232,7 @@ public class NotificationManager {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,timeStamp.getMillis(), pendingIntent);
     }
 
     public boolean removeNotification(int sessionId,int type) {
