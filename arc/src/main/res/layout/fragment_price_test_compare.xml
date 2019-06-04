@@ -46,7 +46,7 @@
         android:lineSpacingExtra="4dp"
         android:paddingLeft="32dp"
         android:paddingRight="32dp"
-        android:text="Is this a good price?"
+        android:text="@string/price_test_isgood"
         android:textSize="26dp" />
 
     <com.healthymedium.arc.custom.RadioButton

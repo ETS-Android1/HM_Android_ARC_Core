@@ -16,10 +16,13 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +57,21 @@ public class NotificationManager {
     static public final String CHANNEL_TEST_NEXT_NAME = "Next Test Date";
     static public final String CHANNEL_TEST_NEXT_DESC = "Notifies user of the next test date";
 
+    public static final int VISIT_NEXT_MONTH = 5;
+    static public final String CHANNEL_VISIT_NEXT_MONTH_ID = "VISIT_NEXT_MONTH";
+    static public final String CHANNEL_VISIT_NEXT_MONTH_NAME = "Next Testing Cycle Date";
+    static public final String CHANNEL_VISIT_NEXT_MONTH_DESC = "Notifies the user 1 month before their next testing cycle";
+
+    public static final int VISIT_NEXT_WEEK = 6;
+    static public final String CHANNEL_VISIT_NEXT_WEEK_ID = "VISIT_NEXT_WEEK";
+    static public final String CHANNEL_VISIT_NEXT_WEEK_NAME = "Next Testing Cycle Date";
+    static public final String CHANNEL_VISIT_NEXT_WEEK_DESC = "Notifies the user 1 week before their next testing cycle";
+
+    public static final int VISIT_NEXT_DAY = 7;
+    static public final String CHANNEL_VISIT_NEXT_DAY_ID = "VISIT_NEXT_DAY";
+    static public final String CHANNEL_VISIT_NEXT_DAY_NAME = "Next Testing Cycle Date";
+    static public final String CHANNEL_VISIT_NEXT_DAY_DESC = "Notifies the user 1 day before their next testing cycle";
+
     private List<Node> nodes;
     private int requestIndex;
     private Context context;
@@ -71,6 +89,9 @@ public class NotificationManager {
             createNotificationChannel(context,CHANNEL_TEST_MISSED_ID,CHANNEL_TEST_MISSED_NAME,CHANNEL_TEST_MISSED_DESC);
             createNotificationChannel(context,CHANNEL_TEST_CONFIRM_ID,CHANNEL_TEST_CONFIRM_NAME,CHANNEL_TEST_CONFIRM_DESC);
             createNotificationChannel(context,CHANNEL_TEST_NEXT_ID,CHANNEL_TEST_NEXT_NAME,CHANNEL_TEST_NEXT_DESC);
+            createNotificationChannel(context,CHANNEL_VISIT_NEXT_MONTH_ID,CHANNEL_VISIT_NEXT_MONTH_NAME,CHANNEL_VISIT_NEXT_MONTH_DESC);
+            createNotificationChannel(context,CHANNEL_VISIT_NEXT_WEEK_ID,CHANNEL_VISIT_NEXT_WEEK_NAME,CHANNEL_VISIT_NEXT_WEEK_DESC);
+            createNotificationChannel(context,CHANNEL_VISIT_NEXT_DAY_ID,CHANNEL_VISIT_NEXT_DAY_NAME,CHANNEL_VISIT_NEXT_DAY_DESC);
             PreferencesManager.getInstance().putBoolean(NOTIFICATION_CHANNELS_CREATED,true);
         }
 
@@ -101,12 +122,16 @@ public class NotificationManager {
     public Notification buildNotification(Node content, String channel) {
         Log.i("NotificationManager","buildNotification(channel=\""+channel+"\")");
 
-        Config.OPENED_FROM_NOTIFICATION = true; // in case the app is already running
-
         Intent main = new Intent(context, MainActivity.class);
-        main.putExtra("OPENED_FROM_NOTIFICATION",true);
+
+        if (channel.equals(CHANNEL_VISIT_NEXT_DAY_ID) || channel.equals(CHANNEL_VISIT_NEXT_MONTH_ID) || channel.equals(CHANNEL_VISIT_NEXT_WEEK_ID)) {
+            main.putExtra(Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION, true);
+        } else {
+            main.putExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION,true);
+        }
+
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.pluck);
 
@@ -128,12 +153,10 @@ public class NotificationManager {
     public Notification buildNotification(String content, String channel) {
         Log.i("NotificationManager","buildNotification");
 
-        Config.OPENED_FROM_NOTIFICATION = true; // in case the app is already running
-
         Intent main = new Intent(context, MainActivity.class);
-        main.putExtra("OPENED_FROM_NOTIFICATION", true);
+        main.putExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION, true);
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.pluck);
 
@@ -209,11 +232,11 @@ public class NotificationManager {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, timeStamp.getMillis(), pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,timeStamp.getMillis(), pendingIntent);
     }
 
     public boolean removeNotification(int sessionId,int type) {
-        Log.i("NotificationManager","removeNotification(id="+sessionId+", type="+type);
+        Log.i("NotificationManager","removeNotification(id="+sessionId+", type="+type+")");
         Node node = getNode(type, sessionId);
         if(node==null){
             return false;
@@ -224,7 +247,7 @@ public class NotificationManager {
         notificationIntent.putExtra(NOTIFICATION_ID, node.id);
         notificationIntent.putExtra(NOTIFICATION_TYPE, node.type);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, node.requestCode, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
 
@@ -250,6 +273,18 @@ public class NotificationManager {
             case TEST_NEXT:
                 // Your next session will be on 12/31/18
                 content = context.getString(R.string.notification_next).replace("{DATE}",Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate().toString(context.getString(R.string.format_date)));
+                break;
+            case VISIT_NEXT_MONTH:
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d");
+                DateTime startDate = Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate();
+                String start = fmt.print(startDate);
+                content = context.getString(R.string.notification_1month).replace("{DATE}", start);
+                break;
+            case VISIT_NEXT_WEEK:
+                content = context.getString(R.string.notification_1week);
+                break;
+            case VISIT_NEXT_DAY:
+                content = context.getString(R.string.notification_1day);
                 break;
         }
         return content;
@@ -310,6 +345,15 @@ public class NotificationManager {
                     break;
                 case TEST_NEXT:
                     channel = CHANNEL_TEST_NEXT_ID;
+                    break;
+                case VISIT_NEXT_MONTH:
+                    channel = CHANNEL_VISIT_NEXT_MONTH_ID;
+                    break;
+                case VISIT_NEXT_WEEK:
+                    channel = CHANNEL_VISIT_NEXT_WEEK_ID;
+                    break;
+                case VISIT_NEXT_DAY:
+                    channel = CHANNEL_VISIT_NEXT_DAY_ID;
                     break;
             }
 

@@ -13,10 +13,12 @@ import android.widget.TextView;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.StudyState;
 import com.healthymedium.arc.study.TestSession;
+import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class DebugDialog extends DialogFragment {
@@ -78,6 +80,28 @@ public class DebugDialog extends DialogFragment {
                 status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
             }
         }
+
+        // Get current visit
+        int currVisitId = participantState.visits.get(participantState.currentVisit).getId();
+
+        // Notification one month before next visit
+        NotificationManager.Node month = NotificationManager.getInstance().getNode(NotificationManager.VISIT_NEXT_MONTH, currVisitId);
+        if (month != null) {
+            status += "month notification: " + month.time + "\n";
+        }
+
+        // Notification one week before next visit
+        NotificationManager.Node week = NotificationManager.getInstance().getNode(NotificationManager.VISIT_NEXT_WEEK, currVisitId);
+        if (week != null) {
+            status += "week notification: " + week.time + "\n";
+        }
+
+        // Notification one day before next visit
+        NotificationManager.Node day = NotificationManager.getInstance().getNode(NotificationManager.VISIT_NEXT_DAY, currVisitId);
+        if (day != null) {
+            status += "day notification: " + day.time + "\n";
+        }
+
         textView = v.findViewById(R.id.textviewState);
         textView.setText(status);
 

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.DigitView;
@@ -59,7 +60,7 @@ public class SetupSite extends StandardTemplate {
     LoadingDialog loadingDialog;
 
     public SetupSite() {
-        super(true,"Please enter the<br/><b>Site Code</b> below.","");
+        super(true, ViewUtil.getString(R.string.login_enter_raterID),"");
         disableScrollBehavior();
     }
 
@@ -161,7 +162,7 @@ public class SetupSite extends StandardTemplate {
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         textViewPolicy = new TextView(getContext());
-        textViewPolicy.setText("By signing in you agree to our");
+        textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);
 
@@ -170,7 +171,7 @@ public class SetupSite extends StandardTemplate {
         ViewUtil.underlineTextView(textViewPolicyLink);
         textViewPolicyLink.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
         textViewPolicyLink.setGravity(Gravity.CENTER_HORIZONTAL);
-        textViewPolicyLink.setText("Privacy Policy");
+        textViewPolicyLink.setText(getResources().getString(com.healthymedium.arc.library.R.string.privacy_linked));
         textViewPolicyLink.setTextSize(15);
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -385,18 +386,18 @@ public class SetupSite extends StandardTemplate {
         int code = response.code;
         switch (code){
             case 400:
-                return defaultError;
+                return getResources().getString(R.string.error3);
             case 401:
-                return getResources().getString(R.string.error_401);
+                return getResources().getString(R.string.error1);
             case 409:
-                return getResources().getString(R.string.error_409);
+                return getResources().getString(R.string.error2);
         }
         if(response.errors.keySet().size()>0){
             String key = response.errors.keySet().toArray()[0].toString();
             return response.errors.get(key).getAsString();
         }
         if(!response.successful || failed){
-            return defaultError;
+            return getResources().getString(R.string.error3);
         }
         return null;
     }

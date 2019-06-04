@@ -30,7 +30,7 @@
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="8dp"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14dp"
@@ -48,7 +48,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="26dp"
-                android:text="Help" />
+                android:text="@string/help_header" />
 
             <TextView
                 android:id="@+id/textViewSubHeader"
@@ -60,7 +60,7 @@
                 android:paddingBottom="45dp"
                 android:textColor="@color/white"
                 android:textSize="18dp"
-                android:text="If you have questions about this app, difficulties using the app, or any concerns about the study, please contact the study Investigator at the telephone number listed on the first page of your informed consent document." />
+                android:text="@string/help_body" />
 
 
         </LinearLayout>
@@ -94,7 +94,7 @@
             android:paddingTop="19dp"
             android:paddingRight="38dp"
             android:paddingBottom="22dp"
-            android:text="About"
+            android:text="@string/about"
             android:textStyle="bold"
             android:textColor="@color/white" />
 
@@ -108,9 +108,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingLeft="1dp"
             android:paddingTop="19dp"
             android:paddingBottom="22dp"
-            android:text="Privacy Policy"
+            android:text="@string/privacy_linked"
             android:textStyle="bold"
             android:textColor="@color/white" />
     </LinearLayout>

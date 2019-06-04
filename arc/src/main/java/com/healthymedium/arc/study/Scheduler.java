@@ -21,7 +21,7 @@ public class Scheduler {
 
     }
 
-    private void unscheduleNotifications(Visit visit) {
+    public void unscheduleNotifications(Visit visit) {
         if(visit==null){
             return;
         }
@@ -50,6 +50,10 @@ public class Scheduler {
         visit.confirmNotificationsScheduled();
     }
 
+    public void scheduleNotifications(Visit visit, Boolean rescheduleDuringVisit) {
+        scheduleNotifications(visit);
+    }
+
     public void scheduleTests(DateTime now, Participant participant){
         ParticipantState state = participant.getState();
         if(state.visits.size()==0){
@@ -58,8 +62,25 @@ public class Scheduler {
 
         int size = state.visits.size();
         for(int i=state.currentVisit;i<size;i++){
-                scheduleTestsForVisit(participant.getCircadianClock(), state, state.visits.get(i));
+                scheduleTestsForVisit(participant.getCircadianClock(), state, state.visits.get(i), false);
                 state.visits.get(i).logTests();
+        }
+
+        participant.state.hasValidSchedule = true;
+        participant.state.isStudyRunning = true;
+        participant.save();
+    }
+
+    public void rescheduleTests(DateTime now, Participant participant){
+        ParticipantState state = participant.getState();
+        if(state.visits.size()==0){
+            initializeVisits(now,participant);
+        }
+
+        int size = state.visits.size();
+        for(int i=state.currentVisit;i<size;i++){
+            scheduleTestsForVisit(participant.getCircadianClock(), state, state.visits.get(i), true);
+            state.visits.get(i).logTests();
         }
 
         participant.state.hasValidSchedule = true;
@@ -137,6 +158,10 @@ public class Scheduler {
             }
             startDate = startDate.plusDays(1);
         }
+    }
+
+    protected void scheduleTestsForVisit(CircadianClock clock, ParticipantState state, Visit visit, boolean isRescheduling) {
+
     }
 
     // The following functions can feel a little misplaced.

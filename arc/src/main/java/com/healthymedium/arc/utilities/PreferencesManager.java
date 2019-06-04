@@ -3,6 +3,7 @@ package com.healthymedium.arc.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,6 +39,7 @@ public class PreferencesManager {
 
     private static PreferencesManager instance;
     private final SharedPreferences sharedPreferences;
+    private static final String tag = "PreferencesManager";
     Gson objectGson;
 
     private PreferencesManager(Context context) {
@@ -83,6 +85,10 @@ public class PreferencesManager {
 
     public void remove(String key) {
         sharedPreferences.edit().remove(key).apply();
+    }
+
+    public void removeAll() {
+        sharedPreferences.edit().clear().commit();
     }
 
     public boolean getBoolean(String key, boolean defValue) {
@@ -133,10 +139,18 @@ public class PreferencesManager {
     }
 
     public void putString(String key, String value) {
+        if(value==null){
+            Log.i(tag,"invalid string, failed to save");
+            throw new RuntimeException("tried to save a null string");
+        }
         sharedPreferences.edit().putString(key, value).apply();
     }
 
     public void putObject(String key, Object object) {
+        if(object==null){
+            Log.i(tag,"invalid object, failed to save");
+            throw new RuntimeException("tried to save a null object");
+        }
         String json = objectGson.toJson(object);
         sharedPreferences.edit().putString(key, json).apply();
     }

@@ -21,6 +21,7 @@ import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.ContactScreen;
+import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -54,7 +55,7 @@ public class StandardTemplate extends BaseFragment {
 
     public StandardTemplate(boolean allowBack, String header, String subheader) {
         this.allowBack = allowBack;
-        stringButton = "NEXT";
+        stringButton = ViewUtil.getString(R.string.button_next);
         stringHeader = header;
         stringSubHeader = subheader;
 
@@ -101,8 +102,8 @@ public class StandardTemplate extends BaseFragment {
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContactScreen contactScreen = new ContactScreen();
-                NavigationManager.getInstance().open(contactScreen);
+                HelpScreen helpScreen = new HelpScreen();
+                NavigationManager.getInstance().open(helpScreen);
             }
         });
 

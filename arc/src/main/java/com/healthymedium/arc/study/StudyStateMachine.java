@@ -1,9 +1,11 @@
 package com.healthymedium.arc.study;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
@@ -13,7 +15,6 @@ import com.healthymedium.arc.path_data.ContextPathData;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.path_data.SinglePageData;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.path_data.WakePathData;
 import com.healthymedium.arc.paths.availability.AvailabilityMondayBed;
@@ -25,6 +26,8 @@ import com.healthymedium.arc.paths.availability.AvailabilitySaturdayWake;
 import com.healthymedium.arc.paths.availability.AvailabilitySundayBed;
 import com.healthymedium.arc.paths.availability.AvailabilitySundayWake;
 import com.healthymedium.arc.paths.availability.AvailabilityWeekdayConfirm;
+import com.healthymedium.arc.paths.informative.ScheduleCalendar;
+import com.healthymedium.arc.paths.questions.QuestionAdjustSchedule;
 import com.healthymedium.arc.paths.templates.InfoTemplate;
 import com.healthymedium.arc.paths.questions.QuestionCheckBoxes;
 import com.healthymedium.arc.paths.questions.QuestionDuration;
@@ -44,12 +47,16 @@ import com.healthymedium.arc.paths.tests.PriceTestCompareFragment;
 import com.healthymedium.arc.paths.tests.PriceTestMatchFragment;
 import com.healthymedium.arc.paths.tests.QuestionInterrupted;
 import com.healthymedium.arc.paths.tests.SymbolTest;
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,8 +68,13 @@ import java.util.Locale;
 
 public class StudyStateMachine {
 
+    public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
+    public static final String TAG_STUDY_STATE = "StudyState";
+
+    protected String tag = getClass().getSimpleName();
+
     protected StudyState state;
-    protected boolean notificationAcknowledged = false;
+    protected StudyStateCache cache;
     protected boolean currentlyInTestPath = false;
 
     public StudyStateMachine() {
@@ -97,15 +109,33 @@ public class StudyStateMachine {
 
     public void initialize(){
         state = new StudyState();
+        cache = new StudyStateCache();
     }
 
     public void load(){
-        state = PreferencesManager.getInstance().getObject("StudyState",StudyState.class);
+        load(false);
     }
 
+    public void load(boolean overwrite){
+        Log.d(tag,"load(overwrite = "+overwrite+")");
+        if(state!=null && !overwrite){
+            return;
+        }
+        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
+        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
+    }
 
     public void save(){
-        PreferencesManager.getInstance().putObject("StudyState", state);
+        save(false);
+    }
+
+    public void save(boolean saveCache){
+        Log.d(tag,"save(saveCache = "+saveCache+")");
+        PreferencesManager.getInstance().putObject(TAG_STUDY_STATE, state);
+        CacheManager.getInstance().putObject(TAG_STUDY_STATE_CACHE,cache);
+        if(saveCache){
+            CacheManager.getInstance().save(TAG_STUDY_STATE_CACHE);
+        }
     }
 
     public void decidePath(){
@@ -115,20 +145,20 @@ public class StudyStateMachine {
     public void abandonTest(){
         Participant participant = Study.getParticipant();
 
-        Log.i("StudyStateMachine", "loading in the middle of an indexed test, marking it abandoned");
+        Log.i(tag, "loading in the middle of an indexed test, marking it abandoned");
         participant.getCurrentTestSession().markAbandoned();
 
-        Log.i("StudyStateMachine", "collecting data from each existing segment");
-        for(PathSegment segment : state.segments){
+        Log.i(tag, "collecting data from each existing segment");
+        for(PathSegment segment : cache.segments){
             BaseData object = segment.collectData();
             if(object!=null){
-                state.cache.add(object);
+                cache.data.add(object);
             }
         }
 
         loadTestDataFromCache();
-        state.segments.clear();
-        state.cache.clear();
+        cache.segments.clear();
+        cache.data.clear();
 
         Study.getRestClient().submitTest(participant.getCurrentTestSession());
         participant.moveOnToNextTestSession(true);
@@ -146,23 +176,23 @@ public class StudyStateMachine {
 
     public boolean skipToNextSegment(){
 
-        if(state.segments.size() > 0) {
-            BaseData object = state.segments.get(0).collectData();
+        if(cache.segments.size() > 0) {
+            BaseData object = cache.segments.get(0).collectData();
             if (object != null) {
-                state.cache.add(object);
+                cache.data.add(object);
             }
-            state.segments.remove(0);
+            cache.segments.remove(0);
 
             NavigationManager.getInstance().clearBackStack();
             Study.getInstance().getParticipant().save();
             save();
         }
 
-        if(state.segments.size()>0){
+        if(cache.segments.size()>0){
             return openNext();
         } else {
             endOfPath();
-            state.cache.clear();
+            cache.data.clear();
             decidePath();
             setupPath();
             return openNext();
@@ -175,8 +205,8 @@ public class StudyStateMachine {
 
     public boolean openNext(int skips){
         save();
-        if(state.segments.size()>0){
-            if(state.segments.get(0).openNext(skips)) {
+        if(cache.segments.size()>0){
+            if(cache.segments.get(0).openNext(skips)) {
                 return true;
             } else {
                 return endOfSegment();
@@ -188,17 +218,17 @@ public class StudyStateMachine {
 
     protected boolean endOfSegment(){
         // else at the end of segment
-        BaseData object = state.segments.get(0).collectData();
+        BaseData object = cache.segments.get(0).collectData();
         if(object!=null){
-            state.cache.add(object);
+            cache.data.add(object);
         }
-        state.segments.remove(0);
+        cache.segments.remove(0);
 
         NavigationManager.getInstance().clearBackStack();
         Study.getInstance().getParticipant().save();
         save();
 
-        if(state.segments.size()>0){
+        if(cache.segments.size()>0){
             return openNext();
         } else {
             endOfPath();
@@ -207,7 +237,7 @@ public class StudyStateMachine {
     }
 
     protected boolean moveOn(){
-        state.cache.clear();
+        cache.data.clear();
         decidePath();
         setupPath();
         Study.getInstance().getParticipant().save();
@@ -220,8 +250,8 @@ public class StudyStateMachine {
     }
 
     public boolean openPrevious(int skips){
-        if(state.segments.size()>0){
-            return state.segments.get(0).openPrevious(skips);
+        if(cache.segments.size()>0){
+            return cache.segments.get(0).openPrevious(skips);
         }
         return false;
     }
@@ -230,7 +260,7 @@ public class StudyStateMachine {
 
 
     protected void setTestCompleteFlag(boolean complete){
-        Log.i("StudyStateMachine", "setTestCompleteFlag("+complete+")");
+        Log.i(tag, "setTestCompleteFlag("+complete+")");
         PreferencesManager.getInstance().putBoolean("TestCompleteFlag",complete);
     }
 
@@ -246,6 +276,21 @@ public class StudyStateMachine {
         return false;
     }
 
+
+    public boolean hasValidFragments() {
+        if(cache.segments.size() == 0) {
+            return false;
+        }
+
+        for(int i = 0; i < cache.segments.size(); i++) {
+            if(cache.segments.get(i).fragments.size() == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // -----------------------------------------------------------------
 
 
@@ -258,7 +303,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
@@ -284,31 +329,32 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupAvailability(){
         List<BaseFragment> fragments = new ArrayList<>();
 
+        Resources res = Application.getInstance().getResources();
+
         fragments.add(new InfoTemplate(
                 false,
-                "Availability" ,
-                "A Few Questions",
-                "First, we'll ask you a few questions to help us determine when to send you those notifications." + "\n\n"
-                        + "You will only receive notifications during your waking hours.",
-                "BEGIN"));
+                res.getString(R.string.setup_avail_header) ,
+                res.getString(R.string.setup_avail_subheader),
+                res.getString(R.string.setup_avail_body),
+                res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
         fragments.add(new AvailabilityMondayBed());
         fragments.add(new AvailabilityWeekdayConfirm());
-        fragments.add(new AvailabilityOtherWake("Tuesday"));
-        fragments.add(new AvailabilityOtherBed("Tuesday"));
-        fragments.add(new AvailabilityOtherWake("Wednesday"));
-        fragments.add(new AvailabilityOtherBed("Wednesday"));
-        fragments.add(new AvailabilityOtherWake("Thursday"));
-        fragments.add(new AvailabilityOtherBed("Thursday"));
-        fragments.add(new AvailabilityOtherWake("Friday"));
-        fragments.add(new AvailabilityOtherBed("Friday"));
+        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
+        fragments.add(new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday)));
+        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
+        fragments.add(new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday)));
+        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
+        fragments.add(new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday)));
+        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
+        fragments.add(new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday)));
         fragments.add(new AvailabilitySaturdayWake());
         fragments.add(new AvailabilitySaturdayBed());
         fragments.add(new AvailabilitySundayWake());
@@ -316,21 +362,88 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
+    }
+
+    public void setPathSetupAvailability(int minWakeTime, int maxWakeTime, boolean reschedule){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
+        fragments.add(new InfoTemplate(
+                false,
+                res.getString(R.string.setup_avail_header),
+                res.getString(R.string.setup_avail_subheader),
+                res.getString(R.string.setup_avail_body),
+                res.getString(R.string.button_begin)));
+
+        Bundle windowBundle = new Bundle();
+        windowBundle.putInt("minWakeTime", minWakeTime);
+        windowBundle.putInt("maxWakeTime", maxWakeTime);
+        windowBundle.putBoolean("reschedule", reschedule);
+
+        fragments.add(new AvailabilityMondayWake());
+
+        AvailabilityMondayBed mondayBed = new AvailabilityMondayBed();
+        mondayBed.setArguments(windowBundle);
+        fragments.add(mondayBed);
+
+        fragments.add(new AvailabilityWeekdayConfirm());
+
+        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
+
+        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday));
+        tuesdayBed.setArguments(windowBundle);
+        fragments.add(tuesdayBed);
+
+        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
+
+        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday));
+        wednesdayBed.setArguments(windowBundle);
+        fragments.add(wednesdayBed);
+
+        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
+
+        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday));
+        thursdayBed.setArguments(windowBundle);
+        fragments.add(thursdayBed);
+
+        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
+
+        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday));
+        fridayBed.setArguments(windowBundle);
+        fragments.add(fridayBed);
+
+        fragments.add(new AvailabilitySaturdayWake());
+
+        AvailabilitySaturdayBed saturdayBed = new AvailabilitySaturdayBed();
+        saturdayBed.setArguments(windowBundle);
+        fragments.add(saturdayBed);
+
+        fragments.add(new AvailabilitySundayWake());
+
+        AvailabilitySundayBed sundayBed = new AvailabilitySundayBed();
+        sundayBed.setArguments(windowBundle);
+        fragments.add(sundayBed);
+
+        PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
+        enableTransition(segment,true);
+        cache.segments.add(segment);
     }
 
     public void addChronotypeSurvey(){
         List<BaseFragment> fragments = new ArrayList<>();
 
+        Resources res = Application.getInstance().getResources();
+
         fragments.add(new InfoTemplate(
                 false,
-                "Chronotype" ,
-                "Six Questions",
-                "The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\n" +
-                        "Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.",
-                "BEGIN"));
+                res.getString(R.string.chronotype_header),
+                res.getString(R.string.chronotype_subhead),
+                res.getString(R.string.chronotype_0_body),
+                res.getString(R.string.button_begin)));
 
-        fragments.add(new QuestionPolar(true,"I have been a shift- or night-worker in the past three months.",""));
+        fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_1_q1),""));
 
         List<String> workingDayCountOptions = new ArrayList<>();
         workingDayCountOptions.add("0");
@@ -342,15 +455,14 @@ public class StudyStateMachine {
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
 
-        fragments.add(new QuestionRadioButtons(true,false, "Normally, I work ____\n\n" + "days/week.","Select one",workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.list_selectone ),workingDayCountOptions));
 
         fragments.add(new InfoTemplate(
                 false,
-                "Chronotype" ,
+                res.getString(R.string.chronotype_header),
                 "",
-                "Please answer all of the following questions even if you do not work 7 days per week.\n\n" +
-                        "Please don't forget to indicate AM or PM.",
-                "NEXT"));
+                res.getString(R.string.chronotype_2_body),
+                res.getString(R.string.button_next)));
 
         CircadianClock clock;
         String weekday;
@@ -379,24 +491,27 @@ public class StudyStateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>workdays</b>, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>fall asleep</b> at:","This is NOT when you go to bed.",bedTime));
-        fragments.add(new QuestionTime(true,"On <b>work-free days</b> when I don't use an alarm clock, I normally <b>wake up</b> at:","This is NOT when you get out of bed.",wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_work_days_sleep), res.getString(R.string.chronotype_body_sleep), bedTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_work_days_wake), res.getString(R.string.chronotype_body_wake), wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_sleep), res.getString(R.string.chronotype_body_sleep), bedTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_wake), res.getString(R.string.chronotype_body_wake), wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addWakeSurvey(){
         List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
         fragments.add(new InfoTemplate(
                 false,
-                "Wake Survey" ,
-                "Six Questions",
-                "The following questions will ask you about sleep specific to last night and waking this morning.",
-                "BEGIN"));
+                res.getString(R.string.sleepwakesurvey_header),
+                res.getString(R.string.sleepwakesurvey_subhead),
+                res.getString(R.string.sleepwakesurvey_body),
+                res.getString(R.string.button_begin)));
 
         CircadianClock clock;
         String weekday;
@@ -425,80 +540,88 @@ public class StudyStateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true,"What time did you get in bed last night?","",bedTime));
-        fragments.add(new QuestionDuration(true,"How long did it take you to fall asleep last night?"," "));
-        fragments.add(new QuestionInteger(true,"How many times did you wake up for 5 minutes or longer?","Number of times",2));
-        fragments.add(new QuestionTime(true,"What time did you wake up this morning?"," ",wakeTime));
-        fragments.add(new QuestionTime(true,"What time did you get out of bed this morning?"," ",wakeTime));
-        fragments.add(new QuestionRating(true,"How would you rate the quality of your sleep?","On a scale of poor to excellent.","Poor","Excellent"));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_0_q1),"",bedTime));
+        fragments.add(new QuestionDuration(true, res.getString(R.string.wake_0_q2)," "));
+        fragments.add(new QuestionInteger(true, res.getString(R.string.wake_0_q3a), res.getString(R.string.wake_0_q3b),2));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q1)," ",wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q2)," ",wakeTime));
+        fragments.add(new QuestionRating(true, res.getString(R.string.wake_1_q3), res.getString(R.string.wake_drag), res.getString(R.string.wake_poor), res.getString(R.string.wake_excellent)));
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addContextSurvey(){
         List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
         fragments.add(new InfoTemplate(
                 false,
-                "Context Survey" ,
-                "Five Questions",
-                "These questions will briefly ask you about what is happening around you right now in this moment.",
-                "BEGIN"));
+                res.getString(R.string.context_header),
+                res.getString(R.string.context_subhead),
+                res.getString(R.string.context_body),
+                res.getString(R.string.button_begin)));
 
         List<String> who = new ArrayList<>();
-        who.add("Nobody");
-        who.add("Partner / Spouse");
-        who.add("Family");
-        who.add("Friends");
-        who.add("Co-Workers");
-        who.add("Pet");
-        who.add("Other");
-        fragments.add(new QuestionCheckBoxes(true,"Who is with you right now?","Select all that apply",who,"Nobody"));
+        who.add(res.getString(R.string.context_q1_answers1));
+        who.add(res.getString(R.string.context_q1_answers2));
+        who.add(res.getString(R.string.context_q1_answers3));
+        who.add(res.getString(R.string.context_q1_answers4));
+        who.add(res.getString(R.string.context_q1_answers5));
+        who.add(res.getString(R.string.context_q1_answers6));
+        who.add(res.getString(R.string.context_q1_answers7));
+        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.Context_q1_sub), who, res.getString(R.string.context_q1_answers1)));
 
         List<String> where = new ArrayList<>();
-        where.add("My Home");
-        where.add("My Work");
-        where.add("School");
-        where.add("Another Person’s Home");
-        where.add("Vehicle");
-        where.add("Outside");
-        where.add("Other");
-        fragments.add(new QuestionRadioButtons(true,false,"Where are you right now?","Select One",where));
+        where.add(res.getString(R.string.context_q2_answers1));
+        where.add(res.getString(R.string.context_q2_answers2));
+        where.add(res.getString(R.string.context_q2_answers3));
+        where.add(res.getString(R.string.context_q2_answers4));
+        where.add(res.getString(R.string.context_q2_answers5));
+        where.add(res.getString(R.string.context_q2_answers6));
+        where.add(res.getString(R.string.context_q2_answers7));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.Context_q2_sub), where));
 
-        fragments.add(new QuestionRating(true,"How would you rate <b>your overall mood</b> right now?","On a scale of bad to good.","Bad","Good"));
-        fragments.add(new QuestionRating(true,"How would you rate <b>how you feel</b> right now?","On a scale of sleepy/tired to active/alert.","Sleepy/Tired","Active/Alert"));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), "", res.getString(R.string.context_bad), res.getString(R.string.context_good)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), "", res.getString(R.string.context_tired), res.getString(R.string.context_active)));
 
         List<String> what = new ArrayList<>();
-        what.add("Sitting at a Desk");
-        what.add("Watching Television");
-        what.add("Eating");
-        what.add("Exercising");
-        what.add("Household Chores (Cooking, Cleaning)");
-        what.add("Driving");
-        what.add("Socializing");
-        what.add("Personal Care");
-        what.add("Resting");
-        what.add("Other");
-        fragments.add(new QuestionRadioButtons(true,false,"In the past 5 minutes, what were you mostly doing?","Select One",what));
+        what.add(res.getString(R.string.context_q5_answers1));
+        what.add(res.getString(R.string.context_q5_answers2));
+        what.add(res.getString(R.string.context_q5_answers3));
+        what.add(res.getString(R.string.context_q5_answers4));
+        what.add(res.getString(R.string.context_q5_answers5));
+        what.add(res.getString(R.string.context_q5_answers6));
+        what.add(res.getString(R.string.context_q5_answers7));
+        what.add(res.getString(R.string.context_q5_answers8));
+        what.add(res.getString(R.string.context_q5_answers9));
+        what.add(res.getString(R.string.context_q5_answers10));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q5), "", what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addTests(){
+        PreferencesManager.getInstance().putInt("test_missed_count", 0);
+
         List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
         InfoTemplate info = new InfoTemplate(
                 false,
-                "Testing" ,
-                "You Will Now Complete 3 Quick Tests",
-                "You cannot pause a test once it has been started. You cannot go back to the previous screen.",
-                "NEXT");
+                res.getString(R.string.testing_intro_header),
+                res.getString(R.string.testing_intro_subhead),
+                res.getString(R.string.testing_intro_body),
+                res.getString(R.string.button_next));
         //info.setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
 
         Integer[] orderArray = new Integer[]{1,2,3};
         List<Integer> order = Arrays.asList(orderArray);
@@ -521,12 +644,18 @@ public class StudyStateMachine {
     public void addPricesTest(int index){
         List<BaseFragment> fragments = new ArrayList<>();
 
+        Resources res = Application.getInstance().getResources();
+
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         InfoTemplate info = new InfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
-                "Prices",
-                "We’ll show you some shopping items and prices.\n\nPlease decide if the displayed price is a good bargain for that item. The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.",
-                "BEGIN");
+                header ,
+                res.getString(R.string.price_header),
+                res.getString(R.string.price_body),
+                res.getString(R.string.button_begin));
         fragments.add(info);
 
         int size = PriceManager.getInstance().getPriceSet().size();
@@ -535,8 +664,8 @@ public class StudyStateMachine {
         }
 
         fragments.add(new SimplePopupScreen(
-                "You will now start the test. You will see an item and two prices. Please select the price that matches the item you studied.",
-                "BEGIN",
+                res.getString(R.string.price_overlay),
+                res.getString(R.string.button_begin),
                 3000,
                 15000,
                 true));
@@ -544,51 +673,63 @@ public class StudyStateMachine {
         fragments.add(new PriceTestMatchFragment());
 
         PathSegment segment = new PathSegment(fragments,PriceTestPathData.class);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addSymbolsTest(int index){
         List<BaseFragment> fragments = new ArrayList<>();
 
+        Resources res = Application.getInstance().getResources();
+
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         InfoTemplate info = new InfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
-                "Symbols",
-                "You will see three pairs of symbols at the top of the screen and two pairs at the bottom.\n\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.",
-                "BEGIN");
+                header ,
+                res.getString(R.string.symbols_header),
+                res.getString(R.string.symbols_body),
+                res.getString(R.string.button_begin));
         fragments.add(info);
 
         fragments.add(new SymbolTest());
 
         PathSegment segment = new PathSegment(fragments,SymbolsTestPathData.class);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addGridTest(int index){
         List<BaseFragment> fragments = new ArrayList<>();
 
+        Resources res = Application.getInstance().getResources();
+
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         InfoTemplate info0 = new InfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
-                "Grids",
-                "In this test you will see a 5 x 5 grid with three items placed in that grid.\n\nStudy the grid and try to remember the location of the three items.",
-                "NEXT");
+                header ,
+                res.getString(R.string.grid_header),
+                res.getString(R.string.grid_body1),
+                res.getString(R.string.button_next));
         fragments.add(info0);
 
         InfoTemplate info1 = new InfoTemplate(
                 true,
-                "Test "+(index+1)+" of 3" ,
-                "Grids",
-                "You will then do a different task where you will touch all the letter “F”s that you find as quickly as you can.",
-                "NEXT");
+                header ,
+                res.getString(R.string.grid_header),
+                res.getString(R.string.grid_body2),
+                res.getString(R.string.button_next));
         fragments.add(info1);
 
         InfoTemplate info2 = new InfoTemplate(
                 true,
-                "Test "+(index+1)+" of 3" ,
-                "Grids",
-                "Finally, you will be shown a blank grid. Tap the boxes where the items were previously located.\n\nPress Begin to start the test.",
-                "BEGIN");
+                header ,
+                res.getString(R.string.grid_header),
+                res.getString(R.string.grid_body3),
+                res.getString(R.string.button_begin));
         fragments.add(info2);
 
         fragments.add(new GridStudy());
@@ -602,33 +743,39 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
         enableTransitionGrids(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addInterruptedPage(){
+
+        Resources res = Application.getInstance().getResources();
+
         List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new QuestionInterrupted(false,"Thanks!<br><br>Were you interrupted or did you have to stop while taking any of these tests?",""));
+        fragments.add(new QuestionInterrupted(false, res.getString(R.string.interrupted_body),""));
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addFinishedPage(){
         List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
         String header;
         String subheader;
         String body;
 
         // Default
-        header = "Thank You";
-        subheader = "Test Complete";
-        body = "You'll get a notification later today when your next test is available.";
+        header = res.getString(R.string.thank_you_header1);
+        subheader = res.getString(R.string.thankyou_testcomplete_subhead1);
+        body = res.getString(R.string.thankyou_testcomplete_body1);
 
         // Finished with study
         if(!Study.getParticipant().isStudyRunning()){
             //at the end of the line
-            header = "Congratulations";
-            subheader = "You've Finished the Study!";
-            body = "There are no more tests to take.";
+            header = res.getString(R.string.thankyou_header3);
+            subheader = res.getString(R.string.thankyou_finished_subhead3);
+            body = res.getString(R.string.thankyou_body3);
         }
         else {
             ParticipantState participantState = Study.getParticipant().getState();
@@ -636,17 +783,34 @@ public class StudyStateMachine {
 
             // After the cycle but before the next session
             if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
-                String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
-                String date = visit.getActualStartDate().toString(format);
-                header = "Great Job";
-                subheader = "You've Finished This Cycle!";
-                body = "There are no tests available at this time. You'll receive a notification on "+date+", when the next testing cycle begins.";
+
+                String language = PreferencesManager.getInstance().getString("language", "en");
+                String country = PreferencesManager.getInstance().getString("country", "US");
+                Locale locale = new Locale(language, country);
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/dd/yy").withLocale(locale);
+
+                //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
+                header = res.getString(R.string.thankyou_header2);
+                subheader = res.getString(R.string.thankyou_cycle_subhead2);
+
+                String body2 = res.getString(R.string.thankyou_cycle_body2);
+
+                // String startDate = visit.getActualStartDate().toString(format);
+                // String endDate = visit.getActualEndDate().toString(format);
+
+                String startDate = fmt.print(visit.getActualStartDate());
+                String endDate = fmt.print(visit.getActualEndDate());
+
+                body2 = body2.replace("{DATE1}", startDate);
+                body2 = body2.replace("{DATE2}", endDate);
+
+                body = body2;
             }
             // After the 4th test of the day
             else if (visit.getNumberOfTestsLeftForToday() == 0) {
-                header = "Thank You";
-                subheader = "All Done for Today!";
-                body = "Thanks for your hard work. We'll notify you tomorrow with your next test.";
+                header = res.getString(R.string.thank_you_header1);
+                subheader = res.getString(R.string.thankyou_alldone_subhead1);
+                body = res.getString(R.string.thankyou_alldone_body1);
             }
 
         }
@@ -656,12 +820,26 @@ public class StudyStateMachine {
                 header ,
                 subheader,
                 body,
-                "RETURN TO HOME");
+                ViewUtil.getDrawable(R.drawable.ic_home_active));
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
+    public void addSchedulePicker() {
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.ChangeAvail_date_picker_body), ""));
+
+        fragments.add(new ScheduleCalendar());
+
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
+    }
+
+    public void setPathAdjustSchedule() {
+        addSchedulePicker();
+    }
 
     // -----------------------
 

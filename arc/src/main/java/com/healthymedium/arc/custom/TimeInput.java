@@ -1,8 +1,6 @@
 package com.healthymedium.arc.custom;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,17 +9,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.utilities.ViewUtil;
 
-import org.joda.time.DateTime;
-import org.joda.time.Hours;
 import org.joda.time.LocalTime;
+import org.joda.time.Minutes;
 
 import java.lang.reflect.Field;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class TimeInput extends FrameLayout {
@@ -29,9 +23,12 @@ public class TimeInput extends FrameLayout {
     boolean restrictTime = false;
     boolean valid = true;
 
+    List<Window> validWindows;
     LocalTime blockoutBegin;
-    LocalTime blockoutEnd;
     LocalTime time;
+
+    int minWakeTime = 4;
+    int maxWakeTime = 24;
 
     Listener listener;
     TimePicker timePicker;
@@ -63,7 +60,6 @@ public class TimeInput extends FrameLayout {
 
         time = new LocalTime(12,0);
 
-
         try{
             Class<?> classForid = Class.forName("com.android.internal.R$id");
             Field minute = classForid.getField("minute");
@@ -88,10 +84,22 @@ public class TimeInput extends FrameLayout {
                 }
                 if(restrictTime){
                     time = new LocalTime(hourOfDay,minute*15);
-                    if(time.isAfter(blockoutBegin) && time.isBefore(blockoutEnd)){
-                        setValidity(false);
-                        return;
+
+                    for(Window window : validWindows){
+                        if(window.contains(time)){
+                            setValidity(true);
+                            return;
+                        }
                     }
+
+                    int minutesBetween = Minutes.minutesBetween(blockoutBegin,time).getMinutes();
+                    if(minutesBetween>0){
+                        errorText.setText(ViewUtil.getString(R.string.error4));
+                    } else {
+                        //errorText.setText("Please set a maximum of " + Integer.toString(maxWakeTime) + " hours of wake time.");
+                    }
+                    setValidity(false);
+                    return;
                 }
                 setValidity(true);
             }
@@ -127,16 +135,38 @@ public class TimeInput extends FrameLayout {
         return valid;
     }
 
-    public void placeRestrictions(LocalTime blockoutBegin, LocalTime blockoutEnd){
+    public void placeRestrictions(List<Window> validWindows){
         restrictTime = true;
-        this.blockoutBegin = blockoutBegin.minusMinutes(1);
-        this.blockoutEnd = blockoutEnd;
-        boolean notValid = time.isAfter(this.blockoutBegin) && time.isBefore(this.blockoutEnd);
-        setValidity(!notValid);
+        this.validWindows = validWindows;
+
+        boolean valid = false;
+        for(Window window : validWindows){
+            if(window.contains(time)){
+               valid = true;
+            }
+        }
+        setValidity(valid);
     }
 
-    public void placeRestrictions(LocalTime blockoutBegin, Hours duration){
-        placeRestrictions(blockoutBegin,blockoutBegin.plus(duration));
+    public void placeRestrictions(LocalTime blockoutBegin, int minDuration, int maxDuration){
+
+        this.blockoutBegin = blockoutBegin;
+        minWakeTime = minDuration;
+        maxWakeTime = maxDuration;
+
+        List<Window> windows = new ArrayList<>();
+
+        LocalTime minLocalTime = blockoutBegin.plusHours(minWakeTime);
+        LocalTime maxLocalTime = blockoutBegin.plusHours(maxWakeTime);
+
+        if(maxLocalTime.isAfter(minLocalTime)){
+            windows.add(new Window(minLocalTime,maxLocalTime));
+        } else {
+            windows.add(new Window(minLocalTime, LocalTime.MIDNIGHT.minusSeconds(1)));
+            windows.add(new Window(LocalTime.MIDNIGHT, maxLocalTime));
+        }
+
+        placeRestrictions(windows);
     }
 
     public void setListener(Listener listener){
@@ -146,6 +176,21 @@ public class TimeInput extends FrameLayout {
     public interface Listener{
         void onValidityChanged(boolean valid);
         void onTimeChanged();
+    }
+
+    public class Window {
+        LocalTime begin;
+        LocalTime end;
+
+        public Window(LocalTime begin, LocalTime end){
+            this.begin = begin;
+            this.end = end;
+        }
+
+        public boolean contains(LocalTime time){
+            return (time.equals(begin) || time.isAfter(begin)) && (time.isBefore(end) || time.equals(end));
+        }
+
     }
 
 }

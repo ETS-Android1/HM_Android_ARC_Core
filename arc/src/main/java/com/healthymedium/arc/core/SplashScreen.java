@@ -24,6 +24,7 @@ public class SplashScreen extends BaseFragment {
 
     boolean paused = false;
     boolean ready = false;
+    boolean skipSegment = false;
 
     public SplashScreen() {
     }
@@ -75,23 +76,35 @@ public class SplashScreen extends BaseFragment {
             conf.setLocale(new Locale(language,country));
             res.updateConfiguration(conf, res.getDisplayMetrics());
 
-            FontFactory.initialize(context);
-            Study.initialize(context);
-            NotificationManager.initialize(context);
+            if(NotificationManager.getInstance()==null){
+                NotificationManager.initialize(context);
+            }
 
-            getApplication().registerStudyComponents();
+            if(FontFactory.getInstance()==null) {
+                FontFactory.initialize(context);
+            }
 
             if(!Fonts.areLoaded()){
                 Fonts.load();
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
             }
-            Study.getInstance().load();
-            Study.getInstance().run();
 
-            //MigrationUtil.checkForUpdate(context);
-            //SignatureManager.initialize(context);
-            //PriceManager.initialize(getContext());
+            // We need to check to see if we're currently in the middle of a test session.
+            // If we are, and if the state machine has valid fragments, we should let it continue
+            // displaying those.
+            // Otherwise, just run the Study instance, and let it figure out where it needs to be.
+
+            if(Study.getParticipant().isCurrentlyInTestSession()
+                && Study.getParticipant().checkForTestAbandonment() == false
+                && Study.getStateMachine().hasValidFragments()
+            ) {
+                skipSegment = true;
+            } else {
+                skipSegment = false;
+                Study.getInstance().run();
+            }
+
             ready = true;
             return null;
         }
@@ -113,7 +126,11 @@ public class SplashScreen extends BaseFragment {
     private void exit(){
         if(getFragmentManager() != null) {
             getFragmentManager().popBackStack();
-            Study.getInstance().openNextFragment();
+            if(skipSegment) {
+                Study.getInstance().skipToNextSegment();
+            } else {
+                Study.getInstance().openNextFragment();
+            }
         }
     }
 

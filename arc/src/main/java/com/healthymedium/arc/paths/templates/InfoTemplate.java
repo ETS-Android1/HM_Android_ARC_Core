@@ -1,9 +1,11 @@
 package com.healthymedium.arc.paths.templates;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,8 @@ public class InfoTemplate extends BaseFragment {
     String stringSubHeader;
     String stringBody;
     String stringButton;
+
+    Drawable buttonImage;
 
     TextView textViewBack;
     TextView textViewHeader;
@@ -47,6 +51,18 @@ public class InfoTemplate extends BaseFragment {
         }
     }
 
+    public InfoTemplate(boolean allowBack, String header, String subheader, String body, @Nullable Drawable buttonImage) {
+        this.allowBack = allowBack;
+        stringHeader = header;
+        stringSubHeader = subheader;
+        stringBody = body;
+        this.buttonImage = buttonImage;
+
+        if(allowBack){
+            allowBackPress(true);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,7 +77,7 @@ public class InfoTemplate extends BaseFragment {
         textViewSubheader.setText(stringSubHeader);
 
         textViewBody = view.findViewById(R.id.textViewBody);
-        textViewBody.setText(stringBody);
+        textViewBody.setText(Html.fromHtml(stringBody));
 
         if (stringSubHeader == "") {
             textViewSubheader.setVisibility(View.GONE);
@@ -90,6 +106,8 @@ public class InfoTemplate extends BaseFragment {
         button = view.findViewById(R.id.button);
         if(stringButton!=null){
             button.setText(stringButton);
+        } else if (buttonImage!=null) {
+            button.setIcon(buttonImage);
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override

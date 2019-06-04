@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.AvailabilityPathData;
 import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class AvailabilitySaturdayWake extends QuestionTime {
 
@@ -17,7 +19,7 @@ public class AvailabilitySaturdayWake extends QuestionTime {
     AvailabilityPathData data;
 
     public AvailabilitySaturdayWake() {
-        super(true,"When do you usually<br/><b>wake up</b> on <b>Saturday</b>?","",null);
+        super(true, ViewUtil.getString(R.string.availability_wake_saturday),"",null);
     }
 
     @Nullable

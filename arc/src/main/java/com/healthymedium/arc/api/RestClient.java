@@ -1,6 +1,7 @@
 package com.healthymedium.arc.api;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
@@ -13,9 +14,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DeviceRegistration;
 import com.healthymedium.arc.api.models.Heartbeat;
 import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.api.models.CachedSignature;
 import com.healthymedium.arc.api.models.TestSchedule;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.api.models.TestSubmission;
@@ -24,11 +27,13 @@ import com.healthymedium.arc.api.models.WakeSleepSchedule;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
@@ -51,12 +56,14 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@SuppressWarnings("unchecked")
 public class RestClient <Api>{
 
     private Class<Api> type;
@@ -64,9 +71,9 @@ public class RestClient <Api>{
     private Api serviceExtension;
     protected Gson gson;
 
-    private List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
+    protected List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
     private UploadListener uploadListener = null;
-    private boolean uploading = false;
+    protected boolean uploading = false;
     private Handler handler;
 
     public RestClient(Class<Api> type) {
@@ -252,6 +259,34 @@ public class RestClient <Api>{
         }
     }
 
+    // For now override in app module
+    public void submitSignature(Bitmap bitmap) {
+        Log.i("RestClient","submitSignature");
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+
+        String key = "signature_" + DateTime.now().getMillis();
+        CacheManager.getInstance().putBitmap(key,bitmap,100);
+
+        CachedSignature signature = new CachedSignature();
+        signature.filename = key;
+        signature.participant_id = Study.getParticipant().getId();
+        signature.session_id = String.valueOf(Study.getCurrentTestSession().getId());
+
+        if(uploading) {
+            Log.i("RestClient","adding signature to upload queue");
+            uploadQueue.add(signature);
+            saveUploadQueue();
+        } else {
+            Log.i("RestClient","uploading signature now");
+            markUploadStarted();
+            Call<ResponseBody> call = getService().submitSignature(signature.getRequestBody(),Device.getId());
+            call.enqueue(createCachedCallback(signature));
+        }
+
+    }
+
     public void submitTest(TestSession session) {
         if(Config.REST_BLACKHOLE) {
             return;
@@ -338,7 +373,7 @@ public class RestClient <Api>{
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                response.errors.addProperty("show","Sorry, our app is currently experiencing issues. Please try again later.");
+                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
                 response.errors.addProperty("format","Invalid response format received");
                 response.successful = retrofitResponse.isSuccessful();
                 return response;
@@ -348,7 +383,7 @@ public class RestClient <Api>{
             try {
                 json = new JsonParser().parse(responseData).getAsJsonObject();
             } catch (JsonSyntaxException e) {
-                response.errors.addProperty("show","Sorry, our app is currently experiencing issues. Please try again later.");
+                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
                 response.errors.addProperty("unknown","Server Error "+response.code);
                 return response;
             }
@@ -376,7 +411,7 @@ public class RestClient <Api>{
             response.errors.addProperty("network","No Network Connection");
         }
         if(throwable!=null) {
-            response.errors.addProperty("show","Sorry, our app is currently experiencing issues. Please try again later.");
+            response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
             response.errors.addProperty(throwable.getClass().getSimpleName(),throwable.getMessage());
         }
         return response;
@@ -441,6 +476,32 @@ public class RestClient <Api>{
         });
     }
 
+    protected Callback createCachedCallback(final CachedObject object) {
+        Log.i("RestClient","createCachedCallback");
+        return createCallback(new Listener() {
+            @Override
+            public void onSuccess(Response response) {
+                Log.i("RestClient","cached callback success");
+                if(uploadQueue.contains(object)) {
+                    uploadQueue.remove(object);
+                    saveUploadQueue();
+                }
+                CacheManager.getInstance().remove(object.filename);
+                popQueue();
+            }
+
+            @Override
+            public void onFailure(Response response) {
+                Log.i("RestClient","cached callback failure");
+                if(!uploadQueue.contains(object)){
+                    uploadQueue.add(object);
+                    saveUploadQueue();
+                }
+                markUploadStopped();
+            }
+        });
+    }
+
     public void popQueue() {
         if(uploadQueue.size()>0){
             Object object = uploadQueue.get(0);
@@ -454,12 +515,20 @@ public class RestClient <Api>{
                 call = getService().submitWakeSleepSchedule(deviceId,json);
             } else if(TestSubmission.class.isInstance(object)) {
                 call = getService().submitTest(deviceId,json);
+            } else if(CachedSignature.class.isInstance(object)) {
+                RequestBody requestBody = ((CachedSignature)object).getRequestBody();
+                call = getService().submitSignature(requestBody,deviceId);
             }
 
             if(call!=null) {
                 Log.i("RestClient", "popQueue("+object.getClass().getName()+")");
                 markUploadStarted();
-                call.enqueue(createDataCallback(object));
+                if(CachedObject.class.isAssignableFrom(object.getClass())){
+                    call.enqueue(createCachedCallback((CachedObject) object));
+                } else {
+                    call.enqueue(createDataCallback(object));
+                }
+
             } else {
                 uploadQueue.remove(object);
                 saveUploadQueue();
@@ -517,7 +586,7 @@ public class RestClient <Api>{
         });
     }
 
-    private void markUploadStarted(){
+    protected void markUploadStarted(){
         if(!uploading) {
             Log.i("RestClient","upload started");
             uploading = true;

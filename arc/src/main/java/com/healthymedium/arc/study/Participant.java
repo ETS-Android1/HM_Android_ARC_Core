@@ -6,8 +6,6 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
-
 public class Participant {
 
     protected ParticipantState state;
@@ -16,7 +14,14 @@ public class Participant {
         state = new ParticipantState();
     }
 
-    public void load(){
+    public void load() {
+        load(false);
+    }
+
+    public void load(boolean overwrite){
+        if(state!=null && !overwrite){
+            return;
+        }
         state = PreferencesManager.getInstance().getObject("ParticipantState",ParticipantState.class);
     }
 
@@ -100,7 +105,7 @@ public class Participant {
             if(state.currentVisit>=state.visits.size()){
                 state.isStudyRunning = false;
             } else if(scheduleNotifications){
-                Study.getScheduler().scheduleNotifications(getCurrentVisit());
+                Study.getScheduler().scheduleNotifications(getCurrentVisit(), false);
             }
         }
         save();

@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.healthymedium.arc.custom.DurationInput;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import static java.lang.Math.floor;
 
@@ -21,7 +23,7 @@ public class QuestionDuration extends QuestionTemplate {
     boolean valid = true;
 
     public QuestionDuration(boolean allowBack, String header, String subheader) {
-        super(allowBack,header,subheader,"SUBMIT TIME");
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submit));
         type = "duration";
     }
 

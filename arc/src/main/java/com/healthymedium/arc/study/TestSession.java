@@ -14,7 +14,8 @@ public class TestSession {
     private int dayIndex;
     private int index;
     private int id;
-    private DateTime scheduledTime;
+    private DateTime scheduledTime;         // The original scheduled time
+    private DateTime userChangeableTime;    // The time changed by the user, used by QuestionAdjustSchedule
     private DateTime startTime;
     private DateTime completeTime;
     private DateTime expirationTime;
@@ -79,6 +80,14 @@ public class TestSession {
         this.expirationTime = scheduledTime.plusHours(2);
     }
 
+    public DateTime getUserChangeableTime() {
+        return userChangeableTime;
+    }
+
+    public void setUserChangeableTime(DateTime actualTime) {
+        this.userChangeableTime = actualTime;
+    }
+
     public DateTime getStartTime() {
         return startTime;
     }
@@ -93,7 +102,7 @@ public class TestSession {
     }
 
     public boolean isOver(){
-        return (wasFinished() || wasMissed());
+        return (completeTime!=null || wasMissed());
     }
 
     public boolean isOngoing() {

@@ -39,6 +39,9 @@ public class HelpScreen extends BaseFragment {
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setLineSpacing(3,1.0f);
 
+        String header = ViewUtil.getString(R.string.Contact_header) + " " + ViewUtil.getString(R.string.contact_body);
+        textViewHeader.setText(header);
+
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {

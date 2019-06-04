@@ -2,6 +2,11 @@ package com.healthymedium.arc.utilities;
 
 import android.util.Log;
 
+import com.google.gson.JsonObject;
+import com.healthymedium.arc.study.StudyState;
+import com.healthymedium.arc.study.StudyStateCache;
+import com.healthymedium.arc.study.StudyStateMachine;
+
 public class MigrationUtil {
 
     public void checkForUpdate(){
@@ -46,6 +51,41 @@ public class MigrationUtil {
     }
 
     protected boolean migrateLibraryData(long oldVersion, long newVersion){
+
+        boolean successful = true;
+
+        if(oldVersion < 1000214){
+            successful = migratePreferencesToCache();
+        }
+
+        return successful;
+    }
+
+    private boolean migratePreferencesToCache(){
+
+        CacheManager.getInstance().removeAll();
+
+        JsonObject json = PreferencesManager.getInstance().getObject("StateMachine", JsonObject.class);
+        PreferencesManager.getInstance().remove("StateMachine");
+
+        StudyState state = new StudyState();
+        if(json.has("lifecycle")) {
+            state.lifecycle = json.get("lifecycle").getAsInt();
+        }
+        if(json.has("currentPath")) {
+            state.currentPath = json.get("currentPath").getAsInt();
+        }
+        PreferencesManager.getInstance().putObject(StudyStateMachine.TAG_STUDY_STATE,state);
+
+        StudyStateCache cache = new StudyStateCache();
+        if(json.has("segments")) {
+            cache.segments = PreferencesManager.getInstance().getGson().fromJson(json.get("segments"), cache.segments.getClass());
+        }
+        if(json.has("cache")) {
+            cache.data = PreferencesManager.getInstance().getGson().fromJson(json.get("cache"), cache.data.getClass());
+        }
+        CacheManager.getInstance().putObject(StudyStateMachine.TAG_STUDY_STATE_CACHE,cache);
+
         return true;
     }
 

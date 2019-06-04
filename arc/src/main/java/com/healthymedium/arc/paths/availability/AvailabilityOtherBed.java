@@ -19,10 +19,12 @@ public class AvailabilityOtherBed extends QuestionTime {
 
     CircadianClock clock;
     String weekday;
+    int minWakeTime = 4;
+    int maxWakeTime = 24;
 
     @SuppressLint("ValidFragment")
-    public AvailabilityOtherBed(String weekday) {
-        super(true,"When do you usually<br/><b>go to bed</b> on <b>"+weekday+"</b>?","",null);
+    public AvailabilityOtherBed(String weekday, String header) {
+        super(true, header,"",null);
         this.weekday = weekday;
     }
 
@@ -31,6 +33,17 @@ public class AvailabilityOtherBed extends QuestionTime {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
+
+        if (getArguments() != null) {
+            if (getArguments().containsKey("minWakeTime")) {
+                minWakeTime = getArguments().getInt("minWakeTime");
+            }
+
+            if (getArguments().containsKey("maxWakeTime")) {
+                maxWakeTime = getArguments().getInt("maxWakeTime");
+            }
+        }
+
 
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged(weekday)){
@@ -41,7 +54,7 @@ public class AvailabilityOtherBed extends QuestionTime {
         }
 
         LocalTime wakeTime = clock.getRhythm(weekday).getWakeTime();
-        timeInput.placeRestrictions(wakeTime, Hours.FOUR);
+        timeInput.placeRestrictions(wakeTime, minWakeTime, maxWakeTime);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override

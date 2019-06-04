@@ -16,6 +16,8 @@ public class PathSegmentData {
 
     protected List<Object> objects = new ArrayList<>();
 
+    public String id2;
+
     public void add(Object object) {
         objects.add(object);
     }

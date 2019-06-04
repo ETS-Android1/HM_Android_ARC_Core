@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.Hours;
 import org.joda.time.LocalTime;
@@ -16,9 +18,11 @@ import org.joda.time.LocalTime;
 public class AvailabilitySaturdayBed extends QuestionTime {
 
     CircadianClock clock;
+    int minWakeTime = 4;
+    int maxWakeTime = 24;
 
     public AvailabilitySaturdayBed() {
-        super(true,"When do you usually<br/><b>go to bed</b> on <b>Saturday</b>?","",null);
+        super(true, ViewUtil.getString(R.string.availability_sleep_saturday),"",null);
     }
 
     @Nullable
@@ -26,6 +30,16 @@ public class AvailabilitySaturdayBed extends QuestionTime {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
+
+        if (getArguments() != null) {
+            if (getArguments().containsKey("minWakeTime")) {
+                minWakeTime = getArguments().getInt("minWakeTime");
+            }
+
+            if (getArguments().containsKey("maxWakeTime")) {
+                maxWakeTime = getArguments().getInt("maxWakeTime");
+            }
+        }
 
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged("Saturday")){
@@ -35,7 +49,7 @@ public class AvailabilitySaturdayBed extends QuestionTime {
         }
 
         LocalTime wakeTime = clock.getRhythm("Saturday").getWakeTime();
-        timeInput.placeRestrictions(wakeTime, Hours.FOUR);
+        timeInput.placeRestrictions(wakeTime, minWakeTime, maxWakeTime);
 
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override

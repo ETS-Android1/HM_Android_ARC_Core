@@ -2,16 +2,10 @@ package com.healthymedium.arc.study;
 
 import android.content.Context;
 
-import com.healthymedium.arc.api.RestAPI;
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.api.models.Heartbeat;
-import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.core.Device;
-import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 //import com.healthymedium.arc.study.PrivacyPolicy;
 import com.healthymedium.arc.utilities.MigrationUtil;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -31,15 +25,18 @@ public class Study{
     static PrivacyPolicy privacyPolicy;
 
     public static synchronized void initialize(Context context) {
-        instance = new Study(context);
+        if(instance==null) {
+            instance = new Study();
+        }
+        instance.context = context;
     }
 
     public static synchronized Study getInstance() {
         return instance;
     }
 
-    protected Study(Context context) {
-        this.context = context;
+    protected Study() {
+
     }
 
     public static boolean isValid(){
@@ -51,7 +48,14 @@ public class Study{
 
     // class registrations -------------------------------------------------------------------------
 
-    public boolean registerParticipantType(Class tClass){
+    public boolean registerParticipantType(Class tClass) {
+        return registerParticipantType(tClass,false);
+    }
+
+    public boolean registerParticipantType(Class tClass, boolean overwrite){
+        if(participant!=null && !overwrite){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -71,10 +75,17 @@ public class Study{
     }
 
     public boolean registerRestApi(Class clientClass){
-        return registerRestApi(clientClass, null);
+        return registerRestApi(clientClass, null,false);
     }
 
-    public boolean registerRestApi(Class clientClass, Class apiClass){
+    public boolean registerRestApi(Class clientClass,Class apiClass){
+        return registerRestApi(clientClass, apiClass,false);
+    }
+
+    public boolean registerRestApi(Class clientClass, Class apiClass, boolean overwrite){
+        if(restClient!=null && !overwrite){
+            return false;
+        }
         if(clientClass==null){
             return false;
         }
@@ -95,7 +106,14 @@ public class Study{
         return true;
     }
 
-    public  boolean registerStateMachine(Class tClass){
+    public  boolean registerStateMachine(Class tClass) {
+        return registerStateMachine(tClass,false);
+    }
+
+    public  boolean registerStateMachine(Class tClass, boolean overwrite){
+        if(stateMachine!=null && !overwrite){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -114,8 +132,14 @@ public class Study{
         return true;
     }
 
-
     public boolean registerScheduler(Class tClass){
+        return registerScheduler(tClass,false);
+    }
+
+    public boolean registerScheduler(Class tClass, boolean overwrite){
+        if(scheduler!=null && !overwrite){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -135,6 +159,13 @@ public class Study{
     }
 
     public boolean registerMigrationUtil(Class tClass){
+        return registerMigrationUtil(tClass,false);
+    }
+
+    public boolean registerMigrationUtil(Class tClass, boolean overwrite){
+        if(migrationUtil!=null && !overwrite){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -152,8 +183,14 @@ public class Study{
         }
         return true;
     }
-
     public boolean registerPrivacyPolicy(Class tClass){
+        return registerPrivacyPolicy(tClass,false);
+    }
+
+    public boolean registerPrivacyPolicy(Class tClass, boolean overwrite){
+        if(privacyPolicy!=null && !overwrite){
+            return false;
+        }
         if(tClass==null){
             return false;
         }
@@ -218,8 +255,8 @@ public class Study{
             migrationUtil.checkForUpdate();
             migrationUtil = null; // not needed after this
 
-            stateMachine.load();
             participant.load();
+            stateMachine.load();
         }
 
         valid = true;
@@ -263,11 +300,11 @@ public class Study{
     }
 
     public static PathSegmentData getCurrentSegmentData() {
-        return stateMachine.state.segments.get(0).dataObject;
+        return stateMachine.cache.segments.get(0).dataObject;
     }
 
     public static void setCurrentSegmentData(Object object) {
-        stateMachine.state.segments.get(0).dataObject = (PathSegmentData) object;
+        stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
     }
 
 
@@ -314,9 +351,15 @@ public class Study{
         stateMachine.openNext();
     }
 
-    public static void updateAvailability()
+    public static void updateAvailability(int minWakeTime, int maxWakeTime)
     {
-        stateMachine.setPathSetupAvailability();
+        stateMachine.setPathSetupAvailability(minWakeTime, maxWakeTime, true);
+        stateMachine.openNext();
+    }
+
+    public static void adjustSchedule()
+    {
+        stateMachine.setPathAdjustSchedule();
         stateMachine.openNext();
     }
 }

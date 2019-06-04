@@ -1,26 +1,32 @@
 package com.healthymedium.arc.core;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.time.TimeChangeReceiver;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.study.AbandonmentJobService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     boolean paused = false;
     boolean backAllowed = false;
     boolean backInStudy = false;
+    boolean hasNewIntent = false;
     int backInStudySkips = 0;
 
     boolean checkAbandonment = false;
@@ -32,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(hasNewIntent){
+            hasNewIntent = false;
+            if(!Study.getStateMachine().isCurrentlyInTestPath()){
+                Study.openNextFragment();
+            }
+        }
     }
 
     @Override
@@ -42,16 +54,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(new Bundle());
+        Log.i("MainActivity","onCreate");
 
         Intent intent = getIntent();
-        if(intent!=null) {
-            Bundle bundle = getIntent().getExtras();
-            if(bundle!=null){
-                Config.OPENED_FROM_NOTIFICATION = bundle.getBoolean("OPENED_FROM_NOTIFICATION",false);
-            }
-        }
-
-        TimeChangeReceiver.registerSelf(getApplicationContext());
+        parseIntent(intent);
 
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
@@ -59,15 +65,42 @@ public class MainActivity extends AppCompatActivity {
         setup();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.i("MainActivity","onNewIntent");
+        parseIntent(intent);
+        hasNewIntent = true;
+
+    }
+
+    private void parseIntent(Intent intent){
+        Log.i("MainActivity","parseIntent");
+        if(intent!=null) {
+            Config.OPENED_FROM_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION,false);
+            Config.OPENED_FROM_VISIT_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION,false);
+        }
+        Log.i("MainActivity","OPENED_FROM_NOTIFICATION = "+Config.OPENED_FROM_NOTIFICATION);
+        Log.i("MainActivity","OPENED_FROM_VISIT_NOTIFICATION = "+Config.OPENED_FROM_VISIT_NOTIFICATION);
+    }
+
     public void setup(){
-
-        PreferencesManager.initialize(this);
         NavigationManager.initializeInstance(getSupportFragmentManager());
-
         if(PreferencesManager.getInstance().contains("language") || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
         } else {
-            //NavigationManager.getInstance().open(new SetupLocaleFragment());
+            List<Locale> locales = Application.getInstance().getLocaleOptions();
+            List<String> options = new ArrayList<>();
+            for(Locale locale : locales) {
+                options.add(locale.getLabel());
+            }
+            QuestionLanguagePreference fragment = new QuestionLanguagePreference(
+                    false,
+                    true,
+                    "Please select your <b>preferred language.</b>",
+                    "",
+                    options,
+                    locales);
+            NavigationManager.getInstance().open(fragment);
         }
     }
 
@@ -143,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.i("MainActivity","onDestroy");
         if(homeWatcher != null){
             homeWatcher.stopWatch();
             homeWatcher = null;
@@ -157,11 +191,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        paused = false;
+
         if(Study.isValid()){
             AbandonmentJobService.unscheduleSelf(getApplicationContext());
-            Study.getParticipant().markResumed();
+            //if we were paused, then we need to call the resume handler.
+            if(paused) {
+                Study.getParticipant().markResumed();
+            }
         }
+        paused = false;
     }
 
     @Override
@@ -170,11 +208,19 @@ public class MainActivity extends AppCompatActivity {
         paused = true;
         if(Study.isValid()){
             Study.getParticipant().markPaused();
-            Study.getStateMachine().save();
+            Study.getStateMachine().save(true);
             if(Study.getParticipant().isCurrentlyInTestSession()) {
                 AbandonmentJobService.scheduleSelf(getApplicationContext());
             }
         }
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        Log.i("MainActivity","attachBaseContext");
+        super.attachBaseContext(context);
+        Application.getInstance().updateLocale(context);
     }
 
     public boolean isVisible() {

@@ -31,18 +31,18 @@ public class GridLetters extends BaseFragment {
 
     boolean paused;
     GridLayout gridLayout;
-    GridTestPathData gridTest;
-    GridTestPathData.Section section;
-    int eCount = 0;
-    int fCount = 0;
+    protected  GridTestPathData gridTest;
+    protected GridTestPathData.Section section;
+    protected int eCount = 0;
+    protected int fCount = 0;
 
-    TimedDialog dialog;
+    protected TimedDialog dialog;
     Handler handler;
-    Runnable runnable = new Runnable() {
+    protected Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if(isVisible()){
-                dialog = new TimedDialog(getString(R.string.ready),1000);
+                dialog = new TimedDialog(getString(R.string.grids_popup1),1000);
                 dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
                     @Override
                     public void dismiss() {
