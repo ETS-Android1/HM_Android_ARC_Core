@@ -7,8 +7,10 @@ public class Locale {
     public static String COUNTRY_SPAIN = "ES";
     public static String COUNTRY_FRANCE = "FR";
     public static String COUNTRY_UNITED_KINGDOM = "GB";
+    public static String COUNTRY_GERMANY = "DE";
     public static String COUNTRY_UNITED_STATES = "US";
 
+    public static String LANGUAGE_GERMAN = "de";
     public static String LANGUAGE_ENGLISH = "en";
     public static String LANGUAGE_FRENCH = "fr";
     public static String LANGUAGE_SPANISH = "es";
@@ -31,6 +33,8 @@ public class Locale {
             label = getFrenchLabel(country);
         } else if(language==LANGUAGE_SPANISH){
             label = getSpanishLabel(country);
+        } else if(language==LANGUAGE_GERMAN) {
+            label =  getGermanLabel(country);
         } else {
             label = "";
         }
@@ -80,6 +84,14 @@ public class Locale {
             return "España - Español";
         } else if(country==COUNTRY_UNITED_STATES){
             return "United States - Español";
+        } else {
+            return "";
+        }
+    }
+
+    private String getGermanLabel(String country){
+        if(country==COUNTRY_GERMANY){
+            return "Deutschland - Deutsche";
         } else {
             return "";
         }
