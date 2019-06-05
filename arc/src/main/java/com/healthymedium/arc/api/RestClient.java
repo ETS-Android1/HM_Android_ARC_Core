@@ -82,7 +82,8 @@ public class RestClient <Api>{
     protected synchronized void initialize() {
         Log.i("RestClient","initialize");
 
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
+        clientBuilder.addInterceptor(new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
@@ -90,7 +91,9 @@ public class RestClient <Api>{
                 request = request.newBuilder().url(httpUrl).build();
                 return chain.proceed(request);
             }
-        }).build();
+        });
+
+        OkHttpClient client = clientBuilder.build();
 
         gson = new GsonBuilder()
                 .registerTypeAdapterFactory(new ItemTypeAdapterFactory())
@@ -133,7 +136,7 @@ public class RestClient <Api>{
 
     // public calls --------------------------------------------------------------------------------
 
-    public void rlegisterDevice(final DeviceRegistration registration, final Listener listener){
+    public void registerDevice(final DeviceRegistration registration, final Listener listener){
         if(Config.REST_BLACKHOLE) {
             return;
         }
@@ -154,14 +157,6 @@ public class RestClient <Api>{
         }
 
         chain.execute(listener);
-    }
-
-    public void registerDevice(DeviceRegistration registration, final Listener listener){
-        if(Config.REST_BLACKHOLE) {
-            return;
-        }
-        Call<ResponseBody> call = getService().registerDevice(serialize(registration));
-        call.enqueue(createCallback(listener));
     }
 
     public void registerDevice(String participantId, String authorizationCode, boolean existingUser, final Listener listener ){
