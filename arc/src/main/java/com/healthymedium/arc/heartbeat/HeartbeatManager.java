@@ -9,7 +9,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -130,7 +130,7 @@ public class HeartbeatManager {
 
     RestClient.Listener restListener = new RestClient.Listener() {
         @Override
-        public void onSuccess(Response response) {
+        public void onSuccess(RestResponse response) {
             lastHeartbeat = (DateTime.now().getMillis() / 1000L);
             PreferencesManager.getInstance().putLong(LAST_HEARTBEAT,lastHeartbeat);
             Log.i("HeartbeatManager", "new heartbeat = "+lastHeartbeat);
@@ -141,7 +141,7 @@ public class HeartbeatManager {
         }
 
         @Override
-        public void onFailure(Response response) {
+        public void onFailure(RestResponse response) {
             if(listener!=null){
                 listener.onFailure();
             }

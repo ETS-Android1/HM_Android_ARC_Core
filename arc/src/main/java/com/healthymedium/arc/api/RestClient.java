@@ -12,13 +12,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DeviceRegistration;
 import com.healthymedium.arc.api.models.Heartbeat;
-import com.healthymedium.arc.api.models.Response;
 import com.healthymedium.arc.api.models.CachedSignature;
+import com.healthymedium.arc.api.models.SessionInfo;
 import com.healthymedium.arc.api.models.TestSchedule;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.api.models.TestSubmission;
@@ -27,7 +25,6 @@ import com.healthymedium.arc.api.models.WakeSleepSchedule;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
-import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Participant;
@@ -70,6 +67,7 @@ public class RestClient <Api>{
     private RestAPI service;
     private Api serviceExtension;
     protected Gson gson;
+    protected Retrofit retrofit;
 
     protected List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
     private UploadListener uploadListener = null;
@@ -101,7 +99,7 @@ public class RestClient <Api>{
                 .setLenient()
                 .create();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl(Config.REST_ENDPOINT)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -129,7 +127,34 @@ public class RestClient <Api>{
         return serviceExtension;
     }
 
+    public Retrofit getRetrofit() {
+        return retrofit;
+    }
+
     // public calls --------------------------------------------------------------------------------
+
+    public void rlegisterDevice(final DeviceRegistration registration, final Listener listener){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+
+        CallbackChain chain = new CallbackChain();
+
+        Call<ResponseBody> call = getService().registerDevice(serialize(registration));
+        chain.addLink(call);
+
+        if(Config.CHECK_CONTACT_INFO){
+            Call<ResponseBody> contactInfo = getService().getContactInfo(Device.getId());
+            chain.addLink(contactInfo,contactListener);
+        }
+
+        if(Config.CHECK_SESSION_INFO) {
+            Call<ResponseBody> sessionInfo = getService().getSessionInfo(Device.getId());
+            chain.addLink(sessionInfo, sessionListener);
+        }
+
+        chain.execute(listener);
+    }
 
     public void registerDevice(DeviceRegistration registration, final Listener listener){
         if(Config.REST_BLACKHOLE) {
@@ -259,7 +284,6 @@ public class RestClient <Api>{
         }
     }
 
-    // For now override in app module
     public void submitSignature(Bitmap bitmap) {
         Log.i("RestClient","submitSignature");
         if(Config.REST_BLACKHOLE) {
@@ -284,7 +308,6 @@ public class RestClient <Api>{
             Call<ResponseBody> call = getService().submitSignature(signature.getRequestBody(),Device.getId());
             call.enqueue(createCachedCallback(signature));
         }
-
     }
 
     public void submitTest(TestSession session) {
@@ -309,17 +332,6 @@ public class RestClient <Api>{
             Call<ResponseBody> call = getService().submitTest(Device.getId(), json);
             call.enqueue(createDataCallback(test));
         }
-    }
-
-    public void enqueueTest(TestSession session)
-    {
-        if(Config.REST_BLACKHOLE) {
-            return;
-        }
-
-        TestSubmission test = createTestSubmission(session);
-        uploadQueue.add(test);
-        saveUploadQueue();
     }
 
     // utility functions ---------------------------------------------------------------------------
@@ -359,63 +371,7 @@ public class RestClient <Api>{
         return test;
     }
 
-    protected Response parseResponse(retrofit2.Response<ResponseBody> retrofitResponse){
-        Response response = new Response();
-
-        if (response != null) {
-            response.code = retrofitResponse.code();
-            String responseData = "{}";
-            try {
-                if(retrofitResponse.isSuccessful()){
-                    responseData = retrofitResponse.body().string();
-                } else {
-                    responseData = retrofitResponse.errorBody().string();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
-                response.errors.addProperty("format","Invalid response format received");
-                response.successful = retrofitResponse.isSuccessful();
-                return response;
-            }
-
-            JsonObject json;
-            try {
-                json = new JsonParser().parse(responseData).getAsJsonObject();
-            } catch (JsonSyntaxException e) {
-                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
-                response.errors.addProperty("unknown","Server Error "+response.code);
-                return response;
-            }
-
-            JsonObject jsonResponse = json.getAsJsonObject("response");
-            response.successful = jsonResponse.get("success").getAsBoolean();
-
-            jsonResponse.remove("success");
-            response.optional = jsonResponse;
-
-            JsonObject jsonErrors = json.getAsJsonObject("errors");
-            for(String key : jsonErrors.keySet()) {
-                response.errors.add(key,jsonErrors.get(key));
-            }
-        }
-
-        return response;
-    }
-
-    protected Response parseFailure(@Nullable Throwable throwable) {
-        Response response = new Response();
-        response.successful = false;
-        response.code = -1;
-        if(!isNetworkConnected()){
-            response.errors.addProperty("network","No Network Connection");
-        }
-        if(throwable!=null) {
-            response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
-            response.errors.addProperty(throwable.getClass().getSimpleName(),throwable.getMessage());
-        }
-        return response;
-    }
+    // callback creation ---------------------------------------------------------------------------
 
     protected Callback createCallback(@Nullable final Listener listener) {
         Log.i("RestClient","createCallback");
@@ -426,7 +382,7 @@ public class RestClient <Api>{
                     return;
                 }
 
-                Response response = parseResponse(retrofitResponse);
+                RestResponse response = RestResponse.fromRetrofitResponse(retrofitResponse);
                 Log.i("RestClient",gson.toJson(response));
                 if(response.successful){
                     Log.i("RestClient","onSuccess");
@@ -443,7 +399,7 @@ public class RestClient <Api>{
                     return;
                 }
 
-                Response response = parseFailure(throwable);
+                RestResponse response = RestResponse.fromRetrofitFailure(throwable);
                 Log.i("RestClient",gson.toJson(response));
                 Log.i("RestClient","onFailure");
                 listener.onFailure(response);
@@ -455,7 +411,7 @@ public class RestClient <Api>{
         Log.i("RestClient","createDataCallback");
         return createCallback(new Listener() {
             @Override
-            public void onSuccess(Response response) {
+            public void onSuccess(RestResponse response) {
                 Log.i("RestClient","data callback success");
                 if(uploadQueue.contains(object)) {
                     uploadQueue.remove(object);
@@ -465,7 +421,7 @@ public class RestClient <Api>{
             }
 
             @Override
-            public void onFailure(Response response) {
+            public void onFailure(RestResponse response) {
                 Log.i("RestClient","data callback failure");
                 if(!uploadQueue.contains(object)){
                     uploadQueue.add(object);
@@ -480,7 +436,7 @@ public class RestClient <Api>{
         Log.i("RestClient","createCachedCallback");
         return createCallback(new Listener() {
             @Override
-            public void onSuccess(Response response) {
+            public void onSuccess(RestResponse response) {
                 Log.i("RestClient","cached callback success");
                 if(uploadQueue.contains(object)) {
                     uploadQueue.remove(object);
@@ -491,7 +447,7 @@ public class RestClient <Api>{
             }
 
             @Override
-            public void onFailure(Response response) {
+            public void onFailure(RestResponse response) {
                 Log.i("RestClient","cached callback failure");
                 if(!uploadQueue.contains(object)){
                     uploadQueue.add(object);
@@ -501,6 +457,56 @@ public class RestClient <Api>{
             }
         });
     }
+
+    CallbackChain.Listener contactListener = new CallbackChain.Listener() {
+        @Override
+        public boolean onResponse(RestResponse response) {
+            if(response.successful) {
+                if (response.optional.has("contact_info")) {
+                    JsonObject contactJson = response.optional.get("contact_info").getAsJsonObject();
+                    if (contactJson.has("phone")) {
+                        PreferencesManager.getInstance().putString("ContactInfo", contactJson.get("phone").getAsString());
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onFailure(RestResponse response) {
+            return false;
+        }
+    };
+
+    CallbackChain.Listener sessionListener = new CallbackChain.Listener() {
+        @Override
+        public boolean onResponse(RestResponse response) {
+            if(response.successful){
+                JsonElement firstElement = response.optional.get("first_test");
+                JsonElement latestElement = response.optional.get("latest_test");
+                if(firstElement.isJsonNull() || latestElement.isJsonNull()){
+                    return true;
+                }
+
+                SessionInfo first = gson.fromJson(firstElement,SessionInfo.class);
+                SessionInfo latest = gson.fromJson(latestElement,SessionInfo.class);
+
+                DateTime startDate = new DateTime(first.session_date*1000L);
+                ParticipantState state = Study.getScheduler().getExistingParticipantState(startDate,latest.week,latest.day,latest.session);
+                Study.getParticipant().setState(state);
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onFailure(RestResponse response) {
+            return false;
+        }
+    };
+
+    // upload queue --------------------------------------------------------------------------------
 
     public void popQueue() {
         if(uploadQueue.size()>0){
@@ -551,6 +557,40 @@ public class RestClient <Api>{
         Log.i("RestClient",uploadQueue.toString());
     }
 
+    protected void markUploadStarted(){
+        if(!uploading) {
+            Log.i("RestClient","upload started");
+            uploading = true;
+            if (uploadListener != null) {
+                uploadListener.onStart();
+            }
+        }
+    }
+
+    private void markUploadStopped(){
+        if(uploading) {
+            Log.i("RestClient","upload stopped");
+            uploading = false;
+            if (uploadListener != null) {
+                uploadListener.onStop();
+            }
+        }
+    }
+
+    public boolean isUploadQueueEmpty(){
+        return uploadQueue.size()==0;
+    }
+
+    public void setUploadListener(UploadListener listener){
+        uploadListener = listener;
+    }
+
+    public void removeUploadListener(){
+        uploadListener = null;
+    }
+
+    // connectivity helpers ------------------------------------------------------------------------
+
     public boolean isNetworkConnected(){
         ConnectivityManager cm = (ConnectivityManager) Application.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -586,43 +626,11 @@ public class RestClient <Api>{
         });
     }
 
-    protected void markUploadStarted(){
-        if(!uploading) {
-            Log.i("RestClient","upload started");
-            uploading = true;
-            if (uploadListener != null) {
-                uploadListener.onStart();
-            }
-        }
-    }
-
-    private void markUploadStopped(){
-        if(uploading) {
-            Log.i("RestClient","upload stopped");
-            uploading = false;
-            if (uploadListener != null) {
-                uploadListener.onStop();
-            }
-        }
-    }
-
-    public boolean isUploadQueueEmpty(){
-        return uploadQueue.size()==0;
-    }
-
-    public void setUploadListener(UploadListener listener){
-        uploadListener = listener;
-    }
-
-    public void removeUploadListener(){
-        uploadListener = null;
-    }
-
     // listener interfaces -------------------------------------------------------------------------
 
     public interface Listener{
-        void onSuccess(Response response);
-        void onFailure(Response response);
+        void onSuccess(RestResponse response);
+        void onFailure(RestResponse response);
     }
 
     public interface ServerListener{
