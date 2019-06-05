@@ -16,6 +16,9 @@ public class Config {
     public static boolean CHECK_SESSION_INFO = false; // if true, an api is called after registration to check for existing session info
     public static boolean CHECK_CONTACT_INFO = false; // if true, an api is called after registration to check for contact info
 
+    //
+    public static boolean ENABLE_VIGNETTES = false; // if true, a notification reminding the user of the upcoming visit will appear one month, week, and day from the start date
+
     //Debug
     public static boolean DEBUG_DIALOGS = true; // click the header on most screens a couple times and a debug dialog will appear
 
