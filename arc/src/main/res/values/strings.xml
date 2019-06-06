@@ -247,7 +247,7 @@
 
     <string name="notification_confirm_adjust_1">&lt;b>Your next testing cycle will be {START} through {END}.&lt;/b></string>
     <string name="notification_confirm_adjust_2">Please confirm these testing dates or adjust your schedule.</string>
-    <string name="notification_1month">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
+    <string name="notification_1month">Your next week of testing begins in one month, on {DATE}.&lt;br /> &lt;br />You may adjust this schedule up to 7 days.</string>
     <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
     <string name="notification_1day">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
 
