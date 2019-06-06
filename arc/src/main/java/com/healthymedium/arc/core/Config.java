@@ -18,7 +18,7 @@ public class Config {
 
     //
     public static boolean ENABLE_VIGNETTES = false; // if true, a notification reminding the user of the upcoming visit will appear one month, week, and day from the start date
-
+    public static boolean ENABLE_LEGACY_PRICE_SETS = false; // if true, the PriceManager will continue to use a long-standing, but incorrect, method to determine the price set for a given test session.
     //Debug
     public static boolean DEBUG_DIALOGS = true; // click the header on most screens a couple times and a debug dialog will appear
 
