@@ -855,6 +855,10 @@ public class StudyStateMachine {
         return state;
     }
 
+    public StudyStateCache getCache(){
+        return cache;
+    }
+
     // loadTestDataFromCache() is called from abandonTest().
     // Override this method to handle loading test data from cache.
     public void loadTestDataFromCache() {
