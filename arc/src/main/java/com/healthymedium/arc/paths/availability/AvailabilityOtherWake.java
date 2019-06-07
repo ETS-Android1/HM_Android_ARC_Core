@@ -48,6 +48,10 @@ public class AvailabilityOtherWake extends QuestionTime {
         return view;
     }
 
+    public String getWeekday(){
+        return weekday;
+    }
+
     @Override
     public void onPause() {
         Study.getParticipant().save();
