@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             QuestionLanguagePreference fragment = new QuestionLanguagePreference(
                     false,
                     true,
-                    "Please select your <b>preferred language.</b>",
+                    "Language:",
                     "",
                     options,
                     locales);
