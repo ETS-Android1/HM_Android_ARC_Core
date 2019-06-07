@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
@@ -28,9 +28,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.templates.StandardTemplate;
-import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
-import com.healthymedium.arc.paths.informative.PrivacyScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
@@ -382,7 +380,7 @@ public class SetupSite extends StandardTemplate {
         }
     };
 
-    String parseForError(Response response, boolean failed){
+    String parseForError(RestResponse response, boolean failed){
         int code = response.code;
         switch (code){
             case 400:
@@ -404,7 +402,7 @@ public class SetupSite extends StandardTemplate {
 
     RestClient.Listener registrationListener = new RestClient.Listener() {
         @Override
-        public void onSuccess(Response response) {
+        public void onSuccess(RestResponse response) {
             String errorString = parseForError(response,false);
             loadingDialog.dismiss();
             if(errorString==null) {
@@ -417,7 +415,7 @@ public class SetupSite extends StandardTemplate {
         }
 
         @Override
-        public void onFailure(Response response) {
+        public void onFailure(RestResponse response) {
             String errorString = parseForError(response,true);
             showError(errorString);
             loadingDialog.dismiss();

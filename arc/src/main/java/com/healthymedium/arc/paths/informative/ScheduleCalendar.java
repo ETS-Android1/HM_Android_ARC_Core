@@ -56,7 +56,7 @@ public class ScheduleCalendar extends BaseFragment {
         String language = PreferencesManager.getInstance().getString("language", "en");
         String country = PreferencesManager.getInstance().getString("country", "US");
         Locale locale = new Locale(language, country);
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("E, MMM d").withLocale(locale);
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
         String start = fmt.print(visitStart);
         String end = fmt.print(visitEnd);
