@@ -255,6 +255,14 @@
 
     <string name="scroll">Scroll</string>
 
+    <string name="Day_Abbrev_Sun">S</string>
+    <string name="Day_Abbrev_Mon">M</string>
+    <string name="Day_Abbrev_Tue">T</string>
+    <string name="Day_Abbrev_Wed">W</string>
+    <string name="Day_Abbrev_Thur">T</string>
+    <string name="Day_Abbrev_Fri">F</string>
+    <string name="Day_Abbrev_Sat">S</string>
+
     <string name="ChangeAvail_date_picker_body"></string>
     <string name="ChangeAvail_date_picker_confirm_body"></string>
     <string name="Contact_header"></string>
