@@ -17,6 +17,7 @@ public class Config {
     public static boolean CHECK_CONTACT_INFO = false; // if true, an api is called after registration to check for contact info
 
     //
+    public static boolean ENABLE_SIGNATURES = false; // if true, signatures will be required before and after every test
     public static boolean ENABLE_VIGNETTES = false; // if true, a notification reminding the user of the upcoming visit will appear one month, week, and day from the start date
     public static boolean ENABLE_LEGACY_PRICE_SETS = false; // if true, the PriceManager will continue to use a long-standing, but incorrect, method to determine the price set for a given test session.
     //Debug
