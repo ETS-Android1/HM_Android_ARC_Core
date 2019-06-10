@@ -59,7 +59,7 @@ public class ScheduleCalendar extends BaseFragment {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
         String start = fmt.print(visitStart);
-        String end = fmt.print(visitEnd);
+        String end = fmt.print(visitEnd.minusDays(1));
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
 
