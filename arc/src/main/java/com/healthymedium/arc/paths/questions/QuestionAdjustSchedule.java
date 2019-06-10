@@ -52,6 +52,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         setHelpVisible(allowHelp);
 
         NumberPicker picker = new NumberPicker(Application.getInstance());
+        picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         setNumberPickerTextColor(picker, ContextCompat.getColor(Application.getInstance(), R.color.text));
         content.addView(picker);
 
