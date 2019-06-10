@@ -3,9 +3,16 @@ package com.healthymedium.arc.study;
 import android.util.Log;
 
 import com.healthymedium.arc.api.tests.CognitiveTest;
+import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
+import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.questions.QuestionSignature;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudyStateMachineAlpha extends StudyStateMachine {
 
@@ -27,7 +34,6 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
     public static final int LIFECYCLE_IDLE = 3;                 //
     public static final int LIFECYCLE_ARC = 4;                  //
     public static final int LIFECYCLE_OVER = 5;                 //
-
 
     @Override
     public void initialize() {
@@ -336,10 +342,27 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
         //  leave empty for now
     }
 
+    public void checkForSignaturePage(){
+        if(Config.ENABLE_SIGNATURES) {
+            addSignaturePage();
+        }
+    }
+
+    public void addSignaturePage(){
+        List<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new QuestionSignature(
+                false,
+                true,
+                ViewUtil.getString(R.string.idverification_header),
+                ViewUtil.getString(R.string.idverification_body)));
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
+    }
 
     // --------------------------------------------------------------------------
 
     public void setPathFirstOfBaseline(){
+        checkForSignaturePage();
         addChronotypeSurvey();
         addWakeSurvey();
         addContextSurvey();
@@ -350,6 +373,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
 
     public void setPathBaselineTest(){
         checkForLandingPage();
+        checkForSignaturePage();
         addContextSurvey();
         addTests();
         addInterruptedPage();
@@ -362,6 +386,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
 
     public void setPathTestFirstOfVisit(){
         checkForLandingPage();
+        checkForSignaturePage();
         addChronotypeSurvey();
         addWakeSurvey();
         addContextSurvey();
@@ -371,6 +396,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
 
     public void setPathTestFirstOfDay(){
         checkForLandingPage();
+        checkForSignaturePage();
         addWakeSurvey();
         addContextSurvey();
         addTests();
@@ -379,6 +405,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
 
     public void setPathTestOther(){
         checkForLandingPage();
+        checkForSignaturePage();
         addContextSurvey();
         addTests();
         addInterruptedPage();
