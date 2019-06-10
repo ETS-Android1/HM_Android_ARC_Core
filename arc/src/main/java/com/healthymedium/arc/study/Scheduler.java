@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.util.Log;
 
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.time.JodaUtil;
 
@@ -17,6 +18,8 @@ import static java.lang.Math.floor;
 
 public class Scheduler {
 
+    protected static String tag = "Scheduler";
+
     public Scheduler() {
 
     }
@@ -25,33 +28,68 @@ public class Scheduler {
         if(visit==null){
             return;
         }
+
+        NotificationManager notificationManager = NotificationManager.getInstance();
+        int visitId = visit.getId();
         int testCount = visit.getNumberOfTests();
+
+        if(Config.ENABLE_VIGNETTES){
+            notificationManager.removeNotification(visitId, NotificationManager.VISIT_NEXT_MONTH);
+            notificationManager.removeNotification(visitId, NotificationManager.VISIT_NEXT_WEEK);
+            notificationManager.removeNotification(visitId, NotificationManager.VISIT_NEXT_DAY);
+        }
+
         List<TestSession> testSessions = visit.getTestSessions();
         for(TestSession session: testSessions) {
-                Log.i("Scheduler", "Unscheduling notifications for " + visit.getId() + "." + session.getId());
-                NotificationManager.getInstance().removeNotification(session.getId(), NotificationManager.TEST_TAKE);
-                NotificationManager.getInstance().removeNotification(testCount+session.getId(), NotificationManager.TEST_MISSED);
+            int sessionId = session.getId();
+            Log.i(tag, "Unscheduling notifications for " + visitId + "." + sessionId);
+            notificationManager.removeNotification(sessionId, NotificationManager.TEST_TAKE);
+            notificationManager.removeNotification(testCount+sessionId, NotificationManager.TEST_MISSED);
         }
     }
 
-    public void scheduleNotifications(Visit visit) {
+    public void scheduleNotifications(Visit visit, boolean rescheduleDuringVisit) {
         if(visit==null){
             return;
         }
-        int testCount = visit.getNumberOfTests();
+
+        NotificationManager notificationManager = NotificationManager.getInstance();
+        int visitId = visit.getId();
+
+        if (Config.ENABLE_VIGNETTES && visitId != 0 && !rescheduleDuringVisit) {
+            Log.i(tag, "Scheduling vignette notifications for " + visitId + ".");
+            DateTime startDate = visit.getActualStartDate();
+
+            // one month out, noon
+            DateTime monthVignette = startDate.minusMonths(1).plusHours(12);
+            if (monthVignette.isAfterNow()) {
+                notificationManager.scheduleNotification(visitId, NotificationManager.VISIT_NEXT_MONTH, monthVignette);
+            }
+
+            // one week out, noon
+            DateTime weekVignette = startDate.minusWeeks(1).plusHours(12);
+            if (weekVignette.isAfterNow()) {
+                notificationManager.scheduleNotification(visitId, NotificationManager.VISIT_NEXT_WEEK, weekVignette);
+            }
+
+            // one day out, noon
+            DateTime dayVignette = startDate.minusDays(1).plusHours(12);
+            if (dayVignette.isAfterNow()) {
+                notificationManager.scheduleNotification(visitId, NotificationManager.VISIT_NEXT_DAY, dayVignette);
+            }
+        }
+
         List<TestSession> testSessions = visit.getTestSessions();
         for (TestSession session : testSessions) {
             if (session.getScheduledTime().isAfterNow()) {
-                Log.i("Scheduler", "Scheduling notifications for " + visit.getId() + "." + session.getId());
-                NotificationManager.getInstance().scheduleNotification(session.getId(), NotificationManager.TEST_TAKE, session.getScheduledTime());
-                NotificationManager.getInstance().scheduleNotification(session.getId(), NotificationManager.TEST_MISSED, session.getExpirationTime());
+                int sessionId = session.getId();
+                Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
+                notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_TAKE, session.getScheduledTime());
+                notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_MISSED, session.getExpirationTime());
             }
         }
-        visit.confirmNotificationsScheduled();
-    }
 
-    public void scheduleNotifications(Visit visit, Boolean rescheduleDuringVisit) {
-        scheduleNotifications(visit);
+        visit.confirmNotificationsScheduled();
     }
 
     public void scheduleTests(DateTime now, Participant participant){

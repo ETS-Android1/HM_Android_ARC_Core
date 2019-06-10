@@ -72,9 +72,11 @@ public class CallbackChain {
 
             Link link = links.remove(0);
 
-            boolean proceed = true;
+            boolean proceed;
             if(link.listener!=null) {
                 proceed = link.listener.onResponse(response);
+            } else {
+                proceed = response.successful;
             }
 
             if(!proceed){
@@ -118,9 +120,11 @@ public class CallbackChain {
 
             Link link = links.remove(0);
 
-            boolean proceed = true;
+            boolean proceed;
             if(link.listener!=null) {
                 proceed = link.listener.onFailure(response);
+            } else {
+                proceed = response.successful;
             }
 
             if(!proceed){

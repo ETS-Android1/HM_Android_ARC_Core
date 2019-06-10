@@ -11,7 +11,7 @@ import okhttp3.RequestBody;
 
 public class CachedImage  extends CachedObject{
 
-    CachedImage(){
+    public CachedImage(){
         super();
         mediaType = "image/*";
     }

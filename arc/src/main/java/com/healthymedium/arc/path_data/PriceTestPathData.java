@@ -20,12 +20,6 @@ public class PriceTestPathData extends PathSegmentData {
 
     public PriceTestPathData(){
         super();
-
-        priceSet = PriceManager.getInstance().getPriceSet();
-        int size = priceSet.size();
-        for(int i=0;i<size;i++){
-            sections.add(new Section());
-        }
     }
 
     public void markStarted(){
@@ -37,15 +31,31 @@ public class PriceTestPathData extends PathSegmentData {
     }
 
     public List<PriceManager.Item> getPriceSet(){
+        if(priceSet==null){
+            loadPriceSet();
+        }
         return priceSet;
     }
 
     public List<Section> getSections() {
+        if(sections.size()==0) {
+            loadPriceSet();
+        }
         return sections;
     }
 
     public void setSections(List<Section> sections) {
         this.sections = sections;
+    }
+
+    private void loadPriceSet(){
+        priceSet = PriceManager.getInstance().getPriceSet();
+        if(sections.size()==0){
+            int size = priceSet.size();
+            for(int i=0;i<size;i++){
+                sections.add(new Section());
+            }
+        }
     }
 
     @Override

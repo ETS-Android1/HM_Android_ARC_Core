@@ -30,6 +30,10 @@ public class BaseFragment extends Fragment {
         tag = getClass().getSimpleName();
     }
 
+    public String getSimpleTag(){
+        return tag;
+    }
+
     @Override
     public void onResume() {
         super.onResume();
