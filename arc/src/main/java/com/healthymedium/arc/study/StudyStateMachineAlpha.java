@@ -320,7 +320,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
 
     // state machine helpers ---------------------------------------------------------------------
 
-    void checkForLandingPage(){
+    public void checkForLandingPage(){
         if(Config.OPENED_FROM_NOTIFICATION) {
             Config.OPENED_FROM_NOTIFICATION = false;
 
@@ -388,7 +388,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
         setPathNoTests();
     }
 
-    
+
     // utility functions ---------------------------------------------------------------------------
 
     @Override
