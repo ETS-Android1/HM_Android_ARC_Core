@@ -30,6 +30,13 @@ public class QuestionRadioButtons extends QuestionTemplate {
         type = "choice";
     }
 
+    public QuestionRadioButtons(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, String button) {
+        super(allowBack,header,subheader, button);
+        this.options = options;
+        this.allowHelp = allowHelp;
+        type = "choice";
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
@@ -59,6 +66,7 @@ public class QuestionRadioButtons extends QuestionTemplate {
                         }
                         if (!buttonNext.isEnabled()) {
                             buttonNext.setEnabled(true);
+                            onNextButtonEnabled(true);
                         }
                     }
                 }
