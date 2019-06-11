@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Study;
@@ -39,8 +40,33 @@ public class PriceManager {
         return instance;
     }
 
-
     public List<PriceManager.Item> getPriceSet(){
+
+        if(Config.ENABLE_LEGACY_PRICE_SETS)
+        {
+            return getLegacyPriceSet();
+        }
+
+        int index = Study.getCurrentTestSession().getId();
+        int size = priceSets.size();
+
+        if(size == 0)
+        {
+            return new ArrayList<>();
+        }
+
+        if(index>=size){
+            index -= size;
+        }
+        return priceSets.get(index);
+    }
+
+    // Many apps have used this older version of the getPriceSet() method, which returns an incorrect
+    // priceSet for later visits. This method is being maintained to provide consistent tests for
+    // the participants using these applications.
+
+    private List<PriceManager.Item> getLegacyPriceSet(){
+
         ParticipantState state = Study.getParticipant().getState();
         int size = priceSets.size();
         int index = 10*state.currentVisit+state.currentTestSession;
@@ -50,9 +76,6 @@ public class PriceManager {
         return priceSets.get(index);
     }
 
-    public List<PriceManager.Item> getPriceSet(int set,int test){
-        return priceSets.get(10*set+test);
-    }
 
     private void loadJson(Context context){
         long before = System.currentTimeMillis();

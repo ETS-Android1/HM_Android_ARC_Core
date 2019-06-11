@@ -17,8 +17,8 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
 
     public List<Locale> locales;
 
-    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<Locale> locales) {
-        super(allowBack, allowHelp, header, subheader, options);
+    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<Locale> locales, String button) {
+        super(allowBack, allowHelp, header, subheader, options, button);
         this.locales = locales;
     }
 
@@ -53,6 +53,12 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         return response;
     }
 
+    @Override
+    protected void onNextButtonEnabled(boolean enabled) {
+        if (enabled) {
+            buttonNext.setText("Next");
+        }
+    }
 
     @Override
     protected void onNextRequested() {

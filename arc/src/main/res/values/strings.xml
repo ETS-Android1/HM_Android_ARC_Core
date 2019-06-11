@@ -245,9 +245,8 @@
     <string name="error2">Already enrolled on another device</string>
     <string name="error4">Please set a minimum of 4 hours of wake time.</string>
 
-    <string name="notification_confirm_adjust_1">&lt;b>Your next testing cycle will be {DATE1} through {DATE2}.&lt;/b></string>
-    <string name="notification_confirm_adjust_2">Please confirm these testing dates or adjust your schedule.</string>
-    <string name="notification_1month">Your next week of testing begins in one month, on {DATE}.&lt;br /> &lt;br />You may adjust this schedule up to 7 days.</string>
+    <string name="notification_confirm_adjust_1">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule. </string>
+    <string name="notification_1month">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
     <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
     <string name="notification_1day">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
 

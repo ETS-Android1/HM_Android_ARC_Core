@@ -787,7 +787,7 @@ public class StudyStateMachine {
                 String language = PreferencesManager.getInstance().getString("language", "en");
                 String country = PreferencesManager.getInstance().getString("country", "US");
                 Locale locale = new Locale(language, country);
-                DateTimeFormatter fmt = DateTimeFormat.forPattern("MM/dd/yy").withLocale(locale);
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
                 //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
                 header = res.getString(R.string.thankyou_header2);
@@ -799,7 +799,7 @@ public class StudyStateMachine {
                 // String endDate = visit.getActualEndDate().toString(format);
 
                 String startDate = fmt.print(visit.getActualStartDate());
-                String endDate = fmt.print(visit.getActualEndDate());
+                String endDate = fmt.print(visit.getActualEndDate().minusDays(1));
 
                 body2 = body2.replace("{DATE1}", startDate);
                 body2 = body2.replace("{DATE2}", endDate);
@@ -853,6 +853,10 @@ public class StudyStateMachine {
 
     public StudyState getState(){
         return state;
+    }
+
+    public StudyStateCache getCache(){
+        return cache;
     }
 
     // loadTestDataFromCache() is called from abandonTest().

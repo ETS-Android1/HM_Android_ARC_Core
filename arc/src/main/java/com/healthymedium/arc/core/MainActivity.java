@@ -99,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
                     "Language:",
                     "",
                     options,
-                    locales);
+                    locales,
+                    "Confirm");
             NavigationManager.getInstance().open(fragment);
         }
     }

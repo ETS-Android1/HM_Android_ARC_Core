@@ -52,6 +52,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         setHelpVisible(allowHelp);
 
         NumberPicker picker = new NumberPicker(Application.getInstance());
+        picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         setNumberPickerTextColor(picker, ContextCompat.getColor(Application.getInstance(), R.color.text));
         content.addView(picker);
 
@@ -195,7 +196,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         int last = visit.testSessions.size()-1;
         visit.setActualStartDate(visit.testSessions.get(0).getScheduledTime());
-        visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime());
+        visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime().plusDays(1));
 
         Study.getScheduler().scheduleNotifications(visit, false);
     }
