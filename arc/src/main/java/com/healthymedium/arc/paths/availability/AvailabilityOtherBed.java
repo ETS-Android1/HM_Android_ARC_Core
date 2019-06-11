@@ -22,28 +22,22 @@ public class AvailabilityOtherBed extends QuestionTime {
     int minWakeTime = 4;
     int maxWakeTime = 24;
 
-    @SuppressLint("ValidFragment")
     public AvailabilityOtherBed(String weekday, String header) {
         super(true, header,"",null);
         this.weekday = weekday;
     }
 
-    @Nullable
+    public AvailabilityOtherBed(int minWakeTime, int maxWakeTime,String weekday, String header) {
+        super(true, header,"",null);
+        this.minWakeTime = minWakeTime;
+        this.maxWakeTime = maxWakeTime;
+        this.weekday = weekday;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
-
-        if (getArguments() != null) {
-            if (getArguments().containsKey("minWakeTime")) {
-                minWakeTime = getArguments().getInt("minWakeTime");
-            }
-
-            if (getArguments().containsKey("maxWakeTime")) {
-                maxWakeTime = getArguments().getInt("maxWakeTime");
-            }
-        }
-
 
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged(weekday)){

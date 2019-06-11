@@ -291,8 +291,7 @@ public class StudyStateMachine {
         return true;
     }
 
-    // -----------------------------------------------------------------
-
+    // ---------------------------------------------------------------------------------------------
 
     public void setPathSetupParticipant(int firstDigitCount, int secondDigitCount, int authDigitCount){
         List<BaseFragment> fragments = new ArrayList<>();
@@ -311,40 +310,7 @@ public class StudyStateMachine {
         setPathSetupParticipant(5,3,5);
     }
 
-
-
-    public void setPathSetupAvailability(){
-        List<BaseFragment> fragments = new ArrayList<>();
-
-        Resources res = Application.getInstance().getResources();
-
-        fragments.add(new InfoTemplate(
-                false,
-                res.getString(R.string.setup_avail_header) ,
-                res.getString(R.string.setup_avail_subheader),
-                res.getString(R.string.setup_avail_body),
-                res.getString(R.string.button_begin)));
-
-        fragments.add(new AvailabilityMondayWake());
-        fragments.add(new AvailabilityMondayBed());
-        fragments.add(new AvailabilityWeekdayConfirm());
-        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
-        fragments.add(new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday)));
-        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
-        fragments.add(new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday)));
-        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
-        fragments.add(new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday)));
-        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
-        fragments.add(new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday)));
-        fragments.add(new AvailabilitySaturdayWake());
-        fragments.add(new AvailabilitySaturdayBed());
-        fragments.add(new AvailabilitySundayWake());
-        fragments.add(new AvailabilitySundayBed());
-
-        PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
-        enableTransition(segment,true);
-        cache.segments.add(segment);
-    }
+    // ---------------------------------------------------------------------------------------------
 
     public void setPathSetupAvailability(int minWakeTime, int maxWakeTime, boolean reschedule){
         List<BaseFragment> fragments = new ArrayList<>();
@@ -358,59 +324,41 @@ public class StudyStateMachine {
                 res.getString(R.string.setup_avail_body),
                 res.getString(R.string.button_begin)));
 
-        Bundle windowBundle = new Bundle();
-        windowBundle.putInt("minWakeTime", minWakeTime);
-        windowBundle.putInt("maxWakeTime", maxWakeTime);
-        windowBundle.putBoolean("reschedule", reschedule);
-
         fragments.add(new AvailabilityMondayWake());
-
-        AvailabilityMondayBed mondayBed = new AvailabilityMondayBed();
-        mondayBed.setArguments(windowBundle);
-        fragments.add(mondayBed);
-
+        fragments.add(new AvailabilityMondayBed(minWakeTime,maxWakeTime));
         fragments.add(new AvailabilityWeekdayConfirm());
-
-        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
-
-        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday));
-        tuesdayBed.setArguments(windowBundle);
-        fragments.add(tuesdayBed);
-
-        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
-
-        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday));
-        wednesdayBed.setArguments(windowBundle);
-        fragments.add(wednesdayBed);
-
-        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
-
-        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday));
-        thursdayBed.setArguments(windowBundle);
-        fragments.add(thursdayBed);
-
-        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
-
-        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday));
-        fridayBed.setArguments(windowBundle);
-        fragments.add(fridayBed);
-
+        fragments.add(new AvailabilityOtherWake(
+                "Tuesday", res.getString(R.string.availability_wake_tuesday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Tuesday", res.getString(R.string.availability_sleep_tuesday)));
+        fragments.add(new AvailabilityOtherWake(
+                "Wednesday", res.getString(R.string.availability_wake_wednesday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Wednesday", res.getString(R.string.availability_sleep_wednesday)));
+        fragments.add(new AvailabilityOtherWake(
+                "Thursday", res.getString(R.string.availability_wake_thursday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Thursday", res.getString(R.string.availability_sleep_thursday)));
+        fragments.add(new AvailabilityOtherWake(
+                "Friday", res.getString(R.string.availability_wake_friday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Friday", res.getString(R.string.availability_sleep_friday)));
         fragments.add(new AvailabilitySaturdayWake());
-
-        AvailabilitySaturdayBed saturdayBed = new AvailabilitySaturdayBed();
-        saturdayBed.setArguments(windowBundle);
-        fragments.add(saturdayBed);
-
+        fragments.add(new AvailabilitySaturdayBed(minWakeTime, maxWakeTime));
         fragments.add(new AvailabilitySundayWake());
-
-        AvailabilitySundayBed sundayBed = new AvailabilitySundayBed();
-        sundayBed.setArguments(windowBundle);
-        fragments.add(sundayBed);
+        fragments.add(new AvailabilitySundayBed(reschedule,minWakeTime,minWakeTime));
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
         cache.segments.add(segment);
     }
+
+    // default
+    public void setPathSetupAvailability(){
+        setPathSetupAvailability(4,24,false);
+    }
+
+    // ---------------------------------------------------------------------------------------------
 
     public void addChronotypeSurvey(){
         List<BaseFragment> fragments = new ArrayList<>();

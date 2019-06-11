@@ -17,13 +17,11 @@ public class AvailabilityOtherWake extends QuestionTime {
     CircadianClock clock;
     String weekday;
 
-    @SuppressLint("ValidFragment")
     public AvailabilityOtherWake(String weekday, String header) {
         super(true, header,"",null);
         this.weekday = weekday;
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
