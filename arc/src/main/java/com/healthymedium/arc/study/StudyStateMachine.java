@@ -294,43 +294,24 @@ public class StudyStateMachine {
     // -----------------------------------------------------------------
 
 
+    public void setPathSetupParticipant(int firstDigitCount, int secondDigitCount, int authDigitCount){
+        List<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new SetupWelcome());
+        fragments.add(new SetupParticipant(firstDigitCount,secondDigitCount));
+        fragments.add(new SetupParticipantConfirm(firstDigitCount,secondDigitCount));
+        fragments.add(new SetupSite(authDigitCount));
+
+        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
+        enableTransition(segment,false);
+        cache.segments.add(segment);
+    }
+
+    // default
     public void setPathSetupParticipant(){
-        List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new SetupWelcome());
-        fragments.add(new SetupParticipant());
-        fragments.add(new SetupParticipantConfirm());
-        fragments.add(new SetupSite());
-
-        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
-        enableTransition(segment,false);
-        cache.segments.add(segment);
+        setPathSetupParticipant(5,3,5);
     }
 
-    public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
-        List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new SetupWelcome());
 
-        SetupParticipant setupParticipantFragment = new SetupParticipant();
-        Bundle setupDigitsBundle = new Bundle();
-        setupDigitsBundle.putInt("firstDigits", firstDigits);
-        setupDigitsBundle.putInt("secondDigits", secondDigits);
-        setupParticipantFragment.setArguments(setupDigitsBundle);
-        fragments.add(setupParticipantFragment);
-
-        SetupParticipantConfirm setupParticipantConfirmFragment = new SetupParticipantConfirm();
-        setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
-        fragments.add(setupParticipantConfirmFragment);
-
-        SetupSite setupSiteFragment = new SetupSite();
-        Bundle setupSiteBundle = new Bundle();
-        setupSiteBundle.putInt("siteDigits", siteDigits);
-        setupSiteFragment.setArguments(setupSiteBundle);
-        fragments.add(setupSiteFragment);
-
-        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
-        enableTransition(segment,false);
-        cache.segments.add(segment);
-    }
 
     public void setPathSetupAvailability(){
         List<BaseFragment> fragments = new ArrayList<>();
