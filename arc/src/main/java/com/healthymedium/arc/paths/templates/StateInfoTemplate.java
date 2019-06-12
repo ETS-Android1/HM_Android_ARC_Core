@@ -1,6 +1,7 @@
 package com.healthymedium.arc.paths.templates;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -26,6 +27,8 @@ public class StateInfoTemplate extends BaseFragment {
     String stringBody;
     String stringButton;
 
+    Drawable buttonImage;
+
     TextView textViewBack;
     TextView textViewHeader;
     TextView textViewSubheader;
@@ -42,6 +45,18 @@ public class StateInfoTemplate extends BaseFragment {
         stringSubHeader = subheader;
         stringBody = body;
         stringButton = buttonText;
+
+        if(allowBack){
+            allowBackPress(true);
+        }
+    }
+
+    public StateInfoTemplate(boolean allowBack, String header, String subheader, String body, @Nullable Drawable buttonImage) {
+        this.allowBack = allowBack;
+        stringHeader = header;
+        stringSubHeader = subheader;
+        stringBody = body;
+        this.buttonImage = buttonImage;
 
         if(allowBack){
             allowBackPress(true);
@@ -91,6 +106,8 @@ public class StateInfoTemplate extends BaseFragment {
         button = view.findViewById(R.id.button);
         if(stringButton!=null){
             button.setText(stringButton);
+        } else if (buttonImage!=null) {
+            button.setIcon(buttonImage);
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override

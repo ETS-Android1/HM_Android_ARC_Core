@@ -826,7 +826,7 @@ public class StudyStateMachine {
                 header ,
                 subheader,
                 body,
-                "temp");//ViewUtil.getDrawable(R.drawable.ic_home_active));
+                ViewUtil.getDrawable(R.drawable.ic_home_active));
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
