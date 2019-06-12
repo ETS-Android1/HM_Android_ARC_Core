@@ -22,6 +22,22 @@ public class CircadianRhythm {
         lastWakeUpdate = now;
     }
 
+    public void setTimes(String wake, String bed) {
+        this.wake = LocalTime.parse(wake);
+        lastWakeUpdate = DateTime.now().getMillis();
+
+        this.bed = LocalTime.parse(bed);
+        lastBedUpdate = DateTime.now().getMillis();
+    }
+
+    public void setTimes(LocalTime wake, LocalTime bed) {
+        this.wake = wake;
+        lastWakeUpdate = DateTime.now().getMillis();
+
+        this.bed = bed;
+        lastBedUpdate = DateTime.now().getMillis();
+    }
+
     public LocalTime getBedTime() {
         return bed;
     }

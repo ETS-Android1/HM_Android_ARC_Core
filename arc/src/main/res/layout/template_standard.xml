@@ -35,7 +35,7 @@
                     android:paddingLeft="16dp"
                     android:paddingTop="22dp"
                     android:paddingBottom="22dp"
-                    android:text="Back"
+                    android:text="@string/button_back"
                     android:textAllCaps="true"
                     android:textColor="@color/primary"
                     android:textSize="14dp"
@@ -58,7 +58,7 @@
                     android:paddingTop="22dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="22dp"
-                    android:text="Help"
+                    android:text="@string/help"
                     android:textAllCaps="true"
                     android:textColor="@color/primary"
                     android:textSize="14dp" />
@@ -106,7 +106,7 @@
         android:layout_marginBottom="24dp"
         android:visibility="gone"
         app:enabled="false"
-        app:text="NEXT" />
+        app:text="@string/button_next" />
 
     <TextView
         android:id="@+id/textViewScroll"
@@ -118,7 +118,7 @@
         android:background="@drawable/ic_rating_scroll_indicator"
         android:gravity="center"
         android:paddingBottom="10dp"
-        android:text="Scroll"
+        android:text="@string/scroll"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:visibility="gone" />

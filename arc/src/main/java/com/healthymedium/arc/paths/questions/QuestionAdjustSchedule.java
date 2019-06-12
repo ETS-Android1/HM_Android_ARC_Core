@@ -1,29 +1,35 @@
 package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.Duration;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @SuppressLint("ValidFragment")
 public class QuestionAdjustSchedule extends QuestionTemplate {
@@ -36,7 +42,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
 
     public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
-        super(allowBack,header,subheader,"SUBMIT");
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_confirm));
         this.allowHelp = allowHelp;
     }
 
@@ -46,6 +52,8 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         setHelpVisible(allowHelp);
 
         NumberPicker picker = new NumberPicker(Application.getInstance());
+        picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        setNumberPickerTextColor(picker, ContextCompat.getColor(Application.getInstance(), R.color.text));
         content.addView(picker);
 
         picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -70,7 +78,10 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String range;
 
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d");
+        String language = PreferencesManager.getInstance().getString("language", "en");
+        String country = PreferencesManager.getInstance().getString("country", "US");
+        Locale locale = new Locale(language, country);
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
 
         int visitAdjustIndex = 0;
 
@@ -173,49 +184,21 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     }
 
     public void updateDates() {
-//        if (shiftDays == 0) {
-//            return;
-//        }
 
-        Participant participant = Study.getParticipant();
-        Visit visit = participant.getCurrentVisit();
-        //DateTime visitStart = visit.getScheduledStartDate();
+        Visit visit = Study.getCurrentVisit();
 
-        List<TestSession> testSessions = new ArrayList<> ();
+        Study.getScheduler().unscheduleNotifications(visit);
 
-        if (shiftDays <= 0) {
-            shiftDays = Math.abs(shiftDays);
-            for (int i = 0; i < visit.testSessions.size(); i++) {
-                TestSession temp = visit.testSessions.get(i);
-                temp.setScheduledTime(temp.getUserChangeableTime().minusDays(shiftDays));
-                testSessions.add(temp);
-
-                if (i == 0) {
-                    visit.setActualStartDate(temp.getScheduledTime());
-                } else if (i == visit.testSessions.size()-1) {
-                    visit.setActualEndDate(temp.getScheduledTime());
-                }
-            }
-        } else {
-            for (int i = 0; i < visit.testSessions.size(); i++) {
-                TestSession temp = visit.testSessions.get(i);
-                temp.setScheduledTime(temp.getUserChangeableTime().plusDays(shiftDays));
-                visit.testSessions.set(i, temp);
-                testSessions.add(temp);
-
-                if (i == 0) {
-                    visit.setActualStartDate(temp.getScheduledTime());
-                } else if (i == visit.testSessions.size()-1) {
-                    visit.setActualEndDate(temp.getScheduledTime());
-                }
-            }
+        for (int i = 0; i < visit.testSessions.size(); i++) {
+            DateTime time = visit.testSessions.get(i).getUserChangeableTime().plusDays(shiftDays);
+            visit.testSessions.get(i).setScheduledTime(time);
         }
 
-        visit.updateTestSessions(testSessions);
+        int last = visit.testSessions.size()-1;
+        visit.setActualStartDate(visit.testSessions.get(0).getScheduledTime());
+        visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime().plusDays(1));
 
-        // Reschedule notifications
-        Study.getScheduler().unscheduleNotifications(Study.getCurrentVisit());
-        Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), false);
+        Study.getScheduler().scheduleNotifications(visit, false);
     }
 
     public void enableNextButton() {
@@ -233,4 +216,27 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             });
         }
     }
+
+    public void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+
+        try{
+            Field selectorWheelPaintField = numberPicker.getClass().getDeclaredField("mSelectorWheelPaint");
+            selectorWheelPaintField.setAccessible(true);
+            ((Paint)selectorWheelPaintField.get(numberPicker)).setColor(color);
+        }
+        catch(Exception e){
+            // nothing
+        }
+
+        final int count = numberPicker.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = numberPicker.getChildAt(i);
+            if (child instanceof EditText) {
+                ((EditText) child).setTextColor(color);
+            }
+        }
+        numberPicker.invalidate();
+
+    }
+
 }

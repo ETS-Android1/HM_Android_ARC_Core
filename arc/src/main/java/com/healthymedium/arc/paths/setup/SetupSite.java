@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.api.models.Response;
+import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
@@ -28,9 +28,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.templates.StandardTemplate;
-import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
-import com.healthymedium.arc.paths.informative.PrivacyScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
@@ -60,7 +58,7 @@ public class SetupSite extends StandardTemplate {
     LoadingDialog loadingDialog;
 
     public SetupSite() {
-        super(true, Application.getInstance().getResources().getString(R.string.login_enter_siteID),"");
+        super(true, ViewUtil.getString(R.string.login_enter_raterID),"");
         disableScrollBehavior();
     }
 
@@ -162,7 +160,7 @@ public class SetupSite extends StandardTemplate {
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         textViewPolicy = new TextView(getContext());
-        textViewPolicy.setText("By signing in you agree to our");
+        textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);
 
@@ -171,7 +169,7 @@ public class SetupSite extends StandardTemplate {
         ViewUtil.underlineTextView(textViewPolicyLink);
         textViewPolicyLink.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
         textViewPolicyLink.setGravity(Gravity.CENTER_HORIZONTAL);
-        textViewPolicyLink.setText("Privacy Policy");
+        textViewPolicyLink.setText(getResources().getString(com.healthymedium.arc.library.R.string.privacy_linked));
         textViewPolicyLink.setTextSize(15);
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -382,29 +380,29 @@ public class SetupSite extends StandardTemplate {
         }
     };
 
-    String parseForError(Response response, boolean failed){
+    String parseForError(RestResponse response, boolean failed){
         int code = response.code;
         switch (code){
             case 400:
-                return getResources().getString(R.string.error_default);
+                return getResources().getString(R.string.error3);
             case 401:
-                return getResources().getString(R.string.error_401);
+                return getResources().getString(R.string.error1);
             case 409:
-                return getResources().getString(R.string.error_409);
+                return getResources().getString(R.string.error2);
         }
         if(response.errors.keySet().size()>0){
             String key = response.errors.keySet().toArray()[0].toString();
             return response.errors.get(key).getAsString();
         }
         if(!response.successful || failed){
-            return getResources().getString(R.string.error_default);
+            return getResources().getString(R.string.error3);
         }
         return null;
     }
 
     RestClient.Listener registrationListener = new RestClient.Listener() {
         @Override
-        public void onSuccess(Response response) {
+        public void onSuccess(RestResponse response) {
             String errorString = parseForError(response,false);
             loadingDialog.dismiss();
             if(errorString==null) {
@@ -417,7 +415,7 @@ public class SetupSite extends StandardTemplate {
         }
 
         @Override
-        public void onFailure(Response response) {
+        public void onFailure(RestResponse response) {
             String errorString = parseForError(response,true);
             showError(errorString);
             loadingDialog.dismiss();

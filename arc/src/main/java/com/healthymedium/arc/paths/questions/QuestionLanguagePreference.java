@@ -2,7 +2,10 @@ package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
 
-import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Locale;
+import com.healthymedium.arc.core.SplashScreen;
+import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import java.util.HashMap;
@@ -12,8 +15,11 @@ import java.util.Map;
 @SuppressLint("ValidFragment")
 public class QuestionLanguagePreference extends QuestionRadioButtons {
 
-    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options) {
-        super(allowBack, allowHelp, header, subheader, options);
+    public List<Locale> locales;
+
+    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<Locale> locales, String button) {
+        super(allowBack, allowHelp, header, subheader, options, button);
+        this.locales = locales;
     }
 
     @Override
@@ -26,25 +32,37 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
             response.put("value", value);
         }
 
+        String language = Locale.LANGUAGE_ENGLISH;
+        String country = Locale.COUNTRY_UNITED_STATES;
+
         selection = options.get((int)value);
 
-        if (selection.equals("English")) {
-            PreferencesManager.getInstance().putString("language", "en");
+        for(Locale locale : locales){
+            if(locale.getLabel().equals(selection)){
+                language = locale.getLanguage();
+                country = locale.getCountry();
+                break;
+            }
         }
-        else if (selection.equals("Français")) {
-            PreferencesManager.getInstance().putString("language", "fr");
-        }
-        else if (selection.equals("Español")) {
-            PreferencesManager.getInstance().putString("language", "es");
-        }
+
+        PreferencesManager.getInstance().putString("language", language);
+        PreferencesManager.getInstance().putString("country", country);
+
+        Application.getInstance().updateLocale(getContext());
 
         return response;
     }
 
+    @Override
+    protected void onNextButtonEnabled(boolean enabled) {
+        if (enabled) {
+            buttonNext.setText("Next");
+        }
+    }
 
     @Override
     protected void onNextRequested() {
         onDataCollection();
-        Study.getInstance().openNextFragment();
+        NavigationManager.getInstance().open(new SplashScreen());
     }
 }

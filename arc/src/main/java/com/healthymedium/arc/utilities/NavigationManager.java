@@ -9,10 +9,6 @@ import com.healthymedium.arc.library.R;
 
 public class NavigationManager {
 
-    public interface NavigationListener {
-        void onBackStackChanged();
-    }
-
     private static NavigationManager instance;
     private FragmentManager fragmentManager;
     private NavigationListener navigationListener;
@@ -26,18 +22,6 @@ public class NavigationManager {
     public static synchronized void initializeInstance(final FragmentManager fragmentManager) {
         instance = new NavigationManager();
         instance.fragmentManager = fragmentManager;
-        instance.fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                Fragment currentFragment = instance.fragmentManager.findFragmentById(instance.currentFragmentId);
-                if (currentFragment instanceof BaseFragment) {
-                }
-                if (instance.navigationListener != null) {
-                    instance.navigationListener.onBackStackChanged();
-                }
-            }
-        });
-
     }
 
     public static synchronized NavigationManager getInstance() {
@@ -72,12 +56,18 @@ public class NavigationManager {
                     .addToBackStack(tag)
                     .commitAllowingStateLoss();
             currentFragmentId = fragment.getId();
+            if(navigationListener!=null){
+                navigationListener.onOpen();
+            }
         }
     }
 
     public void popBackStack() {
         if (fragmentManager != null) {
             fragmentManager.popBackStack();
+            if(navigationListener!=null){
+                navigationListener.onPopBack();
+            }
         }
     }
 
@@ -97,5 +87,15 @@ public class NavigationManager {
             fragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
     }
+
+    public BaseFragment getCurrentFragment(){
+        return (BaseFragment) fragmentManager.findFragmentById(instance.currentFragmentId);
+    }
+
+    public interface NavigationListener {
+        void onOpen();
+        void onPopBack();
+    }
+
 
 }

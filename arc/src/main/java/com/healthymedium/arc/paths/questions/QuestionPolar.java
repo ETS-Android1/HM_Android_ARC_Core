@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 // a yes or no question
 @SuppressLint("ValidFragment")
@@ -31,7 +33,7 @@ public class QuestionPolar extends QuestionTemplate {
         setHelpVisible(false);
 
         yesButton = new RadioButton(getContext());
-        yesButton.setText("Yes");
+        yesButton.setText(ViewUtil.getString(R.string.YES));
         yesButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -45,13 +47,13 @@ public class QuestionPolar extends QuestionTemplate {
                 if(!buttonNext.isEnabled()){
                     buttonNext.setEnabled(true);
                     onNextButtonEnabled(true);
-                    buttonNext.setText("NEXT");
+                    buttonNext.setText(ViewUtil.getString(R.string.button_next));
                 }
             }
         });
 
         noButton = new RadioButton(getContext());
-        noButton.setText("No");
+        noButton.setText(ViewUtil.getString(R.string.NO));
         noButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -65,14 +67,14 @@ public class QuestionPolar extends QuestionTemplate {
                 if(!buttonNext.isEnabled()){
                     buttonNext.setEnabled(true);
                     onNextButtonEnabled(true);
-                    buttonNext.setText("NEXT");
+                    buttonNext.setText(ViewUtil.getString(R.string.button_next));
                 }
             }
         });
 
         content.addView(yesButton);
         content.addView(noButton);
-        buttonNext.setText("CHOOSE ANSWER");
+        buttonNext.setText(ViewUtil.getString(R.string.button_confirm));
 
         return view;
     }

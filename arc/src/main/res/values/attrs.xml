@@ -23,6 +23,7 @@
         <attr name="text"/>
         <attr name="enabled"/>
         <attr name="inverted" format="boolean" />
+        <attr name="icon" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="WeekdayButton">

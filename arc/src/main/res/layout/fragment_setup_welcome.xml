@@ -21,7 +21,8 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:text="Welcome to the"
+        android:text="@string/gen_welcome_key"
+        android:gravity="center"
         android:textSize="26dp" />
 
     <TextView
@@ -31,7 +32,7 @@
         android:layout_below="@+id/textViewHeader"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="6dp"
-        android:text="app"
+        android:text=""
         android:textSize="26dp"
         android:textStyle="bold"/>
 
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
         android:layout_centerHorizontal="true"
-        app:text="SIGN IN" />
+        app:text="@string/Button_signin" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -60,7 +61,7 @@
             android:paddingTop="32dp"
             android:paddingRight="14dp"
             android:paddingBottom="32dp"
-            android:text="About This App"
+            android:text="@string/aboutapp_header"
             android:textColor="@color/primary"
             android:textSize="15dp" />
 
@@ -73,7 +74,7 @@
             android:paddingLeft="14dp"
             android:paddingTop="32dp"
             android:paddingBottom="32dp"
-            android:text="Privacy Policy"
+            android:text="@string/privacy_linked"
             android:textColor="@color/primary"
             android:textSize="15dp" />
     </LinearLayout>

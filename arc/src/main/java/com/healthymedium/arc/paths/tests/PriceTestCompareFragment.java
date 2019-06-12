@@ -17,6 +17,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.PriceManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.Random;
 
@@ -76,7 +77,7 @@ public class PriceTestCompareFragment extends BaseFragment {
         item = priceTest.getPriceSet().get(index);
 
         buttonYes = view.findViewById(R.id.radioButtonYes);
-        buttonYes.setText("Yes");
+        buttonYes.setText(ViewUtil.getString(R.string.YES));
         buttonYes.setCheckable(false);
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -93,7 +94,7 @@ public class PriceTestCompareFragment extends BaseFragment {
         });
 
         buttonNo = view.findViewById(R.id.radioButtonNo);
-        buttonNo.setText("No");
+        buttonNo.setText(ViewUtil.getString(R.string.NO));
         buttonNo.setCheckable(false);
         buttonNo.setOnTouchListener(new View.OnTouchListener() {
             @Override

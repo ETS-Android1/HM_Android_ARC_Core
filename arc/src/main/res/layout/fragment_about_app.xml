@@ -30,7 +30,7 @@
                 android:paddingTop="8dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="8dp"
-                android:text="Back"
+                android:text="@string/button_back"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="14dp"
@@ -45,7 +45,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
-                android:text="About this app"
+                android:text="@string/aboutapp_header"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 android:textStyle="bold" />
@@ -58,7 +58,7 @@
                 android:layout_marginRight="32dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="45dp"
-                android:text="@string/about_app"
+                android:text="@string/aboutapp_body"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
 

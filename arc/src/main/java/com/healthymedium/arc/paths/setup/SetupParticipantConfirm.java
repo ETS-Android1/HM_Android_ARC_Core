@@ -55,7 +55,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
     TextView textViewPolicy;
 
     public SetupParticipantConfirm() {
-        super(true, Application.getInstance().getResources().getString(R.string.login_confirm_participantID),"");
+        super(true, Application.getInstance().getResources().getString(R.string.login_confirm_ARCID),"");
         disableScrollBehavior();
     }
 
@@ -143,7 +143,8 @@ public class SetupParticipantConfirm extends StandardTemplate {
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         textViewPolicy = new TextView(getContext());
-        textViewPolicy.setText("By signing in you agree to our");
+        textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
+        textViewPolicy.setGravity(Gravity.CENTER_HORIZONTAL);
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);
 
@@ -152,7 +153,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
         textViewPolicyLink.setPaintFlags(textViewPolicyLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewPolicyLink.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
         textViewPolicyLink.setGravity(Gravity.CENTER_HORIZONTAL);
-        textViewPolicyLink.setText("Privacy Policy");
+        textViewPolicyLink.setText(getResources().getString(com.healthymedium.arc.library.R.string.privacy_linked));
         textViewPolicyLink.setTextSize(15);
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,7 +225,7 @@ public class SetupParticipantConfirm extends StandardTemplate {
                     if(charSequence.toString().equals(previousCharacterSequence.toString())){
                         buttonNext.setEnabled(true);
                     } else {
-                        showError(Application.getInstance().getResources().getString(R.string.error_id_mismatch));
+                        showError(Application.getInstance().getResources().getString(R.string.error1));
                     }
                 } else if(buttonNext.isEnabled()){
                     buttonNext.setEnabled(false);

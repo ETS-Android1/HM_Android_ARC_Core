@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.Hours;
 import org.joda.time.LocalTime;
@@ -20,7 +22,7 @@ public class AvailabilityMondayBed extends QuestionTime {
     int maxWakeTime = 24;
 
     public AvailabilityMondayBed() {
-        super(true,"What time should we <b>stop</b> your notifications each day?","",null);
+        super(true, ViewUtil.getString(R.string.availability_sleep_monday),"",null);
     }
 
     @Nullable

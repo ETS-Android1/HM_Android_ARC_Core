@@ -56,7 +56,7 @@ public class AboutScreen extends BaseFragment {
 
         button3rdParty = view.findViewById(R.id.button3rdParty);
 
-        if (!name.equals("TU ARC")) {
+        if (!name.equals("CRI-ARC") && !name.equals("CRI-ARC QA") && !name.equals("CRI-ARC DEV")) {
             button3rdParty.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

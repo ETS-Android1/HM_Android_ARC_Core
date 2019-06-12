@@ -15,7 +15,6 @@ import com.healthymedium.arc.path_data.ContextPathData;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.path_data.SinglePageData;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.path_data.WakePathData;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
@@ -50,12 +49,16 @@ import com.healthymedium.arc.paths.tests.PriceTestCompareFragment;
 import com.healthymedium.arc.paths.tests.PriceTestMatchFragment;
 import com.healthymedium.arc.paths.tests.QuestionInterrupted;
 import com.healthymedium.arc.paths.tests.SymbolTest;
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,8 +70,13 @@ import java.util.Locale;
 
 public class StudyStateMachine {
 
+    public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
+    public static final String TAG_STUDY_STATE = "StudyState";
+
+    protected String tag = getClass().getSimpleName();
+
     protected StudyState state;
-    protected boolean notificationAcknowledged = false;
+    protected StudyStateCache cache;
     protected boolean currentlyInTestPath = false;
 
     public StudyStateMachine() {
@@ -103,15 +111,33 @@ public class StudyStateMachine {
 
     public void initialize(){
         state = new StudyState();
+        cache = new StudyStateCache();
     }
 
     public void load(){
-        state = PreferencesManager.getInstance().getObject("StudyState",StudyState.class);
+        load(false);
     }
 
+    public void load(boolean overwrite){
+        Log.d(tag,"load(overwrite = "+overwrite+")");
+        if(state!=null && !overwrite){
+            return;
+        }
+        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
+        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
+    }
 
     public void save(){
-        PreferencesManager.getInstance().putObject("StudyState", state);
+        save(false);
+    }
+
+    public void save(boolean saveCache){
+        Log.d(tag,"save(saveCache = "+saveCache+")");
+        PreferencesManager.getInstance().putObject(TAG_STUDY_STATE, state);
+        CacheManager.getInstance().putObject(TAG_STUDY_STATE_CACHE,cache);
+        if(saveCache){
+            CacheManager.getInstance().save(TAG_STUDY_STATE_CACHE);
+        }
     }
 
     public void decidePath(){
@@ -121,20 +147,20 @@ public class StudyStateMachine {
     public void abandonTest(){
         Participant participant = Study.getParticipant();
 
-        Log.i("StudyStateMachine", "loading in the middle of an indexed test, marking it abandoned");
+        Log.i(tag, "loading in the middle of an indexed test, marking it abandoned");
         participant.getCurrentTestSession().markAbandoned();
 
-        Log.i("StudyStateMachine", "collecting data from each existing segment");
-        for(PathSegment segment : state.segments){
+        Log.i(tag, "collecting data from each existing segment");
+        for(PathSegment segment : cache.segments){
             BaseData object = segment.collectData();
             if(object!=null){
-                state.cache.add(object);
+                cache.data.add(object);
             }
         }
 
         loadTestDataFromCache();
-        state.segments.clear();
-        state.cache.clear();
+        cache.segments.clear();
+        cache.data.clear();
 
         Study.getRestClient().submitTest(participant.getCurrentTestSession());
         participant.moveOnToNextTestSession(true);
@@ -152,23 +178,23 @@ public class StudyStateMachine {
 
     public boolean skipToNextSegment(){
 
-        if(state.segments.size() > 0) {
-            BaseData object = state.segments.get(0).collectData();
+        if(cache.segments.size() > 0) {
+            BaseData object = cache.segments.get(0).collectData();
             if (object != null) {
-                state.cache.add(object);
+                cache.data.add(object);
             }
-            state.segments.remove(0);
+            cache.segments.remove(0);
 
             NavigationManager.getInstance().clearBackStack();
             Study.getInstance().getParticipant().save();
             save();
         }
 
-        if(state.segments.size()>0){
+        if(cache.segments.size()>0){
             return openNext();
         } else {
             endOfPath();
-            state.cache.clear();
+            cache.data.clear();
             decidePath();
             setupPath();
             return openNext();
@@ -181,8 +207,8 @@ public class StudyStateMachine {
 
     public boolean openNext(int skips){
         save();
-        if(state.segments.size()>0){
-            if(state.segments.get(0).openNext(skips)) {
+        if(cache.segments.size()>0){
+            if(cache.segments.get(0).openNext(skips)) {
                 return true;
             } else {
                 return endOfSegment();
@@ -194,17 +220,17 @@ public class StudyStateMachine {
 
     protected boolean endOfSegment(){
         // else at the end of segment
-        BaseData object = state.segments.get(0).collectData();
+        BaseData object = cache.segments.get(0).collectData();
         if(object!=null){
-            state.cache.add(object);
+            cache.data.add(object);
         }
-        state.segments.remove(0);
+        cache.segments.remove(0);
 
         NavigationManager.getInstance().clearBackStack();
         Study.getInstance().getParticipant().save();
         save();
 
-        if(state.segments.size()>0){
+        if(cache.segments.size()>0){
             return openNext();
         } else {
             endOfPath();
@@ -213,7 +239,7 @@ public class StudyStateMachine {
     }
 
     protected boolean moveOn(){
-        state.cache.clear();
+        cache.data.clear();
         decidePath();
         setupPath();
         Study.getInstance().getParticipant().save();
@@ -226,8 +252,8 @@ public class StudyStateMachine {
     }
 
     public boolean openPrevious(int skips){
-        if(state.segments.size()>0){
-            return state.segments.get(0).openPrevious(skips);
+        if(cache.segments.size()>0){
+            return cache.segments.get(0).openPrevious(skips);
         }
         return false;
     }
@@ -236,7 +262,7 @@ public class StudyStateMachine {
 
 
     protected void setTestCompleteFlag(boolean complete){
-        Log.i("StudyStateMachine", "setTestCompleteFlag("+complete+")");
+        Log.i(tag, "setTestCompleteFlag("+complete+")");
         PreferencesManager.getInstance().putBoolean("TestCompleteFlag",complete);
     }
 
@@ -252,6 +278,21 @@ public class StudyStateMachine {
         return false;
     }
 
+
+    public boolean hasValidFragments() {
+        if(cache.segments.size() == 0) {
+            return false;
+        }
+
+        for(int i = 0; i < cache.segments.size(); i++) {
+            if(cache.segments.get(i).fragments.size() == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // -----------------------------------------------------------------
 
 
@@ -264,7 +305,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
@@ -290,7 +331,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupAvailability(){
@@ -300,22 +341,22 @@ public class StudyStateMachine {
 
         fragments.add(new StateInfoTemplate(
                 false,
-                res.getString(R.string.availability_header) ,
+                res.getString(R.string.setup_avail_header) ,
                 null,
-                res.getString(R.string.availability_body),
+                res.getString(R.string.setup_avail_body),
                 res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
         fragments.add(new AvailabilityMondayBed());
         fragments.add(new AvailabilityWeekdayConfirm());
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_tuesday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_tuesday)));
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_wednesday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_wednesday)));
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_thursday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_thursday)));
-        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_friday)));
-        fragments.add(new AvailabilityOtherBed(res.getString(R.string.weekday_friday)));
+        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
+        fragments.add(new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday)));
+        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
+        fragments.add(new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday)));
+        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
+        fragments.add(new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday)));
+        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
+        fragments.add(new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday)));
         fragments.add(new AvailabilitySaturdayWake());
         fragments.add(new AvailabilitySaturdayBed());
         fragments.add(new AvailabilitySundayWake());
@@ -323,7 +364,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathSetupAvailability(int minWakeTime, int maxWakeTime, boolean reschedule){
@@ -333,9 +374,9 @@ public class StudyStateMachine {
 
         fragments.add(new StateInfoTemplate(
                 false,
-                res.getString(R.string.availability_header),
+                res.getString(R.string.setup_avail_header),
                 null,
-                res.getString(R.string.availability_body),
+                res.getString(R.string.setup_avail_body),
                 res.getString(R.string.button_begin_survey)));
 
         Bundle windowBundle = new Bundle();
@@ -355,27 +396,27 @@ public class StudyStateMachine {
 
 //        fragments.add(new AvailabilityWeekdayConfirm());
 //
-//        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_tuesday)));
+//        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
 //
-//        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_tuesday));
+//        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday));
 //        tuesdayBed.setArguments(windowBundle);
 //        fragments.add(tuesdayBed);
 //
-//        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_wednesday)));
+//        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
 //
-//        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_wednesday));
+//        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday));
 //        wednesdayBed.setArguments(windowBundle);
 //        fragments.add(wednesdayBed);
 //
-//        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_thursday)));
+//        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
 //
-//        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_thursday));
+//        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday));
 //        thursdayBed.setArguments(windowBundle);
 //        fragments.add(thursdayBed);
 //
-//        fragments.add(new AvailabilityOtherWake(res.getString(R.string.weekday_friday)));
+//        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
 //
-//        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed(res.getString(R.string.weekday_friday));
+//        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday));
 //        fridayBed.setArguments(windowBundle);
 //        fragments.add(fridayBed);
 //
@@ -393,7 +434,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addChronotypeSurvey(){
@@ -404,7 +445,7 @@ public class StudyStateMachine {
         fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
-                res.getString(R.string.chronotype_subheader),
+                res.getString(R.string.chronotype_subhead),
                 res.getString(R.string.chronotype_0_body),
                 res.getString(R.string.button_begin)));
 
@@ -420,7 +461,7 @@ public class StudyStateMachine {
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
 
-        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.chronotype_1_q2_sub ),workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.list_selectone ),workingDayCountOptions));
 
         fragments.add(new StateInfoTemplate(
                 false,
@@ -463,7 +504,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addWakeSurvey(){
@@ -514,7 +555,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addContextSurvey(){
@@ -537,7 +578,7 @@ public class StudyStateMachine {
         who.add(res.getString(R.string.context_q1_answers5));
         who.add(res.getString(R.string.context_q1_answers6));
         who.add(res.getString(R.string.context_q1_answers7));
-        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.context_q1_sub), who, res.getString(R.string.context_q1_answers1)));
+        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.Context_q1_sub), who, res.getString(R.string.context_q1_answers1)));
 
         List<String> where = new ArrayList<>();
         where.add(res.getString(R.string.context_q2_answers1));
@@ -547,10 +588,10 @@ public class StudyStateMachine {
         where.add(res.getString(R.string.context_q2_answers5));
         where.add(res.getString(R.string.context_q2_answers6));
         where.add(res.getString(R.string.context_q2_answers7));
-        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.context_q2_sub), where));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.Context_q2_sub), where));
 
-        fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), res.getString(R.string.context_q3_sub), res.getString(R.string.context_bad), res.getString(R.string.context_good)));
-        fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), res.getString(R.string.context_q4_sub), res.getString(R.string.context_tired), res.getString(R.string.context_active)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), "", res.getString(R.string.context_bad), res.getString(R.string.context_good)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), "", res.getString(R.string.context_tired), res.getString(R.string.context_active)));
 
         List<String> what = new ArrayList<>();
         what.add(res.getString(R.string.context_q5_answers1));
@@ -563,11 +604,11 @@ public class StudyStateMachine {
         what.add(res.getString(R.string.context_q5_answers8));
         what.add(res.getString(R.string.context_q5_answers9));
         what.add(res.getString(R.string.context_q5_answers10));
-        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q5), res.getString(R.string.context_q5_sub), what));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q5), "", what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
         enableTransition(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addTests(){
@@ -586,7 +627,7 @@ public class StudyStateMachine {
         //info.setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
 
         Integer[] orderArray = new Integer[]{1,2,3};
         List<Integer> order = Arrays.asList(orderArray);
@@ -611,9 +652,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         StateInfoTemplate info = new StateInfoTemplate(
-                false,
-                "Test "+(index+1)+" of 3" ,
+                 false,
+                header ,
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
                 res.getString(R.string.button_begin));
@@ -634,7 +679,7 @@ public class StudyStateMachine {
         fragments.add(new PriceTestMatchFragment());
 
         PathSegment segment = new PathSegment(fragments,PriceTestPathData.class);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addSymbolsTest(int index){
@@ -642,9 +687,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         StateInfoTemplate info = new StateInfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
                 res.getString(R.string.button_begin));
@@ -653,7 +702,7 @@ public class StudyStateMachine {
         fragments.add(new SymbolTest());
 
         PathSegment segment = new PathSegment(fragments,SymbolsTestPathData.class);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addGridTest(int index){
@@ -661,9 +710,13 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
+        String header = ViewUtil.getString(R.string.testing_header_one);
+        header = header.replace("{Value1}", String.valueOf(index+1));
+        header = header.replace("{Value2}", "3");
+
         StateInfoTemplate info0 = new StateInfoTemplate(
                 false,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
                 res.getString(R.string.button_next));
@@ -671,7 +724,7 @@ public class StudyStateMachine {
 
         StateInfoTemplate info1 = new StateInfoTemplate(
                 true,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body2),
                 res.getString(R.string.button_next));
@@ -679,7 +732,7 @@ public class StudyStateMachine {
 
         StateInfoTemplate info2 = new StateInfoTemplate(
                 true,
-                "Test "+(index+1)+" of 3" ,
+                header ,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body3),
                 res.getString(R.string.button_begin));
@@ -696,7 +749,7 @@ public class StudyStateMachine {
 
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
         enableTransitionGrids(segment,true);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addInterruptedPage(){
@@ -706,7 +759,7 @@ public class StudyStateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new QuestionInterrupted(false, res.getString(R.string.interrupted_body),""));
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addFinishedPage(){
@@ -719,7 +772,7 @@ public class StudyStateMachine {
         String body;
 
         // Default
-        header = res.getString(R.string.thankyou_header1);
+        header = res.getString(R.string.thank_you_header1);
         subheader = res.getString(R.string.thankyou_testcomplete_subhead1);
         body = res.getString(R.string.thankyou_testcomplete_body1);
 
@@ -736,19 +789,32 @@ public class StudyStateMachine {
 
             // After the cycle but before the next session
             if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
-                String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
-                String date = visit.getActualStartDate().toString(format);
+
+                String language = PreferencesManager.getInstance().getString("language", "en");
+                String country = PreferencesManager.getInstance().getString("country", "US");
+                Locale locale = new Locale(language, country);
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
+
+                //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
                 header = res.getString(R.string.thankyou_header2);
                 subheader = res.getString(R.string.thankyou_cycle_subhead2);
 
-                String body2_1 = res.getString(R.string.thankyou_cycle_body2_1);
-                String body2_2 = res.getString(R.string.thankyou_cycle_body2_2);
+                String body2 = res.getString(R.string.thankyou_cycle_body2);
 
-                body = body2_1 + date + body2_2;
+                // String startDate = visit.getActualStartDate().toString(format);
+                // String endDate = visit.getActualEndDate().toString(format);
+
+                String startDate = fmt.print(visit.getActualStartDate());
+                String endDate = fmt.print(visit.getActualEndDate().minusDays(1));
+
+                body2 = body2.replace("{DATE1}", startDate);
+                body2 = body2.replace("{DATE2}", endDate);
+
+                body = body2;
             }
             // After the 4th test of the day
             else if (visit.getNumberOfTestsLeftForToday() == 0) {
-                header = res.getString(R.string.thankyou_header1);
+                header = res.getString(R.string.thank_you_header1);
                 subheader = res.getString(R.string.thankyou_alldone_subhead1);
                 body = res.getString(R.string.thankyou_alldone_body1);
             }
@@ -760,21 +826,21 @@ public class StudyStateMachine {
                 header ,
                 subheader,
                 body,
-                res.getString(R.string.thankyou_button_return_to_home));
+                "temp");//ViewUtil.getDrawable(R.drawable.ic_home_active));
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void addSchedulePicker() {
         List<BaseFragment> fragments = new ArrayList<>();
 
-        fragments.add(new QuestionAdjustSchedule(false, true, "What week are you able to test?", ""));
+        fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.ChangeAvail_date_picker_body), ""));
 
         fragments.add(new ScheduleCalendar());
 
         PathSegment segment = new PathSegment(fragments);
-        state.segments.add(segment);
+        cache.segments.add(segment);
     }
 
     public void setPathAdjustSchedule() {
@@ -793,6 +859,10 @@ public class StudyStateMachine {
 
     public StudyState getState(){
         return state;
+    }
+
+    public StudyStateCache getCache(){
+        return cache;
     }
 
     // loadTestDataFromCache() is called from abandonTest().

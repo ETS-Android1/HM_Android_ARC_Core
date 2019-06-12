@@ -30,7 +30,7 @@
             android:background="@drawable/border_grey"
             android:gravity="center"
             android:padding="16dp"
-            android:text="Drag to select" />
+            android:text="@string/wake_drag" />
 
     </FrameLayout>
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="LOW"
+                android:text="@string/wake_poor"
                 android:textAlignment="textStart"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="HIGH"
+                android:text="@string/wake_excellent"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 

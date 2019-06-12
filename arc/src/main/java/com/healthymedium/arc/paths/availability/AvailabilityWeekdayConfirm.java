@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.AvailabilityPathData;
 import com.healthymedium.arc.paths.questions.QuestionPolar;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.LocalTime;
 
@@ -19,9 +21,6 @@ public class AvailabilityWeekdayConfirm extends QuestionPolar {
 
     CircadianClock clock;
     AvailabilityPathData data;
-    String part1 = "Do you usually <b>wake up</b> around <b>";
-    String part2 = "</b> and <b>go to bed</b> around <b>";
-    String part3 = "</b> on <b>Tuesday – Friday</b>?";
 
     public AvailabilityWeekdayConfirm() {
         super(true,"","");
@@ -39,9 +38,13 @@ public class AvailabilityWeekdayConfirm extends QuestionPolar {
         CircadianRhythm monday = clock.getRhythm("Monday");
         String wakeTime = monday.getWakeTime().toString("h:mm a");
         String bedTime = monday.getBedTime().toString("h:mm a");
-        textViewHeader.setText(Html.fromHtml(part1+wakeTime+part2+bedTime+part3));
 
-        buttonNext.setText("CHOOSE ANSWER");
+        String header = ViewUtil.getString(R.string.availability_same_tuesday_friday).replace("{TIME1}", wakeTime);
+        header = header.replace("{TIME2}", bedTime);
+
+        textViewHeader.setText(Html.fromHtml(header));
+
+        buttonNext.setText(ViewUtil.getString(R.string.button_submit));
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +83,7 @@ public class AvailabilityWeekdayConfirm extends QuestionPolar {
 
     @Override
     protected void onNextButtonEnabled(boolean enabled){
-        buttonNext.setText("NEXT");
+        buttonNext.setText(ViewUtil.getString(R.string.button_next));
     }
 
     @Override

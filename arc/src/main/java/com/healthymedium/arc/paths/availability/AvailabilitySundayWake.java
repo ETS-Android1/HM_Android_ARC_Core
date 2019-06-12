@@ -6,16 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class AvailabilitySundayWake extends QuestionTime {
 
     CircadianClock clock;
 
     public AvailabilitySundayWake() {
-        super(true,"When do you usually<br/><b>wake up</b> on <b>Sunday</b>?","",null);
+        super(true, ViewUtil.getString(R.string.availability_wake_sunday),"",null);
     }
 
     @Nullable

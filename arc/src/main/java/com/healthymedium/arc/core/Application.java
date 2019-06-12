@@ -1,6 +1,15 @@
 package com.healthymedium.arc.core;
 
+import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.support.annotation.Nullable;
+import android.util.Log;
+
+
+import com.healthymedium.arc.study.Study;
+
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -10,16 +19,27 @@ import java.util.List;
 
 public class Application extends android.app.Application {
 
+    private static final String tag = "Application";
     static Application instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Log.i(tag,"onCreate");
+
         VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
         PreferencesManager.initialize(this);
+        CacheManager.initialize(this);
         Device.initialize(this);
+        initializeStudy();
+    }
+
+    public void initializeStudy() {
+        Study.initialize(this);
+        registerStudyComponents();
+        Study.getInstance().load();
     }
 
     // register different behaviors here
@@ -32,23 +52,54 @@ public class Application extends android.app.Application {
     }
 
     // list all locale options offered by the app
-    protected List<Locale> getLocaleOptions() {
+    public List<Locale> getLocaleOptions() {
         List<Locale> locales = new ArrayList<>();
         locales.add(new Locale(Locale.COUNTRY_UNITED_STATES,Locale.LANGUAGE_ENGLISH));
         return locales;
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if(PreferencesManager.getInstance() != null){
-            if(PreferencesManager.getInstance().contains("language")){
-                String language = PreferencesManager.getInstance().getString("language","en");
-                String country = PreferencesManager.getInstance().getString("country","US");
-                newConfig.setLocale(new java.util.Locale(language,country));
-                getBaseContext().getResources().updateConfiguration(newConfig, getResources().getDisplayMetrics());
+    public void onConfigurationChanged(Configuration config) {
+        Log.i("Application","onConfigurationChanged");
+        super.onConfigurationChanged(config);
+        updateLocale(getBaseContext());
+    }
+
+    @Override
+    protected void attachBaseContext(Context context) {
+        Log.i("Application","attachBaseContext");
+        super.attachBaseContext(context);
+        updateLocale(context);
+    }
+
+
+    public void updateLocale(@Nullable Context context){
+        PreferencesManager preferences = PreferencesManager.getInstance();
+        if(preferences == null) {
+            return;
+        }
+        if(preferences.contains("language")){
+            String language = preferences.getString("language","en");
+            String country = preferences.getString("country","US");
+            java.util.Locale locale = new java.util.Locale(language,country);
+
+            // update application
+            Resources appResources = getResources();
+            Configuration config = appResources.getConfiguration();
+            config.setLocale(locale);
+            appResources.updateConfiguration(config, appResources.getDisplayMetrics());
+
+            if(context!=null) {
+                Resources activityResources = context.getResources();
+                activityResources.updateConfiguration(config, activityResources.getDisplayMetrics());
             }
         }
+    }
+
+    @Override
+    public void onLowMemory() {
+        Log.w(tag,"onLowMemory");
+        super.onLowMemory();
     }
 
     public static Application getInstance(){

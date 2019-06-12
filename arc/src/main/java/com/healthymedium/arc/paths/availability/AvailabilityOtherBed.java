@@ -23,8 +23,8 @@ public class AvailabilityOtherBed extends QuestionTime {
     int maxWakeTime = 24;
 
     @SuppressLint("ValidFragment")
-    public AvailabilityOtherBed(String weekday) {
-        super(true,"When do you usually<br/><b>go to bed</b> on <b>"+weekday+"</b>?","",null);
+    public AvailabilityOtherBed(String weekday, String header) {
+        super(true, header,"",null);
         this.weekday = weekday;
     }
 
@@ -65,6 +65,10 @@ public class AvailabilityOtherBed extends QuestionTime {
         });
 
         return view;
+    }
+
+    public String getWeekday(){
+        return weekday;
     }
 
     @Override

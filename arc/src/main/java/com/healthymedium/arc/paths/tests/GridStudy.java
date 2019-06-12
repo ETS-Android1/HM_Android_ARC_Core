@@ -54,7 +54,7 @@ public class GridStudy extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_grid_study, container, false);
         gridLayout = view.findViewById(R.id.gridLayout);
 
-        dialog = new TimedDialog(getString(R.string.grid_transition),2000);
+        dialog = new TimedDialog(getString(R.string.grid_transition_overlay),2000);
         dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
             @Override
             public void dismiss() {
