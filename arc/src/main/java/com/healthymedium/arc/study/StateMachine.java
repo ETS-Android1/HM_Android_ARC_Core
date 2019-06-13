@@ -1,7 +1,6 @@
 package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
@@ -53,7 +52,6 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -66,18 +64,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class StudyStateMachine {
+public class StateMachine {
 
     public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
     public static final String TAG_STUDY_STATE = "StudyState";
 
     protected String tag = getClass().getSimpleName();
 
-    protected StudyState state;
-    protected StudyStateCache cache;
+    protected State state;
+    protected StateCache cache;
     protected boolean currentlyInTestPath = false;
 
-    public StudyStateMachine() {
+    public StateMachine() {
 
     }
 
@@ -108,8 +106,8 @@ public class StudyStateMachine {
     }
 
     public void initialize(){
-        state = new StudyState();
-        cache = new StudyStateCache();
+        state = new State();
+        cache = new StateCache();
     }
 
     public void load(){
@@ -121,8 +119,8 @@ public class StudyStateMachine {
         if(state!=null && !overwrite){
             return;
         }
-        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
-        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
+        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE, State.class);
+        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE, StateCache.class);
     }
 
     public void save(){
@@ -780,11 +778,11 @@ public class StudyStateMachine {
         return "";
     }
 
-    public StudyState getState(){
+    public State getState(){
         return state;
     }
 
-    public StudyStateCache getCache(){
+    public StateCache getCache(){
         return cache;
     }
 

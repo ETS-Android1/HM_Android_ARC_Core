@@ -2,18 +2,12 @@ package com.healthymedium.arc.heartbeat;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.StudyStateMachine;
-import com.healthymedium.arc.utilities.PreferencesManager;
-
-import java.util.Locale;
+import com.healthymedium.arc.study.StateMachine;
 
 import static com.healthymedium.arc.study.Study.getRestClient;
 
@@ -94,7 +88,7 @@ public class HeartbeatJobService extends JobService {
 
     private void checkState(){
         Log.i("HeartbeatJobService","checkState");
-        StudyStateMachine stateMachine = Study.getStateMachine();
+        StateMachine stateMachine = Study.getStateMachine();
         stateMachine.decidePath();
         stateMachine.save(true);
     }

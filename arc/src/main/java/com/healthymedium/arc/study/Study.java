@@ -18,7 +18,7 @@ public class Study{
     protected Context context;
 
     static Scheduler scheduler;
-    static StudyStateMachine stateMachine;
+    static StateMachine stateMachine;
     static Participant participant;
     static RestClient restClient;
     static MigrationUtil migrationUtil;
@@ -117,11 +117,11 @@ public class Study{
         if(tClass==null){
             return false;
         }
-        if(!StudyStateMachine.class.isAssignableFrom(tClass)){
+        if(!StateMachine.class.isAssignableFrom(tClass)){
             return false;
         }
         try {
-            stateMachine = (StudyStateMachine) tClass.newInstance();
+            stateMachine = (StateMachine) tClass.newInstance();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             return false;
@@ -217,7 +217,7 @@ public class Study{
             scheduler = new Scheduler();
         }
         if(stateMachine==null){
-            stateMachine = new StudyStateMachine();
+            stateMachine = new StateMachine();
         }
         if(restClient==null){
             restClient = new RestClient(null);
@@ -279,7 +279,7 @@ public class Study{
         return scheduler;
     }
 
-    public static StudyStateMachine getStateMachine(){
+    public static StateMachine getStateMachine(){
         return stateMachine;
     }
 

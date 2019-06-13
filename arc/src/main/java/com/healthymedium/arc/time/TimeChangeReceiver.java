@@ -6,16 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.util.Log;
-
-import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.notifications.NotificationManager;
-import com.healthymedium.arc.notifications.NotificationNotifyJob;
-import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Participant;
-import com.healthymedium.arc.study.StudyStateMachine;
 
 
 /*

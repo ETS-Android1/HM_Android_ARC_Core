@@ -6,13 +6,10 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.font.FontFactory;
-import com.healthymedium.arc.heartbeat.HeartbeatJobService;
 import com.healthymedium.arc.notifications.NotificationManager;
 
 public class AbandonmentJobService extends JobService {
@@ -42,7 +39,7 @@ public class AbandonmentJobService extends JobService {
         }
 
         Participant participant = Study.getParticipant();
-        StudyStateMachine stateMachine = Study.getStateMachine();
+        StateMachine stateMachine = Study.getStateMachine();
         if(participant.isCurrentlyInTestSession() && participant.checkForTestAbandonment())
         {
             Log.i("AbandonmentJobService", participant.getCurrentTestSession().getTestData().toString());

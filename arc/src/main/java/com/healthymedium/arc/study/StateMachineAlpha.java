@@ -14,7 +14,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudyStateMachineAlpha extends StudyStateMachine {
+public class StateMachineAlpha extends StateMachine {
 
     public static final int PATH_SETUP_PARTICIPANT = 0;         //
     public static final int PATH_SETUP_AVAILABILITY = 1;        //
@@ -34,6 +34,7 @@ public class StudyStateMachineAlpha extends StudyStateMachine {
     public static final int LIFECYCLE_IDLE = 3;                 //
     public static final int LIFECYCLE_ARC = 4;                  //
     public static final int LIFECYCLE_OVER = 5;                 //
+
 
     @Override
     public void initialize() {
