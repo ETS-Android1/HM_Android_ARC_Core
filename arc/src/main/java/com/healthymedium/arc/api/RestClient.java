@@ -1,10 +1,6 @@
 package com.healthymedium.arc.api;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -23,7 +19,6 @@ import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.api.models.TestSubmission;
 import com.healthymedium.arc.api.models.WakeSleepData;
 import com.healthymedium.arc.api.models.WakeSleepSchedule;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
 import com.healthymedium.arc.study.CircadianClock;
@@ -42,9 +37,6 @@ import org.joda.time.DateTime;
 import org.joda.time.Weeks;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,7 +65,6 @@ public class RestClient <Api>{
     protected List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
     private UploadListener uploadListener = null;
     protected boolean uploading = false;
-    private Handler handler;
 
     public RestClient(Class<Api> type) {
         this.type = type;
@@ -649,53 +640,11 @@ public class RestClient <Api>{
         uploadListener = null;
     }
 
-    // connectivity helpers ------------------------------------------------------------------------
-
-    public boolean isNetworkConnected(){
-        ConnectivityManager cm = (ConnectivityManager) Application.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-    }
-
-    public void checkIfServerReachable(final ServerListener listener){
-        if(listener==null){
-            return;
-        }
-        if(!isNetworkConnected()) {
-            listener.onFailed();
-        }
-        if(handler==null){
-            handler = new Handler();
-        }
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URLConnection urlConnection = new URL(Config.REST_ENDPOINT).openConnection();
-                    urlConnection.setConnectTimeout(400);
-                    urlConnection.connect();
-                    listener.onReached();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                    listener.onFailed();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    listener.onFailed();
-                }
-            }
-        });
-    }
-
     // listener interfaces -------------------------------------------------------------------------
 
     public interface Listener{
         void onSuccess(RestResponse response);
         void onFailure(RestResponse response);
-    }
-
-    public interface ServerListener{
-        void onReached();
-        void onFailed();
     }
 
     public interface UploadListener{
