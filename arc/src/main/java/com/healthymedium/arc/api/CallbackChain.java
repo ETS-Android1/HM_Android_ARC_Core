@@ -19,6 +19,7 @@ public class CallbackChain {
 
     List<Link> links = new ArrayList<>();
     RestClient.Listener clientListener;
+    Object persistentObject;
     Gson gson;
 
     CallbackChain(){
@@ -26,6 +27,14 @@ public class CallbackChain {
                 .setPrettyPrinting()
                 .setLenient()
                 .create();
+    }
+
+    public Object getPersistentObject(){
+        return persistentObject;
+    }
+
+    public void setPersistentObject(Object object){
+        persistentObject = object;
     }
 
     boolean addLink(Call call){
