@@ -1,6 +1,5 @@
 package com.healthymedium.arc.api;
 
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -83,7 +82,7 @@ public class CallbackChain {
 
             boolean proceed;
             if(link.listener!=null) {
-                proceed = link.listener.onResponse(response);
+                proceed = link.listener.onResponse(CallbackChain.this,response);
             } else {
                 proceed = response.successful;
             }
@@ -131,7 +130,7 @@ public class CallbackChain {
 
             boolean proceed;
             if(link.listener!=null) {
-                proceed = link.listener.onFailure(response);
+                proceed = link.listener.onFailure(CallbackChain.this,response);
             } else {
                 proceed = response.successful;
             }
@@ -171,7 +170,7 @@ public class CallbackChain {
     }
 
     public interface Listener{
-        boolean onResponse(RestResponse response);
-        boolean onFailure(RestResponse response);
+        boolean onResponse(CallbackChain chain, RestResponse response);
+        boolean onFailure(CallbackChain chain, RestResponse response);
     }
 }
