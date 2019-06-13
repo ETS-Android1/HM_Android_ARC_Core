@@ -38,7 +38,7 @@ public class SetupSite extends SetupTemplate {
         textViewProblems = new TextView(getContext());
         textViewProblems.setTypeface(Fonts.robotoMedium);
         textViewProblems.setPadding(0,ViewUtil.dpToPx(24),0,0);
-        textViewProblems.setText("Problems logging in?");
+        // textViewProblems.setText("Problems logging in?");
         textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
         textViewProblems.setVisibility(View.INVISIBLE);
         textViewProblems.setOnClickListener(new View.OnClickListener() {
