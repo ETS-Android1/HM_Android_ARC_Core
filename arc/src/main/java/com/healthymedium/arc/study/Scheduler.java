@@ -2,6 +2,9 @@ package com.healthymedium.arc.study;
 
 import android.util.Log;
 
+import com.healthymedium.arc.api.models.ExistingData;
+import com.healthymedium.arc.api.models.SessionInfo;
+import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.time.JodaUtil;
@@ -126,7 +129,7 @@ public class Scheduler {
         participant.save();
     }
 
-    protected void initializeVisits(DateTime now, Participant participant) {
+    public void initializeVisits(DateTime now, Participant participant) {
         List<Visit> visits = participant.state.visits;
         DateTime midnight = JodaUtil.setMidnight(now);
 
@@ -198,6 +201,7 @@ public class Scheduler {
         }
     }
 
+
     protected void scheduleTestsForVisit(CircadianClock clock, ParticipantState state, Visit visit, boolean isRescheduling) {
 
     }
@@ -214,16 +218,51 @@ public class Scheduler {
     // At some point, I would like to create a study class strictly for unit tests to help when these cases occur.
     // Any suggestions are welcome
 
-    public ParticipantState getExistingParticipantState(DateTime startDate, int week, int dayIndex, int dailyIndex) {
-        ParticipantState state = new ParticipantState();
-        state.studyStartDate = startDate;
-        state.currentVisit = getVisitIndex(week,dayIndex,dailyIndex);
-        state.currentTestSession = getTestIndex(week,dayIndex,dailyIndex);
+    public ParticipantState getExistingParticipantState(ExistingData existingData) {
+
+        ParticipantState state = Study.getParticipant().getState();
+
+        DateTime startDate = JodaUtil.fromUtcDouble(existingData.first_test.session_date);
+        Study.getScheduler().initializeVisits(startDate,Study.getParticipant());
+
+        state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
+
+        List<TestScheduleSession> scheduleSessions = existingData.test_schedule.sessions;
+        for(TestScheduleSession scheduleSession : scheduleSessions){
+
+
+            Log.i(tag,"week = "+scheduleSession.week+", day = "+scheduleSession.day+" session = "+scheduleSession.session);
+
+            // figure out what visit - test this
+            int visitIndex = getVisitIndex(scheduleSession.week,scheduleSession.day,scheduleSession.session);
+            int testIndex = getTestIndex(scheduleSession.week,scheduleSession.day,scheduleSession.session);
+
+            TestSession testSession = state.visits.get(visitIndex).testSessions.get(testIndex);
+            DateTime sessionDateTime = JodaUtil.fromUtcDouble(scheduleSession.session_date);
+            Log.i(tag,"visitIndex = "+visitIndex+", testIndex = "+testIndex+" - "+sessionDateTime.toString());
+
+            testSession.setScheduledTime(sessionDateTime);
+            testSession.setUserChangeableTime(sessionDateTime);
+
+            if(testSession.getExpirationTime().isBeforeNow()){
+                testSession.markAbandoned();
+            }
+
+        }
+
+        SessionInfo latestSession = existingData.latest_test;
+        state.currentVisit = getVisitIndex(latestSession.week,latestSession.day,latestSession.session);
+        state.currentTestSession = getTestIndex(latestSession.week,latestSession.day,latestSession.session);
         state.currentTestSession++;
-        if(isAtEndOfVisit(week,state.currentTestSession)){
+
+        if(isAtEndOfVisit(latestSession.week,state.currentTestSession)){
             state.currentVisit++;
             state.currentTestSession = 0;
         }
+
+        state.hasValidSchedule = true;
+        state.isStudyRunning = true;
+
         return state;
     }
 
@@ -239,7 +278,7 @@ public class Scheduler {
         return 0;
     }
 
-    protected boolean isAtEndOfVisit(int visit, int test){
+    public boolean isAtEndOfVisit(int visit, int test){
         return false;
     }
 
