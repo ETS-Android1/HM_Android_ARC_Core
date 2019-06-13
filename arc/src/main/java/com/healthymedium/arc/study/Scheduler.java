@@ -84,10 +84,14 @@ public class Scheduler {
 
         List<TestSession> testSessions = visit.getTestSessions();
         for (TestSession session : testSessions) {
+            int sessionId = session.getId();
+            Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
+
             if (session.getScheduledTime().isAfterNow()) {
-                int sessionId = session.getId();
-                Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
                 notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_TAKE, session.getScheduledTime());
+            }
+
+            if(session.getExpirationTime().isAfterNow()){
                 notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_MISSED, session.getExpirationTime());
             }
         }

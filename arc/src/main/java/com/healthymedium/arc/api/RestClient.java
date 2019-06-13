@@ -518,7 +518,6 @@ public class RestClient <Api>{
 
                 ExistingData existingData = (ExistingData) chain.getPersistentObject();
                 existingData.wake_sleep_schedule = gson.fromJson(wakeSleepJson,WakeSleepSchedule.class);
-                //chain.setPersistentObject(existingData);
 
                 Call<ResponseBody> testScheduleCall = service.getTestSchedule(Device.getId());
                 chain.addLink(testScheduleCall,testScheduleListener);
@@ -546,7 +545,6 @@ public class RestClient <Api>{
 
                 ExistingData existingData = (ExistingData) chain.getPersistentObject();
                 existingData.test_schedule = gson.fromJson(testSessionJson,TestSchedule.class);
-                //chain.setPersistentObject(existingData);
 
                 if(!existingData.isValid()){
                     return false;
@@ -554,6 +552,8 @@ public class RestClient <Api>{
 
                 ParticipantState state = Study.getScheduler().getExistingParticipantState(existingData);
                 Study.getParticipant().setState(state);
+                Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), false);
+
                 return true;
             }
             return false;
