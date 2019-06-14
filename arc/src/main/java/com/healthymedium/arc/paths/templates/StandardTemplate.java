@@ -142,6 +142,8 @@ public class StandardTemplate extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        buttonNext.setVisibility(View.GONE);
+        buttonShowing = false;
         if(disableScrollBehavior) {
             buttonNext.setVisibility(View.VISIBLE);
             buttonShowing = true;
@@ -159,6 +161,27 @@ public class StandardTemplate extends BaseFragment {
                 }
             }, 50);
         }
+
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+                if(disableScrollBehavior){
+                    return;
+                }
+                boolean needsToShow = scrollViewIsAtBottom();
+                if(needsToShow==buttonShowing){
+                    return;
+                } else if(needsToShow){
+                    buttonNext.setVisibility(View.VISIBLE);
+                    buttonShowing = true;
+                    buttonNext.startAnimation(showAnimation);
+                } else {
+                    buttonNext.setVisibility(View.GONE);
+                    buttonShowing = false;
+                    buttonNext.startAnimation(hideAnimation);
+                }
+            }
+        });
     }
 
     protected void setHelpVisible(boolean visible){
@@ -185,24 +208,6 @@ public class StandardTemplate extends BaseFragment {
     @Override
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
-        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if(disableScrollBehavior){
-                    return;
-                }
-                boolean needsToShow = scrollViewIsAtBottom();
-                if(needsToShow==buttonShowing){
-                    return;
-                } else if(needsToShow){
-                    buttonShowing = true;
-                    buttonNext.startAnimation(showAnimation);
-                } else {
-                    buttonShowing = false;
-                    buttonNext.startAnimation(hideAnimation);
-                }
-            }
-        });
         scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

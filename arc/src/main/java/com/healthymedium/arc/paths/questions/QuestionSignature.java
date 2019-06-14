@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 
 import com.healthymedium.arc.custom.Signature;
 import com.github.gcacace.signaturepad.views.SignaturePad;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
 public class QuestionSignature extends QuestionTemplate {
@@ -19,7 +21,7 @@ public class QuestionSignature extends QuestionTemplate {
     Signature signature;
 
     public QuestionSignature(boolean allowBack, boolean allowHelp, String header, String subheader) {
-        super(allowBack,header,subheader,"SUBMIT");
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_next));
         this.allowHelp = allowHelp;
     }
 
