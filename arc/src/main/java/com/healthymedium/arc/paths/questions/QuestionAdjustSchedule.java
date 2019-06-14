@@ -16,7 +16,6 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;

@@ -20,7 +20,6 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;

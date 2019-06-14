@@ -16,7 +16,6 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-import org.joda.time.Hours;
 import org.joda.time.LocalTime;
 
 @SuppressLint("ValidFragment")

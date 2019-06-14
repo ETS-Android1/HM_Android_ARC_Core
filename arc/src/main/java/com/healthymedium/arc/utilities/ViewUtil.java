@@ -37,6 +37,18 @@ public class ViewUtil {
         return Application.getInstance().getString(id);
     }
 
+    public static String getStringConcat(@StringRes int ... ids){
+        String string = new String();
+        for(int i=0;i<ids.length;i++){
+            string += Application.getInstance().getString(ids[i]);
+        }
+        return string;
+    }
+
+    public static String replaceToken(String input, @StringRes int format, String replacement){
+        return input.replace(getString(format), replacement);
+    }
+
     public static void underlineTextView(TextView textView){
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }

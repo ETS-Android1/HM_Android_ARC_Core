@@ -58,6 +58,13 @@ public class Application extends android.app.Application {
         return locales;
     }
 
+    public java.util.Locale getLocale() {
+        PreferencesManager preferences = PreferencesManager.getInstance();
+        String language = preferences.getString("language","en");
+        String country = preferences.getString("country","US");
+        return new java.util.Locale(language,country);
+    }
+
     @Override
     public void onConfigurationChanged(Configuration config) {
         Log.i("Application","onConfigurationChanged");
