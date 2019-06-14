@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     "",
                     options,
                     locales,
-                    "Confirm");
+                    "CONFIRM");
             NavigationManager.getInstance().open(fragment);
         }
     }
