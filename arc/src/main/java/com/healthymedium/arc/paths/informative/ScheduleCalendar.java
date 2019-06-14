@@ -10,8 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;
@@ -37,8 +37,7 @@ public class ScheduleCalendar extends BaseFragment {
 
     public ScheduleCalendar() {
         allowBackPress(true);
-        setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-        setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Nullable

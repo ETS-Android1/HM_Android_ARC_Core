@@ -2,9 +2,7 @@ package com.healthymedium.arc.core;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.AnimRes;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
@@ -12,27 +10,17 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 
+import com.healthymedium.arc.misc.TransitionSet;
+
 public class BaseFragment extends Fragment {
 
-    int enterTransition = 0;
-    int exitTransition = 0;
-    int popEnterTransition = 0;
-    int popExitTransition = 0;
+    TransitionSet transitions = new TransitionSet();
+    String tag = getClass().getSimpleName();
 
     boolean backAllowed = false;
     boolean backInStudy = false;
 
-    String tag = "";
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        tag = getClass().getSimpleName();
-    }
-
-    public String getSimpleTag(){
-        return tag;
-    }
+    // methods related to enabling back press from a base fragment ---------------------------------
 
     @Override
     public void onResume() {
@@ -49,6 +37,12 @@ public class BaseFragment extends Fragment {
         return backAllowed;
     }
 
+    // convenience getters -------------------------------------------------------------------------
+
+    public String getSimpleTag(){
+        return tag;
+    }
+
     public MainActivity getMainActivity(){
         return (MainActivity)getActivity();
     }
@@ -56,6 +50,8 @@ public class BaseFragment extends Fragment {
     public Application getApplication(){
         return (Application)getMainActivity().getApplication();
     }
+
+    // convenience methods for manipulating the keyboard -------------------------------------------
 
     public void hideKeyboard() {
         Activity activity = getMainActivity();
@@ -74,69 +70,31 @@ public class BaseFragment extends Fragment {
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
+    // part of the magic sewage system -------------------------------------------------------------
+
     public Object onDataCollection(){
         return null;
     }
 
-    public void setupDebug(View view, int id){
-        if(Config.DEBUG_DIALOGS) {
-            final int[] count = {0};
-            view.findViewById(id).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (count[0] <= 0) {
-                        count[0]++;
-                    } else {
-                        count[0] = 0;
-                        DebugDialog.launch();
-                    }
-                }
-            });
-        }
-    }
-
-    public void setEnterTransitionRes(@AnimRes int id, @AnimRes int popId){
-        enterTransition = id;
-        popEnterTransition = popId;
-    }
-
-    public int getEnterTransitionRes(){
-        return enterTransition;
-    }
-
-    public int getPopEnterTransitionRes() {
-        return popEnterTransition;
-    }
-
-    public void setExitTransitionRes(@AnimRes int id, @AnimRes int popId){
-        exitTransition = id;
-        popExitTransition = popId;
-    }
-
-    public int getExitTransitionRes(){
-        return exitTransition;
-    }
-
-    public int getPopExitTransitionRes() {
-        return popExitTransition;
-    }
+    // methods relating to transitions -------------------------------------------------------------
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, final int nextAnim) {
         if(nextAnim==0){
             return null;
         }
+
         Animation anim = AnimationUtils.loadAnimation(getMainActivity(), nextAnim);
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                if(nextAnim==enterTransition){
+                if(nextAnim==transitions.enter){
                     onEnterTransitionStart(false);
-                } else if(nextAnim==exitTransition){
+                } else if(nextAnim==transitions.exit){
                     onExitTransitionStart(false);
-                } else if(nextAnim==popEnterTransition){
+                } else if(nextAnim==transitions.popEnter){
                     onEnterTransitionStart(true);
-                } else if(nextAnim==popExitTransition){
+                } else if(nextAnim==transitions.popExit){
                     onExitTransitionStart(true);
                 }
             }
@@ -148,13 +106,13 @@ public class BaseFragment extends Fragment {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if(nextAnim==enterTransition){
+                if(nextAnim==transitions.enter){
                     onEnterTransitionEnd(false);
-                } else if(nextAnim==exitTransition){
+                } else if(nextAnim==transitions.exit){
                     onExitTransitionEnd(false);
-                } else if(nextAnim==popEnterTransition){
+                } else if(nextAnim==transitions.popEnter){
                     onEnterTransitionEnd(true);
-                } else if(nextAnim==popExitTransition){
+                } else if(nextAnim==transitions.popExit){
                     onExitTransitionEnd(true);
                 }
             }
@@ -180,4 +138,32 @@ public class BaseFragment extends Fragment {
         Log.v(tag,"onExitTransitionEnd");
     }
 
+    public TransitionSet getTransitionSet() {
+        return transitions;
+    }
+
+    public void setTransitionSet(TransitionSet transitions) {
+        if(transitions!=null){
+            this.transitions = transitions;
+        }
+    }
+
+    // debug ---------------------------------------------------------------------------------------
+
+    public void setupDebug(View view, int id){
+        if(Config.DEBUG_DIALOGS) {
+            final int[] count = {0};
+            view.findViewById(id).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (count[0] <= 0) {
+                        count[0]++;
+                    } else {
+                        count[0] = 0;
+                        DebugDialog.launch();
+                    }
+                }
+            });
+        }
+    }
 }

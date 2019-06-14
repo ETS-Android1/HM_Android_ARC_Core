@@ -8,6 +8,7 @@ import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.path_data.AvailabilityPathData;
 import com.healthymedium.arc.path_data.ChronotypePathData;
 import com.healthymedium.arc.path_data.ContextPathData;
@@ -81,27 +82,21 @@ public class StateMachine {
 
     protected void enableTransition(PathSegment segment, boolean animateEntry){
         int size = segment.fragments.size();
-        int first = 0;
-        int last = size-1;
+        if(size==0){
+            return;
+        }
 
-        for(int i=0;i<size;i++){
-            if(i!=first || animateEntry){
-                segment.fragments.get(i).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            }
-            segment.fragments.get(i).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        segment.fragments.get(0).setTransitionSet(TransitionSet.getSlidingDefault(animateEntry));
+        for(int i=1;i<size;i++){
+            segment.fragments.get(i).setTransitionSet(TransitionSet.getSlidingDefault());
         }
     }
 
     protected void enableTransitionGrids(PathSegment segment, boolean animateEntry){
         if (animateEntry) {
-            segment.fragments.get(1).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            segment.fragments.get(1).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
-
-            segment.fragments.get(2).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            segment.fragments.get(2).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
-
-            segment.fragments.get(3).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            segment.fragments.get(3).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+            segment.fragments.get(1).setTransitionSet(TransitionSet.getSlidingDefault());
+            segment.fragments.get(2).setTransitionSet(TransitionSet.getSlidingDefault());
+            segment.fragments.get(3).setTransitionSet(TransitionSet.getSlidingDefault());
         }
     }
 
@@ -545,7 +540,7 @@ public class StateMachine {
                 res.getString(R.string.testing_intro_subhead),
                 res.getString(R.string.testing_intro_body),
                 res.getString(R.string.button_next));
-        //info.setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+        //info.setEnterTransitions(R.anim.slide_in_right,R.anim.slide_in_left);
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
