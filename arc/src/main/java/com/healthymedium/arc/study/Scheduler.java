@@ -17,8 +17,6 @@ import org.joda.time.Seconds;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Math.floor;
-
 public class Scheduler {
 
     protected static String tag = "Scheduler";
@@ -234,24 +232,34 @@ public class Scheduler {
         List<TestScheduleSession> scheduleSessions = existingData.test_schedule.sessions;
         for(TestScheduleSession scheduleSession : scheduleSessions){
 
-
             Log.i(tag,"week = "+scheduleSession.week+", day = "+scheduleSession.day+" session = "+scheduleSession.session);
-
             // figure out what visit - test this
-            int visitIndex = getVisitIndex(scheduleSession.session);
+            int sessionId = Integer.valueOf(scheduleSession.session_id);
+            int visitIndex = getVisitIndex(sessionId);
             int testIndex = getTestIndex(scheduleSession.week,scheduleSession.day,scheduleSession.session);
 
             TestSession testSession = state.visits.get(visitIndex).testSessions.get(testIndex);
-            DateTime sessionDateTime = JodaUtil.fromUtcDouble(scheduleSession.session_date);
-            Log.i(tag,"visitIndex = "+visitIndex+", testIndex = "+testIndex+" - "+sessionDateTime.toString());
+            DateTime scheduledDateTime = JodaUtil.fromUtcDouble(scheduleSession.session_date);
 
-            testSession.setScheduledTime(sessionDateTime);
-            testSession.setUserChangeableTime(sessionDateTime);
+            Log.i(tag,"visitIndex = "+visitIndex+", testIndex = "+testIndex+" - "+scheduledDateTime.toString());
+
+            DateTime prescribedDateTime = testSession.getPrescribedTime();
+            LocalTime scheduleTime = scheduledDateTime.toLocalTime();
+
+            testSession.setPrescribedTime(prescribedDateTime.withTime(scheduleTime));
+            testSession.setScheduledTime(scheduledDateTime);
 
             if(testSession.getExpirationTime().isBeforeNow()){
                 testSession.markMissed();
             }
 
+        }
+
+        for (int i = 0; i < state.visits.size(); i++) {
+            Visit visit = state.visits.get(i);
+            int last = visit.testSessions.size()-1;
+            visit.setActualStartDate(visit.testSessions.get(0).getScheduledTime());
+            visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime().plusDays(1));
         }
 
         SessionInfo latestSession = existingData.latest_test;
