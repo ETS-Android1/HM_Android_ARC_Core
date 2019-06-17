@@ -238,7 +238,7 @@ public class Scheduler {
             Log.i(tag,"week = "+scheduleSession.week+", day = "+scheduleSession.day+" session = "+scheduleSession.session);
 
             // figure out what visit - test this
-            int visitIndex = getVisitIndex(scheduleSession.week,scheduleSession.day,scheduleSession.session);
+            int visitIndex = getVisitIndex(scheduleSession.session);
             int testIndex = getTestIndex(scheduleSession.week,scheduleSession.day,scheduleSession.session);
 
             TestSession testSession = state.visits.get(visitIndex).testSessions.get(testIndex);
@@ -249,13 +249,13 @@ public class Scheduler {
             testSession.setUserChangeableTime(sessionDateTime);
 
             if(testSession.getExpirationTime().isBeforeNow()){
-                testSession.markAbandoned();
+                testSession.markMissed();
             }
 
         }
 
         SessionInfo latestSession = existingData.latest_test;
-        state.currentVisit = getVisitIndex(latestSession.week,latestSession.day,latestSession.session);
+        state.currentVisit = getVisitIndex(latestSession.session);
         state.currentTestSession = getTestIndex(latestSession.week,latestSession.day,latestSession.session);
         state.currentTestSession++;
 
@@ -270,7 +270,7 @@ public class Scheduler {
         return state;
     }
 
-    public int getVisitIndex(int week, int dayIndex, int dailyIndex){
+    public int getVisitIndex(int sessionId){
         return 0;
     }
 
