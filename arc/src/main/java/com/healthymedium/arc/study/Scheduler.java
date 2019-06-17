@@ -137,7 +137,7 @@ public class Scheduler {
 
         Visit visit = new Visit(0,midnight,midnight.plusDays(1));
         TestSession testSession = new TestSession(0,0,0);
-        testSession.setScheduledTime(midnight);
+        testSession.setPrescribedTime(midnight);
         visit.getTestSessions().add(testSession);
         visits.add(visit);
     }
@@ -180,7 +180,7 @@ public class Scheduler {
                 for (int j = 0; j < numTests; j++) {
                     if(!isCurrentDay || index>=state.currentTestSession) {
                         begin = begin.plusSeconds(random.nextInt(period));
-                        testSessions.get(index).setScheduledTime(begin);
+                        testSessions.get(index).setPrescribedTime(begin);
                         begin = begin.plusHours(2);
                     }
                     index++;
@@ -193,7 +193,7 @@ public class Scheduler {
                 for (int j = 0; j < numTests; j++) {
                     if(!isCurrentDay || index>=state.currentTestSession) {
                         begin = begin.plusSeconds(period);
-                        testSessions.get(index).setScheduledTime(begin);
+                        testSessions.get(index).setPrescribedTime(begin);
                     }
                     index++;
                 }
