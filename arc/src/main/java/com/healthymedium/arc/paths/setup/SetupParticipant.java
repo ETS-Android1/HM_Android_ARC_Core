@@ -12,12 +12,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class SetupParticipant extends SetupTemplate {
 
     public SetupParticipant(int firstDigitCount, int secondDigitCount) {
-        super(firstDigitCount,secondDigitCount, ViewUtil.getString(R.string.login_enter_ARCID));
-    }
-
-    @Override
-    protected boolean isFormValid(CharSequence sequence){
-        return true;
+        super(false,firstDigitCount,secondDigitCount, ViewUtil.getString(R.string.login_enter_ARCID));
     }
 
     @Override

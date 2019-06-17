@@ -28,6 +28,7 @@ import com.healthymedium.arc.paths.availability.AvailabilitySundayWake;
 import com.healthymedium.arc.paths.availability.AvailabilityWeekdayConfirm;
 import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.questions.QuestionAdjustSchedule;
+import com.healthymedium.arc.paths.setup.SetupAuthCode;
 import com.healthymedium.arc.paths.templates.InfoTemplate;
 import com.healthymedium.arc.paths.questions.QuestionCheckBoxes;
 import com.healthymedium.arc.paths.questions.QuestionDuration;
@@ -38,7 +39,6 @@ import com.healthymedium.arc.paths.questions.QuestionRating;
 import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.paths.setup.SetupParticipant;
 import com.healthymedium.arc.paths.setup.SetupParticipantConfirm;
-import com.healthymedium.arc.paths.setup.SetupSite;
 import com.healthymedium.arc.paths.setup.SetupWelcome;
 import com.healthymedium.arc.paths.tests.GridLetters;
 import com.healthymedium.arc.paths.tests.GridStudy;
@@ -290,8 +290,8 @@ public class StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new SetupWelcome());
         fragments.add(new SetupParticipant(firstDigitCount,secondDigitCount));
-        fragments.add(new SetupParticipantConfirm(firstDigitCount,secondDigitCount));
-        fragments.add(new SetupSite(authDigitCount));
+        fragments.add(new SetupParticipantConfirm(false,firstDigitCount,secondDigitCount));
+        fragments.add(new SetupAuthCode(true, authDigitCount));
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);

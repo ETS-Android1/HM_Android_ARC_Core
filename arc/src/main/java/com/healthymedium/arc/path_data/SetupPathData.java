@@ -6,6 +6,7 @@ import com.healthymedium.arc.study.PathSegmentData;
 public class SetupPathData extends PathSegmentData {
 
     public String id;
+    public String authCode;
 
     public SetupPathData(){
         super();

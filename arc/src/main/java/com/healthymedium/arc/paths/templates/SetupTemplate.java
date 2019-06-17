@@ -21,9 +21,14 @@ import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
+import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.api.RestResponse;
+import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.DigitView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
@@ -36,9 +41,13 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class SetupTemplate extends StandardTemplate {
 
+    boolean authenticate;
     public int maxDigits;
     public int firstDigits;
     public int secondDigits;
+
+    LoadingDialog loadingDialog;
+    TextView textViewProblems;
 
     protected CharSequence characterSequence;
     int focusedIndex=0;
@@ -51,12 +60,13 @@ public class SetupTemplate extends StandardTemplate {
     TextView textViewPolicyLink;
     TextView textViewPolicy;
 
-    public SetupTemplate(int firstDigitCount, int secondDigitCount, String header) {
+    public SetupTemplate(boolean authenticate,int firstDigitCount, int secondDigitCount, String header) {
         super(true,header,"");
         disableScrollBehavior();
         firstDigits = firstDigitCount;
         secondDigits = secondDigitCount;
         maxDigits = firstDigits + secondDigits;
+        this.authenticate = authenticate;
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -148,9 +158,26 @@ public class SetupTemplate extends StandardTemplate {
         params0.addRule(RelativeLayout.ABOVE,buttonNext.getId());
         relativeLayout.addView(linearLayout,params0);
 
-//        buttonNext.setVisibility(View.GONE);
-//        textViewPolicy.setVisibility(View.GONE);
-//        textViewPolicyLink.setVisibility(View.GONE);
+        if(authenticate) {
+            textViewProblems = new TextView(getContext());
+            textViewProblems.setTypeface(Fonts.robotoMedium);
+            textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
+            // textViewProblems.setText("Problems logging in?");
+            textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
+            textViewProblems.setVisibility(View.INVISIBLE);
+            textViewProblems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    HelpScreen contactScreen = new HelpScreen();
+                    NavigationManager.getInstance().open(contactScreen);
+                }
+            });
+            ViewUtil.underlineTextView(textViewProblems);
+
+            // add below textViewError
+            int index = content.indexOfChild(textViewError) + 1;
+            content.addView(textViewProblems, index);
+        }
 
         return view;
     }
@@ -232,7 +259,9 @@ public class SetupTemplate extends StandardTemplate {
                 }
 
                 if(done && editText.length()==maxDigits){
-                    if(buttonNext.isEnabled()){
+                    if(authenticate){
+                        hideKeyboard();
+                    }else if(buttonNext.isEnabled()){
                         buttonNext.performClick();
                     }
                 }
@@ -249,11 +278,6 @@ public class SetupTemplate extends StandardTemplate {
 
     //
     protected boolean isFormValid(CharSequence sequence){
-//        if(charSequence.toString().equals(previousCharacterSequence.toString())){
-//            buttonNext.setEnabled(true);
-//        } else {
-//            showError(Application.getInstance().getResources().getString(R.string.error1));
-//        }
         return true;
     }
 
@@ -325,12 +349,36 @@ public class SetupTemplate extends StandardTemplate {
     @Override
     protected void onNextRequested() {
         hideKeyboard();
-        super.onNextRequested();
+
+        if(!authenticate) {
+            super.onNextRequested();
+            return;
+        }
+
+        buttonNext.setEnabled(false);
+        if(Config.REST_BLACKHOLE){
+            String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
+            Study.getParticipant().getState().id = id;
+            Study.getInstance().openNextFragment();
+            return;
+        }
+
+        if(isErrorShowing()){
+            hideError();
+        }
+
+        loadingDialog = new LoadingDialog();
+        loadingDialog.show(getFragmentManager(),"LoadingDialog");
+        SetupPathData pathData = (SetupPathData)Study.getCurrentSegmentData();
+        Study.getRestClient().registerDevice(pathData.id, pathData.authCode, false, registrationListener);
     }
 
     public void hideError(){
         textViewError.setVisibility(View.INVISIBLE);
         textViewError.setText("");
+        if(authenticate){
+            textViewProblems.setVisibility(View.INVISIBLE);
+        }
     }
 
     public boolean isErrorShowing(){
@@ -341,6 +389,10 @@ public class SetupTemplate extends StandardTemplate {
         buttonNext.setEnabled(false);
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
+        if(authenticate){
+            textViewProblems.setVisibility(View.VISIBLE);
+            updateView(editText.getText());
+        }
     }
 
     KeyboardWatcher.OnKeyboardToggleListener keyboardToggleListener = new KeyboardWatcher.OnKeyboardToggleListener() {
@@ -360,6 +412,48 @@ public class SetupTemplate extends StandardTemplate {
                 textViewPolicy.setVisibility(View.VISIBLE);
                 textViewPolicyLink.setVisibility(View.VISIBLE);
             }
+        }
+    };
+
+    String parseForError(RestResponse response, boolean failed){
+        int code = response.code;
+        switch (code){
+            case 400:
+                return getResources().getString(R.string.error3);
+            case 401:
+                return getResources().getString(R.string.error1);
+            case 409:
+                return getResources().getString(R.string.error2);
+        }
+        if(response.errors.keySet().size()>0){
+            String key = response.errors.keySet().toArray()[0].toString();
+            return response.errors.get(key).getAsString();
+        }
+        if(!response.successful || failed){
+            return getResources().getString(R.string.error3);
+        }
+        return null;
+    }
+
+    RestClient.Listener registrationListener = new RestClient.Listener() {
+        @Override
+        public void onSuccess(RestResponse response) {
+            String errorString = parseForError(response,false);
+            loadingDialog.dismiss();
+            if(errorString==null) {
+                String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
+                Study.getParticipant().getState().id = id;
+                Study.openNextFragment();
+            } else {
+                showError(errorString);
+            }
+        }
+
+        @Override
+        public void onFailure(RestResponse response) {
+            String errorString = parseForError(response,true);
+            showError(errorString);
+            loadingDialog.dismiss();
         }
     };
 }
