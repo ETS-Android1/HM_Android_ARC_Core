@@ -29,6 +29,8 @@
     <string name="button_adjust_sched">ADJUST SCHEDULE</string>
     <string name="button_chooseanswer">CHOOSE ANSWER</string>
 
+    <string name="radio_understand">I understand</string>
+
     <string name="home_availability_reset_link">Change My Availability</string>
     <string name="home_contact_link">Contact and About</string>
 

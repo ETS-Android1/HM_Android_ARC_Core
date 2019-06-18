@@ -8,21 +8,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.custom.CheckBox;
 import com.healthymedium.arc.paths.templates.AltQuestionTemplate;
-import com.healthymedium.arc.paths.templates.QuestionTemplate;
 
 // a yes or no question
 @SuppressLint("ValidFragment")
 public class QuestionSingleButton extends AltQuestionTemplate {
 
-    RadioButton yesButton;
+    CheckBox box;
     String buttonText;
+    String optionText;
 
-    public QuestionSingleButton(boolean allowBack, String header, String subheader, String buttonText) {
+    public QuestionSingleButton(boolean allowBack, String header, String subheader, String buttonText, String optionText) {
         super(allowBack,header,subheader);
         type = "choice";
         this.buttonText = buttonText;
+        this.optionText = optionText;
     }
 
     @Override
@@ -30,20 +31,24 @@ public class QuestionSingleButton extends AltQuestionTemplate {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(false);
 
-        yesButton = new RadioButton(getContext());
-        yesButton.setText("Yes");
-        yesButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        box = new CheckBox(getContext());
+        box.setText(optionText);
+
+        box.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(!buttonNext.isEnabled()){
                     buttonNext.setEnabled(true);
                     onNextButtonEnabled(true);
                     buttonNext.setText("NEXT");
+                } else {
+                    buttonNext.setEnabled(false);
+                    onNextButtonEnabled(false);
                 }
             }
         });
 
-        content.addView(yesButton);
+        content.addView(box);
         buttonNext.setText(buttonText);
 
         return view;
