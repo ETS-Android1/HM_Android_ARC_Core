@@ -4,6 +4,8 @@
     <string name="country_key">US</string>
     <string name="language_key">en</string>
 
+    <string name="language_prefer">Please select your &lt;b>preferred language.&lt;/b></string>
+
     <string name="gen_welcome_key">Welcome to the app</string>
 
     <string name="login_enter_ARCID">Please enter the\n&lt;b>Subject ID&lt;/b> below.</string>
@@ -25,6 +27,7 @@
     <string name="change_button">CHANGE</string>
     <string name="button_confirm">CONFIRM</string>
     <string name="button_adjust_sched">ADJUST SCHEDULE</string>
+    <string name="button_chooseanswer">CHOOSE ANSWER</string>
 
     <string name="home_availability_reset_link">Change My Availability</string>
     <string name="home_contact_link">Contact and About</string>

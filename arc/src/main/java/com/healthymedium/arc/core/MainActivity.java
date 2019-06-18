@@ -17,6 +17,7 @@ import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.study.AbandonmentJobService;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
             QuestionLanguagePreference fragment = new QuestionLanguagePreference(
                     false,
                     true,
-                    "Language:",
+                    ViewUtil.getString(R.string.language_prefer),
                     "",
                     options,
                     locales,
-                    "CONFIRM");
+                    ViewUtil.getString(R.string.button_chooseanswer));
             NavigationManager.getInstance().open(fragment);
         }
     }
