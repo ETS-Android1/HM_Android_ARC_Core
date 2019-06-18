@@ -118,7 +118,7 @@ public class TestSession {
 
     public boolean isAvailable(){
         DateTime now = DateTime.now();
-        return (scheduledTime.isBefore(now) && expirationTime.isAfter(now));
+        return (getScheduledTime().isBefore(now) && getExpirationTime().isAfter(now));
     }
 
     public List<Object> getTestData(){
@@ -142,7 +142,7 @@ public class TestSession {
     }
 
     public int getDayOfWeek() {
-        int dayOfWeek = scheduledTime.getDayOfWeek();
+        int dayOfWeek = getScheduledTime().getDayOfWeek();
         // sun = 7
         // mon = 1
         // tue = 2
