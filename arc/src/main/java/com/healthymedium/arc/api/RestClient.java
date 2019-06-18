@@ -14,6 +14,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DeviceRegistration;
+import com.healthymedium.arc.api.models.ExistingData;
 import com.healthymedium.arc.api.models.Heartbeat;
 import com.healthymedium.arc.api.models.CachedSignature;
 import com.healthymedium.arc.api.models.SessionInfo;
@@ -455,7 +456,7 @@ public class RestClient <Api>{
 
     CallbackChain.Listener contactListener = new CallbackChain.Listener() {
         @Override
-        public boolean onResponse(RestResponse response) {
+        public boolean onResponse(CallbackChain chain, RestResponse response) {
             if(response.successful) {
                 if (response.optional.has("contact_info")) {
                     JsonObject contactJson = response.optional.get("contact_info").getAsJsonObject();
@@ -469,37 +470,101 @@ public class RestClient <Api>{
         }
 
         @Override
-        public boolean onFailure(RestResponse response) {
+        public boolean onFailure(CallbackChain chain, RestResponse response) {
             return false;
         }
     };
 
     CallbackChain.Listener sessionListener = new CallbackChain.Listener() {
         @Override
-        public boolean onResponse(RestResponse response) {
+        public boolean onResponse(CallbackChain chain, RestResponse response) {
             if(response.successful){
+
                 JsonElement firstElement = response.optional.get("first_test");
                 JsonElement latestElement = response.optional.get("latest_test");
                 if(firstElement.isJsonNull() || latestElement.isJsonNull()){
                     return true;
                 }
 
-                SessionInfo first = gson.fromJson(firstElement,SessionInfo.class);
-                SessionInfo latest = gson.fromJson(latestElement,SessionInfo.class);
+                ExistingData existingData = new ExistingData();
+                existingData.first_test = gson.fromJson(firstElement,SessionInfo.class);
+                existingData.latest_test = gson.fromJson(latestElement,SessionInfo.class);
 
-                DateTime startDate = new DateTime(first.session_date*1000L);
-                ParticipantState state = Study.getScheduler().getExistingParticipantState(startDate,latest.week,latest.day,latest.session);
-                Study.getParticipant().setState(state);
+                chain.setPersistentObject(existingData);
+
+                Call<ResponseBody> wakeSleepSchedule = getService().getWakeSleepSchedule(Device.getId());
+                chain.addLink(wakeSleepSchedule, wakeSleepListener);
+
                 return true;
             }
             return false;
         }
 
         @Override
-        public boolean onFailure(RestResponse response) {
+        public boolean onFailure(CallbackChain chain, RestResponse response) {
             return false;
         }
     };
+
+    CallbackChain.Listener wakeSleepListener = new CallbackChain.Listener() {
+        @Override
+        public boolean onResponse(CallbackChain chain, RestResponse response) {
+            if(response.successful){
+
+                JsonElement wakeSleepJson = response.optional.get("wake_sleep_schedule");
+                if(wakeSleepJson.isJsonNull()){
+                    return false;
+                }
+
+                ExistingData existingData = (ExistingData) chain.getPersistentObject();
+                existingData.wake_sleep_schedule = gson.fromJson(wakeSleepJson,WakeSleepSchedule.class);
+
+                Call<ResponseBody> testScheduleCall = service.getTestSchedule(Device.getId());
+                chain.addLink(testScheduleCall,testScheduleListener);
+
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onFailure(CallbackChain chain, RestResponse response) {
+            return false;
+        }
+    };
+
+    CallbackChain.Listener testScheduleListener = new CallbackChain.Listener() {
+        @Override
+        public boolean onResponse(CallbackChain chain, RestResponse response) {
+            if(response.successful){
+
+                JsonElement testSessionJson = response.optional.get("test_schedule");
+                if(testSessionJson.isJsonNull()){
+                    return false;
+                }
+
+                ExistingData existingData = (ExistingData) chain.getPersistentObject();
+                existingData.test_schedule = gson.fromJson(testSessionJson,TestSchedule.class);
+
+                if(!existingData.isValid()){
+                    return false;
+                }
+
+                ParticipantState state = Study.getScheduler().getExistingParticipantState(existingData);
+                Study.getParticipant().setState(state);
+                Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), false);
+
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onFailure(CallbackChain chain, RestResponse response) {
+            return false;
+        }
+    };
+
 
     // upload queue --------------------------------------------------------------------------------
 

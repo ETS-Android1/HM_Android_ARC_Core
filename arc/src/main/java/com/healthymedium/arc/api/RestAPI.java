@@ -24,6 +24,12 @@ public interface RestAPI {
     @GET("get-session-info")
     Call<ResponseBody> getSessionInfo(@Query("device_id") String deviceId);
 
+    @GET("get-test-schedule")
+    Call<ResponseBody> getTestSchedule(@Query("device_id") String deviceId);
+
+    @GET("get-wake-sleep-schedule")
+    Call<ResponseBody> getWakeSleepSchedule(@Query("device_id") String deviceId);
+
     @POST("signature-data")
     Call<ResponseBody> submitSignature(@Body RequestBody singatureData, @Query("device_id") String deviceId);
 

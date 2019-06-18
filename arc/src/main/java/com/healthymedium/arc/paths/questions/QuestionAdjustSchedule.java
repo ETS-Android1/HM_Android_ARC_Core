@@ -16,7 +16,6 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -190,7 +189,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         Study.getScheduler().unscheduleNotifications(visit);
 
         for (int i = 0; i < visit.testSessions.size(); i++) {
-            DateTime time = visit.testSessions.get(i).getUserChangeableTime().plusDays(shiftDays);
+            DateTime time = visit.testSessions.get(i).getPrescribedTime().plusDays(shiftDays);
             visit.testSessions.get(i).setScheduledTime(time);
         }
 
@@ -211,6 +210,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
                 public void onClick(View view) {
                     shiftDays = (int) onValueCollection();
                     updateDates();
+                    Study.getRestClient().submitTestSchedule();
                     onNextRequested();
                 }
             });

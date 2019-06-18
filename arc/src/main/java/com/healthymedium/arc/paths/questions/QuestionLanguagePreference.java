@@ -56,7 +56,7 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
     @Override
     protected void onNextButtonEnabled(boolean enabled) {
         if (enabled) {
-            buttonNext.setText("Next");
+            buttonNext.setText("NEXT");
         }
     }
 

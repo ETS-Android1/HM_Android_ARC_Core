@@ -1,13 +1,15 @@
 package com.healthymedium.arc.study;
 
-import android.content.Context;
-import android.util.Pair;
+import com.healthymedium.arc.api.models.WakeSleepData;
+import com.healthymedium.arc.api.models.WakeSleepSchedule;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -199,5 +201,20 @@ public class CircadianClock {
         return index;
     }
 
+    public static CircadianClock fromWakeSleepSchedule(WakeSleepSchedule schedule){
+        CircadianClock clock = new CircadianClock();
+        List<WakeSleepData> dataList = schedule.wakeSleepData;
 
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern("h:mm a")
+                .toFormatter();
+
+        for(WakeSleepData data : dataList){
+            LocalTime wake = LocalTime.parse(data.wake,formatter);
+            LocalTime bed = LocalTime.parse(data.bed,formatter);
+            clock.getRhythm(data.weekday).setTimes(wake,bed);
+        }
+
+        return clock;
+    }
 }

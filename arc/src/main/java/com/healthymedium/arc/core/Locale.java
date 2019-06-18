@@ -2,18 +2,26 @@ package com.healthymedium.arc.core;
 
 public class Locale {
 
+    public static String COUNTRY_ARGENTINA = "AR";
     public static String COUNTRY_AUSTRALIA = "AU";
     public static String COUNTRY_CANADA = "CA";
+    public static String COUNTRY_COLUMBIA = "CO";
+    public static String COUNTRY_GERMANY = "DE";
     public static String COUNTRY_SPAIN = "ES";
     public static String COUNTRY_FRANCE = "FR";
     public static String COUNTRY_UNITED_KINGDOM = "GB";
-    public static String COUNTRY_GERMANY = "DE";
+    public static String COUNTRY_IRELAND = "IE";
+    public static String COUNTRY_ITALY = "IT";
+    public static String COUNTRY_MEXICO = "MX";
+    public static String COUNTRY_NETHERLANDS = "NL";
     public static String COUNTRY_UNITED_STATES = "US";
 
     public static String LANGUAGE_GERMAN = "de";
     public static String LANGUAGE_ENGLISH = "en";
-    public static String LANGUAGE_FRENCH = "fr";
     public static String LANGUAGE_SPANISH = "es";
+    public static String LANGUAGE_FRENCH = "fr";
+    public static String LANGUAGE_ITALIAN = "it";
+    public static String LANGUAGE_DUTCH = "nl";
 
     private String label;
     private String country;
@@ -35,6 +43,10 @@ public class Locale {
             label = getSpanishLabel(country);
         } else if(language==LANGUAGE_GERMAN) {
             label =  getGermanLabel(country);
+        } else if(language==LANGUAGE_DUTCH) {
+            label = getDutchLabel(country);
+        } else if(language==LANGUAGE_ITALIAN) {
+            label = getItalianLabel(country);
         } else {
             label = "";
         }
@@ -64,6 +76,8 @@ public class Locale {
             return "United Kingdom - English";
         } else if(country==COUNTRY_UNITED_STATES){
             return "United States - English";
+        } else if(country==COUNTRY_IRELAND) {
+            return "Ireland - English";
         } else {
             return "";
         }
@@ -84,6 +98,12 @@ public class Locale {
             return "España - Español";
         } else if(country==COUNTRY_UNITED_STATES){
             return "United States - Español";
+        } else if(country==COUNTRY_COLUMBIA){
+            return "Columbia - Español";
+        } else if(country==COUNTRY_ARGENTINA){
+            return "Argentina - Español";
+        } else if(country==COUNTRY_MEXICO){
+            return "Mexico - Español";
         } else {
             return "";
         }
@@ -92,6 +112,22 @@ public class Locale {
     private String getGermanLabel(String country){
         if(country==COUNTRY_GERMANY){
             return "Deutschland - Deutsche";
+        } else {
+            return "";
+        }
+    }
+
+    private String getDutchLabel(String country){
+        if(country==COUNTRY_NETHERLANDS){
+            return "Nederland - Nederlands";
+        } else {
+            return "";
+        }
+    }
+
+    private String getItalianLabel(String country){
+        if(country==COUNTRY_ITALY){
+            return "Italia - Italiano";
         } else {
             return "";
         }

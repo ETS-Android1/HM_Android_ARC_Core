@@ -11,6 +11,11 @@ public class JodaUtil {
         return utc/1000;
     }
 
+    public static DateTime fromUtcDouble(double dateTime){
+        long longTime = (long)(dateTime*1000L);
+        return new DateTime(longTime);
+    }
+
     public static DateTime setTime(DateTime date, String time){
         String[] split = time.split("[: ]");
         if(split.length != 3){

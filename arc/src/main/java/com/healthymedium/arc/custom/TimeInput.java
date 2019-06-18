@@ -93,13 +93,15 @@ public class TimeInput extends FrameLayout {
                     }
 
                     int minutesBetween = Minutes.minutesBetween(blockoutBegin,time).getMinutes();
-                    if (minutesBetween > (maxWakeTime*60)) {
-                        //errorText.setText("Please set a maximum of " + Integer.toString(maxWakeTime) + " hours of wake time.");
+                    if (minutesBetween <= 0) {
+                        minutesBetween += maxWakeTime * 60;
+                    }
+                    if (minutesBetween < minWakeTime * 60 && minutesBetween >= 0) {
+                        errorText.setText(ViewUtil.getString(R.string.error4));
+                    } else {
                         errorText.setText("");
                     }
-                    else if(minutesBetween>0){
-                        errorText.setText(ViewUtil.getString(R.string.error4));
-                    }
+
                     setValidity(false);
                     return;
                 }

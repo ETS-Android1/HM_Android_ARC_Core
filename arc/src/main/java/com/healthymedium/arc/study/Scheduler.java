@@ -2,6 +2,9 @@ package com.healthymedium.arc.study;
 
 import android.util.Log;
 
+import com.healthymedium.arc.api.models.ExistingData;
+import com.healthymedium.arc.api.models.SessionInfo;
+import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.time.JodaUtil;
@@ -13,8 +16,6 @@ import org.joda.time.Seconds;
 
 import java.util.List;
 import java.util.Random;
-
-import static java.lang.Math.floor;
 
 public class Scheduler {
 
@@ -81,10 +82,14 @@ public class Scheduler {
 
         List<TestSession> testSessions = visit.getTestSessions();
         for (TestSession session : testSessions) {
+            int sessionId = session.getId();
+            Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
+
             if (session.getScheduledTime().isAfterNow()) {
-                int sessionId = session.getId();
-                Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
                 notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_TAKE, session.getScheduledTime());
+            }
+
+            if(session.getExpirationTime().isAfterNow()){
                 notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_MISSED, session.getExpirationTime());
             }
         }
@@ -126,13 +131,13 @@ public class Scheduler {
         participant.save();
     }
 
-    protected void initializeVisits(DateTime now, Participant participant) {
+    public void initializeVisits(DateTime now, Participant participant) {
         List<Visit> visits = participant.state.visits;
         DateTime midnight = JodaUtil.setMidnight(now);
 
         Visit visit = new Visit(0,midnight,midnight.plusDays(1));
         TestSession testSession = new TestSession(0,0,0);
-        testSession.setScheduledTime(midnight);
+        testSession.setPrescribedTime(midnight);
         visit.getTestSessions().add(testSession);
         visits.add(visit);
     }
@@ -175,7 +180,7 @@ public class Scheduler {
                 for (int j = 0; j < numTests; j++) {
                     if(!isCurrentDay || index>=state.currentTestSession) {
                         begin = begin.plusSeconds(random.nextInt(period));
-                        testSessions.get(index).setScheduledTime(begin);
+                        testSessions.get(index).setPrescribedTime(begin);
                         begin = begin.plusHours(2);
                     }
                     index++;
@@ -188,7 +193,7 @@ public class Scheduler {
                 for (int j = 0; j < numTests; j++) {
                     if(!isCurrentDay || index>=state.currentTestSession) {
                         begin = begin.plusSeconds(period);
-                        testSessions.get(index).setScheduledTime(begin);
+                        testSessions.get(index).setPrescribedTime(begin);
                     }
                     index++;
                 }
@@ -197,6 +202,7 @@ public class Scheduler {
             startDate = startDate.plusDays(1);
         }
     }
+
 
     protected void scheduleTestsForVisit(CircadianClock clock, ParticipantState state, Visit visit, boolean isRescheduling) {
 
@@ -214,20 +220,65 @@ public class Scheduler {
     // At some point, I would like to create a study class strictly for unit tests to help when these cases occur.
     // Any suggestions are welcome
 
-    public ParticipantState getExistingParticipantState(DateTime startDate, int week, int dayIndex, int dailyIndex) {
-        ParticipantState state = new ParticipantState();
-        state.studyStartDate = startDate;
-        state.currentVisit = getVisitIndex(week,dayIndex,dailyIndex);
-        state.currentTestSession = getTestIndex(week,dayIndex,dailyIndex);
+    public ParticipantState getExistingParticipantState(ExistingData existingData) {
+
+        ParticipantState state = Study.getParticipant().getState();
+
+        DateTime startDate = JodaUtil.fromUtcDouble(existingData.first_test.session_date);
+        Study.getScheduler().initializeVisits(startDate,Study.getParticipant());
+
+        state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
+
+        List<TestScheduleSession> scheduleSessions = existingData.test_schedule.sessions;
+        for(TestScheduleSession scheduleSession : scheduleSessions){
+
+            Log.i(tag,"week = "+scheduleSession.week+", day = "+scheduleSession.day+" session = "+scheduleSession.session);
+            // figure out what visit - test this
+            int sessionId = Integer.valueOf(scheduleSession.session_id);
+            int visitIndex = getVisitIndex(sessionId);
+            int testIndex = getTestIndex(scheduleSession.week,scheduleSession.day,scheduleSession.session);
+
+            TestSession testSession = state.visits.get(visitIndex).testSessions.get(testIndex);
+            DateTime scheduledDateTime = JodaUtil.fromUtcDouble(scheduleSession.session_date);
+
+            Log.i(tag,"visitIndex = "+visitIndex+", testIndex = "+testIndex+" - "+scheduledDateTime.toString());
+
+            DateTime prescribedDateTime = testSession.getPrescribedTime();
+            LocalTime scheduleTime = scheduledDateTime.toLocalTime();
+
+            testSession.setPrescribedTime(prescribedDateTime.withTime(scheduleTime));
+            testSession.setScheduledTime(scheduledDateTime);
+
+            if(testSession.getExpirationTime().isBeforeNow()){
+                testSession.markMissed();
+            }
+
+        }
+
+        for (int i = 0; i < state.visits.size(); i++) {
+            Visit visit = state.visits.get(i);
+            int last = visit.testSessions.size()-1;
+            visit.setActualStartDate(visit.testSessions.get(0).getScheduledTime());
+            visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime().plusDays(1));
+        }
+
+        SessionInfo latestSession = existingData.latest_test;
+        state.currentVisit = getVisitIndex(latestSession.session);
+        state.currentTestSession = getTestIndex(latestSession.week,latestSession.day,latestSession.session);
         state.currentTestSession++;
-        if(isAtEndOfVisit(week,state.currentTestSession)){
+
+        if(isAtEndOfVisit(latestSession.week,state.currentTestSession)){
             state.currentVisit++;
             state.currentTestSession = 0;
         }
+
+        state.hasValidSchedule = true;
+        state.isStudyRunning = true;
+
         return state;
     }
 
-    public int getVisitIndex(int week, int dayIndex, int dailyIndex){
+    public int getVisitIndex(int sessionId){
         return 0;
     }
 
@@ -239,7 +290,7 @@ public class Scheduler {
         return 0;
     }
 
-    protected boolean isAtEndOfVisit(int visit, int test){
+    public boolean isAtEndOfVisit(int visit, int test){
         return false;
     }
 
