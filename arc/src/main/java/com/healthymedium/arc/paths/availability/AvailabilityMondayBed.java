@@ -17,12 +17,15 @@ import org.joda.time.LocalTime;
 
 public class AvailabilityMondayBed extends QuestionTime {
 
+    // TODO
+    // Probably want to rename this class to something like AvailabilityBed or AvailabilityStop
+
     CircadianClock clock;
     int minWakeTime = 4;
     int maxWakeTime = 24;
 
     public AvailabilityMondayBed() {
-        super(true, ViewUtil.getString(R.string.availability_sleep_monday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_stop),"",null);
     }
 
     @Nullable

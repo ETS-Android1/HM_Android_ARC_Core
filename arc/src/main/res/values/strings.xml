@@ -187,6 +187,9 @@
     <string name="wake_excellent">Excellent</string>
     <string name="wake_poor">Poor</string>
 
+    <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
+    <string name="availability_stop">What time should we &lt;b>stop&lt;/b> your notifications each day?</string>
+
     <string name="availability_wake_monday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Monday&lt;/b>?</string>
     <string name="availability_sleep_monday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Monday&lt;/b>?</string>
 
@@ -214,7 +217,7 @@
 
     <string name="setup_avail_header">Availability</string>
     <string name="setup_avail_subheader">A Few Questions</string>
-    <string name="setup_avail_body">First, we\'ll ask you a few questions to help us determine when to send you those notifications.\n\nYou will only receive notifications during your waking hours.</string>
+    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
 
     <string name="notest_adjust">I NEED TO ADJUST MY START DATE</string>
     <string name="notification_take">It’s time to take a quick test!</string>
@@ -267,6 +270,8 @@
     <string name="Day_Abbrev_Thur">T</string>
     <string name="Day_Abbrev_Fri">F</string>
     <string name="Day_Abbrev_Sat">S</string>
+
+    <string name="popup_scroll">Scroll to select</string>
 
     <string name="ChangeAvail_date_picker_body"></string>
     <string name="ChangeAvail_date_picker_confirm_body"></string>

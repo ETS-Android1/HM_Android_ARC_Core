@@ -343,7 +343,7 @@ public class StudyStateMachine {
                 false,
                 res.getString(R.string.setup_avail_header) ,
                 null,
-                res.getString(R.string.setup_avail_body),
+                res.getString(R.string.availability_body),
                 res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
@@ -376,7 +376,7 @@ public class StudyStateMachine {
                 false,
                 res.getString(R.string.setup_avail_header),
                 null,
-                res.getString(R.string.setup_avail_body),
+                res.getString(R.string.availability_body),
                 res.getString(R.string.button_begin_survey)));
 
         Bundle windowBundle = new Bundle();
