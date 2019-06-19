@@ -247,7 +247,7 @@ public class Scheduler {
             LocalTime scheduleTime = scheduledDateTime.toLocalTime();
 
             testSession.setPrescribedTime(prescribedDateTime.withTime(scheduleTime));
-            testSession.setScheduledTime(scheduledDateTime);
+            testSession.setScheduledDate(scheduledDateTime.toLocalDate());
 
             if(testSession.getExpirationTime().isBeforeNow()){
                 testSession.markMissed();

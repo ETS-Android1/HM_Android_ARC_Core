@@ -5,6 +5,7 @@ import android.util.Log;
 import com.healthymedium.arc.api.tests.BaseTest;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,11 @@ public class TestSession {
     private int dayIndex;
     private int index;
     private int id;
-    private DateTime scheduledTime;     // The user-modified scheduled time
+    private LocalDate scheduledDate;    // The user-modified scheduled date
     private DateTime prescribedTime;    // The original scheduled time
 
     private DateTime startTime;
     private DateTime completeTime;
-    private DateTime expirationTime;
 
     private List<Object> testData = new ArrayList<>();
 
@@ -49,9 +49,9 @@ public class TestSession {
         return finishedSession;
     }
 
-    public void markCompleted(boolean finished){
+    public void markCompleted(){
         completeTime = DateTime.now();
-        finishedSession = finished;
+        finishedSession = true;
     }
 
     public void markAbandoned() {
@@ -65,29 +65,31 @@ public class TestSession {
     }
 
     public DateTime getExpirationTime() {
-        if(expirationTime==null){
-            return prescribedTime.plusHours(2);
+        if(scheduledDate!=null){
+            return getPrescribedTime().withDate(scheduledDate).plusHours(2);
         }
-        return expirationTime;
+        return getPrescribedTime().plusHours(2);
     }
 
     public DateTime getScheduledTime() {
-        if(scheduledTime==null){
-            return prescribedTime;
+        if(scheduledDate!=null){
+            return getPrescribedTime().withDate(scheduledDate);
         }
-        return scheduledTime;
+        return getPrescribedTime();
     }
 
     public DateTime getCompletedTime() {
         return completeTime;
     }
 
-    public void setScheduledTime(DateTime scheduledTime) {
-        this.scheduledTime = scheduledTime;
-        this.expirationTime = scheduledTime.plusHours(2);
+    public void setScheduledDate(LocalDate scheduledDate) {
+        this.scheduledDate = scheduledDate;
     }
 
     public DateTime getPrescribedTime() {
+        if(prescribedTime==null){
+            throw new UnsupportedOperationException("Prescribed time was not set");
+        }
         return prescribedTime;
     }
 
@@ -141,32 +143,32 @@ public class TestSession {
         this.interrupted = true;
     }
 
-    public int getDayOfWeek() {
-        int dayOfWeek = getScheduledTime().getDayOfWeek();
-        // sun = 7
-        // mon = 1
-        // tue = 2
-        // wed = 3
-        // thu = 4
-        // fri = 5
-        // sat = 6
-        if(dayOfWeek==7){
-            dayOfWeek = 0;
-        }
-        // sun = 0
-        // mon = 1
-        // tue = 2
-        // wed = 3
-        // thu = 4
-        // fri = 5
-        // sat = 6
-        return dayOfWeek;
-    }
+//    public int getDayOfWeek() {
+//        int dayOfWeek = getScheduledTime().getDayOfWeek();
+//        // sun = 7
+//        // mon = 1
+//        // tue = 2
+//        // wed = 3
+//        // thu = 4
+//        // fri = 5
+//        // sat = 6
+//        if(dayOfWeek==7){
+//            dayOfWeek = 0;
+//        }
+//        // sun = 0
+//        // mon = 1
+//        // tue = 2
+//        // wed = 3
+//        // thu = 4
+//        // fri = 5
+//        // sat = 6
+//        return dayOfWeek;
+//    }
 
     public void purgeData(){
         startTime = null;
         completeTime = null;
-        expirationTime = null;
+        prescribedTime = null;
 
         testData.clear();
 

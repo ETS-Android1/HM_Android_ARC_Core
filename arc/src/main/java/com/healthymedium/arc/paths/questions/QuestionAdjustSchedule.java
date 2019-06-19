@@ -22,6 +22,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -189,8 +190,8 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         Study.getScheduler().unscheduleNotifications(visit);
 
         for (int i = 0; i < visit.testSessions.size(); i++) {
-            DateTime time = visit.testSessions.get(i).getPrescribedTime().plusDays(shiftDays);
-            visit.testSessions.get(i).setScheduledTime(time);
+            LocalDate date = visit.testSessions.get(i).getPrescribedTime().plusDays(shiftDays).toLocalDate();
+            visit.testSessions.get(i).setScheduledDate(date);
         }
 
         int last = visit.testSessions.size()-1;
