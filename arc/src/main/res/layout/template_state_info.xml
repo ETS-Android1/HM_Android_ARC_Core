@@ -59,9 +59,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
-                android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold"
+                android:textColor="@color/tealSubheader"
+                android:textSize="16dp"
                 tools:text="Grids" />
 
             <LinearLayout

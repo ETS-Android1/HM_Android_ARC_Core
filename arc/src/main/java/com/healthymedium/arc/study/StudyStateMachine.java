@@ -42,6 +42,7 @@ import com.healthymedium.arc.paths.setup.SetupParticipantConfirm;
 import com.healthymedium.arc.paths.setup.SetupSite;
 import com.healthymedium.arc.paths.setup.SetupWelcome;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
+import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.GridLetters;
 import com.healthymedium.arc.paths.tests.GridStudy;
 import com.healthymedium.arc.paths.tests.GridTest;
@@ -652,16 +653,16 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String header = ViewUtil.getString(R.string.testing_header_one);
-        header = header.replace("{Value1}", String.valueOf(index+1));
-        header = header.replace("{Value2}", "3");
+        String testNumber = ViewUtil.getString(R.string.testing_header_one);
+        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
+        testNumber = testNumber.replace("{Value2}", "3");
 
-        StateInfoTemplate info = new StateInfoTemplate(
-                 false,
-                header ,
+        TestInfoTemplate info = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
-                res.getString(R.string.button_begin));
+                res.getString(R.string.button_begin)
+        );
         fragments.add(info);
 
         int size = PriceManager.getInstance().getPriceSet().size();
@@ -687,16 +688,16 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String header = ViewUtil.getString(R.string.testing_header_one);
-        header = header.replace("{Value1}", String.valueOf(index+1));
-        header = header.replace("{Value2}", "3");
+        String testNumber = ViewUtil.getString(R.string.testing_header_one);
+        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
+        testNumber = testNumber.replace("{Value2}", "3");
 
-        StateInfoTemplate info = new StateInfoTemplate(
-                false,
-                header ,
+        TestInfoTemplate info = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
-                res.getString(R.string.button_begin));
+                res.getString(R.string.button_begin)
+        );
         fragments.add(info);
 
         fragments.add(new SymbolTest());
@@ -710,32 +711,32 @@ public class StudyStateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String header = ViewUtil.getString(R.string.testing_header_one);
-        header = header.replace("{Value1}", String.valueOf(index+1));
-        header = header.replace("{Value2}", "3");
+        String testNumber = ViewUtil.getString(R.string.testing_header_one);
+        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
+        testNumber = testNumber.replace("{Value2}", "3");
 
-        StateInfoTemplate info0 = new StateInfoTemplate(
-                false,
-                header ,
+        TestInfoTemplate info0 = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
-                res.getString(R.string.button_next));
+                res.getString(R.string.button_next)
+        );
         fragments.add(info0);
 
-        StateInfoTemplate info1 = new StateInfoTemplate(
-                true,
-                header ,
+        TestInfoTemplate info1 = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body2),
-                res.getString(R.string.button_next));
+                res.getString(R.string.button_next)
+        );
         fragments.add(info1);
 
-        StateInfoTemplate info2 = new StateInfoTemplate(
-                true,
-                header ,
+        TestInfoTemplate info2 = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body3),
-                res.getString(R.string.button_begin));
+                res.getString(R.string.button_begin)
+        );
         fragments.add(info2);
 
         fragments.add(new GridStudy());
