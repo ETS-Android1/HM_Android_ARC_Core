@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.ContactScreen;
+import com.healthymedium.arc.utilities.BottomNavigationViewHelper;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -29,6 +31,7 @@ public class LandingTemplate extends BaseFragment {
     protected LinearLayout content;
     protected FrameLayout frameLayoutContact;
     protected TextView textViewContact;
+    protected BottomNavigationView bottomNavigationView;
 
     public LandingTemplate(String header, String subheader) {
         stringHeader = header;
@@ -45,17 +48,20 @@ public class LandingTemplate extends BaseFragment {
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
-        textViewContact = view.findViewById(R.id.textViewContact);
-        ViewUtil.underlineTextView(textViewContact);
+//        textViewContact = view.findViewById(R.id.textViewContact);
+//        ViewUtil.underlineTextView(textViewContact);
 
-        frameLayoutContact = view.findViewById(R.id.frameLayoutContact);
-        frameLayoutContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ContactScreen contactScreen = new ContactScreen();
-                NavigationManager.getInstance().open(contactScreen);
-            }
-        });
+        bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
+//        frameLayoutContact = view.findViewById(R.id.frameLayoutContact);
+//        frameLayoutContact.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ContactScreen contactScreen = new ContactScreen();
+//                NavigationManager.getInstance().open(contactScreen);
+//            }
+//        });
 
         setupDebug(view,R.id.textViewHeader);
 

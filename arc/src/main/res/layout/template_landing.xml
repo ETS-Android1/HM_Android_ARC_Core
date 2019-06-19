@@ -61,27 +61,16 @@
 
     </ScrollView>
 
-    <FrameLayout
-        android:id="@+id/frameLayoutContact"
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/primary">
-
-        <TextView
-            android:id="@+id/textViewContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="30dp"
-            android:drawableLeft="@drawable/ic_avatar"
-            android:drawablePadding="13dp"
-            android:gravity="center"
-            android:text="Contact and Help"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
-
-    </FrameLayout>
+        android:background="@color/white"
+        android:paddingTop="1dp"
+        app:itemBackground="@color/white"
+        app:menu="@menu/menu_navigation" />
+        <!--app:itemIconTint="@drawable/menu_item_selector"-->
+        <!--app:itemTextColor="@drawable/menu_text_selector"-->
 
 </RelativeLayout>
