@@ -6,9 +6,11 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.Log;
 
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
-import java.util.Locale;
+
+import static com.healthymedium.arc.study.StudyStateMachine.TAG_TEST_MISSED_COUNT;
 
 public class NotificationNotifyJob extends JobService {
 
@@ -20,12 +22,13 @@ public class NotificationNotifyJob extends JobService {
             PreferencesManager.initialize(this);
         }
 
-        if(PreferencesManager.getInstance().contains("language")) {
-            String language = PreferencesManager.getInstance().getString("language", "en");
-            String country = PreferencesManager.getInstance().getString("country", "US");
+        if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE)) {
+            String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+            String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+
             Resources res = getResources();
             Configuration conf = res.getConfiguration();
-            conf.setLocale(new Locale(language, country));
+            conf.setLocale(new java.util.Locale(language, country));
             res.updateConfiguration(conf, res.getDisplayMetrics());
         }
 
@@ -36,14 +39,14 @@ public class NotificationNotifyJob extends JobService {
         int type = params.getExtras().getInt(NotificationManager.NOTIFICATION_TYPE,1);
 
         if(type==NotificationManager.TEST_MISSED) {
-            int count = PreferencesManager.getInstance().getInt("test_missed_count", 0);
+            int count = PreferencesManager.getInstance().getInt(TAG_TEST_MISSED_COUNT, 0);
             count++;
             if (count == 4) {
                 NotificationManager.getInstance().notifyUser(id, type);
                 count = 0;
             }
             NotificationManager.getInstance().removeNotification(id,type);
-            PreferencesManager.getInstance().putInt("test_missed_count", count);
+            PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, count);
         } else {
             NotificationManager.getInstance().notifyUser(id, type);
         }

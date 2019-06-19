@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
 
 public class Participant {
 
+    public static final String TAG_PARTICIPANT_STATE = "ParticipantState";
+
     protected ParticipantState state;
 
     public void initialize(){
@@ -22,11 +24,11 @@ public class Participant {
         if(state!=null && !overwrite){
             return;
         }
-        state = PreferencesManager.getInstance().getObject("ParticipantState",ParticipantState.class);
+        state = PreferencesManager.getInstance().getObject(TAG_PARTICIPANT_STATE,ParticipantState.class);
     }
 
     public void save(){
-        PreferencesManager.getInstance().putObject("ParticipantState", state);
+        PreferencesManager.getInstance().putObject(TAG_PARTICIPANT_STATE, state);
     }
 
     public boolean hasId(){

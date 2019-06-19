@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 def versionMajor = 2 // max=2000 // bump to mark substantial changes
 def versionMinor = 0 // max=99   // bump for small changes (features, changes in intended behavior, etc)
 def versionPatch = 0 // max=99   // bump for fixes (crashes, unintended behavior, etc)
-def versionBuild = 5 // max=99   // bump for qa builds
+def versionBuild = 8 // max=99   // bump for qa builds
 
 android {
 
@@ -45,6 +45,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.github.gcacace:signature-pad:1.2.1'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'joda-time:joda-time:2.9.9'
 
     api 'com.android.support:appcompat-v7:27.0.2'
     api 'com.android.support:support-v4:27.0.2'
