@@ -45,6 +45,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.github.gcacace:signature-pad:1.2.1'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'joda-time:joda-time:2.9.9'
 
     api 'com.android.support:appcompat-v7:27.0.2'
     api 'com.android.support:support-v4:27.0.2'
