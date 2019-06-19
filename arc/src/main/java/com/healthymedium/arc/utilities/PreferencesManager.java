@@ -43,7 +43,7 @@ public class PreferencesManager {
     Gson objectGson;
 
     private PreferencesManager(Context context) {
-        sharedPreferences = context.getSharedPreferences(context.getPackageName()+".PREF_NAME", Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(context.getPackageName()+".prefs", Context.MODE_PRIVATE);
         buildObjectGson();
     }
 
