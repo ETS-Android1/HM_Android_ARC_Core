@@ -10,7 +10,7 @@ import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 
-import static com.healthymedium.arc.study.StudyStateMachine.TAG_TEST_MISSED_COUNT;
+import static com.healthymedium.arc.study.StateMachine.TAG_TEST_MISSED_COUNT;
 
 public class NotificationNotifyJob extends JobService {
 

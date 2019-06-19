@@ -272,7 +272,7 @@ public class StateMachineAlpha extends StateMachine {
                         LoadingDialog dialog = new LoadingDialog();
                         dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
 
-                        Study.getCurrentTestSession().markCompleted(true);
+                        Study.getCurrentTestSession().markCompleted();
                         if(Study.getCurrentVisit().getNumberOfTestsAvailable()==0){
                             setTestCompleteFlag(true);
                         }
@@ -295,7 +295,7 @@ public class StateMachineAlpha extends StateMachine {
                         LoadingDialog dialog = new LoadingDialog();
                         dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
 
-                        Study.getCurrentTestSession().markCompleted(true);
+                        Study.getCurrentTestSession().markCompleted();
                         if(Study.getCurrentVisit().getNumberOfTestsAvailable()==0){
                             setTestCompleteFlag(true);
                         }
