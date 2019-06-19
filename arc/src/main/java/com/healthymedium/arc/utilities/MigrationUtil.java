@@ -9,12 +9,15 @@ import com.healthymedium.arc.study.StudyStateMachine;
 
 public class MigrationUtil {
 
+    public static final String TAG_VERSION_LIB = "versionLib";
+    public static final String TAG_VERSION_APP = "versionApp";
+
     public void checkForUpdate(){
 
         // library migration
 
         long newLibVersion = VersionUtil.getLibraryVersionCode();
-        long oldLibVersion = PreferencesManager.getInstance().getLong("libVersion", newLibVersion);
+        long oldLibVersion = PreferencesManager.getInstance().getLong(TAG_VERSION_LIB, newLibVersion);
 
         Log.i("MigrationUtil", "old library version="+oldLibVersion);
         Log.i("MigrationUtil", "new library version="+newLibVersion);
@@ -22,14 +25,14 @@ public class MigrationUtil {
         if(newLibVersion > oldLibVersion) {
             Log.i("MigrationUtil", "migrating library data from "+oldLibVersion+" to "+newLibVersion);
             if(migrateLibraryData(oldLibVersion,newLibVersion)) {
-                PreferencesManager.getInstance().putLong("libVersion", newLibVersion);
+                PreferencesManager.getInstance().putLong(TAG_VERSION_LIB, newLibVersion);
             }
         }
 
         // app migration
 
         long newAppVersion = VersionUtil.getAppVersionCode();
-        long oldAppVersion = PreferencesManager.getInstance().getLong("appVersion", newAppVersion);
+        long oldAppVersion = PreferencesManager.getInstance().getLong(TAG_VERSION_APP, newAppVersion);
 
         Log.i("MigrationUtil", "old app version="+oldAppVersion);
         Log.i("MigrationUtil", "new app version="+newAppVersion);
@@ -37,7 +40,7 @@ public class MigrationUtil {
         if(newLibVersion > oldLibVersion) {
             Log.i("MigrationUtil", "migrating app data from "+oldAppVersion+" to "+newAppVersion);
             if(migrateAppData(oldAppVersion,newAppVersion)) {
-                PreferencesManager.getInstance().putLong("appVersion", newAppVersion);
+                PreferencesManager.getInstance().putLong(TAG_VERSION_APP, newAppVersion);
                 Log.i("MigrationUtil", "migration successful");
             } else {
                 Log.i("MigrationUtil", "migration failed");

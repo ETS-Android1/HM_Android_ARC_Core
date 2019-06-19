@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void setup(){
         NavigationManager.initializeInstance(getSupportFragmentManager());
-        if(PreferencesManager.getInstance().contains("language") || !Config.CHOOSE_LOCALE){
+        if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
         } else {
             List<Locale> locales = Application.getInstance().getLocaleOptions();

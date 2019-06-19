@@ -45,8 +45,8 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
             }
         }
 
-        PreferencesManager.getInstance().putString("language", language);
-        PreferencesManager.getInstance().putString("country", country);
+        PreferencesManager.getInstance().putString(Locale.TAG_LANGUAGE, language);
+        PreferencesManager.getInstance().putString(Locale.TAG_COUNTRY, country);
 
         Application.getInstance().updateLocale(getContext());
 

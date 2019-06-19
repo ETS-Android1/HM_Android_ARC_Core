@@ -20,6 +20,8 @@ import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
+
 public class ContactScreen extends BaseFragment {
 
     String stringHeader;
@@ -35,7 +37,7 @@ public class ContactScreen extends BaseFragment {
 
     public ContactScreen() {
         stringHeader = "I would like to <b>contact study site</b>.";
-        stringPhoneNumber = PreferencesManager.getInstance().getString("ContactInfo" ,"555-555-5555");
+        stringPhoneNumber = PreferencesManager.getInstance().getString(TAG_CONTACT_INFO ,"555-555-5555");
         allowBackPress(false);
         setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
         setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);

@@ -61,6 +61,8 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
+
 @SuppressWarnings("unchecked")
 public class RestClient <Api>{
 
@@ -461,7 +463,7 @@ public class RestClient <Api>{
                 if (response.optional.has("contact_info")) {
                     JsonObject contactJson = response.optional.get("contact_info").getAsJsonObject();
                     if (contactJson.has("phone")) {
-                        PreferencesManager.getInstance().putString("ContactInfo", contactJson.get("phone").getAsString());
+                        PreferencesManager.getInstance().putString(TAG_CONTACT_INFO, contactJson.get("phone").getAsString());
                         return true;
                     }
                 }

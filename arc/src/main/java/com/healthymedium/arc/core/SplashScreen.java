@@ -18,7 +18,7 @@ import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
-import java.util.Locale;
+import com.healthymedium.arc.core.Locale;
 
 public class SplashScreen extends BaseFragment {
 
@@ -69,11 +69,11 @@ public class SplashScreen extends BaseFragment {
             getMainActivity().setupHomeWatcher();
             getMainActivity().setupKeyboardWatcher();
 
-            String language = PreferencesManager.getInstance().getString("language","en");
-            String country = PreferencesManager.getInstance().getString("country","US");
+            String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE,Locale.LANGUAGE_ENGLISH);
+            String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY,Locale.COUNTRY_UNITED_STATES);
             Resources res = getResources();
             Configuration conf = res.getConfiguration();
-            conf.setLocale(new Locale(language,country));
+            conf.setLocale(new java.util.Locale(language,country));
             res.updateConfiguration(conf, res.getDisplayMetrics());
 
             if(NotificationManager.getInstance()==null){

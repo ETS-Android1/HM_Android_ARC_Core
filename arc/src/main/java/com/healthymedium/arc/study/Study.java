@@ -13,6 +13,10 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Study{
 
+    public static final String TAG_INITIALIZED = "initialized";
+    public static final String TAG_CONTACT_INFO = "ContactInfo";
+
+
     protected static Study instance;
     protected static boolean valid;
     protected Context context;
@@ -236,7 +240,7 @@ public class Study{
 
         checkRegistrations();
 
-        boolean initialized = PreferencesManager.getInstance().getBoolean("initialized",false);
+        boolean initialized = PreferencesManager.getInstance().getBoolean(TAG_INITIALIZED,false);
         if(!initialized){
             participant.initialize();
             participant.save();
@@ -244,9 +248,10 @@ public class Study{
             stateMachine.initialize();
             stateMachine.save();
 
-            PreferencesManager.getInstance().putLong("libVersion",VersionUtil.getLibraryVersionCode());
-            PreferencesManager.getInstance().putLong("appVersion",VersionUtil.getAppVersionCode());
-            PreferencesManager.getInstance().putBoolean("initialized",true);
+            PreferencesManager.getInstance().putLong(MigrationUtil.TAG_VERSION_LIB,VersionUtil.getLibraryVersionCode());
+            PreferencesManager.getInstance().putLong(MigrationUtil.TAG_VERSION_APP,VersionUtil.getAppVersionCode());
+
+            PreferencesManager.getInstance().putBoolean(TAG_INITIALIZED,true);
 
             HeartbeatManager.initialize(context);
             HeartbeatManager.getInstance().scheduleHeartbeat();

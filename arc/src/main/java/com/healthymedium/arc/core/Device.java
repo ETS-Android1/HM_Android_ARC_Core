@@ -15,6 +15,8 @@ import java.util.UUID;
 
 public class Device {
 
+    public static final String TAG_DEVICE_ID = "deviceId";
+
     private static String id;
     private static String info;
     private static String name;
@@ -26,11 +28,11 @@ public class Device {
 
     public static void initialize(Context context) {
 
-        if(PreferencesManager.getInstance().contains("deviceId")){
-            id = PreferencesManager.getInstance().getString("deviceId","");
+        if(PreferencesManager.getInstance().contains(TAG_DEVICE_ID)){
+            id = PreferencesManager.getInstance().getString(TAG_DEVICE_ID,"");
         } else {
             id = UUID.randomUUID().toString();
-            PreferencesManager.getInstance().putString("deviceId",id);
+            PreferencesManager.getInstance().putString(TAG_DEVICE_ID,id);
         }
 
         String manufacturer = Build.MANUFACTURER;

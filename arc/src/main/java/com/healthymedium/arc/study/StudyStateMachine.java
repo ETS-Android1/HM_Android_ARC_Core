@@ -7,6 +7,7 @@ import android.util.Log;
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.AvailabilityPathData;
@@ -64,12 +65,15 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class StudyStateMachine {
 
     public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
     public static final String TAG_STUDY_STATE = "StudyState";
+    public static final String TAG_TEST_COMPLETE = "TestCompleteFlag";
+    public static final String TAG_TEST_MISSED_COUNT = "TestMissedCount";
+
+
 
     protected String tag = getClass().getSimpleName();
 
@@ -261,11 +265,11 @@ public class StudyStateMachine {
 
     protected void setTestCompleteFlag(boolean complete){
         Log.i(tag, "setTestCompleteFlag("+complete+")");
-        PreferencesManager.getInstance().putBoolean("TestCompleteFlag",complete);
+        PreferencesManager.getInstance().putBoolean(TAG_TEST_COMPLETE,complete);
     }
 
     protected boolean isTestCompleteFlagSet(){
-        return PreferencesManager.getInstance().getBoolean("TestCompleteFlag",false);
+        return PreferencesManager.getInstance().getBoolean(TAG_TEST_COMPLETE,false);
     }
 
     public boolean isCurrentlyInTestPath(){
@@ -469,7 +473,7 @@ public class StudyStateMachine {
         LocalTime wakeTime = null;
         LocalTime bedTime = null;
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", java.util.Locale.US);
         Calendar calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
 
@@ -518,7 +522,7 @@ public class StudyStateMachine {
         LocalTime wakeTime = null;
         LocalTime bedTime = null;
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", java.util.Locale.US);
         Calendar calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
 
@@ -606,7 +610,7 @@ public class StudyStateMachine {
     }
 
     public void addTests(){
-        PreferencesManager.getInstance().putInt("test_missed_count", 0);
+        PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, 0);
 
         List<BaseFragment> fragments = new ArrayList<>();
 
@@ -784,9 +788,9 @@ public class StudyStateMachine {
             // After the cycle but before the next session
             if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
 
-                String language = PreferencesManager.getInstance().getString("language", "en");
-                String country = PreferencesManager.getInstance().getString("country", "US");
-                Locale locale = new Locale(language, country);
+                String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+                String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+                java.util.Locale locale = new java.util.Locale(language, country);
                 DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
                 //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);

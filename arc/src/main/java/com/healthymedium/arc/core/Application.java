@@ -78,9 +78,9 @@ public class Application extends android.app.Application {
         if(preferences == null) {
             return;
         }
-        if(preferences.contains("language")){
-            String language = preferences.getString("language","en");
-            String country = preferences.getString("country","US");
+        if(preferences.contains(Locale.TAG_LANGUAGE)){
+            String language = preferences.getString(Locale.TAG_LANGUAGE,Locale.LANGUAGE_ENGLISH);
+            String country = preferences.getString(Locale.TAG_COUNTRY,Locale.COUNTRY_UNITED_STATES);
             java.util.Locale locale = new java.util.Locale(language,country);
 
             // update application

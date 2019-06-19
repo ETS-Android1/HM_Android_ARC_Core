@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
@@ -29,7 +30,6 @@ import org.joda.time.format.DateTimeFormatter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @SuppressLint("ValidFragment")
 public class QuestionAdjustSchedule extends QuestionTemplate {
@@ -78,9 +78,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String range;
 
-        String language = PreferencesManager.getInstance().getString("language", "en");
-        String country = PreferencesManager.getInstance().getString("country", "US");
-        Locale locale = new Locale(language, country);
+        String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+        String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+        java.util.Locale locale = new java.util.Locale(language, country);
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
 
         int visitAdjustIndex = 0;
