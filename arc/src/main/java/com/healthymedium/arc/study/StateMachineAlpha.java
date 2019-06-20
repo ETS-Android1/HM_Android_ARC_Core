@@ -343,17 +343,17 @@ public class StateMachineAlpha extends StateMachine {
         //  leave empty for now
     }
 
-    public void checkForSignaturePage(){
+    public void checkForSignaturePage(boolean allowHelp){
         if(Config.ENABLE_SIGNATURES) {
-            addSignaturePage();
+            addSignaturePage(allowHelp);
         }
     }
 
-    public void addSignaturePage(){
+    public void addSignaturePage(boolean allowHelp){
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new QuestionSignature(
                 false,
-                true,
+                allowHelp,
                 ViewUtil.getString(R.string.idverification_header),
                 ViewUtil.getString(R.string.idverification_body)));
         PathSegment segment = new PathSegment(fragments);
@@ -363,21 +363,23 @@ public class StateMachineAlpha extends StateMachine {
     // --------------------------------------------------------------------------
 
     public void setPathFirstOfBaseline(){
-        checkForSignaturePage();
+        checkForSignaturePage(true);
         addChronotypeSurvey();
         addWakeSurvey();
         addContextSurvey();
         addTests();
         addInterruptedPage();
+        checkForSignaturePage(false);
         Study.getCurrentTestSession().markStarted();
     }
 
     public void setPathBaselineTest(){
         checkForLandingPage();
-        checkForSignaturePage();
+        checkForSignaturePage(true);
         addContextSurvey();
         addTests();
         addInterruptedPage();
+        checkForSignaturePage(false);
     }
 
 
@@ -387,29 +389,32 @@ public class StateMachineAlpha extends StateMachine {
 
     public void setPathTestFirstOfVisit(){
         checkForLandingPage();
-        checkForSignaturePage();
+        checkForSignaturePage(true);
         addChronotypeSurvey();
         addWakeSurvey();
         addContextSurvey();
         addTests();
         addInterruptedPage();
+        checkForSignaturePage(false);
     }
 
     public void setPathTestFirstOfDay(){
         checkForLandingPage();
-        checkForSignaturePage();
+        checkForSignaturePage(true);
         addWakeSurvey();
         addContextSurvey();
         addTests();
         addInterruptedPage();
+        checkForSignaturePage(false);
     }
 
     public void setPathTestOther(){
         checkForLandingPage();
-        checkForSignaturePage();
+        checkForSignaturePage(true);
         addContextSurvey();
         addTests();
         addInterruptedPage();
+        checkForSignaturePage(false);
     }
 
     public void setPathOver(){
