@@ -103,12 +103,7 @@ public class NavigationManager {
     }
 
     public void openHome() {
-        // TODO
-        // We currently have two landing pages: LandingTemplate and LandingTestReadyHBP
-            // We either need to merge these or write a function somewhere to determine which to use
-        // Both landing pages expect the displayed strings to be passed in
-            // This logic currently lives in the StateMachine
-        //open(new LandingTemplate());
+        open(new LandingTemplate(false));
     }
 
     public void openProgress() {

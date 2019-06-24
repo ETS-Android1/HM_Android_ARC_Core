@@ -277,4 +277,22 @@
     <string name="ChangeAvail_date_picker_confirm_body"></string>
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
+
+    <string name="home_header1">&lt;b>Hello!&lt;/b></string>
+    <string name="home_body1">&lt;br /&gt; &lt;br /&gt;You have a new test available.</string>
+
+    <string name="home_header2">&lt;b>There are no tests to take right now.&lt;/b></string>
+    <string name="home_body2">You will receive a notification later today when it\'s time to take your next test.</string>
+
+    <string name="home_header3">&lt;b>You\'re done with today\'s tests.&lt;/b></string>
+    <string name="home_body3">We\'ll notify you tomorrow when it\'s time to take a test.</string>
+
+    <string name="home_header4">&lt;b>There are no tests available right now.&lt;/b></string>
+    <string name="home_body4">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. &lt;br /> &lt;br /> We\'ll notify you when it\'s time to take a test.</string>
+
+    <string name="home_header5">&lt;b>Your testing cycle starts tomorrow and runs through {DATE}.&lt;/b></string>
+    <string name="home_body5">We\'ll notify you when it\'s time to take a test.</string>
+
+    <string name="home_header6">&lt;b>You\'ve finished the study!&lt;/b></string>
+    <string name="home_body6">There are no more tests to take.</string>
 </resources>
