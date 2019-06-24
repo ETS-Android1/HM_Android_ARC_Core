@@ -31,7 +31,6 @@ public class LandingTemplate extends BaseFragment {
     protected LinearLayout content;
     protected FrameLayout frameLayoutContact;
     protected TextView textViewContact;
-    protected BottomNavigationView bottomNavigationView;
 
     public LandingTemplate(String header, String subheader) {
         stringHeader = header;
@@ -48,20 +47,7 @@ public class LandingTemplate extends BaseFragment {
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
-//        textViewContact = view.findViewById(R.id.textViewContact);
-//        ViewUtil.underlineTextView(textViewContact);
-
-        bottomNavigationView = (BottomNavigationView) view.findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
-
-//        frameLayoutContact = view.findViewById(R.id.frameLayoutContact);
-//        frameLayoutContact.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ContactScreen contactScreen = new ContactScreen();
-//                NavigationManager.getInstance().open(contactScreen);
-//            }
-//        });
+        getMainActivity().showNavigationBar();
 
         setupDebug(view,R.id.textViewHeader);
 

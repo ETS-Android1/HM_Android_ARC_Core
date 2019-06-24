@@ -61,16 +61,16 @@
 
     </ScrollView>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:paddingTop="1dp"
-        app:itemBackground="@color/white"
-        app:menu="@menu/menu_navigation" />
-        <!--app:itemIconTint="@drawable/menu_item_selector"-->
-        <!--app:itemTextColor="@drawable/menu_text_selector"-->
+    <!--<android.support.design.widget.BottomNavigationView-->
+        <!--android:id="@+id/navigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/white"-->
+        <!--android:paddingTop="1dp"-->
+        <!--app:itemBackground="@color/white"-->
+        <!--app:menu="@menu/menu_navigation" />-->
+        <!--&lt;!&ndash;app:itemIconTint="@drawable/menu_item_selector"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:itemTextColor="@drawable/menu_text_selector"&ndash;&gt;-->
 
 </RelativeLayout>

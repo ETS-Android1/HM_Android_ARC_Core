@@ -6,6 +6,11 @@ import android.support.v4.app.FragmentManager;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.informative.AboutScreen;
+import com.healthymedium.arc.paths.informative.EarningsScreen;
+import com.healthymedium.arc.paths.informative.ProgressScreen;
+import com.healthymedium.arc.paths.informative.ResourcesScreen;
+import com.healthymedium.arc.paths.templates.LandingTemplate;
 
 public class NavigationManager {
 
@@ -97,5 +102,25 @@ public class NavigationManager {
         void onPopBack();
     }
 
+    public void openHome() {
+        // TODO
+        // We currently have two landing pages: LandingTemplate and LandingTestReadyHBP
+            // We either need to merge these or write a function somewhere to determine which to use
+        // Both landing pages expect the displayed strings to be passed in
+            // This logic currently lives in the StateMachine
+        //open(new LandingTemplate());
+    }
+
+    public void openProgress() {
+        open(new ProgressScreen());
+    }
+
+    public void openEarnings() {
+        open(new EarningsScreen());
+    }
+
+    public void openResources() {
+        open(new ResourcesScreen());
+    }
 
 }

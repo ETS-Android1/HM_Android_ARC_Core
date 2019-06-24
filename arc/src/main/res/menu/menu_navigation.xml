@@ -6,13 +6,13 @@
         android:icon="@drawable/ic_home_inactive"
         />
     <item
-        android:id="@+id/menu_search"
+        android:id="@+id/menu_progress"
         android:title="Progress"
         android:icon="@drawable/ic_progress_inactive"
         />
 
     <item
-        android:id="@+id/menu_notifications"
+        android:id="@+id/menu_earnings"
         android:title="Earnings"
         android:icon="@drawable/ic_earnings_inactive"
         />
