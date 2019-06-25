@@ -278,6 +278,11 @@
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
 
+    <string name="ChangeAvail_time"></string>
+    <string name="ChangeAvail_date"></string>
+
+    <string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
+    
     <string name="home_header1">&lt;b>Hello!&lt;/b></string>
     <string name="home_body1">&lt;br /&gt; &lt;br /&gt;You have a new test available.</string>
 

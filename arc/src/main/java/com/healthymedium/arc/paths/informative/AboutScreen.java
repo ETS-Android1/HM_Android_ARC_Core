@@ -36,6 +36,8 @@ public class AboutScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about_app, container, false);
 
+        getMainActivity().hideNavigationBar();
+
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setLineSpacing(ViewUtil.dpToPx(3),1.0f);

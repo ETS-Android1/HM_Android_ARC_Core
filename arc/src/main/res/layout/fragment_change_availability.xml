@@ -47,23 +47,7 @@
                 android:layout_marginRight="32dp"
                 android:textColor="@color/white"
                 android:textSize="26dp"
-                tools:text="I would like to contact study site." />
-
-            <TextView
-                android:id="@+id/textViewSubHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:drawableLeft="@drawable/ic_phone_handset"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                tools:text="555-555-5555" />
+                tools:text="I would like to change the time of day I am available for testing." />
 
             <com.healthymedium.arc.custom.Button
                 android:id="@+id/button"
@@ -72,21 +56,23 @@
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="false"
                 android:layout_marginLeft="32dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
                 app:inverted="true"
-                app:text="CALL" />
+                app:text="@string/change_button" />
 
             <FrameLayout
-                android:id="@+id/lineFrameLayout1"
+                android:id="@+id/lineFrameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_above="@+id/linearLayout"
                 android:background="#003245">
 
             </FrameLayout>
 
             <TextView
-                android:id="@+id/textViewEmailHeader"
+                android:id="@+id/textViewChangeDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -95,38 +81,32 @@
                 android:layout_marginRight="32dp"
                 android:textColor="@color/white"
                 android:textSize="26dp"
-                tools:text="I would like to email my study coordinator." />
-
-            <TextView
-                android:id="@+id/textViewEmailSubHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:drawableLeft="@drawable/ic_email"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                tools:text="sample@email.com" />
+                tools:text="I would like to change the dates of my next testing cycle." />
 
             <com.healthymedium.arc.custom.Button
-                android:id="@+id/emailButton"
+                android:id="@+id/changeDateButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="false"
                 android:layout_marginLeft="32dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
                 app:inverted="true"
-                app:text="EMAIL" />
+                app:text="@string/change_button" />
 
         </LinearLayout>
 
     </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/linearLayout"
+        android:background="#003245">
+
+    </FrameLayout>
 
 </RelativeLayout>
