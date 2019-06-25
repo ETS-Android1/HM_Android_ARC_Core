@@ -7,19 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.AboutScreen;
-import com.healthymedium.arc.paths.informative.ContactScreen;
-import com.healthymedium.arc.paths.informative.PrivacyScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.VersionUtil;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SetupWelcome extends BaseFragment {
 

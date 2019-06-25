@@ -2,7 +2,6 @@ package com.healthymedium.arc.core;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.AnimRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;

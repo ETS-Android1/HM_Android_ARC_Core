@@ -1,13 +1,11 @@
 package com.healthymedium.arc.path_data;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
-import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
 import com.healthymedium.arc.api.tests.data.ContextSurvey;
 import com.healthymedium.arc.api.tests.data.ContextSurveySection;
 import com.healthymedium.arc.study.PathSegmentData;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ContextPathData extends PathSegmentData {

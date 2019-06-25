@@ -3,7 +3,6 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
-import android.provider.Settings;
 import android.support.annotation.Dimension;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;

@@ -5,7 +5,6 @@ import android.app.job.JobService;
 import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.Study;
 

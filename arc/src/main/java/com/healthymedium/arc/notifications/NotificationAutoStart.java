@@ -7,10 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.PersistableBundle;
 import android.util.Log;
-
-import com.healthymedium.arc.utilities.PreferencesManager;
 
 public class NotificationAutoStart extends BroadcastReceiver
 {

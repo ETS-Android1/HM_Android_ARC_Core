@@ -16,8 +16,6 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
-import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;

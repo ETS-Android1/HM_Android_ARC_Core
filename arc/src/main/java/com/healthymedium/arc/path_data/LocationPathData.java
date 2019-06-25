@@ -1,7 +1,5 @@
 package com.healthymedium.arc.path_data;
 
-import android.location.Location;
-
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.LocationSurvey;
 import com.healthymedium.arc.api.tests.data.LocationSurveySection;

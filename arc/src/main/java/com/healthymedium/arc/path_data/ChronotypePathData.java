@@ -1,16 +1,11 @@
 package com.healthymedium.arc.path_data;
 
-import com.google.gson.annotations.SerializedName;
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.ChronotypeSurvey;
 import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
 import com.healthymedium.arc.study.PathSegmentData;
-import com.healthymedium.arc.time.JodaUtil;
-
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ChronotypePathData extends PathSegmentData {

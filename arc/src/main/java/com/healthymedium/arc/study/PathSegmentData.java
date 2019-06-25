@@ -1,13 +1,8 @@
 package com.healthymedium.arc.study;
 
-import android.util.Log;
-
-import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.tests.data.BaseData;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

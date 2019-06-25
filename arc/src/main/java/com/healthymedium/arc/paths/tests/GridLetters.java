@@ -15,11 +15,9 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
-import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
-import com.healthymedium.arc.path_data.GridTestPathData.Section;
 import com.healthymedium.arc.study.Study;
 
 import java.util.ArrayList;

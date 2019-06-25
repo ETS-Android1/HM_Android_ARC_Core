@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 import android.os.Handler;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.Config;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

@@ -11,7 +11,6 @@ import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
 
-import org.joda.time.Hours;
 import org.joda.time.LocalTime;
 
 @SuppressLint("ValidFragment")
