@@ -30,7 +30,7 @@ public class WakePathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "wake_" + Integer.toString(i+1);
+            surveySection.question_id = "wake_" + (i+1);
             survey.questions.add(surveySection);
         }
 

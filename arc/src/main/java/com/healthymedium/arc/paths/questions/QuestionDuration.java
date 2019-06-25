@@ -75,7 +75,7 @@ public class QuestionDuration extends QuestionTemplate {
         int hours = (int)floor(minutes/60);
         String value = minutes%60+" min";
         if(hours>0){
-            value = String.valueOf(hours) +" hr " + value;
+            value = hours +" hr " + value;
         }
         return value;
     }

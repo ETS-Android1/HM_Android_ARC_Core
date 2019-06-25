@@ -31,7 +31,7 @@ public class ContextPathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "context_" + Integer.toString(i+1);
+            surveySection.question_id = "context_" + (i+1);
             survey.questions.add(surveySection);
         }
 

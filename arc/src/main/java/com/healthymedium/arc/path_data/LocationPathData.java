@@ -31,7 +31,7 @@ public class LocationPathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "location " + Integer.toString(i+1);
+            surveySection.question_id = "location " + (i+1);
             survey.questions.add(surveySection);
         }
 

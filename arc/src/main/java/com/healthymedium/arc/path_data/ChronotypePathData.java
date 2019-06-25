@@ -31,7 +31,7 @@ public class ChronotypePathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "chronotype_" + Integer.toString(i+1);
+            surveySection.question_id = "chronotype_" + (i+1);
             survey.questions.add(surveySection);
         }
 
