@@ -262,8 +262,8 @@
     <string name="Day_Abbrev_Fri">F</string>
     <string name="Day_Abbrev_Sat">S</string>
 
-    <string name="ChangeAvail_date_picker_body"></string>
-    <string name="ChangeAvail_date_picker_confirm_body"></string>
+    <string name="ChangeAvail_date_picker_body">What week are you able to test?</string>
+    <string name="ChangeAvail_date_picker_confirm_body">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b></string>
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
 </resources>
