@@ -1,36 +1,36 @@
 package com.healthymedium.arc.time;
 
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
-public final class LocalDateTypeAdapter extends TypeAdapter<LocalDate> {
+public class LocalDateTypeAdapter implements JsonSerializer<LocalDate>, JsonDeserializer<LocalDate> {
 
     @Override
-    public void write(JsonWriter out, LocalDate date) throws IOException {
-        if (date == null) {
-            out.nullValue();
-        } else {
-            out.value(new DateTime().withTimeAtStartOfDay().withDate(date).getMillis());
-        }
+    public JsonElement serialize(LocalDate src, Type srcType, JsonSerializationContext context) {
+        return new JsonPrimitive(src.toString());
     }
 
     @Override
-    public LocalDate read(JsonReader in) throws IOException {
-        switch (in.peek()) {
-            case NULL:
-                in.nextNull();
-                return null;
-            default:
-                long millis = in.nextLong();
-                DateTime dateTime = new DateTime(millis);
-                return dateTime.toLocalDate();
-        }
+    public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext context)
+            throws JsonParseException {
+        // long millis = json.getAsJsonObject().get("iLocalMillis").getAsLong();
+        return new LocalDate(json.getAsString());
     }
 
 }
