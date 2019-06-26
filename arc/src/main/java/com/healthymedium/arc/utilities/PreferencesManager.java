@@ -24,9 +24,11 @@ import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.PathSegmentTypeAdapter;
 import com.healthymedium.arc.time.DateTimeTypeAdapter;
+import com.healthymedium.arc.time.LocalDateTypeAdapter;
 import com.healthymedium.arc.time.LocalTimeTypeAdapter;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import java.io.IOException;
@@ -60,7 +62,7 @@ public class PreferencesManager {
                 .registerTypeAdapter(Uri.class, new UriAdapter())
                 .registerTypeAdapter(List.class, new ListTypeAdapter())
                 .registerTypeAdapter(DateTime.class, new DateTimeTypeAdapter())
-                //.registerTypeAdapter(LocalDate.class, new LocalTimeTypeAdapter())
+                .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
                 .registerTypeAdapter(LocalTime.class, new LocalTimeTypeAdapter())
                 .registerTypeAdapter(PathSegment.class,new PathSegmentTypeAdapter())
                 .registerTypeAdapter(BaseData.class, new BaseDataTypeAdapter())
