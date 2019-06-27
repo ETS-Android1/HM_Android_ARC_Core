@@ -266,4 +266,6 @@
     <string name="ChangeAvail_date_picker_confirm_body">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b></string>
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
+
+    <string name="max_time_error"></string>
 </resources>
