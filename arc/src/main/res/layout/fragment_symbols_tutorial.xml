@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/primary">
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test2"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="32dp"
+        android:orientation="horizontal"
+        android:layout_above="@+id/textView20"
+        android:layout_centerHorizontal="true"
+        android:background="@color/grey">
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_top1"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/symbolbutton_top2"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_top2"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_top3"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_alignTop="@+id/symbolbutton_top2"
+            android:layout_toEndOf="@+id/symbolbutton_top2"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView20"
+        android:layout_marginTop="@dimen/frame_vertical"
+        android:orientation="horizontal">
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_bottom1"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/textView19"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="" />
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_bottom2"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView19"
+            android:layout_weight="1"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/frame_vertical"
+        android:layout_marginRight="@dimen/frame_vertical"
+        android:text="Tap the bottom tile that matches a tile on the top."
+        android:textAlignment="center" />
+
+</RelativeLayout>

@@ -661,6 +661,7 @@ public class StudyStateMachine {
                 testNumber,
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
+                "prices",
                 res.getString(R.string.button_begin)
         );
         fragments.add(info);
@@ -696,6 +697,7 @@ public class StudyStateMachine {
                 testNumber,
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
+                "symbols",
                 res.getString(R.string.button_begin)
         );
         fragments.add(info);
@@ -719,6 +721,7 @@ public class StudyStateMachine {
                 testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
+                "grids",
                 res.getString(R.string.button_next)
         );
         fragments.add(info0);
@@ -727,6 +730,7 @@ public class StudyStateMachine {
                 testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body2),
+                "grids",
                 res.getString(R.string.button_next)
         );
         fragments.add(info1);
@@ -735,6 +739,7 @@ public class StudyStateMachine {
                 testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body3),
+                "grids",
                 res.getString(R.string.button_begin)
         );
         fragments.add(info2);

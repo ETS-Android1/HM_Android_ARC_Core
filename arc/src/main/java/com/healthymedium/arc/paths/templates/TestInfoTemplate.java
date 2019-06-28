@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,10 @@ import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.informative.AboutScreen;
+import com.healthymedium.arc.paths.tutorials.SymbolTutorial;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.NavigationManager;
 
 @SuppressLint("ValidFragment")
 public class TestInfoTemplate extends BaseFragment {
@@ -26,29 +31,33 @@ public class TestInfoTemplate extends BaseFragment {
     String stringHeader;
     String stringBody;
     String stringButton;
+    String stringType;
 
     Drawable buttonImage;
 
     TextView textViewTestNumber;
     TextView textViewHeader;
     TextView textViewBody;
+    TextView textViewTutorial;
 
     LinearLayout content;
 
     Button button;
 
-    public TestInfoTemplate(String testNumber, String header, String body, @Nullable String buttonText) {
+    public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable String buttonText) {
         stringTestNumber = testNumber;
         stringHeader = header;
         stringBody = body;
         stringButton = buttonText;
+        stringType = type;
     }
 
-    public TestInfoTemplate(String testNumber, String header, String body, @Nullable Drawable buttonImage) {
+    public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable Drawable buttonImage) {
         stringTestNumber = testNumber;
         stringHeader = header;
         stringBody = body;
         this.buttonImage = buttonImage;
+        stringType = type;
     }
 
     @Nullable
@@ -66,6 +75,29 @@ public class TestInfoTemplate extends BaseFragment {
 
         textViewBody = view.findViewById(R.id.textViewBody);
         textViewBody.setText(Html.fromHtml(stringBody));
+
+        textViewTutorial = view.findViewById(R.id.textViewTutorial);
+        // textViewTutorial.setText("View a Tutorial");
+        SpannableString content = new SpannableString("View a Tutorial");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textViewTutorial.setText(content);
+        textViewTutorial.setVisibility(View.VISIBLE);
+
+        textViewTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (stringType.equals("grids")) {
+
+                }
+                else if (stringType.equals("symbols")) {
+                    SymbolTutorial symbolTutorial = new SymbolTutorial();
+                    NavigationManager.getInstance().open(symbolTutorial);
+                }
+                else if (stringType.equals("prices")) {
+
+                }
+            }
+        });
 
 //        if (stringSubHeader == "") {
 //            textViewSubheader.setVisibility(View.GONE);

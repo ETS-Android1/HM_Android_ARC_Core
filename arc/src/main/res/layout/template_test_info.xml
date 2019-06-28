@@ -82,11 +82,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="92dp"
         android:layout_above="@id/button"
         android:textSize="18dp"
         android:textColor="@color/white"
-        tools:text="Tutorial"
-        tools:visibility="visible" />
+        tools:text="Tutorial" />
 
     <com.healthymedium.arc.custom.Button
         android:id="@+id/button"
