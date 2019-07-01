@@ -7,12 +7,12 @@ def versionBuild = 0 // max=99   // bump for qa builds
 
 android {
 
-    compileSdkVersion 27
+    compileSdkVersion 28
     flavorDimensions "default"
 
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.session.runner.AndroidJUnitRunner"
@@ -48,9 +48,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'joda-time:joda-time:2.9.9'
 
-    api 'com.android.support:appcompat-v7:27.0.2'
-    api 'com.android.support:support-v4:27.0.2'
-    api 'com.android.support:mediarouter-v7:27.0.2'
+    api 'com.android.support:appcompat-v7:28.0.0'
+    api 'com.android.support:support-v4:28.0.0'
+    api 'com.android.support:mediarouter-v7:28.0.0'
     api 'net.danlew:android.joda:2.9.9'
     api 'com.squareup.retrofit2:converter-gson:2.5.0'
     api 'com.squareup.retrofit2:retrofit:2.5.0'
