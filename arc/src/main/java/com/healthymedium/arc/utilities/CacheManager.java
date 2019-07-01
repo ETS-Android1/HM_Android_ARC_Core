@@ -227,7 +227,15 @@ public class CacheManager {
     public <T> T getObject(String key, Class<T> clazz) {
         Log.i(tag,"getObject("+key+")");
         if(!map.containsKey(key)){
-            return objectGson.fromJson("{}", clazz);
+            try {
+                return clazz.newInstance();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                throw new UnsupportedOperationException(e.getMessage());
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                throw new UnsupportedOperationException(e.getMessage());
+            }
         }
         Cache cache = map.get(key);
         if(!cache.read){
