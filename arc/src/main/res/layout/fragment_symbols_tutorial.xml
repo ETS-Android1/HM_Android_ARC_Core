@@ -7,19 +7,25 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/primary">
+        android:layout_height="30dp"
+        android:background="@color/primary"
+        android:animateLayoutChanges="true">
 
-        <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test "/>
-
-        <TextView
+        <ImageView
+            android:id="@+id/closeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="test2"/>
+            android:background="@drawable/ic_x_to_close"/>
+
+        <FrameLayout
+            android:id="@+id/progressBarGradient"
+            android:layout_width="50dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tutorial_progress_bar_gradient">
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -27,9 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:paddingTop="32dp"
-        android:paddingBottom="32dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:orientation="horizontal"
+        android:layout_below="@id/progressBar"
         android:layout_above="@+id/textView20"
         android:layout_centerHorizontal="true"
         android:background="@color/grey">
@@ -112,5 +119,24 @@
         android:layout_marginRight="@dimen/frame_vertical"
         android:text="Tap the bottom tile that matches a tile on the top."
         android:textAlignment="center" />
+
+    <FrameLayout
+        android:id="@+id/fullScreenGray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/progressBar"
+        android:background="#404040"
+        android:alpha="0.9"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+    <com.healthymedium.arc.custom.DialogButtonTutorial
+        android:id="@+id/centerPopup"
+        android:layout_width="220dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>
