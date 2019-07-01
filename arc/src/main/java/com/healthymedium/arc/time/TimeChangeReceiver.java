@@ -1,43 +1,28 @@
 package com.healthymedium.arc.time;
 
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.util.Log;
 
+import com.healthymedium.arc.notifications.Proctor;
+import com.healthymedium.arc.study.Study;
 
-/*
-This receiver catches when the user modifies their date/time. When this happens, the app can occasionally
-get left in an odd state, so we basically just make sure that any existing tests are abandoned,
-and have the Study State Machine re-run its path deciding methods.
- */
+//  This receiver catches when the user modifies their date/time. When this happens, the app can occasionally
+//  get left in an odd state, so we basically just make sure that any existing tests are abandoned,
+//  and have the Study State Machine re-run its path deciding methods.
 
 public class TimeChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("TimeChangeReceiver", "received intent");
-        Log.i("TimeChangeReceiver", intent.toString());
+        Log.i("TimeChangeReceiver", "onReceive");
 
-        ComponentName serviceComponent = new ComponentName(context, TimeChangeJobService.class);
-        JobInfo.Builder builder = new JobInfo.Builder(TimeChangeJobService.ID,serviceComponent);
-        builder.setRequiresDeviceIdle(false);
-        builder.setRequiresCharging(false);
-        builder.setPersisted(false);
-        builder.setMinimumLatency(1);
-        builder.setOverrideDeadline(1);
+        Study.getStateMachine().decidePath();
+        Study.getStateMachine().save(true);
+        Study.getParticipant().save();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setRequiresBatteryNotLow(false);
-            builder.setRequiresStorageNotLow(false);
-        }
-
-        JobScheduler jobScheduler = (JobScheduler)context.getSystemService(context.JOB_SCHEDULER_SERVICE);
-        jobScheduler.schedule(builder.build());
+        Proctor.refreshData(context);
     }
 
 }

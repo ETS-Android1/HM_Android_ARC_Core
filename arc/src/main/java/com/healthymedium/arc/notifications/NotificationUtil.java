@@ -1,0 +1,137 @@
+package com.healthymedium.arc.notifications;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.AudioAttributes;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+
+import com.healthymedium.arc.core.MainActivity;
+import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.notifications.type.NotificationType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NotificationUtil {
+
+    static private final String tag = "NotificationUtil";
+
+    // channels ------------------------------------------------------------------------------------
+
+    public static void createChannel(Context context, NotificationType type){
+        Log.i(tag,"createNotificationChannel(id="+type.getChannelId()+" ,name=\""+type.getChannelName()+"\" ,description=\""+type.getChannelDesc()+"\")");
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
+
+        NotificationChannel channel = new NotificationChannel(type.getChannelId(), type.getChannelName(), type.getImportance());
+        channel.setDescription(type.getChannelDesc());
+        channel.setVibrationPattern(new long[]{500,250,125,250});
+        channel.enableVibration(true);
+        channel.enableLights(true);
+
+        if(type.getSoundResource()!=-1){
+            Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + type.getSoundResource());
+            AudioAttributes attributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .build();
+            channel.setSound(sound,attributes);
+        }
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
+    }
+
+    public static void removeChannel(Context context, NotificationType type){
+        Log.i(tag,"removeNotificationChannel(id="+type.getChannelId()+" ,name=\""+type.getChannelName()+"\" ,description=\""+type.getChannelDesc()+"\")");
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
+
+        android.app.NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.deleteNotificationChannel(type.getChannelId());
+    }
+
+    public static List<NotificationChannel> getChannels(Context context){
+        Log.i(tag,"getNotificationChannels()");
+
+        List<NotificationChannel> channels = new ArrayList<>();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            channels = notificationManager.getNotificationChannels();
+        }
+
+        return channels;
+    }
+
+    public static void removeUnusedChannels(Context context, List<NotificationType> types){
+        Log.i(tag,"removeUnusedChannels()");
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        List<NotificationChannel> channels = notificationManager.getNotificationChannels();
+        for(NotificationChannel channel : channels){
+
+            boolean found = false;
+            String id = channel.getId();
+            for(NotificationType type : types){
+                if(type.getChannelId().equals(id)){
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                notificationManager.deleteNotificationChannel(id);
+            }
+
+        }
+
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    public static Notification buildNotification(Context context, NotificationType type) {
+        Log.i(tag,"buildNotification(channel=\""+type.getChannelName()+"\")");
+
+        Intent main = new Intent(context, MainActivity.class);
+
+        if(type.hasExtra()){
+            main.putExtra(type.getExtra(), true);
+        }
+
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,main, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,type.getChannelId())
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setContentTitle(context.getString(R.string.app_name))
+                .setContentText(type.getContent(context))
+                .setVibrate(new long[]{500,250,125,250})
+                .setAutoCancel(true)
+                .setColor(ContextCompat.getColor(context,R.color.primary))
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.notification);
+
+        int soundResource = type.getSoundResource();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O && soundResource != -1) {
+            Uri sound = Uri.parse("android.resource://" + context.getPackageName() + "/" + type.getSoundResource());
+            builder.setSound(sound);
+        }
+        return builder.build();
+    }
+
+}

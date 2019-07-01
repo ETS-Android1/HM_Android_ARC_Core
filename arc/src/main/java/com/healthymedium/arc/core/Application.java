@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 
+import com.healthymedium.arc.notifications.NotificationTypes;
+import com.healthymedium.arc.notifications.type.NotificationType;
 import com.healthymedium.arc.study.Study;
 
 import com.healthymedium.arc.utilities.CacheManager;
@@ -51,6 +53,21 @@ public class Application extends android.app.Application {
         //Study.getInstance().registerStudyBehavior();
     }
 
+    // list all notification types offered by the app
+    public List<NotificationType> getNotificationTypes() {
+        List<NotificationType> types = new ArrayList<>();
+        types.add(NotificationTypes.TestConfirmed);
+        types.add(NotificationTypes.TestMissed);
+        types.add(NotificationTypes.TestNext);
+        types.add(NotificationTypes.TestTake);
+        if(Config.ENABLE_VIGNETTES) {
+            types.add(NotificationTypes.VisitNextDay);
+            types.add(NotificationTypes.VisitNextWeek);
+            types.add(NotificationTypes.VisitNextMonth);
+        }
+        return types;
+    }
+
     // list all locale options offered by the app
     public List<Locale> getLocaleOptions() {
         List<Locale> locales = new ArrayList<>();
@@ -78,7 +95,6 @@ public class Application extends android.app.Application {
         super.attachBaseContext(context);
         updateLocale(context);
     }
-
 
     public void updateLocale(@Nullable Context context){
         PreferencesManager preferences = PreferencesManager.getInstance();

@@ -7,6 +7,7 @@ import com.healthymedium.arc.api.models.SessionInfo;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
+import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.time.JodaUtil;
 
 import org.joda.time.DateTime;
@@ -32,20 +33,19 @@ public class Scheduler {
 
         NotificationManager notificationManager = NotificationManager.getInstance();
         int visitId = visit.getId();
-        int testCount = visit.getNumberOfTests();
 
         if(Config.ENABLE_VIGNETTES){
-            notificationManager.removeNotification(visitId, NotificationManager.VISIT_NEXT_MONTH);
-            notificationManager.removeNotification(visitId, NotificationManager.VISIT_NEXT_WEEK);
-            notificationManager.removeNotification(visitId, NotificationManager.VISIT_NEXT_DAY);
+            notificationManager.unscheduleNotification(visitId, NotificationTypes.VisitNextMonth);
+            notificationManager.unscheduleNotification(visitId, NotificationTypes.VisitNextWeek);
+            notificationManager.unscheduleNotification(visitId, NotificationTypes.VisitNextDay);
         }
 
         List<TestSession> testSessions = visit.getTestSessions();
         for(TestSession session: testSessions) {
             int sessionId = session.getId();
             Log.i(tag, "Unscheduling notifications for " + visitId + "." + sessionId);
-            notificationManager.removeNotification(sessionId, NotificationManager.TEST_TAKE);
-            notificationManager.removeNotification(testCount+sessionId, NotificationManager.TEST_MISSED);
+            notificationManager.unscheduleNotification(sessionId, NotificationTypes.TestTake);
+            notificationManager.unscheduleNotification(sessionId, NotificationTypes.TestMissed);
         }
     }
 
@@ -64,19 +64,19 @@ public class Scheduler {
             // one month out, noon
             DateTime monthVignette = startDate.minusMonths(1).plusHours(12);
             if (monthVignette.isAfterNow()) {
-                notificationManager.scheduleNotification(visitId, NotificationManager.VISIT_NEXT_MONTH, monthVignette);
+                notificationManager.scheduleNotification(visitId, NotificationTypes.VisitNextMonth, monthVignette);
             }
 
             // one week out, noon
             DateTime weekVignette = startDate.minusWeeks(1).plusHours(12);
             if (weekVignette.isAfterNow()) {
-                notificationManager.scheduleNotification(visitId, NotificationManager.VISIT_NEXT_WEEK, weekVignette);
+                notificationManager.scheduleNotification(visitId, NotificationTypes.VisitNextWeek, weekVignette);
             }
 
             // one day out, noon
             DateTime dayVignette = startDate.minusDays(1).plusHours(12);
             if (dayVignette.isAfterNow()) {
-                notificationManager.scheduleNotification(visitId, NotificationManager.VISIT_NEXT_DAY, dayVignette);
+                notificationManager.scheduleNotification(visitId, NotificationTypes.VisitNextDay, dayVignette);
             }
         }
 
@@ -86,11 +86,11 @@ public class Scheduler {
             Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
 
             if (session.getScheduledTime().isAfterNow()) {
-                notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_TAKE, session.getScheduledTime());
+                notificationManager.scheduleNotification(sessionId, NotificationTypes.TestTake, session.getScheduledTime());
             }
 
             if(session.getExpirationTime().isAfterNow()){
-                notificationManager.scheduleNotification(sessionId, NotificationManager.TEST_MISSED, session.getExpirationTime());
+                notificationManager.scheduleNotification(sessionId, NotificationTypes.TestMissed, session.getExpirationTime());
             }
         }
 

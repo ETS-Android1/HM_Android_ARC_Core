@@ -3,12 +3,15 @@ package com.healthymedium.arc.study;
 import android.util.Log;
 
 import com.healthymedium.arc.api.tests.BaseTest;
+import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.healthymedium.arc.notifications.type.TestMissed.TAG_TEST_MISSED_COUNT;
 
 public class TestSession {
 
@@ -103,6 +106,11 @@ public class TestSession {
 
     public void markStarted() {
         this.startTime = DateTime.now();
+
+        // this null check lets unit tests work properly
+        if(PreferencesManager.getInstance()!=null) {
+            PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, 0);
+        }
     }
 
     public void addTestData(BaseTest data){

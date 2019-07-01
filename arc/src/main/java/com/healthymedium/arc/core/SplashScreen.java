@@ -14,11 +14,10 @@ import android.view.ViewGroup;
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.notifications.NotificationManager;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.PreferencesManager;
-
-import com.healthymedium.arc.core.Locale;
 
 public class SplashScreen extends BaseFragment {
 
@@ -76,10 +75,6 @@ public class SplashScreen extends BaseFragment {
             conf.setLocale(new java.util.Locale(language,country));
             res.updateConfiguration(conf, res.getDisplayMetrics());
 
-            if(NotificationManager.getInstance()==null){
-                NotificationManager.initialize(context);
-            }
-
             if(FontFactory.getInstance()==null) {
                 FontFactory.initialize(context);
             }
@@ -88,6 +83,13 @@ public class SplashScreen extends BaseFragment {
                 Fonts.load();
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
+            }
+
+            Visit visit = Study.getCurrentVisit();
+            if(visit!=null){
+                if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+                    Proctor.startService(getContext());
+                }
             }
 
             // We need to check to see if we're currently in the middle of a test session.

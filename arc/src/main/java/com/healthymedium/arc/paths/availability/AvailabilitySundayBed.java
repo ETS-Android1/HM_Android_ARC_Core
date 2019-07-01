@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionTime;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -93,6 +94,13 @@ public class AvailabilitySundayBed extends QuestionTime {
             }
             Study.getRestClient().submitTestSchedule();
             Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), reschedule);
+
+            if(reschedule) {
+                Proctor.refreshData(getContext());
+            } else {
+                Proctor.startService(getContext());
+            }
+
             return null;
         }
 

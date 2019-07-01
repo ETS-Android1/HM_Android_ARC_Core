@@ -250,10 +250,7 @@ public class Study{
 
             PreferencesManager.getInstance().putLong(MigrationUtil.TAG_VERSION_LIB,VersionUtil.getLibraryVersionCode());
             PreferencesManager.getInstance().putLong(MigrationUtil.TAG_VERSION_APP,VersionUtil.getAppVersionCode());
-
             PreferencesManager.getInstance().putBoolean(TAG_INITIALIZED,true);
-
-            HeartbeatManager.initialize(context);
             HeartbeatManager.getInstance().scheduleHeartbeat();
 
         }  else {

@@ -70,9 +70,6 @@ public class StateMachine {
     public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
     public static final String TAG_STUDY_STATE = "StudyState";
     public static final String TAG_TEST_COMPLETE = "TestCompleteFlag";
-    public static final String TAG_TEST_MISSED_COUNT = "TestMissedCount";
-
-
 
     protected String tag = getClass().getSimpleName();
 
@@ -532,7 +529,6 @@ public class StateMachine {
     }
 
     public void addTests(){
-        PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, 0);
 
         List<BaseFragment> fragments = new ArrayList<>();
 

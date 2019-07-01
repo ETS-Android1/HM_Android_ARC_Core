@@ -2,6 +2,8 @@ package com.healthymedium.arc.study;
 
 import android.util.Log;
 
+import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
@@ -102,6 +104,7 @@ public class Participant {
         Log.i("Participant", "moveOnToNextTestSession");
         state.currentTestSession++;
         if(state.currentTestSession>=state.visits.get(state.currentVisit).testSessions.size()){
+            Proctor.stopService(Application.getInstance());
             state.currentTestSession = 0;
             state.currentVisit++;
             if(state.currentVisit>=state.visits.size()){

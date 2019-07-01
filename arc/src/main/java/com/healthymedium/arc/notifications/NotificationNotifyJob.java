@@ -1,69 +1,72 @@
 package com.healthymedium.arc.notifications;
 
+import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.content.res.Configuration;
-import android.content.res.Resources;
+import android.content.ComponentName;
+import android.content.Context;
+import android.os.Build;
+import android.os.PersistableBundle;
 import android.util.Log;
 
-import com.healthymedium.arc.core.Locale;
-import com.healthymedium.arc.utilities.PreferencesManager;
-
-
-import static com.healthymedium.arc.study.StateMachine.TAG_TEST_MISSED_COUNT;
+// This is only used for notifications that are not proctored.
 
 public class NotificationNotifyJob extends JobService {
 
+    static private final String tag = "NotificationNotifyJob";
+
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.i("NotificationNotifyJob","onStartJob");
+        Log.i(tag,"onStartJob");
 
-        if(PreferencesManager.getInstance()==null){
-            PreferencesManager.initialize(this);
-        }
-
-        if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE)) {
-            String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
-            String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
-
-            Resources res = getResources();
-            Configuration conf = res.getConfiguration();
-            conf.setLocale(new java.util.Locale(language, country));
-            res.updateConfiguration(conf, res.getDisplayMetrics());
-        }
-
-        if(NotificationManager.getInstance()==null){
-            NotificationManager.initialize(this);
-        }
+        // extract parameters
         int id = params.getExtras().getInt(NotificationManager.NOTIFICATION_ID,0);
-        int type = params.getExtras().getInt(NotificationManager.NOTIFICATION_TYPE,1);
+        int typeId = params.getExtras().getInt(NotificationManager.NOTIFICATION_TYPE,1);
 
-        if(type==NotificationManager.TEST_MISSED) {
-            int count = PreferencesManager.getInstance().getInt(TAG_TEST_MISSED_COUNT, 0);
-            count++;
-            if (count == 4) {
-                NotificationManager.getInstance().notifyUser(id, type);
-                count = 0;
-            }
-            NotificationManager.getInstance().removeNotification(id,type);
-            PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, count);
-        } else {
-            NotificationManager.getInstance().notifyUser(id, type);
+        NotificationManager manager = NotificationManager.getInstance();
+
+        // grab the node
+        NotificationNode node = manager.getNode(typeId, id);
+        if(node==null){
+            Log.w(tag,"Unable to find node, aborting");
+            return false;
         }
+
+        manager.notifyUser(node);
 
         return false;
     }
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        Log.i("NotificationNotifyJob","onStopJob");
+        Log.i(tag,"onStopJob");
         return false;
     }
 
+    public static JobInfo build(Context context, int id, int type){
 
+        PersistableBundle extras = new PersistableBundle();
+        extras.putInt(NotificationManager.NOTIFICATION_ID, id);
+        extras.putInt(NotificationManager.NOTIFICATION_TYPE, type);
 
+        NotificationNode node = NotificationManager.getInstance().getNode(type, id);
 
+        ComponentName serviceComponent = new ComponentName(context, NotificationNotifyJob.class);
+        JobInfo.Builder builder = new JobInfo.Builder(node.getNotifyId(), serviceComponent);
+        builder.setRequiresDeviceIdle(false);
+        builder.setRequiresCharging(false);
+        builder.setPersisted(false);
+        builder.setExtras(extras);
 
+        builder.setMinimumLatency(1);
+        builder.setOverrideDeadline(1);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder.setRequiresBatteryNotLow(false);
+            builder.setRequiresStorageNotLow(false);
+        }
+        JobInfo info = builder.build();
+        return info;
+    }
 
 }

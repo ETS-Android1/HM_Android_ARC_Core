@@ -10,12 +10,12 @@ import android.widget.FrameLayout;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
+import com.healthymedium.arc.study.AbandonmentJobService;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
-import com.healthymedium.arc.study.AbandonmentJobService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,24 +86,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationManager.initializeInstance(getSupportFragmentManager());
         if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
-        } else {
-            List<Locale> locales = Application.getInstance().getLocaleOptions();
-            List<String> options = new ArrayList<>();
-            for(Locale locale : locales) {
-                options.add(locale.getLabel());
-            }
-            QuestionLanguagePreference fragment = new QuestionLanguagePreference(
-                    false,
-                    true,
-                    "Language:",
-                    "",
-                    options,
-                    locales,
-                    "CONFIRM");
-            NavigationManager.getInstance().open(fragment);
+            return;
         }
-    }
 
+        List<Locale> locales = Application.getInstance().getLocaleOptions();
+        List<String> options = new ArrayList<>();
+        for(Locale locale : locales) {
+            options.add(locale.getLabel());
+        }
+        QuestionLanguagePreference fragment = new QuestionLanguagePreference(
+                false,
+                true,
+                "Language:",
+                "",
+                options,
+                locales,
+                "CONFIRM");
+        NavigationManager.getInstance().open(fragment);
+    }
 
     public void setupHomeWatcher(){
         homeWatcher = new HomeWatcher(this);
