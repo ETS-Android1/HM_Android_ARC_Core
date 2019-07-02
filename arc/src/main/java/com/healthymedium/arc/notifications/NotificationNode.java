@@ -1,5 +1,7 @@
 package com.healthymedium.arc.notifications;
 
+import android.support.annotation.NonNull;
+
 import org.joda.time.DateTime;
 
 import java.util.Comparator;
@@ -24,6 +26,12 @@ public class NotificationNode {
     // collisions.
     public int getNotifyId(){
         return (type * 10000) + id;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "id="+id+" type="+type+" time="+time.toString();
     }
 
     public static class TimeComparator implements Comparator<NotificationNode>{

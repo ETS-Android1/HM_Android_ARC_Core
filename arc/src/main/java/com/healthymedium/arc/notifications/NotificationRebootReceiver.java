@@ -9,11 +9,13 @@ import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;
 
-public class NotificationRebootReceiver extends BroadcastReceiver
-{
+public class NotificationRebootReceiver extends BroadcastReceiver {
+
+    static private final String tag = "NotificationRebootRecvr";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d("NotificationRebootRecvr","onReceive");
+        Log.d(tag,"onReceive");
         if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
             return;
         }
@@ -23,6 +25,7 @@ public class NotificationRebootReceiver extends BroadcastReceiver
             return;
         }
         if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+            Log.i(tag,"starting proctor service");
             Proctor.startService(Application.getInstance());
         }
     }

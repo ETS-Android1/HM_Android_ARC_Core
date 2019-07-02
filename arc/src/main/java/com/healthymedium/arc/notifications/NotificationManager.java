@@ -135,12 +135,17 @@ public class NotificationManager {
         if(type==null) {
             Log.w(tag,"notification type not found, aborting");
             return;
+        } else {
+            Log.i(tag,"type = "+type.getChannelName());
         }
 
         if(type.onNotifyPending(node)){
+            Log.i(tag,"pending notification allowed");
             android.app.NotificationManager notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = NotificationUtil.buildNotification(context,type);
             notificationManager.notify(node.getNotifyId(), notification);
+        } else {
+            Log.i(tag,"pending notification denied");
         }
     }
 

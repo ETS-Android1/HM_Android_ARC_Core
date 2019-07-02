@@ -33,6 +33,7 @@ public class ProctorServiceHandler {
     }
 
     public void refreshData() {
+        Log.i(tag, "refreshData");
         if(locked){
             return;
         }
@@ -62,10 +63,16 @@ public class ProctorServiceHandler {
 
         //  sort by time
         Collections.sort(nodes,new NotificationNode.TimeComparator());
+
+        for(NotificationNode node : nodes){
+            Log.i(tag, node.toString());
+        }
+
         locked = false;
     }
 
     public void start(){
+        Log.i(tag, "start");
         if(nodes.size()==0){
             listener.onFinished();
             return;
@@ -85,6 +92,7 @@ public class ProctorServiceHandler {
     }
 
     public void stop(){
+        Log.i(tag, "stop");
         handler.removeCallbacks(runnable);
     }
 

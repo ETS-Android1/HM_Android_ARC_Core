@@ -65,15 +65,13 @@ public class ProctorService extends Service {
         switch (action) {
             case ACTION_START_SERVICE:
                 if(serviceHandler!=null){
+                    Log.d(tag, "service handler is not null, exiting");
                     break;
                 }
-
                 startForegroundService();
                 serviceHandler = new ProctorServiceHandler(listener);
                 serviceHandler.start();
-
                 ProctorWatchdogJob.start(this);
-                Toast.makeText(getApplicationContext(), "TestProctor service is started", Toast.LENGTH_LONG).show();
                 break;
 
             case ACTION_STOP_SERVICE:
@@ -83,7 +81,6 @@ public class ProctorService extends Service {
                 }
                 stopForegroundService();
                 ProctorWatchdogJob.stop(this);
-                Toast.makeText(getApplicationContext(), "TestProctor service is stopped", Toast.LENGTH_LONG).show();
                 break;
 
             case ACTION_REFRESH_DATA:
@@ -98,7 +95,6 @@ public class ProctorService extends Service {
                 }
 
                 serviceHandler.start();
-                Toast.makeText(getApplicationContext(), "TestProctor service is refreshing data", Toast.LENGTH_LONG).show();
                 break;
         }
 
@@ -140,6 +136,7 @@ public class ProctorService extends Service {
 
         @Override
         public void onNotify(final NotificationNode node) {
+            Log.d(tag, "onNotify");
             handler.post(new Runnable() {
                 @Override
                 public void run() {

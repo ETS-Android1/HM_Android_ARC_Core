@@ -9,9 +9,11 @@ import com.healthymedium.arc.study.Visit;
 
 public class NotificationRebootJob extends JobService {
 
+    static private final String tag = "NotificationRebootJob";
+
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.i("NotificationRebootJob","onStartJob");
+        Log.i(tag,"onStartJob");
 
         NotificationManager.getInstance().scheduleAllNotifications();
 
@@ -20,6 +22,7 @@ public class NotificationRebootJob extends JobService {
             return false;
         }
         if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+            Log.i(tag,"starting proctor service");
             Proctor.startService(this);
         }
         return false;
@@ -27,7 +30,7 @@ public class NotificationRebootJob extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        Log.i("NotificationRebootJob","onStopJob");
+        Log.i(tag,"onStopJob");
         return false;
     }
 
