@@ -20,6 +20,7 @@ import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.AboutScreen;
+import com.healthymedium.arc.paths.tutorials.PricesTutorial;
 import com.healthymedium.arc.paths.tutorials.SymbolTutorial;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
@@ -94,7 +95,8 @@ public class TestInfoTemplate extends BaseFragment {
                     NavigationManager.getInstance().open(symbolTutorial);
                 }
                 else if (stringType.equals("prices")) {
-
+                    PricesTutorial pricesTutorial = new PricesTutorial();
+                    NavigationManager.getInstance().open(pricesTutorial);
                 }
             }
         });
