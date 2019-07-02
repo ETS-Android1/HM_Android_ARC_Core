@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.notifications.type.NotificationType;
+import com.healthymedium.arc.notifications.types.NotificationType;
 
 import org.joda.time.DateTime;
 
@@ -35,7 +35,6 @@ public class NotificationManager {
         for(NotificationType type : types){
             NotificationUtil.createChannel(context,type);
         }
-        NotificationUtil.removeUnusedChannels(context,types);
 
         nodes.load();
     }
