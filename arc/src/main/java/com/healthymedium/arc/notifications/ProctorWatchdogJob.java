@@ -7,7 +7,7 @@ import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;

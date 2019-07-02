@@ -3,7 +3,7 @@ package com.healthymedium.arc.notifications;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.study.Study;

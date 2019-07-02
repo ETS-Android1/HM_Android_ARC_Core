@@ -2,7 +2,7 @@ package com.healthymedium.arc.api;
 
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

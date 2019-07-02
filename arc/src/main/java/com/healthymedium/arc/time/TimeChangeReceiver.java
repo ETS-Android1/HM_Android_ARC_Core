@@ -3,7 +3,7 @@ package com.healthymedium.arc.time;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;

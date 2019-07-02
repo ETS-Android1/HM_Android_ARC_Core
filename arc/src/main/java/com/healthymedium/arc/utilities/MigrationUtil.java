@@ -1,6 +1,6 @@
 package com.healthymedium.arc.utilities;
 
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.JsonObject;
 import com.healthymedium.arc.study.State;

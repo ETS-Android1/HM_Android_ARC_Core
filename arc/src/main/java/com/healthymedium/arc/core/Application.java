@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 
 import com.healthymedium.arc.notifications.NotificationTypes;
@@ -28,10 +28,8 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        Log.i(tag,"onCreate");
-
-        VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
+        VersionUtil.initialize(this);
         PreferencesManager.initialize(this);
         CacheManager.initialize(this);
         Device.initialize(this);
@@ -91,7 +89,6 @@ public class Application extends android.app.Application {
 
     @Override
     protected void attachBaseContext(Context context) {
-        Log.i("Application","attachBaseContext");
         super.attachBaseContext(context);
         updateLocale(context);
     }

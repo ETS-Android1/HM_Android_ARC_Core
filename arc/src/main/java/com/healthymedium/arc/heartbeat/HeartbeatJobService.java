@@ -2,7 +2,7 @@ package com.healthymedium.arc.heartbeat;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Config;

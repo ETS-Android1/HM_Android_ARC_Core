@@ -10,7 +10,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 import android.widget.Toast;
 
 import com.healthymedium.arc.core.MainActivity;

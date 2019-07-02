@@ -1,7 +1,7 @@
 package com.healthymedium.arc.utilities;
 
 import android.app.Activity;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;

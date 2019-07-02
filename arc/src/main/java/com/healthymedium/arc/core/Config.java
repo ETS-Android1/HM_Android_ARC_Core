@@ -22,6 +22,7 @@ public class Config {
     public static boolean ENABLE_LEGACY_PRICE_SETS = false; // if true, the PriceManager will continue to use a long-standing, but incorrect, method to determine the price set for a given test session.
     //Debug
     public static boolean DEBUG_DIALOGS = true; // click the header on most screens a couple times and a debug dialog will appear
+    public static boolean ENABLE_LOGGING = false; // save logcat output to cached file 'Log'
 
     // Runtime
     public static final String INTENT_EXTRA_OPENED_FROM_NOTIFICATION = "OPENED_FROM_NOTIFICATION";

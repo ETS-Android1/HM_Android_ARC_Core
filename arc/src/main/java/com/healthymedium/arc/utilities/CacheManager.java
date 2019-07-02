@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

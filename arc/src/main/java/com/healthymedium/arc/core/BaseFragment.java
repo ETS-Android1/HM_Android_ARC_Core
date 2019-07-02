@@ -3,7 +3,7 @@ package com.healthymedium.arc.core;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;

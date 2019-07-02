@@ -3,7 +3,7 @@ package com.healthymedium.arc.utilities;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.library.BuildConfig;
 

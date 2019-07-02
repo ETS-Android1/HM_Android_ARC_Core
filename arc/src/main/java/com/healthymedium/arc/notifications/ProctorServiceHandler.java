@@ -2,7 +2,7 @@ package com.healthymedium.arc.notifications;
 
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.types.NotificationType;
 

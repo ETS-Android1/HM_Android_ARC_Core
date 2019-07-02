@@ -11,7 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;

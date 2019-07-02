@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
