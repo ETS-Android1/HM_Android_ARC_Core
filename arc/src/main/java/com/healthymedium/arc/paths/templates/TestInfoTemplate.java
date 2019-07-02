@@ -20,6 +20,7 @@ import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.AboutScreen;
+import com.healthymedium.arc.paths.tutorials.GridTutorial;
 import com.healthymedium.arc.paths.tutorials.PricesTutorial;
 import com.healthymedium.arc.paths.tutorials.SymbolTutorial;
 import com.healthymedium.arc.study.Study;
@@ -88,7 +89,8 @@ public class TestInfoTemplate extends BaseFragment {
             @Override
             public void onClick(View view) {
                 if (stringType.equals("grids")) {
-
+                    GridTutorial gridTutorial = new GridTutorial();
+                    NavigationManager.getInstance().open(gridTutorial);
                 }
                 else if (stringType.equals("symbols")) {
                     SymbolTutorial symbolTutorial = new SymbolTutorial();
