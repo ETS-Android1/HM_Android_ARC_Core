@@ -253,6 +253,19 @@ public class CacheManager {
         if(bitmaps.containsKey(key)){
             return bitmaps.get(key);
         }
+        File file = new File(cacheDir, key);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        Cache cache_t = new Cache();
+        cache_t.file = file;
+        cache_t.read = true;
+        map.put(key,cache_t);
         return null;
     }
 
