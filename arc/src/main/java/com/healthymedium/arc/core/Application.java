@@ -8,7 +8,7 @@ import android.util.Log;
 
 
 import com.healthymedium.arc.notifications.NotificationTypes;
-import com.healthymedium.arc.notifications.type.NotificationType;
+import com.healthymedium.arc.notifications.types.NotificationType;
 import com.healthymedium.arc.study.Study;
 
 import com.healthymedium.arc.utilities.CacheManager;

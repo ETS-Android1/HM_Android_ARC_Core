@@ -15,7 +15,7 @@ import android.util.Log;
 
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.notifications.type.NotificationType;
+import com.healthymedium.arc.notifications.types.NotificationType;
 
 import java.util.ArrayList;
 import java.util.List;

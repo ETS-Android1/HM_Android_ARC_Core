@@ -1,4 +1,4 @@
-package com.healthymedium.arc.notifications.type;
+package com.healthymedium.arc.notifications.types;
 
 import android.content.Context;
 
@@ -6,14 +6,14 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
 
-public class TestConfirmed extends NotificationType {
+public class TestTake extends NotificationType {
 
-    public TestConfirmed(){
+    public TestTake(){
         super();
-        id = 3;
-        channelId = "TEST_CONFIRM";
-        channelName = "Test Confirmation";
-        channelDesc = "Notifies user when a test date confirmation is needed";
+        id = 1;
+        channelId = "TEST_TAKE";
+        channelName = "Test Reminder";
+        channelDesc = "Notifies user when it is time to take a test";
         importance = NotificationImportance.HIGH;
         extra = Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION;
         proctored = true;
@@ -22,7 +22,7 @@ public class TestConfirmed extends NotificationType {
 
     @Override
     public String getContent(Context context) {
-        return context.getString(R.string.notification_confirm);
+        return context.getString(R.string.notification_take);
     }
 
     @Override

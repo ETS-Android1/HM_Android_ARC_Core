@@ -1,13 +1,13 @@
 package com.healthymedium.arc.notifications;
 
-import com.healthymedium.arc.notifications.type.TestProctor;
-import com.healthymedium.arc.notifications.type.TestConfirmed;
-import com.healthymedium.arc.notifications.type.TestMissed;
-import com.healthymedium.arc.notifications.type.TestNext;
-import com.healthymedium.arc.notifications.type.TestTake;
-import com.healthymedium.arc.notifications.type.VisitNextDay;
-import com.healthymedium.arc.notifications.type.VisitNextMonth;
-import com.healthymedium.arc.notifications.type.VisitNextWeek;
+import com.healthymedium.arc.notifications.types.TestProctor;
+import com.healthymedium.arc.notifications.types.TestConfirmed;
+import com.healthymedium.arc.notifications.types.TestMissed;
+import com.healthymedium.arc.notifications.types.TestNext;
+import com.healthymedium.arc.notifications.types.TestTake;
+import com.healthymedium.arc.notifications.types.VisitNextDay;
+import com.healthymedium.arc.notifications.types.VisitNextMonth;
+import com.healthymedium.arc.notifications.types.VisitNextWeek;
 
 public class NotificationTypes {
 

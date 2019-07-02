@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.healthymedium.arc.notifications.type.NotificationType;
+import com.healthymedium.arc.notifications.types.NotificationType;
 
 import org.joda.time.DateTime;
 

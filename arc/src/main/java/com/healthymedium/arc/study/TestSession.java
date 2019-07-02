@@ -11,7 +11,7 @@ import org.joda.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.healthymedium.arc.notifications.type.TestMissed.TAG_TEST_MISSED_COUNT;
+import static com.healthymedium.arc.notifications.types.TestMissed.TAG_TEST_MISSED_COUNT;
 
 public class TestSession {
 

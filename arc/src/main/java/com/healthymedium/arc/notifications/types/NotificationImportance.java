@@ -1,4 +1,4 @@
-package com.healthymedium.arc.notifications.type;
+package com.healthymedium.arc.notifications.types;
 
 import android.app.NotificationManager;
 
