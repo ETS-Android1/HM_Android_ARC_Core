@@ -6,7 +6,7 @@
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:background="@color/primary"
+        android:background="@color/primaryDark"
         android:animateLayoutChanges="true">
 
         <ImageView
