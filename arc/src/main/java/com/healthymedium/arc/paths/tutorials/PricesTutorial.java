@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.RadioButton;
 import com.healthymedium.arc.font.Fonts;
@@ -28,6 +29,8 @@ public class PricesTutorial extends BaseFragment {
 
     TextView textviewFood;
     TextView textviewPrice;
+    TextView textViewComplete;
+    TextView textView12;
 
     DialogButtonTutorial bottomPopup;
     DialogButtonTutorial centerPopup;
@@ -36,6 +39,9 @@ public class PricesTutorial extends BaseFragment {
     FrameLayout progressBarGradient;
 
     ImageView closeButton;
+    ImageView checkmark;
+
+    Button endButton;
 
     private int shortAnimationDuration;
 
@@ -68,6 +74,7 @@ public class PricesTutorial extends BaseFragment {
         progressBarGradient = view.findViewById(R.id.progressBarGradient);
 
         closeButton = view.findViewById(R.id.closeButton);
+        checkmark = view.findViewById(R.id.checkmark);
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -83,6 +90,12 @@ public class PricesTutorial extends BaseFragment {
 
         textviewPrice = view.findViewById(R.id.textviewPrice);
         textviewPrice.setTypeface(Fonts.georgiaItalic);
+
+        textView12=view.findViewById(R.id.textView12);
+
+        textViewComplete = view.findViewById(R.id.textViewComplete);
+
+        endButton = view.findViewById(R.id.endButton);
 
         // TODO
         // This is the wrong  type of popup
@@ -367,20 +380,21 @@ public class PricesTutorial extends BaseFragment {
                         buttonNo.setOnTouchListener(null);
 
                         fadeOutView(bottomPopup);
-                        fadeInView(centerPopup, 1f);
-                        fadeInView(fullScreenGray, 0.9f);
+                        fadeOutView(textView12);
+                        fadeOutView(buttonNo);
+                        fadeOutView(buttonYes);
+                        fadeOutView(textviewFood);
+                        fadeOutView(textviewPrice);
+
+                        fadeInView(checkmark, 1f);
+                        fadeInView(textViewComplete, 1f);
+                        fadeInView(endButton, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        centerPopup.header.setText("Tutorial Complete!");
-                        centerPopup.body.setText("Placeholder popup!");
-                        centerPopup.button.setText("Close");
-
-                        centerPopup.button.setOnClickListener(new View.OnClickListener() {
+                        endButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(centerPopup);
-                                fadeOutView(fullScreenGray);
                                 NavigationManager.getInstance().popBackStack();
                             }
                         });
@@ -404,20 +418,22 @@ public class PricesTutorial extends BaseFragment {
                         buttonNo.setOnTouchListener(null);
 
                         fadeOutView(bottomPopup);
-                        fadeInView(centerPopup, 1f);
-                        fadeInView(fullScreenGray, 0.9f);
+
+                        fadeOutView(textView12);
+                        fadeOutView(buttonNo);
+                        fadeOutView(buttonYes);
+                        fadeOutView(textviewFood);
+                        fadeOutView(textviewPrice);
+
+                        fadeInView(checkmark, 1f);
+                        fadeInView(textViewComplete, 1f);
+                        fadeInView(endButton, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        centerPopup.header.setText("Tutorial Complete!");
-                        centerPopup.body.setText("Placeholder popup!");
-                        centerPopup.button.setText("Close");
-
-                        centerPopup.button.setOnClickListener(new View.OnClickListener() {
+                        endButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(centerPopup);
-                                fadeOutView(fullScreenGray);
                                 NavigationManager.getInstance().popBackStack();
                             }
                         });

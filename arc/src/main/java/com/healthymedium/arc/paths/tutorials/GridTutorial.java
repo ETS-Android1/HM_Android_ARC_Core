@@ -17,12 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class GridTutorial extends BaseFragment {
+
+    int selectedCount;
 
     GridLayout gridLayout;
     GridLayout gridLayoutLetters;
@@ -33,6 +36,11 @@ public class GridTutorial extends BaseFragment {
     FrameLayout progressBarGradient;
 
     ImageView closeButton;
+    ImageView checkmark;
+
+    TextView textViewComplete;
+
+    Button endButton;
 
     private int shortAnimationDuration;
 
@@ -82,6 +90,8 @@ public class GridTutorial extends BaseFragment {
                     getImageView(2,2).setImageResource(0);
                     getImageView(1,3).setImageResource(0);
 
+                    selectedCount = 0;
+
                     View.OnTouchListener listener = new View.OnTouchListener() {
                         @Override
                         public boolean onTouch(View view, MotionEvent event) {
@@ -89,10 +99,16 @@ public class GridTutorial extends BaseFragment {
                             switch (action){
                                 case MotionEvent.ACTION_DOWN:
                                     view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
+                                    selectedCount += 1;
                                     break;
                                 case MotionEvent.ACTION_UP:
                                     break;
                             }
+
+                            if (selectedCount == 3) {
+                                showComplete();
+                            }
+
                             return false;
                         }
                     };
@@ -133,6 +149,11 @@ public class GridTutorial extends BaseFragment {
         progressBarGradient = view.findViewById(R.id.progressBarGradient);
 
         closeButton = view.findViewById(R.id.closeButton);
+        checkmark = view.findViewById(R.id.checkmark);
+
+        textViewComplete = view.findViewById(R.id.textViewComplete);
+
+        endButton = view.findViewById(R.id.endButton);
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -260,5 +281,20 @@ public class GridTutorial extends BaseFragment {
                         view.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    private void showComplete() {
+        fadeInView(checkmark, 1f);
+        fadeInView(textViewComplete, 1f);
+        fadeInView(endButton, 1f);
+
+        fadeOutView(gridLayout);
+
+        endButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavigationManager.getInstance().popBackStack();
+            }
+        });
     }
 }

@@ -9,14 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.SymbolTutorialButton;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class SymbolTutorial extends BaseFragment {
+
+    RelativeLayout topSymbols;
+    RelativeLayout bottomSymbolsButtons;
 
     SymbolTutorialButton buttonTop1;
     SymbolTutorialButton buttonTop2;
@@ -30,6 +36,12 @@ public class SymbolTutorial extends BaseFragment {
     FrameLayout progressBarGradient;
 
     ImageView closeButton;
+    ImageView checkmark;
+
+    TextView textView20;
+    TextView textViewComplete;
+
+    Button endButton;
 
     private int shortAnimationDuration;
 
@@ -47,6 +59,9 @@ public class SymbolTutorial extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_symbols_tutorial, container, false);
 
+        topSymbols = view.findViewById(R.id.topSymbols);
+        bottomSymbolsButtons = view.findViewById(R.id.bottomSymbolsButtons);
+
         buttonTop1 = view.findViewById(R.id.symbolbutton_top1);
         buttonTop2 = view.findViewById(R.id.symbolbutton_top2);
         buttonTop3 = view.findViewById(R.id.symbolbutton_top3);
@@ -60,6 +75,12 @@ public class SymbolTutorial extends BaseFragment {
         progressBarGradient = view.findViewById(R.id.progressBarGradient);
 
         closeButton = view.findViewById(R.id.closeButton);
+        checkmark = view.findViewById(R.id.checkmark);
+
+        textView20 = view.findViewById(R.id.textView20);
+        textViewComplete = view.findViewById(R.id.textViewComplete);
+
+        endButton = view.findViewById(R.id.endButton);
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -149,24 +170,26 @@ public class SymbolTutorial extends BaseFragment {
         buttonBottom1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fadeInView(centerPopup, 1f);
-                fadeInView(fullScreenGray, 0.9f);
+
+                fadeInView(checkmark, 1f);
+                fadeInView(textViewComplete, 1f);
+                fadeInView(endButton, 1f);
+
+                fadeOutView(topSymbols);
+                fadeOutView(textView20);
+                fadeOutView(bottomSymbolsButtons);
+
                 buttonBottom1.setOnClickListener(null);
 
                 progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 200;
 
-                centerPopup.header.setText("Tutorial Complete!");
-                centerPopup.body.setText("Placeholder popup!");
-                centerPopup.button.setText("Close");
-
-                centerPopup.setOnClickListener(new View.OnClickListener() {
+                endButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        fadeOutView(centerPopup);
-                        fadeOutView(fullScreenGray);
                         NavigationManager.getInstance().popBackStack();
                     }
                 });
+
             }
         });
     }
