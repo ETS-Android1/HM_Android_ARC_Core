@@ -11,7 +11,6 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import com.healthymedium.arc.utilities.Log;
-import android.widget.Toast;
 
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
