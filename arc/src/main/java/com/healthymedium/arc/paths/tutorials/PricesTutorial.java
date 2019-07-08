@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -23,6 +24,8 @@ import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class PricesTutorial extends BaseFragment {
+
+    RelativeLayout priceContainer;
 
     RadioButton buttonYes;
     RadioButton buttonNo;
@@ -58,6 +61,8 @@ public class PricesTutorial extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_prices_tutorial, container, false);
+
+        priceContainer = view.findViewById(R.id.priceContainer);
 
         buttonYes = view.findViewById(R.id.radioButtonYes);
         buttonYes.setText(ViewUtil.getString(R.string.YES));
@@ -97,12 +102,16 @@ public class PricesTutorial extends BaseFragment {
 
         endButton = view.findViewById(R.id.endButton);
 
+        fadeInView(fullScreenGray, 0.9f);
+        priceContainer.bringToFront();
+
         // TODO
         // This is the wrong  type of popup
         fadeInView(bottomPopup, 1f);
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Choose the answer that makes sense to you.");
         bottomPopup.button.setText("Next");
+        bottomPopup.bringToFront();
 
         setFirstPricesCompare();
 
@@ -125,6 +134,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
+                        fadeOutView(fullScreenGray);
                         fadeInView(bottomPopup, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
@@ -160,6 +170,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
+                        fadeOutView(fullScreenGray);
                         fadeInView(bottomPopup, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
@@ -188,6 +199,15 @@ public class PricesTutorial extends BaseFragment {
         textviewFood.setText("Soup");
         textviewPrice.setText("$10.82");
 
+        fadeInView(fullScreenGray, 0.9f);
+        priceContainer.bringToFront();
+
+        fadeInView(bottomPopup, 1f);
+        bottomPopup.header.setText("What do you think?");
+        bottomPopup.body.setText("Choose the answer that makes sense to you.");
+        bottomPopup.button.setText("Next");
+        bottomPopup.bringToFront();
+
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -200,8 +220,12 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
+                        fadeOutView(bottomPopup);
+
                         fadeInView(centerPopup, 1f);
-                        fadeInView(fullScreenGray, 0.9f);
+                        fullScreenGray.bringToFront();
+                        centerPopup.bringToFront();
+                        // fadeInView(fullScreenGray, 0.9f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
@@ -237,8 +261,12 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
+                        fadeOutView(bottomPopup);
+
                         fadeInView(centerPopup, 1f);
-                        fadeInView(fullScreenGray, 0.9f);
+                        fullScreenGray.bringToFront();
+                        centerPopup.bringToFront();
+                        // fadeInView(fullScreenGray, 0.9f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
@@ -270,7 +298,11 @@ public class PricesTutorial extends BaseFragment {
         buttonYes.setText("$6.78");
         buttonNo.setText("$3.27");
 
+        fadeInView(fullScreenGray, 0.9f);
+        priceContainer.bringToFront();
+
         fadeInView(bottomPopup, 1f);
+        bottomPopup.bringToFront();
 
         // TODO
         // This is the wrong  type of popup
@@ -291,6 +323,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
+                        fadeOutView(fullScreenGray);
                         // fadeInView(bottomPopup, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
@@ -326,6 +359,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
+                        fadeOutView(fullScreenGray);
                         // fadeInView(bottomPopup, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
@@ -426,7 +460,9 @@ public class PricesTutorial extends BaseFragment {
                         fadeOutView(textviewPrice);
 
                         fadeInView(checkmark, 1f);
+                        checkmark.bringToFront();
                         fadeInView(textViewComplete, 1f);
+                        textViewComplete.bringToFront();
                         fadeInView(endButton, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
