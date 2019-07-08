@@ -1,6 +1,9 @@
 package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
+
+import com.healthymedium.arc.paths.templates.StateInfoTemplate;
+import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
@@ -311,11 +314,11 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        fragments.add(new InfoTemplate(
+        fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.setup_avail_header),
-                res.getString(R.string.setup_avail_subheader),
-                res.getString(R.string.setup_avail_body),
+                null,
+                res.getString(R.string.availability_body),
                 res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
@@ -359,7 +362,7 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        fragments.add(new InfoTemplate(
+        fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
                 res.getString(R.string.chronotype_subhead),
@@ -380,7 +383,7 @@ public class StateMachine {
 
         fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.list_selectone ),workingDayCountOptions));
 
-        fragments.add(new InfoTemplate(
+        fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
                 "",
@@ -429,7 +432,7 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        fragments.add(new InfoTemplate(
+        fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.sleepwakesurvey_header),
                 res.getString(R.string.sleepwakesurvey_subhead),
@@ -480,7 +483,7 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        fragments.add(new InfoTemplate(
+        fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.context_header),
                 res.getString(R.string.context_subhead),
@@ -534,7 +537,7 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        InfoTemplate info = new InfoTemplate(
+        StateInfoTemplate info = new StateInfoTemplate(
                 false,
                 res.getString(R.string.testing_intro_header),
                 res.getString(R.string.testing_intro_subhead),
@@ -568,15 +571,15 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String header = ViewUtil.getString(R.string.testing_header_one);
-        header = header.replace("{Value1}", String.valueOf(index+1));
-        header = header.replace("{Value2}", "3");
+        String testNumber = ViewUtil.getString(R.string.testing_header_one);
+        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
+        testNumber = testNumber.replace("{Value2}", "3");
 
-        InfoTemplate info = new InfoTemplate(
-                false,
-                header ,
+        TestInfoTemplate info = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
+                "prices",
                 res.getString(R.string.button_begin));
         fragments.add(info);
 
@@ -603,15 +606,15 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String header = ViewUtil.getString(R.string.testing_header_one);
-        header = header.replace("{Value1}", String.valueOf(index+1));
-        header = header.replace("{Value2}", "3");
+        String testNumber = ViewUtil.getString(R.string.testing_header_one);
+        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
+        testNumber = testNumber.replace("{Value2}", "3");
 
-        InfoTemplate info = new InfoTemplate(
-                false,
-                header ,
+        TestInfoTemplate info = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
+                "symbols",
                 res.getString(R.string.button_begin));
         fragments.add(info);
 
@@ -626,31 +629,31 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String header = ViewUtil.getString(R.string.testing_header_one);
-        header = header.replace("{Value1}", String.valueOf(index+1));
-        header = header.replace("{Value2}", "3");
+        String testNumber = ViewUtil.getString(R.string.testing_header_one);
+        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
+        testNumber = testNumber.replace("{Value2}", "3");
 
-        InfoTemplate info0 = new InfoTemplate(
-                false,
-                header ,
+        TestInfoTemplate info0 = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
+                "grids",
                 res.getString(R.string.button_next));
         fragments.add(info0);
 
-        InfoTemplate info1 = new InfoTemplate(
-                true,
-                header ,
+        TestInfoTemplate info1 = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body2),
+                "grids",
                 res.getString(R.string.button_next));
         fragments.add(info1);
 
-        InfoTemplate info2 = new InfoTemplate(
-                true,
-                header ,
+        TestInfoTemplate info2 = new TestInfoTemplate(
+                testNumber,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body3),
+                "grids",
                 res.getString(R.string.button_begin));
         fragments.add(info2);
 

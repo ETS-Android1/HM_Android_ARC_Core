@@ -3,8 +3,12 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import com.healthymedium.arc.utilities.Log;
+
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -28,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
     boolean hasNewIntent = false;
     int backInStudySkips = 0;
 
+    int lastNavigationBarItem = R.id.menu_home;
+
     boolean checkAbandonment = false;
 
     FrameLayout contentView;
     HomeWatcher homeWatcher;
     KeyboardWatcher keyboardWatcher;
+    BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onStart() {
@@ -60,6 +68,22 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
+
+        bottomNavigationView = findViewById(R.id.navigation);
+        hideNavigationBar();
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Log.i("onNavigationItemSelect", item.toString());
+                int itemId = item.getItemId();
+                if(lastNavigationBarItem != itemId) {
+                    lastNavigationBarItem = itemId;
+                    navigationItemSelected(item);
+                }
+                return true;
+            }
+        });
 
         setup();
     }
@@ -231,4 +255,26 @@ public class MainActivity extends AppCompatActivity {
         return contentView;
     }
 
+    public void showNavigationBar() {
+        bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    public void hideNavigationBar() {
+        bottomNavigationView.setVisibility(View.GONE);
+    }
+
+    private void navigationItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_home) {
+            NavigationManager.getInstance().openHome();
+        }
+        else if (item.getItemId() == R.id.menu_progress) {
+            NavigationManager.getInstance().openProgress();
+        }
+        else if (item.getItemId() == R.id.menu_earnings) {
+            NavigationManager.getInstance().openEarnings();
+        }
+        else if (item.getItemId() == R.id.menu_resources) {
+            NavigationManager.getInstance().openResources();
+        }
+    }
 }

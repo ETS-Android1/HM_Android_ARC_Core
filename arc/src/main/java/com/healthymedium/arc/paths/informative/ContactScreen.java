@@ -31,9 +31,13 @@ public class ContactScreen extends BaseFragment {
     TextView textViewHeader;
     TextView textViewPhoneNumber;
 
-    TextView textViewAbout;
-    TextView textViewPrivacyPolicy;
+    TextView textViewEmailHeader;
+    TextView textViewEmailAddress;
+
+//    TextView textViewAbout;
+//    TextView textViewPrivacyPolicy;
     Button button;
+    Button emailButton;
 
     public ContactScreen() {
         stringHeader = "I would like to <b>contact study site</b>.";
@@ -48,11 +52,19 @@ public class ContactScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
+        getMainActivity().hideNavigationBar();
+
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
 
         textViewPhoneNumber = view.findViewById(R.id.textViewSubHeader);
         textViewPhoneNumber.setText(stringPhoneNumber);
+
+        textViewEmailHeader = view.findViewById(R.id.textViewEmailHeader);
+        textViewEmailHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.contact_email1)));
+
+        textViewEmailAddress = view.findViewById(R.id.textViewEmailSubHeader);
+        textViewEmailAddress.setText("sample@email.com");
 
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
@@ -74,28 +86,17 @@ public class ContactScreen extends BaseFragment {
             }
         });
 
+        emailButton = view.findViewById(R.id.emailButton);
+        emailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                String number = stringPhoneNumber.replace("-","");
+//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+//                startActivity(intent);
+            }
+        });
+
         textViewBack.setVisibility(View.VISIBLE);
-
-
-
-        textViewAbout = view.findViewById(R.id.textViewAbout);
-        ViewUtil.underlineTextView(textViewAbout);
-        textViewAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AboutScreen aboutScreen = new AboutScreen();
-                NavigationManager.getInstance().open(aboutScreen);
-            }
-        });
-
-        textViewPrivacyPolicy = view.findViewById(R.id.textViewPrivacyPolicy);
-        ViewUtil.underlineTextView(textViewPrivacyPolicy);
-        textViewPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Study.getPrivacyPolicy().show(getContext());
-            }
-        });
 
         return view;
     }

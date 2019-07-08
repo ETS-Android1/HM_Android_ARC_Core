@@ -14,10 +14,13 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class AvailabilityMondayWake extends QuestionTime {
 
+    // TODO
+    // Probably want to rename this class to something like AvailabilityWake or AvailabilityStart
+
     CircadianClock clock;
 
     public AvailabilityMondayWake() {
-        super(true, ViewUtil.getString(R.string.availability_wake_monday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_start),"",null);
     }
 
     @Override

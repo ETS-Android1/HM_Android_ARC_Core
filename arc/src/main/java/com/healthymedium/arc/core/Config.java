@@ -11,8 +11,8 @@ public class Config {
 
     // Rest API
     public static String REST_ENDPOINT = "http://thinkhealthymedium.com/"; // where we send the data
-    public static boolean REST_BLACKHOLE = true; // used for debugging, keeps all rest calls from reaching the outside world
-    public static boolean REST_HEARTBEAT = false; // heartbeat will fail if blackhole is enabled
+    public static boolean REST_BLACKHOLE = false; // used for debugging, keeps all rest calls from reaching the outside world
+    public static boolean REST_HEARTBEAT = true; // heartbeat will fail if blackhole is enabled
     public static boolean CHECK_SESSION_INFO = false; // if true, an api is called after registration to check for existing session info
     public static boolean CHECK_CONTACT_INFO = false; // if true, an api is called after registration to check for contact info
 
@@ -21,7 +21,7 @@ public class Config {
     public static boolean ENABLE_VIGNETTES = false; // if true, a notification reminding the user of the upcoming visit will appear one month, week, and day from the start date
     public static boolean ENABLE_LEGACY_PRICE_SETS = false; // if true, the PriceManager will continue to use a long-standing, but incorrect, method to determine the price set for a given test session.
     //Debug
-    public static boolean DEBUG_DIALOGS = true; // click the header on most screens a couple times and a debug dialog will appear
+    public static boolean DEBUG_DIALOGS = false; // click the header on most screens a couple times and a debug dialog will appear
     public static boolean ENABLE_LOGGING = false; // save logcat output to cached file 'Log'
 
     // Runtime

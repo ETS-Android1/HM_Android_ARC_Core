@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/primaryDark"
+        android:animateLayoutChanges="true">
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_x_to_close"/>
+
+        <FrameLayout
+            android:id="@+id/progressBarGradient"
+            android:layout_width="50dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tutorial_progress_bar_gradient">
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/topSymbols"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/progressBar"
+        android:layout_above="@+id/textView20"
+        android:layout_centerHorizontal="true"
+        android:background="@color/grey">
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_top1"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/symbolbutton_top2"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_top2"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_top3"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_alignTop="@+id/symbolbutton_top2"
+            android:layout_toEndOf="@+id/symbolbutton_top2"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomSymbolsButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView20"
+        android:layout_marginTop="@dimen/frame_vertical"
+        android:orientation="horizontal">
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_bottom1"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/textView19"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="" />
+
+        <com.healthymedium.arc.custom.SymbolTutorialButton
+            android:id="@+id/symbolbutton_bottom2"
+            android:layout_width="75dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textView19"
+            android:layout_weight="1"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/frame_vertical"
+        android:layout_marginRight="@dimen/frame_vertical"
+        android:text="Tap the bottom tile that matches a tile on the top."
+        android:textAlignment="center" />
+
+    <FrameLayout
+        android:id="@+id/fullScreenGray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/progressBar"
+        android:background="#404040"
+        android:alpha="0.9"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+    <com.healthymedium.arc.custom.DialogButtonTutorial
+        android:id="@+id/centerPopup"
+        android:layout_width="220dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/checkmark"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_checkmark_blue"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/textViewComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkmark"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/frame_vertical"
+        android:layout_marginRight="@dimen/frame_vertical"
+        android:paddingTop="21dp"
+        android:text="Tutorial Complete"
+        android:textColor="@color/primaryDark"
+        android:textSize="26dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        />
+
+    <com.healthymedium.arc.custom.Button
+        android:id="@+id/endButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="24dp"
+        app:enabled="true"
+        app:text="CLOSE"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

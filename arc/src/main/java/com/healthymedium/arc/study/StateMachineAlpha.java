@@ -35,7 +35,6 @@ public class StateMachineAlpha extends StateMachine {
     public static final int LIFECYCLE_ARC = 4;                  //
     public static final int LIFECYCLE_OVER = 5;                 //
 
-
     @Override
     public void initialize() {
         super.initialize();

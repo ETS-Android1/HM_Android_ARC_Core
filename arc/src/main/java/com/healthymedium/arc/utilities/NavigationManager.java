@@ -6,6 +6,11 @@ import android.support.v4.app.FragmentManager;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
+import com.healthymedium.arc.paths.informative.AboutScreen;
+import com.healthymedium.arc.paths.informative.EarningsScreen;
+import com.healthymedium.arc.paths.informative.ProgressScreen;
+import com.healthymedium.arc.paths.informative.ResourcesScreen;
+import com.healthymedium.arc.paths.templates.LandingTemplate;
 
 public class NavigationManager {
 
@@ -99,5 +104,20 @@ public class NavigationManager {
         void onPopBack();
     }
 
+    public void openHome() {
+        open(new LandingTemplate(false));
+    }
+
+    public void openProgress() {
+        open(new ProgressScreen());
+    }
+
+    public void openEarnings() {
+        open(new EarningsScreen());
+    }
+
+    public void openResources() {
+        open(new ResourcesScreen());
+    }
 
 }

@@ -55,7 +55,7 @@ public class RadioButton extends FrameLayout {
                     frameLayoutRadioButton.setBackgroundResource(R.drawable.background_accent_rounded);
                     radioButton.setTypeface(Fonts.robotoBold);
                 } else {
-                    frameLayoutRadioButton.setBackground(null);
+                    frameLayoutRadioButton.setBackgroundResource(R.drawable.btn_border_unselected);
                     radioButton.setTypeface(Fonts.roboto);
                 }
                 frameLayoutRadioButton.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);

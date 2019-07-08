@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/primary">
+    android:background="@color/primaryDark">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -77,56 +77,56 @@
                 app:inverted="true"
                 app:text="CALL" />
 
+            <FrameLayout
+                android:id="@+id/lineFrameLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#003245">
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textViewEmailHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="32dp"
+                android:textColor="@color/white"
+                android:textSize="26dp"
+                tools:text="I would like to email my study coordinator." />
+
+            <TextView
+                android:id="@+id/textViewEmailSubHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="false"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                tools:text="sample@email.com" />
+
+            <com.healthymedium.arc.custom.Button
+                android:id="@+id/emailButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="false"
+                android:layout_marginLeft="32dp"
+                android:layout_gravity="left"
+                android:layout_marginBottom="24dp"
+                app:inverted="true"
+                app:text="EMAIL" />
+
         </LinearLayout>
 
     </ScrollView>
-
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_above="@+id/linearLayout"
-        android:background="#003245">
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewAbout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingLeft="32dp"
-            android:paddingTop="19dp"
-            android:paddingRight="38dp"
-            android:paddingBottom="22dp"
-            android:text="About"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="32dp"
-            android:background="#003245" />
-
-        <TextView
-            android:id="@+id/textViewPrivacyPolicy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="19dp"
-            android:paddingBottom="22dp"
-            android:text="Privacy Policy"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
 </RelativeLayout>

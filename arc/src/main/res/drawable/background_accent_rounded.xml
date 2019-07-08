@@ -9,6 +9,10 @@
         android:right="0dp"
         android:bottom="0dp"
         />
+    <stroke
+        android:width="2dp"
+        android:color="@color/primary"
+        />
     <corners
-        android:radius="6dp"/>
+        android:radius="42dp"/>
 </shape>

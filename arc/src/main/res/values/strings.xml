@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">library</string>
     <string name="country_key">US</string>
     <string name="language_key">en</string>
+
+    <string name="language_prefer">Please select your &lt;b>preferred language.&lt;/b></string>
 
     <string name="gen_welcome_key">Welcome to the app</string>
 
@@ -15,6 +17,7 @@
 
     <string name="Button_signin">SIGN IN</string>
     <string name="button_begin">BEGIN</string>
+    <string name="button_begin_survey">BEGIN SURVEY</string>
     <string name="button_next">NEXT</string>
     <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
     <string name="button_submit">SUBMIT TIME</string>
@@ -24,6 +27,9 @@
     <string name="change_button">CHANGE</string>
     <string name="button_confirm">CONFIRM</string>
     <string name="button_adjust_sched">ADJUST SCHEDULE</string>
+    <string name="button_chooseanswer">CHOOSE ANSWER</string>
+
+    <string name="radio_understand">I understand</string>
 
     <string name="home_availability_reset_link">Change My Availability</string>
     <string name="home_contact_link">Contact and About</string>
@@ -181,6 +187,9 @@
     <string name="wake_excellent">Excellent</string>
     <string name="wake_poor">Poor</string>
 
+    <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
+    <string name="availability_stop">What time should we &lt;b>stop&lt;/b> your notifications each day?</string>
+
     <string name="availability_wake_monday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Monday&lt;/b>?</string>
     <string name="availability_sleep_monday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Monday&lt;/b>?</string>
 
@@ -208,7 +217,7 @@
 
     <string name="setup_avail_header">Availability</string>
     <string name="setup_avail_subheader">A Few Questions</string>
-    <string name="setup_avail_body">First, we\'ll ask you a few questions to help us determine when to send you those notifications.\n\nYou will only receive notifications during your waking hours.</string>
+    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
 
     <string name="notest_adjust">I NEED TO ADJUST MY START DATE</string>
     <string name="notification_take">It’s time to take a quick test!</string>
@@ -262,8 +271,33 @@
     <string name="Day_Abbrev_Fri">F</string>
     <string name="Day_Abbrev_Sat">S</string>
 
+    <string name="popup_scroll">Scroll to select</string>
+
     <string name="ChangeAvail_date_picker_body"></string>
     <string name="ChangeAvail_date_picker_confirm_body"></string>
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
+
+    <string name="ChangeAvail_time"></string>
+    <string name="ChangeAvail_date"></string>
+
+    <string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
+    
+    <string name="home_header1">&lt;b>Hello!&lt;/b></string>
+    <string name="home_body1">&lt;br /&gt; &lt;br /&gt;You have a new test available.</string>
+
+    <string name="home_header2">&lt;b>There are no tests to take right now.&lt;/b></string>
+    <string name="home_body2">You will receive a notification later today when it\'s time to take your next test.</string>
+
+    <string name="home_header3">&lt;b>You\'re done with today\'s tests.&lt;/b></string>
+    <string name="home_body3">We\'ll notify you tomorrow when it\'s time to take a test.</string>
+
+    <string name="home_header4">&lt;b>There are no tests available right now.&lt;/b></string>
+    <string name="home_body4">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. &lt;br /> &lt;br /> We\'ll notify you when it\'s time to take a test.</string>
+
+    <string name="home_header5">&lt;b>Your testing cycle starts tomorrow and runs through {DATE}.&lt;/b></string>
+    <string name="home_body5">We\'ll notify you when it\'s time to take a test.</string>
+
+    <string name="home_header6">&lt;b>You\'ve finished the study!&lt;/b></string>
+    <string name="home_body6">There are no more tests to take.</string>
 </resources>

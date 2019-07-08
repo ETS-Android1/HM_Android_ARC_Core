@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/primary"
+        android:animateLayoutChanges="true">
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_x_to_close"/>
+
+        <FrameLayout
+            android:id="@+id/progressBarGradient"
+            android:layout_width="50dp"
+            android:layout_height="6dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tutorial_progress_bar_gradient">
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_below="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:columnCount="5"
+        android:rowCount="5">
+
+
+        <ImageView
+            android:id="@+id/image11"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image12"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image13"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image14"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image15"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image21"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image22"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image23"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image24"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image25"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image31"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image32"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image33"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image34"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image35"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image41"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image42"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image43"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image44"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image45"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image51"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image52"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image53"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image54"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+
+        <ImageView
+            android:id="@+id/image55"
+            android:layout_width="10mm"
+            android:layout_height="16mm"
+            android:layout_margin="1dp"
+            android:background="@color/gridNormal" />
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/gridLettersLayout"
+        android:layout_below="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="false"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:columnCount="6"
+        android:rowCount="10"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:gravity="center"
+            android:text="E"
+
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="F"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+        <TextView
+            android:id="@+id/textView50"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="E"
+            android:textAllCaps="true"
+            android:textColor="@color/gridSelected"
+            android:textSize="36dp" />
+
+    </GridLayout>
+
+    <FrameLayout
+        android:id="@+id/fullScreenGray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/progressBar"
+        android:background="#404040"
+        android:alpha="0.9"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+    <com.healthymedium.arc.custom.DialogButtonTutorial
+        android:id="@+id/centerPopup"
+        android:layout_width="220dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/checkmark"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/ic_checkmark_blue"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/textViewComplete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkmark"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/frame_vertical"
+        android:layout_marginRight="@dimen/frame_vertical"
+        android:paddingTop="21dp"
+        android:text="Tutorial Complete"
+        android:textColor="@color/primaryDark"
+        android:textSize="26dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        />
+
+    <com.healthymedium.arc.custom.Button
+        android:id="@+id/endButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="24dp"
+        app:enabled="true"
+        app:text="CLOSE"
+        android:visibility="gone"
+        />
+
+
+</RelativeLayout>
