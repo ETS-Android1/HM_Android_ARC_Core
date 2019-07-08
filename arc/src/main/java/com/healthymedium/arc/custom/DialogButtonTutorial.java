@@ -57,4 +57,12 @@ public class DialogButtonTutorial extends LinearLayout {
         button.setVisibility(View.GONE);
     }
 
+    public void showBody() {
+        body.setVisibility(View.VISIBLE);
+    }
+
+    public void hideBody() {
+        body.setVisibility(View.GONE);
+    }
+
 }

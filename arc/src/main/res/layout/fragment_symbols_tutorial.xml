@@ -33,9 +33,6 @@
         android:id="@+id/topSymbols"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
         android:orientation="horizontal"
         android:layout_below="@id/progressBar"
         android:layout_above="@+id/textView20"
@@ -57,6 +54,7 @@
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
@@ -71,6 +69,15 @@
             android:layout_weight="1"
             android:background="@color/white"/>
 
+        <FrameLayout
+            android:id="@+id/topScreenGray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#404040"
+            android:alpha="0.9"
+            android:visibility="gone">
+
+        </FrameLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -80,15 +87,20 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView20"
         android:layout_marginTop="@dimen/frame_vertical"
-        android:orientation="horizontal">
+        android:layout_marginRight="90dp"
+        android:layout_marginLeft="90dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <com.healthymedium.arc.custom.SymbolTutorialButton
             android:id="@+id/symbolbutton_bottom1"
             android:layout_width="75dp"
             android:layout_height="150dp"
+            android:layout_marginTop="20dp"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/textView19"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/textView19"
@@ -105,9 +117,11 @@
             android:id="@+id/symbolbutton_bottom2"
             android:layout_width="75dp"
             android:layout_height="150dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/textView19"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/white"/>
 
     </RelativeLayout>
 
@@ -117,16 +131,17 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="@dimen/frame_vertical"
         android:layout_marginRight="@dimen/frame_vertical"
         android:text="Tap the bottom tile that matches a tile on the top."
         android:textAlignment="center" />
 
     <FrameLayout
-        android:id="@+id/fullScreenGray"
+        android:id="@+id/bottomScreenGray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/progressBar"
+        android:layout_below="@+id/topSymbols"
         android:background="#404040"
         android:alpha="0.9"
         android:visibility="gone">
