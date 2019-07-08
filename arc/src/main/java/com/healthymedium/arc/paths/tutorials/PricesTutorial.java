@@ -105,12 +105,11 @@ public class PricesTutorial extends BaseFragment {
         fadeInView(fullScreenGray, 0.9f);
         priceContainer.bringToFront();
 
-        // TODO
-        // This is the wrong  type of popup
         fadeInView(bottomPopup, 1f);
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Choose the answer that makes sense to you.");
-        bottomPopup.button.setText("Next");
+        //bottomPopup.button.setText("Next");
+        bottomPopup.disableButton();
         bottomPopup.bringToFront();
 
         setFirstPricesCompare();
@@ -142,6 +141,7 @@ public class PricesTutorial extends BaseFragment {
                         bottomPopup.header.setText("Great choice!");
                         bottomPopup.body.setText("Let's try another.");
                         bottomPopup.button.setText("Next");
+                        bottomPopup.enableButton();
 
                         bottomPopup.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -178,6 +178,7 @@ public class PricesTutorial extends BaseFragment {
                         bottomPopup.header.setText("Great choice!");
                         bottomPopup.body.setText("Let's try another.");
                         bottomPopup.button.setText("Next");
+                        bottomPopup.enableButton();
 
                         bottomPopup.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -205,7 +206,8 @@ public class PricesTutorial extends BaseFragment {
         fadeInView(bottomPopup, 1f);
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Choose the answer that makes sense to you.");
-        bottomPopup.button.setText("Next");
+        // bottomPopup.button.setText("Next");
+        bottomPopup.disableButton();
         bottomPopup.bringToFront();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
@@ -232,6 +234,7 @@ public class PricesTutorial extends BaseFragment {
                         centerPopup.header.setText("Another great choice!");
                         centerPopup.body.setText("Let's proceed to part two.");
                         centerPopup.button.setText("Next");
+                        centerPopup.enableButton();
 
                         centerPopup.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -273,6 +276,7 @@ public class PricesTutorial extends BaseFragment {
                         centerPopup.header.setText("Another great choice!");
                         centerPopup.body.setText("Let's proceed to part two.");
                         centerPopup.button.setText("Next");
+                        centerPopup.enableButton();
 
                         centerPopup.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -304,11 +308,10 @@ public class PricesTutorial extends BaseFragment {
         fadeInView(bottomPopup, 1f);
         bottomPopup.bringToFront();
 
-        // TODO
-        // This is the wrong  type of popup
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Try your best to recall the price from part one.");
-        bottomPopup.button.setText("Next");
+        // bottomPopup.button.setText("Next");
+        bottomPopup.disableButton();
         bottomPopup.button.setOnClickListener(null);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
@@ -331,6 +334,7 @@ public class PricesTutorial extends BaseFragment {
                         bottomPopup.header.setText("Great choice!");
                         bottomPopup.body.setText("Let's try another.");
                         bottomPopup.button.setText("Next");
+                        bottomPopup.enableButton();
 
                         bottomPopup.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -367,6 +371,7 @@ public class PricesTutorial extends BaseFragment {
                         bottomPopup.header.setText("Great choice!");
                         bottomPopup.body.setText("Let's try another.");
                         bottomPopup.button.setText("Next");
+                        bottomPopup.enableButton();
 
                         bottomPopup.button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -394,11 +399,10 @@ public class PricesTutorial extends BaseFragment {
 
         fadeInView(bottomPopup, 1f);
 
-        // TODO
-        // This is the wrong  type of popup
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Choose the price that you saw in part one.");
-        bottomPopup.button.setText("Next");
+        // bottomPopup.button.setText("Next");
+        bottomPopup.disableButton();
         bottomPopup.button.setOnClickListener(null);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
