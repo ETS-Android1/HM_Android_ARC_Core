@@ -5,6 +5,7 @@ import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ public class DialogButtonTutorial extends LinearLayout {
     public TextView header;
     public TextView body;
     public TextView button;
+
+    private FrameLayout lineFrameLayout;
 
     public DialogButtonTutorial(Context context) {
         super(context);
@@ -37,9 +40,29 @@ public class DialogButtonTutorial extends LinearLayout {
         body = view.findViewById(R.id.dialogBtnTutorialBody);
         button = view.findViewById(R.id.button);
 
+        lineFrameLayout = view.findViewById(R.id.lineFrameLayout);
+
         SpannableString content = new SpannableString("View a Tutorial");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         button.setText(content);
+    }
+
+    public void enableButton() {
+        lineFrameLayout.setVisibility(View.VISIBLE);
+        button.setVisibility(View.VISIBLE);
+    }
+
+    public void disableButton() {
+        lineFrameLayout.setVisibility(View.GONE);
+        button.setVisibility(View.GONE);
+    }
+
+    public void showBody() {
+        body.setVisibility(View.VISIBLE);
+    }
+
+    public void hideBody() {
+        body.setVisibility(View.GONE);
     }
 
 }
