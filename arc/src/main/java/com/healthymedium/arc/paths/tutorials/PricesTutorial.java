@@ -425,7 +425,9 @@ public class PricesTutorial extends BaseFragment {
                         fadeOutView(textviewPrice);
 
                         fadeInView(checkmark, 1f);
+                        checkmark.bringToFront();
                         fadeInView(textViewComplete, 1f);
+                        textViewComplete.bringToFront();
                         fadeInView(endButton, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
