@@ -12,10 +12,8 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
-import com.healthymedium.arc.path_data.GridTestPathData.Section;
 import com.healthymedium.arc.study.Study;
 
 import java.util.ArrayList;

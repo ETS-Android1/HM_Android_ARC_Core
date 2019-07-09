@@ -1,11 +1,11 @@
 package com.healthymedium.arc.utilities;
 
 import android.os.SystemClock;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.informative.ProgressScreen;
@@ -50,13 +50,15 @@ public class NavigationManager {
 
     public void open(BaseFragment fragment) {
         if (fragmentManager != null) {
-            int enterTransition = fragment.getEnterTransitionRes();
-            int exitTransition = fragment.getExitTransitionRes();
-            int popEnterTransition = fragment.getPopEnterTransitionRes();
-            int popExitTransition = fragment.getPopExitTransitionRes();
-            String tag = fragment.getClass().getName() + "." + SystemClock.uptimeMillis();
+
+            TransitionSet transitions = fragment.getTransitionSet();
+            String tag = fragment.getSimpleTag() + "." + SystemClock.uptimeMillis();
             fragmentManager.beginTransaction()
-                    .setCustomAnimations(enterTransition,exitTransition,popEnterTransition,popExitTransition)
+                    .setCustomAnimations(
+                            transitions.enter,
+                            transitions.exit,
+                            transitions.popEnter,
+                            transitions.popExit)
                     .replace(R.id.content_frame, fragment, tag)
                     .addToBackStack(tag)
                     .commitAllowingStateLoss();

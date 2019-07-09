@@ -1,0 +1,32 @@
+package com.healthymedium.arc.notifications.types;
+
+import android.content.Context;
+
+import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.notifications.NotificationNode;
+
+public class VisitNextWeek extends NotificationType {
+
+    public VisitNextWeek(){
+        super();
+        id = 6;
+        channelId = "VISIT_NEXT_WEEK";
+        channelName = "Next Testing Cycle, Week Prior";
+        channelDesc = "Notifies the user one week before their next testing cycle";
+        importance = NotificationImportance.HIGH;
+        extra = Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION;
+        proctored = false;
+        soundResource = R.raw.pluck;
+    }
+
+    @Override
+    public String getContent(Context context) {
+        return context.getString(R.string.notification_1week);
+    }
+
+    @Override
+    public boolean onNotifyPending(NotificationNode node) {
+        return true;
+    }
+}

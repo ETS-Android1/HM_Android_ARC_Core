@@ -2,23 +2,12 @@ package com.healthymedium.arc.custom;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.library.R;
-
-import org.w3c.dom.Text;
 
 public class DigitView extends FrameLayout {
 

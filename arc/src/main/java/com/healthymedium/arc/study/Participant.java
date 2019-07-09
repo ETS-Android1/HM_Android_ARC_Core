@@ -1,12 +1,16 @@
 package com.healthymedium.arc.study;
 
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
+import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
 
 public class Participant {
+
+    public static final String TAG_PARTICIPANT_STATE = "ParticipantState";
 
     protected ParticipantState state;
 
@@ -22,11 +26,11 @@ public class Participant {
         if(state!=null && !overwrite){
             return;
         }
-        state = PreferencesManager.getInstance().getObject("ParticipantState",ParticipantState.class);
+        state = PreferencesManager.getInstance().getObject(TAG_PARTICIPANT_STATE,ParticipantState.class);
     }
 
     public void save(){
-        PreferencesManager.getInstance().putObject("ParticipantState", state);
+        PreferencesManager.getInstance().putObject(TAG_PARTICIPANT_STATE, state);
     }
 
     public boolean hasId(){
@@ -100,6 +104,7 @@ public class Participant {
         Log.i("Participant", "moveOnToNextTestSession");
         state.currentTestSession++;
         if(state.currentTestSession>=state.visits.get(state.currentVisit).testSessions.size()){
+            Proctor.stopService(Application.getInstance());
             state.currentTestSession = 0;
             state.currentVisit++;
             if(state.currentVisit>=state.visits.size()){

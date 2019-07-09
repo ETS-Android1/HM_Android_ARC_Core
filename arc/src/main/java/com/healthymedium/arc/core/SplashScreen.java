@@ -14,11 +14,10 @@ import android.view.ViewGroup;
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.notifications.NotificationManager;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.PreferencesManager;
-
-import java.util.Locale;
 
 public class SplashScreen extends BaseFragment {
 
@@ -69,16 +68,12 @@ public class SplashScreen extends BaseFragment {
             getMainActivity().setupHomeWatcher();
             getMainActivity().setupKeyboardWatcher();
 
-            String language = PreferencesManager.getInstance().getString("language","en");
-            String country = PreferencesManager.getInstance().getString("country","US");
+            String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE,Locale.LANGUAGE_ENGLISH);
+            String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY,Locale.COUNTRY_UNITED_STATES);
             Resources res = getResources();
             Configuration conf = res.getConfiguration();
-            conf.setLocale(new Locale(language,country));
+            conf.setLocale(new java.util.Locale(language,country));
             res.updateConfiguration(conf, res.getDisplayMetrics());
-
-            if(NotificationManager.getInstance()==null){
-                NotificationManager.initialize(context);
-            }
 
             if(FontFactory.getInstance()==null) {
                 FontFactory.initialize(context);
@@ -88,6 +83,13 @@ public class SplashScreen extends BaseFragment {
                 Fonts.load();
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
+            }
+
+            Visit visit = Study.getCurrentVisit();
+            if(visit!=null){
+                if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+                    Proctor.startService(getContext());
+                }
             }
 
             // We need to check to see if we're currently in the middle of a test session.

@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-public class StudyState {
+public class State {
 
     public int lifecycle;
     public int currentPath;

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 
+import com.healthymedium.arc.notifications.NotificationTypes;
+import com.healthymedium.arc.notifications.types.NotificationType;
 import com.healthymedium.arc.study.Study;
 
 import com.healthymedium.arc.utilities.CacheManager;
@@ -26,10 +28,8 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        Log.i(tag,"onCreate");
-
-        VersionUtil.initialize(this);
         JodaTimeAndroid.init(this);
+        VersionUtil.initialize(this);
         PreferencesManager.initialize(this);
         CacheManager.initialize(this);
         Device.initialize(this);
@@ -51,11 +51,33 @@ public class Application extends android.app.Application {
         //Study.getInstance().registerStudyBehavior();
     }
 
+    // list all notification types offered by the app
+    public List<NotificationType> getNotificationTypes() {
+        List<NotificationType> types = new ArrayList<>();
+        types.add(NotificationTypes.TestConfirmed);
+        types.add(NotificationTypes.TestMissed);
+        types.add(NotificationTypes.TestNext);
+        types.add(NotificationTypes.TestTake);
+        if(Config.ENABLE_VIGNETTES) {
+            types.add(NotificationTypes.VisitNextDay);
+            types.add(NotificationTypes.VisitNextWeek);
+            types.add(NotificationTypes.VisitNextMonth);
+        }
+        return types;
+    }
+
     // list all locale options offered by the app
     public List<Locale> getLocaleOptions() {
         List<Locale> locales = new ArrayList<>();
         locales.add(new Locale(Locale.COUNTRY_UNITED_STATES,Locale.LANGUAGE_ENGLISH));
         return locales;
+    }
+
+    public java.util.Locale getLocale() {
+        PreferencesManager preferences = PreferencesManager.getInstance();
+        String language = preferences.getString("language","en");
+        String country = preferences.getString("country","US");
+        return new java.util.Locale(language,country);
     }
 
     @Override
@@ -67,20 +89,18 @@ public class Application extends android.app.Application {
 
     @Override
     protected void attachBaseContext(Context context) {
-        Log.i("Application","attachBaseContext");
         super.attachBaseContext(context);
         updateLocale(context);
     }
-
 
     public void updateLocale(@Nullable Context context){
         PreferencesManager preferences = PreferencesManager.getInstance();
         if(preferences == null) {
             return;
         }
-        if(preferences.contains("language")){
-            String language = preferences.getString("language","en");
-            String country = preferences.getString("country","US");
+        if(preferences.contains(Locale.TAG_LANGUAGE)){
+            String language = preferences.getString(Locale.TAG_LANGUAGE,Locale.LANGUAGE_ENGLISH);
+            String country = preferences.getString(Locale.TAG_COUNTRY,Locale.COUNTRY_UNITED_STATES);
             java.util.Locale locale = new java.util.Locale(language,country);
 
             // update application

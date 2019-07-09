@@ -1,0 +1,35 @@
+package com.healthymedium.arc.misc;
+
+import android.support.annotation.AnimRes;
+
+import com.healthymedium.arc.library.R;
+
+public class TransitionSet {
+
+    @AnimRes
+    public int enter = 0;
+    @AnimRes
+    public int exit = 0;
+    @AnimRes
+    public int popEnter = 0;
+    @AnimRes
+    public int popExit = 0;
+
+
+
+    public static TransitionSet getSlidingDefault(){
+        return getSlidingDefault(true);
+    }
+
+    public static TransitionSet getSlidingDefault(boolean animateEntry){
+        TransitionSet set = new TransitionSet();
+        if(animateEntry) {
+            set.enter = R.anim.slide_in_right;
+            set.popEnter =  R.anim.slide_in_left;
+        }
+        set.exit = R.anim.slide_out_left;
+        set.popExit =  R.anim.slide_out_right;
+        return set;
+    }
+
+}

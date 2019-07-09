@@ -18,10 +18,10 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:paddingTop="1dp"
+        app:labelVisibilityMode="labeled"
         app:itemBackground="@color/white"
         app:menu="@menu/menu_navigation" />
     <!--app:itemIconTint="@drawable/menu_item_selector"-->
     <!--app:itemTextColor="@drawable/menu_text_selector"-->
-
 
 </RelativeLayout>

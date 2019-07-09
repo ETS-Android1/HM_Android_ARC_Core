@@ -3,9 +3,7 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +13,11 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.core.TwoBtnPopupScreen;
 import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;
-import com.healthymedium.arc.utilities.BottomNavigationViewHelper;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 

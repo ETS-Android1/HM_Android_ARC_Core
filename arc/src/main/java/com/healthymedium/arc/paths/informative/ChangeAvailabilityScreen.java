@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;
@@ -57,8 +58,7 @@ public class ChangeAvailabilityScreen extends BaseFragment {
         }
 
         allowBackPress(false);
-        setEnterTransitionRes(com.healthymedium.arc.library.R.anim.slide_in_right, com.healthymedium.arc.library.R.anim.slide_in_left);
-        setExitTransitionRes(com.healthymedium.arc.library.R.anim.slide_out_left, com.healthymedium.arc.library.R.anim.slide_out_right);
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Nullable

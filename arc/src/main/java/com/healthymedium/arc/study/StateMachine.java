@@ -1,14 +1,18 @@
 package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
-import android.os.Bundle;
-import android.util.Log;
+
+import com.healthymedium.arc.paths.templates.StateInfoTemplate;
+import com.healthymedium.arc.paths.templates.TestInfoTemplate;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.path_data.AvailabilityPathData;
 import com.healthymedium.arc.path_data.ChronotypePathData;
 import com.healthymedium.arc.path_data.ContextPathData;
@@ -17,7 +21,6 @@ import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.path_data.WakePathData;
-import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.availability.AvailabilityMondayBed;
 import com.healthymedium.arc.paths.availability.AvailabilityMondayWake;
 import com.healthymedium.arc.paths.availability.AvailabilityOtherBed;
@@ -29,6 +32,7 @@ import com.healthymedium.arc.paths.availability.AvailabilitySundayWake;
 import com.healthymedium.arc.paths.availability.AvailabilityWeekdayConfirm;
 import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.questions.QuestionAdjustSchedule;
+import com.healthymedium.arc.paths.setup.SetupAuthCode;
 import com.healthymedium.arc.paths.templates.InfoTemplate;
 import com.healthymedium.arc.paths.questions.QuestionCheckBoxes;
 import com.healthymedium.arc.paths.questions.QuestionDuration;
@@ -39,10 +43,7 @@ import com.healthymedium.arc.paths.questions.QuestionRating;
 import com.healthymedium.arc.paths.questions.QuestionTime;
 import com.healthymedium.arc.paths.setup.SetupParticipant;
 import com.healthymedium.arc.paths.setup.SetupParticipantConfirm;
-import com.healthymedium.arc.paths.setup.SetupSite;
 import com.healthymedium.arc.paths.setup.SetupWelcome;
-import com.healthymedium.arc.paths.templates.StateInfoTemplate;
-import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.GridLetters;
 import com.healthymedium.arc.paths.tests.GridStudy;
 import com.healthymedium.arc.paths.tests.GridTest;
@@ -56,7 +57,6 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -67,52 +67,46 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
-public class StudyStateMachine {
+public class StateMachine {
 
     public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
     public static final String TAG_STUDY_STATE = "StudyState";
+    public static final String TAG_TEST_COMPLETE = "TestCompleteFlag";
 
     protected String tag = getClass().getSimpleName();
 
-    protected StudyState state;
-    protected StudyStateCache cache;
+    protected State state;
+    protected StateCache cache;
     protected boolean currentlyInTestPath = false;
 
-    public StudyStateMachine() {
+    public StateMachine() {
 
     }
 
     protected void enableTransition(PathSegment segment, boolean animateEntry){
         int size = segment.fragments.size();
-        int first = 0;
-        int last = size-1;
+        if(size==0){
+            return;
+        }
 
-        for(int i=0;i<size;i++){
-            if(i!=first || animateEntry){
-                segment.fragments.get(i).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            }
-            segment.fragments.get(i).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        segment.fragments.get(0).setTransitionSet(TransitionSet.getSlidingDefault(animateEntry));
+        for(int i=1;i<size;i++){
+            segment.fragments.get(i).setTransitionSet(TransitionSet.getSlidingDefault());
         }
     }
 
     protected void enableTransitionGrids(PathSegment segment, boolean animateEntry){
         if (animateEntry) {
-            segment.fragments.get(1).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            segment.fragments.get(1).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
-
-            segment.fragments.get(2).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            segment.fragments.get(2).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
-
-            segment.fragments.get(3).setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-            segment.fragments.get(3).setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+            segment.fragments.get(1).setTransitionSet(TransitionSet.getSlidingDefault());
+            segment.fragments.get(2).setTransitionSet(TransitionSet.getSlidingDefault());
+            segment.fragments.get(3).setTransitionSet(TransitionSet.getSlidingDefault());
         }
     }
 
     public void initialize(){
-        state = new StudyState();
-        cache = new StudyStateCache();
+        state = new State();
+        cache = new StateCache();
     }
 
     public void load(){
@@ -124,8 +118,8 @@ public class StudyStateMachine {
         if(state!=null && !overwrite){
             return;
         }
-        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
-        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
+        state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE, State.class);
+        cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE, StateCache.class);
     }
 
     public void save(){
@@ -264,11 +258,11 @@ public class StudyStateMachine {
 
     protected void setTestCompleteFlag(boolean complete){
         Log.i(tag, "setTestCompleteFlag("+complete+")");
-        PreferencesManager.getInstance().putBoolean("TestCompleteFlag",complete);
+        PreferencesManager.getInstance().putBoolean(TAG_TEST_COMPLETE,complete);
     }
 
     protected boolean isTestCompleteFlagSet(){
-        return PreferencesManager.getInstance().getBoolean("TestCompleteFlag",false);
+        return PreferencesManager.getInstance().getBoolean(TAG_TEST_COMPLETE,false);
     }
 
     public boolean isCurrentlyInTestPath(){
@@ -294,79 +288,26 @@ public class StudyStateMachine {
         return true;
     }
 
-    // -----------------------------------------------------------------
+    // ---------------------------------------------------------------------------------------------
 
+    public void setPathSetupParticipant(int firstDigitCount, int secondDigitCount, int authDigitCount){
+        List<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new SetupWelcome());
+        fragments.add(new SetupParticipant(firstDigitCount,secondDigitCount));
+        fragments.add(new SetupParticipantConfirm(false,firstDigitCount,secondDigitCount));
+        fragments.add(new SetupAuthCode(true, authDigitCount));
 
+        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
+        enableTransition(segment,false);
+        cache.segments.add(segment);
+    }
+
+    // default
     public void setPathSetupParticipant(){
-        List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new SetupWelcome());
-        fragments.add(new SetupParticipant());
-        fragments.add(new SetupParticipantConfirm());
-        fragments.add(new SetupSite());
-
-        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
-        enableTransition(segment,false);
-        cache.segments.add(segment);
+        setPathSetupParticipant(5,3,5);
     }
 
-    public void setPathSetupParticipant(int firstDigits, int secondDigits, int siteDigits) {
-        List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new SetupWelcome());
-
-        SetupParticipant setupParticipantFragment = new SetupParticipant();
-        Bundle setupDigitsBundle = new Bundle();
-        setupDigitsBundle.putInt("firstDigits", firstDigits);
-        setupDigitsBundle.putInt("secondDigits", secondDigits);
-        setupParticipantFragment.setArguments(setupDigitsBundle);
-        fragments.add(setupParticipantFragment);
-
-        SetupParticipantConfirm setupParticipantConfirmFragment = new SetupParticipantConfirm();
-        setupParticipantConfirmFragment.setArguments(setupDigitsBundle);
-        fragments.add(setupParticipantConfirmFragment);
-
-        SetupSite setupSiteFragment = new SetupSite();
-        Bundle setupSiteBundle = new Bundle();
-        setupSiteBundle.putInt("siteDigits", siteDigits);
-        setupSiteFragment.setArguments(setupSiteBundle);
-        fragments.add(setupSiteFragment);
-
-        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
-        enableTransition(segment,false);
-        cache.segments.add(segment);
-    }
-
-    public void setPathSetupAvailability(){
-        List<BaseFragment> fragments = new ArrayList<>();
-
-        Resources res = Application.getInstance().getResources();
-
-        fragments.add(new StateInfoTemplate(
-                false,
-                res.getString(R.string.setup_avail_header) ,
-                null,
-                res.getString(R.string.availability_body),
-                res.getString(R.string.button_begin)));
-
-        fragments.add(new AvailabilityMondayWake());
-        fragments.add(new AvailabilityMondayBed());
-        fragments.add(new AvailabilityWeekdayConfirm());
-        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
-        fragments.add(new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday)));
-        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
-        fragments.add(new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday)));
-        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
-        fragments.add(new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday)));
-        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
-        fragments.add(new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday)));
-        fragments.add(new AvailabilitySaturdayWake());
-        fragments.add(new AvailabilitySaturdayBed());
-        fragments.add(new AvailabilitySundayWake());
-        fragments.add(new AvailabilitySundayBed());
-
-        PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
-        enableTransition(segment,true);
-        cache.segments.add(segment);
-    }
+    // ---------------------------------------------------------------------------------------------
 
     public void setPathSetupAvailability(int minWakeTime, int maxWakeTime, boolean reschedule){
         List<BaseFragment> fragments = new ArrayList<>();
@@ -378,65 +319,43 @@ public class StudyStateMachine {
                 res.getString(R.string.setup_avail_header),
                 null,
                 res.getString(R.string.availability_body),
-                res.getString(R.string.button_begin_survey)));
-
-        Bundle windowBundle = new Bundle();
-        windowBundle.putInt("minWakeTime", minWakeTime);
-        windowBundle.putInt("maxWakeTime", maxWakeTime);
-        windowBundle.putBoolean("reschedule", reschedule);
+                res.getString(R.string.button_begin)));
 
         fragments.add(new AvailabilityMondayWake());
-
-        AvailabilityMondayBed mondayBed = new AvailabilityMondayBed();
-        mondayBed.setArguments(windowBundle);
-        fragments.add(mondayBed);
-
-        AvailabilityConfirm confirm = new AvailabilityConfirm(true);
-        confirm.setArguments(windowBundle);
-        fragments.add(confirm);
-
-//        fragments.add(new AvailabilityWeekdayConfirm());
-//
-//        fragments.add(new AvailabilityOtherWake("Tuesday", res.getString(R.string.availability_wake_tuesday)));
-//
-//        AvailabilityOtherBed tuesdayBed = new AvailabilityOtherBed("Tuesday", res.getString(R.string.availability_sleep_tuesday));
-//        tuesdayBed.setArguments(windowBundle);
-//        fragments.add(tuesdayBed);
-//
-//        fragments.add(new AvailabilityOtherWake("Wednesday", res.getString(R.string.availability_wake_wednesday)));
-//
-//        AvailabilityOtherBed wednesdayBed = new AvailabilityOtherBed("Wednesday", res.getString(R.string.availability_sleep_wednesday));
-//        wednesdayBed.setArguments(windowBundle);
-//        fragments.add(wednesdayBed);
-//
-//        fragments.add(new AvailabilityOtherWake("Thursday", res.getString(R.string.availability_wake_thursday)));
-//
-//        AvailabilityOtherBed thursdayBed = new AvailabilityOtherBed("Thursday", res.getString(R.string.availability_sleep_thursday));
-//        thursdayBed.setArguments(windowBundle);
-//        fragments.add(thursdayBed);
-//
-//        fragments.add(new AvailabilityOtherWake("Friday", res.getString(R.string.availability_wake_friday)));
-//
-//        AvailabilityOtherBed fridayBed = new AvailabilityOtherBed("Friday", res.getString(R.string.availability_sleep_friday));
-//        fridayBed.setArguments(windowBundle);
-//        fragments.add(fridayBed);
-//
-//        fragments.add(new AvailabilitySaturdayWake());
-//
-//        AvailabilitySaturdayBed saturdayBed = new AvailabilitySaturdayBed();
-//        saturdayBed.setArguments(windowBundle);
-//        fragments.add(saturdayBed);
-//
-//        fragments.add(new AvailabilitySundayWake());
-//
-//        AvailabilitySundayBed sundayBed = new AvailabilitySundayBed();
-//        sundayBed.setArguments(windowBundle);
-//        fragments.add(sundayBed);
+        fragments.add(new AvailabilityMondayBed(minWakeTime,maxWakeTime));
+        fragments.add(new AvailabilityWeekdayConfirm());
+        fragments.add(new AvailabilityOtherWake(
+                "Tuesday", res.getString(R.string.availability_wake_tuesday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Tuesday", res.getString(R.string.availability_sleep_tuesday)));
+        fragments.add(new AvailabilityOtherWake(
+                "Wednesday", res.getString(R.string.availability_wake_wednesday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Wednesday", res.getString(R.string.availability_sleep_wednesday)));
+        fragments.add(new AvailabilityOtherWake(
+                "Thursday", res.getString(R.string.availability_wake_thursday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Thursday", res.getString(R.string.availability_sleep_thursday)));
+        fragments.add(new AvailabilityOtherWake(
+                "Friday", res.getString(R.string.availability_wake_friday)));
+        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
+                "Friday", res.getString(R.string.availability_sleep_friday)));
+        fragments.add(new AvailabilitySaturdayWake());
+        fragments.add(new AvailabilitySaturdayBed(minWakeTime, maxWakeTime));
+        fragments.add(new AvailabilitySundayWake());
+        fragments.add(new AvailabilitySundayBed(reschedule,minWakeTime,minWakeTime));
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
         cache.segments.add(segment);
     }
+
+    // default
+    public void setPathSetupAvailability(){
+        setPathSetupAvailability(4,24,false);
+    }
+
+    // ---------------------------------------------------------------------------------------------
 
     public void addChronotypeSurvey(){
         List<BaseFragment> fragments = new ArrayList<>();
@@ -476,7 +395,7 @@ public class StudyStateMachine {
         LocalTime wakeTime = null;
         LocalTime bedTime = null;
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", java.util.Locale.US);
         Calendar calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
 
@@ -525,7 +444,7 @@ public class StudyStateMachine {
         LocalTime wakeTime = null;
         LocalTime bedTime = null;
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.US);
+        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", java.util.Locale.US);
         Calendar calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
 
@@ -613,7 +532,6 @@ public class StudyStateMachine {
     }
 
     public void addTests(){
-        PreferencesManager.getInstance().putInt("test_missed_count", 0);
 
         List<BaseFragment> fragments = new ArrayList<>();
 
@@ -625,7 +543,7 @@ public class StudyStateMachine {
                 res.getString(R.string.testing_intro_subhead),
                 res.getString(R.string.testing_intro_body),
                 res.getString(R.string.button_next));
-        //info.setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
+        //info.setEnterTransitions(R.anim.slide_in_right,R.anim.slide_in_left);
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
@@ -662,8 +580,7 @@ public class StudyStateMachine {
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
                 "prices",
-                res.getString(R.string.button_begin)
-        );
+                res.getString(R.string.button_begin));
         fragments.add(info);
 
         int size = PriceManager.getInstance().getPriceSet().size();
@@ -698,8 +615,7 @@ public class StudyStateMachine {
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
                 "symbols",
-                res.getString(R.string.button_begin)
-        );
+                res.getString(R.string.button_begin));
         fragments.add(info);
 
         fragments.add(new SymbolTest());
@@ -722,8 +638,7 @@ public class StudyStateMachine {
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
                 "grids",
-                res.getString(R.string.button_next)
-        );
+                res.getString(R.string.button_next));
         fragments.add(info0);
 
         TestInfoTemplate info1 = new TestInfoTemplate(
@@ -731,8 +646,7 @@ public class StudyStateMachine {
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body2),
                 "grids",
-                res.getString(R.string.button_next)
-        );
+                res.getString(R.string.button_next));
         fragments.add(info1);
 
         TestInfoTemplate info2 = new TestInfoTemplate(
@@ -740,8 +654,7 @@ public class StudyStateMachine {
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body3),
                 "grids",
-                res.getString(R.string.button_begin)
-        );
+                res.getString(R.string.button_begin));
         fragments.add(info2);
 
         fragments.add(new GridStudy());
@@ -796,9 +709,9 @@ public class StudyStateMachine {
             // After the cycle but before the next session
             if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
 
-                String language = PreferencesManager.getInstance().getString("language", "en");
-                String country = PreferencesManager.getInstance().getString("country", "US");
-                Locale locale = new Locale(language, country);
+                String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+                String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+                java.util.Locale locale = new java.util.Locale(language, country);
                 DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
                 //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
@@ -827,7 +740,7 @@ public class StudyStateMachine {
 
         }
 
-        StateInfoTemplate info = new StateInfoTemplate(
+        InfoTemplate info = new InfoTemplate(
                 false,
                 header ,
                 subheader,
@@ -863,11 +776,11 @@ public class StudyStateMachine {
         return "";
     }
 
-    public StudyState getState(){
+    public State getState(){
         return state;
     }
 
-    public StudyStateCache getCache(){
+    public StateCache getCache(){
         return cache;
     }
 

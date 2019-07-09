@@ -1,13 +1,11 @@
 package com.healthymedium.arc.path_data;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
-import com.healthymedium.arc.api.tests.data.ChronotypeSurveySection;
 import com.healthymedium.arc.api.tests.data.WakeSurvey;
 import com.healthymedium.arc.api.tests.data.WakeSurveySection;
 import com.healthymedium.arc.study.PathSegmentData;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class WakePathData extends PathSegmentData {
@@ -32,7 +30,7 @@ public class WakePathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "wake_" + Integer.toString(i+1);
+            surveySection.question_id = "wake_" + (i+1);
             survey.questions.add(surveySection);
         }
 

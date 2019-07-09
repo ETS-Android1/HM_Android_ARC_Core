@@ -1,7 +1,7 @@
 package com.healthymedium.arc.utilities;
 
 import android.text.TextUtils;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,7 +37,7 @@ public class ChecksumUtil {
         try {
             digest = MessageDigest.getInstance("ChecksumUtil");
         } catch (NoSuchAlgorithmException e) {
-            Log.e(ChecksumUtil.class.getSimpleName(), "Exception while getting digest", e);
+            Log.e(ChecksumUtil.class.getSimpleName(), "Exception while getting digest");
             return null;
         }
 
@@ -45,7 +45,7 @@ public class ChecksumUtil {
         try {
             is = new FileInputStream(updateFile);
         } catch (FileNotFoundException e) {
-            Log.e(ChecksumUtil.class.getSimpleName(), "Exception while getting FileInputStream", e);
+            Log.e(ChecksumUtil.class.getSimpleName(), "Exception while getting FileInputStream");
             return null;
         }
 
@@ -62,12 +62,12 @@ public class ChecksumUtil {
             output = String.format("%32s", output).replace(' ', '0');
             return output;
         } catch (IOException e) {
-            throw new RuntimeException("Unable to process file for ChecksumUtil", e);
+            throw new RuntimeException("Unable to process file for ChecksumUtil");
         } finally {
             try {
                 is.close();
             } catch (IOException e) {
-                Log.e(ChecksumUtil.class.getSimpleName(), "Exception on closing ChecksumUtil input stream", e);
+                Log.e(ChecksumUtil.class.getSimpleName(), "Exception on closing ChecksumUtil input stream");
             }
         }
     }

@@ -4,21 +4,21 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationManager;
+import com.healthymedium.arc.notifications.NotificationNode;
+import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.study.ParticipantState;
+import com.healthymedium.arc.study.State;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.StudyState;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class DebugDialog extends DialogFragment {
@@ -65,7 +65,7 @@ public class DebugDialog extends DialogFragment {
             }
         });
 
-        StudyState studyState = Study.getStateMachine().getState();
+        State studyState = Study.getStateMachine().getState();
         ParticipantState participantState = Study.getParticipant().getState();
 
         String status = "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";
@@ -85,19 +85,19 @@ public class DebugDialog extends DialogFragment {
         int currVisitId = participantState.visits.get(participantState.currentVisit).getId();
 
         // Notification one month before next visit
-        NotificationManager.Node month = NotificationManager.getInstance().getNode(NotificationManager.VISIT_NEXT_MONTH, currVisitId);
+        NotificationNode month = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextMonth.getId(), currVisitId);
         if (month != null) {
             status += "month notification: " + month.time + "\n";
         }
 
         // Notification one week before next visit
-        NotificationManager.Node week = NotificationManager.getInstance().getNode(NotificationManager.VISIT_NEXT_WEEK, currVisitId);
+        NotificationNode week = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextWeek.getId(), currVisitId);
         if (week != null) {
             status += "week notification: " + week.time + "\n";
         }
 
         // Notification one day before next visit
-        NotificationManager.Node day = NotificationManager.getInstance().getNode(NotificationManager.VISIT_NEXT_DAY, currVisitId);
+        NotificationNode day = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextDay.getId(), currVisitId);
         if (day != null) {
             status += "day notification: " + day.time + "\n";
         }

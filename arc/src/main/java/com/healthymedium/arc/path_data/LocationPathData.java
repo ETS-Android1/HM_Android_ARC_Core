@@ -1,7 +1,5 @@
 package com.healthymedium.arc.path_data;
 
-import android.location.Location;
-
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.LocationSurvey;
 import com.healthymedium.arc.api.tests.data.LocationSurveySection;
@@ -33,7 +31,7 @@ public class LocationPathData extends PathSegmentData {
                 survey.start_date = surveySection.display_time;
             }
 
-            surveySection.question_id = "location " + Integer.toString(i+1);
+            surveySection.question_id = "location " + (i+1);
             survey.questions.add(surveySection);
         }
 

@@ -9,16 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
+
+import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
 
 public class ContactScreen extends BaseFragment {
 
@@ -39,10 +41,10 @@ public class ContactScreen extends BaseFragment {
 
     public ContactScreen() {
         stringHeader = "I would like to <b>contact study site</b>.";
-        stringPhoneNumber = PreferencesManager.getInstance().getString("ContactInfo" ,"555-555-5555");
+        stringPhoneNumber = PreferencesManager.getInstance().getString(TAG_CONTACT_INFO ,"555-555-5555");
         allowBackPress(false);
-        setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-        setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        setTransitionSet(TransitionSet.getSlidingDefault());
+
     }
 
     @Nullable

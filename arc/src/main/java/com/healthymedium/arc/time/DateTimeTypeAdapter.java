@@ -10,7 +10,6 @@ import com.google.gson.JsonSerializer;
 
 import org.joda.time.DateTime;
 import java.lang.reflect.Type;
-import java.util.Date;
 
 public class DateTimeTypeAdapter implements JsonSerializer<DateTime>, JsonDeserializer<DateTime> {
 

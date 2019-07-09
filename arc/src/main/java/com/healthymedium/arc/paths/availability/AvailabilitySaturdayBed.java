@@ -1,5 +1,6 @@
 package com.healthymedium.arc.paths.availability;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,9 +13,9 @@ import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import org.joda.time.Hours;
 import org.joda.time.LocalTime;
 
+@SuppressLint("ValidFragment")
 public class AvailabilitySaturdayBed extends QuestionTime {
 
     CircadianClock clock;
@@ -25,21 +26,16 @@ public class AvailabilitySaturdayBed extends QuestionTime {
         super(true, ViewUtil.getString(R.string.availability_sleep_saturday),"",null);
     }
 
-    @Nullable
+    public AvailabilitySaturdayBed(int minWakeTime, int maxWakeTime) {
+        super(true, ViewUtil.getString(R.string.availability_sleep_saturday),"",null);
+        this.minWakeTime = minWakeTime;
+        this.maxWakeTime = maxWakeTime;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
-
-        if (getArguments() != null) {
-            if (getArguments().containsKey("minWakeTime")) {
-                minWakeTime = getArguments().getInt("minWakeTime");
-            }
-
-            if (getArguments().containsKey("maxWakeTime")) {
-                maxWakeTime = getArguments().getInt("maxWakeTime");
-            }
-        }
 
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged("Saturday")){
