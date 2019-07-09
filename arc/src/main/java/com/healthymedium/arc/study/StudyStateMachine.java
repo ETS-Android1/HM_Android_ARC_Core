@@ -50,6 +50,7 @@ import com.healthymedium.arc.paths.tests.PriceTestCompareFragment;
 import com.healthymedium.arc.paths.tests.PriceTestMatchFragment;
 import com.healthymedium.arc.paths.tests.QuestionInterrupted;
 import com.healthymedium.arc.paths.tests.SymbolTest;
+import com.healthymedium.arc.paths.tests.TestBegin;
 import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -666,6 +667,8 @@ public class StudyStateMachine {
         );
         fragments.add(info);
 
+        fragments.add(new TestBegin());
+
         int size = PriceManager.getInstance().getPriceSet().size();
         for(int i=0;i<size;i++){
             fragments.add(new PriceTestCompareFragment(i));
@@ -702,6 +705,8 @@ public class StudyStateMachine {
         );
         fragments.add(info);
 
+        fragments.add(new TestBegin());
+
         fragments.add(new SymbolTest());
 
         PathSegment segment = new PathSegment(fragments,SymbolsTestPathData.class);
@@ -726,24 +731,25 @@ public class StudyStateMachine {
         );
         fragments.add(info0);
 
-        TestInfoTemplate info1 = new TestInfoTemplate(
-                testNumber,
-                res.getString(R.string.grid_header),
-                res.getString(R.string.grid_body2),
-                "grids",
-                res.getString(R.string.button_next)
-        );
-        fragments.add(info1);
+//        TestInfoTemplate info1 = new TestInfoTemplate(
+//                testNumber,
+//                res.getString(R.string.grid_header),
+//                res.getString(R.string.grid_body2),
+//                "grids",
+//                res.getString(R.string.button_next)
+//        );
+//        fragments.add(info1);
+//
+//        TestInfoTemplate info2 = new TestInfoTemplate(
+//                testNumber,
+//                res.getString(R.string.grid_header),
+//                res.getString(R.string.grid_body3),
+//                "grids",
+//                res.getString(R.string.button_begin)
+//        );
+//        fragments.add(info2);
 
-        TestInfoTemplate info2 = new TestInfoTemplate(
-                testNumber,
-                res.getString(R.string.grid_header),
-                res.getString(R.string.grid_body3),
-                "grids",
-                res.getString(R.string.button_begin)
-        );
-        fragments.add(info2);
-
+        fragments.add(new TestBegin());
         fragments.add(new GridStudy());
         fragments.add(new GridLetters());
         fragments.add(new GridTest());
