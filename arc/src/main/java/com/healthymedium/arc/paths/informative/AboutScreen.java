@@ -6,15 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -27,8 +26,7 @@ public class AboutScreen extends BaseFragment {
 
     public AboutScreen() {
         allowBackPress(false);
-        setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-        setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Nullable

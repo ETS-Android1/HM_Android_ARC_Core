@@ -13,12 +13,16 @@ import java.lang.reflect.InvocationTargetException;
 
 public class Study{
 
+    public static final String TAG_INITIALIZED = "initialized";
+    public static final String TAG_CONTACT_INFO = "ContactInfo";
+
+
     protected static Study instance;
     protected static boolean valid;
     protected Context context;
 
     static Scheduler scheduler;
-    static StudyStateMachine stateMachine;
+    static StateMachine stateMachine;
     static Participant participant;
     static RestClient restClient;
     static MigrationUtil migrationUtil;
@@ -117,11 +121,11 @@ public class Study{
         if(tClass==null){
             return false;
         }
-        if(!StudyStateMachine.class.isAssignableFrom(tClass)){
+        if(!StateMachine.class.isAssignableFrom(tClass)){
             return false;
         }
         try {
-            stateMachine = (StudyStateMachine) tClass.newInstance();
+            stateMachine = (StateMachine) tClass.newInstance();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             return false;
@@ -217,7 +221,7 @@ public class Study{
             scheduler = new Scheduler();
         }
         if(stateMachine==null){
-            stateMachine = new StudyStateMachine();
+            stateMachine = new StateMachine();
         }
         if(restClient==null){
             restClient = new RestClient(null);
@@ -236,7 +240,7 @@ public class Study{
 
         checkRegistrations();
 
-        boolean initialized = PreferencesManager.getInstance().getBoolean("initialized",false);
+        boolean initialized = PreferencesManager.getInstance().getBoolean(TAG_INITIALIZED,false);
         if(!initialized){
             participant.initialize();
             participant.save();
@@ -244,11 +248,9 @@ public class Study{
             stateMachine.initialize();
             stateMachine.save();
 
-            PreferencesManager.getInstance().putLong("libVersion",VersionUtil.getLibraryVersionCode());
-            PreferencesManager.getInstance().putLong("appVersion",VersionUtil.getAppVersionCode());
-            PreferencesManager.getInstance().putBoolean("initialized",true);
-
-            HeartbeatManager.initialize(context);
+            PreferencesManager.getInstance().putLong(MigrationUtil.TAG_VERSION_LIB,VersionUtil.getLibraryVersionCode());
+            PreferencesManager.getInstance().putLong(MigrationUtil.TAG_VERSION_APP,VersionUtil.getAppVersionCode());
+            PreferencesManager.getInstance().putBoolean(TAG_INITIALIZED,true);
             HeartbeatManager.getInstance().scheduleHeartbeat();
 
         }  else {
@@ -279,7 +281,7 @@ public class Study{
         return scheduler;
     }
 
-    public static StudyStateMachine getStateMachine(){
+    public static StateMachine getStateMachine(){
         return stateMachine;
     }
 

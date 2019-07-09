@@ -2,6 +2,9 @@ package com.healthymedium.arc.core;
 
 public class Locale {
 
+    public static final String TAG_LANGUAGE = "localeLanguage";
+    public static final String TAG_COUNTRY = "localeCountry";
+
     public static String COUNTRY_ARGENTINA = "AR";
     public static String COUNTRY_AUSTRALIA = "AU";
     public static String COUNTRY_CANADA = "CA";

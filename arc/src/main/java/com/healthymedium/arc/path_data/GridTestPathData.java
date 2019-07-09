@@ -103,7 +103,7 @@ public class GridTestPathData extends PathSegmentData {
 
     }
 
-    public class Section extends Object{
+    public class Section {
 
         private long displayTimeSymbols;
         private long displayTimeDistraction;

@@ -1,7 +1,6 @@
 package com.healthymedium.arc.path_data;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
-import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.PathSegmentData;
 
 public class AvailabilityPathData extends PathSegmentData {

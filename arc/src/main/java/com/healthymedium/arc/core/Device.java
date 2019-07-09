@@ -3,17 +3,18 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
-import android.provider.Settings;
 import android.support.annotation.Dimension;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import java.util.UUID;
 
 public class Device {
+
+    public static final String TAG_DEVICE_ID = "deviceId";
 
     private static String id;
     private static String info;
@@ -26,11 +27,11 @@ public class Device {
 
     public static void initialize(Context context) {
 
-        if(PreferencesManager.getInstance().contains("deviceId")){
-            id = PreferencesManager.getInstance().getString("deviceId","");
+        if(PreferencesManager.getInstance().contains(TAG_DEVICE_ID)){
+            id = PreferencesManager.getInstance().getString(TAG_DEVICE_ID,"");
         } else {
             id = UUID.randomUUID().toString();
-            PreferencesManager.getInstance().putString("deviceId",id);
+            PreferencesManager.getInstance().putString(TAG_DEVICE_ID,id);
         }
 
         String manufacturer = Build.MANUFACTURER;

@@ -3,25 +3,23 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
+import com.healthymedium.arc.study.AbandonmentJobService;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.BottomNavigationViewHelper;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
-import com.healthymedium.arc.study.AbandonmentJobService;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.navigation);
         hideNavigationBar();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -111,26 +108,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void setup(){
         NavigationManager.initializeInstance(getSupportFragmentManager());
-        if(PreferencesManager.getInstance().contains("language") || !Config.CHOOSE_LOCALE){
+        if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
-        } else {
-            List<Locale> locales = Application.getInstance().getLocaleOptions();
-            List<String> options = new ArrayList<>();
-            for(Locale locale : locales) {
-                options.add(locale.getLabel());
-            }
-            QuestionLanguagePreference fragment = new QuestionLanguagePreference(
-                    false,
-                    true,
-                    ViewUtil.getString(R.string.language_prefer),
-                    "",
-                    options,
-                    locales,
-                    ViewUtil.getString(R.string.button_chooseanswer));
-            NavigationManager.getInstance().open(fragment);
+            return;
         }
-    }
 
+        List<Locale> locales = Application.getInstance().getLocaleOptions();
+        List<String> options = new ArrayList<>();
+        for(Locale locale : locales) {
+            options.add(locale.getLabel());
+        }
+        QuestionLanguagePreference fragment = new QuestionLanguagePreference(
+                false,
+                true,
+                "Language:",
+                "",
+                options,
+                locales,
+                "CONFIRM");
+        NavigationManager.getInstance().open(fragment);
+    }
 
     public void setupHomeWatcher(){
         homeWatcher = new HomeWatcher(this);

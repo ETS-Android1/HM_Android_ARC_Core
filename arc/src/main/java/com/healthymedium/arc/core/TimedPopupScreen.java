@@ -6,10 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
 
 @SuppressLint("ValidFragment")

@@ -12,7 +12,6 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.SymbolButton;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
-import com.healthymedium.arc.path_data.SymbolsTestPathData.Section;
 import com.healthymedium.arc.study.Study;
 
 import java.util.ArrayList;

@@ -1,20 +1,23 @@
 package com.healthymedium.arc.utilities;
 
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.JsonObject;
-import com.healthymedium.arc.study.StudyState;
-import com.healthymedium.arc.study.StudyStateCache;
-import com.healthymedium.arc.study.StudyStateMachine;
+import com.healthymedium.arc.study.State;
+import com.healthymedium.arc.study.StateCache;
+import com.healthymedium.arc.study.StateMachine;
 
 public class MigrationUtil {
+
+    public static final String TAG_VERSION_LIB = "versionLib";
+    public static final String TAG_VERSION_APP = "versionApp";
 
     public void checkForUpdate(){
 
         // library migration
 
         long newLibVersion = VersionUtil.getLibraryVersionCode();
-        long oldLibVersion = PreferencesManager.getInstance().getLong("libVersion", newLibVersion);
+        long oldLibVersion = PreferencesManager.getInstance().getLong(TAG_VERSION_LIB, newLibVersion);
 
         Log.i("MigrationUtil", "old library version="+oldLibVersion);
         Log.i("MigrationUtil", "new library version="+newLibVersion);
@@ -22,14 +25,14 @@ public class MigrationUtil {
         if(newLibVersion > oldLibVersion) {
             Log.i("MigrationUtil", "migrating library data from "+oldLibVersion+" to "+newLibVersion);
             if(migrateLibraryData(oldLibVersion,newLibVersion)) {
-                PreferencesManager.getInstance().putLong("libVersion", newLibVersion);
+                PreferencesManager.getInstance().putLong(TAG_VERSION_LIB, newLibVersion);
             }
         }
 
         // app migration
 
         long newAppVersion = VersionUtil.getAppVersionCode();
-        long oldAppVersion = PreferencesManager.getInstance().getLong("appVersion", newAppVersion);
+        long oldAppVersion = PreferencesManager.getInstance().getLong(TAG_VERSION_APP, newAppVersion);
 
         Log.i("MigrationUtil", "old app version="+oldAppVersion);
         Log.i("MigrationUtil", "new app version="+newAppVersion);
@@ -37,7 +40,7 @@ public class MigrationUtil {
         if(newLibVersion > oldLibVersion) {
             Log.i("MigrationUtil", "migrating app data from "+oldAppVersion+" to "+newAppVersion);
             if(migrateAppData(oldAppVersion,newAppVersion)) {
-                PreferencesManager.getInstance().putLong("appVersion", newAppVersion);
+                PreferencesManager.getInstance().putLong(TAG_VERSION_APP, newAppVersion);
                 Log.i("MigrationUtil", "migration successful");
             } else {
                 Log.i("MigrationUtil", "migration failed");
@@ -68,23 +71,23 @@ public class MigrationUtil {
         JsonObject json = PreferencesManager.getInstance().getObject("StateMachine", JsonObject.class);
         PreferencesManager.getInstance().remove("StateMachine");
 
-        StudyState state = new StudyState();
+        State state = new State();
         if(json.has("lifecycle")) {
             state.lifecycle = json.get("lifecycle").getAsInt();
         }
         if(json.has("currentPath")) {
             state.currentPath = json.get("currentPath").getAsInt();
         }
-        PreferencesManager.getInstance().putObject(StudyStateMachine.TAG_STUDY_STATE,state);
+        PreferencesManager.getInstance().putObject(StateMachine.TAG_STUDY_STATE,state);
 
-        StudyStateCache cache = new StudyStateCache();
+        StateCache cache = new StateCache();
         if(json.has("segments")) {
             cache.segments = PreferencesManager.getInstance().getGson().fromJson(json.get("segments"), cache.segments.getClass());
         }
         if(json.has("cache")) {
             cache.data = PreferencesManager.getInstance().getGson().fromJson(json.get("cache"), cache.data.getClass());
         }
-        CacheManager.getInstance().putObject(StudyStateMachine.TAG_STUDY_STATE_CACHE,cache);
+        CacheManager.getInstance().putObject(StateMachine.TAG_STUDY_STATE_CACHE,cache);
 
         return true;
     }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
@@ -22,13 +23,13 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @SuppressLint("ValidFragment")
 public class QuestionAdjustSchedule extends QuestionTemplate {
@@ -77,9 +78,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String range;
 
-        String language = PreferencesManager.getInstance().getString("language", "en");
-        String country = PreferencesManager.getInstance().getString("country", "US");
-        Locale locale = new Locale(language, country);
+        String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+        String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+        java.util.Locale locale = new java.util.Locale(language, country);
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
 
         int visitAdjustIndex = 0;
@@ -189,8 +190,8 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         Study.getScheduler().unscheduleNotifications(visit);
 
         for (int i = 0; i < visit.testSessions.size(); i++) {
-            DateTime time = visit.testSessions.get(i).getPrescribedTime().plusDays(shiftDays);
-            visit.testSessions.get(i).setScheduledTime(time);
+            LocalDate date = visit.testSessions.get(i).getPrescribedTime().plusDays(shiftDays).toLocalDate();
+            visit.testSessions.get(i).setScheduledDate(date);
         }
 
         int last = visit.testSessions.size()-1;

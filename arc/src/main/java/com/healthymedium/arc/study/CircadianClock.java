@@ -189,7 +189,7 @@ public class CircadianClock {
         index++;
         if(index >= rhythms.size()){
             index = 0;
-        };
+        }
         return index;
     }
 
@@ -197,7 +197,7 @@ public class CircadianClock {
         index--;
         if(index < 0){
             index = rhythms.size()-1;
-        };
+        }
         return index;
     }
 

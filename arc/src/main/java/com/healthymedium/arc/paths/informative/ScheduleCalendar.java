@@ -10,8 +10,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.font.Fonts;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.Visit;
@@ -24,8 +25,6 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.Locale;
-
 public class ScheduleCalendar extends BaseFragment {
 
     View view;
@@ -37,8 +36,7 @@ public class ScheduleCalendar extends BaseFragment {
 
     public ScheduleCalendar() {
         allowBackPress(true);
-        setEnterTransitionRes(R.anim.slide_in_right,R.anim.slide_in_left);
-        setExitTransitionRes(R.anim.slide_out_left,R.anim.slide_out_right);
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Nullable
@@ -53,9 +51,9 @@ public class ScheduleCalendar extends BaseFragment {
         DateTime visitStart = visit.getActualStartDate();
         DateTime visitEnd = visit.getActualEndDate();
 
-        String language = PreferencesManager.getInstance().getString("language", "en");
-        String country = PreferencesManager.getInstance().getString("country", "US");
-        Locale locale = new Locale(language, country);
+        String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+        String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+        java.util.Locale locale = new java.util.Locale(language, country);
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
         String start = fmt.print(visitStart);

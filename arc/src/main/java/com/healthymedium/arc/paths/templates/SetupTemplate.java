@@ -1,5 +1,7 @@
-package com.healthymedium.arc.paths.setup;
+package com.healthymedium.arc.paths.templates;
 
+import android.annotation.SuppressLint;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -16,18 +18,17 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.DigitView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.paths.templates.StandardTemplate;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
@@ -37,39 +38,39 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SetupSite extends StandardTemplate {
+@SuppressLint("ValidFragment")
+public class SetupTemplate extends StandardTemplate {
 
-    String defaultError = "Sorry, our app is currently experiencing issues. Please try again later.";
-    int maxDigits = 5;
+    boolean authenticate;
+    public int maxDigits;
+    public int firstDigits;
+    public int secondDigits;
 
-    CharSequence characterSequence;
+    LoadingDialog loadingDialog;
+    TextView textViewProblems;
+
+    protected CharSequence characterSequence;
     int focusedIndex=0;
 
-    EditText editText;
+    protected EditText editText;
     List<DigitView> digits;
     LinearLayout inputLayout;
-    TextView textViewError;
-    TextView textViewProblems;
+    protected TextView textViewError;
 
     TextView textViewPolicyLink;
     TextView textViewPolicy;
 
-    // ---
-    LoadingDialog loadingDialog;
-
-    public SetupSite() {
-        super(true, ViewUtil.getString(R.string.login_enter_raterID),"");
+    public SetupTemplate(boolean authenticate,int firstDigitCount, int secondDigitCount, String header) {
+        super(true,header,"");
         disableScrollBehavior();
+        firstDigits = firstDigitCount;
+        secondDigits = secondDigitCount;
+        maxDigits = firstDigits + secondDigits;
+        this.authenticate = authenticate;
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        View view = super.onCreateView(inflater,container,savedInstanceState);
-
-        if (getArguments() != null) {
-            if (getArguments().containsKey("siteDigits")) {
-                maxDigits = getArguments().getInt("siteDigits");
-            }
-        }
 
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,7 @@ public class SetupSite extends StandardTemplate {
         inputLayout.setGravity(Gravity.CENTER);
         inputLayout.setOrientation(LinearLayout.HORIZONTAL);
         inputLayout.setPadding(0,50,0,ViewUtil.dpToPx(16));
+
         content.addView(inputLayout);
 
         textViewError = new TextView(getContext());
@@ -90,22 +92,6 @@ public class SetupSite extends StandardTemplate {
         textViewError.setTextColor(ViewUtil.getColor(R.color.red));
         textViewError.setVisibility(View.INVISIBLE);
         content.addView(textViewError);
-
-        textViewProblems = new TextView(getContext());
-        textViewProblems.setTypeface(Fonts.robotoMedium);
-        textViewProblems.setPadding(0,ViewUtil.dpToPx(24),0,0);
-        // textViewProblems.setText("Problems logging in?");
-        textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
-        textViewProblems.setVisibility(View.INVISIBLE);
-        textViewProblems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HelpScreen contactScreen = new HelpScreen();
-                NavigationManager.getInstance().open(contactScreen);
-            }
-        });
-        ViewUtil.underlineTextView(textViewProblems);
-        content.addView(textViewProblems);
 
         setupEditText();
         content.addView(editText);
@@ -117,42 +103,28 @@ public class SetupSite extends StandardTemplate {
                 showKeyboard(editText);
             }
         };
+
         content.setOnClickListener(clickListener);
         content.setPadding(ViewUtil.dpToPx(32),50,ViewUtil.dpToPx(32),50);
 
         digits = new ArrayList<>();
-        for(int i=0; i<maxDigits;i++){
+        for(int i=0; i<firstDigits;i++){
             DigitView digitInput = new DigitView(getContext());
             digitInput.setOnClickListener(clickListener);
             digits.add(digitInput);
             inputLayout.addView(digitInput);
         }
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (secondDigits > 0) {
+            addSpacer(16);
 
-                buttonNext.setEnabled(false);
-                hideKeyboard();
-
-                if(Config.REST_BLACKHOLE){
-                    String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
-                    Study.getParticipant().getState().id = id;
-                    Study.getInstance().openNextFragment();
-                    return;
-                }
-
-                if(isErrorShowing()){
-                    hideError();
-                }
-
-                loadingDialog = new LoadingDialog();
-                loadingDialog.show(getFragmentManager(),"LoadingDialog");
-                String siteCode = editText.getText().toString();
-                String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
-                Study.getRestClient().registerDevice(id, siteCode, false, registrationListener);
+            for (int i = 0; i < secondDigits; i++) {
+                DigitView digitInput = new DigitView(getContext());
+                digitInput.setOnClickListener(clickListener);
+                digits.add(digitInput);
+                inputLayout.addView(digitInput);
             }
-        });
+        }
 
         RelativeLayout relativeLayout = (RelativeLayout) view;
         LinearLayout linearLayout = new LinearLayout(getContext());
@@ -161,15 +133,16 @@ public class SetupSite extends StandardTemplate {
 
         textViewPolicy = new TextView(getContext());
         textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
+        textViewPolicy.setGravity(Gravity.CENTER_HORIZONTAL);
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);
 
         textViewPolicyLink = new TextView(getContext());
         textViewPolicyLink.setTypeface(Fonts.robotoMedium);
-        ViewUtil.underlineTextView(textViewPolicyLink);
+        textViewPolicyLink.setPaintFlags(textViewPolicyLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewPolicyLink.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
         textViewPolicyLink.setGravity(Gravity.CENTER_HORIZONTAL);
-        textViewPolicyLink.setText(getResources().getString(com.healthymedium.arc.library.R.string.privacy_linked));
+        textViewPolicyLink.setText(getResources().getString(R.string.privacy_linked));
         textViewPolicyLink.setTextSize(15);
         textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,11 +158,35 @@ public class SetupSite extends StandardTemplate {
         params0.addRule(RelativeLayout.ABOVE,buttonNext.getId());
         relativeLayout.addView(linearLayout,params0);
 
-        buttonNext.setVisibility(View.GONE);
-        textViewPolicy.setVisibility(View.GONE);
-        textViewPolicyLink.setVisibility(View.GONE);
+        if(authenticate) {
+            textViewProblems = new TextView(getContext());
+            textViewProblems.setTypeface(Fonts.robotoMedium);
+            textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
+            // textViewProblems.setText("Problems logging in?");
+            textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
+            textViewProblems.setVisibility(View.INVISIBLE);
+            textViewProblems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    HelpScreen contactScreen = new HelpScreen();
+                    NavigationManager.getInstance().open(contactScreen);
+                }
+            });
+            ViewUtil.underlineTextView(textViewProblems);
+
+            // add below textViewError
+            int index = content.indexOfChild(textViewError) + 1;
+            content.addView(textViewProblems, index);
+        }
 
         return view;
+    }
+
+    void addSpacer(int widthDp){
+        int width = ViewUtil.dpToPx(widthDp);
+        Space space = new Space(getContext());
+        space.setLayoutParams(new ViewGroup.LayoutParams(width,width));
+        inputLayout.addView(space);
     }
 
     void setupEditText(){
@@ -197,7 +194,7 @@ public class SetupSite extends StandardTemplate {
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.setCursorVisible(false);
         editText.setBackground(null);
-        editText.setTextColor(ViewUtil.getColor(android.R.color.transparent));
+        editText.setTextColor(ContextCompat.getColor(getContext(),android.R.color.transparent));
 
         // hackish but moves the edittext off the screen while still letting us use it
         editText.animate().translationXBy(ViewUtil.dpToPx(1000));
@@ -212,7 +209,6 @@ public class SetupSite extends StandardTemplate {
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 //Log.i("textChanged","start="+start+" before="+before+" count="+count);
-
                 characterSequence = charSequence;
                 if(before>count){
                     if(start >= 0){
@@ -231,12 +227,14 @@ public class SetupSite extends StandardTemplate {
                     }
                 }
 
-                updateView(charSequence);
+                // updateView(charSequence);
                 if(charSequence.length()==maxDigits){
-                    buttonNext.setEnabled(true);
+                    boolean enabled = isFormValid(charSequence);
+                    buttonNext.setEnabled(enabled);
                 } else if(buttonNext.isEnabled()){
                     buttonNext.setEnabled(false);
                 }
+                updateView(charSequence);
 
             }
 
@@ -251,20 +249,22 @@ public class SetupSite extends StandardTemplate {
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 boolean done = false;
                 if(actionId == EditorInfo.IME_ACTION_DONE){
-                    //done = true;
-                    hideKeyboard();
+                    done = true;
                 }
 
                 if(keyEvent!=null){
                     if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN){
-                        //done = true;
-                        hideKeyboard();
+                        done = true;
                     }
                 }
 
-//                if(done && editText.length()==maxDigits){
-//                    buttonNext.performClick();
-//                }
+                if(done && editText.length()==maxDigits){
+                    if(authenticate){
+                        hideKeyboard();
+                    }else if(buttonNext.isEnabled()){
+                        buttonNext.performClick();
+                    }
+                }
                 return false;
             }
         });
@@ -276,7 +276,12 @@ public class SetupSite extends StandardTemplate {
 
     }
 
-    void updateView(CharSequence s){
+    //
+    protected boolean isFormValid(CharSequence sequence){
+        return true;
+    }
+
+    protected void updateView(CharSequence s){
         boolean hasError = isErrorShowing();
         int size = s.length();
         for(int i=0;i<size;i++){
@@ -286,7 +291,6 @@ public class SetupSite extends StandardTemplate {
         for(int i=size;i<left+size;i++){
             digits.get(i).removeDigit();
         }
-
     }
 
     @Override
@@ -342,22 +346,53 @@ public class SetupSite extends StandardTemplate {
         hideKeyboard();
     }
 
-    private void hideError(){
-        textViewProblems.setVisibility(View.INVISIBLE);
-        textViewError.setVisibility(View.INVISIBLE);
-        textViewError.setText("");
+    @Override
+    protected void onNextRequested() {
+        hideKeyboard();
+
+        if(!authenticate) {
+            super.onNextRequested();
+            return;
+        }
+
+        buttonNext.setEnabled(false);
+        if(Config.REST_BLACKHOLE){
+            String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
+            Study.getParticipant().getState().id = id;
+            Study.getInstance().openNextFragment();
+            return;
+        }
+
+        if(isErrorShowing()){
+            hideError();
+        }
+
+        loadingDialog = new LoadingDialog();
+        loadingDialog.show(getFragmentManager(),"LoadingDialog");
+        SetupPathData pathData = (SetupPathData)Study.getCurrentSegmentData();
+        Study.getRestClient().registerDevice(pathData.id, pathData.authCode, false, registrationListener);
     }
 
-    private boolean isErrorShowing(){
+    public void hideError(){
+        textViewError.setVisibility(View.INVISIBLE);
+        textViewError.setText("");
+        if(authenticate){
+            textViewProblems.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public boolean isErrorShowing(){
         return textViewError.getVisibility()==View.VISIBLE;
     }
 
-    private void showError(String error){
+    public void showError(String error){
         buttonNext.setEnabled(false);
-        textViewProblems.setVisibility(View.VISIBLE);
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
-        updateView(editText.getText());
+        if(authenticate){
+            textViewProblems.setVisibility(View.VISIBLE);
+            updateView(editText.getText());
+        }
     }
 
     KeyboardWatcher.OnKeyboardToggleListener keyboardToggleListener = new KeyboardWatcher.OnKeyboardToggleListener() {
@@ -421,5 +456,4 @@ public class SetupSite extends StandardTemplate {
             loadingDialog.dismiss();
         }
     };
-
 }

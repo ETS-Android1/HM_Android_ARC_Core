@@ -1,7 +1,13 @@
 package com.healthymedium.arc.time;
 
 
+import android.support.annotation.StringRes;
+
+import com.healthymedium.arc.utilities.ViewUtil;
+
 import org.joda.time.DateTime;
+
+import java.util.Locale;
 
 
 public class JodaUtil {
@@ -14,6 +20,14 @@ public class JodaUtil {
     public static DateTime fromUtcDouble(double dateTime){
         long longTime = (long)(dateTime*1000L);
         return new DateTime(longTime);
+    }
+
+    public static String format(DateTime dateTime, @StringRes int format){
+        return dateTime.toString(ViewUtil.getString(format));
+    }
+
+    public static String format(DateTime dateTime, @StringRes int format, Locale locale){
+        return dateTime.toString(ViewUtil.getString(format),locale);
     }
 
     public static DateTime setTime(DateTime date, String time){

@@ -1,5 +1,6 @@
 package com.healthymedium.arc.paths.availability;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,14 +11,15 @@ import android.view.ViewGroup;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionTime;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-import org.joda.time.Hours;
 import org.joda.time.LocalTime;
 
+@SuppressLint("ValidFragment")
 public class AvailabilitySundayBed extends QuestionTime {
 
     CircadianClock clock;
@@ -29,25 +31,17 @@ public class AvailabilitySundayBed extends QuestionTime {
         super(true, ViewUtil.getString(R.string.availability_sleep_sunday),"",null);
     }
 
-    @Nullable
+    public AvailabilitySundayBed(boolean reschedule, int minWakeTime, int maxWakeTime) {
+        super(true, ViewUtil.getString(R.string.availability_sleep_sunday),"",null);
+        this.minWakeTime = minWakeTime;
+        this.maxWakeTime = maxWakeTime;
+        this.reschedule = reschedule;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(true);
-
-        if (getArguments() != null) {
-            if (getArguments().containsKey("minWakeTime")) {
-                minWakeTime = getArguments().getInt("minWakeTime");
-            }
-
-            if (getArguments().containsKey("maxWakeTime")) {
-                maxWakeTime = getArguments().getInt("maxWakeTime");
-            }
-
-            if (getArguments().containsKey("reschedule")) {
-                reschedule = getArguments().getBoolean("reschedule");
-            }
-        }
 
         clock = Study.getParticipant().getCircadianClock();
         if(time==null && !clock.hasBedRhythmChanged("Sunday")){
@@ -100,6 +94,13 @@ public class AvailabilitySundayBed extends QuestionTime {
             }
             Study.getRestClient().submitTestSchedule();
             Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), reschedule);
+
+            if(reschedule) {
+                Proctor.refreshData(getContext());
+            } else {
+                Proctor.startService(getContext());
+            }
+
             return null;
         }
 

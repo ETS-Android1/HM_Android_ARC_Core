@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
+import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -227,7 +227,15 @@ public class CacheManager {
     public <T> T getObject(String key, Class<T> clazz) {
         Log.i(tag,"getObject("+key+")");
         if(!map.containsKey(key)){
-            return objectGson.fromJson("{}", clazz);
+            try {
+                return clazz.newInstance();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                throw new UnsupportedOperationException(e.getMessage());
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+                throw new UnsupportedOperationException(e.getMessage());
+            }
         }
         Cache cache = map.get(key);
         if(!cache.read){
@@ -245,6 +253,19 @@ public class CacheManager {
         if(bitmaps.containsKey(key)){
             return bitmaps.get(key);
         }
+        File file = new File(cacheDir, key);
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        Cache cache_t = new Cache();
+        cache_t.file = file;
+        cache_t.read = true;
+        map.put(key,cache_t);
         return null;
     }
 
