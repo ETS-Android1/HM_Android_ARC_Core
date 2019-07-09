@@ -645,7 +645,8 @@ public class StateMachine {
                 "grids",
                 res.getString(R.string.button_next));
         fragments.add(info0);
-        
+
+        fragments.add(new TestBegin());
         fragments.add(new GridStudy());
         fragments.add(new GridLetters());
         fragments.add(new GridTest());
