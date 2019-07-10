@@ -19,6 +19,7 @@ import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.RadioButton;
 import com.healthymedium.arc.font.Fonts;
+import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -47,6 +48,8 @@ public class PricesTutorial extends BaseFragment {
     Button endButton;
 
     private int shortAnimationDuration;
+
+    HintHighlighter priceContainerHighlight;
 
     public PricesTutorial() {
 
@@ -102,15 +105,20 @@ public class PricesTutorial extends BaseFragment {
 
         endButton = view.findViewById(R.id.endButton);
 
-        fadeInView(fullScreenGray, 0.9f);
-        priceContainer.bringToFront();
+        //fadeInView(fullScreenGray, 0.9f);
+        //priceContainer.bringToFront();
+
 
         fadeInView(bottomPopup, 1f);
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Choose the answer that makes sense to you.");
         //bottomPopup.button.setText("Next");
         bottomPopup.disableButton();
-        bottomPopup.bringToFront();
+        //bottomPopup.bringToFront();
+
+        priceContainerHighlight = new HintHighlighter(getActivity());
+        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.show();
 
         setFirstPricesCompare();
 
@@ -127,6 +135,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
 
@@ -164,6 +174,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
 
@@ -200,15 +212,19 @@ public class PricesTutorial extends BaseFragment {
         textviewFood.setText("Soup");
         textviewPrice.setText("$10.82");
 
-        fadeInView(fullScreenGray, 0.9f);
-        priceContainer.bringToFront();
+        // fadeInView(fullScreenGray, 0.9f);
+        // priceContainer.bringToFront();
+
+        priceContainerHighlight = new HintHighlighter(getActivity());
+        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.show();
 
         fadeInView(bottomPopup, 1f);
         bottomPopup.header.setText("What do you think?");
         bottomPopup.body.setText("Choose the answer that makes sense to you.");
         // bottomPopup.button.setText("Next");
         bottomPopup.disableButton();
-        bottomPopup.bringToFront();
+        // bottomPopup.bringToFront();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -216,6 +232,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
 
@@ -227,7 +245,7 @@ public class PricesTutorial extends BaseFragment {
                         fadeInView(centerPopup, 1f);
                         fullScreenGray.bringToFront();
                         centerPopup.bringToFront();
-                        // fadeInView(fullScreenGray, 0.9f);
+                        fadeInView(fullScreenGray, 0.9f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
@@ -258,6 +276,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
 
@@ -269,7 +289,7 @@ public class PricesTutorial extends BaseFragment {
                         fadeInView(centerPopup, 1f);
                         fullScreenGray.bringToFront();
                         centerPopup.bringToFront();
-                        // fadeInView(fullScreenGray, 0.9f);
+                        fadeInView(fullScreenGray, 0.9f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
@@ -302,8 +322,15 @@ public class PricesTutorial extends BaseFragment {
         buttonYes.setText("$6.78");
         buttonNo.setText("$3.27");
 
-        fadeInView(fullScreenGray, 0.9f);
-        priceContainer.bringToFront();
+        fadeOutView(centerPopup);
+        fadeOutView(fullScreenGray);
+
+        //fadeInView(fullScreenGray, 0.9f);
+        //priceContainer.bringToFront();
+
+        priceContainerHighlight = new HintHighlighter(getActivity());
+        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.show();
 
         fadeInView(bottomPopup, 1f);
         bottomPopup.bringToFront();
@@ -320,13 +347,15 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
 
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(fullScreenGray);
+                        // fadeOutView(fullScreenGray);
                         // fadeInView(bottomPopup, 1f);
 
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
@@ -357,6 +386,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
 
@@ -397,6 +428,10 @@ public class PricesTutorial extends BaseFragment {
         buttonYes.setText("$10.82");
         buttonNo.setText("$4.01");
 
+        priceContainerHighlight = new HintHighlighter(getActivity());
+        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.show();
+
         fadeInView(bottomPopup, 1f);
 
         bottomPopup.header.setText("What do you think?");
@@ -411,6 +446,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
 
@@ -451,6 +488,8 @@ public class PricesTutorial extends BaseFragment {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+                        priceContainerHighlight.dismiss();
+
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
 
