@@ -32,8 +32,7 @@ public class SymbolTutorial extends BaseFragment {
 
     DialogButtonTutorial centerPopup;
 
-    FrameLayout topScreenGray;
-    FrameLayout bottomScreenGray;
+    FrameLayout fullScreenGray;
     FrameLayout progressBarGradient;
 
     ImageView closeButton;
@@ -72,8 +71,7 @@ public class SymbolTutorial extends BaseFragment {
 
         centerPopup = view.findViewById(R.id.centerPopup);
 
-        topScreenGray = view.findViewById(R.id.topScreenGray);
-        bottomScreenGray = view.findViewById(R.id.bottomScreenGray);
+        fullScreenGray = view.findViewById(R.id.fullScreenGray);
         progressBarGradient = view.findViewById(R.id.progressBarGradient);
 
         closeButton = view.findViewById(R.id.closeButton);
@@ -93,73 +91,9 @@ public class SymbolTutorial extends BaseFragment {
             }
         });
 
-        buttonTop1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_8_tutorial);
-        buttonTop2.setImages(R.drawable.ic_symbol_8_tutorial, R.drawable.ic_symbol_1_tutorial);
-        buttonTop3.setImages(R.drawable.ic_symbol_5_tutorial, R.drawable.ic_symbol_4_tutorial);
-        buttonBottom1.setImages(R.drawable.ic_symbol_5_tutorial, R.drawable.ic_symbol_4_tutorial);
-        buttonBottom2.setImages(R.drawable.ic_symbol_7_tutorial, R.drawable.ic_symbol_3_tutorial);
-
-        step1();
+        setInitialImages();
 
         return view;
-    }
-
-    private void step1() {
-        fadeInView(topScreenGray, 0.9f);
-        fadeInView(bottomScreenGray, 0.9f);
-        buttonTop2.bringToFront();
-
-        fadeInView(centerPopup, 1f);
-        centerPopup.header.setText("This is a tile.");
-        centerPopup.body.setText("Each tile includes a pair of symbols.");
-        centerPopup.button.setText("Next");
-        centerPopup.bringToFront();
-
-        centerPopup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                step2();
-            }
-        });
-    }
-
-    private void step2() {
-        buttonTop1.bringToFront();
-        buttonTop3.bringToFront();
-
-        centerPopup.header.setText("You will see three tiles on the top of the screen...");
-        centerPopup.body.setText("");
-        centerPopup.hideBody();
-        centerPopup.button.setText("Next");
-
-        centerPopup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                step3();
-            }
-        });
-    }
-
-    private void step3() {
-        topScreenGray.bringToFront();
-        // buttonBottom1.bringToFront();
-        // buttonBottom2.bringToFront();
-        bottomSymbolsButtons.bringToFront();
-
-        centerPopup.header.setText("...and two tiles on the bottom.");
-        centerPopup.body.setText("");
-        centerPopup.button.setText("Next");
-        centerPopup.bringToFront();
-
-        centerPopup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fadeOutView(centerPopup);
-                fadeOutView(topScreenGray);
-                fadeOutView(bottomScreenGray);
-                setInitialImages();
-            }
-        });
     }
 
     private void setInitialImages() {
@@ -173,26 +107,20 @@ public class SymbolTutorial extends BaseFragment {
             @Override
             public void onClick(View view) {
                 fadeInView(centerPopup, 1f);
-                fadeInView(topScreenGray, 0.9f);
-                fadeInView(bottomScreenGray, 0.9f);
-                topScreenGray.bringToFront();
-                bottomScreenGray.bringToFront();
+                fadeInView(fullScreenGray, 0.9f);
                 buttonBottom1.setOnClickListener(null);
 
                 progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 200;
 
                 centerPopup.header.setText("Great job!");
                 centerPopup.body.setText("Let's try a couple more for practice.");
-                centerPopup.showBody();
                 centerPopup.button.setText("Next");
-                centerPopup.bringToFront();
 
                 centerPopup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         fadeOutView(centerPopup);
-                        fadeOutView(topScreenGray);
-                        fadeOutView(bottomScreenGray);
+                        fadeOutView(fullScreenGray);
                         setSecondImages();
                     }
                 });
@@ -211,8 +139,7 @@ public class SymbolTutorial extends BaseFragment {
             @Override
             public void onClick(View view) {
                 fadeInView(centerPopup, 1f);
-                fadeInView(topScreenGray, 0.9f);
-                fadeInView(bottomScreenGray, 0.9f);
+                fadeInView(fullScreenGray, 0.9f);
                 buttonBottom2.setOnClickListener(null);
 
                 progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 200;
@@ -225,8 +152,7 @@ public class SymbolTutorial extends BaseFragment {
                     @Override
                     public void onClick(View view) {
                         fadeOutView(centerPopup);
-                        fadeOutView(topScreenGray);
-                        fadeOutView(bottomScreenGray);
+                        fadeOutView(fullScreenGray);
                         setLastImages();
                     }
                 });
