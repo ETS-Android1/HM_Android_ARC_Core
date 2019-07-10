@@ -14,6 +14,9 @@
     <color name="infoBackButtonBackground">#2e406e</color>
     <color name="btnBorderUnselected">#bfd4df</color>
     <color name="tealSubheader">#66c8c7</color>
+    <color name="hintLight">#fdde82</color>
+    <color name="hintDark">#f8be15</color>
+    <color name="shadow">#cc000000</color>
 
     <!-- these are discrete colors, they should be close no matter the application -->
     <color name="black">#000000</color>
