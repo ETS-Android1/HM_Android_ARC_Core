@@ -148,18 +148,20 @@ public class HintHighlighter extends FrameLayout {
     OnTouchListener touchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            for(HintHighlightTarget target : targets){
-                if(target.wasTouched(event)){
-                    if(listener!=null){
-                        if(!listener.onClick(target.getView())){ // if false is returned, do not dismiss
-                            return true;
-                        }
-                    }
-                    dismiss();
-                    return true;
-                }
-            }
-            return true;
+            return false;
+
+//            for(HintHighlightTarget target : targets){
+//                if(target.wasTouched(event)){
+//                    if(listener!=null){
+//                        if(!listener.onClick(target.getView())){ // if false is returned, do not dismiss
+//                            return true;
+//                        }
+//                    }
+//                    dismiss();
+//                    return true;
+//                }
+//            }
+//            return true;
         }
     };
 

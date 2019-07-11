@@ -271,7 +271,10 @@ public class SymbolTutorial extends BaseFragment {
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
 
-                fadeInView(fullScreenGray, 0.9f);
+                initialTilesOutline.dismiss();
+                initialTilesPulsate.dismiss();
+
+                // fadeInView(fullScreenGray, 0.9f);
                 buttonBottom1.setOnClickListener(null);
 
                 progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
@@ -288,7 +291,7 @@ public class SymbolTutorial extends BaseFragment {
                         Runnable runnable = new Runnable() {
                             @Override
                             public void run() {
-                                fadeOutView(fullScreenGray);
+                                // fadeOutView(fullScreenGray);
                                 secondTiles();
                             }
                         };
@@ -316,6 +319,7 @@ public class SymbolTutorial extends BaseFragment {
 
         final HintHighlighter secondTilesPulsate = new HintHighlighter(getActivity());
         secondTilesPulsate.addPulsingTarget(buttonBottom2);
+        secondTilesPulsate.addTarget(buttonTop2);
 
         runnableTileOutline = new Runnable() {
             @Override
@@ -349,6 +353,9 @@ public class SymbolTutorial extends BaseFragment {
                 handlerOutline.removeCallbacks(runnableTileOutline);
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
+
+                secondTilesOutline.dismiss();
+                secondTilesPulsate.dismiss();
 
                 buttonBottom2.setOnClickListener(null);
 
@@ -428,6 +435,9 @@ public class SymbolTutorial extends BaseFragment {
                 handlerOutline.removeCallbacks(runnableTileOutline);
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
+
+                finalTilesOutline.dismiss();
+                finalTilesPulsate.dismiss();
 
                 fadeInView(checkmark, 1f);
                 fadeInView(textViewComplete, 1f);
