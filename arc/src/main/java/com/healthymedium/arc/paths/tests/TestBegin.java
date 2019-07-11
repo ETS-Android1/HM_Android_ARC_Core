@@ -24,11 +24,33 @@ public class TestBegin extends BaseFragment {
         public void run() {
             count--;
             if (count >= 1) {
-                number.setText(String.valueOf(count));
-                handler.postDelayed(runnableCountdown,1000);
+                number.animate()
+                        .alpha(0)
+                        .setDuration(100)
+                        .withEndAction(runnableDisappear);
             } else {
                 Study.openNextFragment();
             }
+        }
+    };
+
+    Runnable runnableDisappear = new Runnable() {
+        @Override
+        public void run() {
+            number.setAlpha(0);
+            number.setText(String.valueOf(count));
+            number.animate()
+                    .alpha(1)
+                    .setDuration(100)
+                    .withEndAction(runnableReappear);
+        }
+    };
+
+    Runnable runnableReappear = new Runnable() {
+        @Override
+        public void run() {
+            number.setAlpha(1);
+            handler.postDelayed(runnableCountdown,800);
         }
     };
 
@@ -49,7 +71,7 @@ public class TestBegin extends BaseFragment {
         number = view.findViewById(R.id.number);
 
         handler = new Handler();
-        handler.postDelayed(runnableCountdown,1000);
+        handler.postDelayed(runnableCountdown,900);
 
         return view;
     }
