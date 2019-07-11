@@ -3,8 +3,8 @@ package com.healthymedium.arc.paths.tutorials;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
+import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -35,9 +35,6 @@ public class PricesTutorial extends BaseFragment {
     TextView textviewPrice;
     TextView textViewComplete;
     TextView textView12;
-
-    DialogButtonTutorial bottomPopup;
-    DialogButtonTutorial centerPopup;
 
     FrameLayout fullScreenGray;
     FrameLayout progressBarGradient;
@@ -75,9 +72,6 @@ public class PricesTutorial extends BaseFragment {
         buttonNo.setText(ViewUtil.getString(R.string.NO));
         buttonNo.setCheckable(false);
 
-        bottomPopup = view.findViewById(R.id.bottomPopup);
-        centerPopup = view.findViewById(R.id.centerPopup);
-
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
         progressBarGradient = view.findViewById(R.id.progressBarGradient);
 
@@ -105,21 +99,6 @@ public class PricesTutorial extends BaseFragment {
 
         endButton = view.findViewById(R.id.endButton);
 
-        //fadeInView(fullScreenGray, 0.9f);
-        //priceContainer.bringToFront();
-
-
-        fadeInView(bottomPopup, 1f);
-        bottomPopup.header.setText("What do you think?");
-        bottomPopup.body.setText("Choose the answer that makes sense to you.");
-        //bottomPopup.button.setText("Next");
-        bottomPopup.disableButton();
-        //bottomPopup.bringToFront();
-
-        priceContainerHighlight = new HintHighlighter(getActivity());
-        priceContainerHighlight.addTarget(priceContainer, 30);
-        priceContainerHighlight.show();
-
         setFirstPricesCompare();
 
         return view;
@@ -129,6 +108,14 @@ public class PricesTutorial extends BaseFragment {
         textviewFood.setText("Bananas");
         textviewPrice.setText("$3.27");
 
+        priceContainerHighlight = new HintHighlighter(getActivity());
+        priceContainerHighlight.addTarget(priceContainer, 10);
+        priceContainerHighlight.show();
+
+        final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
+        priceHint.setText("What do you think? Choose the answer that makes sense to you.");
+        priceHint.show();
+
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -136,6 +123,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
@@ -143,24 +131,31 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(fullScreenGray);
-                        fadeInView(bottomPopup, 1f);
-
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        bottomPopup.header.setText("Great choice!");
-                        bottomPopup.body.setText("Let's try another.");
-                        bottomPopup.button.setText("Next");
-                        bottomPopup.enableButton();
+                        final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
+                        greatChoiceHint.setText("Great choice! Let's try another.");
 
-                        bottomPopup.button.setOnClickListener(new View.OnClickListener() {
+                        View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(bottomPopup);
-                                buttonYes.setChecked(false);
-                                setSecondPricesCompare();
+                                greatChoiceHint.dismiss();
+
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        buttonYes.setChecked(false);
+                                        setSecondPricesCompare();
+                                    }
+                                };
+                                handler.postDelayed(runnable,600);
                             }
-                        });
+                        };
+
+                        greatChoiceHint.addButton("Next", listener);
+
+                        greatChoiceHint.show();
 
                         break;
                 }
@@ -175,6 +170,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
@@ -182,24 +178,31 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(fullScreenGray);
-                        fadeInView(bottomPopup, 1f);
-
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        bottomPopup.header.setText("Great choice!");
-                        bottomPopup.body.setText("Let's try another.");
-                        bottomPopup.button.setText("Next");
-                        bottomPopup.enableButton();
+                        final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
+                        greatChoiceHint.setText("Great choice! Let's try another.");
 
-                        bottomPopup.button.setOnClickListener(new View.OnClickListener() {
+                        View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(bottomPopup);
-                                buttonNo.setChecked(false);
-                                setSecondPricesCompare();
+                                greatChoiceHint.dismiss();
+
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        buttonNo.setChecked(false);
+                                        setSecondPricesCompare();
+                                    }
+                                };
+                                handler.postDelayed(runnable,600);
                             }
-                        });
+                        };
+
+                        greatChoiceHint.addButton("Next", listener);
+
+                        greatChoiceHint.show();
 
                         break;
                 }
@@ -212,19 +215,13 @@ public class PricesTutorial extends BaseFragment {
         textviewFood.setText("Soup");
         textviewPrice.setText("$10.82");
 
-        // fadeInView(fullScreenGray, 0.9f);
-        // priceContainer.bringToFront();
-
         priceContainerHighlight = new HintHighlighter(getActivity());
-        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.addTarget(priceContainer, 10);
         priceContainerHighlight.show();
 
-        fadeInView(bottomPopup, 1f);
-        bottomPopup.header.setText("What do you think?");
-        bottomPopup.body.setText("Choose the answer that makes sense to you.");
-        // bottomPopup.button.setText("Next");
-        bottomPopup.disableButton();
-        // bottomPopup.bringToFront();
+        final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
+        priceHint.setText("What do you think? Choose the answer that makes sense to you.");
+        priceHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -233,6 +230,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
@@ -240,29 +238,31 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(bottomPopup);
-
-                        fadeInView(centerPopup, 1f);
-                        fullScreenGray.bringToFront();
-                        centerPopup.bringToFront();
-                        fadeInView(fullScreenGray, 0.9f);
-
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        centerPopup.header.setText("Another great choice!");
-                        centerPopup.body.setText("Let's proceed to part two.");
-                        centerPopup.button.setText("Next");
-                        centerPopup.enableButton();
+                        final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
+                        greatChoiceHint.setText("Another great choice! Let's proceed to part two.");
 
-                        centerPopup.button.setOnClickListener(new View.OnClickListener() {
+                        View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(centerPopup);
-                                fadeOutView(fullScreenGray);
-                                buttonYes.setChecked(false);
-                                setFirstPriceMatch();
+                                greatChoiceHint.dismiss();
+
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        buttonYes.setChecked(false);
+                                        setFirstPriceMatch();
+                                    }
+                                };
+                                handler.postDelayed(runnable,600);
                             }
-                        });
+                        };
+
+                        greatChoiceHint.addButton("Next", listener);
+
+                        greatChoiceHint.show();
 
                         break;
                 }
@@ -277,6 +277,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
@@ -284,29 +285,31 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(bottomPopup);
-
-                        fadeInView(centerPopup, 1f);
-                        fullScreenGray.bringToFront();
-                        centerPopup.bringToFront();
-                        fadeInView(fullScreenGray, 0.9f);
-
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        centerPopup.header.setText("Another great choice!");
-                        centerPopup.body.setText("Let's proceed to part two.");
-                        centerPopup.button.setText("Next");
-                        centerPopup.enableButton();
+                        final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
+                        greatChoiceHint.setText("Another great choice! Let's proceed to part two.");
 
-                        centerPopup.button.setOnClickListener(new View.OnClickListener() {
+                        View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(centerPopup);
-                                fadeOutView(fullScreenGray);
-                                buttonNo.setChecked(false);
-                                setFirstPriceMatch();
+                                greatChoiceHint.dismiss();
+
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        buttonNo.setChecked(false);
+                                        setFirstPriceMatch();
+                                    }
+                                };
+                                handler.postDelayed(runnable,600);
                             }
-                        });
+                        };
+
+                        greatChoiceHint.addButton("Next", listener);
+
+                        greatChoiceHint.show();
 
                         break;
                 }
@@ -322,24 +325,13 @@ public class PricesTutorial extends BaseFragment {
         buttonYes.setText("$6.78");
         buttonNo.setText("$3.27");
 
-        fadeOutView(centerPopup);
-        fadeOutView(fullScreenGray);
-
-        //fadeInView(fullScreenGray, 0.9f);
-        //priceContainer.bringToFront();
-
         priceContainerHighlight = new HintHighlighter(getActivity());
-        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.addTarget(priceContainer, 10);
         priceContainerHighlight.show();
 
-        fadeInView(bottomPopup, 1f);
-        bottomPopup.bringToFront();
-
-        bottomPopup.header.setText("What do you think?");
-        bottomPopup.body.setText("Try your best to recall the price from part one.");
-        // bottomPopup.button.setText("Next");
-        bottomPopup.disableButton();
-        bottomPopup.button.setOnClickListener(null);
+        final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
+        priceHint.setText("What do you think? Try your best to recall the price from part one.");
+        priceHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -348,6 +340,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
@@ -355,24 +348,31 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        // fadeOutView(fullScreenGray);
-                        // fadeInView(bottomPopup, 1f);
-
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        bottomPopup.header.setText("Great choice!");
-                        bottomPopup.body.setText("Let's try another.");
-                        bottomPopup.button.setText("Next");
-                        bottomPopup.enableButton();
+                        final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
+                        greatChoiceHint.setText("Great choice! Let's try another");
 
-                        bottomPopup.button.setOnClickListener(new View.OnClickListener() {
+                        View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(bottomPopup);
-                                buttonYes.setChecked(false);
-                                setSecondPriceMatch();
+                                greatChoiceHint.dismiss();
+
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        buttonYes.setChecked(false);
+                                        setSecondPriceMatch();
+                                    }
+                                };
+                                handler.postDelayed(runnable,600);
                             }
-                        });
+                        };
+
+                        greatChoiceHint.addButton("Next", listener);
+
+                        greatChoiceHint.show();
 
                         break;
                 }
@@ -387,6 +387,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
@@ -394,24 +395,31 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(fullScreenGray);
-                        // fadeInView(bottomPopup, 1f);
-
                         progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
-                        bottomPopup.header.setText("Great choice!");
-                        bottomPopup.body.setText("Let's try another.");
-                        bottomPopup.button.setText("Next");
-                        bottomPopup.enableButton();
+                        final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
+                        greatChoiceHint.setText("Great choice! Let's try another");
 
-                        bottomPopup.button.setOnClickListener(new View.OnClickListener() {
+                        View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                fadeOutView(bottomPopup);
-                                buttonNo.setChecked(false);
-                                setSecondPriceMatch();
+                                greatChoiceHint.dismiss();
+
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        buttonNo.setChecked(false);
+                                        setSecondPriceMatch();
+                                    }
+                                };
+                                handler.postDelayed(runnable,600);
                             }
-                        });
+                        };
+
+                        greatChoiceHint.addButton("Next", listener);
+
+                        greatChoiceHint.show();
 
                         break;
                 }
@@ -429,16 +437,12 @@ public class PricesTutorial extends BaseFragment {
         buttonNo.setText("$4.01");
 
         priceContainerHighlight = new HintHighlighter(getActivity());
-        priceContainerHighlight.addTarget(priceContainer, 30);
+        priceContainerHighlight.addTarget(priceContainer, 10);
         priceContainerHighlight.show();
 
-        fadeInView(bottomPopup, 1f);
-
-        bottomPopup.header.setText("What do you think?");
-        bottomPopup.body.setText("Choose the price that you saw in part one.");
-        // bottomPopup.button.setText("Next");
-        bottomPopup.disableButton();
-        bottomPopup.button.setOnClickListener(null);
+        final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
+        priceHint.setText("What do you think? Choose the price that you saw in part one.");
+        priceHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -447,6 +451,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonNo.setChecked(false);
                         buttonYes.setChecked(true);
@@ -454,7 +459,8 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(bottomPopup);
+                        // fadeOutView(bottomPopup);
+
                         fadeOutView(textView12);
                         fadeOutView(buttonNo);
                         fadeOutView(buttonYes);
@@ -489,6 +495,7 @@ public class PricesTutorial extends BaseFragment {
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
                         priceContainerHighlight.dismiss();
+                        priceHint.dismiss();
 
                         buttonYes.setChecked(false);
                         buttonNo.setChecked(true);
@@ -496,7 +503,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        fadeOutView(bottomPopup);
+                        // fadeOutView(bottomPopup);
 
                         fadeOutView(textView12);
                         fadeOutView(buttonNo);

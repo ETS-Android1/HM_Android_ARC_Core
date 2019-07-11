@@ -128,28 +128,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/progressBar"
-        android:background="#404040"
+        android:background="@color/shadow"
         android:alpha="0.9"
         android:visibility="gone">
 
     </FrameLayout>
-
-    <com.healthymedium.arc.custom.DialogButtonTutorial
-        android:id="@+id/bottomPopup"
-        android:layout_width="220dp"
-        android:layout_height="150dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        />
-
-    <com.healthymedium.arc.custom.DialogButtonTutorial
-        android:id="@+id/centerPopup"
-        android:layout_width="220dp"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        />
 
     <ImageView
         android:id="@+id/checkmark"
