@@ -30,5 +30,13 @@
         <attr name="text"/>
     </declare-styleable>
 
+    <declare-styleable name="BorderFrameLayout">
+        <attr name="fillColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="dashLength" format="dimension" />
+        <attr name="dashSpacing" format="dimension" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
 
 </resources>
