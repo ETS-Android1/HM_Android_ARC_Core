@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,6 +19,7 @@ import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.SymbolTutorialButton;
 import com.healthymedium.arc.hints.HintHighlighter;
+import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.NavigationManager;
 
@@ -26,6 +28,10 @@ public class SymbolTutorial extends BaseFragment {
     final Handler handlerOutline = new Handler();
     final Handler handlerPulsate = new Handler();
     final Handler handlerCoachmark = new Handler();
+
+    Runnable runnableTileOutline;
+    Runnable runnableTilePulsate;
+    Runnable runnableCoachmark;
 
     RelativeLayout topSymbols;
     RelativeLayout topSymbolsInnerLayout;
@@ -41,6 +47,7 @@ public class SymbolTutorial extends BaseFragment {
 
     FrameLayout fullScreenGray;
     FrameLayout progressBarGradient;
+    FrameLayout progressWhite;
 
     ImageView closeButton;
     ImageView checkmark;
@@ -50,9 +57,8 @@ public class SymbolTutorial extends BaseFragment {
 
     Button endButton;
 
-    Handler handler;
-
     private int shortAnimationDuration;
+    private int progressIncrement;
 
     public SymbolTutorial() {
 
@@ -83,6 +89,7 @@ public class SymbolTutorial extends BaseFragment {
 
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
         progressBarGradient = view.findViewById(R.id.progressBarGradient);
+        progressWhite = view.findViewById(R.id.progressWhite);
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -103,7 +110,18 @@ public class SymbolTutorial extends BaseFragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                handlerOutline.removeCallbacks(runnableTileOutline);
+                handlerPulsate.removeCallbacks(runnableTilePulsate);
+                handlerCoachmark.removeCallbacks(runnableCoachmark);
                 NavigationManager.getInstance().popBackStack();
+            }
+        });
+
+        ViewTreeObserver observer = view.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                setupProgressBar();
             }
         });
 
@@ -112,74 +130,102 @@ public class SymbolTutorial extends BaseFragment {
         return view;
     }
 
+    private void setupProgressBar() {
+        int total = progressWhite.getWidth();
+        progressIncrement = total / 3;
+    }
+
     private void stepMiddleTopTile() {
-        //fadeInView(fullScreenGray, 0.9f);
-
-        //fadeInView(buttonTop2, 1f);
-
-        centerPopup.header.setText("This is a tile.");
-        centerPopup.body.setText("Each tile includes a pair of symbols.");
-        centerPopup.button.setText("Next");
-
-        fadeInView(centerPopup, 1f);
 
         final HintHighlighter buttonTop2Highlight = new HintHighlighter(getActivity());
-        buttonTop2Highlight.addTarget(buttonTop2, 15);
+        buttonTop2Highlight.addTarget(buttonTop2, 10, 10);
         buttonTop2Highlight.show();
 
-        centerPopup.setOnClickListener(new View.OnClickListener() {
+        final HintPointer buttonTop2Hint = new HintPointer(getActivity(), buttonTop2, true, false);
+        buttonTop2Hint.setText("This is a tile. Each tile includes a pair of symbols.");
+
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fadeOutView(centerPopup);
                 buttonTop2Highlight.dismiss();
-                stepAllTopTiles();
+                buttonTop2Hint.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        stepAllTopTiles();
+                    }
+                };
+                handler.postDelayed(runnable,600);
             }
-        });
+        };
+
+        buttonTop2Hint.addButton("Next", listener);
+
+        buttonTop2Hint.show();
     }
 
     private void stepAllTopTiles() {
-        //fadeInView(buttonTop1, 1f);
-        //fadeInView(buttonTop3, 1f);
-
-        centerPopup.header.setText("You will see three tiles on the top of the screen...");
-        centerPopup.body.setText("");
-        centerPopup.button.setText("Next");
-
-        fadeInView(centerPopup, 1f);
 
         final HintHighlighter topSymbolsHighlight = new HintHighlighter(getActivity());
-        topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 30);
+        topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
         topSymbolsHighlight.show();
 
-        centerPopup.setOnClickListener(new View.OnClickListener() {
+        final HintPointer topSymbolsHint = new HintPointer(getActivity(), topSymbols, true, false);
+        topSymbolsHint.setText("You will see three tiles on the top of the screen...");
+
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fadeOutView(centerPopup);
                 topSymbolsHighlight.dismiss();
-                stepBottomTiles();
+                topSymbolsHint.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        stepBottomTiles();
+                    }
+                };
+                handler.postDelayed(runnable,600);
             }
-        });
+        };
+
+        topSymbolsHint.addButton("Next", listener);
+
+        topSymbolsHint.show();
     }
 
     private void stepBottomTiles() {
-        centerPopup.header.setText("...and two tiles on the bottom.");
-        centerPopup.body.setText("");
-        centerPopup.button.setText("Next");
-
-        fadeInView(centerPopup, 1f);
 
         final HintHighlighter bottomSymbolsHighlight = new HintHighlighter(getActivity());
-        bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 30);
+        bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
         bottomSymbolsHighlight.show();
 
-        centerPopup.setOnClickListener(new View.OnClickListener() {
+        final HintPointer bottomSymbolsHint = new HintPointer(getActivity(), bottomSymbolsButtons, true, true);
+        bottomSymbolsHint.setText("...and two tiles on the bottom.");
+
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fadeOutView(centerPopup);
                 bottomSymbolsHighlight.dismiss();
-                initialTiles();
+                bottomSymbolsHint.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        initialTiles();
+                    }
+                };
+                handler.postDelayed(runnable,600);
             }
-        });
+        };
+
+        bottomSymbolsHint.addButton("Next", listener);
+
+        bottomSymbolsHint.show();
     }
 
     private void initialTiles() {
@@ -192,14 +238,14 @@ public class SymbolTutorial extends BaseFragment {
         initialTilesPulsate.addPulsingTarget(buttonBottom1);
         initialTilesPulsate.addTarget(buttonTop3);
 
-        final Runnable runnableTileOutline = new Runnable() {
+        runnableTileOutline = new Runnable() {
             @Override
             public void run() {
                 initialTilesOutline.show();
             }
         };
 
-        final Runnable runnableTilePulsate = new Runnable() {
+        runnableTilePulsate = new Runnable() {
             @Override
             public void run() {
                 initialTilesOutline.dismiss();
@@ -207,7 +253,7 @@ public class SymbolTutorial extends BaseFragment {
             }
         };
 
-        final Runnable runnableCoachmark = new Runnable() {
+        runnableCoachmark = new Runnable() {
             @Override
             public void run() {
             }
@@ -225,24 +271,34 @@ public class SymbolTutorial extends BaseFragment {
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
 
-                fadeInView(centerPopup, 1f);
-                // fadeInView(fullScreenGray, 0.9f);
+                fadeInView(fullScreenGray, 0.9f);
                 buttonBottom1.setOnClickListener(null);
 
-                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 200;
+                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
 
-                centerPopup.header.setText("Great job!");
-                centerPopup.body.setText("Let's try a couple more for practice.");
-                centerPopup.button.setText("Next");
+                final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
+                greatJobHint.setText("Great job! Let's try a couple more for practice.");
 
-                centerPopup.setOnClickListener(new View.OnClickListener() {
+                View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        fadeOutView(centerPopup);
-                        //fadeOutView(fullScreenGray);
-                        secondTiles();
+                        greatJobHint.dismiss();
+
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                fadeOutView(fullScreenGray);
+                                secondTiles();
+                            }
+                        };
+                        handler.postDelayed(runnable,600);
                     }
-                });
+                };
+
+                greatJobHint.addButton("Next", listener);
+
+                greatJobHint.show();
             }
         });
     }
@@ -261,14 +317,14 @@ public class SymbolTutorial extends BaseFragment {
         final HintHighlighter secondTilesPulsate = new HintHighlighter(getActivity());
         secondTilesPulsate.addPulsingTarget(buttonBottom2);
 
-        final Runnable runnableTileOutline = new Runnable() {
+        runnableTileOutline = new Runnable() {
             @Override
             public void run() {
                 secondTilesOutline.show();
             }
         };
 
-        final Runnable runnableTilePulsate = new Runnable() {
+        runnableTilePulsate = new Runnable() {
             @Override
             public void run() {
                 secondTilesOutline.dismiss();
@@ -276,7 +332,7 @@ public class SymbolTutorial extends BaseFragment {
             }
         };
 
-        final Runnable runnableCoachmark = new Runnable() {
+        runnableCoachmark = new Runnable() {
             @Override
             public void run() {
             }
@@ -294,24 +350,33 @@ public class SymbolTutorial extends BaseFragment {
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
 
-                fadeInView(centerPopup, 1f);
-                // fadeInView(fullScreenGray, 0.9f);
                 buttonBottom2.setOnClickListener(null);
 
-                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 200;
+                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
 
-                centerPopup.header.setText("Nice!");
-                centerPopup.body.setText("One more...");
-                centerPopup.button.setText("Next");
+                final HintPointer niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
+                niceHint.setText("Nice! One more...");
 
-                centerPopup.setOnClickListener(new View.OnClickListener() {
+                View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        fadeOutView(centerPopup);
-                        fadeOutView(fullScreenGray);
-                        lastTiles();
+                        niceHint.dismiss();
+
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                fadeOutView(fullScreenGray);
+                                lastTiles();
+                            }
+                        };
+                        handler.postDelayed(runnable,600);
                     }
-                });
+                };
+
+                niceHint.addButton("Next", listener);
+
+                niceHint.show();
             }
         });
     }
@@ -331,14 +396,14 @@ public class SymbolTutorial extends BaseFragment {
         finalTilesPulsate.addPulsingTarget(buttonBottom1);
         finalTilesPulsate.addTarget(buttonTop1);
 
-        final Runnable runnableTileOutline = new Runnable() {
+        runnableTileOutline = new Runnable() {
             @Override
             public void run() {
                 finalTilesOutline.show();
             }
         };
 
-        final Runnable runnableTilePulsate = new Runnable() {
+        runnableTilePulsate = new Runnable() {
             @Override
             public void run() {
                 finalTilesOutline.dismiss();
@@ -346,7 +411,7 @@ public class SymbolTutorial extends BaseFragment {
             }
         };
 
-        final Runnable runnableCoachmark = new Runnable() {
+        runnableCoachmark = new Runnable() {
             @Override
             public void run() {
             }
@@ -374,7 +439,7 @@ public class SymbolTutorial extends BaseFragment {
 
                 buttonBottom1.setOnClickListener(null);
 
-                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 200;
+                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
 
                 endButton.setOnClickListener(new View.OnClickListener() {
                     @Override

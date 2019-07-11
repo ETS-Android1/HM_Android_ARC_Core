@@ -34,7 +34,7 @@
 
             <FrameLayout
                 android:id="@+id/progressBarGradient"
-                android:layout_width="50dp"
+                android:layout_width="0dp"
                 android:layout_height="6dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/tutorial_progress_bar_gradient">
@@ -79,8 +79,8 @@
                 android:id="@+id/symbolbutton_top2"
                 android:layout_width="75dp"
                 android:layout_height="150dp"
+                android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="1"
@@ -157,8 +157,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/progressBar"
-        android:background="#404040"
-        android:alpha="0.9"
+        android:background="@color/shadow"
         android:visibility="gone">
 
     </FrameLayout>
