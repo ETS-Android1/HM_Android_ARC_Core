@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-            android:textColor="@color/primaryDark"
+            android:textColor="@color/secondary"
             android:text="Test will begin in"
             />
 
@@ -25,7 +25,7 @@
             android:layout_below="@id/header"
             android:layout_centerHorizontal="true"
             android:textSize="80dp"
-            android:textColor="@color/primaryDark"
+            android:textColor="@color/secondary"
             android:text="3"
             />
 

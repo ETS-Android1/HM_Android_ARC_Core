@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/primaryDark">
+    android:background="@color/secondary">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:layout_weight="1"
-                android:background="@color/primaryDark"
+                android:background="@color/secondary"
                 android:text="@string/about_3rd_party_button"
                 android:textAppearance="@android:style/TextAppearance.Material.Small"
                 android:textColor="@color/white"

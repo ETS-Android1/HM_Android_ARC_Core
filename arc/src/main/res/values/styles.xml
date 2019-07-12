@@ -2,13 +2,15 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorPrimaryDark">@color/secondary</item>
         <item name="colorAccent">@color/primary</item>
         <item name="android:textColorSecondary">@color/primary</item>
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Dialog" parent="@android:style/Theme.Dialog">
