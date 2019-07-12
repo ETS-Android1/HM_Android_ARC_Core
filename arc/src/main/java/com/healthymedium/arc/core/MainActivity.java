@@ -20,6 +20,7 @@ import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
         contentView = findViewById(R.id.content_frame);
 
         bottomNavigationView = findViewById(R.id.navigation);
-        hideNavigationBar();
-
+        bottomNavigationView.setPadding(0,0,0, ViewUtil.getNavBarHeight());
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
