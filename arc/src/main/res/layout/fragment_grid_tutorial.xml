@@ -7,25 +7,70 @@
     <LinearLayout
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@color/primary"
+        android:layout_height="40dp"
+        android:background="@color/primaryDark"
         android:animateLayoutChanges="true">
 
         <ImageView
             android:id="@+id/closeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="@drawable/ic_x_to_close"/>
 
-        <FrameLayout
-            android:id="@+id/progressBarGradient"
-            android:layout_width="50dp"
-            android:layout_height="6dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/tutorial_progress_bar_gradient">
-        </FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/progressWhite"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/white">
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/progressBarGradient"
+                android:layout_width="50dp"
+                android:layout_height="6dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tutorial_progress_bar_gradient">
+            </FrameLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/itemsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/phone"
+            android:layout_width="80dp"
+            android:layout_height="150dp"
+            android:background="@drawable/phone"/>
+
+        <ImageView
+            android:id="@+id/key"
+            android:layout_width="80dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/phone"
+            android:background="@drawable/key"/>
+
+        <ImageView
+            android:id="@+id/pen"
+            android:layout_width="80dp"
+            android:layout_height="150dp"
+            android:layout_toRightOf="@+id/key"
+            android:background="@drawable/pen"/>
+
+    </RelativeLayout>
 
     <GridLayout
         android:id="@+id/gridLayout"
@@ -37,7 +82,8 @@
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
         android:columnCount="5"
-        android:rowCount="5">
+        android:rowCount="5"
+        android:visibility="gone">
 
 
         <ImageView
@@ -407,6 +453,7 @@
             android:textSize="36dp" />
 
         <TextView
+            android:id="@+id/tapThisF"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -790,8 +837,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/progressBar"
-        android:background="#404040"
-        android:alpha="0.9"
+        android:background="@color/shadow"
         android:visibility="gone">
 
     </FrameLayout>
