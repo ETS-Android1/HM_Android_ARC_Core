@@ -1,177 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/secondary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/progressBar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/secondary"
-        android:animateLayoutChanges="true">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <ImageView
-            android:id="@+id/closeButton"
-            android:layout_width="40dp"
+        <LinearLayout
+            android:id="@+id/progressBar"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/ic_x_to_close"/>
+            android:background="@color/secondary"
+            android:animateLayoutChanges="true">
+
+            <ImageView
+                android:id="@+id/closeButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/ic_x_to_close"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/progressWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/white">
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/progressBarGradient"
+                    android:layout_width="50dp"
+                    android:layout_height="6dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/tutorial_progress_bar_gradient">
+                </FrameLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/priceContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="300dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:background="@drawable/background_rounded">
 
-            <FrameLayout
-                android:id="@+id/progressWhite"
+            <TextView
+                android:id="@+id/textviewPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textView12"
+                android:layout_centerHorizontal="false"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="$1.51"
+                android:textAllCaps="false"
+                android:textSize="35dp" />
+
+            <TextView
+                android:id="@+id/textviewFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/textviewPrice"
+                android:layout_centerHorizontal="false"
+                android:ellipsize="end"
+                android:lineSpacingExtra="3dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="pinzas para la ropa"
+                android:textAllCaps="false"
+                android:textSize="35dp" />
+
+            <TextView
+                android:id="@+id/textView12"
                 android:layout_width="match_parent"
-                android:layout_height="6dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="20dp"
-                android:background="@color/white">
-            </FrameLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="4dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="@string/price_test_isgood"
+                android:textSize="26dp" />
 
-            <FrameLayout
-                android:id="@+id/progressBarGradient"
-                android:layout_width="50dp"
-                android:layout_height="6dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/tutorial_progress_bar_gradient">
-            </FrameLayout>
+            <com.healthymedium.arc.custom.RadioButton
+                android:id="@+id/radioButtonNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radioButtonYes"
+                android:layout_alignParentStart="true" />
+
+            <com.healthymedium.arc.custom.RadioButton
+                android:id="@+id/radioButtonYes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView12" />
 
         </RelativeLayout>
 
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/priceContainer"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:background="@drawable/background_rounded">
-
-        <TextView
-            android:id="@+id/textviewPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView12"
-            android:layout_centerHorizontal="false"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:lineSpacingExtra="3dp"
-            android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:text="$1.51"
-            android:textAllCaps="false"
-            android:textSize="35dp" />
-
-        <TextView
-            android:id="@+id/textviewFood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textviewPrice"
-            android:layout_centerHorizontal="false"
-            android:ellipsize="end"
-            android:lineSpacingExtra="3dp"
-            android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:text="pinzas para la ropa"
-            android:textAllCaps="false"
-            android:textSize="35dp" />
-
-        <TextView
-            android:id="@+id/textView12"
+        <FrameLayout
+            android:id="@+id/frameHide"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone">
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fullScreenGray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/progressBar"
+            android:background="@color/shadow"
+            android:alpha="0.9"
+            android:visibility="gone">
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/checkmark"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_vertical"
-            android:lineSpacingExtra="4dp"
-            android:paddingLeft="32dp"
-            android:paddingRight="32dp"
-            android:text="@string/price_test_isgood"
-            android:textSize="26dp" />
+            android:background="@drawable/ic_checkmark_blue"
+            android:visibility="gone"
+            />
 
-        <com.healthymedium.arc.custom.RadioButton
-            android:id="@+id/radioButtonNo"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewComplete"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/radioButtonYes"
-            android:layout_alignParentStart="true" />
+            android:layout_below="@id/checkmark"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/frame_vertical"
+            android:layout_marginRight="@dimen/frame_vertical"
+            android:paddingTop="21dp"
+            android:text="Tutorial Complete"
+            android:textColor="@color/secondary"
+            android:textSize="26dp"
+            android:textAlignment="center"
+            android:visibility="gone"
+            />
 
-        <com.healthymedium.arc.custom.RadioButton
-            android:id="@+id/radioButtonYes"
-            android:layout_width="match_parent"
+        <com.healthymedium.arc.custom.Button
+            android:id="@+id/endButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView12" />
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="24dp"
+            app:enabled="true"
+            app:text="CLOSE"
+            android:visibility="gone"
+            />
+
 
     </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/frameHide"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:visibility="gone">
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/fullScreenGray"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/progressBar"
-        android:background="@color/shadow"
-        android:alpha="0.9"
-        android:visibility="gone">
-
-    </FrameLayout>
-
-    <ImageView
-        android:id="@+id/checkmark"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/ic_checkmark_blue"
-        android:visibility="gone"
-        />
-
-    <TextView
-        android:id="@+id/textViewComplete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/checkmark"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/frame_vertical"
-        android:layout_marginRight="@dimen/frame_vertical"
-        android:paddingTop="21dp"
-        android:text="Tutorial Complete"
-        android:textColor="@color/secondary"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:visibility="gone"
-        />
-
-    <com.healthymedium.arc.custom.Button
-        android:id="@+id/endButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="24dp"
-        app:enabled="true"
-        app:text="CLOSE"
-        android:visibility="gone"
-        />
-
-
-</RelativeLayout>
+</FrameLayout>
