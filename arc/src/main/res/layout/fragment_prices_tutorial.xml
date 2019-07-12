@@ -9,7 +9,7 @@
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/primaryDark"
+        android:background="@color/secondary"
         android:animateLayoutChanges="true">
 
         <ImageView
@@ -155,7 +155,7 @@
         android:layout_marginRight="@dimen/frame_vertical"
         android:paddingTop="21dp"
         android:text="Tutorial Complete"
-        android:textColor="@color/primaryDark"
+        android:textColor="@color/secondary"
         android:textSize="26dp"
         android:textAlignment="center"
         android:visibility="gone"

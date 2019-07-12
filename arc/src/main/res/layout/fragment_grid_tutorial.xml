@@ -825,7 +825,7 @@
         android:layout_marginRight="@dimen/frame_vertical"
         android:paddingTop="21dp"
         android:text="Tutorial Complete"
-        android:textColor="@color/primaryDark"
+        android:textColor="@color/secondary"
         android:textSize="26dp"
         android:textAlignment="center"
         android:visibility="gone"

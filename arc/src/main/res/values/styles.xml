@@ -2,7 +2,7 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorPrimaryDark">@color/secondary</item>
         <item name="colorAccent">@color/primary</item>
         <item name="android:textColorSecondary">@color/primary</item>
         <item name="android:windowBackground">@drawable/splash_background</item>
