@@ -8,7 +8,9 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:textColor">@color/text</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Dialog" parent="@android:style/Theme.Dialog">

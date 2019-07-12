@@ -1,5 +1,7 @@
 package com.healthymedium.arc.utilities;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -7,11 +9,18 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
+import android.view.ViewConfiguration;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 
 public class ViewUtil {
+
+    private static int navBarHeight = -1;
+    private static int statusBarHeight = -1;
 
     public static int pxToDp(int px) {
         return (int) (px / Resources.getSystem().getDisplayMetrics().density);
@@ -52,5 +61,45 @@ public class ViewUtil {
     public static void underlineTextView(TextView textView){
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
+
+    public static int getStatusBarHeight() {
+        if(statusBarHeight==-1){
+            statusBarHeight = getStatusBarHeight(Application.getInstance());
+        }
+        return statusBarHeight;
+    }
+
+    private static int getStatusBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public static int getNavBarHeight() {
+        if(navBarHeight==-1){
+            navBarHeight = getNavBarHeight(Application.getInstance());
+        }
+        return navBarHeight;
+    }
+
+    private static int getNavBarHeight(Context context) {
+        int result = 0;
+
+        boolean hasMenuKey = ViewConfiguration.get(context).hasPermanentMenuKey();
+
+        // if the device has a navigation bar
+        if(!hasMenuKey) {
+            Resources resources = context.getResources();
+            int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                return resources.getDimensionPixelSize(resourceId);
+            }
+        }
+        return result;
+    }
+
 
 }

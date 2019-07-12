@@ -2,6 +2,9 @@ package com.healthymedium.arc.core;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import com.healthymedium.arc.utilities.Log;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 
 import com.healthymedium.arc.misc.TransitionSet;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class BaseFragment extends Fragment {
 
@@ -21,6 +25,11 @@ public class BaseFragment extends Fragment {
 
     // methods related to enabling back press from a base fragment ---------------------------------
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.setPadding(0, ViewUtil.getStatusBarHeight(),0,ViewUtil.getNavBarHeight());
+    }
     @Override
     public void onResume() {
         super.onResume();
