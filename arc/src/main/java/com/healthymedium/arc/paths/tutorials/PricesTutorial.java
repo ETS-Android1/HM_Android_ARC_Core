@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
@@ -37,7 +38,7 @@ public class PricesTutorial extends BaseFragment {
     TextView textView12;
 
     FrameLayout fullScreenGray;
-    FrameLayout progressBarGradient;
+    TutorialProgressView progressView;
 
     ImageView closeButton;
     ImageView checkmark;
@@ -73,7 +74,9 @@ public class PricesTutorial extends BaseFragment {
         buttonNo.setCheckable(false);
 
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
-        progressBarGradient = view.findViewById(R.id.progressBarGradient);
+
+        progressView = view.findViewById(R.id.progressView);
+        progressView.setProgress(100,true); // TODO: reflect actual progress
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -131,8 +134,6 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
-
                         final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
                         greatChoiceHint.setText("Great choice! Let's try another.");
 
@@ -177,8 +178,6 @@ public class PricesTutorial extends BaseFragment {
 
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
-
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
                         final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
                         greatChoiceHint.setText("Great choice! Let's try another.");
@@ -238,8 +237,6 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
-
                         final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
                         greatChoiceHint.setText("Another great choice! Let's proceed to part two.");
 
@@ -284,8 +281,6 @@ public class PricesTutorial extends BaseFragment {
 
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
-
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
                         final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
                         greatChoiceHint.setText("Another great choice! Let's proceed to part two.");
@@ -348,8 +343,6 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
-
                         final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
                         greatChoiceHint.setText("Great choice! Let's try another");
 
@@ -394,8 +387,6 @@ public class PricesTutorial extends BaseFragment {
 
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
-
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
                         final HintPointer greatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
                         greatChoiceHint.setText("Great choice! Let's try another");
@@ -473,8 +464,6 @@ public class PricesTutorial extends BaseFragment {
                         textViewComplete.bringToFront();
                         fadeInView(endButton, 1f);
 
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
-
                         endButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -516,8 +505,6 @@ public class PricesTutorial extends BaseFragment {
                         fadeInView(textViewComplete, 1f);
                         textViewComplete.bringToFront();
                         fadeInView(endButton, 1f);
-
-                        progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + 150;
 
                         endButton.setOnClickListener(new View.OnClickListener() {
                             @Override

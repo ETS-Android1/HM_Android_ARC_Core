@@ -18,6 +18,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.SymbolTutorialButton;
+import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
@@ -46,8 +47,7 @@ public class SymbolTutorial extends BaseFragment {
     DialogButtonTutorial centerPopup;
 
     FrameLayout fullScreenGray;
-    FrameLayout progressBarGradient;
-    FrameLayout progressWhite;
+    TutorialProgressView progressView;
 
     ImageView closeButton;
     ImageView checkmark;
@@ -86,10 +86,10 @@ public class SymbolTutorial extends BaseFragment {
         buttonBottom2 = view.findViewById(R.id.symbolbutton_bottom2);
 
         centerPopup = view.findViewById(R.id.centerPopup);
-
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
-        progressBarGradient = view.findViewById(R.id.progressBarGradient);
-        progressWhite = view.findViewById(R.id.progressWhite);
+
+        progressView = view.findViewById(R.id.progressView);
+        progressView.setProgress(100,true); // TODO: reflect actual progress
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -131,8 +131,8 @@ public class SymbolTutorial extends BaseFragment {
     }
 
     private void setupProgressBar() {
-        int total = progressWhite.getWidth();
-        progressIncrement = total / 3;
+//        int total = progressWhite.getWidth();
+//        progressIncrement = total / 3;
     }
 
     private void stepMiddleTopTile() {
@@ -277,8 +277,6 @@ public class SymbolTutorial extends BaseFragment {
                 // fadeInView(fullScreenGray, 0.9f);
                 buttonBottom1.setOnClickListener(null);
 
-                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
-
                 final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 greatJobHint.setText("Great job! Let's try a couple more for practice.");
 
@@ -358,8 +356,6 @@ public class SymbolTutorial extends BaseFragment {
                 secondTilesPulsate.dismiss();
 
                 buttonBottom2.setOnClickListener(null);
-
-                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
 
                 final HintPointer niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 niceHint.setText("Nice! One more...");
@@ -448,8 +444,6 @@ public class SymbolTutorial extends BaseFragment {
                 fadeOutView(bottomSymbolsButtons);
 
                 buttonBottom1.setOnClickListener(null);
-
-                progressBarGradient.getLayoutParams().width = progressBarGradient.getLayoutParams().width + progressIncrement;
 
                 endButton.setOnClickListener(new View.OnClickListener() {
                     @Override

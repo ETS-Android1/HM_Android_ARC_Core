@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
+import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
@@ -38,7 +39,7 @@ public class GridTutorial extends BaseFragment {
     DialogButtonTutorial centerPopup;
 
     FrameLayout fullScreenGray;
-    FrameLayout progressBarGradient;
+    TutorialProgressView progressView;
 
     ImageView closeButton;
     ImageView checkmark;
@@ -133,9 +134,10 @@ public class GridTutorial extends BaseFragment {
         gridLayoutLetters = view.findViewById(R.id.gridLettersLayout);
 
         centerPopup = view.findViewById(R.id.centerPopup);
-
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
-        progressBarGradient = view.findViewById(R.id.progressBarGradient);
+
+        progressView = view.findViewById(R.id.progressView);
+        progressView.setProgress(100,true); // TODO: reflect actual progress
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
