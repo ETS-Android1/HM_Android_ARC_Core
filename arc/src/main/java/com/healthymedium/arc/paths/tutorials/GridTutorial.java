@@ -57,7 +57,8 @@ public class GridTutorial extends BaseFragment {
         @Override
         public void run() {
             final HintPointer partTwoHint = new HintPointer(getActivity(), image43, false, true);
-            partTwoHint.setText("Great! Let's proceed to part two.");
+            partTwoHint.setRadius(16);
+            partTwoHint.setText("<b>Great!</b><br>Let's proceed to part two.");
 
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override
@@ -162,7 +163,8 @@ public class GridTutorial extends BaseFragment {
 
     private void setInitialItemLayout() {
         final HintPointer itemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
-        itemsHint.setText("In this three part test, you'll be asked to recall the location of these items.");
+        itemsHint.setRadius(16);
+        itemsHint.setText("In this three part test, you'll be asked to <b>recall the location</b> of these items.");
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -195,7 +197,8 @@ public class GridTutorial extends BaseFragment {
         getImageView(1,3).setImageResource(R.drawable.key);
 
         final HintPointer gridsHint = new HintPointer(getActivity(), image43, false, true);
-        gridsHint.setText("The items will be placed in a grid of boxes. Remember which box each item is in. You will have 3 seconds.");
+        gridsHint.setRadius(16);
+        gridsHint.setText("The items will be placed in a grid of boxes. <b>Remember which box each item is in.</b> You will have 3 seconds.");
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
