@@ -43,6 +43,7 @@
     <declare-styleable name="CircleProgressView">
         <attr name="baseColor" format="color" />
         <attr name="sweepColor" format="color" />
+        <attr name="shadowColor" format="color" />
         <attr name="checkmarkColor" format="color" />
         <attr name="strokeWidth" />
     </declare-styleable>

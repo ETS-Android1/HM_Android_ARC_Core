@@ -33,6 +33,7 @@ public class CircleProgressView extends View {
     private RectF rect;
 
     private Paint basePaint;
+    private Paint shadowPaint;
     private Paint sweepPaint;
     private Paint fillPaint;
 
@@ -65,6 +66,11 @@ public class CircleProgressView extends View {
         basePaint.setStyle(Paint.Style.STROKE);
         basePaint.setColor(ViewUtil.getColor(R.color.secondary));
 
+        shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        shadowPaint.setStyle(Paint.Style.STROKE);
+        shadowPaint.setStrokeCap(Paint.Cap.ROUND);
+        shadowPaint.setColor(ViewUtil.getColor(R.color.white));
+
         sweepPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         sweepPaint.setStyle(Paint.Style.STROKE);
         sweepPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -89,7 +95,8 @@ public class CircleProgressView extends View {
 
         int baseColor = typedArray.getColor(R.styleable.CircleProgressView_baseColor,0);
         int sweepColor = typedArray.getColor(R.styleable.CircleProgressView_sweepColor,0);
-        int checkmarkColor = typedArray.getColor(R.styleable.CircleProgressView_sweepColor,0);
+        int shadowColor = typedArray.getColor(R.styleable.CircleProgressView_shadowColor,0);
+        int checkmarkColor = typedArray.getColor(R.styleable.CircleProgressView_checkmarkColor,0);
         strokeWidth = (int) typedArray.getDimension(R.styleable.CircleProgressView_strokeWidth,0);
 
         typedArray.recycle();
@@ -97,6 +104,7 @@ public class CircleProgressView extends View {
         if(strokeWidth!=0){
             manualStrokeWidth = true;
             basePaint.setStrokeWidth(strokeWidth);
+            shadowPaint.setStrokeWidth(strokeWidth);
             sweepPaint.setStrokeWidth(strokeWidth);
             fillPaint.setStrokeWidth(strokeWidth);
         }
@@ -105,15 +113,18 @@ public class CircleProgressView extends View {
             basePaint.setColor(baseColor);
         }
 
+        if(shadowColor!=0) {
+            shadowPaint.setColor(shadowColor);
+        }
+
         if(sweepColor!=0){
             sweepPaint.setColor(sweepColor);
             fillPaint.setColor(sweepColor);
         }
 
         if(checkmarkColor!=0){
-            checkmark.setColorFilter( checkmarkColor, PorterDuff.Mode.MULTIPLY );
+            checkmark.setTint(checkmarkColor);
         }
-
 
     }
 
@@ -125,6 +136,7 @@ public class CircleProgressView extends View {
         if(!manualStrokeWidth) {
             strokeWidth = size * 0.0625f; // 1/16 of size
             basePaint.setStrokeWidth(strokeWidth);
+            shadowPaint.setStrokeWidth(strokeWidth);
             sweepPaint.setStrokeWidth(strokeWidth);
             fillPaint.setStrokeWidth(strokeWidth);
         }
@@ -151,7 +163,8 @@ public class CircleProgressView extends View {
 
         if(progress<100) {
             canvas.drawArc(rect, startAngle, 360F, false, basePaint);
-            canvas.drawArc(rect, startAngle, sweepAngle, false, sweepPaint);
+            canvas.drawArc(rect, startAngle, sweepAngle, false, shadowPaint);
+            canvas.drawArc(rect, startAngle+1f, sweepAngle-2f, false, sweepPaint);
             return;
         }
 
@@ -181,6 +194,7 @@ public class CircleProgressView extends View {
         strokeWidth = ViewUtil.dpToPx(dp); // 1/16 of size
 
         basePaint.setStrokeWidth(strokeWidth);
+        shadowPaint.setStrokeWidth(strokeWidth);
         sweepPaint.setStrokeWidth(strokeWidth);
         fillPaint.setStrokeWidth(strokeWidth);
     }
