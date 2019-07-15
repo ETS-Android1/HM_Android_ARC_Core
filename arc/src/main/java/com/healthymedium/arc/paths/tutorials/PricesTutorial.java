@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -44,6 +46,8 @@ public class PricesTutorial extends BaseFragment {
     ImageView checkmark;
 
     Button endButton;
+    View loadingView;
+    LinearLayout progressBar;
 
     private int shortAnimationDuration;
 
@@ -62,8 +66,9 @@ public class PricesTutorial extends BaseFragment {
     HintHighlighter secondMatchContainerHighlight;
     HintPointer secondMatchHint;
 
-    public PricesTutorial() {
 
+    public PricesTutorial() {
+        setTransitionSet(TransitionSet.getFadingDefault(true));
     }
 
     @Override
@@ -129,14 +134,7 @@ public class PricesTutorial extends BaseFragment {
                 secondMatchContainerHighlight.dismiss();
                 secondMatchHint.dismiss();
 
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        NavigationManager.getInstance().popBackStack();
-                    }
-                };
-                handler.postDelayed(runnable,300);
+                exit();
             }
         });
 
@@ -151,10 +149,32 @@ public class PricesTutorial extends BaseFragment {
         textViewComplete = view.findViewById(R.id.textViewComplete);
 
         endButton = view.findViewById(R.id.endButton);
+        progressBar = view.findViewById(R.id.progressBar);
+        loadingView = view.findViewById(R.id.loadingView);
 
-        setFirstPricesCompare();
+        progressBar.animate()
+                .setStartDelay(800)
+                .setDuration(400)
+                .alpha(1.0f);
 
         return view;
+    }
+
+    @Override
+    protected void onEnterTransitionEnd(boolean popped) {
+        super.onEnterTransitionEnd(popped);
+
+        loadingView.animate()
+                .setStartDelay(400)
+                .translationYBy(-loadingView.getHeight())
+                .setDuration(400);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setFirstPricesCompare();
+            }
+        },1200);
     }
 
     private void setFirstPricesCompare() {
@@ -509,7 +529,7 @@ public class PricesTutorial extends BaseFragment {
                         endButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                NavigationManager.getInstance().popBackStack();
+                                exit();
                             }
                         });
 
@@ -551,7 +571,7 @@ public class PricesTutorial extends BaseFragment {
                         endButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                NavigationManager.getInstance().popBackStack();
+                                exit();
                             }
                         });
 
@@ -583,4 +603,20 @@ public class PricesTutorial extends BaseFragment {
                     }
                 });
     }
+
+    private void exit(){
+        loadingView.animate()
+                .setDuration(400)
+                .translationY(0);
+        progressBar.animate()
+                .setDuration(400)
+                .alpha(0.0f);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NavigationManager.getInstance().popBackStack();
+            }
+        },1200);
+    }
+
 }
