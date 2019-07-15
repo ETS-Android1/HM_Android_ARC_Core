@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.healthymedium.arc.custom.CircleProgressView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
 public class TestProgress extends BaseFragment {
@@ -40,17 +42,17 @@ public class TestProgress extends BaseFragment {
             case 0:
                 percentageFrom = 0;
                 percentageTo = 33;
-                subheaderText = "Loading next test…";
+                subheaderText = ViewUtil.getString(R.string.testing_loading);
                 break;
             case 1:
                 percentageFrom = 33;
                 percentageTo = 66;
-                subheaderText = "Loading next test…";
+                subheaderText = ViewUtil.getString(R.string.testing_loading);
                 break;
             case 2:
                 percentageFrom = 66;
                 percentageTo = 100;
-                subheaderText = "Well Done!";
+                subheaderText = ViewUtil.getString(R.string.testing_done);
                 break;
         }
     }
@@ -74,11 +76,11 @@ public class TestProgress extends BaseFragment {
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setTypeface(Fonts.robotoBold);
-        textViewHeader.setText(headerText);
+        textViewHeader.setText(Html.fromHtml(headerText));
 
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setTypeface(Fonts.georgiaItalic);
-        textViewSubHeader.setText(subheaderText);
+        textViewSubHeader.setText(Html.fromHtml(subheaderText));
 
         circleProgressView = view.findViewById(R.id.circleProgressView);
         circleProgressView.setProgress(percentageFrom,false);

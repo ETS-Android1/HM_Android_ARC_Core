@@ -332,4 +332,10 @@
     <string name="popup_tutorial_tapf3">&lt;b>Nice work!&lt;/b> &lt;br /&gt;&lt;br /&gt;Don\'t worry if you didn\'t find them all.</string>
     <string name="popup_tutorial_selectbox">In the final part of the test, you will &lt;b>select the three boxes&lt;/b> where these items were located in part one.</string>
     <string name="popup_tutorial_boxhint">&lt;b>Hint:&lt;/b> One item was located in this box. Tap here.</string>
+
+    <string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
+    <string name="symbols_complete">&lt;b>Symbols Test Complete!&lt;/b></string>
+    <string name="grids_complete">&lt;b>Grids Test Complete!&lt;/b></string>
+    <string name="testing_loading">&lt;i>Loading next test&#8230;&lt;/i></string>
+    <string name="testing_done">&lt;i>Well Done!&lt;/i></string>
 </resources>

@@ -600,7 +600,7 @@ public class StateMachine {
                 true));
 
         fragments.add(new PriceTestMatchFragment());
-        fragments.add(new TestProgress("Prices Test Complete!",index));
+        fragments.add(new TestProgress(ViewUtil.getString(R.string.prices_complete), index));
         PathSegment segment = new PathSegment(fragments,PriceTestPathData.class);
         cache.segments.add(segment);
     }
@@ -625,7 +625,7 @@ public class StateMachine {
         fragments.add(new TestBegin());
 
         fragments.add(new SymbolTest());
-        fragments.add(new TestProgress("Symbols Test Complete!",index));
+        fragments.add(new TestProgress(ViewUtil.getString(R.string.symbols_complete), index));
         PathSegment segment = new PathSegment(fragments,SymbolsTestPathData.class);
         cache.segments.add(segment);
     }
@@ -656,7 +656,7 @@ public class StateMachine {
         GridTest gridTestFragment = new GridTest();
         gridTestFragment.second = true;
         fragments.add(gridTestFragment);
-        fragments.add(new TestProgress("Grids Test Complete!",index));
+        fragments.add(new TestProgress(ViewUtil.getString(R.string.grids_complete), index));
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
         enableTransitionGrids(segment,true);
         cache.segments.add(segment);
