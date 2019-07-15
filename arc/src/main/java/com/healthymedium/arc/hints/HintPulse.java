@@ -53,7 +53,13 @@ public class HintPulse extends View{
         RectF rect = new RectF(0,0, width, height);
 
         Canvas canvas = new Canvas(bitmap);
-        canvas.drawRoundRect(rect, radius, radius, paint);
+
+        if(height==width){
+            canvas.drawCircle(width/2,height/2, radius, paint);
+        } else {
+            canvas.drawRoundRect(rect, radius, radius, paint);
+        }
+
     }
 
     public void setRadius(int dp) {
