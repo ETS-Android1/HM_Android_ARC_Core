@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.tests;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,11 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class TestBegin extends BaseFragment {
 
+    TextView begin;
     TextView number;
 
     int count = 3;
@@ -67,6 +70,9 @@ public class TestBegin extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_test_begin, container, false);
+
+        begin = view.findViewById(R.id.header);
+        begin.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_begin)));
 
         number = view.findViewById(R.id.number);
 

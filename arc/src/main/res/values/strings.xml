@@ -305,6 +305,8 @@
 
 
 
+    <string name="testing_begin">&lt;b>Test will begin in&lt;/b></string>
+    
     <string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
 
     <string name="popup_gotit">&lt;b>Got It&lt;/b></string>
