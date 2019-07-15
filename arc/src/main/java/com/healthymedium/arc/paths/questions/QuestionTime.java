@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.healthymedium.arc.custom.TimeInput;
+import com.healthymedium.arc.hints.HintPointer;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Study;
@@ -19,9 +21,13 @@ import org.joda.time.LocalTime;
 @SuppressLint("ValidFragment")
 public class QuestionTime extends QuestionTemplate {
 
+    private static final String HINT_QUESTION_TIME = "HINT_QUESTION_TIME";
+
+    protected HintPointer pointer;
     protected TimeInput timeInput;
     protected LocalTime time;
     boolean enabled;
+    boolean showHint;
 
     public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime) {
         super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submit));
@@ -34,9 +40,14 @@ public class QuestionTime extends QuestionTemplate {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(false);
 
+
         timeInput = new TimeInput(getContext());
         timeInput.setListener(new TimeInput.Listener() {
             public void onValidityChanged(boolean valid) {
+                if(pointer!=null){
+                    pointer.dismiss();
+                    pointer = null;
+                }
                 if(buttonNext.isEnabled() != valid){
                     enabled = valid;
                     buttonNext.setEnabled(enabled);
@@ -46,6 +57,10 @@ public class QuestionTime extends QuestionTemplate {
             @Override
             public void onTimeChanged() {
                 response_time = System.currentTimeMillis();
+                if(pointer!=null){
+                    pointer.dismiss();
+                    pointer = null;
+                }
             }
         });
 
@@ -63,7 +78,23 @@ public class QuestionTime extends QuestionTemplate {
         content.setGravity(Gravity.CENTER);
         content.addView(timeInput);
 
+
+
         return view;
+    }
+
+    @Override
+    protected void onEnterTransitionEnd(boolean popped) {
+        super.onEnterTransitionEnd(popped);
+
+        if(!Hints.hasBeenShown(HINT_QUESTION_TIME)){
+            pointer = new HintPointer(getMainActivity(),timeInput.getTimePicker(),true,false);
+            pointer.setRadius(16);
+            pointer.setText("Scroll to select");
+            pointer.show();
+            Hints.markShown(HINT_QUESTION_TIME);
+        }
+
     }
 
     @Override

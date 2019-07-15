@@ -135,6 +135,10 @@ public class TimeInput extends FrameLayout {
         return time;
     }
 
+    public TimePicker getTimePicker(){
+        return timePicker;
+    }
+
     public boolean isTimeValid() {
         return valid;
     }
