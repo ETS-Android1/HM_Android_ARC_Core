@@ -9,11 +9,16 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 
 import com.healthymedium.arc.custom.Rating;
+import com.healthymedium.arc.hints.HintPointer;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 
 @SuppressLint("ValidFragment")
 public class QuestionRating extends QuestionTemplate {
 
+    private static final String HINT_QUESTION_RATING = "HINT_QUESTION_RATING";
+
+    HintPointer pointer;
     float value = 0.5f;
     Rating rating;
     String high;
@@ -50,12 +55,30 @@ public class QuestionRating extends QuestionTemplate {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 response_time = System.currentTimeMillis();
+                if(pointer!=null){
+                    pointer.dismiss();
+                    pointer = null;
+                }
             }
         });
 
         content.addView(rating);
 
         return view;
+    }
+
+    @Override
+    protected void onEnterTransitionEnd(boolean popped) {
+        super.onEnterTransitionEnd(popped);
+
+        if(!Hints.hasBeenShown(HINT_QUESTION_RATING)){
+            pointer = new HintPointer(getMainActivity(),rating.getSeekBar(),true,true);
+            pointer.setRadius(16);
+            pointer.setText("Drag to select");
+            pointer.show();
+            Hints.markShown(HINT_QUESTION_RATING);
+        }
+
     }
 
     @Override
