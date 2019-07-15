@@ -55,17 +55,10 @@ public class Hints {
     }
 
     public static void markShown(String key){
-        HintDetails details;
-
-        if(map.containsKey(key)){
-            details = map.get(key);
-        } else {
-            details = new HintDetails();
-        }
-
+        HintDetails details = new HintDetails();
         details.name = key;
-        details.versionCode = VersionUtil.getAppVersionCode();
         details.timestamp = DateTime.now().getMillis()/1000;
+        details.versionCode = VersionUtil.getAppVersionCode();
         map.put(key,details);
         save();
     }
