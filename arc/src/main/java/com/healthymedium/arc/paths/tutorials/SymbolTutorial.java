@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class SymbolTutorial extends BaseFragment {
@@ -56,12 +58,14 @@ public class SymbolTutorial extends BaseFragment {
     TextView textViewComplete;
 
     Button endButton;
+    View loadingView;
+    LinearLayout progressBar;
 
     private int shortAnimationDuration;
     private int progressIncrement;
 
     public SymbolTutorial() {
-
+        setTransitionSet(TransitionSet.getFadingDefault(true));
     }
 
     @Override
@@ -98,6 +102,8 @@ public class SymbolTutorial extends BaseFragment {
         textViewComplete = view.findViewById(R.id.textViewComplete);
 
         endButton = view.findViewById(R.id.endButton);
+        progressBar = view.findViewById(R.id.progressBar);
+        loadingView = view.findViewById(R.id.loadingView);
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -113,21 +119,33 @@ public class SymbolTutorial extends BaseFragment {
                 handlerOutline.removeCallbacks(runnableTileOutline);
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
-                NavigationManager.getInstance().popBackStack();
+                exit();
             }
         });
 
-        ViewTreeObserver observer = view.getViewTreeObserver();
-        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                setupProgressBar();
-            }
-        });
-
-        stepMiddleTopTile();
+        progressBar.animate()
+                .setStartDelay(800)
+                .setDuration(400)
+                .alpha(1.0f);
 
         return view;
+    }
+
+    @Override
+    protected void onEnterTransitionEnd(boolean popped) {
+        super.onEnterTransitionEnd(popped);
+
+        loadingView.animate()
+                .setStartDelay(400)
+                .setDuration(400)
+                .translationYBy(-loadingView.getHeight());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stepMiddleTopTile();
+            }
+        },1200);
     }
 
     private void setupProgressBar() {
@@ -448,7 +466,7 @@ public class SymbolTutorial extends BaseFragment {
                 endButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        NavigationManager.getInstance().popBackStack();
+                        exit();
                     }
                 });
 
@@ -476,6 +494,21 @@ public class SymbolTutorial extends BaseFragment {
                         view.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    private void exit(){
+        loadingView.animate()
+                .setDuration(400)
+                .translationY(0);
+        progressBar.animate()
+                .setDuration(400)
+                .alpha(0.0f);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NavigationManager.getInstance().popBackStack();
+            }
+        },1200);
     }
 
 }

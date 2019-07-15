@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class GridTutorial extends BaseFragment {
@@ -50,6 +53,8 @@ public class GridTutorial extends BaseFragment {
     TextView textViewComplete;
 
     Button endButton;
+    View loadingView;
+    LinearLayout progressBar;
 
     private int shortAnimationDuration;
 
@@ -115,7 +120,7 @@ public class GridTutorial extends BaseFragment {
     };
 
     public GridTutorial() {
-
+        setTransitionSet(TransitionSet.getFadingDefault(true));
     }
 
     @Override
@@ -148,19 +153,48 @@ public class GridTutorial extends BaseFragment {
         tapThisF = view.findViewById(R.id.tapThisF);
 
         endButton = view.findViewById(R.id.endButton);
+        progressBar = view.findViewById(R.id.progressBar);
+        loadingView = view.findViewById(R.id.loadingView);
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavigationManager.getInstance().popBackStack();
+                exit();
             }
         });
 
-        setInitialItemLayout();
+        progressBar.animate()
+                .setStartDelay(800)
+                .setDuration(400)
+                .alpha(1.0f);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+    }
+
+    @Override
+    protected void onEnterTransitionEnd(boolean popped) {
+        super.onEnterTransitionEnd(popped);
+
+        loadingView.animate()
+                .setStartDelay(400)
+                .setDuration(400)
+                .translationYBy(-loadingView.getHeight());
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setInitialItemLayout();
+            }
+        },1200);
     }
 
     private void setInitialItemLayout() {
@@ -450,8 +484,24 @@ public class GridTutorial extends BaseFragment {
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavigationManager.getInstance().popBackStack();
+                exit();
             }
         });
     }
+
+    private void exit(){
+        loadingView.animate()
+                .setDuration(400)
+                .translationY(0);
+        progressBar.animate()
+                .setDuration(400)
+                .alpha(0.0f);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                NavigationManager.getInstance().popBackStack();
+            }
+        },1200);
+    }
+
 }
