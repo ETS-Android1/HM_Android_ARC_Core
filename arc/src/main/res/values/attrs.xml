@@ -3,6 +3,7 @@
 
     <attr name="text" format="string" />
     <attr name="enabled" format="boolean" />
+    <attr name="strokeWidth" format="dimension" />
 
 
     <declare-styleable name="FancyButton">
@@ -32,11 +33,19 @@
 
     <declare-styleable name="BorderFrameLayout">
         <attr name="fillColor" format="color" />
+        <attr name="strokeWidth" />
         <attr name="strokeColor" format="color" />
-        <attr name="strokeWidth" format="dimension" />
         <attr name="dashLength" format="dimension" />
         <attr name="dashSpacing" format="dimension" />
         <attr name="radius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="CircleProgressView">
+        <attr name="baseColor" format="color" />
+        <attr name="sweepColor" format="color" />
+        <attr name="checkmarkColor" format="color" />
+        <attr name="strokeWidth" />
+    </declare-styleable>
+
 
 </resources>
