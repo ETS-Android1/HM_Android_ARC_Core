@@ -17,6 +17,21 @@ public class TransitionSet {
 
 
 
+    public static TransitionSet getFadingDefault(){
+        return getSlidingDefault(true);
+    }
+
+    public static TransitionSet getFadingDefault(boolean animateEntry){
+        TransitionSet set = new TransitionSet();
+        if(animateEntry) {
+            set.enter = R.anim.fade_in;
+            set.popEnter =  R.anim.fade_in;
+        }
+        set.exit = R.anim.fade_out;
+        set.popExit =  R.anim.fade_out;
+        return set;
+    }
+
     public static TransitionSet getSlidingDefault(){
         return getSlidingDefault(true);
     }
@@ -31,5 +46,24 @@ public class TransitionSet {
         set.popExit =  R.anim.slide_out_right;
         return set;
     }
+
+    public static TransitionSet getSlidingInFadingOut(){
+        TransitionSet set = new TransitionSet();
+        set.enter = R.anim.slide_in_right;
+        set.popEnter =  R.anim.slide_in_left;
+        set.exit = R.anim.fade_out;
+        set.popExit =  R.anim.fade_out;
+        return set;
+    }
+
+    public static TransitionSet getFadingInSlidingOut(){
+        TransitionSet set = new TransitionSet();
+        set.enter = R.anim.fade_in;
+        set.popEnter =  R.anim.fade_in;
+        set.exit = R.anim.slide_out_left;
+        set.popExit =  R.anim.slide_out_right;
+        return set;
+    }
+
 
 }
