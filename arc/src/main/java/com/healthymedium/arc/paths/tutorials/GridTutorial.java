@@ -53,11 +53,26 @@ public class GridTutorial extends BaseFragment {
 
     private int shortAnimationDuration;
 
+    HintPointer itemsHint;
+    HintPointer gridsHint;
+
+    HintPointer partTwoHint;
+
+    HintHighlighter pulsateF;
+    HintPointer tapThisFHint;
+    HintPointer tapAllFsHint;
+
+    HintPointer niceWorkHint;
+
+    HintPointer secondItemsHint;
+
+    HintPointer recallHint;
+    HintHighlighter pulsateGridItem;
+
     Handler handler;
     Runnable runnableProceedToPartTwo = new Runnable() {
         @Override
         public void run() {
-            final HintPointer partTwoHint = new HintPointer(getActivity(), image43, false, true);
             partTwoHint.setRadius(16);
             partTwoHint.setText("<b>Great!</b><br>Let's proceed to part two.");
 
@@ -88,7 +103,6 @@ public class GridTutorial extends BaseFragment {
         public void run() {
             fadeInView(fullScreenGray, 0.9f);
 
-            final HintPointer niceWorkHint = new HintPointer(getActivity(), image43, false, true);
             niceWorkHint.setText("Nice work! Don't worry if you didn't find them all.");
 
             View.OnClickListener listener = new View.OnClickListener() {
@@ -151,10 +165,49 @@ public class GridTutorial extends BaseFragment {
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+        itemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
+        gridsHint = new HintPointer(getActivity(), image43, false, true);
+
+        partTwoHint = new HintPointer(getActivity(), image43, false, true);
+
+        pulsateF = new HintHighlighter(getActivity());
+        tapThisFHint = new HintPointer(getActivity(), tapThisF, true, false);
+        tapAllFsHint = new HintPointer(getActivity(), image43, false, true);
+
+        niceWorkHint = new HintPointer(getActivity(), image43, false, true);
+
+        secondItemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
+
+        recallHint = new HintPointer(getActivity(), image33, true, false);
+        pulsateGridItem = new HintHighlighter(getActivity());
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavigationManager.getInstance().popBackStack();
+                itemsHint.dismiss();
+                gridsHint.dismiss();
+
+                partTwoHint.dismiss();
+
+                pulsateF.dismiss();
+                tapThisFHint.dismiss();
+                tapAllFsHint.dismiss();
+
+                niceWorkHint.dismiss();
+
+                secondItemsHint.dismiss();
+
+                recallHint.dismiss();
+                pulsateGridItem.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        NavigationManager.getInstance().popBackStack();
+                    }
+                };
+                handler.postDelayed(runnable,300);
             }
         });
 
@@ -164,7 +217,6 @@ public class GridTutorial extends BaseFragment {
     }
 
     private void setInitialItemLayout() {
-        final HintPointer itemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
         itemsHint.setRadius(16);
         itemsHint.setText("In this three part test, you'll be asked to <b>recall the location</b> of these items.");
 
@@ -198,7 +250,6 @@ public class GridTutorial extends BaseFragment {
         getImageView(2,2).setImageResource(R.drawable.pen);
         getImageView(1,3).setImageResource(R.drawable.key);
 
-        final HintPointer gridsHint = new HintPointer(getActivity(), image43, false, true);
         gridsHint.setRadius(16);
         gridsHint.setText("The items will be placed in a grid of boxes. <b>Remember which box each item is in.</b> You will have 3 seconds.");
 
@@ -228,11 +279,9 @@ public class GridTutorial extends BaseFragment {
             ((TextView)gridLayoutLetters.getChildAt(i)).setTypeface(font);
         }
 
-        final HintHighlighter pulsateF = new HintHighlighter(getActivity());
         pulsateF.addPulsingTarget(tapThisF);
         pulsateF.show();
 
-        final HintPointer tapThisFHint = new HintPointer(getActivity(), tapThisF, true, false);
         tapThisFHint.setText("Tap this letter F.");
         tapThisFHint.show();
 
@@ -249,7 +298,6 @@ public class GridTutorial extends BaseFragment {
                             pulsateF.dismiss();
                             tapThisFHint.dismiss();
 
-                            final HintPointer tapAllFsHint = new HintPointer(getActivity(), image43, false, true);
                             tapAllFsHint.setText("Now: Tap all the F's you see as quickly as you can. You will have 3 seconds.");
 
                             View.OnClickListener listener = new View.OnClickListener() {
@@ -317,7 +365,6 @@ public class GridTutorial extends BaseFragment {
     private void setSecondItemLayout() {
         fadeInView(itemsLayout, 1f);
 
-        final HintPointer secondItemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
         secondItemsHint.setText("In the final part of the test, you will select the three boxes where these items were located in part one.");
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -352,11 +399,9 @@ public class GridTutorial extends BaseFragment {
 
         selectedCount = 0;
 
-        final HintPointer recallHint = new HintPointer(getActivity(), image33, true, false);
         recallHint.setText("Hint: One item was located in this box. Tap here.");
         recallHint.show();
 
-        final HintHighlighter pulsateGridItem = new HintHighlighter(getActivity());
         pulsateGridItem.addPulsingTarget(image33);
         pulsateGridItem.show();
 

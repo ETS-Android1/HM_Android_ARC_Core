@@ -60,6 +60,24 @@ public class SymbolTutorial extends BaseFragment {
     private int shortAnimationDuration;
     private int progressIncrement;
 
+    HintHighlighter buttonTop2Highlight;
+    HintPointer buttonTop2Hint;
+
+    HintHighlighter topSymbolsHighlight;
+    HintPointer topSymbolsHint;
+
+    HintHighlighter bottomSymbolsHighlight;
+    HintPointer bottomSymbolsHint;
+
+    HintHighlighter initialTilesOutline;
+    HintHighlighter initialTilesPulsate;
+
+    HintHighlighter secondTilesOutline;
+    HintHighlighter secondTilesPulsate;
+
+    HintHighlighter finalTilesOutline;
+    HintHighlighter finalTilesPulsate;
+
     public SymbolTutorial() {
 
     }
@@ -107,13 +125,57 @@ public class SymbolTutorial extends BaseFragment {
         buttonBottom1.setImages(R.drawable.ic_symbol_5_tutorial, R.drawable.ic_symbol_4_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_7_tutorial, R.drawable.ic_symbol_3_tutorial);
 
+        buttonTop2Highlight = new HintHighlighter(getActivity());
+        buttonTop2Hint = new HintPointer(getActivity(), buttonTop2, true, false);
+
+        topSymbolsHighlight = new HintHighlighter(getActivity());
+        topSymbolsHint = new HintPointer(getActivity(), topSymbols, true, false);
+
+        bottomSymbolsHighlight = new HintHighlighter(getActivity());
+        bottomSymbolsHint = new HintPointer(getActivity(), bottomSymbolsButtons, true, true);
+
+        initialTilesOutline = new HintHighlighter(getActivity());
+        initialTilesPulsate = new HintHighlighter(getActivity());
+
+        secondTilesOutline = new HintHighlighter(getActivity());
+        secondTilesPulsate = new HintHighlighter(getActivity());
+
+        finalTilesOutline = new HintHighlighter(getActivity());
+        finalTilesPulsate = new HintHighlighter(getActivity());
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 handlerOutline.removeCallbacks(runnableTileOutline);
                 handlerPulsate.removeCallbacks(runnableTilePulsate);
                 handlerCoachmark.removeCallbacks(runnableCoachmark);
-                NavigationManager.getInstance().popBackStack();
+
+                buttonTop2Highlight.dismiss();
+                buttonTop2Hint.dismiss();
+
+                topSymbolsHighlight.dismiss();
+                topSymbolsHint.dismiss();
+
+                bottomSymbolsHighlight.dismiss();
+                bottomSymbolsHint.dismiss();
+
+                initialTilesOutline.dismiss();
+                initialTilesPulsate.dismiss();
+
+                secondTilesOutline.dismiss();
+                secondTilesPulsate.dismiss();
+
+                finalTilesOutline.dismiss();
+                finalTilesPulsate.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        NavigationManager.getInstance().popBackStack();
+                    }
+                };
+                handler.postDelayed(runnable,300);
             }
         });
 
@@ -137,11 +199,9 @@ public class SymbolTutorial extends BaseFragment {
 
     private void stepMiddleTopTile() {
 
-        final HintHighlighter buttonTop2Highlight = new HintHighlighter(getActivity());
         buttonTop2Highlight.addTarget(buttonTop2, 10, 10);
         buttonTop2Highlight.show();
 
-        final HintPointer buttonTop2Hint = new HintPointer(getActivity(), buttonTop2, true, false);
         buttonTop2Hint.setText("This is a tile. Each tile includes a pair of symbols.");
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -168,11 +228,9 @@ public class SymbolTutorial extends BaseFragment {
 
     private void stepAllTopTiles() {
 
-        final HintHighlighter topSymbolsHighlight = new HintHighlighter(getActivity());
         topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
         topSymbolsHighlight.show();
 
-        final HintPointer topSymbolsHint = new HintPointer(getActivity(), topSymbols, true, false);
         topSymbolsHint.setText("You will see three tiles on the top of the screen...");
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -199,11 +257,9 @@ public class SymbolTutorial extends BaseFragment {
 
     private void stepBottomTiles() {
 
-        final HintHighlighter bottomSymbolsHighlight = new HintHighlighter(getActivity());
         bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
         bottomSymbolsHighlight.show();
 
-        final HintPointer bottomSymbolsHint = new HintPointer(getActivity(), bottomSymbolsButtons, true, true);
         bottomSymbolsHint.setText("...and two tiles on the bottom.");
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -230,11 +286,9 @@ public class SymbolTutorial extends BaseFragment {
 
     private void initialTiles() {
 
-        final HintHighlighter initialTilesOutline = new HintHighlighter(getActivity());
         initialTilesOutline.addTarget(buttonBottom1);
         initialTilesOutline.addTarget(buttonTop3);
 
-        final HintHighlighter initialTilesPulsate = new HintHighlighter(getActivity());
         initialTilesPulsate.addPulsingTarget(buttonBottom1);
         initialTilesPulsate.addTarget(buttonTop3);
 
@@ -311,11 +365,9 @@ public class SymbolTutorial extends BaseFragment {
         buttonBottom1.setImages(R.drawable.ic_symbol_5_tutorial, R.drawable.ic_symbol_2_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        final HintHighlighter secondTilesOutline = new HintHighlighter(getActivity());
         secondTilesOutline.addTarget(buttonBottom2);
         secondTilesOutline.addTarget(buttonTop2);
 
-        final HintHighlighter secondTilesPulsate = new HintHighlighter(getActivity());
         secondTilesPulsate.addPulsingTarget(buttonBottom2);
         secondTilesPulsate.addTarget(buttonTop2);
 
@@ -391,11 +443,9 @@ public class SymbolTutorial extends BaseFragment {
         buttonBottom1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_7_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        final HintHighlighter finalTilesOutline = new HintHighlighter(getActivity());
         finalTilesOutline.addTarget(buttonBottom1);
         finalTilesOutline.addTarget(buttonTop1);
 
-        final HintHighlighter finalTilesPulsate = new HintHighlighter(getActivity());
         finalTilesPulsate.addPulsingTarget(buttonBottom1);
         finalTilesPulsate.addTarget(buttonTop1);
 
