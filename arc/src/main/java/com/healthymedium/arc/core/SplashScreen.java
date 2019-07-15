@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;
@@ -84,6 +85,8 @@ public class SplashScreen extends BaseFragment {
                 FontFactory.getInstance().setDefaultFont(Fonts.roboto);
                 FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
             }
+
+            Hints.load();
 
             Visit visit = Study.getCurrentVisit();
             if(visit!=null){

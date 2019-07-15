@@ -15,8 +15,6 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Rating extends LinearLayoutCompat{
 
-
-    TextView text;
     TextView textLow;
     TextView textHigh;
 
@@ -41,7 +39,6 @@ public class Rating extends LinearLayoutCompat{
 
     private void init(Context context){
         View view = inflate(context,R.layout.custom_rating,this);
-        text = view.findViewById(R.id.textviewRatingText);
         textLow = view.findViewById(R.id.textviewRatingLow);
         textHigh = view.findViewById(R.id.textviewRatingHigh);
         seekBar = view.findViewById(R.id.seekbarRating);
@@ -79,7 +76,6 @@ public class Rating extends LinearLayoutCompat{
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                text.setVisibility(INVISIBLE);
                 if(listener!=null){
                     listener.onStartTrackingTouch(seekBar);
                 }
@@ -128,6 +124,10 @@ public class Rating extends LinearLayoutCompat{
         if(seekBar!=null){
             seekBar.setProgress((int) (value*100));
         }
+    }
+
+    public SeekBar getSeekBar(){
+        return seekBar;
     }
 
 

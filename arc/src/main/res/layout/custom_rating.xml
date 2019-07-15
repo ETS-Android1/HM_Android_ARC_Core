@@ -8,31 +8,10 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="65dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="56dp"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:rotation="45"
-            android:visibility="gone"
-            app:srcCompat="@drawable/border_grey" />
-
-        <TextView
-            android:id="@+id/textviewRatingText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/background_yellow_bubble"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/wake_drag" />
-
-    </FrameLayout>
+        android:paddingRight="24dp"/>
 
     <FrameLayout
         android:layout_width="match_parent"
