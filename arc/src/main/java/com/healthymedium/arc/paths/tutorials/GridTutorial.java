@@ -310,49 +310,56 @@ public class GridTutorial extends BaseFragment {
             ((TextView)gridLayoutLetters.getChildAt(i)).setTypeface(font);
         }
 
-        pulsateF.addPulsingTarget(tapThisF);
-        pulsateF.show();
-
-        tapThisFHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf1));
-        tapThisFHint.show();
-
-        View.OnTouchListener listener = new View.OnTouchListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                int action = event.getAction();
-                switch (action){
-                    case MotionEvent.ACTION_DOWN:
-                        if((view.getTag() == null) || (view.getTag().equals(false))){
-                            view.setTag(true);
-                            view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridNormal));
+            public void run() {
+                pulsateF.addPulsingTarget(tapThisF,25);
+                pulsateF.show();
 
-                            pulsateF.dismiss();
-                            tapThisFHint.dismiss();
+                tapThisFHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf1));
+                tapThisFHint.show();
 
-                            tapAllFsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf2));
+                View.OnTouchListener listener = new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View view, MotionEvent event) {
+                        int action = event.getAction();
+                        switch (action){
+                            case MotionEvent.ACTION_DOWN:
+                                if((view.getTag() == null) || (view.getTag().equals(false))){
+                                    view.setTag(true);
+                                    view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridNormal));
 
-                            View.OnClickListener listener = new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    tapAllFsHint.dismiss();
-                                    tapLetters();
+                                    pulsateF.dismiss();
+                                    tapThisFHint.dismiss();
+
+                                    tapAllFsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf2));
+
+                                    View.OnClickListener listener = new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            tapAllFsHint.dismiss();
+                                            tapLetters();
+                                        }
+                                    };
+
+                                    tapAllFsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), listener);
+                                    tapAllFsHint.show();
+
+                                    return false;
                                 }
-                            };
-
-                            tapAllFsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), listener);
-                            tapAllFsHint.show();
-
-                            return false;
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                break;
                         }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
-                }
-                return false;
-            }
-        };
+                        return false;
+                    }
+                };
 
-        tapThisF.setOnTouchListener(listener);
+                tapThisF.setOnTouchListener(listener);
+
+            }
+        },500);
+
 
     }
 
