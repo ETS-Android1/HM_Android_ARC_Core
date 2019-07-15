@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SymbolTutorial extends BaseFragment {
 
@@ -62,7 +64,6 @@ public class SymbolTutorial extends BaseFragment {
     LinearLayout progressBar;
 
     private int shortAnimationDuration;
-    private int progressIncrement;
 
     HintHighlighter buttonTop2Highlight;
     HintPointer buttonTop2Hint;
@@ -118,6 +119,7 @@ public class SymbolTutorial extends BaseFragment {
 
         textView20 = view.findViewById(R.id.textView20);
         textViewComplete = view.findViewById(R.id.textViewComplete);
+        textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
         endButton = view.findViewById(R.id.endButton);
         progressBar = view.findViewById(R.id.progressBar);
@@ -209,7 +211,7 @@ public class SymbolTutorial extends BaseFragment {
         buttonTop2Highlight.addTarget(buttonTop2, 10, 10);
         buttonTop2Highlight.show();
 
-        buttonTop2Hint.setText("This is a tile. Each tile includes a pair of symbols.");
+        buttonTop2Hint.setText(ViewUtil.getString(R.string.popup_tutorial_tile));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -228,7 +230,7 @@ public class SymbolTutorial extends BaseFragment {
             }
         };
 
-        buttonTop2Hint.addButton("Next", listener);
+        buttonTop2Hint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
         buttonTop2Hint.show();
     }
@@ -238,7 +240,7 @@ public class SymbolTutorial extends BaseFragment {
         topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
         topSymbolsHighlight.show();
 
-        topSymbolsHint.setText("You will see three tiles on the top of the screen...");
+        topSymbolsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tilestop));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -257,7 +259,7 @@ public class SymbolTutorial extends BaseFragment {
             }
         };
 
-        topSymbolsHint.addButton("Next", listener);
+        topSymbolsHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
         topSymbolsHint.show();
     }
@@ -267,7 +269,7 @@ public class SymbolTutorial extends BaseFragment {
         bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
         bottomSymbolsHighlight.show();
 
-        bottomSymbolsHint.setText("...and two tiles on the bottom.");
+        bottomSymbolsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tilesbottom));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -286,7 +288,7 @@ public class SymbolTutorial extends BaseFragment {
             }
         };
 
-        bottomSymbolsHint.addButton("Next", listener);
+        bottomSymbolsHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
         bottomSymbolsHint.show();
     }
@@ -339,7 +341,7 @@ public class SymbolTutorial extends BaseFragment {
                 buttonBottom1.setOnClickListener(null);
 
                 final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
-                greatJobHint.setText("Great job! Let's try a couple more for practice.");
+                greatJobHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
 
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
@@ -358,7 +360,7 @@ public class SymbolTutorial extends BaseFragment {
                     }
                 };
 
-                greatJobHint.addButton("Next", listener);
+                greatJobHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                 greatJobHint.show();
             }
@@ -417,7 +419,7 @@ public class SymbolTutorial extends BaseFragment {
                 buttonBottom2.setOnClickListener(null);
 
                 final HintPointer niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
-                niceHint.setText("Nice! One more...");
+                niceHint.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
 
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
@@ -436,7 +438,7 @@ public class SymbolTutorial extends BaseFragment {
                     }
                 };
 
-                niceHint.addButton("Next", listener);
+                niceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                 niceHint.show();
             }

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -147,6 +148,7 @@ public class PricesTutorial extends BaseFragment {
         textView12=view.findViewById(R.id.textView12);
 
         textViewComplete = view.findViewById(R.id.textViewComplete);
+        textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
         endButton = view.findViewById(R.id.endButton);
         progressBar = view.findViewById(R.id.progressBar);
@@ -184,7 +186,7 @@ public class PricesTutorial extends BaseFragment {
         firstPriceContainerHighlight.addTarget(priceContainer, 10);
         firstPriceContainerHighlight.show();
 
-        firstPriceHint.setText("What do you think? Choose the answer that makes sense to you.");
+        firstPriceHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose1));
         firstPriceHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
@@ -202,7 +204,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        firstGreatChoiceHint.setText("Great choice! Let's try another.");
+                        firstGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -221,7 +223,7 @@ public class PricesTutorial extends BaseFragment {
                             }
                         };
 
-                        firstGreatChoiceHint.addButton("Next", listener);
+                        firstGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                         firstGreatChoiceHint.show();
 
@@ -246,7 +248,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        firstGreatChoiceHint.setText("Great choice! Let's try another.");
+                        firstGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -265,7 +267,7 @@ public class PricesTutorial extends BaseFragment {
                             }
                         };
 
-                        firstGreatChoiceHint.addButton("Next", listener);
+                        firstGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                         firstGreatChoiceHint.show();
 
@@ -280,12 +282,10 @@ public class PricesTutorial extends BaseFragment {
         textviewFood.setText("Soup");
         textviewPrice.setText("$10.82");
 
-        // priceContainerHighlight = new HintHighlighter(getActivity());
         secondPriceContainerHighlight.addTarget(priceContainer, 10);
         secondPriceContainerHighlight.show();
 
-        // final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
-        secondPriceHint.setText("What do you think? Choose the answer that makes sense to you.");
+        secondPriceHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose1));
         secondPriceHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
@@ -303,7 +303,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        secondGreatChoiceHint.setText("Another great choice! Let's proceed to part two.");
+                        secondGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice2));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -322,7 +322,7 @@ public class PricesTutorial extends BaseFragment {
                             }
                         };
 
-                        secondGreatChoiceHint.addButton("Next", listener);
+                        secondGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                         secondGreatChoiceHint.show();
 
@@ -347,7 +347,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        secondGreatChoiceHint.setText("Another great choice! Let's proceed to part two.");
+                        secondGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice2));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -366,7 +366,7 @@ public class PricesTutorial extends BaseFragment {
                             }
                         };
 
-                        secondGreatChoiceHint.addButton("Next", listener);
+                        secondGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                         secondGreatChoiceHint.show();
 
@@ -384,12 +384,10 @@ public class PricesTutorial extends BaseFragment {
         buttonYes.setText("$6.78");
         buttonNo.setText("$3.27");
 
-        // priceContainerHighlight = new HintHighlighter(getActivity());
         firstMatchContainerHighlight.addTarget(priceContainer, 10);
         firstMatchContainerHighlight.show();
 
-        // final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
-        firstMatchHint.setText("What do you think? Try your best to recall the price from part one.");
+        firstMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_recall));
         firstMatchHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
@@ -407,7 +405,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        firstMatchGreatChoiceHint.setText("Great choice! Let's try another");
+                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -426,7 +424,7 @@ public class PricesTutorial extends BaseFragment {
                             }
                         };
 
-                        firstMatchGreatChoiceHint.addButton("Next", listener);
+                        firstMatchGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                         firstMatchGreatChoiceHint.show();
 
@@ -451,7 +449,7 @@ public class PricesTutorial extends BaseFragment {
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
 
-                        firstMatchGreatChoiceHint.setText("Great choice! Let's try another");
+                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -470,7 +468,7 @@ public class PricesTutorial extends BaseFragment {
                             }
                         };
 
-                        firstMatchGreatChoiceHint.addButton("Next", listener);
+                        firstMatchGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
                         firstMatchGreatChoiceHint.show();
 
@@ -489,12 +487,10 @@ public class PricesTutorial extends BaseFragment {
         buttonYes.setText("$10.82");
         buttonNo.setText("$4.01");
 
-        // priceContainerHighlight = new HintHighlighter(getActivity());
         secondMatchContainerHighlight.addTarget(priceContainer, 10);
         secondMatchContainerHighlight.show();
 
-        // final HintPointer priceHint = new HintPointer(getActivity(), priceContainer, true, false);
-        secondMatchHint.setText("What do you think? Choose the price that you saw in part one.");
+        secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose2));
         secondMatchHint.show();
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
@@ -511,8 +507,6 @@ public class PricesTutorial extends BaseFragment {
 
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
-
-                        // fadeOutView(bottomPopup);
 
                         fadeOutView(textView12);
                         fadeOutView(buttonNo);
@@ -553,8 +547,6 @@ public class PricesTutorial extends BaseFragment {
 
                         buttonYes.setOnTouchListener(null);
                         buttonNo.setOnTouchListener(null);
-
-                        // fadeOutView(bottomPopup);
 
                         fadeOutView(textView12);
                         fadeOutView(buttonNo);

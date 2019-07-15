@@ -836,7 +836,7 @@
             android:layout_marginLeft="@dimen/frame_vertical"
             android:layout_marginRight="@dimen/frame_vertical"
             android:paddingTop="21dp"
-            android:text="Tutorial Complete"
+            android:text="@string/testing_tutorial_complete"
             android:textAlignment="center"
             android:textColor="@color/secondary"
             android:textSize="26dp"
@@ -851,7 +851,7 @@
             android:layout_marginBottom="24dp"
             android:visibility="gone"
             app:enabled="true"
-            app:text="CLOSE" />
+            app:text="@string/button_close" />
 
     </RelativeLayout>
 

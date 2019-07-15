@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class GridTutorial extends BaseFragment {
 
@@ -79,7 +81,7 @@ public class GridTutorial extends BaseFragment {
         @Override
         public void run() {
             partTwoHint.setRadius(16);
-            partTwoHint.setText("<b>Great!</b><br>Let's proceed to part two.");
+            partTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_part2));
 
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override
@@ -98,7 +100,7 @@ public class GridTutorial extends BaseFragment {
                 }
             };
 
-            partTwoHint.addButton("Next", listener);
+            partTwoHint.addButton(ViewUtil.getString(R.string.button_next), listener);
             partTwoHint.show();
         }
     };
@@ -108,7 +110,7 @@ public class GridTutorial extends BaseFragment {
         public void run() {
             fadeInView(fullScreenGray, 0.9f);
 
-            niceWorkHint.setText("Nice work! Don't worry if you didn't find them all.");
+            niceWorkHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf3));
 
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override
@@ -128,7 +130,7 @@ public class GridTutorial extends BaseFragment {
                 }
             };
 
-            niceWorkHint.addButton("Next", listener);
+            niceWorkHint.addButton(ViewUtil.getString(R.string.button_next), listener);
             niceWorkHint.show();
         }
     };
@@ -164,6 +166,8 @@ public class GridTutorial extends BaseFragment {
         image43 = view.findViewById(R.id.image43);
 
         textViewComplete = view.findViewById(R.id.textViewComplete);
+        textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
+
         tapThisF = view.findViewById(R.id.tapThisF);
 
         endButton = view.findViewById(R.id.endButton);
@@ -245,7 +249,7 @@ public class GridTutorial extends BaseFragment {
 
     private void setInitialItemLayout() {
         itemsHint.setRadius(16);
-        itemsHint.setText("In this three part test, you'll be asked to <b>recall the location</b> of these items.");
+        itemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_grid_recall));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -264,7 +268,7 @@ public class GridTutorial extends BaseFragment {
             }
         };
 
-        itemsHint.addButton("Got It", listener);
+        itemsHint.addButton(ViewUtil.getString(R.string.popup_gotit), listener);
         itemsHint.show();
 
     }
@@ -278,7 +282,7 @@ public class GridTutorial extends BaseFragment {
         getImageView(1,3).setImageResource(R.drawable.key);
 
         gridsHint.setRadius(16);
-        gridsHint.setText("The items will be placed in a grid of boxes. <b>Remember which box each item is in.</b> You will have 3 seconds.");
+        gridsHint.setText(ViewUtil.getString(R.string.popup_tutorial_rememberbox));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -291,7 +295,7 @@ public class GridTutorial extends BaseFragment {
             }
         };
 
-        gridsHint.addButton("I'm Ready", listener);
+        gridsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), listener);
         gridsHint.show();
     }
 
@@ -309,7 +313,7 @@ public class GridTutorial extends BaseFragment {
         pulsateF.addPulsingTarget(tapThisF);
         pulsateF.show();
 
-        tapThisFHint.setText("Tap this letter F.");
+        tapThisFHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf1));
         tapThisFHint.show();
 
         View.OnTouchListener listener = new View.OnTouchListener() {
@@ -325,7 +329,7 @@ public class GridTutorial extends BaseFragment {
                             pulsateF.dismiss();
                             tapThisFHint.dismiss();
 
-                            tapAllFsHint.setText("Now: Tap all the F's you see as quickly as you can. You will have 3 seconds.");
+                            tapAllFsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf2));
 
                             View.OnClickListener listener = new View.OnClickListener() {
                                 @Override
@@ -335,7 +339,7 @@ public class GridTutorial extends BaseFragment {
                                 }
                             };
 
-                            tapAllFsHint.addButton("I'm Ready", listener);
+                            tapAllFsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), listener);
                             tapAllFsHint.show();
 
                             return false;
@@ -392,7 +396,7 @@ public class GridTutorial extends BaseFragment {
     private void setSecondItemLayout() {
         fadeInView(itemsLayout, 1f);
 
-        secondItemsHint.setText("In the final part of the test, you will select the three boxes where these items were located in part one.");
+        secondItemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_selectbox));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -411,7 +415,7 @@ public class GridTutorial extends BaseFragment {
             }
         };
 
-        secondItemsHint.addButton("I'm Ready", listener);
+        secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), listener);
         secondItemsHint.show();
     }
 
@@ -426,7 +430,7 @@ public class GridTutorial extends BaseFragment {
 
         selectedCount = 0;
 
-        recallHint.setText("Hint: One item was located in this box. Tap here.");
+        recallHint.setText(ViewUtil.getString(R.string.popup_tutorial_boxhint));
         recallHint.show();
 
         pulsateGridItem.addPulsingTarget(image33);
