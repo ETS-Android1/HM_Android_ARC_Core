@@ -34,12 +34,24 @@ public class ViewUtil {
         return (int) (sp * Resources.getSystem().getDisplayMetrics().scaledDensity);
     }
 
+    public static int getColor(Context context, @ColorRes int id){
+        return ContextCompat.getColor(context,id);
+    }
+
     public static int getColor(@ColorRes int id){
         return ContextCompat.getColor(Application.getInstance(),id);
     }
 
+    public static Drawable getDrawable(Context context, @DrawableRes int id){
+        return ContextCompat.getDrawable(context,id);
+    }
+
     public static Drawable getDrawable(@DrawableRes int id){
         return ContextCompat.getDrawable(Application.getInstance(),id);
+    }
+
+    public static String getString(Context context, @StringRes int id){
+        return context.getString(id);
     }
 
     public static String getString(@StringRes int id){
