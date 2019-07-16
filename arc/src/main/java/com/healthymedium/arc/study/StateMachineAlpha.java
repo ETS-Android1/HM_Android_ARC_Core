@@ -336,7 +336,6 @@ public class StateMachineAlpha extends StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
 
         if(Config.IS_REMOTE) {
-            // EXR
             // I commit or I'm not able to commit
             fragments.add(new QuestionRemoteStudyCommitment(
                     true,
@@ -347,7 +346,6 @@ public class StateMachineAlpha extends StateMachine {
             ));
 
         } else {
-            // CRI
             // I understand
             fragments.add(new QuestionSingleButton(
                     false,
