@@ -319,27 +319,29 @@
 
     <string name="popup_gotit">&lt;b>Got It&lt;/b></string>
 
-    <string name="popup_tutorial_tile">&lt;b>This is a tile.&lt;/b> &lt;br /&gt;&lt;br /&gt;Each tile includes a pair of symbols.</string>
+    <string name="popup_tutorial_tile">&lt;b>This is a tile.&lt;/b> &lt;br /&gt;Each tile includes a pair of symbols.</string>
     <string name="popup_tutorial_tilestop">You will see &lt;b>three tiles&lt;/b> on the top of the screen&#8230;</string>
     <string name="popup_tutorial_tilesbottom">&#8230;and &lt;b>two tiles&lt;/b> on the bottom.</string>
-    <string name="popup_tutorial_greatjob">&lt;b>Great job!&lt;/b> &lt;br /&gt;&lt;br /&gt;Let\'s try a couple more for practice.</string>
-    <string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> &lt;br /&gt;&lt;br /&gt;One more&#8230;</string>
+    <string name="popup_tutorial_greatjob">&lt;b>Great job!&lt;/b> &lt;br /&gt;Let\'s try a couple more for practice.</string>
+    <string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> &lt;br /&gt;One more&#8230;</string>
 
-    <string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b> &lt;br /&gt;&lt;br /&gt;Choose the answer that makes sense to you.</string>
-    <string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> &lt;br /&gt;&lt;br /&gt;Let\'s try another.</string>
-    <string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> &lt;br /&gt;&lt;br /&gt;Let\'s proceed to part two.</string>
-    <string name="popup_tutorial_recall">&lt;b>What do you think?&lt;/b> &lt;br /&gt;&lt;br /&gt;Try your best to recall the price from part one.</string>
-    <string name="popup_tutorial_choose2">&lt;b>What do you think?&lt;/b> &lt;br /&gt;&lt;br /&gt;Choose the price that you saw in part one.</string>
+    <string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the answer that makes sense to you.</string>
+    <string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> &lt;br /&gt;Let\'s try another.</string>
+    <string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>
+    <string name="popup_tutorial_recall">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Try your best to recall the price from part one.</string>
+    <string name="popup_tutorial_choose2">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the price that you saw in part one.</string>
 
     <string name="popup_tutorial_grid_recall">In this three part test, you\'ll be asked to &lt;b>recall the location&lt;/b> of these items.</string>
     <string name="popup_tutorial_rememberbox">The items will be placed in a grid of boxes. &lt;b>Remember which box each item is in.&lt;/b> You will have 3 seconds.</string>
     <string name="popup_tutorial_ready">&lt;b>I\'m Ready.&lt;/b></string>
-    <string name="popup_tutorial_part2">&lt;b>Great!&lt;/b> &lt;br /&gt;&lt;br /&gt;Let\'s proceed to part two.</string>
+    <string name="popup_tutorial_part2">&lt;b>Great!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>
     <string name="popup_tutorial_tapf1">Tap this letter F.</string>
-    <string name="popup_tutorial_tapf2">&lt;b>Perfect!&lt;/b> &lt;br /&gt;&lt;br /&gt;Now: Tap all the F\'s you can see as quickly as you can. You will have 3 seconds.</string>
-    <string name="popup_tutorial_tapf3">&lt;b>Nice work!&lt;/b> &lt;br /&gt;&lt;br /&gt;Don\'t worry if you didn\'t find them all.</string>
+    <string name="popup_tutorial_tapf2">&lt;b>Perfect!&lt;/b> &lt;br /&gt;Now: Tap all the F\'s you can see as quickly as you can. You will have 3 seconds.</string>
+    <string name="popup_tutorial_tapf3">&lt;b>Nice work!&lt;/b> &lt;br /&gt;Don\'t worry if you didn\'t find them all.</string>
     <string name="popup_tutorial_selectbox">In the final part of the test, you will &lt;b>select the three boxes&lt;/b> where these items were located in part one.</string>
     <string name="popup_tutorial_boxhint">&lt;b>Hint:&lt;/b> One item was located in this box. Tap here.</string>
+    <string name="popup_tutorial_tapbox">Now tap on the locations of the other two items.</string>
+    <string name="grids_subheader_boxes">Tap the boxes where the items were located in part one.</string>
 
     <string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
     <string name="symbols_complete">&lt;b>Symbols Test Complete!&lt;/b></string>
