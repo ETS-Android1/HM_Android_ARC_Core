@@ -26,10 +26,11 @@ public class CircleProgressView extends View {
     private float checkmarkY;
 
     private ValueAnimator progressAnimator;
-    private int progress;
+    private int progress = 0;
 
     private float startAngle = 270F;
     private float sweepAngle;
+    private float radius;
     private RectF rect;
 
     private Paint basePaint;
@@ -58,27 +59,29 @@ public class CircleProgressView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
 
+        Context context = getContext();
+
         // initialize member variables
         manualStrokeWidth = false;
         rect = new RectF(0,0,0,0);
 
         basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         basePaint.setStyle(Paint.Style.STROKE);
-        basePaint.setColor(ViewUtil.getColor(R.color.secondary));
+        basePaint.setColor(ViewUtil.getColor(context, R.color.secondary));
 
         shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         shadowPaint.setStyle(Paint.Style.STROKE);
         shadowPaint.setStrokeCap(Paint.Cap.ROUND);
-        shadowPaint.setColor(ViewUtil.getColor(R.color.white));
+        shadowPaint.setColor(ViewUtil.getColor(context, R.color.white));
 
         sweepPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         sweepPaint.setStyle(Paint.Style.STROKE);
         sweepPaint.setStrokeCap(Paint.Cap.ROUND);
-        sweepPaint.setColor(ViewUtil.getColor(R.color.secondaryAccent));
+        sweepPaint.setColor(ViewUtil.getColor(context, R.color.secondaryAccent));
 
         fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         fillPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        fillPaint.setColor(ViewUtil.getColor(R.color.secondaryAccent));
+        fillPaint.setColor(ViewUtil.getColor(context, R.color.secondaryAccent));
 
         progressAnimator = new ValueAnimator();
         progressAnimator.addUpdateListener(progressListener);
@@ -88,7 +91,7 @@ public class CircleProgressView extends View {
         checkmarkAnimator.addUpdateListener(checkmarkListener);
         checkmarkAnimator.setDuration(200);
 
-        checkmark = ViewUtil.getDrawable(R.drawable.ic_checkmark_blue);
+        checkmark = ViewUtil.getDrawable(context, R.drawable.ic_checkmark_blue);
 
         //
         final TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CircleProgressView, defStyle, 0);
@@ -144,6 +147,7 @@ public class CircleProgressView extends View {
         // create a rect that's small enough that the stroke isn't cut off
         float offset = (strokeWidth/2);
         rect.set(offset,offset,size-offset,size-offset);
+        radius = (size-strokeWidth)/2;
 
         int halfSize = size/2;
         int quarterSize = size/4;
@@ -161,14 +165,19 @@ public class CircleProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
+        if(progress==0) {
+            canvas.drawCircle(rect.centerX(),rect.centerY(),radius,basePaint);
+            return;
+        }
+
         if(progress<100) {
-            canvas.drawArc(rect, startAngle, 360F, false, basePaint);
+            canvas.drawCircle(rect.centerX(),rect.centerY(),radius,basePaint);
             canvas.drawArc(rect, startAngle, sweepAngle, false, shadowPaint);
             canvas.drawArc(rect, startAngle+1f, sweepAngle-2f, false, sweepPaint);
             return;
         }
 
-        canvas.drawArc(rect, startAngle, 360F, false, fillPaint);
+        canvas.drawCircle(rect.centerX(),rect.centerY(),radius,fillPaint);
         checkmark.setAlpha(checkmarkAlpha);
         Rect rect = checkmark.getBounds();
         rect.top = (int) checkmarkY;
