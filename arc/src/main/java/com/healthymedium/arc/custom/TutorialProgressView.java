@@ -60,8 +60,8 @@ public class TutorialProgressView extends View {
 
     private void init(AttributeSet attrs, int defStyle) {
 
-        white = ViewUtil.getColor(R.color.white);
-        yellow = ViewUtil.getColor(R.color.hintDark);
+        white = ViewUtil.getColor(getContext(),R.color.white);
+        yellow = ViewUtil.getColor(getContext(),R.color.hintDark);
 
         dp16 = ViewUtil.dpToPx(16);
         dp8 = ViewUtil.dpToPx(8);
