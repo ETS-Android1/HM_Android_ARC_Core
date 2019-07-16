@@ -51,7 +51,7 @@ public class HintHighlightTarget extends View{
         Canvas canvas = new Canvas(bitmap);
         Path clipPath = new Path();
 
-        if(height==width){
+        if(height==width && radius==height/2){
             clipPath.addCircle(x+width/2,y+height/2, radius, Path.Direction.CW);
         } else {
             clipPath.addRoundRect(rect, radius, radius, Path.Direction.CW);
