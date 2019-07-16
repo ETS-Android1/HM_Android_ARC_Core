@@ -52,12 +52,24 @@ public class AltStandardTemplate extends BaseFragment {
 
     boolean allowBack;
     boolean disableScrollBehavior;
+    boolean showNextButton = true;
 
     public AltStandardTemplate(boolean allowBack, String header, String subheader) {
         this.allowBack = allowBack;
         stringButton = "NEXT";
         stringHeader = header;
         stringSubHeader = subheader;
+
+        if(allowBack){
+            allowBackPress(true);
+        }
+    }
+
+    public AltStandardTemplate(boolean allowBack, String header, String subheader, Boolean showButton) {
+        this.allowBack = allowBack;
+        stringHeader = header;
+        stringSubHeader = subheader;
+        showNextButton = showButton;
 
         if(allowBack){
             allowBackPress(true);
@@ -143,15 +155,25 @@ public class AltStandardTemplate extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if(disableScrollBehavior) {
-            buttonNext.setVisibility(View.VISIBLE);
-            buttonShowing = true;
+            if (!showNextButton) {
+                hideNextButton();
+                buttonShowing = false;
+            }  else {
+                buttonNext.setVisibility(View.VISIBLE);
+                buttonShowing = true;
+            }
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if (scrollViewIsAtBottom()) {
-                        buttonNext.setVisibility(View.VISIBLE);
-                        buttonShowing = true;
+                        if (!showNextButton) {
+                            hideNextButton();
+                            buttonShowing = false;
+                        } else {
+                            buttonNext.setVisibility(View.VISIBLE);
+                            buttonShowing = true;
+                        }
                     } else {
                         textViewScroll.setVisibility(View.VISIBLE);
                         buttonNext.startAnimation(hideAnimation);
@@ -259,4 +281,8 @@ public class AltStandardTemplate extends BaseFragment {
 
         }
     };
+
+    protected void hideNextButton() {
+        buttonNext.setVisibility(View.GONE);
+    }
 }

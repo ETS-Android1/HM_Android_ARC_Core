@@ -1,5 +1,11 @@
 package com.healthymedium.arc.study;
 
+import android.content.res.Resources;
+
+import com.healthymedium.arc.paths.questions.QuestionPolar;
+import com.healthymedium.arc.paths.questions.QuestionPolarAlt;
+import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
+import com.healthymedium.arc.paths.questions.QuestionSingleButton;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.tests.CognitiveTest;
@@ -325,6 +331,36 @@ public class StateMachineAlpha extends StateMachine {
     }
 
     // state machine helpers ---------------------------------------------------------------------
+
+    public void addWelcome() {
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        if(Config.IS_REMOTE) {
+            // EXR
+            // I commit or I'm not able to commit
+            fragments.add(new QuestionRemoteStudyCommitment(
+                    true,
+                    ViewUtil.getString(R.string.testing_commitment),
+                    ViewUtil.getString(R.string.onboarding_body),
+                    ViewUtil.getString(R.string.radio_commit),
+                    ViewUtil.getString(R.string.radio_nocommit)
+            ));
+
+        } else {
+            // CRI
+            // I understand
+            fragments.add(new QuestionSingleButton(
+                    false,
+                    ViewUtil.getString(R.string.onboarding_header),
+                    ViewUtil.getString(R.string.onboarding_body),
+                    ViewUtil.getString(R.string.button_continue),
+                    ViewUtil.getString(R.string.radio_understand)));
+        }
+
+        PathSegment segment = new PathSegment(fragments);
+        enableTransition(segment,true);
+        cache.segments.add(segment);
+    }
 
     public void checkForLandingPage(){
         if(Config.OPENED_FROM_NOTIFICATION) {

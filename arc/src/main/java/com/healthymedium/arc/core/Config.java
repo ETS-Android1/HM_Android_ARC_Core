@@ -20,6 +20,7 @@ public class Config {
     public static boolean ENABLE_SIGNATURES = false; // if true, signatures will be required before and after every test
     public static boolean ENABLE_VIGNETTES = false; // if true, a notification reminding the user of the upcoming visit will appear one month, week, and day from the start date
     public static boolean ENABLE_LEGACY_PRICE_SETS = false; // if true, the PriceManager will continue to use a long-standing, but incorrect, method to determine the price set for a given test session.
+    public static boolean IS_REMOTE = false; // if true, user will be required to state whether or not they commit to the study
     //Debug
     public static boolean DEBUG_DIALOGS = false; // click the header on most screens a couple times and a debug dialog will appear
     public static boolean ENABLE_LOGGING = false; // save logcat output to cached file 'Log'

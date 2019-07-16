@@ -10,12 +10,13 @@ import android.widget.CompoundButton;
 
 import com.healthymedium.arc.custom.RadioButton;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.templates.AltQuestionTemplate;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 // a yes or no question
 @SuppressLint("ValidFragment")
-public class QuestionPolar extends QuestionTemplate {
+public class QuestionPolarAlt extends AltQuestionTemplate {
 
     RadioButton yesButton;
     RadioButton noButton;
@@ -25,12 +26,12 @@ public class QuestionPolar extends QuestionTemplate {
     String yesText;
     String noText;
 
-    public QuestionPolar(boolean allowBack, String header, String subheader) {
+    public QuestionPolarAlt(boolean allowBack, String header, String subheader) {
         super(allowBack,header,subheader);
         type = "choice";
     }
 
-    public QuestionPolar(boolean allowBack, String header, String subheader, String yesAnswer, String noAnswer) {
+    public QuestionPolarAlt(boolean allowBack, String header, String subheader, String yesAnswer, String noAnswer) {
         super(allowBack,header,subheader);
         type = "choice";
         yesText = yesAnswer;
