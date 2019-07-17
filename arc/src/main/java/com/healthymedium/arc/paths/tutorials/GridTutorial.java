@@ -83,7 +83,6 @@ public class GridTutorial extends BaseFragment {
     Runnable runnableProceedToPartTwo = new Runnable() {
         @Override
         public void run() {
-            partTwoHint.setRadius(16);
             partTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_part2));
 
             View.OnClickListener listener = new View.OnClickListener() {
@@ -258,7 +257,6 @@ public class GridTutorial extends BaseFragment {
     }
 
     private void setInitialItemLayout() {
-        itemsHint.setRadius(16);
         itemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_grid_recall));
 
         View.OnClickListener listener = new View.OnClickListener() {
@@ -291,7 +289,6 @@ public class GridTutorial extends BaseFragment {
         getImageView(2,2).setImageResource(R.drawable.pen);
         getImageView(1,3).setImageResource(R.drawable.key);
 
-        gridsHint.setRadius(16);
         gridsHint.setText(ViewUtil.getString(R.string.popup_tutorial_rememberbox));
 
         View.OnClickListener listener = new View.OnClickListener() {

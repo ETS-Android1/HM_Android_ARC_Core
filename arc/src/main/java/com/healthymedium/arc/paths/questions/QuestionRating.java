@@ -73,7 +73,6 @@ public class QuestionRating extends QuestionTemplate {
 
         if(!Hints.hasBeenShown(HINT_QUESTION_RATING)){
             pointer = new HintPointer(getMainActivity(),rating.getSeekBar(),true,true);
-            pointer.setRadius(16);
             pointer.setText("Drag to select");
             pointer.show();
             Hints.markShown(HINT_QUESTION_RATING);

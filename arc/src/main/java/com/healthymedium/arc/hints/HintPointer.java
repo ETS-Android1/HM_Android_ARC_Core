@@ -77,6 +77,8 @@ public class HintPointer extends LinearLayout {
     private void init() {
         setWillNotDraw(false);
 
+        radius = ViewUtil.dpToPx(16); // default to 16dp radius
+
         setOrientation(LinearLayout.VERTICAL);
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(dp44,0,dp44,0);
