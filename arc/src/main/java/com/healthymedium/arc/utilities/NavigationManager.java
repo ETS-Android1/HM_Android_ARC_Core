@@ -104,20 +104,4 @@ public class NavigationManager {
         void onPopBack();
     }
 
-    public void openHome() {
-        open(new LandingTemplate(false));
-    }
-
-    public void openProgress() {
-        open(new ProgressScreen());
-    }
-
-    public void openEarnings() {
-        open(new EarningsScreen());
-    }
-
-    public void openResources() {
-        open(new ResourcesScreen());
-    }
-
 }

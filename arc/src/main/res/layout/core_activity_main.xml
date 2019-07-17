@@ -11,17 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.design.widget.BottomNavigationView
+    <com.healthymedium.arc.custom.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:paddingTop="1dp"
-        android:visibility="gone"
-        app:labelVisibilityMode="labeled"
-        app:itemBackground="@color/white"
-        app:menu="@menu/menu_navigation" />
+        android:visibility="gone" />
+
     <!--app:itemIconTint="@drawable/menu_item_selector"-->
     <!--app:itemTextColor="@drawable/menu_text_selector"-->
 
