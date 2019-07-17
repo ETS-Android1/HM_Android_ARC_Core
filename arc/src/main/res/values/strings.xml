@@ -348,4 +348,6 @@
     <string name="grids_complete">&lt;b>Grids Test Complete!&lt;/b></string>
     <string name="testing_loading">&lt;i>Loading next test&#8230;&lt;/i></string>
     <string name="testing_done">&lt;i>Well Done!&lt;/i></string>
+
+    <string name="grids_subheader_fs">Tap on the F\'s</string>
 </resources>

@@ -53,6 +53,7 @@ public class GridTutorial extends BaseFragment {
 
     TextView tapThisF;
     TextView textViewComplete;
+    TextView textViewInstructions;
 
     Button endButton;
     View loadingView;
@@ -75,6 +76,8 @@ public class GridTutorial extends BaseFragment {
 
     HintPointer recallHint;
     HintHighlighter pulsateGridItem;
+    HintPointer otherTwoHint;
+    HintHighlighter gridHighlight;
 
     Handler handler;
     Runnable runnableProceedToPartTwo = new Runnable() {
@@ -123,6 +126,7 @@ public class GridTutorial extends BaseFragment {
                         public void run() {
                             fadeOutView(fullScreenGray);
                             fadeOutView(gridLayoutLetters);
+                            fadeOutView(textViewInstructions);
                             setSecondItemLayout();
                         }
                     };
@@ -168,6 +172,8 @@ public class GridTutorial extends BaseFragment {
         textViewComplete = view.findViewById(R.id.textViewComplete);
         textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
+        textViewInstructions = view.findViewById(R.id.instructions);
+
         tapThisF = view.findViewById(R.id.tapThisF);
 
         endButton = view.findViewById(R.id.endButton);
@@ -191,6 +197,8 @@ public class GridTutorial extends BaseFragment {
 
         recallHint = new HintPointer(getActivity(), image33, true, false);
         pulsateGridItem = new HintHighlighter(getActivity());
+        otherTwoHint = new HintPointer(getActivity(), gridLayout, true, true);
+        gridHighlight = new HintHighlighter(getActivity());
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +218,8 @@ public class GridTutorial extends BaseFragment {
 
                 recallHint.dismiss();
                 pulsateGridItem.dismiss();
+                otherTwoHint.dismiss();
+                gridHighlight.dismiss();
 
                 exit();
             }
@@ -302,6 +312,10 @@ public class GridTutorial extends BaseFragment {
     private void setInitialLetterLayout() {
         fadeOutView(gridLayout);
         fadeInView(gridLayoutLetters, 1f);
+
+        textViewInstructions.setText(ViewUtil.getString(R.string.grids_subheader_fs));
+        fadeInView(textViewInstructions, 1f);
+
         fadeOutView(fullScreenGray);
 
         Typeface font = Fonts.georgia;
@@ -427,7 +441,15 @@ public class GridTutorial extends BaseFragment {
     }
 
     private void setGridRecall() {
+        // TODO
+        // Need to build the Remind Me functionality
+        // Probably somewhere in this function
+
         fadeInView(gridLayout, 1f);
+
+        textViewInstructions.setText(ViewUtil.getString(R.string.grids_subheader_boxes));
+        fadeInView(textViewInstructions, 1f);
+
         fadeOutView(fullScreenGray);
         gridLayout.setVisibility(View.VISIBLE);
 
@@ -440,6 +462,7 @@ public class GridTutorial extends BaseFragment {
         recallHint.setText(ViewUtil.getString(R.string.popup_tutorial_boxhint));
         recallHint.show();
 
+        getImageView(2,2).setImageResource(R.drawable.pen);
         pulsateGridItem.addPulsingTarget(image33);
         pulsateGridItem.show();
 
@@ -451,8 +474,34 @@ public class GridTutorial extends BaseFragment {
                     case MotionEvent.ACTION_DOWN:
                         recallHint.dismiss();
                         pulsateGridItem.dismiss();
+                        getImageView(2,2).setImageResource(0);
                         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
                         selectedCount += 1;
+
+                        // Now tap on the locations of the other two items.
+                        Handler handler = new Handler();
+                        Runnable runnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                gridHighlight.addTarget(gridLayout, 10, 10);
+                                otherTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox));
+                                otherTwoHint.show();
+                                gridHighlight.show();
+
+                                // Disappear after a few seconds
+                                Handler handler = new Handler();
+                                Runnable runnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        otherTwoHint.dismiss();
+                                        gridHighlight.dismiss();
+                                    }
+                                };
+                                handler.postDelayed(runnable,3000);
+                            }
+                        };
+                        handler.postDelayed(runnable,1000);
+
                         break;
                     case MotionEvent.ACTION_UP:
                         break;
@@ -529,6 +578,7 @@ public class GridTutorial extends BaseFragment {
         fadeInView(endButton, 1f);
 
         fadeOutView(gridLayout);
+        fadeOutView(textViewInstructions);
 
         endButton.setOnClickListener(new View.OnClickListener() {
             @Override
