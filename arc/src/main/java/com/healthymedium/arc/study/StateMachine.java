@@ -579,6 +579,7 @@ public class StateMachine {
 
         TestInfoTemplate info = new TestInfoTemplate(
                 testNumber,
+                index+1,
                 res.getString(R.string.price_header),
                 res.getString(R.string.price_body),
                 "prices",
@@ -616,6 +617,7 @@ public class StateMachine {
 
         TestInfoTemplate info = new TestInfoTemplate(
                 testNumber,
+                index+1,
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
                 "symbols",
@@ -641,6 +643,7 @@ public class StateMachine {
 
         TestInfoTemplate info0 = new TestInfoTemplate(
                 testNumber,
+                index+1,
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body1),
                 "grids",

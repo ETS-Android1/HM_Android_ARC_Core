@@ -18,6 +18,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
+import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.paths.tutorials.GridTutorial;
@@ -25,6 +26,8 @@ import com.healthymedium.arc.paths.tutorials.PricesTutorial;
 import com.healthymedium.arc.paths.tutorials.SymbolTutorial;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
 public class TestInfoTemplate extends BaseFragment {
@@ -34,6 +37,8 @@ public class TestInfoTemplate extends BaseFragment {
     String stringBody;
     String stringButton;
     String stringType;
+
+    int testIndex;
 
     Drawable buttonImage;
 
@@ -46,16 +51,20 @@ public class TestInfoTemplate extends BaseFragment {
 
     Button button;
 
-    public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable String buttonText) {
+    HintPointer tutorialHint;
+
+    public TestInfoTemplate(String testNumber, int testIndex, String header, String body, String type, @Nullable String buttonText) {
         stringTestNumber = testNumber;
+        this.testIndex = testIndex;
         stringHeader = header;
         stringBody = body;
         stringButton = buttonText;
         stringType = type;
     }
 
-    public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable Drawable buttonImage) {
+    public TestInfoTemplate(String testNumber, int testIndex, String header, String body, String type, @Nullable Drawable buttonImage) {
         stringTestNumber = testNumber;
+        this.testIndex = testIndex;
         stringHeader = header;
         stringBody = body;
         this.buttonImage = buttonImage;
@@ -85,9 +94,20 @@ public class TestInfoTemplate extends BaseFragment {
         textViewTutorial.setText(content);
         textViewTutorial.setVisibility(View.VISIBLE);
 
+        tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, false);
+        tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_view));
+
+        boolean viewedTutorial = PreferencesManager.getInstance().getBoolean("hasViewedTutorial",false);
+
+        if (testIndex == 1 && !viewedTutorial) {
+            tutorialHint.show();
+        }
+
         textViewTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tutorialHint.dismiss();
+                PreferencesManager.getInstance().putBoolean("hasViewedTutorial", true);
                 if (stringType.equals("grids")) {
                     GridTutorial gridTutorial = new GridTutorial();
                     NavigationManager.getInstance().open(gridTutorial);
@@ -124,6 +144,7 @@ public class TestInfoTemplate extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tutorialHint.dismiss();
                 Study.getInstance().openNextFragment();
             }
         });

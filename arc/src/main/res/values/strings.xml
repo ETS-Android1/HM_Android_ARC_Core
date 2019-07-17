@@ -319,6 +319,8 @@
 
     <string name="popup_gotit">&lt;b>Got It&lt;/b></string>
 
+    <string name="popup_tutorial_view">Tap here to view a tutorial</string>
+
     <string name="popup_tutorial_tile">&lt;b>This is a tile.&lt;/b> &lt;br /&gt;Each tile includes a pair of symbols.</string>
     <string name="popup_tutorial_tilestop">You will see &lt;b>three tiles&lt;/b> on the top of the screen&#8230;</string>
     <string name="popup_tutorial_tilesbottom">&#8230;and &lt;b>two tiles&lt;/b> on the bottom.</string>
