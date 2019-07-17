@@ -3,7 +3,6 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.SpannableString;
@@ -15,12 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintPointer;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.paths.tutorials.GridTutorial;
 import com.healthymedium.arc.paths.tutorials.PricesTutorial;
 import com.healthymedium.arc.paths.tutorials.SymbolTutorial;
@@ -32,13 +30,13 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class TestInfoTemplate extends BaseFragment {
 
+    private static final String HINT_TEST_TUTORIAL = "HINT_TEST_TUTORIAL";
+
     String stringTestNumber;
     String stringHeader;
     String stringBody;
     String stringButton;
     String stringType;
-
-    int testIndex;
 
     Drawable buttonImage;
 
@@ -53,18 +51,16 @@ public class TestInfoTemplate extends BaseFragment {
 
     HintPointer tutorialHint;
 
-    public TestInfoTemplate(String testNumber, int testIndex, String header, String body, String type, @Nullable String buttonText) {
+    public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable String buttonText) {
         stringTestNumber = testNumber;
-        this.testIndex = testIndex;
         stringHeader = header;
         stringBody = body;
         stringButton = buttonText;
         stringType = type;
     }
 
-    public TestInfoTemplate(String testNumber, int testIndex, String header, String body, String type, @Nullable Drawable buttonImage) {
+    public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable Drawable buttonImage) {
         stringTestNumber = testNumber;
-        this.testIndex = testIndex;
         stringHeader = header;
         stringBody = body;
         this.buttonImage = buttonImage;
@@ -94,20 +90,20 @@ public class TestInfoTemplate extends BaseFragment {
         textViewTutorial.setText(content);
         textViewTutorial.setVisibility(View.VISIBLE);
 
-        tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, false);
-        tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_view));
-
-        boolean viewedTutorial = PreferencesManager.getInstance().getBoolean("hasViewedTutorial",false);
-
-        if (testIndex == 1 && !viewedTutorial) {
+        if(!Hints.hasBeenShown(HINT_TEST_TUTORIAL)){
+            tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, false);
+            tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_view));
             tutorialHint.show();
         }
 
         textViewTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tutorialHint.dismiss();
-                PreferencesManager.getInstance().putBoolean("hasViewedTutorial", true);
+                if(tutorialHint!=null) {
+                    tutorialHint.dismiss();
+                }
+                Hints.markShown(HINT_TEST_TUTORIAL);
+
                 if (stringType.equals("grids")) {
                     GridTutorial gridTutorial = new GridTutorial();
                     NavigationManager.getInstance().open(gridTutorial);
@@ -144,7 +140,9 @@ public class TestInfoTemplate extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tutorialHint.dismiss();
+                if(tutorialHint!=null) {
+                    tutorialHint.dismiss();
+                }
                 Study.getInstance().openNextFragment();
             }
         });
