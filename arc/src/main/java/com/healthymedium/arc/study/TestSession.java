@@ -67,6 +67,16 @@ public class TestSession {
         finishedSession = false;
     }
 
+    public int getProgress(){
+        if(startTime==null){
+            return 0;
+        }
+        if(finishedSession){
+            return 100;
+        }
+        return 33;
+    }
+
     public DateTime getExpirationTime() {
         if(scheduledDate!=null){
             return getPrescribedTime().withDate(scheduledDate).plusHours(2);
