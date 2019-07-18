@@ -43,8 +43,11 @@ public class RoundedFrameLayout extends FrameLayout {
         int strokeWidth = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_strokeWidth,0);
         int radius = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_radius,0);
 
-        typedArray.recycle();
+        int gradientEnum = (int) typedArray.getInt(R.styleable.RoundedFrameLayout_gradient,-1);
+        int gradientColor0 = (int) typedArray.getColor(R.styleable.RoundedFrameLayout_gradientColor0,0);
+        int gradientColor1 = (int) typedArray.getColor(R.styleable.RoundedFrameLayout_gradientColor1,0);
 
+        typedArray.recycle();
 
         if(fillColor!=0){
             background.setFillColor(fillColor);
@@ -58,17 +61,29 @@ public class RoundedFrameLayout extends FrameLayout {
         if(dashLength!=0 && dashSpacing!=0){
             background.setStrokeDash(dashLength,dashSpacing);
         }
+
+        if(gradientEnum!=-1 && gradientColor0!=0 && gradientColor1!=0){
+            RoundedDrawable.Gradient gradient = RoundedDrawable.Gradient.fromId(gradientEnum);
+            switch (gradient){
+                case LINEAR_HORIZONTAL:
+                    background.setHorizontalGradient(gradientColor0,gradientColor1);
+                    break;
+                case LINEAR_VERTICAL:
+                    background.setVerticalGradient(gradientColor0,gradientColor1);
+                    break;
+            }
+        }
     }
 
     public void setRadius(int dp) {
         background.setRadius(ViewUtil.dpToPx(dp));
     }
 
-    public void setFillColor(@ColorRes  int color) {
+    public void setFillColor(@ColorRes int color) {
         background.setFillColor(ViewUtil.getColor(color));
     }
 
-    public void setStrokeColor(@ColorRes  int color) {
+    public void setStrokeColor(@ColorRes int color) {
         background.setStrokeColor(ViewUtil.getColor(color));
     }
 
@@ -80,6 +95,18 @@ public class RoundedFrameLayout extends FrameLayout {
         int length = ViewUtil.dpToPx(dpLength);
         int spacing = ViewUtil.dpToPx(dpSpacing);
         background.setStrokeDash(length,spacing);
+    }
+
+    public void setHorizontalGradient(@ColorRes int colorLeft, @ColorRes int colorRight) {
+        int left = ViewUtil.getColor(colorLeft);
+        int right = ViewUtil.getColor(colorRight);
+        background.setHorizontalGradient(left,right);
+    }
+
+    public void setVerticalGradient(@ColorRes int colorTop, @ColorRes int colorBottom) {
+        int top = ViewUtil.getColor(colorTop);
+        int bottom = ViewUtil.getColor(colorBottom);
+        background.setVerticalGradient(top,bottom);
     }
 
     public void refresh(){

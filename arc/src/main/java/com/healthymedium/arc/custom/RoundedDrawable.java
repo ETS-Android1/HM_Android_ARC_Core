@@ -5,11 +5,13 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
@@ -24,6 +26,7 @@ public class RoundedDrawable extends Drawable {
 
     private boolean drawStroke = false;
     private boolean drawFill = false;
+    private Gradient gradient;
 
     private Path path;
     private Paint fillPaint;
@@ -58,6 +61,10 @@ public class RoundedDrawable extends Drawable {
         int offset = (int) (strokeWidth/2);
         path = getPath(bounds,radius);
         rect.set(offset,offset,width-offset,height-offset);
+
+        if(gradient!=null){
+            fillPaint.setShader(gradient.getShader(width,height));
+        }
     }
 
     @Override
@@ -96,6 +103,11 @@ public class RoundedDrawable extends Drawable {
         fillPaint.setColor(color);
     }
 
+    public void setFillShader(Shader shader) {
+        drawFill = true;
+        fillPaint.setShader(shader);
+    }
+
     public void setStrokeColor(int color) {
         drawStroke = color!=0;
         strokePaint.setColor(color);
@@ -108,6 +120,30 @@ public class RoundedDrawable extends Drawable {
 
     public void setStrokeDash(float length, float spacing) {
         strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
+    }
+
+    public void setHorizontalGradient(int colorLeft, int colorRight) {
+        drawFill = true;
+        gradient = Gradient.LINEAR_HORIZONTAL;
+        gradient.setColor0(colorLeft);
+        gradient.setColor1(colorRight);
+        gradient.setTileMode(Shader.TileMode.CLAMP);
+    }
+
+    public void setVerticalGradient(int colorTop, int colorBottom) {
+        drawFill = true;
+        gradient = Gradient.LINEAR_HORIZONTAL;
+        gradient.setColor0(colorTop);
+        gradient.setColor1(colorBottom);
+        gradient.setTileMode(Shader.TileMode.CLAMP);
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
     }
 
     private Path getPath(Rect rect, int radius) {
@@ -148,5 +184,51 @@ public class RoundedDrawable extends Drawable {
 
         return path;
     }
+
+
+    public enum Gradient{
+        LINEAR_HORIZONTAL(0),
+        LINEAR_VERTICAL(1);
+
+        int id;
+        int color0;
+        int color1;
+        Shader.TileMode tileMode;
+
+        Gradient(int enumeratedValue){
+            id = enumeratedValue;
+        }
+
+        Shader getShader(int width, int height){
+            switch (this){
+                case LINEAR_VERTICAL:
+                    return new LinearGradient(0, 0, 0, height, color0, color1, tileMode);
+                case LINEAR_HORIZONTAL:
+                    return new LinearGradient(0,0,width,0,color0,color1,tileMode);
+            }
+            return null;
+        }
+
+        void setColor0(int color){
+            this.color0 = color;
+        }
+
+        void setColor1(int color){
+            this.color1 = color;
+        }
+
+        void setTileMode(Shader.TileMode tileMode){
+            this.tileMode = tileMode;
+        }
+
+        public static Gradient fromId(int id){
+            for (Gradient gradient : values()) {
+                if (gradient.id == id) return gradient;
+            }
+            return null;
+        }
+    }
+
+
 
 }
