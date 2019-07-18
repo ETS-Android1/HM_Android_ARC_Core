@@ -209,6 +209,7 @@ public class PricesTutorial extends BaseFragment {
         }
     }
 
+    // Display the hints for the progress bar and quit button
     private void showTutorial() {
         welcomeHighlight.addTarget(progressView, 10, 2);
         welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));

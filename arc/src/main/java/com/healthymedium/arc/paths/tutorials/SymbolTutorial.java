@@ -236,6 +236,7 @@ public class SymbolTutorial extends BaseFragment {
         }
     }
 
+    // Display the hints for the progress bar and quit button
     private void showTutorial() {
         welcomeHighlight.addTarget(progressView, 10, 2);
         welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
@@ -286,6 +287,8 @@ public class SymbolTutorial extends BaseFragment {
         welcomeHint.show();
     }
 
+    // Displays hints for the middle tile of the top set
+    // Explains what a tile is
     private void stepMiddleTopTile() {
 
         buttonTop2Highlight.addTarget(buttonTop2, 10, 10);
@@ -315,6 +318,7 @@ public class SymbolTutorial extends BaseFragment {
         buttonTop2Hint.show();
     }
 
+    // Displays hints for the entire top set of tiles
     private void stepAllTopTiles() {
 
         topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
@@ -344,6 +348,7 @@ public class SymbolTutorial extends BaseFragment {
         topSymbolsHint.show();
     }
 
+    // Displays hints for the entire bottom set of tiles
     private void stepBottomTiles() {
 
         bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
@@ -373,6 +378,7 @@ public class SymbolTutorial extends BaseFragment {
         bottomSymbolsHint.show();
     }
 
+    // The first set of tiles to match
     private void initialTiles() {
 
         initialTilesOutline.addTarget(buttonBottom1);
@@ -447,6 +453,7 @@ public class SymbolTutorial extends BaseFragment {
         });
     }
 
+    // The second set of tiles to match
     private void secondTiles() {
         buttonTop1.setImages(R.drawable.ic_symbol_2_tutorial, R.drawable.ic_symbol_7_tutorial);
         buttonTop2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
@@ -525,6 +532,7 @@ public class SymbolTutorial extends BaseFragment {
         });
     }
 
+    // The final set of tiles to match
     private void lastTiles() {
         buttonTop1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_7_tutorial);
         buttonTop2.setImages(R.drawable.ic_symbol_2_tutorial, R.drawable.ic_symbol_7_tutorial);

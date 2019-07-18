@@ -89,6 +89,9 @@ public class GridTutorial extends BaseFragment {
     HintHighlighter gridHighlight;
 
     Handler handler;
+
+    // Run after the user has studied the initial layout of the items in the grid
+    // Advances the user to setInitialLetterLayout(), the letter tapping test
     Runnable runnableProceedToPartTwo = new Runnable() {
         @Override
         public void run() {
@@ -116,6 +119,8 @@ public class GridTutorial extends BaseFragment {
         }
     };
 
+    // Run when the user has exceeded the given time to tap Fs
+    // Displays a popup and advances to setSecondItemLayout()
     Runnable runnableTapTheFs = new Runnable() {
         @Override
         public void run() {
@@ -286,6 +291,7 @@ public class GridTutorial extends BaseFragment {
         }
     }
 
+    // Display the hints for the progress bar and quit button
     private void showTutorial() {
         welcomeHighlight.addTarget(progressView, 10, 2);
         welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
@@ -336,6 +342,7 @@ public class GridTutorial extends BaseFragment {
         welcomeHint.show();
     }
 
+    // Displays the items that will appear in the grid and the relevant hints
     private void setInitialItemLayout() {
         itemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_grid_recall));
 
@@ -361,6 +368,8 @@ public class GridTutorial extends BaseFragment {
 
     }
 
+    // Displays the initial layout of the items in the grid
+    // Displays hints
     private void setInitialGridLayout() {
         fadeInView(gridLayout, 1f);
         fadeInView(fullScreenGray, 0.9f);
@@ -386,6 +395,7 @@ public class GridTutorial extends BaseFragment {
         gridsHint.show();
     }
 
+    // Displays the letters layout and prompts the user to tap a specific letter F
     private void setInitialLetterLayout() {
         fadeOutView(gridLayout);
         fadeInView(gridLayoutLetters, 1f);
@@ -454,6 +464,7 @@ public class GridTutorial extends BaseFragment {
 
     }
 
+    // Responds to letter that are tapped, changes their color
     private void tapLetters() {
         handler = new Handler();
         handler.postDelayed(runnableTapTheFs,3000);
@@ -491,6 +502,8 @@ public class GridTutorial extends BaseFragment {
         }
     }
 
+    // Displays the same items as setInitialItemLayout()
+    // Displays a new hint
     private void setSecondItemLayout() {
         fadeInView(itemsLayout, 1f);
 
@@ -517,6 +530,7 @@ public class GridTutorial extends BaseFragment {
         secondItemsHint.show();
     }
 
+    // Displays the grid recall test and associated hints/prompts
     private void setGridRecall() {
         // TODO
         // Need to build the Remind Me functionality
@@ -649,6 +663,7 @@ public class GridTutorial extends BaseFragment {
                 });
     }
 
+    // Displays the tutorial complete screen
     private void showComplete() {
         fadeInView(checkmark, 1f);
         fadeInView(textViewComplete, 1f);
