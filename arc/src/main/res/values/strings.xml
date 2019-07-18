@@ -321,6 +321,9 @@
 
     <string name="popup_tutorial_view">Tap here to view a tutorial</string>
 
+    <string name="popup_tutorial_welcome">&lt;b>Welcome to the tutorial!&lt;/b> &lt;br /&gt;This progress bar shows how much of the tutorial you\'ve completed. </string>
+    <string name="popup_tutorial_quit">Tap here to quit the tutorial.</string>
+
     <string name="popup_tutorial_tile">&lt;b>This is a tile.&lt;/b> &lt;br /&gt;Each tile includes a pair of symbols.</string>
     <string name="popup_tutorial_tilestop">You will see &lt;b>three tiles&lt;/b> on the top of the screen&#8230;</string>
     <string name="popup_tutorial_tilesbottom">&#8230;and &lt;b>two tiles&lt;/b> on the bottom.</string>
