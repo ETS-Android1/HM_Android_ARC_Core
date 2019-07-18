@@ -41,7 +41,12 @@ public class RoundedRelativeLayout extends FrameLayout {
         float dashLength = typedArray.getDimension(R.styleable.RoundedRelativeLayout_dashLength,0);
         float dashSpacing = typedArray.getDimension(R.styleable.RoundedRelativeLayout_dashSpacing,0);
         int strokeWidth = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_strokeWidth,0);
+
         int radius = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radius,0);
+        int radiusTopLeft = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusTopLeft,0);
+        int radiusTopRight = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusTopRight,0);
+        int radiusBottomLeft = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusBottomLeft,0);
+        int radiusBottomRight = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusBottomRight,0);
         
         int gradientEnum = (int) typedArray.getInt(R.styleable.RoundedRelativeLayout_gradient,-1);
         int gradientColor0 = (int) typedArray.getColor(R.styleable.RoundedRelativeLayout_gradientColor0,0);
@@ -57,7 +62,12 @@ public class RoundedRelativeLayout extends FrameLayout {
             background.setStrokeColor(strokeColor);
         }
         background.setStrokeWidth(strokeWidth);
-        background.setRadius(radius);
+
+        if(radius!=0){
+            background.setRadius(radius);
+        } else {
+            background.setRadius(radiusTopLeft,radiusTopRight,radiusBottomLeft,radiusBottomRight);
+        }
 
         if(dashLength!=0 && dashSpacing!=0){
             background.setStrokeDash(dashLength,dashSpacing);

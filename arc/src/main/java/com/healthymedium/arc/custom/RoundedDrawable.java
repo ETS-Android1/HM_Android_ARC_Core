@@ -32,7 +32,10 @@ public class RoundedDrawable extends Drawable {
     private Paint fillPaint;
     private Paint strokePaint;
     private float strokeWidth;
-    private int radius;
+    private int radiusTopLeft;
+    private int radiusTopRight;
+    private int radiusBottomLeft;
+    private int radiusBottonRight;
 
     // only used for drawing
     private Rect rect;
@@ -61,14 +64,22 @@ public class RoundedDrawable extends Drawable {
         int offset = (int) (strokeWidth/2);
         rect.set(offset,offset,width-offset,height-offset);
 
-        if(radius>(rect.height()/2)){
-            radius = rect.height()/2;
+        int maxRadius = Math.min(rect.width()/2, rect.height()/2);
+
+        if(radiusTopLeft > maxRadius) {
+            radiusTopLeft = maxRadius;
         }
-        if(radius>(rect.width()/2)){
-            radius = rect.width()/2;
+        if(radiusTopRight > maxRadius) {
+            radiusTopRight = maxRadius;
+        }
+        if(radiusBottomLeft > maxRadius) {
+            radiusBottomLeft = maxRadius;
+        }
+        if(radiusBottonRight > maxRadius) {
+            radiusBottonRight = maxRadius;
         }
 
-        path = getPath(rect,radius);
+        path = getPath(rect);
 
         if(gradient!=null){
             fillPaint.setShader(gradient.getShader(width,height));
@@ -103,7 +114,17 @@ public class RoundedDrawable extends Drawable {
     }
 
     public void setRadius(int radius) {
-        this.radius = radius;
+        radiusTopLeft = radius;
+        radiusTopRight = radius;
+        radiusBottomLeft = radius;
+        radiusBottonRight = radius;
+    }
+
+    public void setRadius(int topLeft, int topRight, int bottomLeft, int bottomRight) {
+        radiusTopLeft = topLeft;
+        radiusTopRight = topRight;
+        radiusBottomLeft = bottomLeft;
+        radiusBottonRight = bottomRight;
     }
 
     public void setFillColor(int color) {
@@ -154,38 +175,38 @@ public class RoundedDrawable extends Drawable {
         return height;
     }
 
-    private Path getPath(Rect rect, int radius) {
+    private Path getPath(Rect rect) {
 
         Path path = new Path();
 
-        path.moveTo(rect.left + radius, rect.top);
+        path.moveTo(rect.left + radiusTopLeft, rect.top);
 
         // top line
-        path.lineTo(rect.right - radius, rect.top);
+        path.lineTo(rect.right - radiusTopRight, rect.top);
 
         // top right corner
-        RectF topRightRect = new RectF(rect.right - radius,rect.top,rect.right,rect.top+radius);
+        RectF topRightRect = new RectF(rect.right - radiusTopRight,rect.top,rect.right,rect.top+radiusTopRight);
         path.arcTo(topRightRect, 270F, 90F, false);
 
         // right line
-        path.lineTo(rect.right, rect.bottom - radius);
+        path.lineTo(rect.right, rect.bottom - radiusBottonRight);
 
         // bottom right corner
-        RectF bottomRightRect = new RectF(rect.right - radius,rect.bottom - radius,rect.right,rect.bottom);
+        RectF bottomRightRect = new RectF(rect.right - radiusBottonRight,rect.bottom - radiusBottonRight,rect.right,rect.bottom);
         path.arcTo(bottomRightRect, 0F, 90F, false);
 
         // bottom line
-        path.lineTo(rect.left + radius, rect.bottom);
+        path.lineTo(rect.left + radiusBottomLeft, rect.bottom);
 
         // bottom left corner
-        RectF bottomLeftRect = new RectF(rect.left,rect.bottom - radius,rect.left+radius,rect.bottom);
+        RectF bottomLeftRect = new RectF(rect.left,rect.bottom - radiusBottomLeft,rect.left+radiusBottomLeft,rect.bottom);
         path.arcTo(bottomLeftRect, 90F, 90F, false);
 
         // left side
-        path.lineTo(rect.left, rect.top + radius);
+        path.lineTo(rect.left, rect.top + radiusTopLeft);
 
         // top left corner
-        RectF topLeftRect = new RectF(rect.left,rect.top,rect.left+radius,rect.top+radius);
+        RectF topLeftRect = new RectF(rect.left,rect.top,rect.left+radiusTopLeft,rect.top+radiusTopLeft);
         path.arcTo(topLeftRect, 180F, 90F, false);
 
         path.close();
