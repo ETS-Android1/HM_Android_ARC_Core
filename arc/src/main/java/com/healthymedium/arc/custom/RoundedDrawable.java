@@ -60,6 +60,14 @@ public class RoundedDrawable extends Drawable {
         // create a rect that's small enough that the stroke isn't cut off
         int offset = (int) (strokeWidth/2);
         rect.set(offset,offset,width-offset,height-offset);
+
+        if(radius>(rect.height()/2)){
+            radius = rect.height()/2;
+        }
+        if(radius>(rect.width()/2)){
+            radius = rect.width()/2;
+        }
+
         path = getPath(rect,radius);
 
         if(gradient!=null){
