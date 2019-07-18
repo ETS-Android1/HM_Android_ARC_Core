@@ -1,7 +1,5 @@
 package com.healthymedium.arc.paths.tutorials;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,11 +14,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.TutorialProgressView;
@@ -30,12 +26,9 @@ import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class GridTutorial extends BaseFragment {
-
-    private static final String HINT_FIRST_TUTORIAL = "HINT_FIRST_TUTORIAL";
+public class GridTutorial extends Tutorial {
 
     int selectedCount;
 
@@ -50,19 +43,11 @@ public class GridTutorial extends BaseFragment {
     TutorialProgressView progressView;
 
     ImageView closeButton;
-    ImageView checkmark;
     ImageView image33;
     ImageView image43;
 
     TextView tapThisF;
-    TextView textViewComplete;
     TextView textViewInstructions;
-
-    Button endButton;
-    View loadingView;
-    LinearLayout progressBar;
-
-    private int shortAnimationDuration;
 
     HintHighlighter welcomeHighlight;
     HintPointer welcomeHint;
@@ -192,8 +177,6 @@ public class GridTutorial extends BaseFragment {
         endButton = view.findViewById(R.id.endButton);
         progressBar = view.findViewById(R.id.progressBar);
         loadingView = view.findViewById(R.id.loadingView);
-
-        shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         welcomeHighlight = new HintHighlighter(getActivity());
         welcomeHint = new HintPointer(getActivity(), progressView, true, false);
@@ -599,6 +582,8 @@ public class GridTutorial extends BaseFragment {
                 }
 
                 if (selectedCount == 3) {
+                    fadeOutView(gridLayout);
+                    fadeOutView(textViewInstructions);
                     showComplete();
                 }
 
@@ -620,6 +605,8 @@ public class GridTutorial extends BaseFragment {
                 }
 
                 if (selectedCount == 3) {
+                    fadeOutView(gridLayout);
+                    fadeOutView(textViewInstructions);
                     showComplete();
                 }
 
@@ -639,60 +626,6 @@ public class GridTutorial extends BaseFragment {
 
     private ImageView getImageView(int row, int col){
         return (ImageView)gridLayout.getChildAt((5*row)+col);
-    }
-
-    private void fadeInView(View view, Float opacity) {
-        view.setAlpha(0f);
-        view.setVisibility(View.VISIBLE);
-
-        view.animate()
-                .alpha(opacity)
-                .setDuration(shortAnimationDuration)
-                .setListener(null);
-    }
-
-    private void fadeOutView(final View view) {
-        view.animate()
-                .alpha(0f)
-                .setDuration(shortAnimationDuration)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(View.GONE);
-                    }
-                });
-    }
-
-    // Displays the tutorial complete screen
-    private void showComplete() {
-        fadeInView(checkmark, 1f);
-        fadeInView(textViewComplete, 1f);
-        fadeInView(endButton, 1f);
-
-        fadeOutView(gridLayout);
-        fadeOutView(textViewInstructions);
-
-        endButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                exit();
-            }
-        });
-    }
-
-    private void exit(){
-        loadingView.animate()
-                .setDuration(400)
-                .translationY(0);
-        progressBar.animate()
-                .setDuration(400)
-                .alpha(0.0f);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                NavigationManager.getInstance().popBackStack();
-            }
-        },1200);
     }
 
 }

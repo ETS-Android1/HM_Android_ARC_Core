@@ -1,7 +1,5 @@
 package com.healthymedium.arc.paths.tutorials;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,14 +7,11 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.SymbolTutorialButton;
@@ -26,12 +21,9 @@ import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class SymbolTutorial extends BaseFragment {
-
-    private static final String HINT_FIRST_TUTORIAL = "HINT_FIRST_TUTORIAL";
+public class SymbolTutorial extends Tutorial {
 
     final Handler handlerOutline = new Handler();
     final Handler handlerPulsate = new Handler();
@@ -57,16 +49,8 @@ public class SymbolTutorial extends BaseFragment {
     TutorialProgressView progressView;
 
     ImageView closeButton;
-    ImageView checkmark;
 
     TextView textView20;
-    TextView textViewComplete;
-
-    Button endButton;
-    View loadingView;
-    LinearLayout progressBar;
-
-    private int shortAnimationDuration;
 
     HintHighlighter welcomeHighlight;
     HintPointer welcomeHint;
@@ -133,8 +117,6 @@ public class SymbolTutorial extends BaseFragment {
         endButton = view.findViewById(R.id.endButton);
         progressBar = view.findViewById(R.id.progressBar);
         loadingView = view.findViewById(R.id.loadingView);
-
-        shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         buttonTop1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_8_tutorial);
         buttonTop2.setImages(R.drawable.ic_symbol_8_tutorial, R.drawable.ic_symbol_1_tutorial);
@@ -582,62 +564,15 @@ public class SymbolTutorial extends BaseFragment {
                 finalTilesOutline.dismiss();
                 finalTilesPulsate.dismiss();
 
-                fadeInView(checkmark, 1f);
-                fadeInView(textViewComplete, 1f);
-                fadeInView(endButton, 1f);
-
                 fadeOutView(topSymbols);
                 fadeOutView(textView20);
                 fadeOutView(bottomSymbolsButtons);
 
                 buttonBottom1.setOnClickListener(null);
 
-                endButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        exit();
-                    }
-                });
-
+                showComplete();
             }
         });
-    }
-
-    private void fadeInView(View view, Float opacity) {
-        view.setAlpha(0f);
-        view.setVisibility(View.VISIBLE);
-
-        view.animate()
-                .alpha(opacity)
-                .setDuration(shortAnimationDuration)
-                .setListener(null);
-    }
-
-    private void fadeOutView(final View view) {
-        view.animate()
-                .alpha(0f)
-                .setDuration(shortAnimationDuration)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(View.GONE);
-                    }
-                });
-    }
-
-    private void exit(){
-        loadingView.animate()
-                .setDuration(400)
-                .translationY(0);
-        progressBar.animate()
-                .setDuration(400)
-                .alpha(0.0f);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                NavigationManager.getInstance().popBackStack();
-            }
-        },1200);
     }
 
 }

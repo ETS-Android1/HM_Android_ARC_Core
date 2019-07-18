@@ -1,7 +1,5 @@
 package com.healthymedium.arc.paths.tutorials;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -12,11 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.RadioButton;
 import com.healthymedium.arc.custom.TutorialProgressView;
@@ -26,12 +22,9 @@ import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class PricesTutorial extends BaseFragment {
-
-    private static final String HINT_FIRST_TUTORIAL = "HINT_FIRST_TUTORIAL";
+public class PricesTutorial extends Tutorial {
 
     RelativeLayout priceContainer;
 
@@ -40,20 +33,12 @@ public class PricesTutorial extends BaseFragment {
 
     TextView textviewFood;
     TextView textviewPrice;
-    TextView textViewComplete;
     TextView textView12;
 
     FrameLayout fullScreenGray;
     TutorialProgressView progressView;
 
     ImageView closeButton;
-    ImageView checkmark;
-
-    Button endButton;
-    View loadingView;
-    LinearLayout progressBar;
-
-    private int shortAnimationDuration;
 
     HintHighlighter welcomeHighlight;
     HintPointer welcomeHint;
@@ -108,8 +93,6 @@ public class PricesTutorial extends BaseFragment {
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
-
-        shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
         welcomeHighlight = new HintHighlighter(getActivity());
         welcomeHint = new HintPointer(getActivity(), progressView, true, false);
@@ -595,18 +578,7 @@ public class PricesTutorial extends BaseFragment {
                         fadeOutView(textviewFood);
                         fadeOutView(textviewPrice);
 
-                        fadeInView(checkmark, 1f);
-                        checkmark.bringToFront();
-                        fadeInView(textViewComplete, 1f);
-                        textViewComplete.bringToFront();
-                        fadeInView(endButton, 1f);
-
-                        endButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                exit();
-                            }
-                        });
+                        showComplete();
 
                         break;
                 }
@@ -635,61 +607,13 @@ public class PricesTutorial extends BaseFragment {
                         fadeOutView(textviewFood);
                         fadeOutView(textviewPrice);
 
-                        fadeInView(checkmark, 1f);
-                        checkmark.bringToFront();
-                        fadeInView(textViewComplete, 1f);
-                        textViewComplete.bringToFront();
-                        fadeInView(endButton, 1f);
-
-                        endButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                exit();
-                            }
-                        });
+                        showComplete();
 
                         break;
                 }
                 return true;
             }
         });
-    }
-
-    private void fadeInView(View view, Float opacity) {
-        view.setAlpha(0f);
-        view.setVisibility(View.VISIBLE);
-
-        view.animate()
-                .alpha(opacity)
-                .setDuration(shortAnimationDuration)
-                .setListener(null);
-    }
-
-    private void fadeOutView(final View view) {
-        view.animate()
-                .alpha(0f)
-                .setDuration(shortAnimationDuration)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        view.setVisibility(View.GONE);
-                    }
-                });
-    }
-
-    private void exit(){
-        loadingView.animate()
-                .setDuration(400)
-                .translationY(0);
-        progressBar.animate()
-                .setDuration(400)
-                .alpha(0.0f);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                NavigationManager.getInstance().popBackStack();
-            }
-        },1200);
     }
 
 }
