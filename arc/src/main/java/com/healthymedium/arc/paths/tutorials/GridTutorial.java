@@ -414,7 +414,7 @@ public class GridTutorial extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                pulsateF.addPulsingTarget(tapThisF,25);
+                pulsateF.addPulsingTarget(tapThisF,22);
                 pulsateF.show();
 
                 tapThisFHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf1));
