@@ -140,7 +140,7 @@ public class RoundedDrawable extends Drawable {
 
     public void setVerticalGradient(int colorTop, int colorBottom) {
         drawFill = true;
-        gradient = Gradient.LINEAR_HORIZONTAL;
+        gradient = Gradient.LINEAR_VERTICAL;
         gradient.setColor0(colorTop);
         gradient.setColor1(colorBottom);
         gradient.setTileMode(Shader.TileMode.CLAMP);
