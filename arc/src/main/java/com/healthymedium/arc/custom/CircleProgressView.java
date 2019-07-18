@@ -10,8 +10,10 @@ import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -199,6 +201,23 @@ public class CircleProgressView extends View {
         }
     }
 
+    public void setBaseColor(@ColorRes int color) {
+        basePaint.setColor(ViewUtil.getColor(color));
+    }
+
+    public void setSweepColor(@ColorRes int color) {
+        sweepPaint.setColor(ViewUtil.getColor(color));
+    }
+
+    public void setShadowColor(@ColorRes int color) {
+        shadowPaint.setColor(ViewUtil.getColor(color));
+    }
+
+    public void setCheckmarkColor(@ColorRes  int color) {
+        int checkmarkColor = ViewUtil.getColor(color);
+        checkmark.setTint(checkmarkColor);
+    }
+
     public void setStrokeWidth(int dp){
         manualStrokeWidth = true;
         strokeWidth = ViewUtil.dpToPx(dp); // 1/16 of size
@@ -207,6 +226,14 @@ public class CircleProgressView extends View {
         shadowPaint.setStrokeWidth(strokeWidth);
         sweepPaint.setStrokeWidth(strokeWidth);
         fillPaint.setStrokeWidth(strokeWidth);
+    }
+
+    public void setMargin(int left, int top, int right, int bottom) {
+        if (getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) getLayoutParams();
+            params.setMargins(left, top, right, bottom);
+            requestLayout();
+        }
     }
 
     ValueAnimator.AnimatorUpdateListener progressListener = new ValueAnimator.AnimatorUpdateListener() {
