@@ -59,8 +59,8 @@ public class RoundedDrawable extends Drawable {
 
         // create a rect that's small enough that the stroke isn't cut off
         int offset = (int) (strokeWidth/2);
-        path = getPath(bounds,radius);
         rect.set(offset,offset,width-offset,height-offset);
+        path = getPath(rect,radius);
 
         if(gradient!=null){
             fillPaint.setShader(gradient.getShader(width,height));
