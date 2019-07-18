@@ -7,15 +7,10 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.custom.DialogButtonTutorial;
 import com.healthymedium.arc.custom.SymbolTutorialButton;
-import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
@@ -43,20 +38,7 @@ public class SymbolTutorial extends Tutorial {
     SymbolTutorialButton buttonBottom1;
     SymbolTutorialButton buttonBottom2;
 
-    DialogButtonTutorial centerPopup;
-
-    FrameLayout fullScreenGray;
-    TutorialProgressView progressView;
-
-    ImageView closeButton;
-
     TextView textView20;
-
-    HintHighlighter welcomeHighlight;
-    HintPointer welcomeHint;
-
-    HintHighlighter quitHighlight;
-    HintPointer quitHint;
 
     HintHighlighter buttonTop2Highlight;
     HintPointer buttonTop2Hint;
@@ -100,9 +82,6 @@ public class SymbolTutorial extends Tutorial {
 
         buttonBottom1 = view.findViewById(R.id.symbolbutton_bottom1);
         buttonBottom2 = view.findViewById(R.id.symbolbutton_bottom2);
-
-        centerPopup = view.findViewById(R.id.centerPopup);
-        fullScreenGray = view.findViewById(R.id.fullScreenGray);
 
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(100,true); // TODO: reflect actual progress
@@ -183,7 +162,6 @@ public class SymbolTutorial extends Tutorial {
             }
         });
 
-
         progressBar.animate()
                 .setStartDelay(800)
                 .setDuration(400)
@@ -196,18 +174,20 @@ public class SymbolTutorial extends Tutorial {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        loadingView.animate()
-                .setStartDelay(400)
-                .setDuration(400)
-                .translationYBy(-loadingView.getHeight());
-
         if (!Hints.hasBeenShown(HINT_FIRST_TUTORIAL)) {
+            final Runnable next = new Runnable() {
+                @Override
+                public void run() {
+                    stepMiddleTopTile();
+                }
+            };
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showTutorial();
+                    showTutorial(next);
                 }
-            },1200);
+            }, 1200);
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -218,61 +198,9 @@ public class SymbolTutorial extends Tutorial {
         }
     }
 
-    // Display the hints for the progress bar and quit button
-    private void showTutorial() {
-        welcomeHighlight.addTarget(progressView, 10, 2);
-        welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
-
-        quitHighlight.addTarget(closeButton, 50, 10);
-        quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
-
-        View.OnClickListener quitListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                quitHint.dismiss();
-                quitHighlight.dismiss();
-                Hints.markShown(HINT_FIRST_TUTORIAL);
-
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        stepMiddleTopTile();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        quitHint.addButton(ViewUtil.getString(R.string.popup_gotit), quitListener);
-
-        View.OnClickListener welcomeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeHint.dismiss();
-                welcomeHighlight.dismiss();
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        quitHighlight.show();
-                        quitHint.show();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
-
-        welcomeHighlight.show();
-        welcomeHint.show();
-    }
-
     // Displays hints for the middle tile of the top set
     // Explains what a tile is
     private void stepMiddleTopTile() {
-
         buttonTop2Highlight.addTarget(buttonTop2, 10, 10);
         buttonTop2Highlight.show();
 
@@ -302,7 +230,6 @@ public class SymbolTutorial extends Tutorial {
 
     // Displays hints for the entire top set of tiles
     private void stepAllTopTiles() {
-
         topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
         topSymbolsHighlight.show();
 
@@ -332,7 +259,6 @@ public class SymbolTutorial extends Tutorial {
 
     // Displays hints for the entire bottom set of tiles
     private void stepBottomTiles() {
-
         bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
         bottomSymbolsHighlight.show();
 
@@ -362,7 +288,6 @@ public class SymbolTutorial extends Tutorial {
 
     // The first set of tiles to match
     private void initialTiles() {
-
         initialTilesOutline.addTarget(buttonBottom1);
         initialTilesOutline.addTarget(buttonTop3);
 
@@ -405,7 +330,6 @@ public class SymbolTutorial extends Tutorial {
                 initialTilesOutline.dismiss();
                 initialTilesPulsate.dismiss();
 
-                // fadeInView(fullScreenGray, 0.9f);
                 buttonBottom1.setOnClickListener(null);
 
                 final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
@@ -420,7 +344,6 @@ public class SymbolTutorial extends Tutorial {
                         Runnable runnable = new Runnable() {
                             @Override
                             public void run() {
-                                // fadeOutView(fullScreenGray);
                                 secondTiles();
                             }
                         };
@@ -499,7 +422,6 @@ public class SymbolTutorial extends Tutorial {
                         Runnable runnable = new Runnable() {
                             @Override
                             public void run() {
-                                fadeOutView(fullScreenGray);
                                 lastTiles();
                             }
                         };

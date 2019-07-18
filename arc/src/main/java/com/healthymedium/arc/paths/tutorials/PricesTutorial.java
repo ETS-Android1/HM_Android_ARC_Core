@@ -8,14 +8,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.custom.RadioButton;
-import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
@@ -34,17 +30,6 @@ public class PricesTutorial extends Tutorial {
     TextView textviewFood;
     TextView textviewPrice;
     TextView textView12;
-
-    FrameLayout fullScreenGray;
-    TutorialProgressView progressView;
-
-    ImageView closeButton;
-
-    HintHighlighter welcomeHighlight;
-    HintPointer welcomeHint;
-
-    HintHighlighter quitHighlight;
-    HintPointer quitHint;
 
     HintHighlighter firstPriceContainerHighlight;
     HintPointer firstPriceHint;
@@ -85,8 +70,6 @@ public class PricesTutorial extends Tutorial {
         buttonNo = view.findViewById(R.id.radioButtonNo);
         buttonNo.setText(ViewUtil.getString(R.string.NO));
         buttonNo.setCheckable(false);
-
-        fullScreenGray = view.findViewById(R.id.fullScreenGray);
 
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(100,true); // TODO: reflect actual progress
@@ -170,16 +153,18 @@ public class PricesTutorial extends Tutorial {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        loadingView.animate()
-                .setStartDelay(400)
-                .translationYBy(-loadingView.getHeight())
-                .setDuration(400);
-
         if (!Hints.hasBeenShown(HINT_FIRST_TUTORIAL)) {
+            final Runnable next = new Runnable() {
+                @Override
+                public void run() {
+                    setFirstPricesCompare();
+                }
+            };
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showTutorial();
+                    showTutorial(next);
                 }
             }, 1200);
         } else {
@@ -190,57 +175,6 @@ public class PricesTutorial extends Tutorial {
                 }
             }, 1200);
         }
-    }
-
-    // Display the hints for the progress bar and quit button
-    private void showTutorial() {
-        welcomeHighlight.addTarget(progressView, 10, 2);
-        welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
-
-        quitHighlight.addTarget(closeButton, 50, 10);
-        quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
-
-        View.OnClickListener quitListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                quitHint.dismiss();
-                quitHighlight.dismiss();
-                Hints.markShown(HINT_FIRST_TUTORIAL);
-
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        setFirstPricesCompare();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        quitHint.addButton(ViewUtil.getString(R.string.popup_gotit), quitListener);
-
-        View.OnClickListener welcomeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeHint.dismiss();
-                welcomeHighlight.dismiss();
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        quitHighlight.show();
-                        quitHint.show();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
-
-        welcomeHighlight.show();
-        welcomeHint.show();
     }
 
     private void setFirstPricesCompare() {
@@ -262,11 +196,7 @@ public class PricesTutorial extends Tutorial {
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
 
-                        buttonNo.setChecked(false);
-                        buttonYes.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(true);
 
                         firstGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
@@ -306,11 +236,7 @@ public class PricesTutorial extends Tutorial {
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
 
-                        buttonYes.setChecked(false);
-                        buttonNo.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(false);
 
                         firstGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
@@ -361,11 +287,7 @@ public class PricesTutorial extends Tutorial {
                         secondPriceContainerHighlight.dismiss();
                         secondPriceHint.dismiss();
 
-                        buttonNo.setChecked(false);
-                        buttonYes.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(true);
 
                         secondGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice2));
 
@@ -405,11 +327,7 @@ public class PricesTutorial extends Tutorial {
                         secondPriceContainerHighlight.dismiss();
                         secondPriceHint.dismiss();
 
-                        buttonYes.setChecked(false);
-                        buttonNo.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(false);
 
                         secondGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice2));
 
@@ -463,11 +381,7 @@ public class PricesTutorial extends Tutorial {
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
 
-                        buttonNo.setChecked(false);
-                        buttonYes.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(true);
 
                         firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
@@ -507,11 +421,7 @@ public class PricesTutorial extends Tutorial {
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
 
-                        buttonYes.setChecked(false);
-                        buttonNo.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(false);
 
                         firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
 
@@ -566,11 +476,7 @@ public class PricesTutorial extends Tutorial {
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
 
-                        buttonNo.setChecked(false);
-                        buttonYes.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(true);
 
                         fadeOutView(textView12);
                         fadeOutView(buttonNo);
@@ -595,11 +501,7 @@ public class PricesTutorial extends Tutorial {
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
 
-                        buttonYes.setChecked(false);
-                        buttonNo.setChecked(true);
-
-                        buttonYes.setOnTouchListener(null);
-                        buttonNo.setOnTouchListener(null);
+                        updateButtons(false);
 
                         fadeOutView(textView12);
                         fadeOutView(buttonNo);
@@ -616,4 +518,16 @@ public class PricesTutorial extends Tutorial {
         });
     }
 
+    private void updateButtons(Boolean isYesChecked) {
+        if (isYesChecked) {
+            buttonYes.setChecked(true);
+            buttonNo.setChecked(false);
+        } else {
+            buttonYes.setChecked(false);
+            buttonNo.setChecked(true);
+        }
+
+        buttonYes.setOnTouchListener(null);
+        buttonNo.setOnTouchListener(null);
+    }
 }

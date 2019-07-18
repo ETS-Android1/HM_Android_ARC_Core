@@ -11,7 +11,13 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
+import com.healthymedium.arc.custom.TutorialProgressView;
+import com.healthymedium.arc.hints.HintHighlighter;
+import com.healthymedium.arc.hints.HintPointer;
+import com.healthymedium.arc.hints.Hints;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Tutorial extends BaseFragment {
 
@@ -19,6 +25,13 @@ public class Tutorial extends BaseFragment {
 
     protected int shortAnimationDuration;
 
+    protected HintHighlighter welcomeHighlight;
+    protected HintPointer welcomeHint;
+    protected HintHighlighter quitHighlight;
+    protected HintPointer quitHint;
+
+    protected TutorialProgressView progressView;
+    protected ImageView closeButton;
     protected View loadingView;
     protected LinearLayout progressBar;
 
@@ -32,7 +45,62 @@ public class Tutorial extends BaseFragment {
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
 
+    @Override
+    protected void onEnterTransitionEnd(boolean popped) {
+        super.onEnterTransitionEnd(popped);
+
+        loadingView.animate()
+                .setStartDelay(400)
+                .setDuration(400)
+                .translationYBy(-loadingView.getHeight());
+    }
+
     public Tutorial() {
+    }
+
+    // Display the hints for the progress bar and quit button
+    protected void showTutorial(final Runnable nextSection) {
+        welcomeHighlight.addTarget(progressView, 10, 2);
+        welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
+
+        quitHighlight.addTarget(closeButton, 50, 10);
+        quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
+
+        View.OnClickListener quitListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quitHint.dismiss();
+                quitHighlight.dismiss();
+                Hints.markShown(HINT_FIRST_TUTORIAL);
+
+                Handler handler = new Handler();
+                handler.postDelayed(nextSection,600);
+            }
+        };
+
+        quitHint.addButton(ViewUtil.getString(R.string.popup_gotit), quitListener);
+
+        View.OnClickListener welcomeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                welcomeHint.dismiss();
+                welcomeHighlight.dismiss();
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        quitHighlight.show();
+                        quitHint.show();
+                    }
+                };
+                handler.postDelayed(runnable,600);
+            }
+        };
+
+        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
+
+        welcomeHighlight.show();
+        welcomeHint.show();
     }
 
     protected void fadeInView(View view, Float opacity) {

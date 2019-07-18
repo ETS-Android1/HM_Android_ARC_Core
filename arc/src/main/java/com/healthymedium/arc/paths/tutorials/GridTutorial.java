@@ -17,9 +17,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.custom.DialogButtonTutorial;
-import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
@@ -37,23 +34,13 @@ public class GridTutorial extends Tutorial {
     GridLayout gridLayout;
     GridLayout gridLayoutLetters;
 
-    DialogButtonTutorial centerPopup;
-
     FrameLayout fullScreenGray;
-    TutorialProgressView progressView;
 
-    ImageView closeButton;
     ImageView image33;
     ImageView image43;
 
     TextView tapThisF;
     TextView textViewInstructions;
-
-    HintHighlighter welcomeHighlight;
-    HintPointer welcomeHint;
-
-    HintHighlighter quitHighlight;
-    HintPointer quitHint;
 
     HintPointer itemsHint;
     HintPointer gridsHint;
@@ -156,7 +143,6 @@ public class GridTutorial extends Tutorial {
         gridLayout = view.findViewById(R.id.gridLayout);
         gridLayoutLetters = view.findViewById(R.id.gridLettersLayout);
 
-        centerPopup = view.findViewById(R.id.centerPopup);
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
 
         progressView = view.findViewById(R.id.progressView);
@@ -244,26 +230,26 @@ public class GridTutorial extends Tutorial {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     @Override
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        loadingView.animate()
-                .setStartDelay(400)
-                .setDuration(400)
-                .translationYBy(-loadingView.getHeight());
-
         if (!Hints.hasBeenShown(HINT_FIRST_TUTORIAL)) {
+            final Runnable next = new Runnable() {
+                @Override
+                public void run() {
+                    setInitialItemLayout();
+                }
+            };
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showTutorial();
+                    showTutorial(next);
                 }
-            },1200);
+            }, 1200);
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -272,57 +258,6 @@ public class GridTutorial extends Tutorial {
                 }
             },1200);
         }
-    }
-
-    // Display the hints for the progress bar and quit button
-    private void showTutorial() {
-        welcomeHighlight.addTarget(progressView, 10, 2);
-        welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
-
-        quitHighlight.addTarget(closeButton, 50, 10);
-        quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
-
-        View.OnClickListener quitListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                quitHint.dismiss();
-                quitHighlight.dismiss();
-                Hints.markShown(HINT_FIRST_TUTORIAL);
-
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        setInitialItemLayout();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        quitHint.addButton(ViewUtil.getString(R.string.popup_gotit), quitListener);
-
-        View.OnClickListener welcomeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeHint.dismiss();
-                welcomeHighlight.dismiss();
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        quitHighlight.show();
-                        quitHint.show();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
-
-        welcomeHighlight.show();
-        welcomeHint.show();
     }
 
     // Displays the items that will appear in the grid and the relevant hints

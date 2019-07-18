@@ -119,23 +119,6 @@
             android:text="Tap the bottom tile that matches a tile on the top."
             android:textAlignment="center" />
 
-        <FrameLayout
-            android:id="@+id/fullScreenGray"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/shadow"
-            android:visibility="gone">
-
-        </FrameLayout>
-
-        <com.healthymedium.arc.custom.DialogButtonTutorial
-            android:id="@+id/centerPopup"
-            android:layout_width="220dp"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
-            />
-
         <ImageView
             android:id="@+id/checkmark"
             android:layout_width="100dp"

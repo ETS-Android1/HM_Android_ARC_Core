@@ -91,16 +91,6 @@
 
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/fullScreenGray"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/shadow"
-            android:alpha="0.9"
-            android:visibility="gone">
-
-        </FrameLayout>
-
         <ImageView
             android:id="@+id/checkmark"
             android:layout_width="100dp"
