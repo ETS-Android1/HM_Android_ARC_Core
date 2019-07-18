@@ -3,8 +3,13 @@
 
     <attr name="text" format="string" />
     <attr name="enabled" format="boolean" />
-    <attr name="strokeWidth" format="dimension" />
 
+    <attr name="fillColor" format="color" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="strokeColor" format="color" />
+    <attr name="dashLength" format="dimension" />
+    <attr name="dashSpacing" format="dimension" />
+    <attr name="radius" format="dimension" />
 
     <declare-styleable name="FancyButton">
         <attr name="rounded" format="boolean" />
@@ -31,13 +36,31 @@
         <attr name="text"/>
     </declare-styleable>
 
-    <declare-styleable name="BorderFrameLayout">
-        <attr name="fillColor" format="color" />
+    <declare-styleable name="RoundedFrameLayout">
+        <attr name="fillColor" />
         <attr name="strokeWidth" />
-        <attr name="strokeColor" format="color" />
-        <attr name="dashLength" format="dimension" />
-        <attr name="dashSpacing" format="dimension" />
-        <attr name="radius" format="dimension" />
+        <attr name="strokeColor" />
+        <attr name="dashLength" />
+        <attr name="dashSpacing" />
+        <attr name="radius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundedLinearLayout">
+        <attr name="fillColor" />
+        <attr name="strokeWidth" />
+        <attr name="strokeColor" />
+        <attr name="dashLength" />
+        <attr name="dashSpacing" />
+        <attr name="radius" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundedRelativeLayout">
+        <attr name="fillColor" />
+        <attr name="strokeWidth" />
+        <attr name="strokeColor" />
+        <attr name="dashLength" />
+        <attr name="dashSpacing" />
+        <attr name="radius" />
     </declare-styleable>
 
     <declare-styleable name="CircleProgressView">
