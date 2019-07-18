@@ -192,6 +192,7 @@ public class CircleProgressView extends View {
             progressAnimator.start();
         } else {
             progress = value;
+            sweepAngle = (360f/100)*(value);
             checkmarkAlpha = 255;
             invalidate();
 
