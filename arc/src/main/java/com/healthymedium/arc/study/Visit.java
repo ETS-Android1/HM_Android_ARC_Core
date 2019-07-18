@@ -135,6 +135,15 @@ public class Visit {
         return getNumberOfTests(today);
     }
 
+    public int getDayIndex(LocalDate date){
+        LocalDate startDate = getActualStartDate().toLocalDate();
+        int index = Days.daysBetween(startDate,date).getDays();
+        if(index<0 || index>=getNumberOfDays()){
+            return -1;
+        }
+        return index;
+    }
+
     public int getNumberOfTests(LocalDate date){
         int count = 0;
         for(TestSession test : testSessions){
