@@ -23,12 +23,15 @@ import com.healthymedium.arc.custom.TutorialProgressView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class PricesTutorial extends BaseFragment {
+
+    private static final String HINT_FIRST_TUTORIAL = "HINT_FIRST_TUTORIAL";
 
     RelativeLayout priceContainer;
 
@@ -51,6 +54,12 @@ public class PricesTutorial extends BaseFragment {
     LinearLayout progressBar;
 
     private int shortAnimationDuration;
+
+    HintHighlighter welcomeHighlight;
+    HintPointer welcomeHint;
+
+    HintHighlighter quitHighlight;
+    HintPointer quitHint;
 
     HintHighlighter firstPriceContainerHighlight;
     HintPointer firstPriceHint;
@@ -102,6 +111,12 @@ public class PricesTutorial extends BaseFragment {
 
         shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
+        welcomeHighlight = new HintHighlighter(getActivity());
+        welcomeHint = new HintPointer(getActivity(), progressView, true, false);
+
+        quitHighlight = new HintHighlighter(getActivity());
+        quitHint = new HintPointer(getActivity(), closeButton, true, false);
+
         firstPriceContainerHighlight = new HintHighlighter(getActivity());
         firstPriceHint = new HintPointer(getActivity(), priceContainer, true, false);
         firstGreatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
@@ -120,6 +135,12 @@ public class PricesTutorial extends BaseFragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                welcomeHighlight.dismiss();
+                welcomeHint.dismiss();
+
+                quitHighlight.dismiss();
+                quitHint.dismiss();
+
                 firstPriceContainerHighlight.dismiss();
                 firstPriceHint.dismiss();
                 firstGreatChoiceHint.dismiss();
@@ -171,12 +192,71 @@ public class PricesTutorial extends BaseFragment {
                 .translationYBy(-loadingView.getHeight())
                 .setDuration(400);
 
-        new Handler().postDelayed(new Runnable() {
+        if (!Hints.hasBeenShown(HINT_FIRST_TUTORIAL)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showTutorial();
+                }
+            }, 1200);
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setFirstPricesCompare();
+                }
+            }, 1200);
+        }
+    }
+
+    private void showTutorial() {
+        welcomeHighlight.addTarget(progressView, 10, 2);
+        welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
+
+        quitHighlight.addTarget(closeButton, 50, 10);
+        quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
+
+        View.OnClickListener quitListener = new View.OnClickListener() {
             @Override
-            public void run() {
-                setFirstPricesCompare();
+            public void onClick(View view) {
+                quitHint.dismiss();
+                quitHighlight.dismiss();
+                Hints.markShown(HINT_FIRST_TUTORIAL);
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        setFirstPricesCompare();
+                    }
+                };
+                handler.postDelayed(runnable,600);
             }
-        },1200);
+        };
+
+        quitHint.addButton(ViewUtil.getString(R.string.popup_gotit), quitListener);
+
+        View.OnClickListener welcomeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                welcomeHint.dismiss();
+                welcomeHighlight.dismiss();
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        quitHighlight.show();
+                        quitHint.show();
+                    }
+                };
+                handler.postDelayed(runnable,600);
+            }
+        };
+
+        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
+
+        welcomeHighlight.show();
+        welcomeHint.show();
     }
 
     private void setFirstPricesCompare() {
