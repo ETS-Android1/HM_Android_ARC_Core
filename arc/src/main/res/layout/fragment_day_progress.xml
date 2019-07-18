@@ -79,12 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:visibility="visible"
-                app:gradient="linearHorizontal"
-                app:gradientColor0="@color/hintLight"
-                app:gradientColor1="@color/hintDark"
-                app:radius="32dp"
-                app:strokeColor="@color/hintDark"
-                app:strokeWidth="4dp">
+                app:fillColor="@color/hintDark"
+                app:radius="4dp">
 
                 <TextView
                     android:layout_width="match_parent"
