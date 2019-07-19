@@ -304,6 +304,7 @@
 
 
 
+    <string name="popup_begin">Let\'s begin the first test.</string>
 
     <string name="testing_commitment">&lt;b>Testing Commitment&lt;/b></string>
     <string name="onboarding_header">&lt;b>Welcome: What to Expect&lt;/b></string>

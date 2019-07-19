@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;
+import com.healthymedium.arc.hints.HintHighlighter;
+import com.healthymedium.arc.hints.HintPointer;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
@@ -30,15 +33,21 @@ import java.util.Locale;
 @SuppressLint("ValidFragment")
 public class LandingTemplate extends BaseFragment {
 
+    protected static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
+
     String stringHeader;
     String stringSubheader;
     Boolean boolTestReady;
 
+    protected LinearLayout landing_layout;
     protected TextView textViewHeader;
     protected TextView textViewSubheader;
     protected LinearLayout content;
     protected FrameLayout frameLayoutContact;
     protected TextView textViewContact;
+
+    HintPointer beginTestHint;
+    HintHighlighter beginTestHighlight;
 
     public LandingTemplate(Boolean testReady) {
         boolTestReady = testReady;
@@ -48,6 +57,9 @@ public class LandingTemplate extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.template_landing, container, false);
+
+        landing_layout = view.findViewById(R.id.landing_layout);
+
         content = view.findViewById(R.id.linearLayoutContent);
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
@@ -61,6 +73,12 @@ public class LandingTemplate extends BaseFragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
+                        beginTestHighlight.dismiss();
+                        beginTestHint.dismiss();
+                        Hints.markShown(HINT_FIRST_TEST);
+                    }
+
                     getMainActivity().hideNavigationBar();
                     Study.getCurrentTestSession().markStarted();
                     Study.getParticipant().save();
@@ -74,6 +92,16 @@ public class LandingTemplate extends BaseFragment {
             params.leftMargin = ViewUtil.dpToPx(32);
             params.topMargin = ViewUtil.dpToPx(16);
             content.setLayoutParams(params);
+
+            if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
+                beginTestHint = new HintPointer(getActivity(), landing_layout, true, false);
+                beginTestHint.setText(ViewUtil.getString(R.string.popup_begin));
+                beginTestHighlight = new HintHighlighter(getActivity());
+                beginTestHighlight.addTarget(landing_layout, 10);
+
+                beginTestHighlight.show();
+                beginTestHint.show();
+            }
         }
 
         getMainActivity().showNavigationBar();
