@@ -86,9 +86,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q1"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -110,9 +125,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q2"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -134,9 +164,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q3"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -158,9 +203,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q4"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -182,9 +242,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q5"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -206,9 +281,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q6"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -230,9 +320,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q7"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -254,9 +359,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q8"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -278,9 +398,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q9"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
@@ -302,9 +437,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginRight="64dp"
                         android:layout_centerVertical="true"
                         android:text="@string/faq_testing_q10"
                         android:textColor="@color/white"
+                        android:textSize="17dp"
+                        />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/background_back_button"
+                        android:drawableEnd="@drawable/ic_arrow_right_white"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:paddingRight="5dp"
                         />
 
                 </RelativeLayout>
