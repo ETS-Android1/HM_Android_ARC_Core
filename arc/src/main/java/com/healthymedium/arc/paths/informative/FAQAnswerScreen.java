@@ -1,7 +1,9 @@
 package com.healthymedium.arc.paths.informative;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +16,28 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
 
-public class FAQScreen extends BaseFragment {
+@SuppressLint("ValidFragment")
+public class FAQAnswerScreen extends BaseFragment {
 
     TextView textViewBack;
+    TextView textViewHeader;
+    TextView textViewSubHeader;
 
-    RelativeLayout testing;
-    RelativeLayout earnings;
-    RelativeLayout technology;
+    String headerText;
+    String bodyText;
 
-
-    public FAQScreen() {
+    public FAQAnswerScreen(String header, String body) {
         allowBackPress(false);
         setTransitionSet(TransitionSet.getSlidingDefault());
+
+        headerText = header;
+        bodyText = body;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_faq, container, false);
+        View view = inflater.inflate(R.layout.fragment_faq_answer, container, false);
 
         getMainActivity().hideNavigationBar();
 
@@ -45,32 +51,11 @@ public class FAQScreen extends BaseFragment {
         });
         textViewBack.setVisibility(View.VISIBLE);
 
-        testing = view.findViewById(R.id.testing);
-        testing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQTestingScreen();
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
+        textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setText(headerText);
 
-        earnings = view.findViewById(R.id.earnings);
-        earnings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQEarningsScreen();
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        technology = view.findViewById(R.id.technology);
-        technology.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQTechnologyScreen();
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
+        textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
+        textViewSubHeader.setText(Html.fromHtml(bodyText));
 
         return view;
     }

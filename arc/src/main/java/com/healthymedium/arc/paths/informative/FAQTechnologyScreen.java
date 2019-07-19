@@ -13,17 +13,18 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
-public class FAQScreen extends BaseFragment {
+public class FAQTechnologyScreen extends BaseFragment {
 
     TextView textViewBack;
 
-    RelativeLayout testing;
-    RelativeLayout earnings;
-    RelativeLayout technology;
+    RelativeLayout tech_q1;
+    RelativeLayout tech_q2;
+    RelativeLayout tech_q3;
+    RelativeLayout tech_q4;
 
-
-    public FAQScreen() {
+    public FAQTechnologyScreen() {
         allowBackPress(false);
         setTransitionSet(TransitionSet.getSlidingDefault());
     }
@@ -31,7 +32,7 @@ public class FAQScreen extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_faq, container, false);
+        View view = inflater.inflate(R.layout.fragment_faq_technology, container, false);
 
         getMainActivity().hideNavigationBar();
 
@@ -45,29 +46,38 @@ public class FAQScreen extends BaseFragment {
         });
         textViewBack.setVisibility(View.VISIBLE);
 
-        testing = view.findViewById(R.id.testing);
-        testing.setOnClickListener(new View.OnClickListener() {
+        tech_q1 = view.findViewById(R.id.tech_q1);
+        tech_q1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BaseFragment fragment = new FAQTestingScreen();
+                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q1), ViewUtil.getString(R.string.faq_tech_a1));
                 NavigationManager.getInstance().open(fragment);
             }
         });
 
-        earnings = view.findViewById(R.id.earnings);
-        earnings.setOnClickListener(new View.OnClickListener() {
+        tech_q2 = view.findViewById(R.id.tech_q2);
+        tech_q2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BaseFragment fragment = new FAQEarningsScreen();
+                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q2), ViewUtil.getString(R.string.faq_tech_a2));
                 NavigationManager.getInstance().open(fragment);
             }
         });
 
-        technology = view.findViewById(R.id.technology);
-        technology.setOnClickListener(new View.OnClickListener() {
+        tech_q3 = view.findViewById(R.id.tech_q3);
+        tech_q3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BaseFragment fragment = new FAQTechnologyScreen();
+                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q3), ViewUtil.getString(R.string.faq_tech_a3));
+                NavigationManager.getInstance().open(fragment);
+            }
+        });
+
+        tech_q4 = view.findViewById(R.id.tech_q4);
+        tech_q4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q4), ViewUtil.getString(R.string.faq_tech_a4));
                 NavigationManager.getInstance().open(fragment);
             }
         });

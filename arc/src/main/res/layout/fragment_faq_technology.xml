@@ -45,7 +45,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
-                android:text="@string/faq_header"
+                android:text="@string/faq_tech_header"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 android:textStyle="bold" />
@@ -78,7 +78,7 @@
                 </FrameLayout>
 
                 <RelativeLayout
-                    android:id="@+id/testing"
+                    android:id="@+id/tech_q1"
                     android:layout_width="match_parent"
                     android:layout_height="75dp">
 
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
                         android:layout_centerVertical="true"
-                        android:text="@string/faq_testing"
+                        android:text="@string/faq_tech_q1"
                         android:textColor="@color/white"
                         />
 
@@ -102,7 +102,7 @@
                 </FrameLayout>
 
                 <RelativeLayout
-                    android:id="@+id/earnings"
+                    android:id="@+id/tech_q2"
                     android:layout_width="match_parent"
                     android:layout_height="75dp">
 
@@ -111,7 +111,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
                         android:layout_centerVertical="true"
-                        android:text="@string/faq_earnings"
+                        android:text="@string/faq_tech_q2"
                         android:textColor="@color/white"
                         />
 
@@ -126,7 +126,7 @@
                 </FrameLayout>
 
                 <RelativeLayout
-                    android:id="@+id/technology"
+                    android:id="@+id/tech_q3"
                     android:layout_width="match_parent"
                     android:layout_height="75dp">
 
@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="32dp"
                         android:layout_centerVertical="true"
-                        android:text="@string/faq_technology"
+                        android:text="@string/faq_tech_q3"
                         android:textColor="@color/white"
                         />
 
@@ -149,31 +149,24 @@
 
                 </FrameLayout>
 
-                <FrameLayout
+                <RelativeLayout
+                    android:id="@+id/tech_q4"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:layout_alignParentBottom="true">
+                    android:layout_height="75dp">
 
-                </FrameLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/faq_tech_q4"
+                        android:textColor="@color/white"
+                        />
+
+                </RelativeLayout>
 
                 <FrameLayout
                     android:id="@+id/lineFrameLayout5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#003245">
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="75dp"
-                    android:layout_alignParentBottom="true">
-
-
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/lineFrameLayout6"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#003245">
