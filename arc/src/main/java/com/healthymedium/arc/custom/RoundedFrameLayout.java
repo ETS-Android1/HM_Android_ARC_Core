@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-
 public class RoundedFrameLayout extends FrameLayout {
 
     RoundedDrawable background;

@@ -4,13 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-
-public class RoundedRelativeLayout extends FrameLayout {
+public class RoundedRelativeLayout extends RelativeLayout {
 
     RoundedDrawable background;
 
