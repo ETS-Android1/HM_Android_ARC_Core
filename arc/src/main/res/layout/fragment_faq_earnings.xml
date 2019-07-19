@@ -60,6 +60,16 @@
                 android:layout_weight="1"
                 android:background="@color/yellow" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginBottom="15dp"
+                android:text="@string/faq_subpage_subheader"
+                android:textColor="@color/tealSubheader"
+                android:textSize="17dp"
+                />
+
             <LinearLayout
                 android:id="@+id/bottomLinearLayout"
                 android:layout_width="match_parent"

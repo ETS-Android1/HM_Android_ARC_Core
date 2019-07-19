@@ -361,6 +361,8 @@
     <string name="faq_earnings">Earnings</string>
     <string name="faq_technology">Technology</string>
 
+    <string name="faq_subpage_subheader">Tap a question to see the answer.</string>
+
     <string name="faq_testing_header">Testing FAQ</string>
     <string name="faq_testing_q1">How long do I have to take tests?</string>
     <string name="faq_testing_q2">Do I have to take the test as soon as I get the notification?</string>
