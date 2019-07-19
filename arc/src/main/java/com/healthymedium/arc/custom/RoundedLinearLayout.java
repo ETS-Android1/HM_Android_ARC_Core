@@ -42,14 +42,14 @@ public class RoundedLinearLayout extends LinearLayout {
         int strokeWidth = (int) typedArray.getDimension(R.styleable.RoundedLinearLayout_strokeWidth,0);
         
         int radius = (int) typedArray.getDimension(R.styleable.RoundedLinearLayout_radius,0);
-        int radiusTopLeft = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusTopLeft,0);
-        int radiusTopRight = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusTopRight,0);
-        int radiusBottomLeft = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusBottomLeft,0);
-        int radiusBottomRight = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusBottomRight,0);
+        int radiusTopLeft = (int) typedArray.getDimension(R.styleable.RoundedLinearLayout_radiusTopLeft,0);
+        int radiusTopRight = (int) typedArray.getDimension(R.styleable.RoundedLinearLayout_radiusTopRight,0);
+        int radiusBottomLeft = (int) typedArray.getDimension(R.styleable.RoundedLinearLayout_radiusBottomLeft,0);
+        int radiusBottomRight = (int) typedArray.getDimension(R.styleable.RoundedLinearLayout_radiusBottomRight,0);
 
-        int gradientEnum = (int) typedArray.getInt(R.styleable.RoundedRelativeLayout_gradient,-1);
-        int gradientColor0 = (int) typedArray.getColor(R.styleable.RoundedRelativeLayout_gradientColor0,0);
-        int gradientColor1 = (int) typedArray.getColor(R.styleable.RoundedRelativeLayout_gradientColor1,0);
+        int gradientEnum = (int) typedArray.getInt(R.styleable.RoundedLinearLayout_gradient,-1);
+        int gradientColor0 = (int) typedArray.getColor(R.styleable.RoundedLinearLayout_gradientColor0,0);
+        int gradientColor1 = (int) typedArray.getColor(R.styleable.RoundedLinearLayout_gradientColor1,0);
 
         typedArray.recycle();
 
