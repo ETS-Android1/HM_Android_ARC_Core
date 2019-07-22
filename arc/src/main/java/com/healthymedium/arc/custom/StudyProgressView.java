@@ -22,8 +22,8 @@ import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_VERTI
 
 public class StudyProgressView extends LinearLayout {
 
-    int currentVisit;
-    int visitCount;
+    int currentWeek;
+    int weekCount;
 
     int dp4;
     int dp8;
@@ -51,17 +51,12 @@ public class StudyProgressView extends LinearLayout {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
 
-        // init woth dummy values
-        currentVisit = 4;
-        visitCount = 12;
+        // init dummy values
+        currentWeek = 4;
+        weekCount = 12;
 
         if(!isInEditMode()){
-            ParticipantState state = Study.getParticipant().getState();
-            visitCount = state.visits.size();
-
-            // offset because internal data is indexed 0
-            // and this view uses indexed 1
-            currentVisit = state.currentVisit+1;
+            // Todo: actually get data
         }
 
         int dp1 = ViewUtil.dpToPx(1);
@@ -74,13 +69,13 @@ public class StudyProgressView extends LinearLayout {
 
         int color = ViewUtil.getColor(getContext(),R.color.secondaryAccent);
 
-        for(int i=0;i<visitCount;i++){
+        for(int i=0;i<weekCount;i++){
             RoundedDrawable drawable = new RoundedDrawable();
             drawable.setRadius(dp4);
             drawable.setStrokeColor(color);
             drawable.setStrokeWidth(dp1);
 
-            if(i<=currentVisit){
+            if(i<currentWeek){
                 drawable.setFillColor(color);
             }
 
@@ -88,7 +83,7 @@ public class StudyProgressView extends LinearLayout {
             view.setBackground(drawable);
 
             LayoutParams params;
-            if(i==currentVisit){
+            if(i==currentWeek-1){
                 params = new LayoutParams(dp8,dp42);
             } else {
                 params = new LayoutParams(dp8,dp32);
@@ -96,7 +91,7 @@ public class StudyProgressView extends LinearLayout {
 
             if(i==0){
                 params.setMargins(0,0,dp4,0);
-            } else if(i==visitCount-1){
+            } else if(i==weekCount-1){
                 params.setMargins(dp4,0,0,0);
             } else {
                 params.setMargins(dp4,0,dp4,0);
@@ -112,7 +107,7 @@ public class StudyProgressView extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
-        int blockWidth = ((width-((visitCount-1)*dp8))/visitCount);
+        int blockWidth = ((width-((weekCount-1)*dp8))/weekCount);
 
         int childCount = getChildCount();
         for(int i=0;i<childCount;i++){
