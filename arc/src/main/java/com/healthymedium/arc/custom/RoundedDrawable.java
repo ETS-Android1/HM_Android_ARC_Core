@@ -64,19 +64,21 @@ public class RoundedDrawable extends Drawable {
         int offset = (int) (strokeWidth/2);
         rect.set(offset,offset,width-offset,height-offset);
 
-        int maxRadius = Math.min(rect.width()/2, rect.height()/2);
+        if(drawStroke) {
+            int maxRadius = Math.min(rect.width() / 2, rect.height() / 2);
 
-        if(radiusTopLeft > maxRadius) {
-            radiusTopLeft = maxRadius;
-        }
-        if(radiusTopRight > maxRadius) {
-            radiusTopRight = maxRadius;
-        }
-        if(radiusBottomLeft > maxRadius) {
-            radiusBottomLeft = maxRadius;
-        }
-        if(radiusBottonRight > maxRadius) {
-            radiusBottonRight = maxRadius;
+            if (radiusTopLeft > maxRadius) {
+                radiusTopLeft = maxRadius;
+            }
+            if (radiusTopRight > maxRadius) {
+                radiusTopRight = maxRadius;
+            }
+            if (radiusBottomLeft > maxRadius) {
+                radiusBottomLeft = maxRadius;
+            }
+            if (radiusBottonRight > maxRadius) {
+                radiusBottonRight = maxRadius;
+            }
         }
 
         path = getPath(rect);
