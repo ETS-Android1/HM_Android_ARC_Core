@@ -1,32 +1,32 @@
-package com.healthymedium.arc.custom;
+package com.healthymedium.arc.custom.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_HORIZONTAL;
-import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_VERTICAL;
+import static com.healthymedium.arc.custom.base.RoundedDrawable.Gradient.LINEAR_HORIZONTAL;
+import static com.healthymedium.arc.custom.base.RoundedDrawable.Gradient.LINEAR_VERTICAL;
 
-public class RoundedFrameLayout extends FrameLayout {
+public class RoundedRelativeLayout extends RelativeLayout {
 
     RoundedDrawable background;
 
-    public RoundedFrameLayout(Context context) {
+    public RoundedRelativeLayout(Context context) {
         super(context);
         init(null,0);
     }
 
-    public RoundedFrameLayout(Context context, AttributeSet attrs) {
+    public RoundedRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public RoundedFrameLayout(Context context, AttributeSet attrs, int defStyle) {
+    public RoundedRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
     }
@@ -36,26 +36,26 @@ public class RoundedFrameLayout extends FrameLayout {
         background = new RoundedDrawable();
         setBackground(background);
 
-        final TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.RoundedFrameLayout, defStyle, 0);
+        final TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.RoundedRelativeLayout, defStyle, 0);
 
-        int fillColor = typedArray.getColor(R.styleable.RoundedFrameLayout_fillColor,0);
-        int strokeColor = typedArray.getColor(R.styleable.RoundedFrameLayout_strokeColor,0);
-        float dashLength = typedArray.getDimension(R.styleable.RoundedFrameLayout_dashLength,0);
-        float dashSpacing = typedArray.getDimension(R.styleable.RoundedFrameLayout_dashSpacing,0);
-        int strokeWidth = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_strokeWidth,0);
+        int fillColor = typedArray.getColor(R.styleable.RoundedRelativeLayout_fillColor,0);
+        int strokeColor = typedArray.getColor(R.styleable.RoundedRelativeLayout_strokeColor,0);
+        float dashLength = typedArray.getDimension(R.styleable.RoundedRelativeLayout_dashLength,0);
+        float dashSpacing = typedArray.getDimension(R.styleable.RoundedRelativeLayout_dashSpacing,0);
+        int strokeWidth = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_strokeWidth,0);
 
-        int radius = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_radius,0);
-        int radiusTopLeft = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_radiusTopLeft,0);
-        int radiusTopRight = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_radiusTopRight,0);
-        int radiusBottomLeft = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_radiusBottomLeft,0);
-        int radiusBottomRight = (int) typedArray.getDimension(R.styleable.RoundedFrameLayout_radiusBottomRight,0);
-
-
-        int gradientEnum = (int) typedArray.getInt(R.styleable.RoundedFrameLayout_gradient,-1);
-        int gradientColor0 = (int) typedArray.getColor(R.styleable.RoundedFrameLayout_gradientColor0,0);
-        int gradientColor1 = (int) typedArray.getColor(R.styleable.RoundedFrameLayout_gradientColor1,0);
+        int radius = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radius,0);
+        int radiusTopLeft = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusTopLeft,0);
+        int radiusTopRight = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusTopRight,0);
+        int radiusBottomLeft = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusBottomLeft,0);
+        int radiusBottomRight = (int) typedArray.getDimension(R.styleable.RoundedRelativeLayout_radiusBottomRight,0);
+        
+        int gradientEnum = (int) typedArray.getInt(R.styleable.RoundedRelativeLayout_gradient,-1);
+        int gradientColor0 = (int) typedArray.getColor(R.styleable.RoundedRelativeLayout_gradientColor0,0);
+        int gradientColor1 = (int) typedArray.getColor(R.styleable.RoundedRelativeLayout_gradientColor1,0);
 
         typedArray.recycle();
+
 
         if(fillColor!=0){
             background.setFillColor(fillColor);

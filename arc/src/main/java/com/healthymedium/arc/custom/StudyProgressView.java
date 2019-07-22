@@ -1,24 +1,14 @@
 package com.healthymedium.arc.custom;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.healthymedium.arc.custom.base.RoundedDrawable;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.study.ParticipantState;
-import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
-
-import java.util.List;
-
-import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_HORIZONTAL;
-import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_VERTICAL;
 
 public class StudyProgressView extends LinearLayout {
 
