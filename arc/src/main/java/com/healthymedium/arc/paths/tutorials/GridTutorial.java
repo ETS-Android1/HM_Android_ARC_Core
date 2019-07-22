@@ -28,6 +28,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class GridTutorial extends Tutorial {
 
     int selectedCount;
+    Boolean image33Selected = false;
+    Boolean image24Selected = false;
+    Boolean image41Selected = false;
 
     RelativeLayout itemsLayout;
 
@@ -36,7 +39,9 @@ public class GridTutorial extends Tutorial {
 
     FrameLayout fullScreenGray;
 
+    ImageView image24;
     ImageView image33;
+    ImageView image41;
     ImageView image43;
 
     TextView tapThisF;
@@ -59,6 +64,10 @@ public class GridTutorial extends Tutorial {
     HintHighlighter pulsateGridItem;
     HintPointer otherTwoHint;
     HintHighlighter gridHighlight;
+
+    HintPointer remindMeHint;
+    HintPointer remindMeTapHint;
+    HintHighlighter remindMeTapHighlight;
 
     Handler handler;
 
@@ -150,7 +159,9 @@ public class GridTutorial extends Tutorial {
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
+        image24 = view.findViewById(R.id.image24);
         image33 = view.findViewById(R.id.image33);
+        image41 = view.findViewById(R.id.image41);
         image43 = view.findViewById(R.id.image43);
 
         textViewComplete = view.findViewById(R.id.textViewComplete);
@@ -188,6 +199,10 @@ public class GridTutorial extends Tutorial {
         otherTwoHint = new HintPointer(getActivity(), gridLayout, true, true);
         gridHighlight = new HintHighlighter(getActivity());
 
+        remindMeHint = new HintPointer(getActivity(), image43, false, true);
+        remindMeTapHint = new HintPointer(getActivity(), gridLayout, true, true);
+        remindMeTapHighlight = new HintHighlighter(getActivity());
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -214,6 +229,10 @@ public class GridTutorial extends Tutorial {
                 pulsateGridItem.dismiss();
                 otherTwoHint.dismiss();
                 gridHighlight.dismiss();
+
+                remindMeHint.dismiss();
+                remindMeTapHint.dismiss();
+                remindMeTapHighlight.dismiss();
 
                 exit();
             }
@@ -449,11 +468,9 @@ public class GridTutorial extends Tutorial {
     }
 
     // Displays the grid recall test and associated hints/prompts
+    // TODO
+    // This is all awful and super gross, make it cleaner at some point
     private void setGridRecall() {
-        // TODO
-        // Need to build the Remind Me functionality
-        // Probably somewhere in this function
-
         fadeInView(gridLayout, 1f);
 
         textViewInstructions.setText(ViewUtil.getString(R.string.grids_subheader_boxes));
@@ -475,6 +492,27 @@ public class GridTutorial extends Tutorial {
         pulsateGridItem.addPulsingTarget(image33);
         pulsateGridItem.show();
 
+        final Handler remindMeHandler = new Handler();
+        final Runnable remindMeRunnable = new Runnable() {
+            @Override
+            public void run() {
+                remindMeHint.show();
+            }
+        };
+
+        View.OnClickListener remindMeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                remindMeHint.dismiss();
+                remindMeTapHint.show();
+                remindMeHighlights();
+            }
+        };
+
+        remindMeHint.setText("Need help?");
+        remindMeHint.addButton("Remind Me", remindMeListener);
+        remindMeTapHint.setText("Tap on the locations of the other two items.");
+
         View.OnTouchListener image33Listener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -486,6 +524,7 @@ public class GridTutorial extends Tutorial {
                         getImageView(2,2).setImageResource(0);
                         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
                         selectedCount += 1;
+                        image33Selected = true;
 
                         // Now tap on the locations of the other two items.
                         Handler handler = new Handler();
@@ -504,6 +543,9 @@ public class GridTutorial extends Tutorial {
                                     public void run() {
                                         otherTwoHint.dismiss();
                                         gridHighlight.dismiss();
+
+                                        // If no response for 5 seconds after the hint has disappeared then show another hint
+                                        remindMeHandler.postDelayed(remindMeRunnable, 5000);
                                     }
                                 };
                                 handler.postDelayed(runnable,3000);
@@ -526,7 +568,7 @@ public class GridTutorial extends Tutorial {
             }
         };
 
-        View.OnTouchListener listener = new View.OnTouchListener() {
+        View.OnTouchListener image24Listener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 int action = event.getAction();
@@ -534,6 +576,10 @@ public class GridTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
                         selectedCount += 1;
+                        image24Selected = true;
+                        remindMeHandler.removeCallbacks(remindMeRunnable);
+                        remindMeTapHint.dismiss();
+                        remindMeTapHighlight.dismiss();
                         break;
                     case MotionEvent.ACTION_UP:
                         break;
@@ -543,20 +589,68 @@ public class GridTutorial extends Tutorial {
                     fadeOutView(gridLayout);
                     fadeOutView(textViewInstructions);
                     showComplete();
+                    return false;
                 }
+
+                // If no response for 5 seconds after selection then show a hint
+                remindMeHandler.postDelayed(remindMeRunnable, 5000);
+
+                return false;
+            }
+        };
+
+        View.OnTouchListener image41Listener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                int action = event.getAction();
+                switch (action){
+                    case MotionEvent.ACTION_DOWN:
+                        view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
+                        selectedCount += 1;
+                        image41Selected = true;
+                        remindMeHandler.removeCallbacks(remindMeRunnable);
+                        remindMeTapHint.dismiss();
+                        remindMeTapHighlight.dismiss();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+
+                if (selectedCount == 3) {
+                    fadeOutView(gridLayout);
+                    fadeOutView(textViewInstructions);
+                    showComplete();
+                    return false;
+                }
+
+                // If no response for 5 seconds after selection then show a hint
+                remindMeHandler.postDelayed(remindMeRunnable, 5000);
 
                 return false;
             }
         };
 
         gridLayout.getChildAt(8).setTag(R.id.tag_color,R.color.gridNormal);
-        gridLayout.getChildAt(8).setOnTouchListener(listener);
+        gridLayout.getChildAt(8).setOnTouchListener(image24Listener);
 
         gridLayout.getChildAt(12).setTag(R.id.tag_color,R.color.gridNormal);
         gridLayout.getChildAt(12).setOnTouchListener(image33Listener);
 
         gridLayout.getChildAt(15).setTag(R.id.tag_color,R.color.gridNormal);
-        gridLayout.getChildAt(15).setOnTouchListener(listener);
+        gridLayout.getChildAt(15).setOnTouchListener(image41Listener);
+    }
+
+    // Determines which items to highlight for the remind me hints in the grid recall
+    private void remindMeHighlights() {
+        if (!image24Selected) {
+            remindMeTapHighlight.addPulsingTarget(image24, 10);
+        }
+
+        if (!image41Selected) {
+            remindMeTapHighlight.addPulsingTarget(image41, 10);
+        }
+
+        remindMeTapHighlight.show();
     }
 
     private ImageView getImageView(int row, int col){
