@@ -9,6 +9,9 @@ import android.widget.FrameLayout;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_HORIZONTAL;
+import static com.healthymedium.arc.custom.RoundedDrawable.Gradient.LINEAR_VERTICAL;
+
 public class RoundedFrameLayout extends FrameLayout {
 
     RoundedDrawable background;
@@ -74,7 +77,7 @@ public class RoundedFrameLayout extends FrameLayout {
 
         if(gradientEnum!=-1 && gradientColor0!=0 && gradientColor1!=0){
             RoundedDrawable.Gradient gradient = RoundedDrawable.Gradient.fromId(gradientEnum);
-            switch (gradient){
+            switch (gradient.getId()){
                 case LINEAR_HORIZONTAL:
                     background.setHorizontalGradient(gradientColor0,gradientColor1);
                     break;

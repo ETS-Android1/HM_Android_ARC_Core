@@ -155,7 +155,7 @@ public class RoundedDrawable extends Drawable {
 
     public void setHorizontalGradient(int colorLeft, int colorRight) {
         drawFill = true;
-        gradient = Gradient.LINEAR_HORIZONTAL;
+        gradient = Gradient.fromId(Gradient.LINEAR_HORIZONTAL);
         gradient.setColor0(colorLeft);
         gradient.setColor1(colorRight);
         gradient.setTileMode(Shader.TileMode.CLAMP);
@@ -163,7 +163,7 @@ public class RoundedDrawable extends Drawable {
 
     public void setVerticalGradient(int colorTop, int colorBottom) {
         drawFill = true;
-        gradient = Gradient.LINEAR_VERTICAL;
+        gradient = Gradient.fromId(Gradient.LINEAR_VERTICAL);
         gradient.setColor0(colorTop);
         gradient.setColor1(colorBottom);
         gradient.setTileMode(Shader.TileMode.CLAMP);
@@ -217,9 +217,9 @@ public class RoundedDrawable extends Drawable {
     }
 
 
-    public enum Gradient{
-        LINEAR_HORIZONTAL(0),
-        LINEAR_VERTICAL(1);
+    public static class Gradient{
+        public static final int LINEAR_HORIZONTAL = 0;
+        public static final int LINEAR_VERTICAL = 1;
 
         int id;
         int color0;
@@ -230,8 +230,12 @@ public class RoundedDrawable extends Drawable {
             id = enumeratedValue;
         }
 
+        public int getId() {
+            return id;
+        }
+
         Shader getShader(int width, int height){
-            switch (this){
+            switch (id){
                 case LINEAR_VERTICAL:
                     return new LinearGradient(0, 0, 0, height, color0, color1, tileMode);
                 case LINEAR_HORIZONTAL:
@@ -253,10 +257,7 @@ public class RoundedDrawable extends Drawable {
         }
 
         public static Gradient fromId(int id){
-            for (Gradient gradient : values()) {
-                if (gradient.id == id) return gradient;
-            }
-            return null;
+            return new Gradient(id);
         }
     }
 
