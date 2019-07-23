@@ -1,64 +1,23 @@
 package com.healthymedium.arc.custom.base;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.DashPathEffect;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
+
 import android.graphics.Path;
-import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.widget.FrameLayout;
 
-import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.utilities.ViewUtil;
+public class RoundedDrawable extends SimpleDrawable {
 
-
-public class RoundedDrawable extends Drawable {
-
-    private boolean drawStroke = false;
-    private boolean drawFill = false;
-    private Gradient gradient;
-
-    private Path path;
-    private Paint fillPaint;
-    private Paint strokePaint;
-    private float strokeWidth;
     private int radiusTopLeft;
     private int radiusTopRight;
     private int radiusBottomLeft;
     private int radiusBottonRight;
 
-    // only used for drawing
-    private Rect rect;
-    private int height;
-    private int width;
-
     public RoundedDrawable(){
-
-        // initialize member variables
-        rect = new Rect(0,0,0,0);
-
-        fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        fillPaint.setStyle(Paint.Style.FILL);
-
-        strokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        strokePaint.setStyle(Paint.Style.STROKE);
-
+        super();
     }
 
     @Override
-    protected void onBoundsChange(Rect bounds) {
-        width = bounds.width();
-        height = bounds.height();
+    protected void updateOffsets() {
 
         // create a rect that's small enough that the stroke isn't cut off
         int offset = (int) (strokeWidth/2);
@@ -80,39 +39,6 @@ public class RoundedDrawable extends Drawable {
                 radiusBottonRight = maxRadius;
             }
         }
-
-        path = getPath(rect);
-
-        if(gradient!=null){
-            fillPaint.setShader(gradient.getShader(width,height));
-        }
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        if(drawFill){
-            canvas.drawPath(path,fillPaint);
-        }
-        if(drawStroke) {
-            canvas.drawPath(path,strokePaint);
-        }
-    }
-
-    @Override
-    public void setAlpha(int alpha) {
-        fillPaint.setAlpha(alpha);
-        strokePaint.setAlpha(alpha);
-    }
-
-    @Override
-    public void setColorFilter(@Nullable ColorFilter colorFilter) {
-        fillPaint.setColorFilter(colorFilter);
-        strokePaint.setColorFilter(colorFilter);
-    }
-
-    @Override
-    public int getOpacity() {
-        return PixelFormat.OPAQUE;
     }
 
     public void setRadius(int radius) {
@@ -129,66 +55,8 @@ public class RoundedDrawable extends Drawable {
         radiusBottonRight = bottomRight;
     }
 
-    public void setFillColor(int color) {
-        drawFill = color!=0;
-        fillPaint.setColor(color);
-    }
 
-    public void setFillShader(Shader shader) {
-        drawFill = true;
-        fillPaint.setShader(shader);
-    }
-
-    public void setStrokeColor(int color) {
-        drawStroke = color!=0;
-        strokePaint.setColor(color);
-    }
-
-    public void setStrokeWidth(float width) {
-        strokeWidth = width;
-        strokePaint.setStrokeWidth(width);
-    }
-
-    public void setStrokeDash(float length, float spacing) {
-        strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
-    }
-
-    public void setGradient(int gradientId, int colorFirst, int colorSecond) {
-        switch (gradientId){
-            case LINEAR_HORIZONTAL:
-                setHorizontalGradient(colorFirst,colorSecond);
-                break;
-            case LINEAR_VERTICAL:
-                setVerticalGradient(colorFirst,colorSecond);
-                break;
-        }
-    }
-
-    public void setHorizontalGradient(int colorLeft, int colorRight) {
-        drawFill = true;
-        gradient = Gradient.fromId(Gradient.LINEAR_HORIZONTAL);
-        gradient.setColor0(colorLeft);
-        gradient.setColor1(colorRight);
-        gradient.setTileMode(Shader.TileMode.CLAMP);
-    }
-
-    public void setVerticalGradient(int colorTop, int colorBottom) {
-        drawFill = true;
-        gradient = Gradient.fromId(Gradient.LINEAR_VERTICAL);
-        gradient.setColor0(colorTop);
-        gradient.setColor1(colorBottom);
-        gradient.setTileMode(Shader.TileMode.CLAMP);
-    }
-
-    public float getWidth() {
-        return width;
-    }
-
-    public float getHeight() {
-        return height;
-    }
-
-    private Path getPath(Rect rect) {
+    protected Path getPath(Rect rect) {
 
         Path path = new Path();
 
@@ -226,52 +94,6 @@ public class RoundedDrawable extends Drawable {
 
         return path;
     }
-
-
-    public static class Gradient{
-        public static final int LINEAR_HORIZONTAL = 0;
-        public static final int LINEAR_VERTICAL = 1;
-
-        int id;
-        int color0;
-        int color1;
-        Shader.TileMode tileMode;
-
-        Gradient(int enumeratedValue){
-            id = enumeratedValue;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        Shader getShader(int width, int height){
-            switch (id){
-                case LINEAR_VERTICAL:
-                    return new LinearGradient(0, 0, 0, height, color0, color1, tileMode);
-                case LINEAR_HORIZONTAL:
-                    return new LinearGradient(0,0,width,0,color0,color1,tileMode);
-            }
-            return null;
-        }
-
-        void setColor0(int color){
-            this.color0 = color;
-        }
-
-        void setColor1(int color){
-            this.color1 = color;
-        }
-
-        void setTileMode(Shader.TileMode tileMode){
-            this.tileMode = tileMode;
-        }
-
-        public static Gradient fromId(int id){
-            return new Gradient(id);
-        }
-    }
-
 
 
 }
