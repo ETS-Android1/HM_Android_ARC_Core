@@ -32,6 +32,8 @@ public class TestInfoTemplate extends BaseFragment {
 
     private static final String HINT_TEST_TUTORIAL = "HINT_TEST_TUTORIAL";
 
+    LinearLayout headerLayout;
+
     String stringTestNumber;
     String stringHeader;
     String stringBody;
@@ -72,6 +74,17 @@ public class TestInfoTemplate extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.template_test_info, container, false);
         content = view.findViewById(R.id.linearLayoutContent);
+
+        headerLayout = view.findViewById(R.id.headerLayout);
+        if (stringType.equals("grids")) {
+            headerLayout.setBackground(ViewUtil.getDrawable(R.drawable.ic_grids_bg));
+        }
+        else if (stringType.equals("symbols")) {
+            headerLayout.setBackground(ViewUtil.getDrawable(R.drawable.ic_symbols_bg));
+        }
+        else if (stringType.equals("prices")) {
+            headerLayout.setBackground(ViewUtil.getDrawable(R.drawable.ic_prices_bg));
+        }
 
         textViewTestNumber = view.findViewById(R.id.textViewTestNumber);
         textViewTestNumber.setText(stringTestNumber);

@@ -509,9 +509,9 @@ public class GridTutorial extends Tutorial {
             }
         };
 
-        remindMeHint.setText("Need help?");
-        remindMeHint.addButton("Remind Me", remindMeListener);
-        remindMeTapHint.setText("Tap on the locations of the other two items.");
+        remindMeHint.setText(ViewUtil.getString(R.string.popup_tutorial_needhelp));
+        remindMeHint.addButton(ViewUtil.getString(R.string.popup_tutorial_remindme), remindMeListener);
+        remindMeTapHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox2));
 
         View.OnTouchListener image33Listener = new View.OnTouchListener() {
             @Override

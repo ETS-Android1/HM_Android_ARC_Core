@@ -580,7 +580,7 @@ public class StateMachine {
         TestInfoTemplate info = new TestInfoTemplate(
                 testNumber,
                 res.getString(R.string.price_header),
-                res.getString(R.string.price_body),
+                res.getString(R.string.prices_body),
                 "prices",
                 res.getString(R.string.button_begin));
         fragments.add(info);
@@ -642,7 +642,7 @@ public class StateMachine {
         TestInfoTemplate info0 = new TestInfoTemplate(
                 testNumber,
                 res.getString(R.string.grid_header),
-                res.getString(R.string.grid_body1),
+                res.getString(R.string.grid_body),
                 "grids",
                 res.getString(R.string.button_next));
         fragments.add(info0);
