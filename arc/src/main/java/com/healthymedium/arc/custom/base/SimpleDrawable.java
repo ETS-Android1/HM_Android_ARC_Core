@@ -67,6 +67,9 @@ public abstract class SimpleDrawable extends Drawable {
 
     @Override
     public void draw(Canvas canvas) {
+        if(path==null){
+            return;
+        }
         if(drawFill){
             canvas.drawPath(path,fillPaint);
         }
