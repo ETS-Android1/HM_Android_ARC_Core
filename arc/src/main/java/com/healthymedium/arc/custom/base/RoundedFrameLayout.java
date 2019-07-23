@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
+import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
 
 import com.healthymedium.arc.library.R;
@@ -116,4 +117,14 @@ public class RoundedFrameLayout extends FrameLayout {
         invalidate();
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        setOutlineProvider(background.getOutlineProvider());
+    }
+
+    @Override
+    public ViewOutlineProvider getOutlineProvider() {
+        return background.getOutlineProvider();
+    }
 }

@@ -3,6 +3,7 @@ package com.healthymedium.arc.custom.base;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.DashPathEffect;
+import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
@@ -11,6 +12,8 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 
 
 public abstract class SimpleDrawable extends Drawable {
@@ -146,6 +149,19 @@ public abstract class SimpleDrawable extends Drawable {
 
     public float getHeight() {
         return height;
+    }
+
+    public ViewOutlineProvider getOutlineProvider() {
+        return new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                if (path != null) {
+                    outline.setConvexPath(path);
+                    return;
+                }
+                outline.setRect(0, 0, width, height);
+            }
+        };
     }
 
     protected abstract Path getPath(Rect rect);
