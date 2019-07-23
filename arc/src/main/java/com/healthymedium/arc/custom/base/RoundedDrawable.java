@@ -153,6 +153,17 @@ public class RoundedDrawable extends Drawable {
         strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
     }
 
+    public void setGradient(int gradientId, int colorFirst, int colorSecond) {
+        switch (gradientId){
+            case LINEAR_HORIZONTAL:
+                setHorizontalGradient(colorFirst,colorSecond);
+                break;
+            case LINEAR_VERTICAL:
+                setVerticalGradient(colorFirst,colorSecond);
+                break;
+        }
+    }
+
     public void setHorizontalGradient(int colorLeft, int colorRight) {
         drawFill = true;
         gradient = Gradient.fromId(Gradient.LINEAR_HORIZONTAL);

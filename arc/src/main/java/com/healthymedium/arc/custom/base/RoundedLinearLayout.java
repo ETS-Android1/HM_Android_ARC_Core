@@ -9,9 +9,6 @@ import android.widget.LinearLayout;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import static com.healthymedium.arc.custom.base.RoundedDrawable.Gradient.LINEAR_HORIZONTAL;
-import static com.healthymedium.arc.custom.base.RoundedDrawable.Gradient.LINEAR_VERTICAL;
-
 public class RoundedLinearLayout extends LinearLayout {
 
     RoundedDrawable background;
@@ -76,15 +73,7 @@ public class RoundedLinearLayout extends LinearLayout {
         }
 
         if(gradientEnum!=-1 && gradientColor0!=0 && gradientColor1!=0){
-            RoundedDrawable.Gradient gradient = RoundedDrawable.Gradient.fromId(gradientEnum);
-            switch (gradient.getId()){
-                case LINEAR_HORIZONTAL:
-                    background.setHorizontalGradient(gradientColor0,gradientColor1);
-                    break;
-                case LINEAR_VERTICAL:
-                    background.setVerticalGradient(gradientColor0,gradientColor1);
-                    break;
-            }
+            background.setGradient(gradientEnum,gradientColor0,gradientColor1);
         }
     }
 
