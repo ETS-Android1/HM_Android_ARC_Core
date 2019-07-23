@@ -347,6 +347,9 @@
     <string name="popup_tutorial_selectbox">In the final part of the test, you will &lt;b>select the three boxes&lt;/b> where these items were located in part one.</string>
     <string name="popup_tutorial_boxhint">&lt;b>Hint:&lt;/b> One item was located in this box. Tap here.</string>
     <string name="popup_tutorial_tapbox">Now tap on the locations of the other two items.</string>
+    <string name="popup_tutorial_tapbox2">Tap on the locations of the other two items.</string>
+    <string name="popup_tutorial_needhelp">Need help?</string>
+    <string name="popup_tutorial_remindme">&lt;b>Remind Me&lt;/b></string>
     <string name="grids_subheader_boxes">Tap the boxes where the items were located in part one.</string>
 
     <string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
