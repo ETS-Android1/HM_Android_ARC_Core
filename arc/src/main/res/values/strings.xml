@@ -170,7 +170,6 @@
     <string name="startdate_header">SET START DATE</string>
 
     <string name="symbols_header">Symbols</string>
-    <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom.\n\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
     <string name="symbols_match">Which pair below matches one of the pairs on the top?</string>
     <string name="symbols_or">Or</string>
 
@@ -229,7 +228,6 @@
 
     <string name="confirm_header">CONFIRM START DATE</string>
 
-    <string name="price_body">We’ll show you some shopping items and prices.\n\nPlease decide if the displayed price is a good bargain for that item. The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
     <string name="notification_next">Your next test will be on {DATE}.</string>
 
     <string name="time_hr">hr</string>
@@ -304,6 +302,9 @@
 
 
 
+
+
+
     <string name="popup_begin">Let\'s begin the first test.</string>
 
     <string name="testing_commitment">&lt;b>Testing Commitment&lt;/b></string>
@@ -313,7 +314,11 @@
     <string name="radio_nocommit">I\'m NOT able to commit to this study</string>
     <string name="onboarding_nocommit_header">&lt;b>Thank you for your time.&lt;/b></string>
     <string name="onboarding_nocommit_body">Your study coordinator will be notified that you do not wish to participate at this time. Your study coordinator may also contact you to confirm this information.</string>
-    
+
+    <string name="prices_body">Please decide if the displayed price is a good bargain for that item.&lt;br /&gt;&lt;br /&gt;The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
+    <string name="grid_body">Study the grid and try to remember the location of the three items.</string>
+    <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom.&lt;br /&gt;&lt;br /&gt;As quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
+
     <string name="testing_begin">&lt;b>Test will begin in&lt;/b></string>
     
     <string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
