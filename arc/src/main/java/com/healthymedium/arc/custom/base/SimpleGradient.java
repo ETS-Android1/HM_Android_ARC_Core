@@ -43,4 +43,31 @@ public class SimpleGradient {
         this.tileMode = tileMode;
     }
 
+    public static SimpleGradient getGradient(int gradientId, int colorFirst, int colorSecond) {
+        switch (gradientId){
+            case SimpleGradient.LINEAR_HORIZONTAL:
+                return getHorizontalGradient(colorFirst,colorSecond);
+            case SimpleGradient.LINEAR_VERTICAL:
+                return getVerticalGradient(colorFirst,colorSecond);
+            default:
+                return null;
+        }
+    }
+
+    public static SimpleGradient getHorizontalGradient(int colorLeft, int colorRight) {
+        SimpleGradient gradient = new SimpleGradient(SimpleGradient.LINEAR_HORIZONTAL);
+        gradient.setColor0(colorLeft);
+        gradient.setColor1(colorRight);
+        gradient.setTileMode(Shader.TileMode.CLAMP);
+        return gradient;
+    }
+
+    public static SimpleGradient getVerticalGradient(int colorTop, int colorBottom) {
+        SimpleGradient gradient = new SimpleGradient(SimpleGradient.LINEAR_VERTICAL);
+        gradient.setColor0(colorTop);
+        gradient.setColor1(colorBottom);
+        gradient.setTileMode(Shader.TileMode.CLAMP);
+        return gradient;
+    }
+
 }

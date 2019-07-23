@@ -103,13 +103,13 @@ public class RoundedRelativeLayout extends RelativeLayout {
     public void setHorizontalGradient(@ColorRes int colorLeft, @ColorRes int colorRight) {
         int left = ViewUtil.getColor(colorLeft);
         int right = ViewUtil.getColor(colorRight);
-        background.setHorizontalGradient(left,right);
+        background.setGradient(SimpleGradient.LINEAR_HORIZONTAL,left,right);
     }
 
     public void setVerticalGradient(@ColorRes int colorTop, @ColorRes int colorBottom) {
         int top = ViewUtil.getColor(colorTop);
         int bottom = ViewUtil.getColor(colorBottom);
-        background.setVerticalGradient(top,bottom);
+        background.setGradient(SimpleGradient.LINEAR_VERTICAL,top,bottom);
     }
 
     public void refresh(){

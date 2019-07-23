@@ -117,30 +117,26 @@ public abstract class SimpleDrawable extends Drawable {
     }
 
     public void setGradient(int gradientId, int colorFirst, int colorSecond) {
-        switch (gradientId){
-            case SimpleGradient.LINEAR_HORIZONTAL:
-                setHorizontalGradient(colorFirst,colorSecond);
-                break;
-            case SimpleGradient.LINEAR_VERTICAL:
-                setVerticalGradient(colorFirst,colorSecond);
-                break;
+        gradient = SimpleGradient.getGradient(gradientId,colorFirst,colorSecond);
+        if(gradient!=null){
+            drawFill = true;
         }
     }
 
-    public void setHorizontalGradient(int colorLeft, int colorRight) {
-        drawFill = true;
-        gradient = new SimpleGradient(SimpleGradient.LINEAR_HORIZONTAL);
-        gradient.setColor0(colorLeft);
-        gradient.setColor1(colorRight);
-        gradient.setTileMode(Shader.TileMode.CLAMP);
+    public void setStrokeEnabled(boolean enabled){
+        drawStroke = enabled;
     }
 
-    public void setVerticalGradient(int colorTop, int colorBottom) {
-        drawFill = true;
-        gradient = new SimpleGradient(SimpleGradient.LINEAR_VERTICAL);
-        gradient.setColor0(colorTop);
-        gradient.setColor1(colorBottom);
-        gradient.setTileMode(Shader.TileMode.CLAMP);
+    public void setFillEnabled(boolean enabled){
+        drawFill = enabled;
+    }
+
+    public Paint getFillPaint() {
+        return fillPaint;
+    }
+
+    public Paint getStrokePaint() {
+        return strokePaint;
     }
 
     public float getWidth() {
