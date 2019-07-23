@@ -96,6 +96,40 @@
         <attr name="gradient" />
     </declare-styleable>
 
+
+    <declare-styleable name="ChipFrameLayout">
+        <attr name="fillColor" />
+        <attr name="strokeWidth" />
+        <attr name="strokeColor" />
+        <attr name="dashLength" />
+        <attr name="dashSpacing" />
+        <attr name="gradientColor0" />
+        <attr name="gradientColor1" />
+        <attr name="gradient" />
+    </declare-styleable>
+
+    <declare-styleable name="ChipLinearLayout">
+        <attr name="fillColor" />
+        <attr name="strokeWidth" />
+        <attr name="strokeColor" />
+        <attr name="dashLength" />
+        <attr name="dashSpacing" />
+        <attr name="gradientColor0" />
+        <attr name="gradientColor1" />
+        <attr name="gradient" />
+    </declare-styleable>
+
+    <declare-styleable name="ChipRelativeLayout">
+        <attr name="fillColor" />
+        <attr name="strokeWidth" />
+        <attr name="strokeColor" />
+        <attr name="dashLength" />
+        <attr name="dashSpacing" />
+        <attr name="gradientColor0" />
+        <attr name="gradientColor1" />
+        <attr name="gradient" />
+    </declare-styleable>
+
     <declare-styleable name="CircleProgressView">
         <attr name="baseColor" format="color" />
         <attr name="sweepColor" format="color" />
