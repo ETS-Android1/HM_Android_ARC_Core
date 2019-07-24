@@ -27,6 +27,9 @@ public class ChipButton extends LinearLayout {
 
     float elevation;
 
+    int defaultWidth = ViewUtil.dpToPx(216);
+    int defaultHeight = ViewUtil.dpToPx(48);
+
     public ChipButton(Context context) {
         super(context);
         init(null,0);
@@ -77,6 +80,34 @@ public class ChipButton extends LinearLayout {
         top.setStrokeColor(color);
         top.setFillColor(color);
         invalidate();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+
+        int width;
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        if (widthMode == MeasureSpec.EXACTLY) {
+            width = widthSize;
+        } else if (widthMode == MeasureSpec.AT_MOST) {
+            width = Math.min(defaultWidth, widthSize);
+        } else {
+            width = defaultWidth;
+        }
+
+        int height;
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (heightMode == MeasureSpec.EXACTLY) {
+            height = heightSize;
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            height = Math.min(defaultHeight, heightSize);
+        } else {
+            height = defaultHeight;
+        }
+        setMeasuredDimension(width,height);
     }
 
     @Override
