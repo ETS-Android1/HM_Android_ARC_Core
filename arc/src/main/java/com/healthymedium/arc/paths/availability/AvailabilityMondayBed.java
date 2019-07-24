@@ -30,7 +30,7 @@ public class AvailabilityMondayBed extends QuestionTime {
     }
 
     public AvailabilityMondayBed(int minWakeTime, int maxWakeTime) {
-        super(true, ViewUtil.getString(R.string.availability_sleep_monday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_stop),"",null);
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;
     }

@@ -68,9 +68,13 @@ public class AvailabilityConfirm extends BaseFragment {
     int maxWakeTime = 24;
     boolean reschedule = false;
 
-    public AvailabilityConfirm(boolean allowBack) {
+    public AvailabilityConfirm(int minWakeTime, int maxWakeTime, boolean reschedule, boolean allowBack) {
         this.allowBack = allowBack;
         stringButton = "NEXT";
+
+        this.minWakeTime = minWakeTime;
+        this.maxWakeTime = maxWakeTime;
+        this.reschedule =reschedule;
 
         if(allowBack){
             allowBackPress(true);
@@ -91,19 +95,19 @@ public class AvailabilityConfirm extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_availability_confirm, container, false);
 
-        if (getArguments() != null) {
-            if (getArguments().containsKey("minWakeTime")) {
-                minWakeTime = getArguments().getInt("minWakeTime");
-            }
-
-            if (getArguments().containsKey("maxWakeTime")) {
-                maxWakeTime = getArguments().getInt("maxWakeTime");
-            }
-
-            if (getArguments().containsKey("reschedule")) {
-                reschedule = getArguments().getBoolean("reschedule");
-            }
-        }
+//        if (getArguments() != null) {
+//            if (getArguments().containsKey("minWakeTime")) {
+//                minWakeTime = getArguments().getInt("minWakeTime");
+//            }
+//
+//            if (getArguments().containsKey("maxWakeTime")) {
+//                maxWakeTime = getArguments().getInt("maxWakeTime");
+//            }
+//
+//            if (getArguments().containsKey("reschedule")) {
+//                reschedule = getArguments().getBoolean("reschedule");
+//            }
+//        }
 
         content = view.findViewById(R.id.linearLayoutContent);
 

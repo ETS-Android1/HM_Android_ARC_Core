@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
 
+import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.TestProgress;
@@ -325,27 +326,7 @@ public class StateMachine {
 
         fragments.add(new AvailabilityMondayWake());
         fragments.add(new AvailabilityMondayBed(minWakeTime,maxWakeTime));
-        fragments.add(new AvailabilityWeekdayConfirm());
-        fragments.add(new AvailabilityOtherWake(
-                "Tuesday", res.getString(R.string.availability_wake_tuesday)));
-        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
-                "Tuesday", res.getString(R.string.availability_sleep_tuesday)));
-        fragments.add(new AvailabilityOtherWake(
-                "Wednesday", res.getString(R.string.availability_wake_wednesday)));
-        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
-                "Wednesday", res.getString(R.string.availability_sleep_wednesday)));
-        fragments.add(new AvailabilityOtherWake(
-                "Thursday", res.getString(R.string.availability_wake_thursday)));
-        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
-                "Thursday", res.getString(R.string.availability_sleep_thursday)));
-        fragments.add(new AvailabilityOtherWake(
-                "Friday", res.getString(R.string.availability_wake_friday)));
-        fragments.add(new AvailabilityOtherBed(minWakeTime, maxWakeTime,
-                "Friday", res.getString(R.string.availability_sleep_friday)));
-        fragments.add(new AvailabilitySaturdayWake());
-        fragments.add(new AvailabilitySaturdayBed(minWakeTime, maxWakeTime));
-        fragments.add(new AvailabilitySundayWake());
-        fragments.add(new AvailabilitySundayBed(reschedule,minWakeTime,minWakeTime));
+        fragments.add(new AvailabilityConfirm(minWakeTime, maxWakeTime, reschedule, true));
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
         enableTransition(segment,true);
