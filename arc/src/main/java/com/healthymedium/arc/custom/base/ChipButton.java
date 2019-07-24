@@ -1,6 +1,5 @@
 package com.healthymedium.arc.custom.base;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,12 +18,10 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class ChipButton extends LinearLayout {
 
-    private ValueAnimator enableAnimator;
-
-    LayerDrawable background;
-    ChipDrawable bottom;
-    ChipDrawable gradient;
-    FadingDrawable top;
+    protected LayerDrawable background;
+    protected ChipDrawable bottomLayer;
+    protected ChipDrawable gradientLayer;
+    protected FadingDrawable topLayer;
 
     float elevation;
 
@@ -50,37 +47,35 @@ public class ChipButton extends LinearLayout {
 
         Context context = getContext();
         setGravity(Gravity.CENTER);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
-        enableAnimator = new ValueAnimator();
-        enableAnimator.addUpdateListener(enableListener);
+        bottomLayer = new ChipDrawable();
+        gradientLayer = new ChipDrawable();
+        topLayer = new FadingDrawable();
 
-        bottom = new ChipDrawable();
-        gradient = new ChipDrawable();
-        top = new FadingDrawable();
-
-        background = new LayerDrawable(new Drawable[]{bottom,gradient,top});
+        background = new LayerDrawable(new Drawable[]{bottomLayer, gradientLayer, topLayer});
         setBackground(background);
 
         int color = ViewUtil.getColor(context,R.color.primary);
 
-        bottom.setFillColor(color);
+        bottomLayer.setFillColor(color);
 
         int white = Color.argb(64,255,255,255);
         int black = Color.argb(64,0,0,0);
-        gradient.setGradient(SimpleGradient.LINEAR_VERTICAL,white,black);
+        gradientLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL,white,black);
 
-        top.setStrokeWidth(ViewUtil.dpToPx(16));
-        top.setStrokeColor(color);
-        top.setFillColor(color);
+        topLayer.setStrokeWidth(ViewUtil.dpToPx(16));
+        topLayer.setStrokeColor(color);
+        topLayer.setFillColor(color);
 
         elevation = getElevation();
         setOnTouchListener(touchListener);
     }
 
     protected void setColor(@ColorInt int color) {
-        bottom.setFillColor(color);
-        top.setStrokeColor(color);
-        top.setFillColor(color);
+        bottomLayer.setFillColor(color);
+        topLayer.setStrokeColor(color);
+        topLayer.setFillColor(color);
         invalidate();
     }
 
@@ -115,54 +110,29 @@ public class ChipButton extends LinearLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        setOutlineProvider(bottom.getOutlineProvider());
+        setOutlineProvider(bottomLayer.getOutlineProvider());
     }
 
     @Override
     public ViewOutlineProvider getOutlineProvider() {
-        return bottom.getOutlineProvider();
+        return bottomLayer.getOutlineProvider();
     }
 
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         if(enabled) {
-            gradient.setAlpha(255);
-            top.setAlpha(255);
+            gradientLayer.setAlpha(255);
+            topLayer.setAlpha(255);
             setElevation(elevation);
             setAlpha(1.0f);
         } else {
-            gradient.setAlpha(0);
-            top.setAlpha(0);
+            gradientLayer.setAlpha(0);
+            topLayer.setAlpha(0);
             setElevation(0);
             setAlpha(0.5f);
         }
     }
-
-    public void setEnabled(boolean enabled, boolean animate) {
-        if(!animate){
-            setEnabled(enabled);
-            return;
-        }
-        super.setEnabled(enabled);
-        int v0 = enabled ? 0:255;
-        int v1 = enabled ? 255:0;
-        enableAnimator.setIntValues(v0,v1);
-        enableAnimator.start();
-    }
-
-    ValueAnimator.AnimatorUpdateListener enableListener = new ValueAnimator.AnimatorUpdateListener() {
-        @Override
-        public void onAnimationUpdate(ValueAnimator animation) {
-            int value = (int) animation.getAnimatedValue();
-            float percentage  = value/255f;
-            setAlpha((percentage/2f)+0.5f); // scale between 0.5 and 1.0
-            gradient.setAlpha(value);
-            top.setAlpha(value);
-            setElevation(percentage*elevation);
-            invalidate();
-        }
-    };
 
     OnTouchListener touchListener = new OnTouchListener() {
         @Override
@@ -171,8 +141,8 @@ public class ChipButton extends LinearLayout {
             switch (action) {
                 case MotionEvent.ACTION_UP:
                     setElevation(elevation);
-                    gradient.setAlpha(255);
-                    top.setAlpha(255);
+                    gradientLayer.setAlpha(255);
+                    topLayer.setAlpha(255);
                     invalidate();
 
                     float x = event.getX();
@@ -186,8 +156,8 @@ public class ChipButton extends LinearLayout {
                     break;
                 case MotionEvent.ACTION_DOWN:
                     setElevation(0);
-                    gradient.setAlpha(0);
-                    top.setAlpha(0);
+                    gradientLayer.setAlpha(0);
+                    topLayer.setAlpha(0);
                     invalidate();
                     break;
             }
@@ -201,6 +171,9 @@ public class ChipButton extends LinearLayout {
 
         @Override
         public void draw(Canvas canvas) {
+            if(alphaBlock){
+                return;
+            }
             if(path==null){
                 return;
             }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.healthymedium.arc.custom.base.ChipButton;
+import com.healthymedium.arc.custom.base.SimpleGradient;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -46,6 +47,13 @@ public class Button extends ChipButton {
         imageView = new ImageView(context);
         imageView.setVisibility(GONE);
 
+        int colorTop = ViewUtil.getColor(context,R.color.primaryButtonLight);
+        int colorBottom = ViewUtil.getColor(context,R.color.primaryButtonDark);
+
+        topLayer.setStrokeGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
+        topLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
+        bottomLayer.setFillColor(ViewUtil.getColor(R.color.primaryButtonDark));
+
         addView(imageView);
         addView(textView);
     }
@@ -57,7 +65,14 @@ public class Button extends ChipButton {
             inverted = a.getBoolean(R.styleable.Button_inverted,false);
             if(inverted){
                 textView.setTextColor(ViewUtil.getColor(R.color.black));
-                setColor(ViewUtil.getColor(R.color.buttonWhite));
+
+                int colorTop = ViewUtil.getColor(context,R.color.whiteButtonLight);
+                int colorBottom = ViewUtil.getColor(context,R.color.whiteButtonDark);
+
+                topLayer.setStrokeGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
+                topLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
+                bottomLayer.setFillColor(ViewUtil.getColor(R.color.whiteButtonSelected));
+
             }
             setIcon(a.getDrawable(R.styleable.Button_icon));
             boolean enabled = a.getBoolean(R.styleable.Button_enabled,true);
