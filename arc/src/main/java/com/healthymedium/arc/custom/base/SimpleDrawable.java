@@ -155,8 +155,10 @@ public abstract class SimpleDrawable extends Drawable {
             @Override
             public void getOutline(View view, Outline outline) {
                 if (path != null) {
-                    outline.setConvexPath(path);
-                    return;
+                    if(path.isConvex()) {
+                        outline.setConvexPath(path);
+                        return;
+                    }
                 }
                 outline.setRect(0, 0, width, height);
             }
