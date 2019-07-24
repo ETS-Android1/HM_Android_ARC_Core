@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -48,6 +49,7 @@ public class ChipButton extends LinearLayout {
     private void init(AttributeSet attrs, int defStyle) {
 
         Context context = getContext();
+        setGravity(Gravity.CENTER);
 
         enableAnimator = new ValueAnimator();
         enableAnimator.addUpdateListener(enableListener);
