@@ -12,14 +12,11 @@ import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class AvailabilityMondayWake extends QuestionTime {
-
-    // TODO
-    // Probably want to rename this class to something like AvailabilityWake or AvailabilityStart
+public class AvailabilityWake extends QuestionTime {
 
     CircadianClock clock;
 
-    public AvailabilityMondayWake() {
+    public AvailabilityWake() {
         super(true, ViewUtil.getString(R.string.availability_start),"",null);
     }
 

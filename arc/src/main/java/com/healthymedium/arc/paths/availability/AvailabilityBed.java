@@ -16,20 +16,17 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import org.joda.time.LocalTime;
 
 @SuppressLint("ValidFragment")
-public class AvailabilityMondayBed extends QuestionTime {
-
-    // TODO
-    // Probably want to rename this class to something like AvailabilityBed or AvailabilityStop
+public class AvailabilityBed extends QuestionTime {
 
     CircadianClock clock;
     int minWakeTime = 4;
     int maxWakeTime = 24;
 
-    public AvailabilityMondayBed() {
+    public AvailabilityBed() {
         super(true, ViewUtil.getString(R.string.availability_stop),"",null);
     }
 
-    public AvailabilityMondayBed(int minWakeTime, int maxWakeTime) {
+    public AvailabilityBed(int minWakeTime, int maxWakeTime) {
         super(true, ViewUtil.getString(R.string.availability_stop),"",null);
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;
