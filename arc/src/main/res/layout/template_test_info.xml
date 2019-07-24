@@ -101,14 +101,16 @@
 
     <com.healthymedium.arc.custom.Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        app:enabled="true"
-        app:text="BEGIN TEST"
-        app:inverted="true"/>
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:enabled="true"
+        android:text="BEGIN TEST"
+        app:buttonTheme="light"/>
 
     <TextView
         android:id="@+id/textViewScroll"
