@@ -5,22 +5,19 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.healthymedium.arc.custom.base.ChipButton;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class Button extends FrameLayout {
+public class Button extends ChipButton {
 
     TextView textView;
     ImageView imageView;
-    View view;
     boolean inverted;
-    Drawable shadow;
-    int elevation;
 
     public Button(Context context) {
         super(context);
@@ -40,13 +37,18 @@ public class Button extends FrameLayout {
     }
 
     private void init(Context context){
-        view = inflate(context,R.layout.custom_button,this);
-        textView = view.findViewById(R.id.textView);
-        imageView = view.findViewById(R.id.imageView);
-        shadow = ViewUtil.getDrawable(R.drawable.btn_shadow);
-        elevation = ViewUtil.dpToPx(3);
-    }
 
+        textView = new TextView(context);
+        textView.setTextColor(ViewUtil.getColor(context,R.color.white));
+        textView.setTypeface(Fonts.robotoBold);
+        textView.setTextSize(18);
+
+        imageView = new ImageView(context);
+        imageView.setVisibility(GONE);
+
+        addView(imageView);
+        addView(textView);
+    }
 
     private void applyAttributeSet(Context context,AttributeSet attrs){
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Button);
@@ -54,8 +56,8 @@ public class Button extends FrameLayout {
             textView.setText(a.getString(R.styleable.Button_text));
             inverted = a.getBoolean(R.styleable.Button_inverted,false);
             if(inverted){
-                textView.setTextColor(ViewUtil.getColor(R.color.primary));
-                textView.setBackgroundResource(R.drawable.button_inverted);
+                textView.setTextColor(ViewUtil.getColor(R.color.black));
+                setColor(ViewUtil.getColor(R.color.buttonWhite));
             }
             setIcon(a.getDrawable(R.styleable.Button_icon));
             boolean enabled = a.getBoolean(R.styleable.Button_enabled,true);
@@ -65,20 +67,6 @@ public class Button extends FrameLayout {
             e.printStackTrace();
         } finally {
             a.recycle();
-        }
-    }
-
-    @Override
-    public void setEnabled(boolean enabled) {
-        super.setEnabled(enabled);
-        if(enabled) {
-            view.setElevation(elevation);
-            textView.setAlpha(1.0f);
-            view.setBackground(shadow);
-        } else {
-            view.setBackgroundResource(0);
-            textView.setAlpha(0.5f);
-            view.setElevation(0);
         }
     }
 
