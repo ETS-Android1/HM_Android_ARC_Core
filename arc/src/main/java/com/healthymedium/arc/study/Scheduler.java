@@ -205,7 +205,164 @@ public class Scheduler {
 
 
     protected void scheduleTestsForVisit(CircadianClock clock, ParticipantState state, Visit visit, boolean isRescheduling) {
+        Random random = new Random(System.currentTimeMillis());
+        List<TestSession> testSessions = visit.testSessions;
 
+        DateTime startDate = visit.getActualStartDate();
+        List<CircadianInstant> orderedPairs = clock.getRhythmInstances(startDate.toLocalDate());
+
+        // Are we scheduling tests for the current visit?
+        boolean isCurrentVisit = visit.getId()==state.currentVisit;
+
+        //TestSession currTestSession = testSessions.get(state.currentTestSession);
+        //int currentDayIndex = currTestSession.getDayIndex();
+
+        // The number of total days in the visit, should always be 7
+        // Except for the baseline which has 8
+        int numDays = visit.getNumberOfDays();
+
+        // The test index
+        // Initialized to 0 and never reset because this function is only called for one visit at a time
+        int testIndex = 0;
+
+        // The id of the visit for which we're scheduling tests
+        int visitId = visit.getId();
+
+        // Loop over all days in the visit
+        for(int i=0;i<numDays;i++){
+            // Get the wake and bed times for this day i in the visit, unless we have 8 days
+            DateTime wake;
+            DateTime bed;
+            if (i >= 7) {
+                // Baseline day 8
+                wake = orderedPairs.get(0).getWakeTime().plusDays(7);
+                bed = orderedPairs.get(0).getBedTime().plusDays(7);
+            } else {
+                wake = orderedPairs.get(i).getWakeTime();
+                bed = orderedPairs.get(i).getBedTime();
+            }
+
+            // isCurrentVisit - are these tests being scheduled in the current visit
+            // Date stuff - is the wake time equal to today OR is the wake time prior to today
+            boolean isCurrentDay = isCurrentVisit && (LocalDate.now().equals(wake.toLocalDate()) || wake.toLocalDate().isBefore(LocalDate.now()));
+
+            // We don't want to change today's schedule when rescheduling
+            if (isCurrentDay && isRescheduling) {
+                // Can't rely on the date to determine the number of tests today
+                // Due to a separate scheduler bug where the test date and the day index aren't necessarily the same
+                int tempDayIndex = testSessions.get(testIndex).getDayIndex();
+                int numTestsToday = visit.getNumberOfTests(tempDayIndex);
+                //int numTestsToday = visit.getNumberOfTestsToday();
+                testIndex = testIndex + numTestsToday;
+                continue;
+            }
+
+            // The number of tests we have on this day i
+            int numTests;
+
+            // If we're NOT rescheduling then the current day's wake time needs to be set to now
+            // This ensures a test is available immediately after set up in the baseline
+            // Additionally, we only have one test on the first baseline day
+            if(isCurrentDay && i == 0){
+                wake = wake.withTime(LocalTime.now());
+                numTests = 1;
+            } else if (i >= 7) {
+                // Baseline day 8
+                numTests = 4;
+            }
+            else {
+                numTests = visit.getNumberOfTests(i);
+            }
+
+            // The gap in seconds between the wake time and the bed time for this day i
+            int gap = Seconds.secondsBetween(wake,bed).getSeconds();
+
+
+            DateTime begin = wake;
+
+            int period;
+
+            // if this is NOT the baseline visit
+            // OR this is NOT the first day of the visit
+            // OR this is NOT the first test of the visit
+            // OR we are rescheduling our tests
+            if(visitId != 0 || i != 0 || testIndex != 0 || isRescheduling == true) {
+                if (gap > 7*60*60) {
+                    gap -= 7*60*60;
+                }
+            }
+
+            // Some period adjustments idk - TODO
+            period = gap;
+            if(numTests>1){
+                period = gap / (numTests-1);
+            }
+            if (period <= 0) {
+                period = 10;
+            }
+
+            // Loop through all of the tests on this day i
+            for (int j = 0; j < numTests; j++) {
+
+                // If this is the first day of the baseline visit and we're not rescheduling
+                if (visitId == 0 && i == 0 && testIndex == 0 && isRescheduling == false) {
+                    begin = DateTime.now();
+                    testSessions.get(testIndex).setPrescribedTime(begin);
+                    begin = begin.plusHours(2);
+//                    if(isCurrentDay){
+//                        if (gap <= 7200) {
+//                            numTests = numTests - 3;
+//                            visit.testSessions.remove(1);
+//                            visit.testSessions.remove(1);
+//                            visit.testSessions.remove(1);
+//                            testSessions = visit.testSessions;
+//                        } else if (gap <= 14400) {
+//                            numTests = numTests - 2;
+//                            visit.testSessions.remove(2);
+//                            visit.testSessions.remove(2);
+//                            testSessions = visit.testSessions;
+//                        } else if (gap < 28800) {
+//                            numTests = numTests - 1;
+//                            visit.testSessions.remove(3);
+//                            testSessions = visit.testSessions;
+//                        }
+//                    }
+                }
+
+                // if this is NOT the current day
+                // OR this test is >= the test the user is currently on
+                else if(!isCurrentDay || testIndex>=state.currentTestSession) {
+
+                    // If we're rescheduling AND this is the current day then break
+                    // NOTE: This shouldn't ever be possible so we can probably cut this
+                    if (isRescheduling && isCurrentDay) {
+                        break;
+                    }
+
+                    boolean loop = true;
+
+                    // If our start time ends up after our bed time, just start at bed time
+                    if (begin.isAfter(bed)) {
+                        begin = bed;
+                        loop = false;
+                    }
+
+                    // Loop until we get a begin time earlier than our bed time
+                    while (loop) {
+                        DateTime temp = begin.plusSeconds(random.nextInt(period));
+                        if (temp.isBefore(bed)) {
+                            begin = temp;
+                            loop = false;
+                        }
+                    }
+                    testSessions.get(testIndex).setPrescribedTime(begin);
+                    begin = begin.plusHours(2);
+                }
+                testIndex++;
+            }
+
+            startDate = startDate.plusDays(1);
+        }
     }
 
     // The following functions can feel a little misplaced.
