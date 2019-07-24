@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
 
+import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
@@ -23,15 +24,7 @@ import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.path_data.WakePathData;
-import com.healthymedium.arc.paths.availability.AvailabilityMondayBed;
-import com.healthymedium.arc.paths.availability.AvailabilityMondayWake;
-import com.healthymedium.arc.paths.availability.AvailabilityOtherBed;
-import com.healthymedium.arc.paths.availability.AvailabilityOtherWake;
-import com.healthymedium.arc.paths.availability.AvailabilitySaturdayBed;
-import com.healthymedium.arc.paths.availability.AvailabilitySaturdayWake;
-import com.healthymedium.arc.paths.availability.AvailabilitySundayBed;
-import com.healthymedium.arc.paths.availability.AvailabilitySundayWake;
-import com.healthymedium.arc.paths.availability.AvailabilityWeekdayConfirm;
+import com.healthymedium.arc.paths.availability.AvailabilityWake;
 import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.questions.QuestionAdjustSchedule;
 import com.healthymedium.arc.paths.setup.SetupAuthCode;
@@ -324,8 +317,8 @@ public class StateMachine {
                 res.getString(R.string.availability_body),
                 res.getString(R.string.button_begin)));
 
-        fragments.add(new AvailabilityMondayWake());
-        fragments.add(new AvailabilityMondayBed(minWakeTime,maxWakeTime));
+        fragments.add(new AvailabilityWake());
+        fragments.add(new AvailabilityBed(minWakeTime,maxWakeTime));
         fragments.add(new AvailabilityConfirm(minWakeTime, maxWakeTime, reschedule, true));
 
         PathSegment segment = new PathSegment(fragments,AvailabilityPathData.class);
