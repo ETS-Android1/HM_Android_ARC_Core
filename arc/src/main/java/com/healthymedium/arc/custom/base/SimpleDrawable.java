@@ -20,7 +20,9 @@ public abstract class SimpleDrawable extends Drawable {
 
     protected boolean drawStroke = false;
     protected boolean drawFill = false;
-    protected SimpleGradient gradient;
+    protected boolean alphaBlock = false;
+    protected SimpleGradient fillGradient;
+    protected SimpleGradient strokeGradient;
 
     protected Path path;
     protected Paint fillPaint;
@@ -55,8 +57,11 @@ public abstract class SimpleDrawable extends Drawable {
 
         path = getPath(rect);
 
-        if(gradient!=null){
-            fillPaint.setShader(gradient.getShader(width,height));
+        if(fillGradient!=null){
+            fillPaint.setShader(fillGradient.getShader(width,height));
+        }
+        if(strokeGradient!=null){
+            strokePaint.setShader(strokeGradient.getShader(width,height));
         }
     }
 
@@ -68,6 +73,9 @@ public abstract class SimpleDrawable extends Drawable {
     @Override
     public void draw(Canvas canvas) {
         if(path==null){
+            return;
+        }
+        if(alphaBlock){
             return;
         }
         if(drawFill){
@@ -82,6 +90,7 @@ public abstract class SimpleDrawable extends Drawable {
     public void setAlpha(int alpha) {
         fillPaint.setAlpha(alpha);
         strokePaint.setAlpha(alpha);
+        alphaBlock = (alpha==0);
     }
 
     @Override
@@ -119,12 +128,25 @@ public abstract class SimpleDrawable extends Drawable {
         strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
     }
 
+    //default to fill gradient
     public void setGradient(int gradientId, int colorFirst, int colorSecond) {
-        gradient = SimpleGradient.getGradient(gradientId,colorFirst,colorSecond);
-        if(gradient!=null){
+        setFillGradient(gradientId,colorFirst,colorSecond);
+    }
+
+    public void setFillGradient(int gradientId, int colorFirst, int colorSecond) {
+        fillGradient = SimpleGradient.getGradient(gradientId,colorFirst,colorSecond);
+        if(fillGradient!=null){
             drawFill = true;
         }
     }
+
+    public void setStrokeGradient(int gradientId, int colorFirst, int colorSecond) {
+        strokeGradient = SimpleGradient.getGradient(gradientId,colorFirst,colorSecond);
+        if(strokeGradient!=null){
+            drawStroke = true;
+        }
+    }
+
 
     public void setStrokeEnabled(boolean enabled){
         drawStroke = enabled;
