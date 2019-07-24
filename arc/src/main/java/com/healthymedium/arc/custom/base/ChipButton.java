@@ -60,8 +60,8 @@ public class ChipButton extends LinearLayout {
 
         bottom.setFillColor(color);
 
-        int white = Color.argb(34,255,255,255);
-        int black = Color.argb(34,0,0,0);
+        int white = Color.argb(64,255,255,255);
+        int black = Color.argb(64,0,0,0);
         gradient.setGradient(SimpleGradient.LINEAR_VERTICAL,white,black);
 
         top.setStrokeWidth(ViewUtil.dpToPx(16));
