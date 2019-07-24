@@ -51,16 +51,17 @@
 
             <com.healthymedium.arc.custom.Button
                 android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="false"
                 android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
-                app:inverted="true"
-                app:text="@string/change_button" />
+                android:text="@string/change_button"
+                app:buttonTheme="light"/>
 
             <FrameLayout
                 android:id="@+id/lineFrameLayout"
@@ -85,16 +86,17 @@
 
             <com.healthymedium.arc.custom.Button
                 android:id="@+id/changeDateButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="false"
                 android:layout_centerHorizontal="false"
                 android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
-                app:inverted="true"
-                app:text="@string/change_button" />
+                android:text="@string/change_button"
+                app:buttonTheme="light"/>
 
         </LinearLayout>
 

@@ -18,6 +18,9 @@
     <color name="whiteButtonLight">#f4f4f4</color>
     <color name="whiteButtonDark">#dadada</color>
     <color name="whiteButtonSelected">#e7e7e7</color>
+    <color name="blackButtonLight">#323232</color>
+    <color name="blackButtonDark">#212121</color>
+    <color name="blackButtonSelected">#222222</color>
 
     <color name="gridNormal">#40066187</color>
     <color name="gridSelected">#066187</color>

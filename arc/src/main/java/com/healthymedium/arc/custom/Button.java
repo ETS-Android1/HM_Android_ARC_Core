@@ -16,9 +16,12 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Button extends ChipButton {
 
+    public static final int THEME_PRIMARY = 0;
+    public static final int THEME_WHITE = 1;
+    public static final int THEME_BLACK = 2;
+
     TextView textView;
     ImageView imageView;
-    boolean inverted;
 
     public Button(Context context) {
         super(context);
@@ -40,19 +43,11 @@ public class Button extends ChipButton {
     private void init(Context context){
 
         textView = new TextView(context);
-        textView.setTextColor(ViewUtil.getColor(context,R.color.white));
         textView.setTypeface(Fonts.robotoBold);
         textView.setTextSize(18);
 
         imageView = new ImageView(context);
         imageView.setVisibility(GONE);
-
-        int colorTop = ViewUtil.getColor(context,R.color.primaryButtonLight);
-        int colorBottom = ViewUtil.getColor(context,R.color.primaryButtonDark);
-
-        topLayer.setStrokeGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
-        topLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
-        bottomLayer.setFillColor(ViewUtil.getColor(R.color.primaryButtonDark));
 
         addView(imageView);
         addView(textView);
@@ -61,21 +56,38 @@ public class Button extends ChipButton {
     private void applyAttributeSet(Context context,AttributeSet attrs){
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Button);
         try {
-            textView.setText(a.getString(R.styleable.Button_text));
-            inverted = a.getBoolean(R.styleable.Button_inverted,false);
-            if(inverted){
-                textView.setTextColor(ViewUtil.getColor(R.color.black));
+            int normalTop = R.color.primaryButtonLight;
+            int normalBottom = R.color.primaryButtonDark;
+            int selected = R.color.primaryButtonDark;
+            int textColor = R.color.white;
 
-                int colorTop = ViewUtil.getColor(context,R.color.whiteButtonLight);
-                int colorBottom = ViewUtil.getColor(context,R.color.whiteButtonDark);
-
-                topLayer.setStrokeGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
-                topLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL, colorTop, colorBottom);
-                bottomLayer.setFillColor(ViewUtil.getColor(R.color.whiteButtonSelected));
-
+            textView.setText(a.getString(R.styleable.Button_android_text));
+            if(a.hasValue(R.styleable.Button_buttonTheme)){
+                int styleEnum = a.getInt(R.styleable.Button_buttonTheme,0);
+                switch (styleEnum){
+                    case THEME_PRIMARY:
+                        break; // already set
+                    case THEME_WHITE:
+                        normalTop = R.color.whiteButtonLight;
+                        normalBottom = R.color.whiteButtonDark;
+                        selected = R.color.whiteButtonSelected;
+                        textColor = R.color.black;
+                        break;
+                    case THEME_BLACK:
+                        normalTop = R.color.blackButtonLight;
+                        normalBottom = R.color.blackButtonDark;
+                        selected = R.color.blackButtonSelected;
+                        break;
+                }
             }
+
+            topLayer.setStrokeGradient(SimpleGradient.LINEAR_VERTICAL, ViewUtil.getColor(context,normalTop), ViewUtil.getColor(context,normalBottom));
+            topLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL, ViewUtil.getColor(context,normalTop), ViewUtil.getColor(context,normalBottom));
+            bottomLayer.setFillColor(ViewUtil.getColor(context,selected));
+            textView.setTextColor(ViewUtil.getColor(context,textColor));
+
             setIcon(a.getDrawable(R.styleable.Button_icon));
-            boolean enabled = a.getBoolean(R.styleable.Button_enabled,true);
+            boolean enabled = a.getBoolean(R.styleable.Button_android_enabled,true);
             setEnabled(enabled);
 
         } catch (Exception e) {

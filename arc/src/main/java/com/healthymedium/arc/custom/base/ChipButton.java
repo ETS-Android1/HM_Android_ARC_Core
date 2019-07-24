@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import android.widget.LinearLayout;
 
-import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class ChipButton extends LinearLayout {
@@ -45,9 +44,8 @@ public class ChipButton extends LinearLayout {
 
     private void init(AttributeSet attrs, int defStyle) {
 
-        Context context = getContext();
         setGravity(Gravity.CENTER);
-        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
         bottomLayer = new ChipDrawable();
         gradientLayer = new ChipDrawable();
@@ -56,28 +54,16 @@ public class ChipButton extends LinearLayout {
         background = new LayerDrawable(new Drawable[]{bottomLayer, gradientLayer, topLayer});
         setBackground(background);
 
-        int color = ViewUtil.getColor(context,R.color.primary);
-
-        bottomLayer.setFillColor(color);
-
         int white = Color.argb(64,255,255,255);
         int black = Color.argb(64,0,0,0);
         gradientLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL,white,black);
 
         topLayer.setStrokeWidth(ViewUtil.dpToPx(16));
-        topLayer.setStrokeColor(color);
-        topLayer.setFillColor(color);
 
         elevation = getElevation();
         setOnTouchListener(touchListener);
     }
 
-    protected void setColor(@ColorInt int color) {
-        bottomLayer.setFillColor(color);
-        topLayer.setStrokeColor(color);
-        topLayer.setFillColor(color);
-        invalidate();
-    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

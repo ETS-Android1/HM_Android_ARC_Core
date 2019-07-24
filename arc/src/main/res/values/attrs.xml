@@ -23,6 +23,12 @@
         <enum name="linearVertical" value="1"/>
     </attr>
 
+    <attr name="buttonTheme" format="enum" >
+        <enum name="primary" value="0"/>
+        <enum name="light" value="1"/>
+        <enum name="dark" value="2"/>
+    </attr>
+
     <declare-styleable name="FancyButton">
         <attr name="rounded" format="boolean" />
     </declare-styleable>
@@ -38,9 +44,9 @@
     </declare-styleable>
 
     <declare-styleable name="Button">
-        <attr name="text"/>
-        <attr name="enabled"/>
-        <attr name="inverted" format="boolean" />
+        <attr name="android:text"/>
+        <attr name="android:enabled"/>
+        <attr name="buttonTheme" />
         <attr name="icon" format="reference" />
     </declare-styleable>
 
