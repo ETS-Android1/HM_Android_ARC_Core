@@ -60,7 +60,7 @@
                 tools:text="Keep in mind that it might take a few minutes to receive your security code."
                 />
 
-            <com.healthymedium.arc.custom.Button
+            <com.healthymedium.arc.ui.Button
                 android:id="@+id/newCodeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

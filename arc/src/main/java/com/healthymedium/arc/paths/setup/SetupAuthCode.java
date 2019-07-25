@@ -11,8 +11,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class SetupAuthCode extends SetupTemplate {
 
-    public SetupAuthCode(boolean authenticate, int digitCount) {
-        super(authenticate, false, digitCount,0, ViewUtil.getString(R.string.login_enter_raterID));
+    public SetupAuthCode(boolean authenticate, boolean is2FA, int digitCount, String header) {
+        super(authenticate, is2FA, digitCount,0, header);
+
     }
 
     @Override

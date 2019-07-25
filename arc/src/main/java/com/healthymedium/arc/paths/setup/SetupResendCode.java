@@ -10,13 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.custom.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.FAQAnswerScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.paths.templates.StandardTemplate;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
