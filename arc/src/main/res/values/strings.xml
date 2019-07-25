@@ -305,11 +305,13 @@
 
 
 
+    <string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
+    
     <string name="login_enter_2FA">Please enter your &lt;b>login verification code&lt;/b>.</string>
     <string name="login_problems_2FA">Didn\'t receive code?</string>
     <string name="login_resend_header">Resend code?</string>
     <string name="login_resend_subheader">Keep in mind that it might take a few minutes to receive your security code.</string>
-
+    
     <string name="popup_begin">Let\'s begin the first test.</string>
 
     <string name="testing_commitment">&lt;b>Testing Commitment&lt;/b></string>
