@@ -33,7 +33,7 @@
                 android:lineSpacingExtra="3dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="$1.51"
+                android:text="$3.27"
                 android:textAllCaps="false"
                 android:textSize="35dp" />
 
@@ -47,7 +47,7 @@
                 android:lineSpacingExtra="3dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="pinzas para la ropa"
+                android:text="Bananas"
                 android:textAllCaps="false"
                 android:textSize="35dp" />
 
