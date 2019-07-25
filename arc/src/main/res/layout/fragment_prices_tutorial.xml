@@ -66,14 +66,14 @@
                 android:text="@string/price_test_isgood"
                 android:textSize="26dp" />
 
-            <com.healthymedium.arc.custom.RadioButton
+            <com.healthymedium.arc.ui.RadioButton
                 android:id="@+id/radioButtonNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/radioButtonYes"
                 android:layout_alignParentStart="true" />
 
-            <com.healthymedium.arc.custom.RadioButton
+            <com.healthymedium.arc.ui.RadioButton
                 android:id="@+id/radioButtonYes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
             android:visibility="gone"
             />
 
-        <com.healthymedium.arc.custom.Button
+        <com.healthymedium.arc.ui.Button
             android:id="@+id/endButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/ic_x_to_close" />
 
-            <com.healthymedium.arc.custom.TutorialProgressView
+            <com.healthymedium.arc.ui.TutorialProgressView
                 android:id="@+id/progressView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

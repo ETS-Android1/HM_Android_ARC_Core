@@ -1,14 +1,6 @@
-package com.healthymedium.arc.custom;
+package com.healthymedium.arc.ui;
 
-import android.animation.ObjectAnimator;
-import android.animation.PropertyValuesHolder;
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
@@ -16,7 +8,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;

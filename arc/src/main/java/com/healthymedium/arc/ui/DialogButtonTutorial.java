@@ -1,4 +1,4 @@
-package com.healthymedium.arc.custom;
+package com.healthymedium.arc.ui;
 
 import android.content.Context;
 import android.text.SpannableString;

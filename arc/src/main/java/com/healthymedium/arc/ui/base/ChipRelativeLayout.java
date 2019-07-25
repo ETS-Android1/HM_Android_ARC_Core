@@ -1,30 +1,30 @@
-package com.healthymedium.arc.custom.base;
+package com.healthymedium.arc.ui.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class ChipFrameLayout extends FrameLayout {
+public class ChipRelativeLayout extends RelativeLayout {
 
     ChipDrawable background;
 
-    public ChipFrameLayout(Context context) {
+    public ChipRelativeLayout(Context context) {
         super(context);
         init(null,0);
     }
 
-    public ChipFrameLayout(Context context, AttributeSet attrs) {
+    public ChipRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public ChipFrameLayout(Context context, AttributeSet attrs, int defStyle) {
+    public ChipRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs, defStyle);
     }
@@ -34,17 +34,17 @@ public class ChipFrameLayout extends FrameLayout {
         background = new ChipDrawable();
         setBackground(background);
 
-        final TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ChipFrameLayout, defStyle, 0);
+        final TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ChipRelativeLayout, defStyle, 0);
 
-        int fillColor = typedArray.getColor(R.styleable.ChipFrameLayout_fillColor,0);
-        int strokeColor = typedArray.getColor(R.styleable.ChipFrameLayout_strokeColor,0);
-        float dashLength = typedArray.getDimension(R.styleable.ChipFrameLayout_dashLength,0);
-        float dashSpacing = typedArray.getDimension(R.styleable.ChipFrameLayout_dashSpacing,0);
-        int strokeWidth = (int) typedArray.getDimension(R.styleable.ChipFrameLayout_strokeWidth,0);
-
-        int gradientEnum = (int) typedArray.getInt(R.styleable.ChipFrameLayout_gradient,-1);
-        int gradientColor0 = (int) typedArray.getColor(R.styleable.ChipFrameLayout_gradientColor0,0);
-        int gradientColor1 = (int) typedArray.getColor(R.styleable.ChipFrameLayout_gradientColor1,0);
+        int fillColor = typedArray.getColor(R.styleable.ChipRelativeLayout_fillColor,0);
+        int strokeColor = typedArray.getColor(R.styleable.ChipRelativeLayout_strokeColor,0);
+        float dashLength = typedArray.getDimension(R.styleable.ChipRelativeLayout_dashLength,0);
+        float dashSpacing = typedArray.getDimension(R.styleable.ChipRelativeLayout_dashSpacing,0);
+        int strokeWidth = (int) typedArray.getDimension(R.styleable.ChipRelativeLayout_strokeWidth,0);
+        
+        int gradientEnum = (int) typedArray.getInt(R.styleable.ChipRelativeLayout_gradient,-1);
+        int gradientColor0 = (int) typedArray.getColor(R.styleable.ChipRelativeLayout_gradientColor0,0);
+        int gradientColor1 = (int) typedArray.getColor(R.styleable.ChipRelativeLayout_gradientColor1,0);
 
         typedArray.recycle();
 
@@ -55,7 +55,7 @@ public class ChipFrameLayout extends FrameLayout {
             background.setStrokeColor(strokeColor);
         }
         background.setStrokeWidth(strokeWidth);
-        
+
         if(dashLength!=0 && dashSpacing!=0){
             background.setStrokeDash(dashLength,dashSpacing);
         }
@@ -109,4 +109,5 @@ public class ChipFrameLayout extends FrameLayout {
     public ViewOutlineProvider getOutlineProvider() {
         return background.getOutlineProvider();
     }
+
 }

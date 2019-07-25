@@ -3,13 +3,11 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import com.healthymedium.arc.custom.BottomNavigationView;
+import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.utilities.Log;
 
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -21,7 +19,6 @@ import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;

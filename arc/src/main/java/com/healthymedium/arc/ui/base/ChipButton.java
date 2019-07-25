@@ -1,11 +1,10 @@
-package com.healthymedium.arc.custom.base;
+package com.healthymedium.arc.ui.base;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -118,6 +117,12 @@ public class ChipButton extends LinearLayout {
             setElevation(0);
             setAlpha(0.5f);
         }
+    }
+
+    @Override
+    public void setElevation(float elevation) {
+        super.setElevation(elevation);
+        this.elevation = elevation;
     }
 
     OnTouchListener touchListener = new OnTouchListener() {

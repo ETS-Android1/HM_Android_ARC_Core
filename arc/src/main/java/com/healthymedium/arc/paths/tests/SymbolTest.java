@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.custom.SymbolButton;
+import com.healthymedium.arc.ui.SymbolButton;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.study.Study;

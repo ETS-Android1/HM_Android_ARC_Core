@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
-import com.healthymedium.arc.custom.Rating;
+import com.healthymedium.arc.ui.Rating;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;

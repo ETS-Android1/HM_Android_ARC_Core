@@ -79,7 +79,7 @@
                     android:textColor="@color/white"
                     android:textSize="48dp" />
 
-                <com.healthymedium.arc.custom.CircleProgressView
+                <com.healthymedium.arc.ui.CircleProgressView
                     android:id="@+id/circleProgressView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

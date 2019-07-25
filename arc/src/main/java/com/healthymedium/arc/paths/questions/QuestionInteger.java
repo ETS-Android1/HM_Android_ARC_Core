@@ -11,7 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.IntegerInput;
+import com.healthymedium.arc.ui.IntegerInput;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.ViewUtil;

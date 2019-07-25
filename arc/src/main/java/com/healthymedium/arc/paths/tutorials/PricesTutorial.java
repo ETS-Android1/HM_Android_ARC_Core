@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;

@@ -19,7 +19,7 @@ import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
-import com.healthymedium.arc.custom.Button;
+import com.healthymedium.arc.ui.Button;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;

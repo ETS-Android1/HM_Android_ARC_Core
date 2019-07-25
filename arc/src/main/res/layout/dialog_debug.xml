@@ -39,7 +39,7 @@
         android:textStyle="bold"
         android:text="Send"/>
 
-    <com.healthymedium.arc.custom.Button
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/buttonDebugDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

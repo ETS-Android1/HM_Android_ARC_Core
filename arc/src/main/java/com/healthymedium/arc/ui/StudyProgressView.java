@@ -1,4 +1,4 @@
-package com.healthymedium.arc.custom;
+package com.healthymedium.arc.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.healthymedium.arc.custom.base.RoundedDrawable;
+import com.healthymedium.arc.ui.base.RoundedDrawable;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 

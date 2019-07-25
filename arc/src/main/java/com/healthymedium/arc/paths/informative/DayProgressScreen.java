@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.custom.CircleProgressView;
-import com.healthymedium.arc.custom.base.RoundedFrameLayout;
+import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.ui.CircleProgressView;
+import com.healthymedium.arc.ui.base.RoundedFrameLayout;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;

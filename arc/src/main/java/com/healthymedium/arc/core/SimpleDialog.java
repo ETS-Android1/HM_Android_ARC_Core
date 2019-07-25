@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.Button;
+import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.library.R;
 
 @SuppressLint("ValidFragment")

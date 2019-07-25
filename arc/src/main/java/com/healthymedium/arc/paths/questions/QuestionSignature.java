@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.healthymedium.arc.custom.Signature;
+import com.healthymedium.arc.ui.Signature;
 import com.github.gcacace.signaturepad.views.SignaturePad;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;

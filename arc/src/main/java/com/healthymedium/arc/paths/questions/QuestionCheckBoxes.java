@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.healthymedium.arc.custom.CheckBox;
+import com.healthymedium.arc.ui.CheckBox;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 
 import java.util.ArrayList;

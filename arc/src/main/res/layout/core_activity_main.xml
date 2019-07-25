@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.healthymedium.arc.custom.BottomNavigationView
+    <com.healthymedium.arc.ui.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

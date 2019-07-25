@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.PriceTestPathData;

@@ -32,7 +32,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
 
-                <com.healthymedium.arc.custom.SymbolTutorialButton
+                <com.healthymedium.arc.ui.SymbolTutorialButton
                     android:id="@+id/symbolbutton_top1"
                     android:layout_width="75dp"
                     android:layout_height="150dp"
@@ -42,7 +42,7 @@
                     android:layout_weight="1"
                     android:background="@color/white"/>
 
-                <com.healthymedium.arc.custom.SymbolTutorialButton
+                <com.healthymedium.arc.ui.SymbolTutorialButton
                     android:id="@+id/symbolbutton_top2"
                     android:layout_width="75dp"
                     android:layout_height="150dp"
@@ -53,7 +53,7 @@
                     android:layout_weight="1"
                     android:background="@color/white"/>
 
-                <com.healthymedium.arc.custom.SymbolTutorialButton
+                <com.healthymedium.arc.ui.SymbolTutorialButton
                     android:id="@+id/symbolbutton_top3"
                     android:layout_width="75dp"
                     android:layout_height="150dp"
@@ -75,7 +75,7 @@
             android:layout_marginRight="70dp"
             android:orientation="horizontal">
 
-            <com.healthymedium.arc.custom.SymbolTutorialButton
+            <com.healthymedium.arc.ui.SymbolTutorialButton
                 android:id="@+id/symbolbutton_bottom1"
                 android:layout_width="75dp"
                 android:layout_height="150dp"
@@ -96,7 +96,7 @@
                 android:layout_marginRight="8dp"
                 android:text="" />
 
-            <com.healthymedium.arc.custom.SymbolTutorialButton
+            <com.healthymedium.arc.ui.SymbolTutorialButton
                 android:id="@+id/symbolbutton_bottom2"
                 android:layout_width="75dp"
                 android:layout_height="150dp"
@@ -146,7 +146,7 @@
             android:visibility="gone"
             />
 
-        <com.healthymedium.arc.custom.Button
+        <com.healthymedium.arc.ui.Button
             android:id="@+id/endButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/ic_x_to_close" />
 
-            <com.healthymedium.arc.custom.TutorialProgressView
+            <com.healthymedium.arc.ui.TutorialProgressView
                 android:id="@+id/progressView"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

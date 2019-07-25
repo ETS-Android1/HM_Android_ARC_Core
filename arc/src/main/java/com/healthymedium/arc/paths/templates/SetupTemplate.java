@@ -25,7 +25,7 @@ import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
-import com.healthymedium.arc.custom.DigitView;
+import com.healthymedium.arc.ui.DigitView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
