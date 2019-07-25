@@ -202,6 +202,10 @@ public class SetupTemplate extends StandardTemplate {
             content.addView(textViewProblems, index);
         }
 
+        if (is2FA) {
+            Study.getRestClient().requestVerificationCode(verificationCodeListener);
+        }
+
         return view;
     }
 
@@ -477,6 +481,22 @@ public class SetupTemplate extends StandardTemplate {
             String errorString = parseForError(response,true);
             showError(errorString);
             loadingDialog.dismiss();
+        }
+    };
+
+    RestClient.Listener verificationCodeListener = new RestClient.Listener() {
+        @Override
+        public void onSuccess(RestResponse response) {
+            String errorString = parseForError(response,false);
+            if(errorString!=null) {
+                showError(errorString);
+            }
+        }
+
+        @Override
+        public void onFailure(RestResponse response) {
+            String errorString = parseForError(response,true);
+            showError(errorString);
         }
     };
 }

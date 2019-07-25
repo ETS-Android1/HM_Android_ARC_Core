@@ -2,6 +2,8 @@ package com.healthymedium.arc.api;
 
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
+
+import com.healthymedium.arc.api.models.VerificationCodeRequest;
 import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.Gson;
@@ -169,6 +171,20 @@ public class RestClient <Api>{
             registration.override = Boolean.TRUE;
         }
         registerDevice(registration,listener);
+    }
+
+    public void requestVerificationCode(Listener listener){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","requestVerificationCode");
+
+        VerificationCodeRequest request = new VerificationCodeRequest();
+        request.setArcId(Study.getParticipant().getId());
+        JsonObject json = serialize(request);
+
+        Call<ResponseBody> call = getService().requestVerificationCode(json);
+        call.enqueue(createCallback(listener));
     }
 
     public void getSessionInfo(final Listener listener ){

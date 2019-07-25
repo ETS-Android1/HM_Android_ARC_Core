@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -57,9 +59,14 @@ public class SetupResendCode extends BaseFragment {
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setText(ViewUtil.getString(R.string.login_resend_subheader));
 
-        // TODO
-        // Send new code button needs to send a new code
         newCodeButton = view.findViewById(R.id.newCodeButton);
+        newCodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Study.getRestClient().requestVerificationCode(verificationCodeListener);
+            }
+        });
 
         textViewError = new TextView(getContext());
         textViewError.setTextSize(16);
@@ -93,4 +100,42 @@ public class SetupResendCode extends BaseFragment {
         Log.i("SetupResendCode","onBackRequested");
         NavigationManager.getInstance().popBackStack();
     }
+
+    String parseForError(RestResponse response, boolean failed){
+        int code = response.code;
+        switch (code){
+            case 400:
+                return getResources().getString(R.string.error3);
+            case 401:
+                return getResources().getString(R.string.error1);
+            case 409:
+                return getResources().getString(R.string.error2);
+        }
+        if(response.errors.keySet().size()>0){
+            String key = response.errors.keySet().toArray()[0].toString();
+            return response.errors.get(key).getAsString();
+        }
+        if(!response.successful || failed){
+            return getResources().getString(R.string.error3);
+        }
+        return null;
+    }
+
+    RestClient.Listener verificationCodeListener = new RestClient.Listener() {
+        @Override
+        public void onSuccess(RestResponse response) {
+            String errorString = parseForError(response,false);
+            if(errorString!=null) {
+                textViewError.setVisibility(View.VISIBLE);
+                textViewError.setText(errorString);
+            }
+        }
+
+        @Override
+        public void onFailure(RestResponse response) {
+            String errorString = parseForError(response,true);
+            textViewError.setVisibility(View.VISIBLE);
+            textViewError.setText(errorString);
+        }
+    };
 }
