@@ -305,6 +305,11 @@
 
 
 
+    <string name="login_enter_2FA">Please enter your &lt;b>login verification code&lt;/b>.</string>
+    <string name="login_problems_2FA">Didn\'t receive code?</string>
+    <string name="login_resend_header">Resend code?</string>
+    <string name="login_resend_subheader">Keep in mind that it might take a few minutes to receive your security code.</string>
+
     <string name="popup_begin">Let\'s begin the first test.</string>
 
     <string name="testing_commitment">&lt;b>Testing Commitment&lt;/b></string>

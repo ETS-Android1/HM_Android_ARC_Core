@@ -4,6 +4,7 @@ import android.content.res.Resources;
 
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
+import com.healthymedium.arc.paths.setup.Setup2FA;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.TestProgress;
@@ -292,6 +293,7 @@ public class StateMachine {
         fragments.add(new SetupParticipant(firstDigitCount,secondDigitCount));
         fragments.add(new SetupParticipantConfirm(false,firstDigitCount,secondDigitCount));
         fragments.add(new SetupAuthCode(true, authDigitCount));
+        fragments.add(new Setup2FA(ViewUtil.getString(R.string.login_enter_2FA), "", 6));
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
         enableTransition(segment,false);

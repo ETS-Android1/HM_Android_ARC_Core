@@ -5,19 +5,27 @@ import android.annotation.SuppressLint;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.templates.SetupTemplate;
+import com.healthymedium.arc.paths.templates.StandardTemplate;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
-public class SetupAuthCode extends SetupTemplate {
+public class Setup2FA extends SetupTemplate {
 
-    public SetupAuthCode(boolean authenticate, int digitCount) {
-        super(authenticate, false, digitCount,0, ViewUtil.getString(R.string.login_enter_raterID));
+    public Setup2FA(String header, String subheader, int digitCount) {
+        super(true, true, digitCount, 0, header);
+
+        // TODO
+        // Send code
     }
 
     @Override
     protected void onNextRequested() {
-        ((SetupPathData) Study.getCurrentSegmentData()).authCode = characterSequence.toString();
+
+        // TODO
+        // Figure out how verification works
+
+        //((SetupPathData) Study.getCurrentSegmentData()).authCode = characterSequence.toString();
         super.onNextRequested();
     }
 

@@ -30,6 +30,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.informative.HelpScreen;
+import com.healthymedium.arc.paths.setup.SetupResendCode;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.NavigationManager;
@@ -42,6 +43,7 @@ import java.util.List;
 public class SetupTemplate extends StandardTemplate {
 
     boolean authenticate;
+    boolean is2FA;
     public int maxDigits;
     public int firstDigits;
     public int secondDigits;
@@ -60,13 +62,14 @@ public class SetupTemplate extends StandardTemplate {
     TextView textViewPolicyLink;
     TextView textViewPolicy;
 
-    public SetupTemplate(boolean authenticate,int firstDigitCount, int secondDigitCount, String header) {
+    public SetupTemplate(boolean authenticate, boolean is2FA, int firstDigitCount, int secondDigitCount, String header) {
         super(true,header,"");
         disableScrollBehavior();
         firstDigits = firstDigitCount;
         secondDigits = secondDigitCount;
         maxDigits = firstDigits + secondDigits;
         this.authenticate = authenticate;
+        this.is2FA = is2FA;
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -158,7 +161,7 @@ public class SetupTemplate extends StandardTemplate {
         params0.addRule(RelativeLayout.ABOVE,buttonNext.getId());
         relativeLayout.addView(linearLayout,params0);
 
-        if(authenticate) {
+        if(authenticate && !is2FA) {
             textViewProblems = new TextView(getContext());
             textViewProblems.setTypeface(Fonts.robotoMedium);
             textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
@@ -170,6 +173,26 @@ public class SetupTemplate extends StandardTemplate {
                 public void onClick(View view) {
                     HelpScreen contactScreen = new HelpScreen();
                     NavigationManager.getInstance().open(contactScreen);
+                }
+            });
+            ViewUtil.underlineTextView(textViewProblems);
+
+            // add below textViewError
+            int index = content.indexOfChild(textViewError) + 1;
+            content.addView(textViewProblems, index);
+        }
+        else if (authenticate && is2FA) {
+            textViewProblems = new TextView(getContext());
+            textViewProblems.setTypeface(Fonts.robotoMedium);
+            textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
+            textViewProblems.setText(ViewUtil.getString(R.string.login_problems_2FA));
+            textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
+            textViewProblems.setVisibility(View.VISIBLE);
+            textViewProblems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SetupResendCode setupResendCodeScreen = new SetupResendCode();
+                    NavigationManager.getInstance().open(setupResendCodeScreen);
                 }
             });
             ViewUtil.underlineTextView(textViewProblems);

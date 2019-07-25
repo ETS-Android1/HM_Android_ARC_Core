@@ -15,7 +15,7 @@ public class SetupParticipantConfirm extends SetupTemplate {
     CharSequence previousCharacterSequence = "";
 
     public SetupParticipantConfirm(boolean authenticate, int firstDigitCount, int secondDigitCount) {
-        super(authenticate,firstDigitCount, secondDigitCount, ViewUtil.getString(R.string.login_confirm_ARCID));
+        super(authenticate, false, firstDigitCount, secondDigitCount, ViewUtil.getString(R.string.login_confirm_ARCID));
     }
 
     @Override
