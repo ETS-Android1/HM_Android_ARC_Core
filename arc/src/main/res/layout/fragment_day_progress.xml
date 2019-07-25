@@ -73,7 +73,7 @@
                 android:textColor="@color/white"
                 android:textSize="22dp" />
 
-            <com.healthymedium.arc.custom.base.RoundedFrameLayout
+            <com.healthymedium.arc.ui.base.RoundedFrameLayout
                 android:id="@+id/frameLayoutDone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -95,13 +95,13 @@
                     android:textColor="@color/secondaryDark"
                     android:textSize="22dp" />
 
-            </com.healthymedium.arc.custom.base.RoundedFrameLayout>
+            </com.healthymedium.arc.ui.base.RoundedFrameLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <com.healthymedium.arc.custom.Button
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

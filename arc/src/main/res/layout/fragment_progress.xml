@@ -222,13 +222,13 @@
                 android:layout_weight="1"
                 android:background="@color/yellow" />
 
-            <com.healthymedium.arc.custom.StudyProgressView
+            <com.healthymedium.arc.ui.StudyProgressView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp">
 
-            </com.healthymedium.arc.custom.StudyProgressView>
+            </com.healthymedium.arc.ui.StudyProgressView>
 
             <TextView
                 android:layout_width="wrap_content"

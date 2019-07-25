@@ -49,14 +49,14 @@
         android:text="@string/price_test_isgood"
         android:textSize="26dp" />
 
-    <com.healthymedium.arc.custom.RadioButton
+    <com.healthymedium.arc.ui.RadioButton
         android:id="@+id/radioButtonNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/radioButtonYes"
         android:layout_alignParentStart="true" />
 
-    <com.healthymedium.arc.custom.RadioButton
+    <com.healthymedium.arc.ui.RadioButton
         android:id="@+id/radioButtonYes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -36,7 +36,7 @@
         android:textSize="26dp"
         android:textStyle="bold"/>
 
-    <com.healthymedium.arc.custom.Button
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

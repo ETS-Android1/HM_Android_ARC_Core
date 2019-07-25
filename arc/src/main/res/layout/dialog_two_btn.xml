@@ -28,7 +28,7 @@
         android:gravity="center"
         android:text="TextView" />
 
-    <com.healthymedium.arc.custom.Button
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/buttonTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_marginBottom="24dp"
         android:text="@string/button_next" />
 
-    <com.healthymedium.arc.custom.Button
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/buttonBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

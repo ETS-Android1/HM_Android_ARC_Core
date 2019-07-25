@@ -1,4 +1,4 @@
-package com.healthymedium.arc.custom.base;
+package com.healthymedium.arc.ui.base;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;

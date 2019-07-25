@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.AltQuestionTemplate;
-import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 // a yes or no question

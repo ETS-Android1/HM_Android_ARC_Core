@@ -33,7 +33,7 @@
         android:text="@string/price_test_wasprice"
         android:textSize="26dp" />
 
-    <com.healthymedium.arc.custom.RadioButton
+    <com.healthymedium.arc.ui.RadioButton
         android:id="@+id/buttonTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         tool:text="$1.51" />
 
 
-    <com.healthymedium.arc.custom.RadioButton
+    <com.healthymedium.arc.ui.RadioButton
         android:id="@+id/buttonBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.custom.TutorialProgressView;
+import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.ui.TutorialProgressView;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;

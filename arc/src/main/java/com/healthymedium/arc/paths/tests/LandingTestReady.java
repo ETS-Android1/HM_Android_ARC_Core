@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.healthymedium.arc.custom.Button;
+import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.paths.templates.LandingTemplate;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;

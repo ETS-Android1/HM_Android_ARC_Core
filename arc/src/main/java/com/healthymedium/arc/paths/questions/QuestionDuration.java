@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.healthymedium.arc.custom.DurationInput;
+import com.healthymedium.arc.ui.DurationInput;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.utilities.ViewUtil;

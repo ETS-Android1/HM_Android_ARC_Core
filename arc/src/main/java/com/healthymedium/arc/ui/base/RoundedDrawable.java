@@ -1,4 +1,4 @@
-package com.healthymedium.arc.custom.base;
+package com.healthymedium.arc.ui.base;
 
 
 import android.graphics.Path;

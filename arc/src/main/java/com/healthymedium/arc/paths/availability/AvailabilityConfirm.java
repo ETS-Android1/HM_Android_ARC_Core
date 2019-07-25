@@ -19,10 +19,9 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.LoadingDialog;
-import com.healthymedium.arc.custom.Button;
+import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
@@ -30,7 +29,6 @@ import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalTime;
 
 @SuppressLint("ValidFragment")
 public class AvailabilityConfirm extends BaseFragment {

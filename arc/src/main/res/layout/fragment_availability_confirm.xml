@@ -112,7 +112,7 @@
         android:textStyle="bold"
         tools:text="Change Times" />
 
-    <com.healthymedium.arc.custom.Button
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/buttonNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

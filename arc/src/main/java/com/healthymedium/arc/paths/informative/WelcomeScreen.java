@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
-import com.healthymedium.arc.custom.RadioButton;
+import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.paths.templates.InfoTemplate;
 
 @SuppressLint("ValidFragment")

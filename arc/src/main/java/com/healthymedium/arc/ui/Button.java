@@ -1,4 +1,4 @@
-package com.healthymedium.arc.custom;
+package com.healthymedium.arc.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,8 +8,8 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.healthymedium.arc.custom.base.ChipButton;
-import com.healthymedium.arc.custom.base.SimpleGradient;
+import com.healthymedium.arc.ui.base.ChipButton;
+import com.healthymedium.arc.ui.base.SimpleGradient;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
