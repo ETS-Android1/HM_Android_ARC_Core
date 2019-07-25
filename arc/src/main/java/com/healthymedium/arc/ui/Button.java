@@ -51,6 +51,8 @@ public class Button extends ChipButton {
 
         addView(imageView);
         addView(textView);
+
+        setElevation(ViewUtil.dpToPx(2));
     }
 
     private void applyAttributeSet(Context context,AttributeSet attrs){

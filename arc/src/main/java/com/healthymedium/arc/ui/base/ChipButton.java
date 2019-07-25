@@ -119,6 +119,12 @@ public class ChipButton extends LinearLayout {
         }
     }
 
+    @Override
+    public void setElevation(float elevation) {
+        super.setElevation(elevation);
+        this.elevation = elevation;
+    }
+
     OnTouchListener touchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
