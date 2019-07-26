@@ -643,11 +643,11 @@ public class GridTutorial extends Tutorial {
     // Determines which items to highlight for the remind me hints in the grid recall
     private void remindMeHighlights() {
         if (!image24Selected) {
-            remindMeTapHighlight.addPulsingTarget(image24, 10);
+            remindMeTapHighlight.addPulsingTarget(image24, 0);
         }
 
         if (!image41Selected) {
-            remindMeTapHighlight.addPulsingTarget(image41, 10);
+            remindMeTapHighlight.addPulsingTarget(image41, 0);
         }
 
         remindMeTapHighlight.show();
