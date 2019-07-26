@@ -1,8 +1,11 @@
 package com.healthymedium.arc.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.DrawableRes;
+import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.MainActivity;
+import com.healthymedium.arc.hints.HintHighlighter;
+import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.informative.ProgressScreen;
@@ -187,5 +193,114 @@ public class BottomNavigationView extends LinearLayout {
         resources.callOnClick();
     }
 
+    public void showHomeHint(final Activity activity) {
+        final HintPointer homeHint = new HintPointer(activity, home, true, true);
+        homeHint.setText(ViewUtil.getString(R.string.popup_tab_home));
 
+        final HintHighlighter homeHighlight = new HintHighlighter(activity);
+        homeHighlight.addTarget(home, 50, 0);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                homeHint.dismiss();
+                homeHighlight.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        showProgressHint(activity);
+                    }
+                };
+                handler.postDelayed(runnable,600);
+            }
+        };
+
+        homeHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+
+        homeHint.show();
+        homeHighlight.show();
+    }
+
+    public void showProgressHint(final Activity activity) {
+        final HintPointer progressHint = new HintPointer(activity, progress, true, true);
+        progressHint.setText(ViewUtil.getString(R.string.popup_tab_progress));
+
+        final HintHighlighter progressHighlight = new HintHighlighter(activity);
+        progressHighlight.addTarget(progress, 50, 0);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressHint.dismiss();
+                progressHighlight.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        showEarningsHint(activity);
+                    }
+                };
+                handler.postDelayed(runnable,600);
+            }
+        };
+
+        progressHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+
+        progressHint.show();
+        progressHighlight.show();
+    }
+
+    public void showEarningsHint(final Activity activity) {
+        final HintPointer earningsHint = new HintPointer(activity, earnings, true, true);
+        earningsHint.setText(ViewUtil.getString(R.string.popup_tab_earnings));
+
+        final HintHighlighter earningsHighlight = new HintHighlighter(activity);
+        earningsHighlight.addTarget(earnings, 50, 0);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                earningsHint.dismiss();
+                earningsHighlight.dismiss();
+
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        showResourcesHint(activity);
+                    }
+                };
+                handler.postDelayed(runnable,600);
+            }
+        };
+
+        earningsHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+
+        earningsHint.show();
+        earningsHighlight.show();
+    }
+
+    public void showResourcesHint(Activity activity) {
+        final HintPointer resourcesHint = new HintPointer(activity, resources, true, true);
+        resourcesHint.setText(ViewUtil.getString(R.string.popup_tab_resources));
+
+        final HintHighlighter resourcesHighlight = new HintHighlighter(activity);
+        resourcesHighlight.addTarget(resources, 50, 0);
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resourcesHint.dismiss();
+                resourcesHighlight.dismiss();
+            }
+        };
+
+        resourcesHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+
+        resourcesHint.show();
+        resourcesHighlight.show();
+    }
 }

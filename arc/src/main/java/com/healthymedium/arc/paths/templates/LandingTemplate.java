@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.templates;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
@@ -34,6 +36,7 @@ import java.util.Locale;
 public class LandingTemplate extends BaseFragment {
 
     protected static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
+    protected static final String HINT_POST_BASELINE = "HINT_POST_BASELINE";
 
     String stringHeader;
     String stringSubheader;
@@ -66,6 +69,10 @@ public class LandingTemplate extends BaseFragment {
 
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
+
+        if (!Hints.hasBeenShown(HINT_POST_BASELINE)) {
+            showPostBaselineHints();
+        }
 
         if (boolTestReady) {
             Button button = new Button(getContext());
@@ -181,4 +188,22 @@ public class LandingTemplate extends BaseFragment {
         stringSubheader = body;
     }
 
+    private void showPostBaselineHints() {
+        Hints.markShown(HINT_POST_BASELINE);
+
+        final HintPointer niceJobHint = new HintPointer(getActivity(), landing_layout, false, false);
+        niceJobHint.setText(ViewUtil.getString(R.string.popup_nicejob));
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                niceJobHint.dismiss();
+                getMainActivity().showHomeHint(getActivity());
+            }
+        };
+
+        niceJobHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+
+        niceJobHint.show();
+    }
 }

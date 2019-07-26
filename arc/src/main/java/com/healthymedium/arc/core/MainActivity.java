@@ -1,5 +1,6 @@
 package com.healthymedium.arc.core;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -246,6 +247,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void hideNavigationBar() {
         bottomNavigationView.setVisibility(View.GONE);
+    }
+
+    public void showHomeHint(Activity activity) {
+        bottomNavigationView.showHomeHint(activity);
     }
 
 }
