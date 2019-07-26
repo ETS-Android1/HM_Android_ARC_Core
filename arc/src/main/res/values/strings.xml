@@ -36,11 +36,11 @@
     <string name="home_contact_link">Contact and About</string>
 
     <string name="chronotype_subhead">Six Questions</string>
-    <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\nPlease estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>
+    <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.&lt;br /> &lt;br />Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>
     <string name="chronotype_1_q1">I have been a shift- or night-worker in the past three months.</string>
     <string name="chronotype_1_q2">Normally, I work ____\n\ndays/week.</string>
 
-    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work 7 days per week.\n\nPlease don\'t forget to indicate AM or PM.</string>
+    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work 7 days per week.&lt;br /> &lt;br />Please don\'t forget to indicate AM or PM.</string>
 
     <string name="chronotype_body_sleep">This is NOT when you go to bed.</string>
     <string name="chronotype_body_wake">This is NOT when you get out of bed.</string>
