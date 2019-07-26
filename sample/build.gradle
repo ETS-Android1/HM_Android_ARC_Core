@@ -6,13 +6,13 @@ def versionPatch = 0 // max=99   // bump for fixes (crashes, unintended behavior
 def versionBuild = 1 // max=99   // bump for qa builds
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     flavorDimensions "default"
 
     defaultConfig {
         applicationId "com.healthymedium.sample"
         minSdkVersion 23
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -43,11 +43,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'net.danlew:android.joda:2.9.9'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation 'joda-time:joda-time:2.9.9'
+
     implementation project(':arc')
 }
