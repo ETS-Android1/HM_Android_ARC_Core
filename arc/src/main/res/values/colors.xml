@@ -30,6 +30,8 @@
     <color name="hintLight">#fdde82</color>
     <color name="hintDark">#f8be15</color>
     <color name="shadow">#cc000000</color>
+    <color name="earnedGradientLight">#ffeaab</color>
+    <color name="unearnedGray">#b3b3b3</color>
 
     <!-- these are discrete colors, they should be close no matter the application -->
     <color name="transparent">#00000001</color>

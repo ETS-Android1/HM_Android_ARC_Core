@@ -144,5 +144,12 @@
         <attr name="strokeWidth" />
     </declare-styleable>
 
+    <declare-styleable name="EarningsBonusView">
+        <attr name="textLeft" format="string" />
+        <attr name="textRight" format="string" />
+        <attr name="textCenter" format="string" />
+        <attr name="unearned" format="boolean" />
+    </declare-styleable>
+
 
 </resources>
