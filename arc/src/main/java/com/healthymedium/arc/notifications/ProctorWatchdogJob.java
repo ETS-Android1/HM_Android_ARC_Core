@@ -7,10 +7,11 @@ import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
+
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
 
 public class ProctorWatchdogJob extends JobService {
 
@@ -24,12 +25,12 @@ public class ProctorWatchdogJob extends JobService {
         this.params = jobParameters;
         Log.i(tag, "onStartJob");
 
-        Visit visit = Study.getCurrentVisit();
-        if (visit == null) {
+        TestCycle cycle = Study.getCurrentTestCycle();
+        if (cycle == null) {
             stop(getApplicationContext());
             return false;
         }
-        if (visit.getActualStartDate().isAfterNow() || visit.getActualEndDate().isBeforeNow()) {
+        if (cycle.getActualStartDate().isAfterNow() || cycle.getActualEndDate().isBeforeNow()) {
             stop(getApplicationContext());
             return false;
         }

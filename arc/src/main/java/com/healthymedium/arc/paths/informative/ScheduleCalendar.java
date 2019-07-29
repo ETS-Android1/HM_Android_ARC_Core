@@ -15,7 +15,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -46,10 +46,10 @@ public class ScheduleCalendar extends BaseFragment {
 
 
         Participant participant = Study.getParticipant();
-        Visit visit = participant.getCurrentVisit();
+        TestCycle cycle = participant.getCurrentTestCycle();
 
-        DateTime visitStart = visit.getActualStartDate();
-        DateTime visitEnd = visit.getActualEndDate();
+        DateTime visitStart = cycle.getActualStartDate();
+        DateTime visitEnd = cycle.getActualEndDate();
 
         String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
         String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);

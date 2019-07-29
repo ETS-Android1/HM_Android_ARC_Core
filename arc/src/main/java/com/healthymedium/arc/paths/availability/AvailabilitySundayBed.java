@@ -85,15 +85,13 @@ public class AvailabilitySundayBed extends QuestionTime {
             DateTime start = Study.getParticipant().getState().studyStartDate;
             if(start==null){
                 start = DateTime.now();
+            } else {
+                start = start.withTime(LocalTime.now());
             }
 
-            if (reschedule == true) {
-                Study.getScheduler().rescheduleTests(start,Study.getInstance().getParticipant());
-            } else {
-                Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
-            }
+            Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
             Study.getRestClient().submitTestSchedule();
-            Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), reschedule);
+            Study.getScheduler().scheduleNotifications(Study.getCurrentTestCycle(), reschedule);
 
             if(reschedule) {
                 Proctor.refreshData(getContext());

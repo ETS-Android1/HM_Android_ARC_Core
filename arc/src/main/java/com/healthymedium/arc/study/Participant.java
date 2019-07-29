@@ -79,7 +79,7 @@ public class Participant {
         return state.lastPauseTime.plusMinutes(5).isBeforeNow();
     }
     public boolean isCurrentlyInTestSession(){
-        if(state.visits.size()==0){
+        if(state.testCycles.size()==0){
             return false;
         }
 
@@ -87,37 +87,61 @@ public class Participant {
     }
 
     public boolean shouldCurrentlyBeInTestSession(){
-        if(state.visits.size()==0){
+        if(state.testCycles.size()==0){
             return false;
         }
         return getCurrentTestSession().getScheduledTime().isBeforeNow();
     }
 
-    public Visit getCurrentVisit(){
-        if(state.visits.size()>0) {
-            return state.visits.get(state.currentVisit);
+    public TestCycle getCurrentTestCycle(){
+        if(state.testCycles.size()>0) {
+            return state.testCycles.get(state.currentTestCycle);
+        }
+        return null;
+    }
+
+    public TestDay getCurrentTestDay(){
+        TestCycle cycle = getCurrentTestCycle();
+        if(cycle==null) {
+            return null;
+        }
+        return cycle.getTestDay(state.currentTestDay);
+    }
+
+    public TestSession getCurrentTestSession(){
+        TestDay day = getCurrentTestDay();
+        if(day==null){
+            return null;
+        }
+        for(TestSession session : day.getTestSessions()) {
+            if(session.getIndex()==state.currentTestSession){
+                return session;
+            }
         }
         return null;
     }
 
     public void moveOnToNextTestSession(boolean scheduleNotifications){
         Log.i("Participant", "moveOnToNextTestSession");
+
         state.currentTestSession++;
-        if(state.currentTestSession>=state.visits.get(state.currentVisit).testSessions.size()){
+
+        if(getCurrentTestDay().isOver()){
+            state.currentTestDay++;
+        }
+
+        if(getCurrentTestCycle().isOver()){
             Proctor.stopService(Application.getInstance());
             state.currentTestSession = 0;
-            state.currentVisit++;
-            if(state.currentVisit>=state.visits.size()){
+            state.currentTestDay = 0;
+            state.currentTestCycle++;
+            if(state.currentTestCycle >=state.testCycles.size()){
                 state.isStudyRunning = false;
             } else if(scheduleNotifications){
-                Study.getScheduler().scheduleNotifications(getCurrentVisit(), false);
+                Study.getScheduler().scheduleNotifications(getCurrentTestCycle(), false);
             }
         }
         save();
-    }
-
-    public TestSession getCurrentTestSession(){
-        return getCurrentVisit().getTestSessions().get(state.currentTestSession);
     }
 
     public void setCircadianClock(CircadianClock clock){
@@ -149,6 +173,13 @@ public class Participant {
     public void setState(ParticipantState state){
         this.state = state;
         save();
+    }
+
+    public void setState(ParticipantState state, boolean shouldSave){
+        this.state = state;
+        if(shouldSave) {
+            save();
+        }
     }
 
 }

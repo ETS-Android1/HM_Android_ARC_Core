@@ -13,13 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.base.RoundedFrameLayout;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.TestCycle;
+import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
@@ -56,30 +58,21 @@ public class DayProgressScreen extends BaseFragment {
         confetti = view.findViewById(R.id.imageViewConfetti);
 
         // display progress views ------------------------------------------------------------------
+        Participant participant = Study.getParticipant();
+        TestDay testDay = participant.getCurrentTestDay();
 
-        Visit visit = Study.getCurrentVisit();
 
-        List<TestSession> allSessions = visit.getTestSessions();
-        List<TestSession> sessions = new ArrayList<>();
+        List<TestSession> sessions = testDay.getTestSessions();
 
-        int sessionsComplete = 0;
+        int sessionsFinished = testDay.getNumberOfTestsFinished();
         int latestIndex = -1;
 
-
-        // get an array of today's tests
-        int dayIndex = visit.getDayIndex(LocalDate.now());
-        for(TestSession session : allSessions){
-            if(session.getDayIndex()==dayIndex){
-                sessions.add(session);
-            }
-        }
 
         // find the last test to be competed
         DateTime latestComplete = new DateTime();
         for(int i=0;i<sessions.size();i++){
             TestSession session = sessions.get(i);
             if(session.wasFinished()){
-                sessionsComplete++;
                 DateTime completeTime = session.getCompletedTime();
                 if(completeTime.isAfter(latestComplete)){
                     latestComplete = completeTime;
@@ -108,14 +101,14 @@ public class DayProgressScreen extends BaseFragment {
 
         // display proper test ---------------------------------------------------------------------
 
-        textViewTestsComplete.setText(sessionsComplete + (sessionsComplete==1?" Session Complete!":" Sessions Complete!"));
+        textViewTestsComplete.setText(sessionsFinished + (sessionsFinished==1?" Session Complete!":" Sessions Complete!"));
 
-        if(sessionsComplete==visit.getNumberOfTestsToday()){
+        if(testDay.getNumberOfTestsLeft()==0){
             textViewTestsLeft.setVisibility(View.GONE);
             frameLayoutDone.setVisibility(View.VISIBLE);
         } else {
             String before= "Only ";
-            String highlight =  visit.getNumberOfTestsLeftForToday()+" more ";
+            String highlight =  testDay.getNumberOfTestsLeft()+" more ";
             String after= "to go today.";
             String text = before+highlight+after;
             Spannable spannable = new SpannableString(text);

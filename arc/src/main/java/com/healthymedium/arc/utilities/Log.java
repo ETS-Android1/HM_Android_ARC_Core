@@ -14,12 +14,18 @@ import java.io.IOException;
 public class Log {
 
     private static FileOutputStream stream;
+    private static boolean logSystemOut = false;
 
+    public static void pointToLogcat(){
+        logSystemOut = false;
+    }
+
+    public static void pointToSystemOut(){
+        logSystemOut = true;
+    }
 
     public static String format(String level, String tag, String msg) {
-        //int time = (int) (System.currentTimeMillis()/1000);
         String time = DateTime.now().toString();
-
         return time+"/"+level+"/"+tag+": "+msg+"\n";
     }
 
@@ -67,9 +73,18 @@ public class Log {
         }
     }
 
+    private static void writeToSystemOut(String level, String tag, String msg){
+        String output = format(level,tag,msg);
+        System.out.print(output);
+    }
+
     public static int v(String tag, String msg) {
         if(Config.ENABLE_LOGGING){
             writeToFile("V",tag,msg);
+        }
+        if(logSystemOut){
+            writeToSystemOut("V",tag,msg);
+            return 0;
         }
         return android.util.Log.v(tag,msg);
     }
@@ -78,12 +93,20 @@ public class Log {
         if(Config.ENABLE_LOGGING){
             writeToFile("D",tag,msg);
         }
+        if(logSystemOut){
+            writeToSystemOut("D",tag,msg);
+            return 0;
+        }
         return android.util.Log.d(tag,msg);
     }
 
     public static int i(String tag, String msg) {
         if(Config.ENABLE_LOGGING){
             writeToFile("I",tag,msg);
+        }
+        if(logSystemOut){
+            writeToSystemOut("I",tag,msg);
+            return 0;
         }
         return android.util.Log.d(tag,msg);
 
@@ -93,6 +116,10 @@ public class Log {
         if(Config.ENABLE_LOGGING){
             writeToFile("W",tag,msg);
         }
+        if(logSystemOut){
+            writeToSystemOut("W",tag,msg);
+            return 0;
+        }
         return android.util.Log.d(tag,msg);
     }
 
@@ -100,12 +127,20 @@ public class Log {
         if(Config.ENABLE_LOGGING){
             writeToFile("E",tag,msg);
         }
+        if(logSystemOut){
+            writeToSystemOut("E",tag,msg);
+            return 0;
+        }
         return android.util.Log.d(tag,msg);
     }
 
     public static int wtf(String tag, String msg) {
         if(Config.ENABLE_LOGGING){
             writeToFile("WTF",tag,msg);
+        }
+        if(logSystemOut){
+            writeToSystemOut("WTF",tag,msg);
+            return 0;
         }
         return android.util.Log.wtf(tag,msg);
     }

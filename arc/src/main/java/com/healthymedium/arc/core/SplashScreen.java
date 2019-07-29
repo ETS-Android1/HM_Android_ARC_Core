@@ -17,7 +17,7 @@ import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 public class SplashScreen extends BaseFragment {
@@ -88,9 +88,9 @@ public class SplashScreen extends BaseFragment {
 
             Hints.load();
 
-            Visit visit = Study.getCurrentVisit();
-            if(visit!=null){
-                if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+            TestCycle cycle = Study.getCurrentTestCycle();
+            if(cycle !=null){
+                if(cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow()){
                     Proctor.startService(getContext());
                 }
             }
