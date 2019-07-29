@@ -312,7 +312,8 @@ public class RestClient <Api>{
         if(Config.REST_BLACKHOLE) {
             return;
         }
-        TestSubmission test  = createTestSubmission(session);
+        TestSubmission test = createTestSubmission(session);
+        session.purgeData();
         submitTest(test);
     }
 
@@ -364,7 +365,7 @@ public class RestClient <Api>{
         test.missed_session = session.wasMissed() ? 1 : 0;
         test.finished_session = session.wasFinished() ? 1 : 0;
         test.interrupted = session.wasInterrupted() ? 1 : 0;
-        test.tests = session.getTestData();
+        test.tests = session.getCopyOfTestData();
 
         return test;
     }

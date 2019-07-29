@@ -3,9 +3,13 @@ package com.healthymedium.arc.utilities;
 import android.util.Log;
 
 import com.google.gson.JsonObject;
+import com.healthymedium.arc.study.Participant;
+import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.StudyState;
 import com.healthymedium.arc.study.StudyStateCache;
 import com.healthymedium.arc.study.StudyStateMachine;
+import com.healthymedium.arc.study.TestSession;
+import com.healthymedium.arc.study.Visit;
 
 public class MigrationUtil {
 
@@ -61,6 +65,10 @@ public class MigrationUtil {
             successful = migratePreferencesToCache();
         }
 
+        if(oldVersion < 2010001){
+            successful = removeExistingTestData();
+        }
+
         return successful;
     }
 
@@ -89,6 +97,24 @@ public class MigrationUtil {
         }
         CacheManager.getInstance().putObject(StudyStateMachine.TAG_STUDY_STATE_CACHE,cache);
 
+        return true;
+    }
+
+    private boolean removeExistingTestData(){
+
+        Participant participant = new Participant();
+        participant.load();
+
+        ParticipantState state = participant.getState();
+        for(Visit visit : state.visits) {
+            for(TestSession session : visit.testSessions) {
+                if(session.isOver()){
+                    session.purgeData();
+                }
+            }
+        }
+
+        participant.save();
         return true;
     }
 

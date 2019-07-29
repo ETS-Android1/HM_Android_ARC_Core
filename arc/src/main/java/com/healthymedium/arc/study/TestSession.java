@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TestSession {
@@ -127,6 +128,10 @@ public class TestSession {
         return testData;
     }
 
+    public List<Object> getCopyOfTestData(){
+        return Arrays.asList(Arrays.copyOf(testData.toArray(), testData.size()));
+    }
+
     public boolean wasInterrupted() {
         return interrupted;
     }
@@ -166,14 +171,7 @@ public class TestSession {
 //    }
 
     public void purgeData(){
-        startTime = null;
-        completeTime = null;
-        prescribedTime = null;
-
         testData.clear();
-
-        finishedSession = false;
-        missedSession = false;
         interrupted = false;
     }
 
