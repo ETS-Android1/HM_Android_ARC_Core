@@ -504,7 +504,9 @@ public class GridTutorial extends Tutorial {
             @Override
             public void onClick(View view) {
                 remindMeHint.dismiss();
-                remindMeTapHint.show();
+                if (selectedCount < 2) {
+                    remindMeTapHint.show();
+                }
                 remindMeHighlights();
             }
         };
@@ -516,6 +518,10 @@ public class GridTutorial extends Tutorial {
         View.OnTouchListener image33Listener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if (image33Selected) {
+                    return false;
+                }
+
                 int action = event.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
@@ -571,6 +577,10 @@ public class GridTutorial extends Tutorial {
         View.OnTouchListener image24Listener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if (image24Selected) {
+                    return false;
+                }
+
                 int action = event.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
@@ -602,6 +612,10 @@ public class GridTutorial extends Tutorial {
         View.OnTouchListener image41Listener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
+                if (image41Selected) {
+                    return false;
+                }
+
                 int action = event.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
