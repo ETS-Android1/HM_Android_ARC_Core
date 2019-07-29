@@ -312,6 +312,9 @@
     <string name="login_resend_header">Resend code?</string>
     <string name="login_resend_subheader">Keep in mind that it might take a few minutes to receive your security code.</string>
 
+    <string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
+    <string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
+
     <string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b>&lt;br /&gt;&lt;br /&gt;Let\'s take a look at the rest of the app.</string>
     <string name="popup_tab_home">&lt;b>This is the Home tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Check here to see if it\'s time to take a test.</string>
     <string name="popup_tab_progress">&lt;b>This is the Progress tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Tap here to see where you are in the testing week.</string>

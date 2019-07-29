@@ -40,7 +40,7 @@ public class ChangeAvailabilityScreen extends BaseFragment {
     FrameLayout lineFrameLayout;
 
     public ChangeAvailabilityScreen() {
-        stringHeader = Application.getInstance().getResources().getString(R.string.ChangeAvail_time);
+        stringHeader = Application.getInstance().getResources().getString(R.string.availability_changetime);
 
         Participant participant = Study.getParticipant();
         Visit visit = participant.getCurrentVisit();
@@ -51,7 +51,7 @@ public class ChangeAvailabilityScreen extends BaseFragment {
         if (now.isBefore(startDate) || now.isAfter(endDate)) {
             // We're not in a visit, so show the 1 week adjustment option
             showChangeDate = true;
-            changeDateHeader = Application.getInstance().getResources().getString(R.string.ChangeAvail_date);
+            changeDateHeader = Application.getInstance().getResources().getString(R.string.availability_changedates);
         } else {
             // We are in a visit
             showChangeDate = false;
@@ -80,13 +80,6 @@ public class ChangeAvailabilityScreen extends BaseFragment {
                 @Override
                 public void onClick(View view) {
                     Study.adjustSchedule();
-//                    Participant participant = Study.getParticipant();
-//                    Visit visit = participant.getCurrentVisit();
-//                    for (int i = 0; i < visit.testSessions.size() ; i++) {
-//                        TestSession temp = visit.testSessions.get(i);
-//                        temp.setScheduledTime(temp.getScheduledTime().plusWeeks(1));
-//                        visit.testSessions.set(i, temp);
-//                    }
                 }
             });
         } else {
@@ -109,9 +102,6 @@ public class ChangeAvailabilityScreen extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String number = stringPhoneNumber.replace("-","");
-//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
-//                startActivity(intent);
                 Study.updateAvailability(8, 18);
             }
         });
