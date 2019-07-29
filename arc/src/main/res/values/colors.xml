@@ -32,6 +32,8 @@
     <color name="shadow">#cc000000</color>
     <color name="earnedGradientLight">#ffeaab</color>
     <color name="unearnedGray">#b3b3b3</color>
+    <color name="weekProgressBorder">#979797</color>
+    <color name="weekProgressFill">#005781</color>
 
     <!-- these are discrete colors, they should be close no matter the application -->
     <color name="transparent">#00000001</color>
