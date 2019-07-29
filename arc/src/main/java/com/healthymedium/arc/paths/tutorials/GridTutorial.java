@@ -642,6 +642,7 @@ public class GridTutorial extends Tutorial {
 
     // Determines which items to highlight for the remind me hints in the grid recall
     private void remindMeHighlights() {
+        remindMeTapHighlight = new HintHighlighter(getActivity());
         if (!image24Selected) {
             remindMeTapHighlight.addPulsingTarget(image24, 0);
         }
