@@ -85,6 +85,16 @@ public class CircadianClock {
         rhythms.get(6).setTimes(wake,bed); // Saturday
     }
 
+    public void setRhythms(String wake, String bed) {
+        rhythms.get(0).setTimes(wake,bed); // Sunday
+        rhythms.get(1).setTimes(wake,bed); // Monday
+        rhythms.get(2).setTimes(wake,bed); // Tuesday
+        rhythms.get(3).setTimes(wake,bed); // Wednesday
+        rhythms.get(4).setTimes(wake,bed); // Thursday
+        rhythms.get(5).setTimes(wake,bed); // Friday
+        rhythms.get(6).setTimes(wake,bed); // Saturday
+    }
+
     public boolean isValid(){
         List<CircadianInstant> orderedRhythms = getRhythmInstances(LocalDate.now(),7);
         List<DateTime> mockDates = new ArrayList<>();
