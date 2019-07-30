@@ -79,6 +79,7 @@ public class ChangeAvailabilityScreen extends BaseFragment {
             changeDateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    getMainActivity().hideNavigationBar();
                     Study.adjustSchedule();
                 }
             });
@@ -102,6 +103,7 @@ public class ChangeAvailabilityScreen extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getMainActivity().hideNavigationBar();
                 Study.updateAvailability(8, 18);
             }
         });
