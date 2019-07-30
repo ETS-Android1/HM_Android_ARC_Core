@@ -45,4 +45,12 @@ public interface RestAPI {
     @POST("submit-wake-sleep-schedule")
     Call<ResponseBody> submitWakeSleepSchedule(@Query("device_id") String deviceId, @Body JsonObject body);
 
+    // earnings ------------------------------------------------------------------------------------
+
+    @GET("earning-overview")
+    Call<ResponseBody> getEarningOverview(@Query("device_id") String deviceId);
+
+    @GET("earning-details")
+    Call<ResponseBody> getEarningDetails(@Query("device_id") String deviceId);
+
 }

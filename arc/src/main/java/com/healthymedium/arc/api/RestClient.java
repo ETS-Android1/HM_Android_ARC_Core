@@ -213,6 +213,26 @@ public class RestClient <Api>{
         call.enqueue(createCallback(listener));
     }
 
+    public void getEarningOverview(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningOverview()");
+
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId());
+        call.enqueue(createCallback(listener));
+        }
+
+    public void getEarningDetails(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningDetails()");
+
+        Call<ResponseBody> call = getService().getEarningDetails(Device.getId());
+        call.enqueue(createCallback(listener));
+    }
+
     public void submitWakeSleepSchedule(){
         if(Config.REST_BLACKHOLE) {
             return;
