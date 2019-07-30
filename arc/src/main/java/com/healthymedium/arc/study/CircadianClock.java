@@ -75,12 +75,28 @@ public class CircadianClock {
         return 0;
     }
 
-    public void setRhythms(List<CircadianRhythm> rhythms) {
-        this.rhythms = rhythms;
+    public void setRhythms(LocalTime wake, LocalTime bed) {
+        rhythms.get(0).setTimes(wake,bed); // Sunday
+        rhythms.get(1).setTimes(wake,bed); // Monday
+        rhythms.get(2).setTimes(wake,bed); // Tuesday
+        rhythms.get(3).setTimes(wake,bed); // Wednesday
+        rhythms.get(4).setTimes(wake,bed); // Thursday
+        rhythms.get(5).setTimes(wake,bed); // Friday
+        rhythms.get(6).setTimes(wake,bed); // Saturday
+    }
+
+    public void setRhythms(String wake, String bed) {
+        rhythms.get(0).setTimes(wake,bed); // Sunday
+        rhythms.get(1).setTimes(wake,bed); // Monday
+        rhythms.get(2).setTimes(wake,bed); // Tuesday
+        rhythms.get(3).setTimes(wake,bed); // Wednesday
+        rhythms.get(4).setTimes(wake,bed); // Thursday
+        rhythms.get(5).setTimes(wake,bed); // Friday
+        rhythms.get(6).setTimes(wake,bed); // Saturday
     }
 
     public boolean isValid(){
-        List<CircadianInstant> orderedRhythms = getRhythmInstances(LocalDate.now());
+        List<CircadianInstant> orderedRhythms = getRhythmInstances(LocalDate.now(),7);
         List<DateTime> mockDates = new ArrayList<>();
 
         int size = orderedRhythms.size();
@@ -122,7 +138,7 @@ public class CircadianClock {
 
     // this outputs a list of pairs<wake,sleep>
     // the list starts with the date provided and provides a weeks worth of pairs
-    public List<CircadianInstant> getRhythmInstances(LocalDate startDate){
+    public List<CircadianInstant> getRhythmInstances(LocalDate startDate, int numDays){
 
         List<CircadianInstant> orderedRhythms = new ArrayList<>();
         int rhythmCount = rhythms.size();
@@ -131,58 +147,36 @@ public class CircadianClock {
             return orderedRhythms;
         }
 
-        List<DateTime> dateTimeList = new ArrayList<>();
-        boolean wrapAround = rhythms.get(0).isNocturnal();
-        int startIndex = startDate.getDayOfWeek();
-
-        for(int i=startIndex;i<rhythmCount;i++){
-            CircadianInstant instant = new CircadianInstant();
-            DateTime wake;
-            DateTime bed;
-
-            if(rhythms.get(i).isNocturnal()){
-                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
-                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate).plusDays(1);
-                //bed = startDate.toDateTime(rhythms.get(i).getBedTime()).plusDays(1);
-            } else {
-                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
-                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate);
-                //bed = startDate.toDateTime(rhythms.get(i).getBedTime());
-            }
-            instant.setWakeTime(wake);
-            instant.setBedTime(bed);
-
-            orderedRhythms.add(instant);
-            startDate = startDate.plusDays(1);
+        int index = startDate.getDayOfWeek();
+        if(index==7){
+            index = 0;
         }
 
-        for(int i=0;i<startIndex;i++){
+        for(int i=0;i<numDays;i++){
             CircadianInstant instant = new CircadianInstant();
             DateTime wake;
             DateTime bed;
 
-            if(rhythms.get(i).isNocturnal()){
-                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
-                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate).plusDays(1);
-                //bed = startDate.toDateTime(rhythms.get(i).getBedTime()).plusDays(1);
+            if(rhythms.get(index).isNocturnal()){
+                wake = getCorrectedTime(rhythms.get(index).getWakeTime(), startDate);
+                bed = getCorrectedTime(rhythms.get(index).getBedTime(), startDate).plusDays(1);
             } else {
-                wake = getCorrectedTime(rhythms.get(i).getWakeTime(), startDate);
-                //wake = startDate.toDateTime(rhythms.get(i).getWakeTime());
-                bed = getCorrectedTime(rhythms.get(i).getBedTime(), startDate);
-                //bed = startDate.toDateTime(rhythms.get(i).getBedTime());
+                wake = getCorrectedTime(rhythms.get(index).getWakeTime(), startDate);
+                bed = getCorrectedTime(rhythms.get(index).getBedTime(), startDate);
             }
             instant.setWakeTime(wake);
             instant.setBedTime(bed);
 
             orderedRhythms.add(instant);
             startDate = startDate.plusDays(1);
+
+            index++;
+            if(index>=7){
+                index = 0;
+            }
         }
 
         return orderedRhythms;
-
     }
 
     private int getNextIndex(int index){

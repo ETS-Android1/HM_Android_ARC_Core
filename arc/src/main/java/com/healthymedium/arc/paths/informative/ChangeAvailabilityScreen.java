@@ -18,7 +18,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 import org.joda.time.DateTime;
@@ -43,9 +43,9 @@ public class ChangeAvailabilityScreen extends BaseFragment {
         stringHeader = Application.getInstance().getResources().getString(R.string.availability_changetime);
 
         Participant participant = Study.getParticipant();
-        Visit visit = participant.getCurrentVisit();
-        DateTime startDate = visit.getScheduledStartDate();
-        DateTime endDate = visit.getScheduledEndDate();
+        TestCycle cycle = participant.getCurrentTestCycle();
+        DateTime startDate = cycle.getScheduledStartDate();
+        DateTime endDate = cycle.getScheduledEndDate();
         DateTime now = DateTime.now();
 
         if (now.isBefore(startDate) || now.isAfter(endDate)) {

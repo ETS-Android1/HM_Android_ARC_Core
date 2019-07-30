@@ -22,7 +22,7 @@ import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -136,44 +136,44 @@ public class LandingTemplate extends BaseFragment {
         String header = Application.getInstance().getResources().getString(R.string.home_header1) + "<br /> <br />" + Application.getInstance().getResources().getString(R.string.home_body1);
         String body = "";
 
-        if (participant.getState().currentVisit != 5) {
-            Visit visit = participant.getCurrentVisit();
+        if (participant.getState().currentTestCycle != 5) {
+            TestCycle cycle = participant.getCurrentTestCycle();
 
             DateTime today = new DateTime().withTimeAtStartOfDay();
-            DateTime schedStartDateMinusOne = visit.getActualStartDate().minusDays(1);
+            DateTime schedStartDateMinusOne = cycle.getActualStartDate().minusDays(1);
 
             // After the cycle, one day before the start of the next session
             if (schedStartDateMinusOne.isEqual(today)) {
                 header = Application.getInstance().getResources().getString(R.string.home_header5);
 
                 DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
-                DateTime endDate = participant.getCurrentVisit().getActualEndDate();
+                DateTime endDate = participant.getCurrentTestCycle().getActualEndDate();
                 String endDateFmt = fmt.print(endDate.minusDays(1));
 
                 header = header.replace("{DATE}", endDateFmt);
                 body = Application.getInstance().getResources().getString(R.string.home_body5);
             }
             // After the cycle before the start of the next session
-            else if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
+            else if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests()) {
                 header = Application.getInstance().getResources().getString(R.string.home_header4);
 
                 DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
-                DateTime startDate = participant.getCurrentVisit().getActualStartDate();
+                DateTime startDate = participant.getCurrentTestCycle().getActualStartDate();
                 String startDateFmt = fmt.print(startDate);
 
-                DateTime endDate = visit.getActualEndDate();
+                DateTime endDate = cycle.getActualEndDate();
                 String endDateFmt = fmt.print(endDate.minusDays(1));
 
                 body = Application.getInstance().getResources().getString(R.string.home_body4).replace("{DATE1}", startDateFmt);
                 body = body.replace("{DATE2}", endDateFmt);
             }
             // After 4th test of the day
-            else if (visit.getNumberOfTestsLeftForToday() == 0) {
+            else if (participant.getCurrentTestDay().getNumberOfTestsLeft() == 0) {
                 header = Application.getInstance().getResources().getString(R.string.home_header3);
                 body = Application.getInstance().getResources().getString(R.string.home_body3);
             }
             // Open the app, no test, still in a cycle
-            else if (visit.getNumberOfTestsLeft() > 0) {
+            else if (cycle.getNumberOfTestsLeft() > 0) {
                 header = Application.getInstance().getResources().getString(R.string.home_header2);
                 body = Application.getInstance().getResources().getString(R.string.home_body2);
             }

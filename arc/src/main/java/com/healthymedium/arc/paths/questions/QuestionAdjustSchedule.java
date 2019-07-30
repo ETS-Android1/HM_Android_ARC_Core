@@ -17,7 +17,8 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.study.TestCycle;
+import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -66,10 +67,10 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
 
         Participant participant = Study.getParticipant();
-        Visit visit = participant.getCurrentVisit();
+        TestCycle cycle = participant.getCurrentTestCycle();
 
-        DateTime visitStart = visit.getScheduledStartDate();
-        DateTime visitEnd = visit.getScheduledEndDate();
+        DateTime visitStart = cycle.getScheduledStartDate();
+        DateTime visitEnd = cycle.getScheduledEndDate();
         String start;
         String end;
 
@@ -86,12 +87,12 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         int visitAdjustIndex = 0;
 
 
-        String currStart = fmt.print(visit.getActualStartDate());
-        String currEnd = fmt.print(visit.getActualEndDate());
+        String currStart = fmt.print(cycle.getActualStartDate());
+        String currEnd = fmt.print(cycle.getActualEndDate());
 
-        int daysRange = Days.daysBetween(visit.getActualStartDate().toLocalDate(), visit.getActualEndDate().toLocalDate()).getDays();
+        int daysRange = Days.daysBetween(cycle.getActualStartDate().toLocalDate(), cycle.getActualEndDate().toLocalDate()).getDays();
         if (daysRange == 6) {
-            currEnd = fmt.print(visit.getActualEndDate().plusDays(1));
+            currEnd = fmt.print(cycle.getActualEndDate().plusDays(1));
         }
 
         String currRange = currStart + "-" + currEnd;
@@ -185,20 +186,21 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
     public void updateDates() {
 
-        Visit visit = Study.getCurrentVisit();
+        TestCycle cycle = Study.getCurrentTestCycle();
+        List<TestSession> sessions = cycle.getTestSessions();
 
-        Study.getScheduler().unscheduleNotifications(visit);
+        Study.getScheduler().unscheduleNotifications(cycle);
 
-        for (int i = 0; i < visit.testSessions.size(); i++) {
-            LocalDate date = visit.testSessions.get(i).getPrescribedTime().plusDays(shiftDays).toLocalDate();
-            visit.testSessions.get(i).setScheduledDate(date);
+        for (int i = 0; i < sessions.size(); i++) {
+            LocalDate date = sessions.get(i).getPrescribedTime().plusDays(shiftDays).toLocalDate();
+            sessions.get(i).setScheduledDate(date);
         }
 
-        int last = visit.testSessions.size()-1;
-        visit.setActualStartDate(visit.testSessions.get(0).getScheduledTime());
-        visit.setActualEndDate(visit.testSessions.get(last).getScheduledTime().plusDays(1));
+        int last = sessions.size()-1;
+        cycle.setActualStartDate(sessions.get(0).getScheduledTime());
+        cycle.setActualEndDate(sessions.get(last).getScheduledTime().plusDays(1));
 
-        Study.getScheduler().scheduleNotifications(visit, false);
+        Study.getScheduler().scheduleNotifications(cycle, false);
     }
 
     public void enableNextButton() {

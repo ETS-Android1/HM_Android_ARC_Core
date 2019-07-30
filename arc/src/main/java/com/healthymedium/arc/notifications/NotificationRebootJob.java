@@ -2,10 +2,11 @@ package com.healthymedium.arc.notifications;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
 
 public class NotificationRebootJob extends JobService {
 
@@ -17,11 +18,11 @@ public class NotificationRebootJob extends JobService {
 
         NotificationManager.getInstance().scheduleAllNotifications();
 
-        Visit visit = Study.getCurrentVisit();
-        if(visit==null){
+        TestCycle cycle = Study.getCurrentTestCycle();
+        if(cycle ==null){
             return false;
         }
-        if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+        if(cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow()){
             Log.i(tag,"starting proctor service");
             Proctor.startService(this);
         }

@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+
+import com.healthymedium.arc.study.Participant;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,23 +69,24 @@ public class DebugDialog extends DialogFragment {
         });
 
         State studyState = Study.getStateMachine().getState();
-        ParticipantState participantState = Study.getParticipant().getState();
+        Participant participant = Study.getParticipant();
 
         String status = "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";
         status += "path: "+Study.getStateMachine().getPathName(studyState.currentPath).toLowerCase()+"\n\n";
 
-        status += "visit: "+participantState.currentVisit +"\n";
-        status += "test: "+participantState.currentTestSession+"\n";
+        status += "visit: "+participant.getState().currentTestCycle +"\n";
+        status += "test: "+participant.getState().currentTestSession+"\n";
         status += "\nscheduled tests:\n\n";
-        if(participantState.visits.size()>participantState.currentVisit) {
-            Log.e("Test Count",String.valueOf(participantState.visits.get(participantState.currentVisit).getTestSessions().size()));
-            for (TestSession session : participantState.visits.get(participantState.currentVisit).getTestSessions()) {
+        TestCycle cycle = participant.getCurrentTestCycle();
+        if(cycle!=null) {
+            Log.e("Test Count",String.valueOf(cycle.getNumberOfTests()));
+            for (TestSession session : cycle.getTestSessions()) {
                 status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
             }
         }
 
         // Get current visit
-        int currVisitId = participantState.visits.get(participantState.currentVisit).getId();
+        int currVisitId = Study.getCurrentTestCycle().getId();
 
         // Notification one month before next visit
         NotificationNode month = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextMonth.getId(), currVisitId);

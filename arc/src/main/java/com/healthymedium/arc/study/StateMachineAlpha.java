@@ -93,10 +93,10 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
-        if(participant.getState().currentVisit==0){
+        if(participant.getState().currentTestCycle == 0){
             Log.i("StateMachine", "init finished, setting lifecycle to baseline");
             state.lifecycle = LIFECYCLE_BASELINE;
-        } else if(participant.getState().currentVisit==4) {
+        } else if(participant.getState().currentTestCycle == 4) {
             Log.i("StateMachine", "init finished, setting lifecycle to over");
             state.lifecycle = LIFECYCLE_OVER;
         } else {
@@ -119,7 +119,7 @@ public class StateMachineAlpha extends StateMachine {
 
         cache.segments.clear();
 
-        if(participant.getCurrentVisit().getActualStartDate().isAfterNow()){
+        if(participant.getCurrentTestCycle().getActualStartDate().isAfterNow()){
             Log.i("StateMachine", "indexed visit hasn't started, setting lifecycle to idle");
             state.lifecycle = LIFECYCLE_IDLE;
             decidePath();
@@ -153,7 +153,7 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
-        if (!participant.getCurrentVisit().hasThereBeenAFinishedTest(participant.getCurrentTestSession().getDayIndex())) {
+        if (!participant.getCurrentTestDay().hasThereBeenAFinishedTest()) {
             Log.i("StateMachine", "setting path for first of day");
             state.currentPath = PATH_TEST_FIRST_OF_DAY;
             return;
@@ -166,13 +166,14 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathArc(){
         Participant participant = Study.getInstance().getParticipant();
 
-        if(participant.getState().currentVisit == 4) {
+        if(participant.getState().currentTestCycle == 4) {
             state.lifecycle = LIFECYCLE_OVER;
             decidePath();
             return;
         }
 
-        Visit visit = participant.getCurrentVisit();
+        TestCycle cycle = participant.getCurrentTestCycle();
+        TestDay day = participant.getCurrentTestDay();
 
         if(!participant.isStudyRunning()){
             Log.i("StateMachine", "study isn't running, setting lifecycle to over");
@@ -189,8 +190,8 @@ public class StateMachineAlpha extends StateMachine {
 
         cache.segments.clear();
 
-        if(visit.getActualStartDate().isAfterNow()){
-            Log.i("StateMachine", "indexed visit hasn't started, setting lifecycle to idle");
+        if(cycle.getActualStartDate().isAfterNow()){
+            Log.i("StateMachine", "indexed cycle hasn't started, setting lifecycle to idle");
             state.lifecycle = LIFECYCLE_IDLE;
             decidePath();
             return;
@@ -214,13 +215,13 @@ public class StateMachineAlpha extends StateMachine {
 
         currentlyInTestPath = true;
 
-        if (!visit.hasThereBeenAFinishedTest()){
-            Log.i("StateMachine", "setting path for first of visit");
+        if (!cycle.hasThereBeenAFinishedTest()){
+            Log.i("StateMachine", "setting path for first of cycle");
             state.currentPath = PATH_TEST_FIRST_OF_VISIT;
             return;
         }
 
-        if (!visit.hasThereBeenAFinishedTest(participant.getCurrentTestSession().getDayIndex())) {
+        if (!day.hasThereBeenAFinishedTest()) {
             Log.i("StateMachine", "setting path for first of day");
             state.currentPath = PATH_TEST_FIRST_OF_DAY;
             return;
@@ -231,9 +232,9 @@ public class StateMachineAlpha extends StateMachine {
     }
 
     private void decidePathIdle() {
-        Visit visit = Study.getCurrentVisit();
+        TestCycle cycle = Study.getCurrentTestCycle();
 
-        if (visit.getActualStartDate().isBeforeNow()) {
+        if (cycle.getActualStartDate().isBeforeNow()) {
             state.lifecycle = LIFECYCLE_ARC;
             decidePath();
         } else {
@@ -278,7 +279,7 @@ public class StateMachineAlpha extends StateMachine {
                         dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
 
                         Study.getCurrentTestSession().markCompleted();
-                        if(Study.getCurrentVisit().getNumberOfTestsAvailable()==0){
+                        if(Study.getCurrentTestDay().getNumberOfTestsAvailableNow()==0){
                             setTestCompleteFlag(true);
                         }
                         loadCognitiveTestFromCache();
@@ -301,7 +302,7 @@ public class StateMachineAlpha extends StateMachine {
                         dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
 
                         Study.getCurrentTestSession().markCompleted();
-                        if(Study.getCurrentVisit().getNumberOfTestsAvailable()==0){
+                        if(Study.getCurrentTestDay().getNumberOfTestsAvailableNow()==0){
                             setTestCompleteFlag(true);
                         }
                         loadCognitiveTestFromCache();
