@@ -94,7 +94,7 @@ public class QuestionTime extends QuestionTemplate {
         super.onEnterTransitionEnd(popped);
 
         if(!Hints.hasBeenShown(HINT_QUESTION_TIME)){
-            pointer = new HintPointer(getMainActivity(),timeInput.getTimePicker(),true,false);
+            pointer = new HintPointer(getMainActivity(),timeInput.getTimePicker(),true,true);
             pointer.setText("Scroll to select");
             pointer.show();
             Hints.markShown(HINT_QUESTION_TIME);
