@@ -97,7 +97,8 @@ public class TimeInput extends FrameLayout {
                         minutesBetween += maxWakeTime * 60;
                     }
                     if (minutesBetween < minWakeTime * 60 && minutesBetween >= 0) {
-                        errorText.setText(ViewUtil.getString(R.string.error4));
+                        String error = ViewUtil.getString(R.string.availability_minimum_error).replace("{HOURS}", Integer.toString(minWakeTime));
+                        errorText.setText(error);
                     } else {
                         errorText.setText("");
                     }
