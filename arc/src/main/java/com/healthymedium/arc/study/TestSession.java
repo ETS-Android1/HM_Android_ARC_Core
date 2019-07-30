@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.healthymedium.arc.notifications.types.TestMissed.TAG_TEST_MISSED_COUNT;
@@ -146,6 +147,10 @@ public class TestSession {
         return testData;
     }
 
+    public List<Object> getCopyOfTestData(){
+        return Arrays.asList(Arrays.copyOf(testData.toArray(), testData.size()));
+    }
+
     public boolean wasInterrupted() {
         return interrupted;
     }
@@ -162,15 +167,8 @@ public class TestSession {
         this.interrupted = true;
     }
 
-    public void purgeData() {
-        startTime = null;
-        completeTime = null;
-        prescribedTime = null;
-
+    public void purgeData(){
         testData.clear();
-
-        finishedSession = false;
-        missedSession = false;
         interrupted = false;
     }
 
