@@ -63,7 +63,7 @@ public class CallbackChain {
         @Override
         public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> retrofitResponse) {
             Log.i(tag,"parsing response");
-            RestResponse response = RestResponse.fromRetrofitResponse(retrofitResponse);
+            RestResponse response = RestResponse.fromRetrofitResponse(gson,retrofitResponse);
             Log.i(tag,gson.toJson(response));
 
             if(links.size()==0){
