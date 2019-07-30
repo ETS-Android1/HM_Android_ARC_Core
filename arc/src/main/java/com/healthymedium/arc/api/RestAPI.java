@@ -59,7 +59,7 @@ public interface RestAPI {
     // earnings ------------------------------------------------------------------------------------
 
     @GET("earning-overview")
-    Call<ResponseBody> getEarningOverview(@Query("device_id") String deviceId);
+    Call<ResponseBody> getEarningOverview(@Query("device_id") String deviceId, @Query("cycle") Integer cycle, @Query("day") Integer day);
 
     @GET("earning-details")
     Call<ResponseBody> getEarningDetails(@Query("device_id") String deviceId);

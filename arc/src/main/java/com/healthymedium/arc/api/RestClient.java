@@ -263,13 +263,33 @@ public class RestClient <Api>{
         call.enqueue(createCallback(listener));
     }
 
+    public void getEarningOverview(int cycleIndex, int dayIndex, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningOverview()");
+
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId(),cycleIndex,dayIndex);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getEarningOverview(int cycleIndex, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningOverview()");
+
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId(),cycleIndex,null);
+        call.enqueue(createCallback(listener));
+    }
+
     public void getEarningOverview(final Listener listener ){
         if(Config.REST_BLACKHOLE) {
             return;
         }
         Log.i("RestClient","getEarningOverview()");
 
-        Call<ResponseBody> call = getService().getEarningOverview(Device.getId());
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId(),null,null);
         call.enqueue(createCallback(listener));
     }
 
