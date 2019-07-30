@@ -7,6 +7,7 @@ import android.support.v4.app.DialogFragment;
 
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
+import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.utilities.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,15 +75,20 @@ public class DebugDialog extends DialogFragment {
         String status = "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";
         status += "path: "+Study.getStateMachine().getPathName(studyState.currentPath).toLowerCase()+"\n\n";
 
-        status += "visit: "+participant.getState().currentTestCycle +"\n";
+        status += "cycle: "+participant.getState().currentTestCycle +"\n";
+        status += "day: "+participant.getState().currentTestDay+"\n";
         status += "test: "+participant.getState().currentTestSession+"\n";
-        status += "\nscheduled tests:\n\n";
+        status += "\nscheduled tests:\n";
         TestCycle cycle = participant.getCurrentTestCycle();
         if(cycle!=null) {
             Log.e("Test Count",String.valueOf(cycle.getNumberOfTests()));
-            for (TestSession session : cycle.getTestSessions()) {
-                status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
+            for(TestDay day : cycle.getTestDays()){
+                status += "\nday "+day.getDayIndex()+"\n";
+                for (TestSession session : day.getTestSessions()) {
+                    status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
+                }
             }
+
         }
 
         // Get current visit
