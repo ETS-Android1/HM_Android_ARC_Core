@@ -15,12 +15,41 @@ import com.healthymedium.arc.ui.base.ChipLinearLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.Calendar;
+import java.util.HashMap;
+
+/*
+    Displays days of week with indicator circle on current day.
+
+    Usage:
+        Define in XML:
+            <com.healthymedium.arc.ui.WeekProgressView
+                android:id="@+id/weekProgressView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        Set days array in Java:
+            WeekProgressView weekProgressView = view.findViewById(R.id.weekProgressView);
+            weekProgressView.setDays(new String[]{"M", "T", "W", "T", "F"});
+
+        Current day of the week will highlight itself
+*/
 
 public class WeekProgressView extends RelativeLayout {
-    private String[] days = new String[]{"S", "M", "T", "W", "T", "F", "S"};
+
+    private HashMap<String, Integer> dayMap = new HashMap<String, Integer>(){{
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Sun), 0);
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Mon), 1);
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Tue), 2);
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Wed), 3);
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Thur), 4);
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Fri), 5);
+        put(getContext().getResources().getString(R.string.Day_Abbrev_Sat), 6);
+    }};
+    private String[] days;
     private int currentDay = 0;
     private int indicatorWidth;
     private Integer difference;
+    private int dayWidth;
 
     private ChipLinearLayout dayLayout;
     private ChipLinearLayout completedDayLayout;
@@ -63,21 +92,6 @@ public class WeekProgressView extends RelativeLayout {
         completedDayLayout.setStrokeColor(R.color.weekProgressFill);
         completedDayLayout.setStrokeWidth(1);
 
-        LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
-        dayTextParams.weight = 1;
-
-        for(String day : days) {
-            TextView dayTextView = new TextView(context);
-            dayTextView.setLayoutParams(dayTextParams);
-            dayTextView.setTypeface(Fonts.robotoBold);
-            dayTextView.setTextSize(16);
-            dayTextView.setTextColor(ViewUtil.getColor(context, R.color.text));
-            dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-            dayTextView.setText(day);
-            dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
-            dayLayout.addView(dayTextView);
-        }
-
         addView(dayLayout);
 
         indicatorWidth = ViewUtil.dpToPx(50);
@@ -92,9 +106,6 @@ public class WeekProgressView extends RelativeLayout {
         indicatorTextView.setGravity(Gravity.CENTER_VERTICAL);
 
         indicatorLayout.addView(indicatorTextView);
-
-        Calendar calendar = Calendar.getInstance();
-        currentDay = calendar.get(Calendar.DAY_OF_WEEK);
     }
 
     @Override
@@ -108,7 +119,7 @@ public class WeekProgressView extends RelativeLayout {
         }
 
         if(width > 0 && !initialized) {
-            int dayWidth = (int)(width/7.0);
+            dayWidth = (width/days.length);
 
             if(difference == null) {
                 indicatorWidth = Math.max(indicatorWidth, dayWidth);
@@ -137,16 +148,65 @@ public class WeekProgressView extends RelativeLayout {
 
                 addView(completedDayLayout);
 
-                FrameLayout.LayoutParams indicatorParams = new FrameLayout.LayoutParams(indicatorWidth, indicatorWidth);
-                indicatorLayout.setLayoutParams(indicatorParams);
-                indicatorTextView.setLayoutParams(indicatorParams);
-                indicatorTextView.setText(days[currentDay]);
-                indicatorLayout.setX((dayWidth * currentDay));
-                addView(indicatorLayout);
-
+                if(currentDay >= 0) {
+                    FrameLayout.LayoutParams indicatorParams = new FrameLayout.LayoutParams(indicatorWidth, indicatorWidth);
+                    indicatorLayout.setLayoutParams(indicatorParams);
+                    indicatorTextView.setLayoutParams(indicatorParams);
+                    indicatorTextView.setText(days[currentDay]);
+                    indicatorLayout.setX((dayWidth * currentDay));
+                    addView(indicatorLayout);
+                }
 
                 initialized = true;
             }
         }
+    }
+
+    private void buildView() {
+        LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        dayTextParams.weight = 1;
+        for(String day : days) {
+            TextView dayTextView = new TextView(getContext());
+            dayTextView.setLayoutParams(dayTextParams);
+            dayTextView.setTypeface(Fonts.robotoBold);
+            dayTextView.setTextSize(16);
+            dayTextView.setTextColor(ViewUtil.getColor(getContext(), R.color.text));
+            dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+            dayTextView.setText(day);
+            dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
+            dayLayout.addView(dayTextView);
+        }
+    }
+
+    private void parseDays() {
+        String firstDay = days[0];
+        String nextDay = days[1];
+        int dayOffset = 0;
+
+        if(firstDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Sun))) {
+            if(nextDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Sun))) {
+                dayOffset = 6;
+            }
+        } else if(firstDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Tue))) {
+            dayOffset = 2;
+            if(nextDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Fri))) {
+                dayOffset = 4;
+            }
+        } else {
+            dayOffset = dayMap.get(firstDay);
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        currentDay = calendar.get(Calendar.DAY_OF_WEEK) - dayOffset;
+    }
+
+    public String[] getDays() {
+        return days;
+    }
+
+    public void setDays(String[] days) {
+        this.days = days;
+        parseDays();
+        buildView();
     }
 }
