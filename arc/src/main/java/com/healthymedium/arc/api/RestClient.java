@@ -213,6 +213,56 @@ public class RestClient <Api>{
         call.enqueue(createCallback(listener));
     }
 
+    public void getStudyProgress(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getStudyProgress()");
+
+        Call<ResponseBody> call = getService().getStudyProgress(Device.getId());
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getCycleProgress(int index, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getCycleProgress()");
+
+        Call<ResponseBody> call = getService().getCycleProgress(Device.getId(),index);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getCurrentCycleProgress(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getCycleProgress()");
+
+        Call<ResponseBody> call = getService().getCycleProgress(Device.getId(),null);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getDayProgress(int cycleIndex, int dayIndex, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getDayProgress()");
+
+        Call<ResponseBody> call = getService().getDayProgress(Device.getId(),cycleIndex,dayIndex);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getCurrentDayProgress(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getDayProgress()");
+
+        Call<ResponseBody> call = getService().getDayProgress(Device.getId(),null,null);
+        call.enqueue(createCallback(listener));
+    }
+
     public void getEarningOverview(final Listener listener ){
         if(Config.REST_BLACKHOLE) {
             return;
@@ -221,7 +271,7 @@ public class RestClient <Api>{
 
         Call<ResponseBody> call = getService().getEarningOverview(Device.getId());
         call.enqueue(createCallback(listener));
-        }
+    }
 
     public void getEarningDetails(final Listener listener ){
         if(Config.REST_BLACKHOLE) {
