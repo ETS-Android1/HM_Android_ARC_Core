@@ -656,6 +656,8 @@ public class StateMachine {
     public void addFinishedPage(){
         List<BaseFragment> fragments = new ArrayList<>();
 
+        Participant participant = Study.getParticipant();
+
         Resources res = Application.getInstance().getResources();
 
         String header;
@@ -668,18 +670,17 @@ public class StateMachine {
         body = res.getString(R.string.thankyou_testcomplete_body1);
 
         // Finished with study
-        if(!Study.getParticipant().isStudyRunning()){
+        if(!participant.isStudyRunning()){
             //at the end of the line
             header = res.getString(R.string.thankyou_header3);
             subheader = res.getString(R.string.thankyou_finished_subhead3);
             body = res.getString(R.string.thankyou_body3);
         }
         else {
-            ParticipantState participantState = Study.getParticipant().getState();
-            Visit visit = participantState.visits.get(participantState.currentVisit);
+            TestCycle cycle = participant.getCurrentTestCycle();
 
-            // After the cycle but before the next session
-            if (visit.getNumberOfTestsLeft() == visit.getNumberOfTests()) {
+            // After the testCycles but before the next session
+            if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests()) {
 
                 String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
                 String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
@@ -692,11 +693,11 @@ public class StateMachine {
 
                 String body2 = res.getString(R.string.thankyou_cycle_body2);
 
-                // String startDate = visit.getActualStartDate().toString(format);
-                // String endDate = visit.getActualEndDate().toString(format);
+                // String startDate = testCycles.getActualStartDate().toString(format);
+                // String endDate = testCycles.getActualEndDate().toString(format);
 
-                String startDate = fmt.print(visit.getActualStartDate());
-                String endDate = fmt.print(visit.getActualEndDate().minusDays(1));
+                String startDate = fmt.print(cycle.getActualStartDate());
+                String endDate = fmt.print(cycle.getActualEndDate().minusDays(1));
 
                 body2 = body2.replace("{DATE1}", startDate);
                 body2 = body2.replace("{DATE2}", endDate);
@@ -704,7 +705,7 @@ public class StateMachine {
                 body = body2;
             }
             // After the 4th test of the day
-            else if (visit.getNumberOfTestsLeftForToday() == 0) {
+            else if (participant.getCurrentTestDay().getNumberOfTestsLeft() == 0) {
                 header = res.getString(R.string.thank_you_header1);
                 subheader = res.getString(R.string.thankyou_alldone_subhead1);
                 body = res.getString(R.string.thankyou_alldone_body1);

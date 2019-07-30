@@ -293,12 +293,16 @@ public class Study{
 
     // commonly used accessors ---------------------------------------------------------------------
 
-    public static Visit getCurrentVisit(){
-        return participant.getCurrentVisit();
+    public static TestCycle getCurrentTestCycle() {
+        return participant.getCurrentTestCycle();
     }
 
-    public static TestSession getCurrentTestSession(){
+    public static TestSession getCurrentTestSession() {
         return participant.getCurrentTestSession();
+    }
+
+    public static TestDay getCurrentTestDay() {
+        return participant.getCurrentTestDay();
     }
 
     public static PathSegmentData getCurrentSegmentData() {
@@ -308,8 +312,6 @@ public class Study{
     public static void setCurrentSegmentData(Object object) {
         stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
     }
-
-
 
     // operations ----------------------------------------------------------------------------------
 

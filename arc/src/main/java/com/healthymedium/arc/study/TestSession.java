@@ -30,7 +30,7 @@ public class TestSession {
     private boolean missedSession;
     private boolean interrupted;
 
-    public TestSession(int dayIndex, int index, int id){
+    public TestSession(int dayIndex, int index, int id) {
         this.dayIndex = dayIndex;
         this.index = index;
         this.id = id;
@@ -44,15 +44,19 @@ public class TestSession {
         return index;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
 
-    public boolean isFinished(){
+    public boolean isFinished() {
         return finishedSession;
     }
 
-    public void markCompleted(){
+    public void markCompleted() {
         completeTime = DateTime.now();
         finishedSession = true;
     }
@@ -62,30 +66,30 @@ public class TestSession {
         finishedSession = false;
     }
 
-    public void markMissed(){
+    public void markMissed() {
         missedSession = true;
         finishedSession = false;
     }
 
-    public int getProgress(){
-        if(startTime==null){
+    public int getProgress() {
+        if(startTime==null) {
             return 0;
         }
-        if(finishedSession){
+        if(finishedSession) {
             return 100;
         }
         return 33;
     }
 
     public DateTime getExpirationTime() {
-        if(scheduledDate!=null){
+        if(scheduledDate!=null) {
             return getPrescribedTime().withDate(scheduledDate).plusHours(2);
         }
         return getPrescribedTime().plusHours(2);
     }
 
     public DateTime getScheduledTime() {
-        if(scheduledDate!=null){
+        if(scheduledDate!=null) {
             return getPrescribedTime().withDate(scheduledDate);
         }
         return getPrescribedTime();
@@ -100,9 +104,6 @@ public class TestSession {
     }
 
     public DateTime getPrescribedTime() {
-        if(prescribedTime==null){
-            throw new UnsupportedOperationException("Prescribed time was not set");
-        }
         return prescribedTime;
     }
 
@@ -123,12 +124,12 @@ public class TestSession {
         }
     }
 
-    public void addTestData(BaseTest data){
+    public void addTestData(BaseTest data) {
         Log.i("TestSession","addTestData("+data.getClass().getName()+")");
         testData.add(data);
     }
 
-    public boolean isOver(){
+    public boolean isOver() {
         return (completeTime!=null || wasMissed());
     }
 
@@ -136,12 +137,12 @@ public class TestSession {
         return startTime!=null && completeTime==null && !missedSession;
     }
 
-    public boolean isAvailable(){
+    public boolean isAvailableNow() {
         DateTime now = DateTime.now();
         return (getScheduledTime().isBefore(now) && getExpirationTime().isAfter(now));
     }
 
-    public List<Object> getTestData(){
+    public List<Object> getTestData() {
         return testData;
     }
 
@@ -161,29 +162,7 @@ public class TestSession {
         this.interrupted = true;
     }
 
-//    public int getDayOfWeek() {
-//        int dayOfWeek = getScheduledTime().getDayOfWeek();
-//        // sun = 7
-//        // mon = 1
-//        // tue = 2
-//        // wed = 3
-//        // thu = 4
-//        // fri = 5
-//        // sat = 6
-//        if(dayOfWeek==7){
-//            dayOfWeek = 0;
-//        }
-//        // sun = 0
-//        // mon = 1
-//        // tue = 2
-//        // wed = 3
-//        // thu = 4
-//        // fri = 5
-//        // sat = 6
-//        return dayOfWeek;
-//    }
-
-    public void purgeData(){
+    public void purgeData() {
         startTime = null;
         completeTime = null;
         prescribedTime = null;

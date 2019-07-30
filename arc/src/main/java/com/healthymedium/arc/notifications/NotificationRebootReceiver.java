@@ -7,7 +7,7 @@ import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.Visit;
+import com.healthymedium.arc.study.TestCycle;
 
 public class NotificationRebootReceiver extends BroadcastReceiver {
 
@@ -20,11 +20,11 @@ public class NotificationRebootReceiver extends BroadcastReceiver {
             return;
         }
         NotificationManager.getInstance().scheduleAllNotifications();
-        Visit visit = Study.getCurrentVisit();
-        if(visit==null){
+        TestCycle cycle = Study.getCurrentTestCycle();
+        if(cycle ==null){
             return;
         }
-        if(visit.getActualStartDate().isBeforeNow() && visit.getActualEndDate().isAfterNow()){
+        if(cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow()){
             Log.i(tag,"starting proctor service");
             Proctor.startService(Application.getInstance());
         }

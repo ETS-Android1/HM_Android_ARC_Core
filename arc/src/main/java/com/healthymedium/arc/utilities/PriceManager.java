@@ -69,7 +69,7 @@ public class PriceManager {
 
         ParticipantState state = Study.getParticipant().getState();
         int size = priceSets.size();
-        int index = 10*state.currentVisit+state.currentTestSession;
+        int index = 10*state.currentTestCycle +state.currentTestSession;
         if(index>=size){
             index -= size;
         }

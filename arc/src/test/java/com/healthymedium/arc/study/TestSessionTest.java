@@ -65,7 +65,7 @@ public class TestSessionTest {
         TestSession session = new TestSession(0,0,0);
         session.setPrescribedTime(DateTime.now().plusHours(1));
 
-        Assert.assertFalse(session.isAvailable());
+        Assert.assertFalse(session.isAvailableNow());
 
         Assert.assertFalse(session.wasFinished());
         Assert.assertFalse(session.isFinished());
@@ -82,7 +82,7 @@ public class TestSessionTest {
         TestSession session = new TestSession(0,0,0);
         session.setPrescribedTime(DateTime.now().minusHours(1));
 
-        Assert.assertTrue(session.isAvailable());
+        Assert.assertTrue(session.isAvailableNow());
 
         session.markStarted();
 
@@ -101,7 +101,7 @@ public class TestSessionTest {
         TestSession session = new TestSession(0,0,0);
         session.setPrescribedTime(DateTime.now().minusHours(1));
 
-        Assert.assertTrue(session.isAvailable());
+        Assert.assertTrue(session.isAvailableNow());
 
         session.markStarted();
         session.markAbandoned();
@@ -121,7 +121,7 @@ public class TestSessionTest {
         TestSession session = new TestSession(0,0,0);
         session.setPrescribedTime(DateTime.now().minusHours(1));
 
-        Assert.assertTrue(session.isAvailable());
+        Assert.assertTrue(session.isAvailableNow());
 
         session.markStarted();
         session.markCompleted();
@@ -141,7 +141,7 @@ public class TestSessionTest {
         TestSession session = new TestSession(0,0,0);
         session.setPrescribedTime(DateTime.now().plusHours(3));
 
-        Assert.assertFalse(session.isAvailable());
+        Assert.assertFalse(session.isAvailableNow());
 
         session.markMissed();
 

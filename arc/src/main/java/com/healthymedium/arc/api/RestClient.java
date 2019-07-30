@@ -3,13 +3,11 @@ package com.healthymedium.arc.api;
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 
-import com.healthymedium.arc.api.models.VerificationCodeRequest;
-import com.healthymedium.arc.utilities.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
 import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DeviceRegistration;
 import com.healthymedium.arc.api.models.ExistingData;
@@ -21,19 +19,22 @@ import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.api.models.TestSubmission;
 import com.healthymedium.arc.api.models.WakeSleepData;
 import com.healthymedium.arc.api.models.WakeSleepSchedule;
+import com.healthymedium.arc.api.models.VerificationCodeRequest;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
-import com.healthymedium.arc.study.Visit;
-import com.healthymedium.arc.utilities.CacheManager;
-import com.healthymedium.arc.utilities.VersionUtil;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.TestCycle;
+import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.utilities.CacheManager;
+import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.VersionUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Weeks;
@@ -354,21 +355,23 @@ public class RestClient <Api>{
         schedule.participant_id = participant.getId();
         schedule.sessions = new ArrayList<>();
 
-        for(Visit visit : state.visits){
-            for(TestSession session : visit.getTestSessions()){
-                TestScheduleSession scheduleSession = new TestScheduleSession();
-                scheduleSession.session = session.getIndex()%visit.getNumberOfTests(session.getDayIndex());
-                scheduleSession.session_id = String.valueOf(session.getId());
-                scheduleSession.session_date = JodaUtil.toUtcDouble(session.getScheduledTime());
-                scheduleSession.week = Weeks.weeksBetween(state.visits.get(0).getScheduledStartDate(),visit.getScheduledStartDate()).getWeeks();
-                scheduleSession.day = session.getDayIndex();
-                scheduleSession.types = new ArrayList<>();
-                scheduleSession.types.add("cognitive");
-                schedule.sessions.add(scheduleSession);
+        for(TestCycle cycle : state.testCycles){
+            for(TestDay day : cycle.getTestDays()){
+                for(TestSession session : day.getTestSessions()){
+                    TestScheduleSession scheduleSession = new TestScheduleSession();
+                    scheduleSession.session = session.getIndex();
+                    scheduleSession.session_id = String.valueOf(session.getId());
+                    scheduleSession.session_date = JodaUtil.toUtcDouble(session.getScheduledTime());
+                    scheduleSession.week = Weeks.weeksBetween(state.testCycles.get(0).getScheduledStartDate(), session.getScheduledTime()).getWeeks();
+                    scheduleSession.day = day.getDayIndex();
+                    scheduleSession.types = new ArrayList<>();
+                    scheduleSession.types.add("cognitive");
+                    schedule.sessions.add(scheduleSession);
+                }
             }
         }
 
-        if(uploading){
+        if(uploading) {
             uploadQueue.add(schedule);
             saveUploadQueue();
         } else {
@@ -447,16 +450,10 @@ public class RestClient <Api>{
         }
         test.day = session.getDayIndex();
 
-        DateTime scheduledTime = session.getScheduledTime();
-        List<Visit> visits =  Study.getParticipant().getState().visits;
+        List<TestCycle> cycles =  Study.getParticipant().getState().testCycles;
 
-        for(Visit visit : visits) {
-            if (scheduledTime.isBefore(visit.getActualEndDate()) && scheduledTime.isAfter(visit.getActualStartDate())) {
-                test.week = Weeks.weeksBetween(visits.get(0).getScheduledStartDate(),visit.getScheduledStartDate()).getWeeks();
-                test.session = session.getIndex()%visit.getNumberOfTests(session.getDayIndex());
-                break;
-            }
-        }
+        test.week = Weeks.weeksBetween(cycles.get(0).getScheduledStartDate(), session.getScheduledTime()).getWeeks();
+        test.session = session.getIndex();
 
         test.missed_session = session.wasMissed() ? 1 : 0;
         test.finished_session = session.wasFinished() ? 1 : 0;
@@ -651,7 +648,7 @@ public class RestClient <Api>{
 
                 ParticipantState state = Study.getScheduler().getExistingParticipantState(existingData);
                 Study.getParticipant().setState(state);
-                Study.getScheduler().scheduleNotifications(Study.getCurrentVisit(), false);
+                Study.getScheduler().scheduleNotifications(Study.getCurrentTestCycle(), false);
 
                 return true;
             }

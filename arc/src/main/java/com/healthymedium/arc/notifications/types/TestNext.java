@@ -25,7 +25,7 @@ public class TestNext extends NotificationType {
 
     @Override
     public String getContent(Context context) {
-        DateTime date = Study.getInstance().getParticipant().getCurrentVisit().getActualStartDate();
+        DateTime date = Study.getInstance().getParticipant().getCurrentTestCycle().getActualStartDate();
         String fmtDate = date.toString(context.getString(R.string.format_date));
         return context.getString(R.string.notification_next).replace("{DATE}", fmtDate);
     }
