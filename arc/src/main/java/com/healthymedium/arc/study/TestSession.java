@@ -26,6 +26,7 @@ public class TestSession {
     private DateTime completeTime;
 
     private List<Object> testData = new ArrayList<>();
+    private List<Integer> testPercentages = new ArrayList<>();
 
     private boolean finishedSession;
     private boolean missedSession;
@@ -73,13 +74,12 @@ public class TestSession {
     }
 
     public int getProgress() {
-        if(startTime==null) {
-            return 0;
+        float progress = 0;
+        int numEntries = testPercentages.size();
+        for(Integer percentage : testPercentages){
+            progress += ((float)percentage/numEntries);
         }
-        if(finishedSession) {
-            return 100;
-        }
-        return 33;
+        return (int) progress;
     }
 
     public DateTime getExpirationTime() {
@@ -128,6 +128,7 @@ public class TestSession {
     public void addTestData(BaseTest data) {
         Log.i("TestSession","addTestData("+data.getClass().getName()+")");
         testData.add(data);
+        testPercentages.add(data.getProgress());
     }
 
     public boolean isOver() {

@@ -20,4 +20,25 @@ public class CognitiveTest extends BaseTest {
         type = "cognitive";
     }
 
+    @Override
+    public int getProgress(){
+        int progress = 0;
+
+        if(context_survey!=null){
+            progress += context_survey.getProgress();
+        }
+        if(grid_test!=null){
+            progress += grid_test.getProgress();
+        }
+        if(price_test!=null){
+            progress += price_test.getProgress();
+        }
+        if(symbol_test!=null){
+            progress += symbol_test.getProgress();
+        }
+        progress /= 4;
+
+        return progress;
+    }
+
 }
