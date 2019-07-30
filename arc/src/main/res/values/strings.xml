@@ -362,7 +362,7 @@
 
     <string name="popup_tutorial_grid_recall">In this three part test, you\'ll be asked to &lt;b>recall the location&lt;/b> of these items.</string>
     <string name="popup_tutorial_rememberbox">The items will be placed in a grid of boxes. &lt;b>Remember which box each item is in.&lt;/b> You will have 3 seconds.</string>
-    <string name="popup_tutorial_ready">&lt;b>I\'m Ready.&lt;/b></string>
+    <string name="popup_tutorial_ready">&lt;b>I\'m Ready&lt;/b></string>
     <string name="popup_tutorial_part2">&lt;b>Great!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>
     <string name="popup_tutorial_tapf1">Tap this letter F.</string>
     <string name="popup_tutorial_tapf2">&lt;b>Perfect!&lt;/b> &lt;br /&gt;Now: Tap all the F\'s you can see as quickly as you can. You will have 3 seconds.</string>
