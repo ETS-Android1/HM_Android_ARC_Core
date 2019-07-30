@@ -184,7 +184,7 @@ public class SetupTemplate extends StandardTemplate {
         else if (authenticate && is2FA) {
             textViewProblems = new TextView(getContext());
             textViewProblems.setTypeface(Fonts.robotoMedium);
-            textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
+            textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
             textViewProblems.setText(ViewUtil.getString(R.string.login_problems_2FA));
             textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
             textViewProblems.setVisibility(View.VISIBLE);
