@@ -3,7 +3,6 @@ package com.healthymedium.arc.api;
 import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +20,8 @@ public class CallbackChain {
     Object persistentObject;
     Gson gson;
 
-    CallbackChain(){
-        gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .setLenient()
-                .create();
+    CallbackChain(Gson gson){
+        this.gson = gson;
     }
 
     public Object getPersistentObject(){

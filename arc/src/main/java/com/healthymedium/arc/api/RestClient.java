@@ -137,7 +137,7 @@ public class RestClient <Api>{
             return;
         }
 
-        CallbackChain chain = new CallbackChain();
+        CallbackChain chain = new CallbackChain(gson);
 
         Call<ResponseBody> call = getService().registerDevice(serialize(registration));
         chain.addLink(call);
