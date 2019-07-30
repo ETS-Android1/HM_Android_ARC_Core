@@ -138,7 +138,7 @@ public class RestClient <Api>{
             return;
         }
 
-        CallbackChain chain = new CallbackChain();
+        CallbackChain chain = new CallbackChain(gson);
 
         Call<ResponseBody> call = getService().registerDevice(serialize(registration));
         chain.addLink(call);
@@ -211,6 +211,96 @@ public class RestClient <Api>{
 
         JsonObject json = serialize(heartbeat);
         Call<ResponseBody> call = getService().sendHeartbeat(Device.getId(), json);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getStudyProgress(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getStudyProgress()");
+
+        Call<ResponseBody> call = getService().getStudyProgress(Device.getId());
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getCycleProgress(int index, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getCycleProgress()");
+
+        Call<ResponseBody> call = getService().getCycleProgress(Device.getId(),index);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getCurrentCycleProgress(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getCycleProgress()");
+
+        Call<ResponseBody> call = getService().getCycleProgress(Device.getId(),null);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getDayProgress(int cycleIndex, int dayIndex, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getDayProgress()");
+
+        Call<ResponseBody> call = getService().getDayProgress(Device.getId(),cycleIndex,dayIndex);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getCurrentDayProgress(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getDayProgress()");
+
+        Call<ResponseBody> call = getService().getDayProgress(Device.getId(),null,null);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getEarningOverview(int cycleIndex, int dayIndex, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningOverview()");
+
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId(),cycleIndex,dayIndex);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getEarningOverview(int cycleIndex, final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningOverview()");
+
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId(),cycleIndex,null);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getEarningOverview(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningOverview()");
+
+        Call<ResponseBody> call = getService().getEarningOverview(Device.getId(),null,null);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void getEarningDetails(final Listener listener ){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getEarningDetails()");
+
+        Call<ResponseBody> call = getService().getEarningDetails(Device.getId());
         call.enqueue(createCallback(listener));
     }
 
@@ -384,7 +474,7 @@ public class RestClient <Api>{
                     return;
                 }
 
-                RestResponse response = RestResponse.fromRetrofitResponse(retrofitResponse);
+                RestResponse response = RestResponse.fromRetrofitResponse(gson,retrofitResponse);
                 Log.i("RestClient",gson.toJson(response));
                 if(response.successful){
                     Log.i("RestClient","onSuccess");

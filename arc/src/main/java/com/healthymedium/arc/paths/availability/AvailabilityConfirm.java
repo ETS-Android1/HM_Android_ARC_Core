@@ -149,7 +149,7 @@ public class AvailabilityConfirm extends BaseFragment {
         textViewChangeTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Study.updateAvailability(8, 18);
+                Study.updateAvailabilityOnboarding(8, 18);
             }
         });
 

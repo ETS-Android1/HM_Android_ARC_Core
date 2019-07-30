@@ -3,7 +3,6 @@ package com.healthymedium.arc.api;
 import com.healthymedium.arc.utilities.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +20,8 @@ public class CallbackChain {
     Object persistentObject;
     Gson gson;
 
-    CallbackChain(){
-        gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .setLenient()
-                .create();
+    CallbackChain(Gson gson){
+        this.gson = gson;
     }
 
     public Object getPersistentObject(){
@@ -67,7 +63,7 @@ public class CallbackChain {
         @Override
         public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> retrofitResponse) {
             Log.i(tag,"parsing response");
-            RestResponse response = RestResponse.fromRetrofitResponse(retrofitResponse);
+            RestResponse response = RestResponse.fromRetrofitResponse(gson,retrofitResponse);
             Log.i(tag,gson.toJson(response));
 
             if(links.size()==0){

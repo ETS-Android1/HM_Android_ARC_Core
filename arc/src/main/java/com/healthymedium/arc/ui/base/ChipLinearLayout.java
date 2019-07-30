@@ -67,11 +67,11 @@ public class ChipLinearLayout extends LinearLayout {
     }
 
     public void setFillColor(@ColorRes int color) {
-        background.setFillColor(ViewUtil.getColor(color));
+        background.setFillColor(ViewUtil.getColor(getContext(),color));
     }
 
     public void setStrokeColor(@ColorRes int color) {
-        background.setStrokeColor(ViewUtil.getColor(color));
+        background.setStrokeColor(ViewUtil.getColor(getContext(),color));
     }
 
     public void setStrokeWidth(int dp) {
@@ -85,14 +85,14 @@ public class ChipLinearLayout extends LinearLayout {
     }
 
     public void setHorizontalGradient(@ColorRes int colorLeft, @ColorRes int colorRight) {
-        int left = ViewUtil.getColor(colorLeft);
-        int right = ViewUtil.getColor(colorRight);
+        int left = ViewUtil.getColor(getContext(),colorLeft);
+        int right = ViewUtil.getColor(getContext(),colorRight);
         background.setGradient(SimpleGradient.LINEAR_HORIZONTAL,left,right);
     }
 
     public void setVerticalGradient(@ColorRes int colorTop, @ColorRes int colorBottom) {
-        int top = ViewUtil.getColor(colorTop);
-        int bottom = ViewUtil.getColor(colorBottom);
+        int top = ViewUtil.getColor(getContext(),colorTop);
+        int bottom = ViewUtil.getColor(getContext(),colorBottom);
         background.setGradient(SimpleGradient.LINEAR_VERTICAL,top,bottom);
     }
 

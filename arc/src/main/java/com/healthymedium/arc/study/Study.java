@@ -361,6 +361,12 @@ public class Study{
         stateMachine.openNext();
     }
 
+    public static void updateAvailabilityOnboarding(int minWakeTime, int maxWakeTime)
+    {
+        stateMachine.setPathSetupAvailability(minWakeTime, maxWakeTime, false);
+        stateMachine.openNext();
+    }
+
     public static void adjustSchedule()
     {
         stateMachine.setPathAdjustSchedule();

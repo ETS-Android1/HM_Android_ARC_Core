@@ -454,7 +454,7 @@ public class StateMachine {
         fragments.add(new QuestionInteger(true, res.getString(R.string.wake_0_q3a), res.getString(R.string.wake_0_q3b),2));
         fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q1)," ",wakeTime));
         fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q2)," ",wakeTime));
-        fragments.add(new QuestionRating(true, res.getString(R.string.wake_1_q3), res.getString(R.string.wake_drag), res.getString(R.string.wake_poor), res.getString(R.string.wake_excellent)));
+        fragments.add(new QuestionRating(true, res.getString(R.string.wake_1_q3), "", res.getString(R.string.wake_poor), res.getString(R.string.wake_excellent)));
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
         enableTransition(segment,true);
