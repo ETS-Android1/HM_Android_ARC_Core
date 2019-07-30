@@ -1,6 +1,7 @@
 package com.healthymedium.arc.ui;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -24,5 +25,6 @@ public class Signature extends FrameLayout {
 
         mSignaturePad = findViewById(R.id.signature_pad);
         clear = findViewById(R.id.clear_signature);
+        clear.setText(Html.fromHtml("<u>Undo</u>"));
     }
 }
