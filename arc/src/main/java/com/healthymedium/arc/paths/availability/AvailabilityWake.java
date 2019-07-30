@@ -38,6 +38,7 @@ public class AvailabilityWake extends QuestionTime {
             @Override
             public void onClick(View view) {
                 clock.getRhythm("Monday").setWakeTime(timeInput.getTime());
+                dismissPointer();
                 Study.openNextFragment();
             }
         });
