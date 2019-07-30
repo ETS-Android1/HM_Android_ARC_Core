@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.ui.TimeInput;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.LocalTime;
@@ -44,10 +46,7 @@ public class QuestionTime extends QuestionTemplate {
         timeInput = new TimeInput(getContext());
         timeInput.setListener(new TimeInput.Listener() {
             public void onValidityChanged(boolean valid) {
-                if(pointer!=null){
-                    pointer.dismiss();
-                    pointer = null;
-                }
+                dismissPointer();
                 if(buttonNext.isEnabled() != valid){
                     enabled = valid;
                     buttonNext.setEnabled(enabled);
@@ -57,10 +56,7 @@ public class QuestionTime extends QuestionTemplate {
             @Override
             public void onTimeChanged() {
                 response_time = System.currentTimeMillis();
-                if(pointer!=null){
-                    pointer.dismiss();
-                    pointer = null;
-                }
+                dismissPointer();
             }
         });
 
@@ -70,8 +66,18 @@ public class QuestionTime extends QuestionTemplate {
                 if(response_time==0.0){
                     response_time = System.currentTimeMillis();
                 }
+                dismissPointer();
                 Study.getInstance().openNextFragment();
 
+            }
+        });
+
+        textViewHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismissPointer();
+                HelpScreen helpScreen = new HelpScreen();
+                NavigationManager.getInstance().open(helpScreen);
             }
         });
 
@@ -121,6 +127,13 @@ public class QuestionTime extends QuestionTemplate {
             return time.toString("h:mm a");
         }
         return null;
+    }
+
+    protected void dismissPointer() {
+        if(pointer!=null){
+            pointer.dismiss();
+            pointer = null;
+        }
     }
 
 }
