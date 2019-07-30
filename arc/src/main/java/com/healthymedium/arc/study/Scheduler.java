@@ -207,27 +207,30 @@ public class Scheduler {
 
     protected void scheduleTestsForDay(TestDay day, DateTime wake, DateTime bed) {
 
-        int secondsLeft = Seconds.secondsBetween(wake,bed).getSeconds();
-        int sevenHours = 7*60*60;
-
-        if(secondsLeft>sevenHours){
-            secondsLeft -= sevenHours;
-        }
-
         int numTests = day.getNumberOfTests();
-        int interval = (int)((float)secondsLeft/numTests);
-        if (interval <= 0) {
-            interval = 10;
+        int secondsLeft = Seconds.secondsBetween(wake,bed).getSeconds();
+        int minimumTimeForAllTests = (2*60*60)*(numTests-1);
+
+        secondsLeft -= minimumTimeForAllTests;
+        if(secondsLeft<0){
+            throw new UnsupportedOperationException("invalid scheduling scenario, contact technical support");
         }
+
+        int interval = (int)((float)secondsLeft/numTests);
 
         DateTime begin = wake;
 
         // Loop through all of the tests on this day
-        for (TestSession session : day.getTestSessions()) {
+        List<TestSession> sessions = day.getTestSessions();
+        int lastIndex = sessions.size()-1;
+
+        for (int i=0;i<sessions.size();i++) {
+            if(i==lastIndex){
+                interval = Seconds.secondsBetween(begin,bed).getSeconds();
+            }
             DateTime temp = begin.plusSeconds(random.nextInt(interval));
-            session.setPrescribedTime(temp);
+            sessions.get(i).setPrescribedTime(temp);
             begin = temp.plusHours(2);
-            numTests--;
         }
     }
 
