@@ -37,4 +37,8 @@ public class BaseTest {
         }
     }
 
+    public int getProgress(){
+        return 0;
+    }
+
 }

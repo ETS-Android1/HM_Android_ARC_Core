@@ -128,6 +128,7 @@ public class Participant {
 
         if(getCurrentTestDay().isOver()){
             state.currentTestDay++;
+            state.currentTestSession = 0;
         }
 
         if(getCurrentTestCycle().isOver()){

@@ -136,4 +136,13 @@ public class TestCycle {
         return false;
     }
 
+    public int getProgress() {
+        float progress = 0;
+        int numEntries = days.size();
+        for(TestDay day : days){
+            progress += ((float)day.getProgress()/numEntries);
+        }
+        return (int) progress;
+    }
+
 }

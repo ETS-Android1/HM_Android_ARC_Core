@@ -433,4 +433,23 @@
     <string name="faq_earnings_a3"></string>
     <string name="faq_earnings_a4"></string>
     <string name="faq_earnings_a5"></string>
+
+    <string name="progress_daily_header">Today\'s Sessions</string>
+    <string name="progess_dailystatus">&lt;b>{#}&lt;/b> Complete</string>
+
+    <string name="progress_weekly_header">This Week</string>
+    <string name="progess_weeklystatus">Day &lt;b>{#}&lt;/b> of &lt;b>7&lt;/b></string>
+    <string name="progress_startdate">&lt;b>Start Date:&lt;/b></string>
+    <string name="progress_startdate_date">{DATE}</string>
+    <string name="progress_enddate">&lt;b>End Date:&lt;/b></string>
+    <string name="progress_enddate_date">{DATE}</string>
+
+    <string name="progress_study_header">This Study</string>
+    <string name="progress_studystatus">Week &lt;b>{#}&lt;/b> of &lt;b>12&lt;/b></string>
+    <string name="progress_joindate">&lt;b>Joined Date:&lt;/b></string>
+    <string name="progress_joindate_date">{DATE}</string>
+    <string name="progress_finishdate">&lt;b>Estimated Finish Date*:&lt;/b></string>
+    <string name="progress_finishdate_date">{DATE}</string>
+    <string name="progress_timebtwtesting">&lt;b>Time Between Testing Weeks:&lt;/b></string>
+    <string name="progress_timebtwtesting_unit">{#} {UNIT}</string>
 </resources>

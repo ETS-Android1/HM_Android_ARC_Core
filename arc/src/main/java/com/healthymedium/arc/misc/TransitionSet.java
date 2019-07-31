@@ -18,7 +18,7 @@ public class TransitionSet {
 
 
     public static TransitionSet getFadingDefault(){
-        return getSlidingDefault(true);
+        return getFadingDefault(true);
     }
 
     public static TransitionSet getFadingDefault(boolean animateEntry){

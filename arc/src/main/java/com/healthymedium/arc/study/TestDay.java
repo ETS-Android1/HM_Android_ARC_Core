@@ -83,9 +83,13 @@ public class TestDay {
         return scheduledTime.isBeforeNow();
     }
 
-    // todo: needs to be implemented
     public int getProgress() {
-        return 33;
+        float progress = 0;
+        int numEntries = sessions.size();
+        for(TestSession session : sessions){
+            progress += ((float)session.getProgress()/numEntries);
+        }
+        return (int) progress;
     }
 
 }
