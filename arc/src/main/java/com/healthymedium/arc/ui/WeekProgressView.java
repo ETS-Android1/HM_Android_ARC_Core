@@ -197,7 +197,7 @@ public class WeekProgressView extends RelativeLayout {
         }
 
         Calendar calendar = Calendar.getInstance();
-        currentDay = calendar.get(Calendar.DAY_OF_WEEK) - dayOffset;
+        currentDay = calendar.get(Calendar.DAY_OF_WEEK) - dayOffset - 1;
     }
 
     public String[] getDays() {
