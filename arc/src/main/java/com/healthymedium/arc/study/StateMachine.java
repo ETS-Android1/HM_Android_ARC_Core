@@ -2,9 +2,12 @@ package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
 
+import com.healthymedium.arc.api.tests.CognitiveTest;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
+import com.healthymedium.arc.paths.informative.DayProgressScreen;
+import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.TestProgress;
@@ -739,6 +742,18 @@ public class StateMachine {
         addSchedulePicker();
     }
 
+    public void addPostTestProgressAndEarnings(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new DayProgressScreen());
+//        EarningsScreen earningsScreen = new EarningsScreen();
+//        earningsScreen.setTransitionSet(TransitionSet.getSlidingDefault());
+//        fragments.add(earningsScreen);
+
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
+    }
+
     // -----------------------
 
     public String getLifecycleName(int lifecycle){
@@ -763,5 +778,11 @@ public class StateMachine {
 
     }
 
+    public void loadCognitiveTestFromCache(){
+        Log.i("StateMachine", "loadCognitiveTestFromCache");
+        CognitiveTest cognitiveTest = new CognitiveTest();
+        cognitiveTest.load(cache.data);
+        Study.getCurrentTestSession().addTestData(cognitiveTest);
+    }
 
 }

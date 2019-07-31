@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:alpha="0"
         tools:alpha="1.0f"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/confetti"/>
 
     <ScrollView

@@ -13,21 +13,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
+import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.base.RoundedFrameLayout;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class DayProgressScreen extends BaseFragment {
@@ -41,6 +39,7 @@ public class DayProgressScreen extends BaseFragment {
 
     public DayProgressScreen() {
         allowBackPress(false);
+        setTransitionSet(TransitionSet.getFadingDefault());
     }
 
     @Nullable
@@ -59,27 +58,27 @@ public class DayProgressScreen extends BaseFragment {
 
         // display progress views ------------------------------------------------------------------
         Participant participant = Study.getParticipant();
+        ParticipantState state = participant.getState();
+
         TestDay testDay = participant.getCurrentTestDay();
 
 
-        List<TestSession> sessions = testDay.getTestSessions();
+        int sessionIndex = state.currentTestSession-1;
+        int dayIndex = state.currentTestDay;
+        int cycleIndex = state.currentTestCycle;
 
-        int sessionsFinished = testDay.getNumberOfTestsFinished();
-        int latestIndex = -1;
-
-
-        // find the last test to be competed
-        DateTime latestComplete = new DateTime();
-        for(int i=0;i<sessions.size();i++){
-            TestSession session = sessions.get(i);
-            if(session.wasFinished()){
-                DateTime completeTime = session.getCompletedTime();
-                if(completeTime.isAfter(latestComplete)){
-                    latestComplete = completeTime;
-                    latestIndex = i;
-                }
+        if(sessionIndex<0) {
+            dayIndex--;
+            if (dayIndex < 0) {
+                cycleIndex--;
+                dayIndex = state.testCycles.get(cycleIndex).getNumberOfTestDays() - 1;
             }
+            testDay = state.testCycles.get(cycleIndex).getTestDay(dayIndex);
+            sessionIndex = testDay.getNumberOfTests() - 1;
         }
+
+        List<TestSession> sessions = testDay.getTestSessions();
+        int sessionsFinished = testDay.getNumberOfTestsFinished();
 
         // add progress views
         for(int i=0;i<sessions.size();i++){
@@ -91,7 +90,7 @@ public class DayProgressScreen extends BaseFragment {
             progressView.setShadowColor(R.color.secondary);
             progressView.setSweepColor(R.color.secondaryAccent);
             progressView.setMargin(margin,0,margin,0);
-            if(i!=latestIndex) {
+            if(i!=sessionIndex) {
                 progressView.setProgress(sessions.get(i).getProgress(), false);
             } else {
                 latestView = progressView;

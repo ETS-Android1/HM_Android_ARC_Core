@@ -135,7 +135,7 @@ public class StateMachineAlpha extends StateMachine {
         if (participant.getCurrentTestSession().getExpirationTime().isBeforeNow()) {
             Log.i("StateMachine", "indexed test has expired, marking it as such");
             participant.getCurrentTestSession().markMissed();
-            loadCognitiveTestFromCache();
+            loadTestDataFromCache();
             cache.data.clear();
 
             Study.getRestClient().submitTest(participant.getCurrentTestSession());
@@ -269,48 +269,28 @@ public class StateMachineAlpha extends StateMachine {
                 }
                 break;
             case LIFECYCLE_BASELINE:
-                switch (state.currentPath){
-                    case PATH_TEST_NONE:
-                        break;
-                    default:
-                        Log.i("StateMachine", "gather data from test");
-                        // set up a loading dialog in case this takes a bit
-                        LoadingDialog dialog = new LoadingDialog();
-                        dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
-
-                        Study.getCurrentTestSession().markCompleted();
-                        if(Study.getCurrentTestDay().getNumberOfTestsAvailableNow()==0){
-                            setTestCompleteFlag(true);
-                        }
-                        loadCognitiveTestFromCache();
-                        Study.getRestClient().submitTest(Study.getCurrentTestSession());
-                        Study.getParticipant().moveOnToNextTestSession(true);
-                        save();
-
-                        dialog.dismiss();
-                        break;
-                }
-                break;
             case LIFECYCLE_ARC:
                 switch (state.currentPath){
                     case PATH_TEST_NONE:
                         break;
                     default:
-                        Log.i("StateMachine", "gather data from test");
+                        Log.i(tag, "gather data from test");
                         // set up a loading dialog in case this takes a bit
                         LoadingDialog dialog = new LoadingDialog();
                         dialog.show(NavigationManager.getInstance().getFragmentManager(),"LoadingDialog");
 
-                        Study.getCurrentTestSession().markCompleted();
+                        TestSession currentTest = Study.getCurrentTestSession();
+                        currentTest.markCompleted();
                         if(Study.getCurrentTestDay().getNumberOfTestsAvailableNow()==0){
                             setTestCompleteFlag(true);
                         }
-                        loadCognitiveTestFromCache();
+                        loadTestDataFromCache();
                         Study.getRestClient().submitTest(Study.getCurrentTestSession());
                         Study.getParticipant().moveOnToNextTestSession(true);
                         save();
 
                         dialog.dismiss();
+
                         break;
                 }
                 break;
@@ -320,15 +300,6 @@ public class StateMachineAlpha extends StateMachine {
                 break;
         }
         currentlyInTestPath = false;
-    }
-
-    // ---------------------------------------------------------------------------------------------
-
-    public void loadCognitiveTestFromCache(){
-        Log.i("StateMachine", "loadCognitiveTestFromCache");
-        CognitiveTest cognitiveTest = new CognitiveTest();
-        cognitiveTest.load(cache.data);
-        Study.getCurrentTestSession().addTestData(cognitiveTest);
     }
 
     // state machine helpers ---------------------------------------------------------------------
