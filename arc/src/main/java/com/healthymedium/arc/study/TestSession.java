@@ -79,7 +79,8 @@ public class TestSession {
         for(Integer percentage : testPercentages){
             progress += ((float)percentage/numEntries);
         }
-        return (int) progress;
+        return (progress>0) ? 100:0;
+//        return (int) progress;
     }
 
     public DateTime getExpirationTime() {

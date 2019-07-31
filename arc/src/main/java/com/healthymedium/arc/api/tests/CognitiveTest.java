@@ -23,7 +23,16 @@ public class CognitiveTest extends BaseTest {
     @Override
     public int getProgress(){
         int progress = 0;
+        int divisor = 4;
 
+        if(wake_survey!=null){
+            progress += wake_survey.getProgress();
+            divisor++;
+        }
+        if(chronotype_survey!=null){
+            progress += chronotype_survey.getProgress();
+            divisor++;
+        }
         if(context_survey!=null){
             progress += context_survey.getProgress();
         }
@@ -36,7 +45,7 @@ public class CognitiveTest extends BaseTest {
         if(symbol_test!=null){
             progress += symbol_test.getProgress();
         }
-        progress /= 4;
+        progress /= divisor;
 
         return progress;
     }
