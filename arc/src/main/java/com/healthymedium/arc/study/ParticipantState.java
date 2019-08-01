@@ -16,6 +16,8 @@ public class ParticipantState {
     public int currentTestCycle;
     public int currentTestDay;
 
+    public Earnings earnings;
+
     public CircadianClock circadianClock;
     public boolean hasValidSchedule;
     public boolean isStudyRunning;
@@ -27,6 +29,7 @@ public class ParticipantState {
         circadianClock = new CircadianClock();
         lastPauseTime = new DateTime();
         testCycles = new ArrayList<>();
+        earnings = new Earnings();
     }
 
 }

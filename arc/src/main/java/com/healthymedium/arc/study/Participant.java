@@ -183,4 +183,8 @@ public class Participant {
         }
     }
 
+    public Earnings getEarnings(){
+        return state.earnings;
+    }
+
 }

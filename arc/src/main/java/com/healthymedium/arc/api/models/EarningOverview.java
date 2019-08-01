@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class EarningsOverview {
+public class EarningOverview {
 
     String total_earnings;
     Integer cycle;
