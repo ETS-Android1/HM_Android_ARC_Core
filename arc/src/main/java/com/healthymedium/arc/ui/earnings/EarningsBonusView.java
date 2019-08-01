@@ -1,4 +1,4 @@
-package com.healthymedium.arc.ui;
+package com.healthymedium.arc.ui.earnings;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,6 +19,9 @@ public class EarningsBonusView extends RoundedLinearLayout {
     TextView textViewCenter;
 
     boolean unearned;
+
+    int defaultWidth = ViewUtil.dpToPx(280);
+    int defaultHeight = ViewUtil.dpToPx(48);
 
     public EarningsBonusView(Context context) {
         super(context);
@@ -147,6 +150,12 @@ public class EarningsBonusView extends RoundedLinearLayout {
         applyCenterTextFontStyle();
     }
 
+    public void setTextCenter(String text) {
+        textViewCenter.setText(text);
+        applyCenterTextFontStyle();
+    }
+
+
     public boolean isUnearned() {
         return unearned;
     }
@@ -156,5 +165,33 @@ public class EarningsBonusView extends RoundedLinearLayout {
         if(unearned) {
             applyUnearnedStyle();
         }
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+
+        int width;
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        if (widthMode == MeasureSpec.EXACTLY) {
+            width = widthSize;
+        } else if (widthMode == MeasureSpec.AT_MOST) {
+            width = Math.min(defaultWidth, widthSize);
+        } else {
+            width = defaultWidth;
+        }
+
+        int height;
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        if (heightMode == MeasureSpec.EXACTLY) {
+            height = heightSize;
+        } else if (heightMode == MeasureSpec.AT_MOST) {
+            height = Math.min(defaultHeight, heightSize);
+        } else {
+            height = defaultHeight;
+        }
+        setMeasuredDimension(width,height);
     }
 }
