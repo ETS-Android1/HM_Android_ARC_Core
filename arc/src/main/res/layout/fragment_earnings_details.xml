@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/secondary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="32dp"
+            android:text="Earnings Details"
+            android:textColor="@color/white"
+            android:textSize="26dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewSessionDivider"
+            android:layout_width="50dp"
+            android:layout_height="2dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="19dp"
+            android:layout_weight="1"
+            android:background="@color/yellow" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="@string/earnings_studytotal"
+                android:textColor="@color/tealSubheader"
+                android:textSize="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="32dp"
+                android:text="$0.00"
+                android:textColor="@color/white"
+                android:textSize="32dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginRight="32dp"
+                android:text="This Week"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="32dp"
+                android:text="Tue, March 5 - Mon, March 11"
+                android:textColor="@color/tealSubheader"
+                android:textSize="17dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="Complete Test Session"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$0.50 (28 times)"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$14.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="4 Out Of 4 Goal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$1.00 (7 times)"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$7.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="2-A-Day Goal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$6.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$6.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="21 Sessions Goal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$5.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$5.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="32dp"
+                    android:text="Cycle Total"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$32.00"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Completed Testing Cycle"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="32dp"
+                android:text="Tue, March 5 - Mon, March 11"
+                android:textColor="@color/tealSubheader"
+                android:textSize="17dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="Complete Test Session"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$0.50 (28 times)"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$14.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="4 Out Of 4 Goal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$1.00 (1 time)"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$1.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="2-A-Day Goal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$6.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$6.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="21 Sessions Goal"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$5.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$5.00"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="32dp"
+                    android:text="Cycle Total"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$22.50"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Completed Testing Cycle"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="32dp"
+                android:text="Tue, March 5 - Mon, March 11"
+                android:textColor="@color/tealSubheader"
+                android:textSize="17dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/tealSubheader">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="32dp"
+                android:text="Complete Test Session"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$0.50 (19 times)"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$9.50"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="32dp"
+                    android:text="Cycle Total"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="32dp"
+                    android:text="$9.50"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="22dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.healthymedium.arc.ui.Button
+            android:id="@+id/viewFaqButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/button_viewfaq"
+            app:buttonTheme="light">
+
+        </com.healthymedium.arc.ui.Button>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -11,15 +11,19 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class EarningsScreen extends BaseFragment {
 
     TextView earningsBody1;
+    Button viewDetailsButton;
     TextView bonusBody;
     TextView fourOfFourBody;
     TextView twoADayBody;
     TextView twentyOneTestsBody;
+    Button viewFaqButton;
 
     public EarningsScreen() {
         allowBackPress(false);
@@ -33,6 +37,15 @@ public class EarningsScreen extends BaseFragment {
         earningsBody1 = view.findViewById(R.id.earningsBody1);
         earningsBody1.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_body1)));
 
+        viewDetailsButton = view.findViewById(R.id.viewDetailsButton);
+        viewDetailsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EarningsDetailsScreen earningsDetailsScreen = new EarningsDetailsScreen();
+                NavigationManager.getInstance().open(earningsDetailsScreen);
+            }
+        });
+
         bonusBody = view.findViewById(R.id.bonusBody);
         bonusBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_body)));
 
@@ -44,6 +57,15 @@ public class EarningsScreen extends BaseFragment {
 
         twentyOneTestsBody = view.findViewById(R.id.twentyOneTestsBody);
         twentyOneTestsBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_21tests_body)));
+
+        viewFaqButton = view.findViewById(R.id.viewFaqButton);
+        viewFaqButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FAQScreen faqScreen = new FAQScreen();
+                NavigationManager.getInstance().open(faqScreen);
+            }
+        });
 
         return view;
     }
