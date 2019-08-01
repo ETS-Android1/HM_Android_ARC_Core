@@ -466,6 +466,12 @@
     <string name="earnings_2aday_body">Complete &lt;b>at least 2&lt;/b> test sessions every day of the week to earn &lt;b>$6.00&lt;/b>.</string>
     <string name="earnings_21tests_header">21 Tests</string>
     <string name="earnings_21tests_body">Earn &lt;b>$5.00&lt;/b> when you complete &lt;b>21 tests&lt;/b>.</string>
-    
+
+    <string name="earnings_details_header">Earnings Details</string>
+    <string name="earnings_details_subheader1">This Week</string>
+    <string name="earnings_details_complete_test_session">Complete Test Session</string>
+    <string name="earnings_details_subheader2">Completed Testing Cycle</string>
+    <string name="earnings_details_cycletotal">Cycle Total</string>
+
     <string name="footnote_symbol">*</string>
 </resources>

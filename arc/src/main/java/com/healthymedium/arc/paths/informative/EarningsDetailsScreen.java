@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.utilities.NavigationManager;
 
 public class EarningsDetailsScreen extends BaseFragment {
+
+    Button viewFaqButton;
 
     public EarningsDetailsScreen() {
         allowBackPress(false);
@@ -21,6 +25,15 @@ public class EarningsDetailsScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_earnings_details, container, false);
 
+        viewFaqButton = view.findViewById(R.id.viewFaqButton);
+        viewFaqButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FAQScreen faqScreen = new FAQScreen();
+                NavigationManager.getInstance().open(faqScreen);
+            }
+        });
+
         return view;
     }
 
@@ -29,5 +42,6 @@ public class EarningsDetailsScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
+        getMainActivity().showNavigationBar();
     }
 }
