@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/sessions"
             android:orientation="vertical"
-            android:background="@color/primary">
+            android:background="@color/progressWeekBackground">
 
             <TextView
                 android:id="@+id/textViewWeekHeader"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
                 android:text="@string/progress_weekly_header"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="26dp"
                 android:textStyle="bold" />
 
@@ -127,21 +127,18 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Day 6 of 7"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="26dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.healthymedium.arc.ui.WeekProgressView
+                android:id="@+id/weekProgressView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="32dp"
-                android:text="Day progress bar here"
-                android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:layout_marginRight="32dp">
+
+            </com.healthymedium.arc.ui.WeekProgressView>
 
             <TextView
                 android:id="@+id/startDate"
@@ -164,7 +161,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Sunday, March 5"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="17dp"
                 />
 
@@ -190,7 +187,7 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="26dp"
                 android:text="Saturday, March 11"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="17dp"
                 />
 
@@ -226,11 +223,35 @@
                 android:layout_weight="1"
                 android:background="@color/yellow" />
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/studyStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:textSize="22dp"
+                    android:textColor="@color/white"
+                    android:text="Week 4 of 12"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/studyStatus"
+                    android:text="*"
+                    android:textColor="@color/yellow"/>
+
+            </RelativeLayout>
+
             <com.healthymedium.arc.ui.StudyProgressView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp">
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="5dp">
 
             </com.healthymedium.arc.ui.StudyProgressView>
 
@@ -259,18 +280,29 @@
                 android:textSize="17dp"
                 />
 
-            <TextView
-                android:id="@+id/finishDate"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="32dp"
-                android:text="Estimated Finish Date"
-                android:textColor="@color/tealSubheader"
-                android:textSize="17dp"
-                />
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/finishDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:text="Estimated Finish Date"
+                    android:textColor="@color/tealSubheader"
+                    android:textSize="17dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/finishDate"
+                    android:text="*"
+                    android:textColor="@color/yellow"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/finishDate_date"
@@ -309,31 +341,47 @@
                 android:textSize="17dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.healthymedium.arc.ui.Button
+                android:id="@+id/viewFaqButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="29dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
-                android:text="View FAQ Button here"
-                android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold"
-                />
+                android:text="@string/button_viewfaq"
+                app:buttonTheme="light">
 
-            <TextView
-                android:layout_width="wrap_content"
+            </com.healthymedium.arc.ui.Button>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="26dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginBottom="26dp"
-                android:text="* End Date and number of testing weeks is dependent upon some stuff for placeholder like if you reschedule a week or get moved to the drug trial and may change."
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                />
+                android:layout_marginBottom="30dp">
+
+                <TextView
+                    android:id="@+id/asterisk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginLeft="32dp"
+                    android:text="*"
+                    android:textColor="@color/yellow"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/asterisk"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="26dp"
+                    android:text="End Date and number of testing weeks is dependent upon some stuff for placeholder like if you reschedule a week or get moved to the drug trial and may change."
+                    android:textColor="@color/white"
+                    android:textSize="17dp"
+                    />
+
+            </RelativeLayout>
 
         </LinearLayout>
 

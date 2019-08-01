@@ -34,6 +34,7 @@
     <color name="unearnedGray">#b3b3b3</color>
     <color name="weekProgressBorder">#979797</color>
     <color name="weekProgressFill">#005781</color>
+    <color name="progressWeekBackground">#e1f4f4</color>
 
     <!-- these are discrete colors, they should be close no matter the application -->
     <color name="transparent">#00000001</color>
