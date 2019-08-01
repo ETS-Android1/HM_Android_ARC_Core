@@ -305,6 +305,7 @@
 
 
     <string name="button_viewfaq">VIEW FAQ</string>
+    <string name="button_viewdetails">VIEW DETAILS</string>
 
     <string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
     
@@ -454,5 +455,17 @@
     <string name="progress_timebtwtesting">&lt;b>Time Between Testing Weeks:&lt;/b></string>
     <string name="progress_timebtwtesting_unit">{#} {UNIT}</string>
 
+    <string name="earnings_body1">You will receive an &lt;b>Amazon Gift Card&lt;/b> for the earned amount after each week of testing.</string>
+    <string name="earnings_weektotal">This Week</string>
+    <string name="earnings_studytotal">Study Total</string>
+    <string name="earnings_bonus_header">Bonus Goals</string>
+    <string name="earnings_bonus_body">Complete the following testing goals to &lt;b>earn bonuses&lt;/b>.</string>
+    <string name="earnings_4of4_header">4 Out Of 4</string>
+    <string name="earnings_4of4_body">Complete &lt;b>all 4&lt;/b> test sessions for the day to earn &lt;b>$1.00&lt;/b>.</string>
+    <string name="earnings_2aday_header">2-A-Day</string>
+    <string name="earnings_2aday_body">Complete &lt;b>at least 2&lt;/b> test sessions every day of the week to earn &lt;b>$6.00&lt;/b>.</string>
+    <string name="earnings_21tests_header">21 Tests</string>
+    <string name="earnings_21tests_body">Earn &lt;b>$5.00&lt;/b> when you complete &lt;b>21 tests&lt;/b>.</string>
+    
     <string name="footnote_symbol">*</string>
 </resources>

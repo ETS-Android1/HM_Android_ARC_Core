@@ -41,13 +41,14 @@
                 android:background="@color/yellow" />
 
             <TextView
+                android:id="@+id/earningsBody1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="32dp"
-                android:text="You will receive an Amazon Gift Card for the earned amount after each week of testing."
+                android:text="@string/earnings_body1"
                 android:textColor="@color/white"
                 android:textSize="17dp" />
 
@@ -68,7 +69,7 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginRight="32dp"
-                        android:text="This Week"
+                        android:text="@string/earnings_weektotal"
                         android:textColor="@color/tealSubheader"
                         android:textSize="17dp" />
 
@@ -97,7 +98,7 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginRight="32dp"
-                        android:text="This Week"
+                        android:text="@string/earnings_studytotal"
                         android:textColor="@color/tealSubheader"
                         android:textSize="17dp" />
 
@@ -124,7 +125,7 @@
                 android:layout_marginBottom="24dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
-                android:text="VIEW DETAILS"
+                android:text="@string/button_viewdetails"
                 app:buttonTheme="light">
 
             </com.healthymedium.arc.ui.Button>
@@ -144,7 +145,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
-                android:text="Bonus Goals"
+                android:text="@string/earnings_bonus_header"
                 android:textColor="@color/black"
                 android:textSize="26dp"
                 android:textStyle="bold" />
@@ -158,6 +159,7 @@
                 android:background="@color/yellow" />
 
             <TextView
+                android:id="@+id/bonusBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -165,7 +167,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:layout_marginRight="32dp"
-                android:text="Complete the following testing goals to earn bonuses."
+                android:text="@string/earnings_bonus_body"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
 
@@ -191,9 +193,10 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="18dp"
-                    android:text="4 Out Of 4"
+                    android:text="@string/earnings_4of4_header"
                     android:textSize="20dp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     />
 
             </LinearLayout>
@@ -205,13 +208,14 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:id="@+id/fourOfFourBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Complete all 4 test sessions for the day to earn $1.00."
+                    android:text="@string/earnings_4of4_body"
                     android:textSize="17dp"
                     android:textColor="@color/black"
                     />
@@ -264,9 +268,10 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="18dp"
-                    android:text="2-A-Day"
+                    android:text="@string/earnings_2aday_header"
                     android:textSize="20dp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     />
 
             </LinearLayout>
@@ -278,13 +283,14 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:id="@+id/twoADayBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Complete at least 2 test sessions every day of the week to earn $6.00."
+                    android:text="@string/earnings_2aday_body"
                     android:textSize="17dp"
                     android:textColor="@color/black"
                     />
@@ -337,9 +343,10 @@
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="18dp"
-                    android:text="21 Sessions"
+                    android:text="@string/earnings_21tests_header"
                     android:textSize="20dp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     />
 
             </LinearLayout>
@@ -351,13 +358,14 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:id="@+id/twentyOneTestsBody"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="14dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="Earn $5.00 when you complete at least 21 test sessions in a week."
+                    android:text="@string/earnings_21tests_body"
                     android:textSize="17dp"
                     android:textColor="@color/black"
                     />
@@ -395,9 +403,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
+            android:layout_marginBottom="24dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:text="VIEW FAQ"
+            android:text="@string/button_viewfaq"
             app:buttonTheme="light">
 
         </com.healthymedium.arc.ui.Button>
