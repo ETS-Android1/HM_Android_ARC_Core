@@ -1,7 +1,6 @@
 package com.healthymedium.arc.utilities;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -9,10 +8,9 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import android.util.TypedValue;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
-import android.view.ViewConfiguration;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
@@ -100,10 +98,25 @@ public class ViewUtil {
     private static int getNavBarHeight(Context context) {
         int result = 0;
 
-        boolean hasMenuKey = ViewConfiguration.get(context).hasPermanentMenuKey();
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+
+        DisplayMetrics realMetrics = new DisplayMetrics();
+        display.getRealMetrics(realMetrics);
+
+        int realHeight = realMetrics.heightPixels;
+        int realWidth = realMetrics.widthPixels;
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        boolean hasSoftKeys = (realWidth>displayWidth) || (realHeight>displayHeight);
 
         // if the device has a navigation bar
-        if(!hasMenuKey) {
+        if(hasSoftKeys) {
             Resources resources = context.getResources();
             int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
             if (resourceId > 0) {
