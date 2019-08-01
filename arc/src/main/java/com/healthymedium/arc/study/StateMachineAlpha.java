@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
 
+import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.paths.questions.QuestionPolar;
 import com.healthymedium.arc.paths.questions.QuestionPolarAlt;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
@@ -138,7 +139,9 @@ public class StateMachineAlpha extends StateMachine {
             loadTestDataFromCache();
             cache.data.clear();
 
-            Study.getRestClient().submitTest(participant.getCurrentTestSession());
+            RestClient client = Study.getRestClient();
+            client.setUploadListener(earningsListener);
+            client.submitTest(participant.getCurrentTestSession());
             participant.moveOnToNextTestSession(true);
             save();
             decidePath();
@@ -206,7 +209,10 @@ public class StateMachineAlpha extends StateMachine {
         if (participant.getCurrentTestSession().getExpirationTime().isBeforeNow()) {
             Log.i("StateMachine", "indexed test has expired, marking it as such");
             participant.getCurrentTestSession().markMissed();
-            Study.getRestClient().submitTest(participant.getCurrentTestSession());
+
+            RestClient client = Study.getRestClient();
+            client.setUploadListener(earningsListener);
+            client.submitTest(participant.getCurrentTestSession());
             participant.moveOnToNextTestSession(true);
             participant.save();
             decidePath();
@@ -285,7 +291,10 @@ public class StateMachineAlpha extends StateMachine {
                             setTestCompleteFlag(true);
                         }
                         loadTestDataFromCache();
-                        Study.getRestClient().submitTest(Study.getCurrentTestSession());
+
+                        RestClient client = Study.getRestClient();
+                        client.setUploadListener(earningsListener);
+                        client.submitTest(Study.getCurrentTestSession());
                         Study.getParticipant().moveOnToNextTestSession(true);
                         save();
 

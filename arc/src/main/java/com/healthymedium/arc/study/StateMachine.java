@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
 
+import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.tests.CognitiveTest;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
@@ -157,7 +158,9 @@ public class StateMachine {
         cache.segments.clear();
         cache.data.clear();
 
-        Study.getRestClient().submitTest(participant.getCurrentTestSession());
+        RestClient client = Study.getRestClient();
+        client.setUploadListener(earningsListener);
+        client.submitTest(participant.getCurrentTestSession());
         participant.moveOnToNextTestSession(true);
         save();
     }
@@ -784,5 +787,23 @@ public class StateMachine {
         cognitiveTest.load(cache.data);
         Study.getCurrentTestSession().addTestData(cognitiveTest);
     }
+
+    protected RestClient.UploadListener earningsListener = new RestClient.UploadListener() {
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onStop() {
+            RestClient client = Study.getRestClient();
+            client.removeUploadListener();
+            if (client.isUploadQueueEmpty()) {
+                Earnings earnings = Study.getParticipant().getEarnings();
+                earnings.refreshOverview(null);
+                earnings.refreshDetails(null);
+            }
+        }
+    };
 
 }
