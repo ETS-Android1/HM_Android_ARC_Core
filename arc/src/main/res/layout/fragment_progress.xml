@@ -241,7 +241,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/studyStatus"
-                    android:text="*"
+                    android:text="@string/footnote_symbol"
                     android:textColor="@color/yellow"/>
 
             </RelativeLayout>
@@ -299,7 +299,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/finishDate"
-                    android:text="*"
+                    android:text="@string/footnote_symbol"
                     android:textColor="@color/yellow"/>
 
             </RelativeLayout>
@@ -364,7 +364,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
                     android:layout_marginLeft="32dp"
-                    android:text="*"
+                    android:text="@string/footnote_symbol"
                     android:textColor="@color/yellow"/>
 
                 <TextView

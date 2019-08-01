@@ -449,8 +449,10 @@
     <string name="progress_studystatus">Week &lt;b>{#}&lt;/b> of &lt;b>12&lt;/b></string>
     <string name="progress_joindate">&lt;b>Joined Date:&lt;/b></string>
     <string name="progress_joindate_date">{DATE}</string>
-    <string name="progress_finishdate">&lt;b>Estimated Finish Date*:&lt;/b></string>
+    <string name="progress_finishdate">&lt;b>Estimated Finish Date&lt;/b></string>
     <string name="progress_finishdate_date">{DATE}</string>
     <string name="progress_timebtwtesting">&lt;b>Time Between Testing Weeks:&lt;/b></string>
     <string name="progress_timebtwtesting_unit">{#} {UNIT}</string>
+
+    <string name="footnote_symbol">*</string>
 </resources>
