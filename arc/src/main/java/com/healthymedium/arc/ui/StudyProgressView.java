@@ -9,11 +9,15 @@ import android.widget.LinearLayout;
 import com.healthymedium.arc.ui.base.RoundedDrawable;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
+import com.healthymedium.arc.study.Participant;
+import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.TestCycle;
+
 
 public class StudyProgressView extends LinearLayout {
 
-    int currentWeek;
-    int weekCount;
+    int currentWeek = 4;
+    int weekCount = 12;
 
     int dp4;
     int dp8;
@@ -41,13 +45,13 @@ public class StudyProgressView extends LinearLayout {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
 
-        // init dummy values
-        currentWeek = 4;
-        weekCount = 12;
-
         if(!isInEditMode()){
             // Todo: actually get data
         }
+
+        Participant participant = Study.getParticipant();
+        TestCycle cycle = participant.getCurrentTestCycle();
+        int currentWeek = cycle.getId()+1; // Cycles are 0-indexed
 
         int dp1 = ViewUtil.dpToPx(1);
         int dp2 = ViewUtil.dpToPx(2);
