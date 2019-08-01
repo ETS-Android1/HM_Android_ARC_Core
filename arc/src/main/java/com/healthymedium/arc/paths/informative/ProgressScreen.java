@@ -142,5 +142,6 @@ public class ProgressScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
+        getMainActivity().showNavigationBar();
     }
 }
