@@ -127,41 +127,6 @@ public class SymbolTutorial extends Tutorial {
         finalTilesOutline = new HintHighlighter(getActivity());
         finalTilesPulsate = new HintHighlighter(getActivity());
 
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                handlerOutline.removeCallbacks(runnableTileOutline);
-                handlerPulsate.removeCallbacks(runnableTilePulsate);
-                handlerCoachmark.removeCallbacks(runnableCoachmark);
-
-                welcomeHighlight.dismiss();
-                welcomeHint.dismiss();
-
-                quitHighlight.dismiss();
-                quitHint.dismiss();
-
-                buttonTop2Highlight.dismiss();
-                buttonTop2Hint.dismiss();
-
-                topSymbolsHighlight.dismiss();
-                topSymbolsHint.dismiss();
-
-                bottomSymbolsHighlight.dismiss();
-                bottomSymbolsHint.dismiss();
-
-                initialTilesOutline.dismiss();
-                initialTilesPulsate.dismiss();
-
-                secondTilesOutline.dismiss();
-                secondTilesPulsate.dismiss();
-
-                finalTilesOutline.dismiss();
-                finalTilesPulsate.dismiss();
-
-                exit();
-            }
-        });
-
         progressBar.animate()
                 .setStartDelay(800)
                 .setDuration(400)
@@ -196,6 +161,46 @@ public class SymbolTutorial extends Tutorial {
                 }
             },1200);
         }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        handlerOutline.removeCallbacks(runnableTileOutline);
+                        handlerPulsate.removeCallbacks(runnableTilePulsate);
+                        handlerCoachmark.removeCallbacks(runnableCoachmark);
+
+                        welcomeHighlight.dismiss();
+                        welcomeHint.dismiss();
+
+                        quitHighlight.dismiss();
+                        quitHint.dismiss();
+
+                        buttonTop2Highlight.dismiss();
+                        buttonTop2Hint.dismiss();
+
+                        topSymbolsHighlight.dismiss();
+                        topSymbolsHint.dismiss();
+
+                        bottomSymbolsHighlight.dismiss();
+                        bottomSymbolsHint.dismiss();
+
+                        initialTilesOutline.dismiss();
+                        initialTilesPulsate.dismiss();
+
+                        secondTilesOutline.dismiss();
+                        secondTilesPulsate.dismiss();
+
+                        finalTilesOutline.dismiss();
+                        finalTilesPulsate.dismiss();
+
+                        exit();
+                    }
+                });
+            }
+        },1200);
     }
 
     // Displays hints for the middle tile of the top set

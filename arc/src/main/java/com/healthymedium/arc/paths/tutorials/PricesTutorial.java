@@ -98,34 +98,6 @@ public class PricesTutorial extends Tutorial {
         secondMatchContainerHighlight = new HintHighlighter(getActivity());
         secondMatchHint = new HintPointer(getActivity(), priceContainer, true, false);
 
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeHighlight.dismiss();
-                welcomeHint.dismiss();
-
-                quitHighlight.dismiss();
-                quitHint.dismiss();
-
-                firstPriceContainerHighlight.dismiss();
-                firstPriceHint.dismiss();
-                firstGreatChoiceHint.dismiss();
-
-                secondPriceContainerHighlight.dismiss();
-                secondPriceHint.dismiss();
-                secondGreatChoiceHint.dismiss();
-
-                firstMatchContainerHighlight.dismiss();
-                firstMatchHint.dismiss();
-                firstMatchGreatChoiceHint.dismiss();
-
-                secondMatchContainerHighlight.dismiss();
-                secondMatchHint.dismiss();
-
-                exit();
-            }
-        });
-
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);
 
@@ -175,6 +147,39 @@ public class PricesTutorial extends Tutorial {
                 }
             }, 1200);
         }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        welcomeHighlight.dismiss();
+                        welcomeHint.dismiss();
+
+                        quitHighlight.dismiss();
+                        quitHint.dismiss();
+
+                        firstPriceContainerHighlight.dismiss();
+                        firstPriceHint.dismiss();
+                        firstGreatChoiceHint.dismiss();
+
+                        secondPriceContainerHighlight.dismiss();
+                        secondPriceHint.dismiss();
+                        secondGreatChoiceHint.dismiss();
+
+                        firstMatchContainerHighlight.dismiss();
+                        firstMatchHint.dismiss();
+                        firstMatchGreatChoiceHint.dismiss();
+
+                        secondMatchContainerHighlight.dismiss();
+                        secondMatchHint.dismiss();
+
+                        exit();
+                    }
+                });
+            }
+        },1200);
     }
 
     private void setFirstPricesCompare() {

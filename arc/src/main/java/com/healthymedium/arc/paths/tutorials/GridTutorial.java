@@ -204,41 +204,6 @@ public class GridTutorial extends Tutorial {
         remindMeTapHint = new HintPointer(getActivity(), gridLayout, true, true);
         remindMeTapHighlight = new HintHighlighter(getActivity());
 
-        closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeHighlight.dismiss();
-                welcomeHint.dismiss();
-
-                quitHighlight.dismiss();
-                quitHint.dismiss();
-
-                itemsHint.dismiss();
-                gridsHint.dismiss();
-
-                partTwoHint.dismiss();
-
-                pulsateF.dismiss();
-                tapThisFHint.dismiss();
-                tapAllFsHint.dismiss();
-
-                niceWorkHint.dismiss();
-
-                secondItemsHint.dismiss();
-
-                recallHint.dismiss();
-                pulsateGridItem.dismiss();
-                otherTwoHint.dismiss();
-                gridHighlight.dismiss();
-
-                remindMeHint.dismiss();
-                remindMeTapHint.dismiss();
-                remindMeTapHighlight.dismiss();
-
-                exit();
-            }
-        });
-
         progressBar.animate()
                 .setStartDelay(800)
                 .setDuration(400)
@@ -278,6 +243,46 @@ public class GridTutorial extends Tutorial {
                 }
             },1200);
         }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                closeButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        welcomeHighlight.dismiss();
+                        welcomeHint.dismiss();
+
+                        quitHighlight.dismiss();
+                        quitHint.dismiss();
+
+                        itemsHint.dismiss();
+                        gridsHint.dismiss();
+
+                        partTwoHint.dismiss();
+
+                        pulsateF.dismiss();
+                        tapThisFHint.dismiss();
+                        tapAllFsHint.dismiss();
+
+                        niceWorkHint.dismiss();
+
+                        secondItemsHint.dismiss();
+
+                        recallHint.dismiss();
+                        pulsateGridItem.dismiss();
+                        otherTwoHint.dismiss();
+                        gridHighlight.dismiss();
+
+                        remindMeHint.dismiss();
+                        remindMeTapHint.dismiss();
+                        remindMeTapHighlight.dismiss();
+
+                        exit();
+                    }
+                });
+            }
+        },1200);
     }
 
     // Displays the items that will appear in the grid and the relevant hints
