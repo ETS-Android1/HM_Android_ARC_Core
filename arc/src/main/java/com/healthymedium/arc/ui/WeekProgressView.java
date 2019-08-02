@@ -2,16 +2,11 @@ package com.healthymedium.arc.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.Gravity;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.ui.base.ChipFrameLayout;
-import com.healthymedium.arc.ui.base.ChipLinearLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.Calendar;
@@ -34,133 +29,67 @@ import java.util.HashMap;
         Current day of the week will highlight itself
 */
 
-public class WeekProgressView extends RelativeLayout {
+public class WeekProgressView extends LinearProgressView {
 
-    private HashMap<String, Integer> dayMap = new HashMap<String, Integer>(){{
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Sun), 0);
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Mon), 1);
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Tue), 2);
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Wed), 3);
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Thur), 4);
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Fri), 5);
-        put(getContext().getResources().getString(R.string.Day_Abbrev_Sat), 6);
-    }};
+    private HashMap<Integer, Integer> dayMap = new HashMap<>();
+    private String[] defaultDays = new String[]{"S", "M", "T", "W", "T", "F", "S"};
     private String[] days;
-    private int currentDay = 0;
-    private int indicatorWidth;
-    private Integer difference;
-    private int dayWidth;
-
-    private ChipLinearLayout dayLayout;
-    private ChipLinearLayout completedDayLayout;
-    private ChipFrameLayout indicatorLayout;
-    private TextView indicatorTextView;
-
-    private boolean initialized = false;
+    protected int currentDay = 0;
 
     public WeekProgressView(Context context) {
         super(context);
-        init(context);
     }
 
     public WeekProgressView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public WeekProgressView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
-    private void init(Context context) {
-        RelativeLayout.LayoutParams matchWrapParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        RelativeLayout.LayoutParams wrapWrapParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        matchWrapParams.addRule(RelativeLayout.CENTER_VERTICAL);
-        wrapWrapParams.addRule(RelativeLayout.CENTER_VERTICAL);
-
-        dayLayout = new ChipLinearLayout(context);
-        dayLayout.setLayoutParams(matchWrapParams);
-        dayLayout.setOrientation(LinearLayout.HORIZONTAL);
-        dayLayout.setStrokeColor(R.color.weekProgressBorder);
-        dayLayout.setStrokeWidth(1);
-
-        completedDayLayout = new ChipLinearLayout(context);
-        completedDayLayout.setLayoutParams(wrapWrapParams);
-        completedDayLayout.setOrientation(LinearLayout.HORIZONTAL);
-        completedDayLayout.setFillColor(R.color.weekProgressFill);
-        completedDayLayout.setStrokeColor(R.color.weekProgressFill);
-        completedDayLayout.setStrokeWidth(1);
-
-        addView(dayLayout);
-
-        indicatorWidth = ViewUtil.dpToPx(50);
-        indicatorLayout = new ChipFrameLayout(context);
-        indicatorLayout.setFillColor(R.color.weekProgressFill);
-
-        indicatorTextView = new TextView(context);
-        indicatorTextView.setTypeface(Fonts.robotoBold);
-        indicatorTextView.setTextSize(16);
-        indicatorTextView.setTextColor(ViewUtil.getColor(getContext(), R.color.white));
-        indicatorTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-        indicatorTextView.setGravity(Gravity.CENTER_VERTICAL);
-
-        indicatorLayout.addView(indicatorTextView);
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int width = 0;
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        if (widthMode == MeasureSpec.EXACTLY) {
-            width = widthSize;
-        }
-
-        if(width > 0 && !initialized) {
-            dayWidth = (width/days.length);
-
-            if(difference == null) {
-                indicatorWidth = Math.max(indicatorWidth, dayWidth);
-                difference = 0;
-                if (indicatorWidth - dayWidth > 0) {
-                    difference = (indicatorWidth - dayWidth) / 2;
-                }
-
-                dayLayout.setPadding(difference, 0, difference, 0);
-                completedDayLayout.setPadding(difference, 0, difference, 0);
-            } else {
-                LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(dayWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                for (int i = 0; i <= currentDay; i++) {
-                    String day = days[i];
-                    TextView dayTextView = new TextView(getContext());
-                    dayTextView.setLayoutParams(dayTextParams);
-                    dayTextView.setTypeface(Fonts.robotoBold);
-                    dayTextView.setTextSize(16);
-                    dayTextView.setTextColor(ViewUtil.getColor(getContext(), R.color.white));
-                    dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-                    dayTextView.setText(day);
-                    dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
-                    completedDayLayout.addView(dayTextView);
-                }
-
-                addView(completedDayLayout);
-
-                if(currentDay >= 0) {
-                    FrameLayout.LayoutParams indicatorParams = new FrameLayout.LayoutParams(indicatorWidth, indicatorWidth);
-                    indicatorLayout.setLayoutParams(indicatorParams);
-                    indicatorTextView.setLayoutParams(indicatorParams);
-                    indicatorTextView.setText(days[currentDay]);
-                    indicatorLayout.setX((dayWidth * currentDay));
-                    addView(indicatorLayout);
-                }
-
-                initialized = true;
-            }
-        }
+    protected void init(Context context) {
+        backgroundBorderColor = R.color.weekProgressBorder;
+        progressColor = R.color.weekProgressFill;
+        indicatorColor = R.color.weekProgressFill;
+        indicatorTextColor = R.color.white;
+        indicatorWidth = ViewUtil.dpToPx(50);
+        super.init(context);
     }
+
+    @Override
+    protected void initOnMeasure() {
+        if(padding == null) {
+                indicatorWidth = Math.max(indicatorWidth, unitWidth);
+            padding = 0;
+            if (indicatorWidth > unitWidth) {
+                padding = (indicatorWidth - unitWidth) / 2;
+            }
+            backgroundLayout.setPadding(padding, 0, padding, 0);
+        }
+
+        for (int i = 0; i <= currentDay; i++) {
+            int width = backgroundLayout.getChildAt(i).getMeasuredWidth() - padding*2/7;
+            LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT);
+            String day = days[i];
+            TextView dayTextView = new TextView(getContext());
+            dayTextView.setLayoutParams(dayTextParams);
+            dayTextView.setTypeface(Fonts.robotoBold);
+            dayTextView.setTextSize(16);
+            dayTextView.setTextColor(ViewUtil.getColor(getContext(), R.color.white));
+            dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+            dayTextView.setText(day);
+            dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
+            progressLayout.addView(dayTextView);
+        }
+        progressLayout.setPadding(padding, 0, padding, 0);
+
+        progressText = days[currentDay];
+
+        super.initOnMeasure();
+    }
+
 
     private void buildView() {
         LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -174,30 +103,43 @@ public class WeekProgressView extends RelativeLayout {
             dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
             dayTextView.setText(day);
             dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
-            dayLayout.addView(dayTextView);
+            backgroundLayout.addView(dayTextView);
         }
     }
 
     private void parseDays() {
-        String firstDay = days[0];
-        String nextDay = days[1];
-        int dayOffset = 0;
+        Calendar calendar = Calendar.getInstance();
+        currentDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
-        if(firstDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Sun))) {
-            if(nextDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Sun))) {
-                dayOffset = 6;
+        for(int i=0; i < days.length; i++) {
+            int nextDay = (i == days.length-1) ? 0:i+1;
+            String a = days[i];
+            String b = days[nextDay];
+
+            if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Sun))) {
+                if(b.equals(getContext().getResources().getString(R.string.Day_Abbrev_Mon))) {
+                    dayMap.put(0, i);
+                } else {
+                    dayMap.put(6, i);
+                }
+            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Tue))) {
+                if(b.equals(getContext().getResources().getString(R.string.Day_Abbrev_Wed))) {
+                    dayMap.put(2, i);
+                } else {
+                    dayMap.put(4, i);
+                }
+            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Mon))) {
+                dayMap.put(1, i);
+            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Wed))) {
+                dayMap.put(3, i);
+            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Fri))) {
+                dayMap.put(5, i);
             }
-        } else if(firstDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Tue))) {
-            dayOffset = 2;
-            if(nextDay.equals(getContext().getResources().getString(R.string.Day_Abbrev_Fri))) {
-                dayOffset = 4;
-            }
-        } else {
-            dayOffset = dayMap.get(firstDay);
         }
 
-        Calendar calendar = Calendar.getInstance();
-        currentDay = calendar.get(Calendar.DAY_OF_WEEK) - dayOffset - 1;
+        currentDay = dayMap.get(currentDay);
+
+        progress = currentDay;
     }
 
     public String[] getDays() {
@@ -206,6 +148,7 @@ public class WeekProgressView extends RelativeLayout {
 
     public void setDays(String[] days) {
         this.days = days;
+        maxValue = days.length-1;
         parseDays();
         buildView();
     }
