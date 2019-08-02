@@ -11,6 +11,7 @@ import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
+import com.healthymedium.arc.paths.tests.TestIntro;
 import com.healthymedium.arc.paths.tests.TestProgress;
 import com.healthymedium.arc.utilities.Log;
 
@@ -526,12 +527,13 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        StateInfoTemplate info = new StateInfoTemplate(
-                false,
-                res.getString(R.string.testing_intro_header),
-                res.getString(R.string.testing_intro_subhead),
-                res.getString(R.string.testing_intro_body),
-                res.getString(R.string.button_next));
+        TestIntro info = new TestIntro();
+//        StateInfoTemplate info = new StateInfoTemplate(
+//                false,
+//                res.getString(R.string.testing_intro_header),
+//                res.getString(R.string.testing_intro_subhead),
+//                res.getString(R.string.testing_intro_body),
+//                res.getString(R.string.button_next));
         //info.setEnterTransitions(R.anim.slide_in_right,R.anim.slide_in_left);
         fragments.add(info);
         PathSegment segment = new PathSegment(fragments);
