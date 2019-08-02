@@ -3,10 +3,12 @@ package com.healthymedium.arc.study;
 import android.content.res.Resources;
 
 import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.paths.questions.QuestionPolar;
 import com.healthymedium.arc.paths.questions.QuestionPolarAlt;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
 import com.healthymedium.arc.paths.questions.QuestionSingleButton;
+import com.healthymedium.arc.paths.templates.LandingTemplate;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.tests.CognitiveTest;
@@ -354,7 +356,12 @@ public class StateMachineAlpha extends StateMachine {
     }
 
     public void addTestLandingPage(){
-        //  leave empty for now
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        // Default
+        fragments.add(new LandingTemplate(true));
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
     }
 
     public void checkForSignaturePage(boolean allowHelp){
@@ -377,6 +384,7 @@ public class StateMachineAlpha extends StateMachine {
     // --------------------------------------------------------------------------
 
     public void setPathFirstOfBaseline(){
+        addTestLandingPage();
         checkForSignaturePage(true);
         addChronotypeSurvey();
         addWakeSurvey();

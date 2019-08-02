@@ -71,7 +71,7 @@ public class LandingTemplate extends BaseFragment {
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
-        if (!Hints.hasBeenShown(HINT_POST_BASELINE)) {
+        if (!Hints.hasBeenShown(HINT_POST_BASELINE) && Hints.hasBeenShown(HINT_FIRST_TEST)) {
             showPostBaselineHints();
         }
 
@@ -137,14 +137,14 @@ public class LandingTemplate extends BaseFragment {
         String country = PreferencesManager.getInstance().getString("country", "US");
         Locale locale = new Locale(language, country);
 
-//        String header = Application.getInstance().getResources().getString(R.string.home_header2);
-//        String body = Application.getInstance().getResources().getString(R.string.home_body2);
-
         // Default
-        String header = Application.getInstance().getResources().getString(R.string.home_header1) + "<br /> <br />" + Application.getInstance().getResources().getString(R.string.home_body1);
+        String header = Application.getInstance().getResources().getString(R.string.home_header1) + Application.getInstance().getResources().getString(R.string.home_body1);
         String body = "";
 
-        if (participant.getState().currentTestCycle != 5) {
+        if (participant.getState().currentTestCycle == 0 && participant.getCurrentTestSession().getId() == 0) {
+            // default
+        }
+        else if (participant.getState().currentTestCycle != 5) {
             TestCycle cycle = participant.getCurrentTestCycle();
 
             DateTime today = new DateTime().withTimeAtStartOfDay();
@@ -162,7 +162,7 @@ public class LandingTemplate extends BaseFragment {
                 body = Application.getInstance().getResources().getString(R.string.home_body5);
             }
             // After the cycle before the start of the next session
-            else if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests()) {
+            else if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests() && participant.getState().currentTestCycle != 0) {
                 header = Application.getInstance().getResources().getString(R.string.home_header4);
 
                 DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
