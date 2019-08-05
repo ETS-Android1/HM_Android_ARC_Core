@@ -37,6 +37,8 @@
     <color name="sessionProgressBackground">#66c8c7</color>
     <color name="progressWeekBackground">#e1f4f4</color>
     <color name="earningsDetailsBlue">#13275b</color>
+    <color name="symbolsGreyBackground">#ededef</color>
+    <color name="symbolsOffWhite">#f3f3f3</color>
 
     <!-- these are discrete colors, they should be close no matter the application -->
     <color name="transparent">#00000001</color>

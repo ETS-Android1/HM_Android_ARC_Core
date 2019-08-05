@@ -10,12 +10,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.ui.SymbolTutorialButton;
+import com.healthymedium.arc.ui.SymbolButton;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
+import com.healthymedium.arc.ui.SymbolView;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SymbolTutorial extends Tutorial {
@@ -32,11 +33,11 @@ public class SymbolTutorial extends Tutorial {
     RelativeLayout topSymbolsInnerLayout;
     RelativeLayout bottomSymbolsButtons;
 
-    SymbolTutorialButton buttonTop1;
-    SymbolTutorialButton buttonTop2;
-    SymbolTutorialButton buttonTop3;
-    SymbolTutorialButton buttonBottom1;
-    SymbolTutorialButton buttonBottom2;
+    SymbolView buttonTop1;
+    SymbolView buttonTop2;
+    SymbolView buttonTop3;
+    SymbolButton buttonBottom1;
+    SymbolButton buttonBottom2;
 
     TextView textView20;
 

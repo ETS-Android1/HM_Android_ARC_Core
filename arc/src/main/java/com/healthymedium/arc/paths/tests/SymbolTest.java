@@ -13,6 +13,7 @@ import com.healthymedium.arc.ui.SymbolButton;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.ui.SymbolView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,9 +32,9 @@ public class SymbolTest extends BaseFragment {
             R.drawable.symbol_6,
             R.drawable.symbol_7));
 
-    SymbolButton buttonTop1;
-    SymbolButton buttonTop2;
-    SymbolButton buttonTop3;
+    SymbolView buttonTop1;
+    SymbolView buttonTop2;
+    SymbolView buttonTop3;
     SymbolButton buttonBottom1;
     SymbolButton buttonBottom2;
     Random random = new Random(System.currentTimeMillis());

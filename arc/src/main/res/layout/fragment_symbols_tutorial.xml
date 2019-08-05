@@ -32,35 +32,32 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
 
-                <com.healthymedium.arc.ui.SymbolTutorialButton
+                <com.healthymedium.arc.ui.SymbolView
                     android:id="@+id/symbolbutton_top1"
-                    android:layout_width="75dp"
-                    android:layout_height="150dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toStartOf="@+id/symbolbutton_top2"
                     android:layout_alignTop="@+id/symbolbutton_top2"
-                    android:layout_weight="1"
-                    android:background="@color/white"/>
+                    android:layout_weight="1"/>
 
-                <com.healthymedium.arc.ui.SymbolTutorialButton
+                <com.healthymedium.arc.ui.SymbolView
                     android:id="@+id/symbolbutton_top2"
-                    android:layout_width="75dp"
-                    android:layout_height="150dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_weight="1"
-                    android:background="@color/white"/>
+                    android:layout_weight="1"/>
 
-                <com.healthymedium.arc.ui.SymbolTutorialButton
+                <com.healthymedium.arc.ui.SymbolView
                     android:id="@+id/symbolbutton_top3"
-                    android:layout_width="75dp"
-                    android:layout_height="150dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/symbolbutton_top2"
                     android:layout_toEndOf="@+id/symbolbutton_top2"
-                    android:layout_weight="1"
-                    android:background="@color/white"/>
+                    android:layout_weight="1"/>
             </RelativeLayout>
 
         </RelativeLayout>
@@ -73,17 +70,18 @@
             android:layout_below="@+id/textView20"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
-            <com.healthymedium.arc.ui.SymbolTutorialButton
+            <com.healthymedium.arc.ui.SymbolButton
                 android:id="@+id/symbolbutton_bottom1"
-                android:layout_width="75dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/textView19"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_weight="1"/>
+                android:layout_toStartOf="@+id/textView19"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -96,15 +94,15 @@
                 android:layout_marginRight="8dp"
                 android:text="" />
 
-            <com.healthymedium.arc.ui.SymbolTutorialButton
+            <com.healthymedium.arc.ui.SymbolButton
                 android:id="@+id/symbolbutton_bottom2"
-                android:layout_width="75dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textView19"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_weight="1"/>
+                android:layout_toEndOf="@+id/textView19"
+                android:layout_weight="1" />
 
         </RelativeLayout>
 

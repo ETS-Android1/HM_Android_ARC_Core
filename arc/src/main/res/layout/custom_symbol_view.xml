@@ -3,17 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     app:radius="8dp"
-    app:gradient="linearVertical"
-    app:gradientColor0="@color/white"
-    app:gradientColor1="@color/symbolsOffWhite"
-    app:strokeColor="@color/headerGrey"
-    app:strokeWidth="1dp">
+    app:fillColor="@color/white"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/headerGrey" >
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/symbolTop"

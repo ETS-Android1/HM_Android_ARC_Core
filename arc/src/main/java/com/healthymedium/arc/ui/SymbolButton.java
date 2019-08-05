@@ -7,11 +7,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.ui.base.RoundedFrameLayout;
+import com.healthymedium.arc.ui.base.RoundedLinearLayout;
+import com.healthymedium.arc.utilities.ViewUtil;
 
-public class SymbolButton extends LinearLayout {
+public class SymbolButton extends RoundedLinearLayout {
 
     ImageView topImage;
     ImageView bottomImage;
+
+    float elevation = ViewUtil.dpToPx(2);
+
+    RoundedLinearLayout layout;
 
     public SymbolButton(Context context) {
         super(context);
@@ -30,6 +37,7 @@ public class SymbolButton extends LinearLayout {
 
     private void init(Context context){
         View view = inflate(context,R.layout.custom_symbol_button,this);
+        layout = view.findViewById(R.id.linearLayout);
         topImage = view.findViewById(R.id.symbolTop);
         bottomImage = view.findViewById(R.id.symbolBottom);
     }
@@ -47,13 +55,14 @@ public class SymbolButton extends LinearLayout {
 
     public void setSelected(boolean selected){
         if(selected){
-            setBackgroundResource(R.drawable.background_symbol_selected);
+            layout.setStrokeColor(R.color.primary);
+            layout.setStrokeWidth(3);
         } else {
-            setBackgroundResource(R.drawable.background_symbol);
-
+            layout.setStrokeWidth(1);
+            layout.setStrokeColor(R.color.headerGrey);
         }
+        layout.refresh();
     }
-
 
     public void setImages(int topId,int bottomId){
         topImage.setImageResource(topId);
