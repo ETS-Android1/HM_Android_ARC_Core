@@ -339,7 +339,9 @@ public class AvailabilityConfirm extends BaseFragment {
 
         @Override
         protected void onPostExecute(Void etc) {
-            loadingDialog.dismiss();
+            if (loadingDialog != null) {
+                loadingDialog.dismiss();
+            }
             Study.openNextFragment();
         }
     }
