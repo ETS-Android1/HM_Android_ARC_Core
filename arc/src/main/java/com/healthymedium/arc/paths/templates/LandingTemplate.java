@@ -144,6 +144,9 @@ public class LandingTemplate extends BaseFragment {
         if (participant.getState().currentTestCycle == 0 && participant.getCurrentTestSession().getId() == 0) {
             // default
         }
+        else if (participant.shouldCurrentlyBeInTestSession()) {
+            // default
+        }
         else if (participant.getState().currentTestCycle != 5) {
             TestCycle cycle = participant.getCurrentTestCycle();
 
