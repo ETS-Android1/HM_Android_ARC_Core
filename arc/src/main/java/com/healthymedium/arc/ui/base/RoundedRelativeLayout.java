@@ -113,6 +113,7 @@ public class RoundedRelativeLayout extends RelativeLayout {
     }
 
     public void refresh(){
+        background.invalidate();
         invalidate();
     }
 

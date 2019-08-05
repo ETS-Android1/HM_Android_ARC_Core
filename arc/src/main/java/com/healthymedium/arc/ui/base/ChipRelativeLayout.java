@@ -96,6 +96,7 @@ public class ChipRelativeLayout extends RelativeLayout {
     }
 
     public void refresh(){
+        background.invalidate();
         invalidate();
     }
 

@@ -114,6 +114,7 @@ public class RoundedFrameLayout extends FrameLayout {
     }
 
     public void refresh(){
+        background.invalidate();
         invalidate();
     }
 

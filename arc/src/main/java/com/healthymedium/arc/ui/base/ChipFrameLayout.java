@@ -96,6 +96,7 @@ public class ChipFrameLayout extends FrameLayout {
     }
 
     public void refresh(){
+        background.invalidate();
         invalidate();
     }
 

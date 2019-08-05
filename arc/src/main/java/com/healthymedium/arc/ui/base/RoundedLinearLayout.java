@@ -113,6 +113,7 @@ public class RoundedLinearLayout extends LinearLayout {
     }
 
     public void refresh(){
+        background.invalidate();
         invalidate();
     }
 

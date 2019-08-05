@@ -97,6 +97,7 @@ public class ChipLinearLayout extends LinearLayout {
     }
 
     public void refresh(){
+        background.invalidate();
         invalidate();
     }
 

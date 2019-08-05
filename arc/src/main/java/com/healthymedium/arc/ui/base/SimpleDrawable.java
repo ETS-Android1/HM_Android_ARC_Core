@@ -50,6 +50,10 @@ public abstract class SimpleDrawable extends Drawable {
     protected void onBoundsChange(Rect bounds) {
         width = bounds.width();
         height = bounds.height();
+        invalidate();
+    }
+
+    public void invalidate() {
 
         // create a rect that's small enough that the stroke isn't cut off
         updateOffsets();
