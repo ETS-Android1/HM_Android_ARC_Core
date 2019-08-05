@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.LoadingDialog;
+import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -334,6 +335,12 @@ public class AvailabilityConfirm extends BaseFragment {
             Study.getScheduler().scheduleTests(start,Study.getInstance().getParticipant());
             Study.getRestClient().submitTestSchedule();
             Study.getScheduler().scheduleNotifications(Study.getCurrentTestCycle(), reschedule);
+
+            if(reschedule) {
+                Proctor.refreshData(getContext());
+            } else {
+                Proctor.startService(getContext());
+            }
             return null;
         }
 
