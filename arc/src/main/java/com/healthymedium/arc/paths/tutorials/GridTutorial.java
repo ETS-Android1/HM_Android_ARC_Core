@@ -412,7 +412,7 @@ public class GridTutorial extends Tutorial {
     // Responds to letter that are tapped, changes their color
     private void tapLetters() {
         handler = new Handler();
-        handler.postDelayed(runnableTapTheFs,3000);
+        handler.postDelayed(runnableTapTheFs,8000);
 
         View.OnTouchListener listener = new View.OnTouchListener() {
             @Override
