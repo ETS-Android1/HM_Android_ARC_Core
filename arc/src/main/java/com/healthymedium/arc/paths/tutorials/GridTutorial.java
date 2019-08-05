@@ -525,8 +525,14 @@ public class GridTutorial extends Tutorial {
                 } else {
                     remindMeTapHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox2));
                 }
-                remindMeTapHint.show();
-                remindMeHighlights();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        remindMeTapHint.show();
+                        remindMeHighlights();
+                    }
+                }, 600);
             }
         };
 
@@ -619,6 +625,7 @@ public class GridTutorial extends Tutorial {
                         remindMeHandler.removeCallbacks(remindMeRunnable);
                         remindMeTapHint.dismiss();
                         remindMeTapHighlight.dismiss();
+                        hideGridImages();
                         break;
                     case MotionEvent.ACTION_UP:
                         break;
@@ -656,6 +663,7 @@ public class GridTutorial extends Tutorial {
                         remindMeHandler.removeCallbacks(remindMeRunnable);
                         remindMeTapHint.dismiss();
                         remindMeTapHighlight.dismiss();
+                        hideGridImages();
                         break;
                     case MotionEvent.ACTION_UP:
                         break;
@@ -689,18 +697,27 @@ public class GridTutorial extends Tutorial {
     private void remindMeHighlights() {
         remindMeTapHighlight = new HintHighlighter(getActivity());
         if (!image24Selected) {
+            getImageView(1,3).setImageResource(R.drawable.key);
             remindMeTapHighlight.addPulsingTarget(image24, 0);
         }
 
         if (!image33Selected) {
+            getImageView(2,2).setImageResource(R.drawable.pen);
             remindMeTapHighlight.addPulsingTarget(image33, 0);
         }
 
         if (!image41Selected) {
+            getImageView(3,0).setImageResource(R.drawable.phone);
             remindMeTapHighlight.addPulsingTarget(image41, 0);
         }
 
         remindMeTapHighlight.show();
+    }
+
+    private void hideGridImages() {
+        getImageView(1,3).setImageResource(0);
+        getImageView(2,2).setImageResource(0);
+        getImageView(3,0).setImageResource(0);
     }
 
     private ImageView getImageView(int row, int col){
