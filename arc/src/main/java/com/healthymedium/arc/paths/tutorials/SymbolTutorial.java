@@ -294,11 +294,11 @@ public class SymbolTutorial extends Tutorial {
 
     // The first set of tiles to match
     private void initialTiles() {
-        initialTilesOutline.addTarget(buttonBottom1);
-        initialTilesOutline.addTarget(buttonTop3);
+        initialTilesOutline.addTarget(buttonBottom1,8);
+        initialTilesOutline.addTarget(buttonTop3,8);
 
-        initialTilesPulsate.addPulsingTarget(buttonBottom1);
-        initialTilesPulsate.addTarget(buttonTop3);
+        initialTilesPulsate.addPulsingTarget(buttonBottom1,8);
+        initialTilesPulsate.addTarget(buttonTop3,8);
 
         runnableTileOutline = new Runnable() {
             @Override
@@ -372,11 +372,11 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setImages(R.drawable.ic_symbol_5_tutorial, R.drawable.ic_symbol_2_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        secondTilesOutline.addTarget(buttonBottom2);
-        secondTilesOutline.addTarget(buttonTop2);
+        secondTilesOutline.addTarget(buttonBottom2,8);
+        secondTilesOutline.addTarget(buttonTop2,8);
 
-        secondTilesPulsate.addPulsingTarget(buttonBottom2);
-        secondTilesPulsate.addTarget(buttonTop2);
+        secondTilesPulsate.addPulsingTarget(buttonBottom2,8);
+        secondTilesPulsate.addTarget(buttonTop2,8);
 
         runnableTileOutline = new Runnable() {
             @Override
@@ -450,11 +450,11 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_7_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        finalTilesOutline.addTarget(buttonBottom1);
-        finalTilesOutline.addTarget(buttonTop1);
+        finalTilesOutline.addTarget(buttonBottom1,8);
+        finalTilesOutline.addTarget(buttonTop1,8);
 
-        finalTilesPulsate.addPulsingTarget(buttonBottom1);
-        finalTilesPulsate.addTarget(buttonTop1);
+        finalTilesPulsate.addPulsingTarget(buttonBottom1,8);
+        finalTilesPulsate.addTarget(buttonTop1,8);
 
         runnableTileOutline = new Runnable() {
             @Override
