@@ -113,13 +113,19 @@ public class TutorialProgressView extends View {
         float x = ((width-dp16)*((float)progress/100))+dp8;
         canvas.drawRoundRect(dp8,centerHeight-dp4,x,centerHeight+dp4,dp8,dp8,progressLinePaint);
 
-        if(progress==100) {
+        if(progress>=100) {
             progressDotPaint.setAlpha(doneDotAlpha);
             canvas.drawCircle(width-dp16,centerHeight,doneDotRadius,progressDotPaint);
         }
     }
 
     public void setProgress(int value, boolean animate) {
+        if(value<0){
+            value = 0;
+        }
+        if (value>100){
+            value = 100;
+        }
         if(animate) {
             progressAnimator.setValues(PropertyValuesHolder.ofInt(PROPERTY_PROGRESS, progress, value));
             progressAnimator.start();

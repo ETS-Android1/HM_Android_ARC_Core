@@ -77,8 +77,8 @@ public class GridTutorial extends Tutorial {
     Runnable runnableProceedToPartTwo = new Runnable() {
         @Override
         public void run() {
+            incrementProgress();
             partTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_part2));
-
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -106,6 +106,7 @@ public class GridTutorial extends Tutorial {
     Runnable runnableTapTheFs = new Runnable() {
         @Override
         public void run() {
+            incrementProgress();
             fadeInView(fullScreenGray, 0.9f);
 
             niceWorkHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf3));
@@ -156,7 +157,7 @@ public class GridTutorial extends Tutorial {
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
 
         progressView = view.findViewById(R.id.progressView);
-        progressView.setProgress(100,true); // TODO: reflect actual progress
+        progressIncrement = 17;
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -375,6 +376,7 @@ public class GridTutorial extends Tutorial {
 
                                     pulsateF.dismiss();
                                     tapThisFHint.dismiss();
+                                    incrementProgress();
 
                                     tapAllFsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf2));
 
@@ -546,6 +548,7 @@ public class GridTutorial extends Tutorial {
                         pulsateGridItem.dismiss();
                         getImageView(2,2).setImageResource(0);
                         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
+                        incrementProgress();
                         selectedCount += 1;
                         image33Selected = true;
 
@@ -610,6 +613,7 @@ public class GridTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         image33Handler.removeCallbacks(image33Runnable);
                         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
+                        incrementProgress();
                         selectedCount += 1;
                         image24Selected = true;
                         remindMeHandler.removeCallbacks(remindMeRunnable);
@@ -646,6 +650,7 @@ public class GridTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         image33Handler.removeCallbacks(image33Runnable);
                         view.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.gridSelected));
+                        incrementProgress();
                         selectedCount += 1;
                         image41Selected = true;
                         remindMeHandler.removeCallbacks(remindMeRunnable);

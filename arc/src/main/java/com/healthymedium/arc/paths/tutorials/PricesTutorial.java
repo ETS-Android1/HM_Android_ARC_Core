@@ -72,7 +72,7 @@ public class PricesTutorial extends Tutorial {
         buttonNo.setCheckable(false);
 
         progressView = view.findViewById(R.id.progressView);
-        progressView.setProgress(100,true); // TODO: reflect actual progress
+        progressIncrement = 25;
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -200,7 +200,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(true);
 
                         firstGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
@@ -240,7 +240,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(false);
 
                         firstGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
@@ -291,7 +291,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondPriceContainerHighlight.dismiss();
                         secondPriceHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(true);
 
                         secondGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice2));
@@ -331,7 +331,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondPriceContainerHighlight.dismiss();
                         secondPriceHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(false);
 
                         secondGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice2));
@@ -385,7 +385,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(true);
 
                         firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
@@ -425,7 +425,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(false);
 
                         firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
@@ -480,7 +480,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(true);
 
                         fadeOutView(textView12);
@@ -505,7 +505,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
-
+                        incrementProgress();
                         updateButtons(false);
 
                         fadeOutView(textView12);

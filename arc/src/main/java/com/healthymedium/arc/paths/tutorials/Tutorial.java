@@ -33,7 +33,10 @@ public class Tutorial extends BaseFragment {
     protected TutorialProgressView progressView;
     protected ImageView closeButton;
     protected View loadingView;
+
     protected LinearLayout progressBar;
+    protected int progressIncrement;
+    protected int progress = 0;
 
     protected ImageView checkmark;
     protected TextView textViewComplete;
@@ -152,5 +155,10 @@ public class Tutorial extends BaseFragment {
                 NavigationManager.getInstance().popBackStack();
             }
         },1200);
+    }
+
+    protected void incrementProgress(){
+        progress += progressIncrement;
+        progressView.setProgress(progress,true);
     }
 }

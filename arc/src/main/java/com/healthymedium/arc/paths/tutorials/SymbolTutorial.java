@@ -85,7 +85,7 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom2 = view.findViewById(R.id.symbolbutton_bottom2);
 
         progressView = view.findViewById(R.id.progressView);
-        progressView.setProgress(100,true); // TODO: reflect actual progress
+        progressIncrement = 17;
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -217,6 +217,7 @@ public class SymbolTutorial extends Tutorial {
             public void onClick(View view) {
                 buttonTop2Highlight.dismiss();
                 buttonTop2Hint.dismiss();
+                incrementProgress();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -246,6 +247,7 @@ public class SymbolTutorial extends Tutorial {
             public void onClick(View view) {
                 topSymbolsHighlight.dismiss();
                 topSymbolsHint.dismiss();
+                incrementProgress();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -275,6 +277,7 @@ public class SymbolTutorial extends Tutorial {
             public void onClick(View view) {
                 bottomSymbolsHighlight.dismiss();
                 bottomSymbolsHint.dismiss();
+                incrementProgress();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -337,6 +340,7 @@ public class SymbolTutorial extends Tutorial {
                 initialTilesPulsate.dismiss();
 
                 buttonBottom1.setOnClickListener(null);
+                incrementProgress();
 
                 final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 greatJobHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
@@ -415,6 +419,7 @@ public class SymbolTutorial extends Tutorial {
                 secondTilesPulsate.dismiss();
 
                 buttonBottom2.setOnClickListener(null);
+                incrementProgress();
 
                 final HintPointer niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 niceHint.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
@@ -497,6 +502,7 @@ public class SymbolTutorial extends Tutorial {
                 fadeOutView(bottomSymbolsButtons);
 
                 buttonBottom1.setOnClickListener(null);
+                incrementProgress();
 
                 showComplete();
             }
