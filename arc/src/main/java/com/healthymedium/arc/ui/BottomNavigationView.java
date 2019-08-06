@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -38,6 +39,8 @@ public class BottomNavigationView extends LinearLayout {
     private MenuItem lastSelected;
     private int normalColor;
     private int selectedColor;
+
+    boolean showingHints = false;
 
     public BottomNavigationView(Context context) {
         super(context);
@@ -177,6 +180,14 @@ public class BottomNavigationView extends LinearLayout {
 
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev){
+        if(showingHints){
+            return true;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
     public void openHome() {
         home.callOnClick();
     }
@@ -194,6 +205,9 @@ public class BottomNavigationView extends LinearLayout {
     }
 
     public void showHomeHint(final Activity activity) {
+
+        showingHints = true;
+
         final HintPointer homeHint = new HintPointer(activity, home, true, true);
         homeHint.setText(ViewUtil.getString(R.string.popup_tab_home));
 
@@ -295,6 +309,8 @@ public class BottomNavigationView extends LinearLayout {
             public void onClick(View view) {
                 resourcesHint.dismiss();
                 resourcesHighlight.dismiss();
+
+                showingHints = false;
             }
         };
 
