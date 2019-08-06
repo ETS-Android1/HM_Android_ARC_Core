@@ -24,6 +24,16 @@ public class NotificationUtil {
 
     static private final String tag = "NotificationUtil";
 
+    public static void openNotificationSettings(Context context){
+        Log.i(tag,"openNotificationSettings()");
+        Intent intent = new Intent();
+        intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
+        intent.putExtra("app_package", context.getPackageName());
+        intent.putExtra("app_uid", context.getApplicationInfo().uid);
+        intent.putExtra("android.provider.extra.APP_PACKAGE", context.getPackageName());
+        context.startActivity(intent);
+    }
+
     // channels ------------------------------------------------------------------------------------
 
     public static void createChannel(Context context, NotificationType type){
