@@ -59,7 +59,7 @@ public class HintHighlightTarget extends View {
 
         path = new Path();
 
-        if(height==width && radius==height/2){
+        if(radius==width/2 || radius==height/2){
             path.addCircle(x+width/2,y+height/2, radius, Path.Direction.CW);
         } else {
             path.addRoundRect(rect, radius, radius, Path.Direction.CW);
