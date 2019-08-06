@@ -10,7 +10,10 @@ import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
+
+import com.healthymedium.arc.notifications.types.NotificationImportance;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.core.MainActivity;
@@ -23,6 +26,23 @@ import java.util.List;
 public class NotificationUtil {
 
     static private final String tag = "NotificationUtil";
+
+    public static boolean areNotificationsEnabled(Context context){
+        Log.i(tag,"areNotificationsEnabled()");
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        if(!notificationManager.areNotificationsEnabled()){
+            return false;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return true;
+        }
+        for(NotificationChannel channel : getChannels(context)){
+            if(channel.getImportance() == NotificationImportance.NONE){
+                return false;
+            }
+        }
+        return true;
+    }
 
     public static void openNotificationSettings(Context context){
         Log.i(tag,"openNotificationSettings()");
