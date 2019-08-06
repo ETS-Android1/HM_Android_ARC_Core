@@ -198,7 +198,7 @@ public class BottomNavigationView extends LinearLayout {
         homeHint.setText(ViewUtil.getString(R.string.popup_tab_home));
 
         final HintHighlighter homeHighlight = new HintHighlighter(activity);
-        homeHighlight.addTarget(home, 50, 0);
+        homeHighlight.addTarget(home, 40, 0);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -228,7 +228,7 @@ public class BottomNavigationView extends LinearLayout {
         progressHint.setText(ViewUtil.getString(R.string.popup_tab_progress));
 
         final HintHighlighter progressHighlight = new HintHighlighter(activity);
-        progressHighlight.addTarget(progress, 50, 0);
+        progressHighlight.addTarget(progress, 40, 0);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -258,7 +258,7 @@ public class BottomNavigationView extends LinearLayout {
         earningsHint.setText(ViewUtil.getString(R.string.popup_tab_earnings));
 
         final HintHighlighter earningsHighlight = new HintHighlighter(activity);
-        earningsHighlight.addTarget(earnings, 50, 0);
+        earningsHighlight.addTarget(earnings, 40, 0);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -288,7 +288,7 @@ public class BottomNavigationView extends LinearLayout {
         resourcesHint.setText(ViewUtil.getString(R.string.popup_tab_resources));
 
         final HintHighlighter resourcesHighlight = new HintHighlighter(activity);
-        resourcesHighlight.addTarget(resources, 50, 0);
+        resourcesHighlight.addTarget(resources, 40, 0);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
