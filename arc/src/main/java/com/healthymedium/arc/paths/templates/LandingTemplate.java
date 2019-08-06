@@ -84,6 +84,7 @@ public class LandingTemplate extends BaseFragment {
                     if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
                         beginTestHighlight.dismiss();
                         beginTestHint.dismiss();
+                        getMainActivity().enableNavigationBar(true);
                         Hints.markShown(HINT_FIRST_TEST);
                     }
 
@@ -102,6 +103,8 @@ public class LandingTemplate extends BaseFragment {
             content.setLayoutParams(params);
 
             if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
+                getMainActivity().enableNavigationBar(false);
+
                 beginTestHint = new HintPointer(getActivity(), landing_layout, true, false);
                 beginTestHint.setText(ViewUtil.getString(R.string.popup_begin));
                 beginTestHighlight = new HintHighlighter(getActivity());
