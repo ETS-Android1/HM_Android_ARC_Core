@@ -241,6 +241,10 @@ public class MainActivity extends AppCompatActivity {
         return contentView;
     }
 
+    public void enableNavigationBar(boolean enabled) {
+        bottomNavigationView.setEnabled(enabled);
+    }
+
     public void showNavigationBar() {
         bottomNavigationView.setVisibility(View.VISIBLE);
     }

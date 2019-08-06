@@ -40,7 +40,7 @@ public class BottomNavigationView extends LinearLayout {
     private int normalColor;
     private int selectedColor;
 
-    boolean showingHints = false;
+    boolean enabled = true;
 
     public BottomNavigationView(Context context) {
         super(context);
@@ -180,9 +180,13 @@ public class BottomNavigationView extends LinearLayout {
 
     }
 
+    public void setEnabled(boolean enabled){
+        this.enabled = enabled;
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev){
-        if(showingHints){
+        if(!enabled){
             return true;
         }
         return super.dispatchTouchEvent(ev);
@@ -206,7 +210,7 @@ public class BottomNavigationView extends LinearLayout {
 
     public void showHomeHint(final Activity activity) {
 
-        showingHints = true;
+        enabled = false;
 
         final HintPointer homeHint = new HintPointer(activity, home, true, true);
         homeHint.setText(ViewUtil.getString(R.string.popup_tab_home));
@@ -310,7 +314,7 @@ public class BottomNavigationView extends LinearLayout {
                 resourcesHint.dismiss();
                 resourcesHighlight.dismiss();
 
-                showingHints = false;
+                enabled = true;
             }
         };
 
@@ -319,4 +323,5 @@ public class BottomNavigationView extends LinearLayout {
         resourcesHint.show();
         resourcesHighlight.show();
     }
+
 }
