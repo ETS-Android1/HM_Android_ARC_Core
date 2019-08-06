@@ -1,26 +1,30 @@
 package com.healthymedium.arc.hints;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class HintHighlightTarget extends View{
+public class HintHighlightTarget extends View {
 
-    private final Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-    private boolean pulsing = false;
+    private ViewTreeObserver viewTreeObserver;
+    private Listener listener;
+
+    private long pulseDelay = 0;
     private HintPulse pulse;
 
-    private ViewGroup parentView;
-    private Bitmap bitmap;
     private View view;
+    private Path path;
+
 
     private int radius = 0;
     private int padding = 0;
@@ -28,14 +32,20 @@ public class HintHighlightTarget extends View{
     private int width;
     private int x,y;
 
-    public HintHighlightTarget(Context context, ViewGroup parent, View view) {
+    public HintHighlightTarget(Context context, View view, Listener listener) {
         super(context);
-
-        this.parentView = parent;
         this.view = view;
+        this.listener = listener;
+
+        paint.setStyle(Paint.Style.FILL);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+
+        viewTreeObserver = view.getViewTreeObserver();
+        viewTreeObserver.addOnGlobalLayoutListener(globalLayoutListener);
     }
 
     void process(){
+
         width = view.getWidth()+(2*padding);
         height = view.getHeight()+(2*padding);
 
@@ -45,26 +55,19 @@ public class HintHighlightTarget extends View{
         x = locations[0]-padding;
         y = locations[1]-padding;
 
-        bitmap = Bitmap.createBitmap(parentView.getWidth(), parentView.getHeight(), Bitmap.Config.ARGB_8888);
         RectF rect = new RectF(x, y, x+width, y+height);
 
-        Canvas canvas = new Canvas(bitmap);
-        Path clipPath = new Path();
+        path = new Path();
 
         if(height==width && radius==height/2){
-            clipPath.addCircle(x+width/2,y+height/2, radius, Path.Direction.CW);
+            path.addCircle(x+width/2,y+height/2, radius, Path.Direction.CW);
         } else {
-            clipPath.addRoundRect(rect, radius, radius, Path.Direction.CW);
+            path.addRoundRect(rect, radius, radius, Path.Direction.CW);
         }
 
-        canvas.clipPath(clipPath);
-
-        parentView.draw(canvas);
-
-        if(pulsing){
+        if(pulse!=null){
             pulse.setRadius(ViewUtil.pxToDp(radius));
             pulse.process();
-            pulse.start();
         }
     }
 
@@ -72,9 +75,8 @@ public class HintHighlightTarget extends View{
         radius = ViewUtil.dpToPx(dp);
     }
 
-    public void setPulsing() {
-        pulse = new HintPulse(getContext(),view);
-        pulsing = true;
+    public void setPulsing(Context context, long delay) {
+        pulse = new HintPulse(context,view);
     }
 
     public void setPadding(int dp) {
@@ -89,31 +91,46 @@ public class HintHighlightTarget extends View{
         return pulse;
     }
 
-    @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawBitmap(bitmap, 0,0, basePaint);
+        if(path==null){
+            return;
+        }
+        canvas.drawPath(path, paint);
+        if(pulse!=null) {
+            pulse.draw(canvas);
+        }
     }
 
     public void cleanup(){
-        if(bitmap!=null) {
-            bitmap.recycle();
+        if(viewTreeObserver.isAlive()) {
+            viewTreeObserver.removeOnGlobalLayoutListener(globalLayoutListener);
         }
         if(pulse!=null){
             pulse.cleanup();
         }
     }
 
-    public boolean wasTouched(MotionEvent event){
-        int touch_x = (int) event.getX();
-        int touch_y = (int) event.getY();
-        if(touch_x<x || touch_x>(x+width)){
-            return false;
+    ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout () {
+            if(!view.isLaidOut()){
+                return;
+            }
+            if(viewTreeObserver.isAlive()){
+                viewTreeObserver.removeOnGlobalLayoutListener(globalLayoutListener);
+            }
+            process();
+            if(pulse!=null){
+                pulse.start(pulseDelay);
+            }
+            if(listener!=null){
+                listener.onLayout(HintHighlightTarget.this);
+            }
         }
-        if(touch_y<y || touch_y>(y+height)){
-            return false;
-        }
-        return true;
+    };
+
+    public interface Listener {
+        void onLayout(HintHighlightTarget target);
     }
 
 }

@@ -21,6 +21,7 @@ public class HintPulse extends View{
     private ObjectAnimator animator;
     private Bitmap bitmap;
     private View view;
+    private boolean running = false;
 
     private int radius = 0;
     private int height;
@@ -72,8 +73,9 @@ public class HintPulse extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawBitmap(bitmap, x,y, paint);
+        if(bitmap!=null && running){
+            canvas.drawBitmap(bitmap, x,y, paint);
+        }
     }
 
     public void cleanup(){
@@ -82,7 +84,7 @@ public class HintPulse extends View{
         }
     }
 
-    public void start(){
+    public void start(long delay){
 
         float scaleX;
         float scaleY;
@@ -104,7 +106,7 @@ public class HintPulse extends View{
         animator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-
+                running = true;
             }
 
             @Override
@@ -127,7 +129,21 @@ public class HintPulse extends View{
 
             }
         });
-        animator.start();
+        animator.setStartDelay(delay);
+
+        if(delay==0){
+            animator.start();
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if(animator!=null){
+                        animator.start();
+                    }
+                }
+            },delay);
+        }
+
     }
 
     public void stop(){
