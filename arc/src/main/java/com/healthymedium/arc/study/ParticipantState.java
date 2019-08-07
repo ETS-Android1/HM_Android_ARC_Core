@@ -21,6 +21,8 @@ public class ParticipantState {
     public CircadianClock circadianClock;
     public boolean hasValidSchedule;
     public boolean isStudyRunning;
+    public boolean hasCommittedToStudy;
+    public boolean hasBeenShownNotificationOverview;
 
     // These are variables only used during runtime
     public DateTime lastPauseTime;

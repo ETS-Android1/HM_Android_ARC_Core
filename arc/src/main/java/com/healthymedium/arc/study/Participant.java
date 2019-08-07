@@ -45,6 +45,22 @@ public class Participant {
         return state.hasValidSchedule;
     }
 
+    public boolean hasCommittedToStudy(){
+        return state.hasCommittedToStudy;
+    }
+
+    public void markCommittedToStudy(){
+        state.hasCommittedToStudy = true;
+    }
+
+    public boolean hasBeenShownNotificationOverview(){
+        return state.hasBeenShownNotificationOverview;
+    }
+
+    public void markShownNotificationOverview(){
+        state.hasBeenShownNotificationOverview = true;
+    }
+
     public void markPaused(){
         state.lastPauseTime = DateTime.now();
     }
