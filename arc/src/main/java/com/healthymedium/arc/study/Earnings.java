@@ -1,17 +1,23 @@
 package com.healthymedium.arc.study;
 
+import android.support.annotation.Nullable;
+
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.api.models.EarningDetails;
 import com.healthymedium.arc.api.models.EarningOverview;
 
+import org.joda.time.DateTime;
+
 public class Earnings {
 
     private EarningOverview overview;
     private int overviewRefresh;
+    private DateTime overviewUpdateTime;
 
     private EarningDetails details;
     private int detailsRefresh;
+    private DateTime detailsUpdateTime;
 
     public Earnings(){
         overviewRefresh = 0;
@@ -30,7 +36,6 @@ public class Earnings {
         }
 
         // check the upload queue first. if it has anything, mark failed
-        overview = null;
         overviewRefresh = -1;
 
         client.getEarningOverview(new RestClient.Listener() {
@@ -38,6 +43,7 @@ public class Earnings {
             public void onSuccess(RestResponse response) {
                 overviewRefresh = 1;
                 overview = response.getOptionalAs(EarningOverview.class);
+                overviewUpdateTime = DateTime.now();
                 if(listener!=null){
                     listener.onSuccess();
                 }
@@ -57,8 +63,17 @@ public class Earnings {
         return overviewRefresh==-1;
     }
 
+    public boolean hasCurrentOverview(){
+        return overviewRefresh==1;
+    }
+
     public EarningOverview getOverview(){
         return overview;
+    }
+
+    @Nullable
+    public DateTime getOverviewRefreshTime(){
+        return overviewUpdateTime;
     }
 
     public void refreshDetails(final Listener listener){
@@ -73,7 +88,6 @@ public class Earnings {
             return;
         }
 
-        details = null;
         detailsRefresh = -1;
 
         client.getEarningDetails(new RestClient.Listener() {
@@ -81,6 +95,7 @@ public class Earnings {
             public void onSuccess(RestResponse response) {
                 detailsRefresh = 1;
                 details = response.getOptionalAs(EarningDetails.class);
+                detailsUpdateTime = DateTime.now();
                 if(listener!=null){
                     listener.onSuccess();
                 }
@@ -100,15 +115,21 @@ public class Earnings {
         return detailsRefresh==-1;
     }
 
+    public boolean hasCurrentDetails(){
+        return detailsRefresh==1;
+    }
+
     public EarningDetails getDetails(){
         return details;
     }
 
-    public void invalidate(){
-        overview = null;
-        overviewRefresh = 0;
+    @Nullable
+    public DateTime getDetailsRefreshTime(){
+        return detailsUpdateTime;
+    }
 
-        details = null;
+    public void invalidate(){
+        overviewRefresh = 0;
         detailsRefresh = 0;
     }
 
