@@ -842,9 +842,9 @@ public class StateMachine {
             RestClient client = Study.getRestClient();
             client.removeUploadListener();
             if (client.isUploadQueueEmpty()) {
-                Earnings earnings = Study.getParticipant().getEarnings();
-                earnings.refreshOverview(null);
-                earnings.refreshDetails(null);
+//                Earnings earnings = Study.getParticipant().getEarnings();
+//                earnings.refreshOverview(null);
+//                earnings.refreshDetails(null);
             }
         }
     };
