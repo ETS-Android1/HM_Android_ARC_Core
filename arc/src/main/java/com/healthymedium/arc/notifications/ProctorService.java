@@ -14,6 +14,7 @@ import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class ProctorService extends Service {
 
@@ -109,8 +110,8 @@ public class ProctorService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationTypes.TestProctor.getChannelId())
-                .setContentTitle("Test Proctor Service Running")
-                .setContentText("This ensures that you're notified when a test becomes available")
+                .setContentTitle(ViewUtil.getString(R.string.notification_testproctor_header))
+                .setContentText(ViewUtil.getString(R.string.notification_testproctor_body))
                 .setStyle(new NotificationCompat.BigTextStyle())
                 .setSmallIcon(R.drawable.notification)
                 .setContentIntent(pendingIntent)

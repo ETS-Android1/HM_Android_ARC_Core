@@ -226,6 +226,9 @@
     <string name="notification_missed">You\'ve missed your tests. If you\'re unable \nto finish this week, please contact your site \ncoordinator.</string>
     <string name="notification_confirm">Please confirm your next testing start date.</string>
 
+    <string name="notification_testproctor_header">Test Proctor Service Running</string>
+    <string name="notification_testproctor_body">This service ensures that you\'re notified when a test becomes available in the ARC app.</string>
+
     <string name="confirm_header">CONFIRM START DATE</string>
 
     <string name="notification_next">Your next test will be on {DATE}.</string>
