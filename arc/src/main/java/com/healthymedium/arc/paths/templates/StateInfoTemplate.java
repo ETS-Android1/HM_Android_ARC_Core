@@ -34,7 +34,7 @@ public class StateInfoTemplate extends BaseFragment {
 
     LinearLayout content;
 
-    Button button;
+    protected Button button;
     boolean allowBack;
 
     public StateInfoTemplate(boolean allowBack, String header, String subheader, String body, @Nullable String buttonText) {

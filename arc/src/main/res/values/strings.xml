@@ -29,6 +29,7 @@
     <string name="button_adjust_sched">ADJUST SCHEDULE</string>
     <string name="button_chooseanswer">CHOOSE ANSWER</string>
     <string name="button_close">CLOSE</string>
+    <string name="button_settings">GO TO SETTINGS</string>
 
     <string name="radio_understand">I understand</string>
 
@@ -330,13 +331,18 @@
 
     <string name="popup_begin">Let\'s begin the first test.</string>
 
-    <string name="testing_commitment">&lt;b>Testing Commitment&lt;/b></string>
-    <string name="onboarding_header">&lt;b>Welcome: What to Expect&lt;/b></string>
-    <string name="onboarding_body">Every few months, you will be asked to complete &lt;b>one week&lt;/b> of cognitive tests. During the week, you will be reminded &lt;b>4 times a day&lt;/b> to complete tests within the app. You may be in the study for as long as &lt;b>6 years&lt;/b> (8 weeks of testing).</string>
+    <string name="onboarding_header">Testing Committment</string>
+    <string name="onboarding_body">Every few months, you will be asked to complete <b>one week</b> of cognitive tests. During the week, you will be reminded <b>4 times a day</b> to complete tests within the app. You may be in the study for as long as <b>6 years</b> (8 weeks of testing).</string>
     <string name="radio_commit">I commit to participate for the length of the study</string>
     <string name="radio_nocommit">I\'m NOT able to commit to this study</string>
-    <string name="onboarding_nocommit_header">&lt;b>Thank you for your time.&lt;/b></string>
+    <string name="onboarding_nocommit_header">Thank you for your time.</string>
     <string name="onboarding_nocommit_body">Your study coordinator will be notified that you do not wish to participate at this time. Your study coordinator may also contact you to confirm this information.</string>
+    <string name="onboarding_commit_header">Thank you!</string>
+    <string name="onboarding_commit_body">Your participation in this study and every task you complete contributes to advancing Alzheimer\'s Disease research.</string>
+    <string name="onboarding_notifications_header1">A Note on Notifications</string>
+    <string name="onboarding_notifications_body1">We use notifications to let you know it\'s time to take a test. <b>Notifications are essential for the study to function properly.</b> Please allow notifications for this app throughout the duration of the study.</string>
+    <string name="onboarding_notifications_header2">Please turn on notifications.</string>
+    <string name="onboarding_notifications_body2">You must turn on notifications for the study to function properly. Please visit settings and flip the notifications switch on.</string>
 
     <string name="prices_body">Please decide if the displayed price is a good bargain for that item.&lt;br /&gt;&lt;br /&gt;The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
     <string name="grid_body">Study the grid and try to remember the location of the three items.</string>

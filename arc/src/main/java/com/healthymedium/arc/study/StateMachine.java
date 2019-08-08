@@ -9,6 +9,9 @@ import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsScreen;
+import com.healthymedium.arc.paths.notification.NotificationOverview;
+import com.healthymedium.arc.paths.notification.NotificationTurnOn;
+import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.TestIntro;
@@ -315,6 +318,44 @@ public class StateMachine {
     // default
     public void setPathSetupParticipant(){
         setPathSetupParticipant(5,3,5);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+
+    public void setPathCommitment(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
+        fragments.add(new QuestionRemoteStudyCommitment(
+                false,
+                res.getString(R.string.onboarding_header),
+                res.getString(R.string.onboarding_body),
+                res.getString(R.string.radio_commit),
+                res.getString(R.string.radio_nocommit)
+        ));
+
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.onboarding_commit_header),
+                null,
+                res.getString(R.string.onboarding_commit_body),
+                res.getString(R.string.button_next)));
+
+        PathSegment segment = new PathSegment(fragments);
+        enableTransition(segment,true);
+        cache.segments.add(segment);
+    }
+
+    public void setPathNotificationOverview(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new NotificationOverview());
+        fragments.add(new NotificationTurnOn());
+
+        PathSegment segment = new PathSegment(fragments);
+        enableTransition(segment,true);
+        cache.segments.add(segment);
     }
 
     // ---------------------------------------------------------------------------------------------

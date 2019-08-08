@@ -1,17 +1,11 @@
 package com.healthymedium.arc.study;
 
-import android.content.res.Resources;
-
 import com.healthymedium.arc.api.RestClient;
-import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.paths.questions.QuestionPolar;
-import com.healthymedium.arc.paths.questions.QuestionPolarAlt;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
 import com.healthymedium.arc.paths.questions.QuestionSingleButton;
 import com.healthymedium.arc.paths.templates.LandingTemplate;
 import com.healthymedium.arc.utilities.Log;
 
-import com.healthymedium.arc.api.tests.CognitiveTest;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
@@ -26,6 +20,8 @@ import java.util.List;
 public class StateMachineAlpha extends StateMachine {
 
     public static final int PATH_SETUP_PARTICIPANT = 0;         //
+    public static final int PATH_COMMITMENT = 9;
+    public static final int PATH_NOTIFICATIONS_OVERVIEW = 10;
     public static final int PATH_SETUP_AVAILABILITY = 1;        //
 
     public static final int PATH_TEST_FIRST_OF_BASELINE = 2;    // first test of the baseline
@@ -88,6 +84,16 @@ public class StateMachineAlpha extends StateMachine {
 
         if(!participant.hasId()){
             state.currentPath = PATH_SETUP_PARTICIPANT;
+            return;
+        }
+
+        if(!participant.hasCommittedToStudy()){
+            state.currentPath = PATH_COMMITMENT;
+            return;
+        }
+
+        if(!participant.hasBeenShownNotificationOverview()){
+            state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }
 
@@ -316,31 +322,31 @@ public class StateMachineAlpha extends StateMachine {
     // state machine helpers ---------------------------------------------------------------------
 
     public void addWelcome() {
-        List<BaseFragment> fragments = new ArrayList<>();
-
-        if(Config.IS_REMOTE) {
-            // I commit or I'm not able to commit
-            fragments.add(new QuestionRemoteStudyCommitment(
-                    true,
-                    ViewUtil.getString(R.string.testing_commitment),
-                    ViewUtil.getString(R.string.onboarding_body),
-                    ViewUtil.getString(R.string.radio_commit),
-                    ViewUtil.getString(R.string.radio_nocommit)
-            ));
-
-        } else {
-            // I understand
-            fragments.add(new QuestionSingleButton(
-                    false,
-                    ViewUtil.getString(R.string.onboarding_header),
-                    ViewUtil.getString(R.string.onboarding_body),
-                    ViewUtil.getString(R.string.button_continue),
-                    ViewUtil.getString(R.string.radio_understand)));
-        }
-
-        PathSegment segment = new PathSegment(fragments);
-        enableTransition(segment,true);
-        cache.segments.add(segment);
+//        List<BaseFragment> fragments = new ArrayList<>();
+//
+//        if(Config.IS_REMOTE) {
+//            // I commit or I'm not able to commit
+//            fragments.add(new QuestionRemoteStudyCommitment(
+//                    true,
+//                    ViewUtil.getString(R.string.testing_commitment),
+//                    ViewUtil.getString(R.string.onboarding_body),
+//                    ViewUtil.getString(R.string.radio_commit),
+//                    ViewUtil.getString(R.string.radio_nocommit)
+//            ));
+//
+//        } else {
+//            // I understand
+//            fragments.add(new QuestionSingleButton(
+//                    false,
+//                    ViewUtil.getString(R.string.onboarding_header),
+//                    ViewUtil.getString(R.string.onboarding_body),
+//                    ViewUtil.getString(R.string.button_continue),
+//                    ViewUtil.getString(R.string.radio_understand)));
+//        }
+//
+//        PathSegment segment = new PathSegment(fragments);
+//        enableTransition(segment,true);
+//        cache.segments.add(segment);
     }
 
     public void checkForLandingPage(){

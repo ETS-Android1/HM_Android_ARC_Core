@@ -19,19 +19,17 @@ public class QuestionRemoteStudyCommitment extends QuestionPolarAlt {
 
     @Override
     protected void onNextRequested() {
-        goToNextScreen();
-    }
-
-    public void goToNextScreen() {
         if (answered) {
             if (answerIsYes) {
                 // go to next fragment
+                Study.getParticipant().markCommittedToStudy();
                 Study.getInstance().openNextFragment();
-            } else if (!answerIsYes) {
+            } else {
                 // go to thank you screen
                 BaseFragment fragment = new AltStandardTemplate(false, ViewUtil.getString(R.string.onboarding_nocommit_header), ViewUtil.getString(R.string.onboarding_nocommit_body), false);
                 NavigationManager.getInstance().open(fragment);
             }
         }
     }
+
 }
