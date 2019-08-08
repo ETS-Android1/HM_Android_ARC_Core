@@ -120,7 +120,7 @@
     <string name="interrupted_body">Thanks! &lt;br /&gt; &lt;br /&gt; Were you interrupted or did you have to stop while taking any of these tests?</string>
     <string name="interrupted_header">Final Questions</string>
 
-    <string name="thank_you_header1">Thank You</string>
+    <string name="thank_you_header1">Thank you!</string>
     <string name="thankyou_testcomplete_subhead1">Test Complete</string>
     <string name="thankyou_testcomplete_body1">You\'ll get a notification later today when your next test is available.</string>
     <string name="thankyou_header2">Great Job</string>
