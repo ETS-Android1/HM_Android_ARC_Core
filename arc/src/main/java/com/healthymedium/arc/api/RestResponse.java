@@ -3,6 +3,7 @@ package com.healthymedium.arc.api;
 import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
@@ -20,15 +21,16 @@ public class RestResponse {
     public JsonObject optional = new JsonObject();
     public JsonObject errors = new JsonObject();
 
-    private Gson gson;
-
     public <T> T getOptionalAs(Class<T> tClass){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(new ItemTypeAdapterFactory())
+                .setLenient()
+                .create();
         return gson.fromJson(optional, tClass);
     }
 
-    public static RestResponse fromRetrofitResponse(Gson gson, retrofit2.Response<ResponseBody> retrofitResponse){
+    public static RestResponse fromRetrofitResponse(retrofit2.Response<ResponseBody> retrofitResponse){
         RestResponse response = new RestResponse();
-        response.gson = gson;
 
         if (response != null) {
             response.code = retrofitResponse.code();

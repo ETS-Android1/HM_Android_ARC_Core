@@ -475,7 +475,7 @@ public class RestClient <Api>{
                     return;
                 }
 
-                RestResponse response = RestResponse.fromRetrofitResponse(gson,retrofitResponse);
+                RestResponse response = RestResponse.fromRetrofitResponse(retrofitResponse);
                 Log.i("RestClient",gson.toJson(response));
                 if(response.successful){
                     Log.i("RestClient","onSuccess");
