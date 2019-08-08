@@ -14,6 +14,7 @@ import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.informative.FAQAnswerScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.paths.templates.StandardTemplate;
@@ -63,8 +64,8 @@ public class SetupResendCode extends BaseFragment {
         newCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Study.getRestClient().requestVerificationCode(verificationCodeListener);
+                String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
+                Study.getRestClient().requestVerificationCode(id,verificationCodeListener);
             }
         });
 

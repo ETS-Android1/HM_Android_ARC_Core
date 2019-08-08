@@ -18,7 +18,7 @@ public interface RestAPI {
     @POST("device-registration")
     Call<ResponseBody> registerDevice(@Body JsonObject body);
 
-    @POST("verificationCode")
+    @POST("request-confirmation-code")
     Call<ResponseBody> requestVerificationCode(@Body JsonObject body);
 
     @GET("get-contact-info")

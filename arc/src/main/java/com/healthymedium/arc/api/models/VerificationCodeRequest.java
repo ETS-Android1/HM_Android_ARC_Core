@@ -3,7 +3,7 @@ package com.healthymedium.arc.api.models;
 import com.google.gson.annotations.SerializedName;
 
 public class VerificationCodeRequest {
-    @SerializedName("subject_id")
+    @SerializedName("participant_id")
     private String arcId;
 
     public String getArcId() {

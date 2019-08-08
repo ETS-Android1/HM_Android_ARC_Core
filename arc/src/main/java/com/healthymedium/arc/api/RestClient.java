@@ -174,14 +174,14 @@ public class RestClient <Api>{
         registerDevice(registration,listener);
     }
 
-    public void requestVerificationCode(Listener listener){
+    public void requestVerificationCode(String participantId, Listener listener){
         if(Config.REST_BLACKHOLE) {
             return;
         }
         Log.i("RestClient","requestVerificationCode");
 
         VerificationCodeRequest request = new VerificationCodeRequest();
-        request.setArcId(Study.getParticipant().getId());
+        request.setArcId(participantId);
         JsonObject json = serialize(request);
 
         Call<ResponseBody> call = getService().requestVerificationCode(json);
