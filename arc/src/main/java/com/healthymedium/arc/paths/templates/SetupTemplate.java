@@ -203,8 +203,11 @@ public class SetupTemplate extends StandardTemplate {
         }
 
         if (is2FA) {
-            String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
-            Study.getRestClient().requestVerificationCode(id,verificationCodeListener);
+            SetupPathData setupPathData = ((SetupPathData)Study.getCurrentSegmentData());
+            if(!setupPathData.requested2FA) {
+                setupPathData.requested2FA = true;
+                Study.getRestClient().requestVerificationCode(setupPathData.id, verificationCodeListener);
+            }
         }
 
         return view;

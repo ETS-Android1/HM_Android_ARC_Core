@@ -7,6 +7,7 @@ public class SetupPathData extends PathSegmentData {
 
     public String id;
     public String authCode;
+    public boolean requested2FA;
 
     public SetupPathData(){
         super();

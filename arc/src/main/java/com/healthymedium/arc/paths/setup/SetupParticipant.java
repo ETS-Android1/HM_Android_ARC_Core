@@ -17,7 +17,12 @@ public class SetupParticipant extends SetupTemplate {
 
     @Override
     protected void onNextRequested() {
-        ((SetupPathData) Study.getCurrentSegmentData()).id = characterSequence.toString();
+        SetupPathData setupPathData = (SetupPathData) Study.getCurrentSegmentData();
+        String newId = characterSequence.toString();
+        if(!newId.equals(setupPathData.id)){
+            setupPathData.requested2FA = false;
+        }
+        setupPathData.id = newId;
         super.onNextRequested();
     }
 
