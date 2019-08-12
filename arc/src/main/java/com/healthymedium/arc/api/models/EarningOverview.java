@@ -2,14 +2,15 @@ package com.healthymedium.arc.api.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EarningOverview {
 
-    String total_earnings;
-    Integer cycle;
-    String cycle_earnings;
-    Goals goals;
+    public String total_earnings;
+    public Integer cycle;
+    public String cycle_earnings;
+    public Goals goals;
 
     public class Goals {
 
@@ -19,6 +20,14 @@ public class EarningOverview {
         public Goal twoADay;
         @SerializedName("4-out-of-4")
         public Goal fourOutOfFour;
+
+        public List<Goal> getList(){
+            List list = new ArrayList<>();
+            list.add(twentyOneSessions);
+            list.add(twoADay);
+            list.add(fourOutOfFour);
+            return list;
+        }
 
         public class Goal {
             public String name;

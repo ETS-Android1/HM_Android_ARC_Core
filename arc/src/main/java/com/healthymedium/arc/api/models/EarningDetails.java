@@ -4,22 +4,22 @@ import java.util.List;
 
 public class EarningDetails {
 
-    String total_earnings;
-    List<Cycle> cycles;
+    public String total_earnings;
+    public List<Cycle> cycles;
 
     public class Cycle {
-        Integer cycle;
-        String total;
-        Long start_date;
-        Long end_date;
-        List<Goal> details;
+        public Integer cycle;
+        public String total;
+        public Long start_date;
+        public Long end_date;
+        public List<Goal> details;
     }
 
     public class Goal {
-        String name;
-        String value;
-        Integer count_completed;
-        String amount_earned;
+        public String name;
+        public String value;
+        public Integer count_completed;
+        public String amount_earned;
     }
 
 }
