@@ -97,8 +97,10 @@ public class ProctorServiceHandler {
 
     public void stop(){
         Log.i(tag, "stop");
-        timer.cancel();
-        timer = null;
+        if(timer!=null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
     public boolean isValid(){
