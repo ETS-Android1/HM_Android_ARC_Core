@@ -10,6 +10,7 @@ import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.Log;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.joda.time.LocalTime;
 import org.joda.time.Seconds;
 
@@ -237,11 +238,11 @@ public class Scheduler {
     public ParticipantState getExistingParticipantState(ExistingData existingData) {
 
         ParticipantState state = Study.getParticipant().getState();
+        state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
 
         DateTime startDate = JodaUtil.fromUtcDouble(existingData.first_test.session_date);
         Study.getScheduler().initializeCycles(startDate,Study.getParticipant());
-
-        state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
+        Study.getScheduler().scheduleTests(startDate,Study.getParticipant());
 
         List<TestScheduleSession> scheduleSessions = existingData.test_schedule.sessions;
 
@@ -249,8 +250,12 @@ public class Scheduler {
         int last = scheduleSessions.size()-1;
         int lastCycle = 0;
 
-        for(TestCycle cycle : state.testCycles ){
-            lastCycle = cycle.getId();
+        for(TestCycle cycle : state.testCycles ) {
+
+            DateTime sessionDate = JodaUtil.fromUtcDouble(scheduleSessions.get(index).session_date);
+            int daysShifted = Days.daysBetween(sessionDate,cycle.getScheduledStartDate()).getDays();
+            int cycleId = cycle.getId();
+
             for(TestDay day : cycle.getTestDays()) {
                 for(TestSession session : day.getTestSessions()) {
 
@@ -258,13 +263,15 @@ public class Scheduler {
                     int sessionId = Integer.valueOf(scheduleSession.session_id);
                     DateTime scheduledDateTime = JodaUtil.fromUtcDouble(scheduleSession.session_date);
 
-                    DateTime prescribedDateTime = session.getPrescribedTime();
-                    LocalTime scheduleTime = scheduledDateTime.toLocalTime();
-
-                    session.setPrescribedTime(prescribedDateTime.withTime(scheduleTime));
+                    DateTime prescribedDateTime = scheduledDateTime.plusDays(daysShifted);
+                    session.setPrescribedTime(prescribedDateTime);
                     session.setScheduledDate(scheduledDateTime.toLocalDate());
 
-                    Log.i(tag,"visitIndex = "+lastCycle+", testIndex = "+sessionId+" - "+scheduledDateTime.toString());
+                    if(existingData.latest_test.session==session.getId()){
+                        lastCycle = cycleId;
+                    }
+
+                    Log.i(tag,"cycleIndex = "+cycleId+", testIndex = "+sessionId+" - "+scheduledDateTime.toString());
 
                     index++;
                     if(index>last) {
