@@ -491,6 +491,10 @@ public class StateMachineAlpha extends StateMachine {
                 return "TEST_OTHER";
             case PATH_STUDY_OVER:
                 return "STUDY_OVER";
+            case PATH_COMMITMENT:
+                return "PATH_COMMITMENT";
+            case PATH_NOTIFICATIONS_OVERVIEW:
+                return "PATH_NOTIFICATIONS_OVERVIEW";
             default:
                 return "INVALID";
         }
