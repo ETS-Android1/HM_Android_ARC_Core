@@ -112,6 +112,10 @@ public class RoundedLinearLayout extends LinearLayout {
         background.setGradient(SimpleGradient.LINEAR_VERTICAL,top,bottom);
     }
 
+    public void removeStrokeDash() {
+        background.removeStrokeDash();
+    }
+
     public void refresh(){
         background.invalidate();
         invalidate();

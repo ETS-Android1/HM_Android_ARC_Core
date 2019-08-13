@@ -131,6 +131,10 @@ public abstract class SimpleDrawable extends Drawable {
         strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
     }
 
+    public void removeStrokeDash() {
+        strokePaint.setPathEffect(null);
+    }
+
     //default to fill gradient
     public void setGradient(int gradientId, int colorFirst, int colorSecond) {
         setFillGradient(gradientId,colorFirst,colorSecond);
