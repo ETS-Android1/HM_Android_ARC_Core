@@ -30,7 +30,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="4dp"
-        android:text="@string/price_test_wasprice"
+        android:text="@string/prices_whatwasprice"
         android:textSize="26dp" />
 
     <com.healthymedium.arc.ui.RadioButton

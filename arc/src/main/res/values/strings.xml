@@ -163,7 +163,6 @@
     <string name="price_header">Prices</string>
     <string name="price_overlay">You will now start the test. You will see an item and two prices. Please select the price that matches the item you studied.</string>
     <string name="price_test_isgood">Is this a good price?</string>
-    <string name="price_test_wasprice">What was the price of the</string>
 
     <string name="grids_popup1">Ready</string>
     <string name="grids_popup2">Next: Tap on the location of the items</string>
@@ -386,6 +385,8 @@
     <string name="popup_tutorial_needhelp">Need help?</string>
     <string name="popup_tutorial_remindme">&lt;b>Remind Me&lt;/b></string>
     <string name="grids_subheader_boxes">Tap the boxes where the items were located in part one.</string>
+
+    <string name="prices_whatwasprice">What was the price?</string>
 
     <string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
     <string name="symbols_complete">&lt;b>Symbols Test Complete!&lt;/b></string>
