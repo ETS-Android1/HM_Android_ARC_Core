@@ -59,9 +59,9 @@ public class EarningOverview {
 
         public List<Goal> getList(){
             List list = new ArrayList<>();
-            list.add(twentyOneSessions);
-            list.add(twoADay);
             list.add(fourOutOfFour);
+            list.add(twoADay);
+            list.add(twentyOneSessions);
             return list;
         }
 
