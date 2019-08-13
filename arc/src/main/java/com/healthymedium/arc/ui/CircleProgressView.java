@@ -206,6 +206,7 @@ public class CircleProgressView extends View {
 
     public void setSweepColor(@ColorRes int color) {
         sweepPaint.setColor(ViewUtil.getColor(color));
+        fillPaint.setColor(ViewUtil.getColor(color));
     }
 
     public void setShadowColor(@ColorRes int color) {
