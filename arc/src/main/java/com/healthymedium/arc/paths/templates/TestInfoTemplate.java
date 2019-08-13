@@ -28,7 +28,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class TestInfoTemplate extends BaseFragment {
 
-    private static final String HINT_TEST_TUTORIAL = "HINT_TEST_TUTORIAL";
+    private static final String HINT_GRID_TUTORIAL = "HINT_GRID_TUTORIAL";
+    private static final String HINT_PRICES_TUTORIAL = "HINT_PRICES_TUTORIAL";
+    private static final String HINT_SYMBOL_TUTORIAL = "HINT_SYMBOL_TUTORIAL";
 
     LinearLayout headerLayout;
 
@@ -101,10 +103,32 @@ public class TestInfoTemplate extends BaseFragment {
         textViewTutorial.setText(content);
         textViewTutorial.setVisibility(View.VISIBLE);
 
-        if(!Hints.hasBeenShown(HINT_TEST_TUTORIAL)){
+        button = view.findViewById(R.id.button);
+        if(stringButton!=null){
+            button.setText(stringButton);
+        } else if (buttonImage!=null) {
+            button.setIcon(buttonImage);
+        }
+
+        // Show a hint if this test type's tutorial has not yet been completed
+        if ((stringType.equals("grids") && !Hints.hasBeenShown(HINT_GRID_TUTORIAL))
+                || (stringType.equals("prices") && !Hints.hasBeenShown(HINT_PRICES_TUTORIAL))
+                || (stringType.equals("symbols") && !Hints.hasBeenShown(HINT_SYMBOL_TUTORIAL))) {
             tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, false);
             tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_view));
             tutorialHint.show();
+        }
+        // If the tutorial has been completed, enable the test button
+        else {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(tutorialHint!=null) {
+                        tutorialHint.dismiss();
+                    }
+                    Study.getInstance().openNextFragment();
+                }
+            });
         }
 
         textViewTutorial.setOnClickListener(new View.OnClickListener() {
@@ -113,48 +137,22 @@ public class TestInfoTemplate extends BaseFragment {
                 if(tutorialHint!=null) {
                     tutorialHint.dismiss();
                 }
-                Hints.markShown(HINT_TEST_TUTORIAL);
 
                 if (stringType.equals("grids")) {
+                    Hints.markShown(HINT_GRID_TUTORIAL);
                     GridTutorial gridTutorial = new GridTutorial();
                     NavigationManager.getInstance().open(gridTutorial);
                 }
                 else if (stringType.equals("symbols")) {
+                    Hints.markShown(HINT_SYMBOL_TUTORIAL);
                     SymbolTutorial symbolTutorial = new SymbolTutorial();
                     NavigationManager.getInstance().open(symbolTutorial);
                 }
                 else if (stringType.equals("prices")) {
+                    Hints.markShown(HINT_PRICES_TUTORIAL);
                     PricesTutorial pricesTutorial = new PricesTutorial();
                     NavigationManager.getInstance().open(pricesTutorial);
                 }
-            }
-        });
-
-//        if (stringSubHeader == "") {
-//            textViewSubheader.setVisibility(View.GONE);
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//
-//            float dpRatio = getResources().getDisplayMetrics().density;
-//            int side = (int)(32 * dpRatio);
-//            int top = (int)(15 * dpRatio);
-//
-//            params.setMargins(side,top,side,0);
-//            textViewBody.setLayoutParams(params);
-//        }
-
-        button = view.findViewById(R.id.button);
-        if(stringButton!=null){
-            button.setText(stringButton);
-        } else if (buttonImage!=null) {
-            button.setIcon(buttonImage);
-        }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(tutorialHint!=null) {
-                    tutorialHint.dismiss();
-                }
-                Study.getInstance().openNextFragment();
             }
         });
 
