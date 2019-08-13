@@ -36,22 +36,11 @@
         android:textSize="26dp"
         android:textStyle="bold"/>
 
-    <com.healthymedium.arc.ui.Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:text="@string/Button_signin" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="48dp"
+        android:layout_above="@id/button"
         android:orientation="horizontal">
 
         <TextView
@@ -62,7 +51,7 @@
             android:gravity="right"
             android:paddingTop="32dp"
             android:paddingRight="14dp"
-            android:paddingBottom="32dp"
+            android:paddingBottom="25dp"
             android:text="@string/aboutapp_header"
             android:textColor="@color/primary"
             android:textSize="15dp" />
@@ -75,11 +64,23 @@
             android:gravity="left"
             android:paddingLeft="14dp"
             android:paddingTop="32dp"
-            android:paddingBottom="32dp"
+            android:paddingBottom="25dp"
             android:text="@string/privacy_linked"
             android:textColor="@color/primary"
             android:textSize="15dp" />
     </LinearLayout>
+
+    <com.healthymedium.arc.ui.Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewVersion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/Button_signin" />
+
 
     <TextView
         android:id="@+id/textViewVersion"
