@@ -15,7 +15,7 @@ public class EarningOverview {
     public static EarningOverview getTestObject() {
         EarningOverview overview = new EarningOverview();
         overview.cycle = 1;
-        overview.cycle_earnings = "0.50";
+        overview.cycle_earnings = "$0.50";
         overview.total_earnings = "$13.50";
         overview.goals.twentyOneSessions.name = "21-sessions";
         overview.goals.twentyOneSessions.completed = true;
