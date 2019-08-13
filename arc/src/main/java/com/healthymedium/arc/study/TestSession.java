@@ -30,12 +30,13 @@ public class TestSession {
 
     private boolean finishedSession;
     private boolean missedSession;
-    private boolean interrupted;
+    private int interrupted;
 
     public TestSession(int dayIndex, int index, int id) {
         this.dayIndex = dayIndex;
         this.index = index;
         this.id = id;
+        this.interrupted = -99;
     }
 
     public int getDayIndex() {
@@ -153,7 +154,7 @@ public class TestSession {
         return Arrays.asList(Arrays.copyOf(testData.toArray(), testData.size()));
     }
 
-    public boolean wasInterrupted() {
+    public int wasInterrupted() {
         return interrupted;
     }
 
@@ -165,13 +166,13 @@ public class TestSession {
         return missedSession;
     }
 
-    public void markInterrupted() {
-        this.interrupted = true;
+    public void markInterrupted(boolean interrupted) {
+        this.interrupted = interrupted?1:0;
     }
 
     public void purgeData(){
         testData.clear();
-        interrupted = false;
+        interrupted = -99;
     }
 
 }

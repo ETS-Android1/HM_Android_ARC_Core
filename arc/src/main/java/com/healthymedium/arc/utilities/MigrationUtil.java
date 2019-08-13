@@ -1,5 +1,7 @@
 package com.healthymedium.arc.utilities;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.healthymedium.arc.study.State;
 import com.healthymedium.arc.study.StateCache;
 import com.healthymedium.arc.study.StateMachine;
@@ -69,6 +71,10 @@ public class MigrationUtil {
             successful = removeExistingTestData();
         }
 
+        if(oldVersion < 3000002){
+            successful = convertInterruptedBooleanToInteger();
+        }
+
         return successful;
     }
 
@@ -115,6 +121,37 @@ public class MigrationUtil {
         }
 
         participant.save();
+        return true;
+    }
+
+    private boolean convertInterruptedBooleanToInteger(){
+
+        JsonObject json = PreferencesManager.getInstance().getObject("ParticipantState", JsonObject.class);
+        if(!json.has("testCycles")){
+            return true;
+        }
+        JsonArray cycles = json.getAsJsonArray("testCycles");
+        for(JsonElement cycleElement : cycles) {
+            JsonObject cycle = cycleElement.getAsJsonObject();
+            if(cycle.has("days")){
+                JsonArray days = cycle.getAsJsonArray("days");
+                for(JsonElement dayElement : days){
+                    JsonObject day = dayElement.getAsJsonObject();
+                    if(day.has("sessions")){
+                        JsonArray sessions = day.getAsJsonArray("sessions");
+                        for(JsonElement sessionElement : sessions){
+                            JsonObject session = sessionElement.getAsJsonObject();
+                            if(session.has("interrupted")){
+                                boolean interrupted = session.get("interrupted").getAsBoolean();
+                                int integer = interrupted?1:0;
+                                session.addProperty("interrupted",integer);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        PreferencesManager.getInstance().putObject("ParticipantState", json);
         return true;
     }
 

@@ -27,9 +27,7 @@ public class QuestionInterrupted extends QuestionPolar {
 
     @Override
     protected void onNextRequested() {
-        if(answerIsYes){
-            Study.getCurrentTestSession().markInterrupted();
-        }
+        Study.getCurrentTestSession().markInterrupted(answerIsYes);
         super.onNextRequested();
     }
 

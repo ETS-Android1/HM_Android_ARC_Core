@@ -160,9 +160,9 @@ public class TestSessionTest {
         TestSession session = new TestSession(0,0,0);
         session.setPrescribedTime(DateTime.now());
 
-        Assert.assertFalse(session.wasInterrupted());
-        session.markInterrupted();
-        Assert.assertTrue(session.wasInterrupted());
+        Assert.assertEquals(-99,session.wasInterrupted());
+        session.markInterrupted(true);
+        Assert.assertEquals(1,session.wasInterrupted());
 
     }
 
