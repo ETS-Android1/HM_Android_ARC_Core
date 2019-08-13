@@ -8,8 +8,8 @@
 
     <string name="gen_welcome_key">Welcome to the app</string>
 
-    <string name="login_enter_ARCID">Please enter the\n&lt;b>Subject ID&lt;/b> below.</string>
-    <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter the Subject ID&lt;/b>.</string>
+    <string name="login_enter_ARCID">Please enter your\n&lt;b>ARC ID&lt;/b> below.</string>
+    <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter your ARC ID&lt;/b>.</string>
     <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
 
     <string name="bysigning_key">By signing in you agree to our Privacy Policy.</string>
