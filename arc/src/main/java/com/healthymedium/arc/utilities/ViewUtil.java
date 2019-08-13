@@ -28,6 +28,10 @@ public class ViewUtil {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
+    public static float dpToPx(float dp) {
+        return (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
     public static int spToPx(int sp) {
         return (int) (sp * Resources.getSystem().getDisplayMetrics().scaledDensity);
     }
