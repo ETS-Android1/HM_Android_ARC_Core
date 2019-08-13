@@ -11,18 +11,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.DateTime;
+
 public class EarningsScreen extends BaseFragment {
 
     TextView weeklyTotal;
     TextView studyTotal;
+    TextView lastSync;
     LinearLayout goalLayout;
 
     TextView earningsBody1;
@@ -65,7 +70,6 @@ public class EarningsScreen extends BaseFragment {
 
         goalLayout = view.findViewById(R.id.goalLayout);
 
-
         EarningOverview overview = Study.getParticipant().getEarnings().getOverview();
         if(overview==null){
             overview = EarningOverview.getTestObject();
@@ -76,6 +80,21 @@ public class EarningsScreen extends BaseFragment {
 
         studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setText(overview.total_earnings);
+
+        String syncString = getString(R.string.earnings_sync) + " ";
+        DateTime lastSyncTime = Study.getParticipant().getEarnings().getOverviewRefreshTime();
+        if(lastSyncTime != null) {
+            if(lastSyncTime.plusMinutes(1).isAfterNow()) {
+                syncString += JodaUtil.format(
+                        lastSyncTime,
+                        R.string.format_date,
+                        Application.getInstance().getLocale());
+            } else {
+                syncString += getString(R.string.earnings_sync_justnow);
+            }
+        }
+        lastSync = view.findViewById(R.id.textViewLastSync);
+        lastSync.setText(syncString);
 
         for(EarningOverview.Goals.Goal goal : overview.goals.getList()){
             goalLayout.addView(new EarningsGoalView(getContext(),goal));

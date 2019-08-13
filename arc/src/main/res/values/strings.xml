@@ -486,5 +486,8 @@
     <string name="earnings_details_subheader2">Completed Testing Cycle</string>
     <string name="earnings_details_cycletotal">Cycle Total</string>
 
+    <string name="earnings_sync">Last Synced:</string>
+    <string name="earnings_sync_justnow">Just Now</string>
+
     <string name="footnote_symbol">*</string>
 </resources>
