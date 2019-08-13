@@ -22,7 +22,8 @@ public class EarningsGoalView extends RoundedLinearLayout {
     TextView textViewBody;
     LinearLayout contentLayout;
     FrameLayout frameLayoutDone;
-    EarningsBonusView bonusView;
+    RoundedLinearLayout bonusLayout;
+    TextView bonusTextView;
 
     public EarningsGoalView(Context context, EarningOverview.Goals.Goal goal) {
         super(context);
@@ -36,17 +37,20 @@ public class EarningsGoalView extends RoundedLinearLayout {
         textViewBody = view.findViewById(R.id.textViewBody);
         frameLayoutDone = view.findViewById(R.id.frameLayoutDone);
         contentLayout = view.findViewById(R.id.contentLayout);
-        bonusView = view.findViewById(R.id.bonusView);
+        bonusLayout = view.findViewById(R.id.bonusView);
+        bonusTextView = view.findViewById(R.id.bonusTextView);
 
-        bonusView.setUnearned(!goal.completed);
+        if(goal.completed){
+            frameLayoutDone.setVisibility(VISIBLE);
+            bonusLayout.setStrokeColor(R.color.hintDark);
+            bonusLayout.removeStrokeDash();
+            bonusLayout.setHorizontalGradient(R.color.hintLight,R.color.hintDark);
+            bonusTextView.setTextColor(ViewUtil.getColor(R.color.secondaryDark));
+        }
 
         String bonusString = ViewUtil.getString(goal.completed ? R.string.earnings_bonus_complete : R.string.earnings_bonus_incomplete);
         bonusString = ViewUtil.replaceToken(bonusString,R.string.token_amount,goal.value);
-        bonusView.setTextCenter(bonusString);
-
-        if(!goal.completed){
-            frameLayoutDone.setVisibility(GONE);
-        }
+        bonusTextView.setText(Html.fromHtml(bonusString));
 
         switch (goal.name) {
             case TWENTY_ONE_SESSIONS:

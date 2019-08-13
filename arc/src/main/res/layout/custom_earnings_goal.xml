@@ -36,19 +36,16 @@
 
         <com.healthymedium.arc.ui.base.RoundedFrameLayout
             android:id="@+id/frameLayoutDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:visibility="invisible"
             app:fillColor="@color/hintDark"
-            app:radius="4dp"
-            tools:visibility="invisible">
+            app:radius="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingTop="2dp"
-                android:paddingRight="8dp"
-                android:paddingBottom="2dp"
+                android:layout_gravity="center"
                 android:text="Done!"
                 android:textColor="@color/secondaryDark"
                 android:textSize="16dp" />
@@ -88,11 +85,30 @@
             android:gravity="center"
             android:orientation="horizontal" />
 
-        <com.healthymedium.arc.ui.earnings.EarningsBonusView
+        <com.healthymedium.arc.ui.base.RoundedLinearLayout
             android:id="@+id/bonusView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp" />
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            app:dashLength="6dp"
+            app:dashSpacing="6dp"
+            app:radius="6dp"
+            app:strokeColor="@color/unearnedGray"
+            app:strokeWidth="2dp">
+
+
+            <TextView
+                android:id="@+id/bonusTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/unearnedGray"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                tools:text="$6.00 Bonus" />
+
+
+        </com.healthymedium.arc.ui.base.RoundedLinearLayout>
 
     </com.healthymedium.arc.ui.base.RoundedLinearLayout>
 
