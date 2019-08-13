@@ -3,12 +3,16 @@ package com.healthymedium.arc.ui.earnings;
 import android.content.Context;
 import android.text.Html;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.ui.CircleProgressView;
+import com.healthymedium.arc.ui.WeekProgressView;
 import com.healthymedium.arc.ui.base.RoundedLinearLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -86,7 +90,24 @@ public class EarningsGoalView extends RoundedLinearLayout {
         String body = ViewUtil.getString(R.string.earnings_4of4_body);
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
         textViewBody.setText(Html.fromHtml(body));
-//        contentLayout.addView();
+
+        int dp56 = ViewUtil.dpToPx(56);
+        int dp4 = ViewUtil.dpToPx(4);
+        contentLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp56));
+
+        for(Integer progress : goal.progress_components){
+            CircleProgressView progressView = new CircleProgressView(getContext());
+            contentLayout.addView(progressView);
+
+            progressView.setMargin(dp4,0,dp4,0);
+            progressView.setStrokeWidth((int)ViewUtil.dpToPx(1.5f));
+            progressView.setBaseColor(R.color.secondaryAccent);
+            progressView.setCheckmarkColor(R.color.secondaryAccent);
+            progressView.setShadowColor(R.color.white);
+            progressView.setSweepColor(R.color.secondary);
+            progressView.setProgress(progress,false);
+        }
+
     }
 
 }

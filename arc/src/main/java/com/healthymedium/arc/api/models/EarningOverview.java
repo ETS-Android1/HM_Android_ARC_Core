@@ -32,6 +32,12 @@ public class EarningOverview {
         overview.goals.fourOutOfFour.amount_earned = "$0.00";
         overview.goals.fourOutOfFour.progress = 1;
         overview.goals.fourOutOfFour.value = "$1.00";
+        overview.goals.fourOutOfFour.progress_components = new ArrayList<Integer>() {{
+            add(33);
+            add(100);
+            add(0);
+            add(0);
+        }};
         return overview;
     }
 
