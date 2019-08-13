@@ -471,12 +471,14 @@
     <string name="earnings_studytotal">Study Total</string>
     <string name="earnings_bonus_header">Bonus Goals</string>
     <string name="earnings_bonus_body">Complete the following testing goals to &lt;b>earn bonuses&lt;/b>.</string>
+    <string name="earnings_bonus_incomplete"><b>[AMOUNT] Bonus</b></string>
+    <string name="earnings_bonus_complete"><b>[AMOUNT] Bonus Earned!</b></string>
     <string name="earnings_4of4_header">4 Out Of 4</string>
-    <string name="earnings_4of4_body">Complete &lt;b>all 4&lt;/b> test sessions for the day to earn &lt;b>$1.00&lt;/b>.</string>
+    <string name="earnings_4of4_body">Complete &lt;b>all 4&lt;/b> test sessions for the day to earn &lt;b>[AMOUNT]&lt;/b>.</string>
     <string name="earnings_2aday_header">2-A-Day</string>
-    <string name="earnings_2aday_body">Complete &lt;b>at least 2&lt;/b> test sessions every day of the week to earn &lt;b>$6.00&lt;/b>.</string>
+    <string name="earnings_2aday_body">Complete &lt;b>at least 2&lt;/b> test sessions every day of the week to earn &lt;b>[AMOUNT]&lt;/b>.</string>
     <string name="earnings_21tests_header">21 Tests</string>
-    <string name="earnings_21tests_body">Earn &lt;b>$5.00&lt;/b> when you complete &lt;b>21 tests&lt;/b>.</string>
+    <string name="earnings_21tests_body">Earn &lt;b>[AMOUNT]&lt;/b> when you complete &lt;b>21 tests&lt;/b>.</string>
 
     <string name="earnings_details_header">Earnings Details</string>
     <string name="earnings_details_subheader1">This Week</string>

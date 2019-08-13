@@ -7,22 +7,27 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class EarningsScreen extends BaseFragment {
 
+    TextView weeklyTotal;
+    TextView studyTotal;
+    LinearLayout goalLayout;
+
     TextView earningsBody1;
     Button viewDetailsButton;
     TextView bonusBody;
-    TextView fourOfFourBody;
-    TextView twoADayBody;
-    TextView twentyOneTestsBody;
     Button viewFaqButton;
 
     public EarningsScreen() {
@@ -49,15 +54,6 @@ public class EarningsScreen extends BaseFragment {
         bonusBody = view.findViewById(R.id.bonusBody);
         bonusBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_body)));
 
-        fourOfFourBody = view.findViewById(R.id.fourOfFourBody);
-        fourOfFourBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_4of4_body)));
-
-        twoADayBody = view.findViewById(R.id.twoADayBody);
-        twoADayBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_2aday_body)));
-
-        twentyOneTestsBody = view.findViewById(R.id.twentyOneTestsBody);
-        twentyOneTestsBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_21tests_body)));
-
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
         viewFaqButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +62,24 @@ public class EarningsScreen extends BaseFragment {
                 NavigationManager.getInstance().open(faqScreen);
             }
         });
+
+        goalLayout = view.findViewById(R.id.goalLayout);
+
+
+        EarningOverview overview = Study.getParticipant().getEarnings().getOverview();
+        if(overview==null){
+            overview = EarningOverview.getTestObject();
+        }
+
+        weeklyTotal = view.findViewById(R.id.weeklyTotal);
+        weeklyTotal.setText(overview.cycle_earnings);
+
+        studyTotal = view.findViewById(R.id.studyTotal);
+        studyTotal.setText(overview.total_earnings);
+
+        for(EarningOverview.Goals.Goal goal : overview.goals.getList()){
+            goalLayout.addView(new EarningsGoalView(getContext(),goal));
+        }
 
         return view;
     }
