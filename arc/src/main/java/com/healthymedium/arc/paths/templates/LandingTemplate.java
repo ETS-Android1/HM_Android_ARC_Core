@@ -37,7 +37,9 @@ import java.util.Locale;
 public class LandingTemplate extends BaseFragment {
 
     protected static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
+    protected static final String HINT_TOUR = "HINT_TOUR";
     protected static final String HINT_POST_BASELINE = "HINT_POST_BASELINE";
+    protected static final String HINT_POST_PAID_TEST = "HINT_POST_PAID_TEST";
 
     String stringHeader;
     String stringSubheader;
@@ -71,8 +73,18 @@ public class LandingTemplate extends BaseFragment {
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
-        if (!Hints.hasBeenShown(HINT_POST_BASELINE) && Hints.hasBeenShown(HINT_FIRST_TEST)) {
-            showPostBaselineHints();
+        // The "tour" hints are the same for both post-baseline and post-paid test
+        // The only difference is the first hint
+        // HINT_TOUR - have the tour hints been shown at all?
+        // HINT_POST_BASELINE - are we showing the post-baseline hints?
+        // HINT_POST_PAID_TEST - are we showing the post-paid test hints?
+        if (!Hints.hasBeenShown(HINT_TOUR) && Hints.hasBeenShown(HINT_FIRST_TEST)) {
+            if (!Hints.hasBeenShown(HINT_POST_BASELINE)) {
+                showTourHints("", ViewUtil.getString(R.string.popup_tour), HINT_POST_BASELINE);
+            }
+            else {
+                showTourHints(ViewUtil.getString(R.string.popup_nicejob), ViewUtil.getString(R.string.button_next), HINT_POST_PAID_TEST);
+            }
         }
 
         if (boolTestReady) {
@@ -202,22 +214,34 @@ public class LandingTemplate extends BaseFragment {
         stringSubheader = body;
     }
 
-    private void showPostBaselineHints() {
-        Hints.markShown(HINT_POST_BASELINE);
+    private void showTourHints(String body, String btn, String hint) {
+        // Mark the hint type as shown
+        // Should be either HINT_POST_BASELINE or HINT_POST_PAID_TEST
+        Hints.markShown(hint);
 
-        final HintPointer niceJobHint = new HintPointer(getActivity(), landing_layout, false, false);
-        niceJobHint.setText(ViewUtil.getString(R.string.popup_nicejob));
+        final HintPointer tourHint = new HintPointer(getActivity(), landing_layout, false, false);
+
+        tourHint.setText(body);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                niceJobHint.dismiss();
+                tourHint.dismiss();
+
+                // Once the tour has started, assume the user has seen it
+                Hints.markShown(HINT_TOUR);
+
                 getMainActivity().showHomeHint(getActivity());
             }
         };
 
-        niceJobHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+        tourHint.addButton(btn, listener);
 
-        niceJobHint.show();
+        if (body.equals("")) {
+            tourHint.hideText();
+        }
+
+        tourHint.show();
     }
+
 }
