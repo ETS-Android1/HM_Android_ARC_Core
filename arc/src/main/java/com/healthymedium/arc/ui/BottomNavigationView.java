@@ -24,10 +24,11 @@ import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.informative.ProgressScreen;
 import com.healthymedium.arc.paths.informative.ResourcesScreen;
 import com.healthymedium.arc.paths.templates.LandingTemplate;
+import com.healthymedium.arc.ui.base.RoundedLinearLayout;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class BottomNavigationView extends LinearLayout {
+public class BottomNavigationView extends RoundedLinearLayout {
 
     private MenuItem home;
     private MenuItem progress;
@@ -63,6 +64,9 @@ public class BottomNavigationView extends LinearLayout {
 
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_HORIZONTAL);
+        setStrokeWidth(1);
+        setStrokeColor(R.color.text);
+        setFillColor(R.color.white);
 
         normalColor = ViewUtil.getColor(getContext(),R.color.text);
         selectedColor = ViewUtil.getColor(getContext(),R.color.primary);
