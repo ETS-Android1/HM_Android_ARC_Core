@@ -260,6 +260,11 @@ public class HintPointer extends LinearLayout {
         textView.setText(Html.fromHtml(text));
     }
 
+    public void hideText() {
+        border.setVisibility(GONE);
+        textView.setVisibility(GONE);
+    }
+
     public void setRadius(int dp) {
         radius = ViewUtil.dpToPx(dp);
     }

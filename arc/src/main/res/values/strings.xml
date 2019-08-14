@@ -387,6 +387,7 @@
     <string name="popup_tutorial_tapbox3">Tap on the location of the final item.</string>
     <string name="popup_tutorial_needhelp">Need help?</string>
     <string name="popup_tutorial_remindme">&lt;b>Remind Me&lt;/b></string>
+    <string name="popup_tour">&lt;b>Tour the App&lt;/b></string>
     <string name="grids_subheader_boxes">Tap the boxes where the items were located in part one.</string>
 
     <string name="prices_whatwasprice">What was the price?</string>
