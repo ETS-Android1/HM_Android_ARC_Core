@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
@@ -61,6 +63,7 @@ public class CircleProgressView extends View {
     private void init(AttributeSet attrs, int defStyle) {
 
         Context context = getContext();
+        setLayerType(LAYER_TYPE_HARDWARE,null);
 
         // initialize member variables
         manualStrokeWidth = false;
@@ -71,9 +74,9 @@ public class CircleProgressView extends View {
         basePaint.setColor(ViewUtil.getColor(context, R.color.secondary));
 
         shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        shadowPaint.setStyle(Paint.Style.STROKE);
+        shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         shadowPaint.setStrokeCap(Paint.Cap.ROUND);
-        shadowPaint.setColor(ViewUtil.getColor(context, R.color.white));
+        shadowPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 
         sweepPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         sweepPaint.setStyle(Paint.Style.STROKE);
@@ -99,7 +102,6 @@ public class CircleProgressView extends View {
 
         int baseColor = typedArray.getColor(R.styleable.CircleProgressView_baseColor,0);
         int sweepColor = typedArray.getColor(R.styleable.CircleProgressView_sweepColor,0);
-        int shadowColor = typedArray.getColor(R.styleable.CircleProgressView_shadowColor,0);
         int checkmarkColor = typedArray.getColor(R.styleable.CircleProgressView_checkmarkColor,0);
         strokeWidth = (int) typedArray.getDimension(R.styleable.CircleProgressView_strokeWidth,0);
 
@@ -108,17 +110,13 @@ public class CircleProgressView extends View {
         if(strokeWidth!=0){
             manualStrokeWidth = true;
             basePaint.setStrokeWidth(strokeWidth);
-            shadowPaint.setStrokeWidth(strokeWidth);
+            shadowPaint.setStrokeWidth(strokeWidth*1.25f);
             sweepPaint.setStrokeWidth(strokeWidth);
             fillPaint.setStrokeWidth(strokeWidth);
         }
 
         if(baseColor!=0) {
             basePaint.setColor(baseColor);
-        }
-
-        if(shadowColor!=0) {
-            shadowPaint.setColor(shadowColor);
         }
 
         if(sweepColor!=0){
@@ -140,7 +138,7 @@ public class CircleProgressView extends View {
         if(!manualStrokeWidth) {
             strokeWidth = size * 0.0625f; // 1/16 of size
             basePaint.setStrokeWidth(strokeWidth);
-            shadowPaint.setStrokeWidth(strokeWidth);
+            shadowPaint.setStrokeWidth(strokeWidth*1.25f);
             sweepPaint.setStrokeWidth(strokeWidth);
             fillPaint.setStrokeWidth(strokeWidth);
         }
@@ -174,7 +172,7 @@ public class CircleProgressView extends View {
         if(progress<100) {
             canvas.drawCircle(rect.centerX(),rect.centerY(),radius,basePaint);
             canvas.drawArc(rect, startAngle, sweepAngle, false, shadowPaint);
-            canvas.drawArc(rect, startAngle+1f, sweepAngle-2f, false, sweepPaint);
+            canvas.drawArc(rect, startAngle, sweepAngle, false, sweepPaint);
             return;
         }
 
@@ -209,10 +207,6 @@ public class CircleProgressView extends View {
         fillPaint.setColor(ViewUtil.getColor(color));
     }
 
-    public void setShadowColor(@ColorRes int color) {
-        shadowPaint.setColor(ViewUtil.getColor(color));
-    }
-
     public void setCheckmarkColor(@ColorRes  int color) {
         int checkmarkColor = ViewUtil.getColor(color);
         checkmark.setTint(checkmarkColor);
@@ -223,7 +217,7 @@ public class CircleProgressView extends View {
         strokeWidth = ViewUtil.dpToPx(dp); // 1/16 of size
 
         basePaint.setStrokeWidth(strokeWidth);
-        shadowPaint.setStrokeWidth(strokeWidth);
+        shadowPaint.setStrokeWidth(strokeWidth*1.25f);
         sweepPaint.setStrokeWidth(strokeWidth);
         fillPaint.setStrokeWidth(strokeWidth);
     }

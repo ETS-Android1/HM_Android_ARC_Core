@@ -110,7 +110,6 @@ public class EarningsTwoADayView extends LinearLayout {
             progressView.setStrokeWidth(ViewUtil.dpToPx(1));
             progressView.setBaseColor(R.color.secondaryAccent);
             progressView.setCheckmarkColor(R.color.secondaryAccent);
-            progressView.setShadowColor(R.color.white);
             progressView.setSweepColor(R.color.secondary);
             addView(progressView);
 

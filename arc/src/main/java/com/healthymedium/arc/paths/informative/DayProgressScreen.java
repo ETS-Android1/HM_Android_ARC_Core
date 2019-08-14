@@ -87,7 +87,6 @@ public class DayProgressScreen extends BaseFragment {
 
             progressView.setBaseColor(R.color.primary);
             progressView.setCheckmarkColor(R.color.secondary);
-            progressView.setShadowColor(R.color.secondary);
             progressView.setSweepColor(R.color.secondaryAccent);
             progressView.setMargin(margin,0,margin,0);
             if(i!=sessionIndex) {

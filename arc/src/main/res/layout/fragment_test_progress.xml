@@ -85,7 +85,6 @@
                     android:layout_height="match_parent"
                     app:strokeWidth="28dp"
                     app:baseColor="@color/primary"
-                    app:shadowColor="@color/secondary"
                     app:sweepColor="@color/secondaryAccent"
                     app:checkmarkColor="@color/secondary"/>
 

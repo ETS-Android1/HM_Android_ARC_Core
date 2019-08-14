@@ -106,7 +106,6 @@ public class EarningsGoalView extends RoundedLinearLayout {
             progressView.setStrokeWidth((int)ViewUtil.dpToPx(1.5f));
             progressView.setBaseColor(R.color.secondaryAccent);
             progressView.setCheckmarkColor(R.color.secondaryAccent);
-            progressView.setShadowColor(R.color.white);
             progressView.setSweepColor(R.color.secondary);
             progressView.setProgress(progress,false);
         }
