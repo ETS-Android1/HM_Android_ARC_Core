@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.SpannableString;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
@@ -31,6 +33,7 @@ public class TestInfoTemplate extends BaseFragment {
     private static final String HINT_GRID_TUTORIAL = "HINT_GRID_TUTORIAL";
     private static final String HINT_PRICES_TUTORIAL = "HINT_PRICES_TUTORIAL";
     private static final String HINT_SYMBOL_TUTORIAL = "HINT_SYMBOL_TUTORIAL";
+    private static final String HINT_REPEAT_TUTORIAL = "HINT_REPEAT_TUTORIAL";
 
     LinearLayout headerLayout;
 
@@ -52,6 +55,7 @@ public class TestInfoTemplate extends BaseFragment {
     Button button;
 
     HintPointer tutorialHint;
+    HintHighlighter tutorialHintHighlighter;
 
     public TestInfoTemplate(String testNumber, String header, String body, String type, @Nullable String buttonText) {
         stringTestNumber = testNumber;
@@ -118,17 +122,31 @@ public class TestInfoTemplate extends BaseFragment {
             tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_view));
             tutorialHint.show();
         }
-        // If the tutorial has been completed, enable the test button
-        else {
-            button.setOnClickListener(new View.OnClickListener() {
+        else if (!Hints.hasBeenShown(HINT_REPEAT_TUTORIAL)) {
+            Hints.markShown(HINT_REPEAT_TUTORIAL);
+
+            tutorialHintHighlighter = new HintHighlighter(getActivity());
+            tutorialHintHighlighter.addTarget(textViewTutorial, 5, 10);
+            tutorialHintHighlighter.show();
+
+            tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, true);
+            tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_complete));
+
+            View.OnClickListener listener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(tutorialHint!=null) {
-                        tutorialHint.dismiss();
-                    }
-                    Study.getInstance().openNextFragment();
+                    tutorialHint.dismiss();
+                    tutorialHintHighlighter.dismiss();
+                    enableButton();
                 }
-            });
+            };
+
+            tutorialHint.addButton(ViewUtil.getString(R.string.popup_gotit), listener);
+            tutorialHint.show();
+        }
+        // If the tutorial has been completed, enable the test button
+        else {
+            enableButton();
         }
 
         textViewTutorial.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +154,10 @@ public class TestInfoTemplate extends BaseFragment {
             public void onClick(View view) {
                 if(tutorialHint!=null) {
                     tutorialHint.dismiss();
+                }
+
+                if (tutorialHintHighlighter!=null) {
+                    tutorialHintHighlighter.dismiss();
                 }
 
                 if (stringType.equals("grids")) {
@@ -159,6 +181,23 @@ public class TestInfoTemplate extends BaseFragment {
         setupDebug(view,R.id.textViewHeader);
 
         return view;
+    }
+
+    private void enableButton() {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(tutorialHint!=null) {
+                    tutorialHint.dismiss();
+                }
+
+                if (tutorialHintHighlighter!=null) {
+                    tutorialHintHighlighter.dismiss();
+                }
+
+                Study.getInstance().openNextFragment();
+            }
+        });
     }
 
 }
