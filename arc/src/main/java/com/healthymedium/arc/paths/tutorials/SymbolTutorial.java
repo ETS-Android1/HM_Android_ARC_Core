@@ -52,12 +52,15 @@ public class SymbolTutorial extends Tutorial {
 
     HintHighlighter initialTilesOutline;
     HintHighlighter initialTilesPulsate;
+    HintPointer initialPointer;
 
     HintHighlighter secondTilesOutline;
     HintHighlighter secondTilesPulsate;
+    HintPointer secondPointer;
 
     HintHighlighter finalTilesOutline;
     HintHighlighter finalTilesPulsate;
+    HintPointer finalPointer;
 
     public SymbolTutorial() {
         setTransitionSet(TransitionSet.getFadingDefault(true));
@@ -121,12 +124,15 @@ public class SymbolTutorial extends Tutorial {
 
         initialTilesOutline = new HintHighlighter(getActivity());
         initialTilesPulsate = new HintHighlighter(getActivity());
+        initialPointer = new HintPointer(getActivity(), buttonBottom1, true, false);
 
         secondTilesOutline = new HintHighlighter(getActivity());
         secondTilesPulsate = new HintHighlighter(getActivity());
+        secondPointer = new HintPointer(getActivity(), buttonBottom2, true, false);
 
         finalTilesOutline = new HintHighlighter(getActivity());
         finalTilesPulsate = new HintHighlighter(getActivity());
+        finalPointer = new HintPointer(getActivity(), buttonBottom1, true, false);
 
         progressBar.animate()
                 .setStartDelay(800)
@@ -190,12 +196,15 @@ public class SymbolTutorial extends Tutorial {
 
                         initialTilesOutline.dismiss();
                         initialTilesPulsate.dismiss();
+                        initialPointer.dismiss();
 
                         secondTilesOutline.dismiss();
                         secondTilesPulsate.dismiss();
+                        secondPointer.dismiss();
 
                         finalTilesOutline.dismiss();
                         finalTilesPulsate.dismiss();
+                        finalPointer.dismiss();
 
                         exit();
                     }
@@ -321,6 +330,8 @@ public class SymbolTutorial extends Tutorial {
         runnableCoachmark = new Runnable() {
             @Override
             public void run() {
+                initialPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
+                initialPointer.show();
             }
         };
 
@@ -338,6 +349,7 @@ public class SymbolTutorial extends Tutorial {
 
                 initialTilesOutline.dismiss();
                 initialTilesPulsate.dismiss();
+                initialPointer.dismiss();
 
                 buttonBottom1.setOnClickListener(null);
                 incrementProgress();
@@ -400,6 +412,8 @@ public class SymbolTutorial extends Tutorial {
         runnableCoachmark = new Runnable() {
             @Override
             public void run() {
+                secondPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
+                secondPointer.show();
             }
         };
 
@@ -417,6 +431,7 @@ public class SymbolTutorial extends Tutorial {
 
                 secondTilesOutline.dismiss();
                 secondTilesPulsate.dismiss();
+                secondPointer.dismiss();
 
                 buttonBottom2.setOnClickListener(null);
                 incrementProgress();
@@ -479,6 +494,8 @@ public class SymbolTutorial extends Tutorial {
         runnableCoachmark = new Runnable() {
             @Override
             public void run() {
+                finalPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
+                finalPointer.show();
             }
         };
 
@@ -496,6 +513,7 @@ public class SymbolTutorial extends Tutorial {
 
                 finalTilesOutline.dismiss();
                 finalTilesPulsate.dismiss();
+                finalPointer.dismiss();
 
                 fadeOutView(topSymbols);
                 fadeOutView(textView20);

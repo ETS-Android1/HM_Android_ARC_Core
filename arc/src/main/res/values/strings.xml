@@ -362,6 +362,7 @@
     <string name="popup_tutorial_tile">&lt;b>This is a tile.&lt;/b> &lt;br /&gt;Each tile includes a pair of symbols.</string>
     <string name="popup_tutorial_tilestop">You will see &lt;b>three tiles&lt;/b> on the top of the screen&#8230;</string>
     <string name="popup_tutorial_tilesbottom">&#8230;and &lt;b>two tiles&lt;/b> on the bottom.</string>
+    <string name="popup_tutorial_tiletap">Tap this matching tile.</string>
     <string name="popup_tutorial_greatjob">&lt;b>Great job!&lt;/b> &lt;br /&gt;Let\'s try a couple more for practice.</string>
     <string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> &lt;br /&gt;One more&#8230;</string>
 
