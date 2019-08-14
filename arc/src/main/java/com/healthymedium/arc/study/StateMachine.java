@@ -370,7 +370,7 @@ public class StateMachine {
                 res.getString(R.string.setup_avail_header),
                 null,
                 res.getString(R.string.availability_body),
-                res.getString(R.string.button_begin)));
+                res.getString(R.string.button_beginsurvey)));
 
         fragments.add(new AvailabilityWake());
         fragments.add(new AvailabilityBed(minWakeTime,maxWakeTime));
@@ -398,7 +398,7 @@ public class StateMachine {
                 res.getString(R.string.chronotype_header),
                 res.getString(R.string.chronotype_subhead),
                 res.getString(R.string.chronotype_0_body),
-                res.getString(R.string.button_begin)));
+                res.getString(R.string.button_beginsurvey)));
 
         fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_1_q1),""));
 
@@ -468,7 +468,7 @@ public class StateMachine {
                 res.getString(R.string.sleepwakesurvey_header),
                 res.getString(R.string.sleepwakesurvey_subhead),
                 res.getString(R.string.sleepwakesurvey_body),
-                res.getString(R.string.button_begin)));
+                res.getString(R.string.button_beginsurvey)));
 
         CircadianClock clock;
         String weekday;
@@ -519,7 +519,7 @@ public class StateMachine {
                 res.getString(R.string.context_header),
                 res.getString(R.string.context_subhead),
                 res.getString(R.string.context_body),
-                res.getString(R.string.button_begin)));
+                res.getString(R.string.button_beginsurvey)));
 
         List<String> who = new ArrayList<>();
         who.add(res.getString(R.string.context_q1_answers1));
@@ -612,7 +612,7 @@ public class StateMachine {
                 res.getString(R.string.price_header),
                 res.getString(R.string.prices_body),
                 "prices",
-                res.getString(R.string.button_begin));
+                res.getString(R.string.button_begintest));
         fragments.add(info);
 
         fragments.add(new TestBegin());
@@ -649,7 +649,7 @@ public class StateMachine {
                 res.getString(R.string.symbols_header),
                 res.getString(R.string.symbols_body),
                 "symbols",
-                res.getString(R.string.button_begin));
+                res.getString(R.string.button_begintest));
         fragments.add(info);
 
         fragments.add(new TestBegin());
@@ -674,7 +674,7 @@ public class StateMachine {
                 res.getString(R.string.grid_header),
                 res.getString(R.string.grid_body),
                 "grids",
-                res.getString(R.string.button_next));
+                res.getString(R.string.button_begintest));
         fragments.add(info0);
 
         fragments.add(new TestBegin());
