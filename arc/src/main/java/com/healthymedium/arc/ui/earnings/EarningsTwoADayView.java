@@ -95,7 +95,10 @@ public class EarningsTwoADayView extends LinearLayout {
             int dp8 = ViewUtil.dpToPx(8);
             int dp24 = ViewUtil.dpToPx(24);
 
-            setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,ViewUtil.dpToPx(72)));
+            LinearLayout.LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,ViewUtil.dpToPx(72));
+            params.weight = 1.0f;
+            setLayoutParams(params);
+
             setBackgroundColor(bgColor);
             setGravity(Gravity.CENTER);
             setOrientation(VERTICAL);
