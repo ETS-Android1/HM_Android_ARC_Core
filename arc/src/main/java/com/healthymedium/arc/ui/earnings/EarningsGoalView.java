@@ -29,12 +29,12 @@ public class EarningsGoalView extends RoundedLinearLayout {
     RoundedLinearLayout bonusLayout;
     TextView bonusTextView;
 
-    public EarningsGoalView(Context context, EarningOverview.Goals.Goal goal) {
+    public EarningsGoalView(Context context, EarningOverview.Goals.Goal goal, int cycle) {
         super(context);
-        init(context, goal);
+        init(context, goal, cycle);
     }
 
-    protected void init(Context context, EarningOverview.Goals.Goal goal) {
+    protected void init(Context context, EarningOverview.Goals.Goal goal, int cycle) {
         View view = inflate(context,R.layout.custom_earnings_goal,this);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
@@ -61,7 +61,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
                 initTwentyOneSessions(goal);
                 break;
             case TWO_A_DAY:
-                initTwoADay(goal);
+                initTwoADay(goal,cycle);
                 break;
             case FOUR_OUT_OF_FOUR:
                 initFourOutOfFour(goal);
@@ -77,12 +77,13 @@ public class EarningsGoalView extends RoundedLinearLayout {
 //        contentLayout.addView();
     }
 
-    private void initTwoADay(EarningOverview.Goals.Goal goal){
+    private void initTwoADay(EarningOverview.Goals.Goal goal, int cycle){
         textViewHeader.setText(ViewUtil.getString(R.string.earnings_2aday_header));
         String body = ViewUtil.getString(R.string.earnings_2aday_body);
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
         textViewBody.setText(Html.fromHtml(body));
-//        contentLayout.addView();
+        contentLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        contentLayout.addView(new EarningsTwoADayView(getContext(), goal, cycle));
     }
 
     private void initFourOutOfFour(EarningOverview.Goals.Goal goal){

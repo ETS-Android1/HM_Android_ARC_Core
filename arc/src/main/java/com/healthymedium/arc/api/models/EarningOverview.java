@@ -14,7 +14,7 @@ public class EarningOverview {
 
     public static EarningOverview getTestObject() {
         EarningOverview overview = new EarningOverview();
-        overview.cycle = 1;
+        overview.cycle = 0;
         overview.cycle_earnings = "$0.50";
         overview.total_earnings = "$13.50";
         overview.goals.twentyOneSessions.name = "21-sessions";
@@ -27,6 +27,15 @@ public class EarningOverview {
         overview.goals.twoADay.amount_earned = "$0.00";
         overview.goals.twoADay.progress = 1;
         overview.goals.twoADay.value = "$6.00";
+        overview.goals.twoADay.progress_components = new ArrayList<Integer>() {{
+            add(100);
+            add(100);
+            add(100);
+            add(100);
+            add(50);
+            add(0);
+            add(0);
+        }};
         overview.goals.fourOutOfFour.name = "4-out-of-4";
         overview.goals.fourOutOfFour.completed = false;
         overview.goals.fourOutOfFour.amount_earned = "$0.00";
