@@ -8,6 +8,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.informative.DayProgressScreen;
+import com.healthymedium.arc.paths.informative.EarningsPostTestScreen;
 import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
@@ -792,9 +793,9 @@ public class StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
 
         fragments.add(new DayProgressScreen());
-//        EarningsScreen earningsScreen = new EarningsScreen();
-//        earningsScreen.setTransitionSet(TransitionSet.getSlidingDefault());
-//        fragments.add(earningsScreen);
+        EarningsPostTestScreen earningsScreen = new EarningsPostTestScreen();
+        earningsScreen.setTransitionSet(TransitionSet.getSlidingDefault());
+        fragments.add(earningsScreen);
 
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
