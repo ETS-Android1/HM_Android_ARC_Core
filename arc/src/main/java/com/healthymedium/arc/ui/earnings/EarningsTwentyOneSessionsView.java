@@ -67,7 +67,7 @@ public class EarningsTwentyOneSessionsView extends View {
         progressPaint.setColor(progressColor);
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setStyle(Paint.Style.STROKE);
+        textPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         textPaint.setTypeface(Fonts.robotoBold);
         textPaint.setTextAlign(Paint.Align.CENTER);
         textPaint.setTextSize(dp18);
