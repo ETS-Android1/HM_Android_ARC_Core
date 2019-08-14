@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.ui.TimeInput;
 import com.healthymedium.arc.hints.HintPointer;
@@ -19,6 +21,8 @@ import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.LocalTime;
+
+import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;
 
 @SuppressLint("ValidFragment")
 public class QuestionTime extends QuestionTemplate {
@@ -76,7 +80,13 @@ public class QuestionTime extends QuestionTemplate {
             @Override
             public void onClick(View view) {
                 dismissPointer();
-                HelpScreen helpScreen = new HelpScreen();
+
+                BaseFragment helpScreen;
+                if (USE_HELP_SCREEN) {
+                    helpScreen = new HelpScreen();
+                } else {
+                    helpScreen = new ContactScreen();
+                }
                 NavigationManager.getInstance().open(helpScreen);
             }
         });

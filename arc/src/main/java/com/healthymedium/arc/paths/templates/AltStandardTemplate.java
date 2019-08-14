@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -24,6 +25,8 @@ import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
+
+import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;
 
 @SuppressLint("ValidFragment")
 public class AltStandardTemplate extends BaseFragment {
@@ -113,7 +116,12 @@ public class AltStandardTemplate extends BaseFragment {
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HelpScreen helpScreen = new HelpScreen();
+                BaseFragment helpScreen;
+                if (USE_HELP_SCREEN) {
+                    helpScreen = new HelpScreen();
+                } else {
+                    helpScreen = new ContactScreen();
+                }
                 NavigationManager.getInstance().open(helpScreen);
             }
         });

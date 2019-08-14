@@ -22,6 +22,7 @@ public class Config {
     public static boolean ENABLE_LEGACY_PRICE_SETS = false; // if true, the PriceManager will continue to use a long-standing, but incorrect, method to determine the price set for a given test session.
     public static boolean IS_REMOTE = false; // if true, user will be required to state whether or not they commit to the study
     public static boolean EXPECTS_2FA_TEXT = true; // if true, user will receive a 2FA text message, if false use site code
+    public static boolean USE_HELP_SCREEN = true; // if true, uses the actual HelpScreen for the help buttons instead of the contact screen
     //Debug
     public static boolean DEBUG_DIALOGS = false; // click the header on most screens a couple times and a debug dialog will appear
     public static boolean ENABLE_LOGGING = false; // save logcat output to cached file 'Log'

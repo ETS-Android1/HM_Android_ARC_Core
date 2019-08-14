@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
+
+import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.utilities.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,6 +26,8 @@ import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
+
+import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;
 
 @SuppressLint("ValidFragment")
 public class StandardTemplate extends BaseFragment {
@@ -101,7 +105,13 @@ public class StandardTemplate extends BaseFragment {
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HelpScreen helpScreen = new HelpScreen();
+
+                BaseFragment helpScreen;
+                if (USE_HELP_SCREEN) {
+                    helpScreen = new HelpScreen();
+                } else {
+                    helpScreen = new ContactScreen();
+                }
                 NavigationManager.getInstance().open(helpScreen);
             }
         });

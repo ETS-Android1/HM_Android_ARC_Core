@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.notifications.Proctor;
+import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -31,6 +32,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
+
+import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;
 
 @SuppressLint("ValidFragment")
 public class AvailabilityConfirm extends BaseFragment {
@@ -140,7 +143,12 @@ public class AvailabilityConfirm extends BaseFragment {
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HelpScreen helpScreen = new HelpScreen();
+                BaseFragment helpScreen;
+                if (USE_HELP_SCREEN) {
+                    helpScreen = new HelpScreen();
+                } else {
+                    helpScreen = new ContactScreen();
+                }
                 NavigationManager.getInstance().open(helpScreen);
             }
         });

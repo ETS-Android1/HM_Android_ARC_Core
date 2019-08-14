@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -23,8 +24,10 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
+import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
+import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.ui.DigitView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -38,6 +41,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;
 
 @SuppressLint("ValidFragment")
 public class SetupTemplate extends StandardTemplate {
@@ -78,7 +83,13 @@ public class SetupTemplate extends StandardTemplate {
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HelpScreen helpScreen = new HelpScreen();
+                BaseFragment helpScreen;
+                if (USE_HELP_SCREEN) {
+                    helpScreen = new HelpScreen();
+                } else {
+                    helpScreen = new ContactScreen();
+                }
+
                 NavigationManager.getInstance().open(helpScreen);
             }
         });
