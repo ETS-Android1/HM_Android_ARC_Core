@@ -20,7 +20,7 @@ public class EarningOverview {
         overview.goals.twentyOneSessions.name = "21-sessions";
         overview.goals.twentyOneSessions.completed = true;
         overview.goals.twentyOneSessions.amount_earned = "$5.00";
-        overview.goals.twentyOneSessions.progress = 21;
+        overview.goals.twentyOneSessions.progress = 13;
         overview.goals.twentyOneSessions.value = "$5.00";
         overview.goals.twoADay.name = "2-a-day";
         overview.goals.twoADay.completed = false;

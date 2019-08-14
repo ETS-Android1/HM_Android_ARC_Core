@@ -74,7 +74,9 @@ public class EarningsGoalView extends RoundedLinearLayout {
         String body = ViewUtil.getString(R.string.earnings_21tests_body);
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
         textViewBody.setText(Html.fromHtml(body));
-//        contentLayout.addView();
+        EarningsTwentyOneSessionsView view = new EarningsTwentyOneSessionsView(getContext());
+        view.setProgress(goal.progress);
+        contentLayout.addView(view);
     }
 
     private void initTwoADay(EarningOverview.Goals.Goal goal, int cycle){
