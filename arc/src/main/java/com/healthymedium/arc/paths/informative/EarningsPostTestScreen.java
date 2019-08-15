@@ -14,6 +14,7 @@ import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
@@ -30,7 +31,7 @@ public class EarningsPostTestScreen extends BaseFragment {
     LinearLayout goalLayout;
 
     public EarningsPostTestScreen() {
-
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Nullable
