@@ -777,7 +777,7 @@ public class StateMachine {
     public void addSchedulePicker() {
         List<BaseFragment> fragments = new ArrayList<>();
 
-        fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.ChangeAvail_date_picker_body), ""));
+        fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.dateshift_picker), ""));
 
         fragments.add(new ScheduleCalendar());
 

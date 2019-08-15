@@ -493,5 +493,8 @@
     <string name="earnings_sync">Last Synced:</string>
     <string name="earnings_sync_justnow">Just Now</string>
 
+    <string name="dateshift_picker">What week are you able to test?</string>
+    <string name="dateshift_confirmation">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>.</string>
+
     <string name="footnote_symbol">*</string>
 </resources>

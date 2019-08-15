@@ -61,7 +61,7 @@ public class ScheduleCalendar extends BaseFragment {
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
 
-        String header = ViewUtil.getString(R.string.ChangeAvail_date_picker_confirm_body);
+        String header = ViewUtil.getString(R.string.dateshift_confirmation);
         header = header.replace("{DATE1}", start);
         header = header.replace("{DATE2}", end);
 
