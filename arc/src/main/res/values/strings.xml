@@ -445,11 +445,11 @@
     <string name="faq_earnings_q3">How do I get paid?</string>
     <string name="faq_earnings_q4">What\'s the different between "this week" and "study total"?</string>
     <string name="faq_earnings_q5">How do bonus goals work?</string>
-    <string name="faq_earnings_a1"></string>
-    <string name="faq_earnings_a2"></string>
-    <string name="faq_earnings_a3"></string>
-    <string name="faq_earnings_a4"></string>
-    <string name="faq_earnings_a5"></string>
+    <string name="faq_earnings_a1">You can earn up to $32 per 7-day testing cycle for as long as you are in the study. You earn $0.50 for each test you complete (up to $14 per cycle). You also can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests.</string>
+    <string name="faq_earnings_a2">Your payment will be processed immediately upon completion of a testing cycle. It may take up to [X] business days for your payment to be processed. Please contact your study coordinator if you have any questions about when you will receive your payment.</string>
+    <string name="faq_earnings_a3">You will be paid via an electronic Amazon gift card.</string>
+    <string name="faq_earnings_a4">"This week" refers to the amount of money you have earned during the current testing cycle. "Study total" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
+    <string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
 
     <string name="progress_daily_header">Today\'s Sessions</string>
     <string name="progess_dailystatus">&lt;b>{#}&lt;/b> Complete</string>
