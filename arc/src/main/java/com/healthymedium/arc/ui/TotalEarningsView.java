@@ -16,7 +16,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import java.text.DecimalFormat;
 
 /*
-    Displays an initial value of text on screen for 1 second, then text slides up to reveal new text.
+    Displays an initial value of text on screen, then text slides up to reveal new text.
 
     Usage:
         Define in XML:
@@ -27,21 +27,15 @@ import java.text.DecimalFormat;
 
         Set first and second values in Java:
             TotalEarningsView totalEarningsView = view.findViewById(R.id.totalEarningsView);
-            totalEarningsView.setOriginalValue(4.10);
-            totalEarningsView.setUpdatedValue(7.50);
-
-        The field will animate itself.
+            totalEarningsView.setText($0.00);
+            totalEarningsView.setText($7.50,true);
 */
 
 public class TotalEarningsView extends LinearLayout {
 
-    private final long animationStartDelayTime = 1000L;
     private int white;
-    private double originalValue;
-    private double updatedValue;
     private Handler handler;
     TextSwitcher textSwitcher;
-    DecimalFormat decimalFormat;
 
     public TotalEarningsView(Context context) {
         super(context);
@@ -62,20 +56,6 @@ public class TotalEarningsView extends LinearLayout {
         setOrientation(HORIZONTAL);
         white = ViewUtil.getColor(getContext(), R.color.white);
         handler = new Handler();
-        decimalFormat = new DecimalFormat("0.00");
-    }
-
-    public void setOriginalValue(double originalValue) {
-        this.originalValue = originalValue;
-        addOriginalValueText();
-    }
-
-    public void setUpdatedValue(double updatedValue) {
-        this.updatedValue = updatedValue;
-    }
-
-    private void addOriginalValueText() {
-        String originalValueString = "$" + decimalFormat.format(originalValue);
 
         textSwitcher = new TextSwitcher(getContext());
         textSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
@@ -88,23 +68,37 @@ public class TotalEarningsView extends LinearLayout {
                 return textView;
             }
         });
-        textSwitcher.setCurrentText(originalValueString);
-
         textSwitcher.setInAnimation(getContext(), R.anim.slide_in_up);
         textSwitcher.setOutAnimation(getContext(), R.anim.slide_out_up);
-
         addView(textSwitcher);
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                textSwitcher.setText("$" + decimalFormat.format(updatedValue));
+    public void setText(String value) {
+        setText(value,false,null);
+    }
+
+    public void setText(String value, boolean animate) {
+        setText(value,animate,null);
+    }
+
+    public void setText(String value, boolean animate, final Listener listener) {
+        if(animate){
+            textSwitcher.setText(value);
+            if(listener!=null){
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        listener.onFinished();
+                    }
+                },500);
             }
-        }, animationStartDelayTime);
+        } else {
+            textSwitcher.setCurrentText(value);
+        }
+    }
+
+    public interface Listener {
+        void onFinished();
     }
 
 }
