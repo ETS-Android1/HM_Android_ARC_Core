@@ -43,7 +43,8 @@ public class NotificationOverview extends StateInfoTemplate {
                 button.setEnabled(false);
                 if(NotificationUtil.areNotificationsEnabled(getContext())){
                     Study.getParticipant().markShownNotificationOverview();
-                    Study.skipToNextSegment();
+                    Study.openNextFragment();
+                    Study.openNextFragment();
                 } else {
                     Study.openNextFragment();
                 }
