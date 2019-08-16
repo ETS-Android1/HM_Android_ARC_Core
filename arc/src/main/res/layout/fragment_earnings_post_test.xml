@@ -8,6 +8,7 @@
     android:background="@color/secondary" >
 
     <ImageView
+        android:id="@+id/imageViewConfetti"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/confetti" />
@@ -65,18 +66,14 @@
                         android:textColor="@color/tealSubheader"
                         android:textSize="17dp" />
 
-                    <TextView
+                    <com.healthymedium.arc.ui.TotalEarningsView
                         android:id="@+id/weeklyTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="2dp"
-                        android:layout_marginRight="32dp"
-                        android:text="$0.00"
-                        android:textColor="@color/white"
-                        android:textSize="32dp"
-                        android:textStyle="bold" />
+                        android:layout_marginRight="32dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -96,7 +93,7 @@
                         android:textColor="@color/tealSubheader"
                         android:textSize="17dp" />
 
-                    <TextView
+                    <com.healthymedium.arc.ui.TotalEarningsView
                         android:id="@+id/studyTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,10 +101,7 @@
                         android:layout_marginLeft="32dp"
                         android:layout_marginTop="2dp"
                         android:layout_marginRight="32dp"
-                        android:text="$0.00"
-                        android:textColor="@color/white"
-                        android:textSize="32dp"
-                        android:textStyle="bold" />
+                        android:text="$0.00" />
                 </LinearLayout>
 
             </RelativeLayout>
