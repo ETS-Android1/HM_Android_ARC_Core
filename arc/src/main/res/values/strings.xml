@@ -35,7 +35,7 @@
     <string name="home_availability_reset_link">Change My Availability</string>
     <string name="home_contact_link">Contact and About</string>
 
-    <string name="chronotype_subhead">Six Questions</string>
+    <string name="chronotype_subhead">6 Questions</string>
     <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.&lt;br /> &lt;br />Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>
     <string name="chronotype_1_q1">I have been a shift- or night-worker in the past three months.</string>
     <string name="chronotype_1_q2">Normally, I work ____\n\ndays/week.</string>
@@ -52,7 +52,7 @@
     <string name="chronotype_workfree_wake">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>wake up&lt;/b> at:</string>
 
     <string name="sleepwakesurvey_header">Wake Survey</string>
-    <string name="sleepwakesurvey_subhead">Six Questions</string>
+    <string name="sleepwakesurvey_subhead">6 Questions</string>
     <string name="sleepwakesurvey_body">The following questions will ask you about sleep specific to last night and waking this morning.</string>
 
     <string name="chronotype_header">Chronotype</string>
@@ -61,7 +61,7 @@
     <string name="context_good">Good</string>
 
     <string name="context_header">Context Survey</string>
-    <string name="context_subhead">Five Questions</string>
+    <string name="context_subhead">5 Questions</string>
     <string name="context_body">These questions will briefly ask you about what is happening around you right now in this moment.</string>
 
     <string name="context_q1">Who is with you right now?</string>
