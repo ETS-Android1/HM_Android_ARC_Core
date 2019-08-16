@@ -22,6 +22,7 @@ import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.utilities.NavigationManager;
 
+import java.util.List;
 import java.util.Random;
 
 public class EarningsPostTestLoadingScreen extends BaseFragment {
@@ -76,21 +77,18 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
     @Override
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
-        animateAlpha(1.0f);
+        animateAlpha(1.0f,null);
     }
 
-    @Override
-    protected void onExitTransitionStart(boolean popped) {
-        super.onEnterTransitionEnd(popped);
-        animateAlpha(0f);
-    }
-
-    private void animateAlpha(float value) {
+    private void animateAlpha(float value, Runnable runnable) {
         if(textView!=null){
             textView.animate().alpha(value);
         }
         if(progressBar!=null) {
             progressBar.animate().alpha(value);
+        }
+        if(runnable!=null && handler!=null) {
+            handler.postDelayed(runnable,300);
         }
     }
 
@@ -110,11 +108,21 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
     }
 
     private void openSuccess(){
-        NavigationManager.getInstance().open(new EarningsPostTestScreen());
+        animateAlpha(0f, new Runnable() {
+            @Override
+            public void run() {
+                NavigationManager.getInstance().open(new EarningsPostTestScreen());
+            }
+        });
     }
 
     private void openFailure(){
-        NavigationManager.getInstance().open(new EarningsPostTestUnavailableScreen());
+        animateAlpha(0f, new Runnable() {
+            @Override
+            public void run() {
+                NavigationManager.getInstance().open(new EarningsPostTestUnavailableScreen());
+            }
+        });
     }
 
     Runnable runnable = new Runnable() {
