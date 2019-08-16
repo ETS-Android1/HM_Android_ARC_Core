@@ -40,7 +40,7 @@
     <string name="chronotype_1_q1">I have been a shift- or night-worker in the past three months.</string>
     <string name="chronotype_1_q2">Normally, I work ____\n\ndays/week.</string>
 
-    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work 7 days per week.&lt;br /> &lt;br />Please don\'t forget to indicate AM or PM.</string>
+    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work 7 days per week.&lt;br /> &lt;br />&lt;i>Please don\'t forget to indicate AM or PM.&lt;/i></string>
 
     <string name="chronotype_body_sleep">This is NOT when you go to bed.</string>
     <string name="chronotype_body_wake">This is NOT when you get out of bed.</string>

@@ -418,7 +418,7 @@ public class StateMachine {
 
         fragments.add(new StateInfoTemplate(
                 false,
-                res.getString(R.string.chronotype_header),
+                "",
                 "",
                 res.getString(R.string.chronotype_2_body),
                 res.getString(R.string.button_next)));
