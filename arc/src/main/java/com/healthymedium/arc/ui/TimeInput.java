@@ -100,7 +100,8 @@ public class TimeInput extends FrameLayout {
                         String error = ViewUtil.getString(R.string.availability_minimum_error).replace("{HOURS}", Integer.toString(minWakeTime));
                         errorText.setText(error);
                     } else {
-                        errorText.setText("");
+                        String error = ViewUtil.getString(R.string.availability_maximum_error).replace("{HOURS}", Integer.toString(maxWakeTime));
+                        errorText.setText(error);
                     }
 
                     setValidity(false);
