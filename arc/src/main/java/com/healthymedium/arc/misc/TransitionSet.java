@@ -40,10 +40,10 @@ public class TransitionSet {
         TransitionSet set = new TransitionSet();
         if(animateEntry) {
             set.enter = R.anim.slide_in_right;
-            set.popEnter =  R.anim.slide_in_left;
+            set.popEnter =  R.anim.slide_in_right;
         }
         set.exit = R.anim.slide_out_left;
-        set.popExit =  R.anim.slide_out_right;
+        set.popExit =  R.anim.slide_out_left;
         return set;
     }
 
