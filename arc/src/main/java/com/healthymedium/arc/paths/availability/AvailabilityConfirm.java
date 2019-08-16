@@ -119,6 +119,9 @@ public class AvailabilityConfirm extends BaseFragment {
         String bedTime = clock.getRhythm("Monday").getBedTime().toString("h:mm a");
 
         stringHeader = "Great! We'll only send you reminders between <b>" + wakeTime + "</b> and <b>" + bedTime + ".</b>";
+        if(reschedule) {
+            stringHeader = "Great! Starting tomorrow, we'll only send you reminders between <b>" + wakeTime + "</b> and <b>" + bedTime + ".</b>";
+        }
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
