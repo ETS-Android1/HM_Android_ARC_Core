@@ -366,6 +366,7 @@
     <string name="popup_tutorial_greatjob">&lt;b>Great job!&lt;/b> &lt;br /&gt;Let\'s try a couple more for practice.</string>
     <string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> &lt;br /&gt;One more&#8230;</string>
 
+    <string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
     <string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the answer that makes sense to you.</string>
     <string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> &lt;br /&gt;Let\'s try another.</string>
     <string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>

@@ -22,6 +22,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class PricesTutorial extends Tutorial {
 
+    Runnable runnableWhatDoYouThink;
+    Handler handlerWhatDoYouThink = new Handler();
+
     RelativeLayout priceContainer;
 
     RadioButton buttonYes;
@@ -30,6 +33,8 @@ public class PricesTutorial extends Tutorial {
     TextView textviewFood;
     TextView textviewPrice;
     TextView textView12;
+
+    HintPointer initialViewHint;
 
     HintHighlighter firstPriceContainerHighlight;
     HintPointer firstPriceHint;
@@ -82,6 +87,8 @@ public class PricesTutorial extends Tutorial {
 
         quitHighlight = new HintHighlighter(getActivity());
         quitHint = new HintPointer(getActivity(), closeButton, true, false);
+
+        initialViewHint = new HintPointer(getActivity(), priceContainer, true, false);
 
         firstPriceContainerHighlight = new HintHighlighter(getActivity());
         firstPriceHint = new HintPointer(getActivity(), priceContainer, true, false);
@@ -160,6 +167,8 @@ public class PricesTutorial extends Tutorial {
                         quitHighlight.dismiss();
                         quitHint.dismiss();
 
+                        initialViewHint.dismiss();
+
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
                         firstGreatChoiceHint.dismiss();
@@ -189,8 +198,20 @@ public class PricesTutorial extends Tutorial {
         firstPriceContainerHighlight.addTarget(priceContainer, 10);
         firstPriceContainerHighlight.show();
 
+        initialViewHint.setText(ViewUtil.getString(R.string.popup_tutorial_price_intro));
+        initialViewHint.show();
+
         firstPriceHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose1));
-        firstPriceHint.show();
+
+        runnableWhatDoYouThink = new Runnable() {
+            @Override
+            public void run() {
+                initialViewHint.dismiss();
+                firstPriceHint.show();
+            }
+        };
+
+        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink,10000);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -200,6 +221,8 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
+                        initialViewHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(true);
 
@@ -240,6 +263,8 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstPriceContainerHighlight.dismiss();
                         firstPriceHint.dismiss();
+                        initialViewHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(false);
 
@@ -277,11 +302,18 @@ public class PricesTutorial extends Tutorial {
         textviewFood.setText("Soup");
         textviewPrice.setText("$10.82");
 
-        secondPriceContainerHighlight.addTarget(priceContainer, 10);
-        secondPriceContainerHighlight.show();
+        runnableWhatDoYouThink = new Runnable() {
+            @Override
+            public void run() {
+                secondPriceContainerHighlight.addTarget(priceContainer, 10);
+                secondPriceContainerHighlight.show();
 
-        secondPriceHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose1));
-        secondPriceHint.show();
+                secondPriceHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose1));
+                secondPriceHint.show();
+            }
+        };
+
+        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink,10000);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -291,6 +323,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondPriceContainerHighlight.dismiss();
                         secondPriceHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(true);
 
@@ -331,6 +364,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondPriceContainerHighlight.dismiss();
                         secondPriceHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(false);
 
@@ -368,14 +402,23 @@ public class PricesTutorial extends Tutorial {
         textviewFood.setText("Bananas");
         textviewPrice.setVisibility(View.GONE);
 
+        textView12.setText(ViewUtil.getString(R.string.prices_whatwasprice));
+
         buttonYes.setText("$6.78");
         buttonNo.setText("$3.27");
 
-        firstMatchContainerHighlight.addTarget(priceContainer, 10);
-        firstMatchContainerHighlight.show();
+        runnableWhatDoYouThink = new Runnable() {
+            @Override
+            public void run() {
+                firstMatchContainerHighlight.addTarget(priceContainer, 10);
+                firstMatchContainerHighlight.show();
 
-        firstMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_recall));
-        firstMatchHint.show();
+                firstMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_recall));
+                firstMatchHint.show();
+            }
+        };
+
+        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink,10000);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -385,6 +428,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(true);
 
@@ -425,6 +469,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(false);
 
@@ -466,11 +511,18 @@ public class PricesTutorial extends Tutorial {
         buttonYes.setText("$10.82");
         buttonNo.setText("$4.01");
 
-        secondMatchContainerHighlight.addTarget(priceContainer, 10);
-        secondMatchContainerHighlight.show();
+        runnableWhatDoYouThink = new Runnable() {
+            @Override
+            public void run() {
+                secondMatchContainerHighlight.addTarget(priceContainer, 10);
+                secondMatchContainerHighlight.show();
 
-        secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose2));
-        secondMatchHint.show();
+                secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose2));
+                secondMatchHint.show();
+            }
+        };
+
+        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink,10000);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -480,6 +532,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(true);
 
@@ -505,6 +558,7 @@ public class PricesTutorial extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         incrementProgress();
                         updateButtons(false);
 
