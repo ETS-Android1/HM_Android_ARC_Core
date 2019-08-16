@@ -15,6 +15,9 @@ public class Earnings {
     private int overviewRefresh;
     private DateTime overviewUpdateTime;
 
+    private String prevWeeklyTotal = new String();
+    private String prevStudyTotal = new String();
+
     private EarningDetails details;
     private int detailsRefresh;
     private DateTime detailsUpdateTime;
@@ -76,6 +79,14 @@ public class Earnings {
         return overviewUpdateTime;
     }
 
+    public String getPrevWeeklyTotal() {
+        return prevWeeklyTotal;
+    }
+
+    public String getPrevStudyTotal() {
+        return prevStudyTotal;
+    }
+
     public void refreshDetails(final Listener listener){
 
         RestClient client = Study.getRestClient();
@@ -129,6 +140,10 @@ public class Earnings {
     }
 
     public void invalidate(){
+        if(overview!=null){
+            prevStudyTotal = overview.total_earnings;
+            prevWeeklyTotal = overview.cycle_earnings;
+        }
         overviewRefresh = 0;
         detailsRefresh = 0;
     }

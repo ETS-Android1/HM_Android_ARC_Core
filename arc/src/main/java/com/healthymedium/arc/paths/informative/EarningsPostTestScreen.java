@@ -16,6 +16,7 @@ import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
+import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
@@ -51,16 +52,17 @@ public class EarningsPostTestScreen extends BaseFragment {
         goalLayout = view.findViewById(R.id.goalLayout);
         goalLayout.setAlpha(0f);
 
-        overview = Study.getParticipant().getEarnings().getOverview();
+        Earnings earnings = Study.getParticipant().getEarnings();
+        overview = earnings.getOverview();
         if(overview==null){
             overview = EarningOverview.getTestObject();
         }
 
         weeklyTotal = view.findViewById(R.id.weeklyTotal);
-        weeklyTotal.setText("$0.00",false);
+        weeklyTotal.setText(earnings.getPrevWeeklyTotal(),false);
 
         studyTotal = view.findViewById(R.id.studyTotal);
-        studyTotal.setText("$0.00",false);
+        studyTotal.setText(earnings.getPrevStudyTotal(),false);
 
         for(EarningOverview.Goals.Goal goal : overview.goals.getList()){
             goalLayout.addView(new EarningsGoalView(getContext(),goal, overview.cycle));
