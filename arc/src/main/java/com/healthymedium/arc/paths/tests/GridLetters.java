@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
+import com.healthymedium.arc.core.TimedDialogMultipart;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
@@ -34,14 +35,14 @@ public class GridLetters extends BaseFragment {
     protected int eCount = 0;
     protected int fCount = 0;
 
-    protected TimedDialog dialog;
+    protected TimedDialogMultipart dialog;
     Handler handler;
     protected Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if(isVisible()){
-                dialog = new TimedDialog(getString(R.string.grids_popup1),1000);
-                dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
+                dialog = new TimedDialogMultipart(getString(R.string.grids_popup2), getString(R.string.grids_popup1), 3000, 6000);
+                dialog.setOnDialogDismissListener(new TimedDialogMultipart.OnDialogDismiss() {
                     @Override
                     public void dismiss() {
                         section.setECount(eCount);
