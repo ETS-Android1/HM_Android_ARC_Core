@@ -72,7 +72,7 @@
                 android:layout_marginRight="32dp"
                 android:text="Only 1 more to go today."
                 android:textAlignment="center"
-                android:textColor="@color/white"
+                android:textColor="@color/hintDark"
                 android:textSize="22dp" />
 
             <com.healthymedium.arc.ui.base.RoundedFrameLayout
@@ -80,9 +80,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:visibility="visible"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:fillColor="@color/hintDark"
-                app:radius="4dp">
+                app:radius="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -92,7 +93,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="2dp"
-                    android:text="Done for the day!"
+                    android:text="@string/progress_schedule_status2"
                     android:textAlignment="center"
                     android:textColor="@color/secondaryDark"
                     android:textSize="22dp" />
@@ -102,6 +103,25 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        tools:text="Starting tomorrow, you’ll earn money for each session you complete!"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+
 
     <com.healthymedium.arc.ui.Button
         android:id="@+id/button"
