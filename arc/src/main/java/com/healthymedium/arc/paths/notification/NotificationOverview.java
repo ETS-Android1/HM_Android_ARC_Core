@@ -37,6 +37,11 @@ public class NotificationOverview extends StateInfoTemplate {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
 
+        if(Study.getParticipant().hasBeenShownNotificationOverview()){
+            Study.getStateMachine().openNext();
+            return view;
+        }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

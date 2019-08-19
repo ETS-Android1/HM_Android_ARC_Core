@@ -1,6 +1,8 @@
 package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.notifications.NotificationUtil;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
 import com.healthymedium.arc.paths.questions.QuestionSingleButton;
 import com.healthymedium.arc.paths.templates.LandingTemplate;
@@ -97,6 +99,11 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+            state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
+            return;
+        }
+
         if(!participant.hasSchedule()){
             state.currentPath = PATH_SETUP_AVAILABILITY;
             return;
@@ -118,6 +125,11 @@ public class StateMachineAlpha extends StateMachine {
 
     private void decidePathBaseline(){
         Participant participant = Study.getInstance().getParticipant();
+
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+            state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
+            return;
+        }
 
         if (participant.getCurrentTestSession().isOngoing()) {
             Log.i("StateMachine", "loading in the middle of an indexed test, marking it abandoned");
@@ -176,6 +188,11 @@ public class StateMachineAlpha extends StateMachine {
 
     private void decidePathArc(){
         Participant participant = Study.getInstance().getParticipant();
+
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+            state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
+            return;
+        }
 
         if(participant.getState().currentTestCycle == 4) {
             state.lifecycle = LIFECYCLE_OVER;
@@ -248,6 +265,11 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathIdle() {
         TestCycle cycle = Study.getCurrentTestCycle();
 
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+            state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
+            return;
+        }
+
         if (cycle.getActualStartDate().isBeforeNow()) {
             state.lifecycle = LIFECYCLE_ARC;
             decidePath();
@@ -286,6 +308,8 @@ public class StateMachineAlpha extends StateMachine {
             case LIFECYCLE_ARC:
                 switch (state.currentPath){
                     case PATH_TEST_NONE:
+                        break;
+                    case PATH_NOTIFICATIONS_OVERVIEW:
                         break;
                     default:
                         Log.i(tag, "gather data from test");
