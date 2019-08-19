@@ -1,29 +1,22 @@
 package com.healthymedium.arc.paths.informative;
 
-import android.animation.Animator;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Earnings;
+import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.ui.Button;
-import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.utilities.NavigationManager;
-
-import java.util.List;
-import java.util.Random;
 
 public class EarningsPostTestLoadingScreen extends BaseFragment {
 
@@ -32,15 +25,30 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
 
     Earnings earnings;
     Handler handler;
+    boolean practiceTest;
 
     public EarningsPostTestLoadingScreen() {
-        setTransitionSet(TransitionSet.getSlidingDefault());
+        ParticipantState state = Study.getParticipant().getState();
+        practiceTest = (state.currentTestCycle==0 && state.currentTestDay==1 && state.currentTestSession==0);
+        TransitionSet set = new TransitionSet();
+        set.enter = R.anim.slide_in_right;
+        set.popEnter =  R.anim.slide_in_left;
+        if(!practiceTest) {
+            set.exit = R.anim.slide_out_left;
+            set.popExit = R.anim.slide_out_right;
+        }
+        setTransitionSet(set);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_earnings_post_test_loading, container, false);
+
+        if(practiceTest){
+            Study.openNextFragment();
+            return view;
+        }
 
         progressBar = view.findViewById(R.id.progressBar);
         textView = view.findViewById(R.id.textView);
