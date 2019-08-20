@@ -107,7 +107,6 @@ public class StateMachine {
         if (animateEntry) {
             segment.fragments.get(1).setTransitionSet(TransitionSet.getSlidingDefault());
             segment.fragments.get(2).setTransitionSet(TransitionSet.getSlidingDefault());
-            segment.fragments.get(3).setTransitionSet(TransitionSet.getSlidingDefault());
         }
     }
 
