@@ -2,9 +2,7 @@ package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +23,6 @@ import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import org.joda.time.DateTime;
 import java.util.List;
 
 public class DayProgressScreen extends BaseFragment {
@@ -52,9 +49,12 @@ public class DayProgressScreen extends BaseFragment {
         LinearLayout linearLayout = view.findViewById(R.id.linearLayout);
         TextView textViewTestsComplete = view.findViewById(R.id.textViewTestsComplete);
         TextView textViewTestsLeft = view.findViewById(R.id.textViewTestsLeft);
+        TextView textView = view.findViewById(R.id.textView);
         RoundedFrameLayout frameLayoutDone = view.findViewById(R.id.frameLayoutDone);
         Button button = view.findViewById(R.id.button);
         confetti = view.findViewById(R.id.imageViewConfetti);
+
+
 
         // display progress views ------------------------------------------------------------------
         Participant participant = Study.getParticipant();
@@ -99,23 +99,24 @@ public class DayProgressScreen extends BaseFragment {
 
         // display proper test ---------------------------------------------------------------------
 
-        textViewTestsComplete.setText(sessionsFinished + (sessionsFinished==1?" Session Complete!":" Sessions Complete!"));
+        if(cycleIndex==0 && dayIndex==0) {
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(Html.fromHtml(getString(R.string.progress_practice_body2)));
+            textViewTestsComplete.setText(getString(R.string.progress_practice_body1));
+        } else {
+            int id = (sessionsFinished == 1 ? R.string.progress_schedule_body1 : R.string.progress_schedule_body2);
+            String text = ViewUtil.replaceToken(getString(id), R.string.token_number, String.valueOf(sessionsFinished));
+            textViewTestsComplete.setText(Html.fromHtml(text));
+        }
 
-        if(testDay.getNumberOfTestsLeft()==0){
+        if(testDay.getNumberOfTestsLeft()==0) {
             textViewTestsLeft.setVisibility(View.GONE);
             frameLayoutDone.setVisibility(View.VISIBLE);
         } else {
-            String before= "Only ";
-            String highlight =  testDay.getNumberOfTestsLeft()+" more ";
-            String after= "to go today.";
-            String text = before+highlight+after;
-            Spannable spannable = new SpannableString(text);
-            spannable.setSpan(new ForegroundColorSpan(
-                    ViewUtil.getColor(getContext(),R.color.hintDark)),
-                    text.indexOf(highlight),
-                    text.indexOf(highlight)+ highlight.length(),
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            textViewTestsLeft.setText(spannable);
+            String text = getString(R.string.progress_schedule_status1);
+            String left = String.valueOf(testDay.getNumberOfTestsLeft());
+            text = ViewUtil.replaceToken(text, R.string.token_number, left);
+            textViewTestsLeft.setText(Html.fromHtml(text));
         }
 
         button.setOnClickListener(new View.OnClickListener() {

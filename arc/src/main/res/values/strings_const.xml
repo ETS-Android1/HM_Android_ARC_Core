@@ -8,6 +8,7 @@
     <string name="token_value1">{Value1}</string>
     <string name="token_value2">{Value2}</string>
     <string name="token_amount">[AMOUNT]</string>
+    <string name="token_number">[#]</string>
 
     <string name="format_date_long">EEEE, MMMM d</string>
 
