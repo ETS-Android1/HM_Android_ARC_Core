@@ -4,10 +4,14 @@ import com.healthymedium.arc.api.models.ExistingData;
 import com.healthymedium.arc.api.models.SessionInfo;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationTypes;
+import com.healthymedium.arc.notifications.types.TestTake;
+import com.healthymedium.arc.notifications.types.TestTakeFirstOfDay;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -86,6 +90,54 @@ public class Scheduler {
         for (TestSession session : testSessions) {
             int sessionId = session.getId();
             Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
+
+//            if (session.getScheduledTime().isAfterNow()) {
+//                TestTake type = new TestTake();
+//                //TestTake type = NotificationTypes.TestTake;
+//                type.setExpirationTime(session.getExpirationTime());
+//
+//                // if first test of the cycle
+//                if (session.getIndex() == 0 && session.getDayIndex() == 0) {
+//                    type.setBody(ViewUtil.getString(R.string.notification1_firstday));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//
+//                // if first of day 4
+//                else if (session.getIndex() == 0 && session.getDayIndex() == 3) {
+//                    type.setBody(ViewUtil.getString(R.string.notification1_halfway));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//
+//                // if first of day
+//                else if (session.getIndex() == 0) {
+//                    type.setBody(ViewUtil.getString(R.string.notification1_default));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//
+//                // if second of day
+//                else if (session.getIndex() == 1) {
+//                    type.setBody(ViewUtil.getString(R.string.notifications2_default));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//
+//                // if third of day
+//                else if (session.getIndex() == 2) {
+//                    type.setBody(ViewUtil.getString(R.string.notification3_default));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//
+//                // if last of cycle
+//                else if (session.getIndex() == 3 && session.getDayIndex() == 6) {
+//                    type.setBody(ViewUtil.getString(R.string.notification4_lastday));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//
+//                // if last of day
+//                else if (session.getIndex() == 3) {
+//                    type.setBody(ViewUtil.getString(R.string.notification4_default));
+//                    notificationManager.scheduleNotification(sessionId, type, session.getScheduledTime());
+//                }
+//            }
 
             if (session.getScheduledTime().isAfterNow()) {
                 notificationManager.scheduleNotification(sessionId, NotificationTypes.TestTake, session.getScheduledTime());

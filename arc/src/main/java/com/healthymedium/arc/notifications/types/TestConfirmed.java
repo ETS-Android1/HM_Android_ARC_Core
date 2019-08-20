@@ -5,6 +5,7 @@ import android.content.Context;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class TestConfirmed extends NotificationType {
 
@@ -21,8 +22,8 @@ public class TestConfirmed extends NotificationType {
     }
 
     @Override
-    public String getContent(Context context) {
-        return context.getString(R.string.notification_confirm);
+    public String getContent(NotificationNode node) {
+        return ViewUtil.getString(R.string.notification_confirm);
     }
 
     @Override

@@ -60,7 +60,7 @@ public abstract class NotificationType {
 
     // abstract methods ----------------------------------------------------------------------------
 
-    public abstract String getContent(Context context);
+    public abstract String getContent(NotificationNode node);
 
     // the return value dictates whether or not the notification is shown to the user
     public abstract boolean onNotifyPending(NotificationNode node);

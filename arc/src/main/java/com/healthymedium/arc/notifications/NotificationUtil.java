@@ -134,7 +134,7 @@ public class NotificationUtil {
 
     // ---------------------------------------------------------------------------------------------
 
-    public static Notification buildNotification(Context context, NotificationType type) {
+    public static Notification buildNotification(Context context, NotificationNode node, NotificationType type) {
         Log.i(tag,"buildNotification(channel=\""+type.getChannelName()+"\")");
 
         Intent main = new Intent(context, MainActivity.class);
@@ -149,7 +149,7 @@ public class NotificationUtil {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,type.getChannelId())
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentTitle(context.getString(R.string.app_name))
-                .setContentText(type.getContent(context))
+                .setContentText(type.getContent(node))
                 .setVibrate(new long[]{500,250,125,250})
                 .setAutoCancel(true)
                 .setColor(ContextCompat.getColor(context,R.color.primary))

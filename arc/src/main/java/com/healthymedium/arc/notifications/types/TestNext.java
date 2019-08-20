@@ -6,6 +6,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 
@@ -24,10 +25,10 @@ public class TestNext extends NotificationType {
     }
 
     @Override
-    public String getContent(Context context) {
+    public String getContent(NotificationNode node) {
         DateTime date = Study.getInstance().getParticipant().getCurrentTestCycle().getActualStartDate();
-        String fmtDate = date.toString(context.getString(R.string.format_date));
-        return context.getString(R.string.notification_next).replace("{DATE}", fmtDate);
+        String fmtDate = date.toString(ViewUtil.getString(R.string.format_date));
+        return ViewUtil.getString(R.string.notification_next).replace("{DATE}", fmtDate);
     }
 
     @Override

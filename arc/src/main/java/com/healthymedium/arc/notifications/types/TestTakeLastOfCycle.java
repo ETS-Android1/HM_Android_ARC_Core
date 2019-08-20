@@ -12,26 +12,26 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-public class VisitNextMonth extends NotificationType {
+public class TestTakeLastOfCycle extends NotificationType {
 
-    public VisitNextMonth(){
+    public TestTakeLastOfCycle(){
         super();
-        id = 5;
-        channelId = "VISIT_NEXT_MONTH";
-        channelName = "Next Testing Cycle, Month Prior";
-        channelDesc = "Notifies the user one month before their next testing cycle";
+        id = 1;
+        channelId = "TEST_TAKE_LAST_OF_CYCLE";
+        channelName = "Test Reminder";
+        channelDesc = "Notifies user when it is time to take their last test of the cycle";
         importance = NotificationImportance.HIGH;
-        extra = Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION;
-        proctored = false;
+        extra = Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION;
+        proctored = true;
         soundResource = R.raw.pluck;
     }
 
     @Override
     public String getContent(NotificationNode node) {
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d");
-        DateTime startDate = Study.getInstance().getParticipant().getCurrentTestCycle().getActualStartDate();
-        String start = fmt.print(startDate);
-        return ViewUtil.getString(R.string.notification_1month).replace("{DATE}", start);
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("hh:mm a");
+        DateTime expirationTime = Study.getInstance().getParticipant().getCurrentTestSession().getExpirationTime();
+        String time = fmt.print(expirationTime);
+        return ViewUtil.getString(R.string.notification4_lastday).replace("{TIME}", time);
     }
 
     @Override

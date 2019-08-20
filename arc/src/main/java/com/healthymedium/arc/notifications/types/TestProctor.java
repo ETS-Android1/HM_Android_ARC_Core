@@ -18,7 +18,7 @@ public class TestProctor extends NotificationType {
     }
 
     @Override
-    public String getContent(Context context) {
+    public String getContent(NotificationNode node) {
         return "";
     }
 

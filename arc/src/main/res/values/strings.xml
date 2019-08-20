@@ -306,6 +306,15 @@
 
 
 
+
+    <string name="notification1_firstday">It\'s time for the first test of the week! Start your streak by completing this test by {TIME}.</string>
+    <string name="notification1_default">It\'s time for the first test of the day! This test will be available until {TIME}.</string>
+    <string name="notification1_halfway">You\'re halfway through the week. Keep it up! Today\'s first test will be available until {TIME}.</string>
+    <string name="notifications2_default">It\'s time for today\'s second test! This test will be available until {TIME}.</string>
+    <string name="notification3_default">Your third test of the day is now available. Please complete this test by {TIME}.</string>
+    <string name="notification4_default">The last test of the day is here! Finish strong by completing this test by {TIME}.</string>
+    <string name="notification4_lastday">It\'s time to take your last test of the week! Please finish it by {TIME}. Your coordinator will contact you about your earnings shortly.</string>
+
     <string name="button_viewfaq">VIEW FAQ</string>
     <string name="button_viewdetails">VIEW DETAILS</string>
     <string name="button_beginsurvey">BEGIN SURVEY</string>

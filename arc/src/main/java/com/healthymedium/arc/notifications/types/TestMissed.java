@@ -6,6 +6,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class TestMissed extends NotificationType {
 
@@ -24,8 +25,8 @@ public class TestMissed extends NotificationType {
     }
 
     @Override
-    public String getContent(Context context) {
-        return context.getString(R.string.notification_missed);
+    public String getContent(NotificationNode node) {
+        return ViewUtil.getString(R.string.notification_missed);
     }
 
     @Override

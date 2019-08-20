@@ -16,8 +16,8 @@ import static com.healthymedium.arc.notifications.types.TestMissed.TAG_TEST_MISS
 
 public class TestSession {
 
-    private int dayIndex;
-    private int index;
+    private int dayIndex;               // The day in the cycle
+    private int index;                  // Which test this is on a given day
     private int id;
     private LocalDate scheduledDate;    // The user-modified scheduled date
     private DateTime prescribedTime;    // The original scheduled time
