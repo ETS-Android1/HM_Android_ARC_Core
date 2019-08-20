@@ -272,6 +272,12 @@
     <string name="Day_Abbrev_Fri">F</string>
     <string name="Day_Abbrev_Sat">S</string>
 
+    <string name="status_ongoing">Ongoing</string>
+    <string name="status_inprogress">In Progress</string>
+    <string name="status_done">Done!</string>
+    <string name="status_done_withdate">Done {DATE}</string>
+    <string name="status_nonedone">None! You\'re all done!</string>
+
     <string name="popup_scroll">Scroll to select</string>
 
     <string name="ChangeAvail_date_picker_body"></string>
