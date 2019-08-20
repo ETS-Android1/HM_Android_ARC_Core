@@ -407,6 +407,11 @@ public class PricesTutorial extends Tutorial {
         buttonYes.setText("$6.78");
         buttonNo.setText("$3.27");
 
+        buttonYes.showButton(false);
+        buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
+        buttonNo.showButton(false);
+        buttonNo.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
+
         runnableWhatDoYouThink = new Runnable() {
             @Override
             public void run() {
@@ -510,6 +515,11 @@ public class PricesTutorial extends Tutorial {
 
         buttonYes.setText("$10.82");
         buttonNo.setText("$4.01");
+
+        buttonYes.showButton(false);
+        buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
+        buttonNo.showButton(false);
+        buttonNo.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
 
         runnableWhatDoYouThink = new Runnable() {
             @Override

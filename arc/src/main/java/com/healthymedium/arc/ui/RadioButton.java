@@ -1,6 +1,7 @@
 package com.healthymedium.arc.ui;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.util.AttributeSet;
 import android.view.View;
@@ -24,20 +25,20 @@ public class RadioButton extends FrameLayout {
 
     public RadioButton(Context context) {
         super(context);
-        init(context);
+        init(context, null);
     }
 
     public RadioButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        init(context, attrs);
     }
 
     public RadioButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init(context, attrs);
     }
 
-    private void init(Context context){
+    private void init(Context context, AttributeSet attrs){
         View view = inflate(context,R.layout.custom_radio_button,this);
         radioButton = view.findViewById(R.id.radioButton);
         radioButton.setText(text);
@@ -47,6 +48,17 @@ public class RadioButton extends FrameLayout {
         paddingTop = frameLayoutRadioButton.getPaddingTop();
         paddingRight = frameLayoutRadioButton.getPaddingRight();
         paddingBottom = frameLayoutRadioButton.getPaddingBottom();
+
+        // attributes
+        TypedArray options = context.obtainStyledAttributes(attrs, R.styleable.RadioButton, 0, 0);
+        boolean showButton = options.getBoolean(R.styleable.RadioButton_showButton, true);
+        if(!showButton) {
+            radioButton.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
+        }
+        int labelPosition = options.getInteger(R.styleable.RadioButton_labelPosition, 0);
+        if(labelPosition == 2) {
+            radioButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
+        }
 
         radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -95,6 +107,17 @@ public class RadioButton extends FrameLayout {
 
     public boolean isChecked(){
         return radioButton.isChecked();
+    }
+
+    public void showButton(boolean showButton) {
+        radioButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.radiobutton),null,null,null);
+        if(!showButton) {
+            radioButton.setCompoundDrawablesWithIntrinsicBounds(null,null,null,null);
+        }
+    }
+
+    public void setLabelPosition(int position) {
+        radioButton.setTextAlignment(position);
     }
 
 }

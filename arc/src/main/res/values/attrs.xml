@@ -150,5 +150,14 @@
         <attr name="unearned" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="RadioButton">
+        <attr name="showButton" format="boolean"/>
+        <attr name="labelPosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="center" value="2"/>
+        </attr>
+    </declare-styleable>
+
 
 </resources>

@@ -35,6 +35,8 @@
 
     <com.healthymedium.arc.ui.RadioButton
         android:id="@+id/buttonTop"
+        app:showButton="false"
+        app:labelPosition="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -44,6 +46,8 @@
 
     <com.healthymedium.arc.ui.RadioButton
         android:id="@+id/buttonBottom"
+        app:showButton="false"
+        app:labelPosition="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonTop"
