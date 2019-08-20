@@ -54,16 +54,16 @@ public class EarningsGoalView extends RoundedLinearLayout {
         linearLayoutBody = view.findViewById(R.id.linearLayoutBody);
         linearLayoutHeader = view.findViewById(R.id.linearLayoutHeader);
 
-        if(goal.completed_on!=null){
-            DateTime completedDate = new DateTime(goal.completed_on*1000L);
-            String date = JodaUtil.format(completedDate,R.string.format_date_dashed,Application.getInstance().getLocale());
-            String completedOn = ViewUtil.replaceToken(ViewUtil.getString(R.string.status_done_withdate),R.string.token_date,date);
-            textViewDone.setText(completedOn);
-        }
-
         if(showCompletionCollapsed){
             linearLayoutHeader.setRadius(ViewUtil.dpToPx(8));
             linearLayoutBody.setVisibility(GONE);
+
+            if(goal.completed_on!=null){
+                DateTime completedDate = new DateTime(goal.completed_on*1000L);
+                String date = JodaUtil.format(completedDate,R.string.format_date_dashed,Application.getInstance().getLocale());
+                String completedOn = ViewUtil.replaceToken(ViewUtil.getString(R.string.status_done_withdate),R.string.token_date,date);
+                textViewDone.setText(completedOn);
+            }
         }
 
         if(goal.completed){
