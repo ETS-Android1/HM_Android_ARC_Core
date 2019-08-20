@@ -1,6 +1,6 @@
 package com.healthymedium.arc.api.models;
 
-import com.google.gson.annotations.SerializedName;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,24 +10,46 @@ public class EarningOverview {
     public String total_earnings;
     public Integer cycle;
     public String cycle_earnings;
-    public Goals goals;
+    public List<Goal> goals;
+    public List<Achievement> new_achievements;
 
     public static EarningOverview getTestObject() {
         EarningOverview overview = new EarningOverview();
         overview.cycle = 0;
         overview.cycle_earnings = "$0.50";
         overview.total_earnings = "$13.50";
-        overview.goals.twentyOneSessions.name = "21-sessions";
-        overview.goals.twentyOneSessions.completed = true;
-        overview.goals.twentyOneSessions.amount_earned = "$5.00";
-        overview.goals.twentyOneSessions.progress = 13;
-        overview.goals.twentyOneSessions.value = "$5.00";
-        overview.goals.twoADay.name = "2-a-day";
-        overview.goals.twoADay.completed = false;
-        overview.goals.twoADay.amount_earned = "$0.00";
-        overview.goals.twoADay.progress = 1;
-        overview.goals.twoADay.value = "$6.00";
-        overview.goals.twoADay.progress_components = new ArrayList<Integer>() {{
+
+        Achievement testAchievement = new Achievement();
+        testAchievement.name = "test-session";
+        testAchievement.amount_earned = "$0.50";
+        overview.new_achievements.add(testAchievement);
+
+//        Achievement twentyOneAchievement = new Achievement();
+//        twentyOneAchievement.name = "21-sessions";
+//        twentyOneAchievement.amount_earned = "$5.00";
+//        overview.new_achievements.add(twentyOneAchievement);
+
+        Goal fourOutOfFour = new Goal();
+        fourOutOfFour.name = "4-out-of-4";
+        fourOutOfFour.completed = false;
+        fourOutOfFour.amount_earned = "$0.00";
+        fourOutOfFour.progress = 1;
+        fourOutOfFour.value = "$1.00";
+        fourOutOfFour.progress_components = new ArrayList<Integer>() {{
+            add(33);
+            add(100);
+            add(0);
+            add(0);
+        }};
+        overview.goals.add(fourOutOfFour);
+
+        Goal twoADay = new Goal();
+        twoADay.name = "2-a-day";
+        twoADay.completed = false;
+        twoADay.amount_earned = "$0.00";
+        twoADay.progress = 1;
+        twoADay.value = "$6.00";
+        twoADay.progress_components = new ArrayList<Integer>() {{
             add(100);
             add(100);
             add(100);
@@ -36,17 +58,17 @@ public class EarningOverview {
             add(0);
             add(0);
         }};
-        overview.goals.fourOutOfFour.name = "4-out-of-4";
-        overview.goals.fourOutOfFour.completed = false;
-        overview.goals.fourOutOfFour.amount_earned = "$0.00";
-        overview.goals.fourOutOfFour.progress = 1;
-        overview.goals.fourOutOfFour.value = "$1.00";
-        overview.goals.fourOutOfFour.progress_components = new ArrayList<Integer>() {{
-            add(33);
-            add(100);
-            add(0);
-            add(0);
-        }};
+        overview.goals.add(twoADay);
+
+        Goal twentyOneSessions = new Goal();
+        twentyOneSessions.name = "21-sessions";
+        twentyOneSessions.completed = true;
+        twentyOneSessions.completed_on = 1566251711L;
+        twentyOneSessions.amount_earned = "$5.00";
+        twentyOneSessions.progress = 13;
+        twentyOneSessions.value = "$5.00";
+        overview.goals.add(twentyOneSessions);
+
         return overview;
     }
 
@@ -54,49 +76,53 @@ public class EarningOverview {
         total_earnings = new String();
         cycle = new Integer(0);
         cycle_earnings = new String();
-        goals = new Goals();
+        goals = new ArrayList<>();
+        new_achievements = new ArrayList<>();
     }
 
-    public class Goals {
-
-        @SerializedName("21-sessions")
-        public Goal twentyOneSessions;
-        @SerializedName("2-a-day")
-        public Goal twoADay;
-        @SerializedName("4-out-of-4")
-        public Goal fourOutOfFour;
-
-        public Goals() {
-            twentyOneSessions = new Goal();
-            twoADay = new Goal();
-            fourOutOfFour = new Goal();
-        }
-
-        public List<Goal> getList(){
-            List list = new ArrayList<>();
-            list.add(fourOutOfFour);
-            list.add(twoADay);
-            list.add(twentyOneSessions);
-            return list;
-        }
-
-        public class Goal {
-            public String name;
-            public String value;
-            public Integer progress;
-            public String amount_earned;
-            public Boolean completed;
-            public List<Integer> progress_components;
-
-            Goal(){
-                name = new String();
-                value = new String();
-                progress = new Integer(0);
-                amount_earned = new String();
-                completed = new Boolean(false);
+    public boolean hasAchievementFor(Goal goal) {
+        for(EarningOverview.Achievement achievement : new_achievements) {
+            if(achievement.name.equals(goal.name)) {
+                return true;
             }
         }
+        return false;
+    }
 
+
+    public static class Goal {
+
+        public String name;
+        public String value;
+        public Integer progress;
+        public String amount_earned;
+        public Boolean completed;
+        public Long completed_on;
+        public List<Integer> progress_components;
+
+        public Goal() {
+            name = new String();
+            value = new String();
+            progress = new Integer(0);
+            amount_earned = new String();
+            completed = new Boolean(false);
+        }
+    }
+
+    public static class Achievement {
+
+        public String name;
+        public String amount_earned;
+
+        public Achievement() {
+            name = new String();
+            amount_earned = new String();
+        }
+
+        @Override
+        public boolean equals(@Nullable Object obj) {
+            return name.equals(obj);
+        }
     }
 
 }

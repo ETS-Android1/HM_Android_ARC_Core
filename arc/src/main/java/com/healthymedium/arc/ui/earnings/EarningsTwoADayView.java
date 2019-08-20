@@ -38,7 +38,7 @@ import java.util.List;
 
 public class EarningsTwoADayView extends LinearLayout {
 
-    public EarningsTwoADayView(Context context, EarningOverview.Goals.Goal goal, int cycleIndex) {
+    public EarningsTwoADayView(Context context, EarningOverview.Goal goal, int cycleIndex) {
         super(context);
 
         setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

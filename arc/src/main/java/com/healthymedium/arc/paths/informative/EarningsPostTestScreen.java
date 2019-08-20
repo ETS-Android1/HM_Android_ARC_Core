@@ -64,8 +64,9 @@ public class EarningsPostTestScreen extends BaseFragment {
         studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setText(earnings.getPrevStudyTotal(),false);
 
-        for(EarningOverview.Goals.Goal goal : overview.goals.getList()){
-            goalLayout.addView(new EarningsGoalView(getContext(),goal, overview.cycle));
+        for(EarningOverview.Goal goal : overview.goals) {
+            boolean showCompletionCollapsed = (goal.completed && !overview.hasAchievementFor(goal));
+            goalLayout.addView(new EarningsGoalView(getContext(), goal, overview.cycle, showCompletionCollapsed));
         }
 
         Button button = view.findViewById(R.id.buttonNext);

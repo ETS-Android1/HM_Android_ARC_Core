@@ -10,6 +10,7 @@
     <string name="token_amount">[AMOUNT]</string>
     <string name="token_number">[#]</string>
 
+    <string name="format_date_dashed">MM-dd-yy</string>
     <string name="format_date_long">EEEE, MMMM d</string>
 
 </resources>

@@ -96,8 +96,8 @@ public class EarningsScreen extends BaseFragment {
         lastSync = view.findViewById(R.id.textViewLastSync);
         lastSync.setText(syncString);
 
-        for(EarningOverview.Goals.Goal goal : overview.goals.getList()){
-            goalLayout.addView(new EarningsGoalView(getContext(),goal, overview.cycle));
+        for(EarningOverview.Goal goal : overview.goals){
+            goalLayout.addView(new EarningsGoalView(getContext(),goal, overview.cycle,false));
         }
 
         return view;

@@ -9,12 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.WeekProgressView;
 import com.healthymedium.arc.ui.base.RoundedLinearLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
+
+import org.joda.time.DateTime;
 
 public class EarningsGoalView extends RoundedLinearLayout {
 
@@ -25,24 +29,42 @@ public class EarningsGoalView extends RoundedLinearLayout {
     TextView textViewHeader;
     TextView textViewBody;
     LinearLayout contentLayout;
+    TextView textViewDone;
     FrameLayout frameLayoutDone;
     RoundedLinearLayout bonusLayout;
+    RoundedLinearLayout linearLayoutBody;
+    RoundedLinearLayout linearLayoutHeader;
     TextView bonusTextView;
 
-    public EarningsGoalView(Context context, EarningOverview.Goals.Goal goal, int cycle) {
+    public EarningsGoalView(Context context, EarningOverview.Goal goal, int cycle, boolean showCompletionCollapsed) {
         super(context);
-        init(context, goal, cycle);
+        init(context, goal, cycle, showCompletionCollapsed);
     }
 
-    protected void init(Context context, EarningOverview.Goals.Goal goal, int cycle) {
+    protected void init(Context context, EarningOverview.Goal goal, int cycle, boolean showCompletionCollapsed) {
         View view = inflate(context,R.layout.custom_earnings_goal,this);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewBody = view.findViewById(R.id.textViewBody);
+        textViewDone = view.findViewById(R.id.textViewDone);
         frameLayoutDone = view.findViewById(R.id.frameLayoutDone);
         contentLayout = view.findViewById(R.id.contentLayout);
         bonusLayout = view.findViewById(R.id.bonusView);
         bonusTextView = view.findViewById(R.id.bonusTextView);
+        linearLayoutBody = view.findViewById(R.id.linearLayoutBody);
+        linearLayoutHeader = view.findViewById(R.id.linearLayoutHeader);
+
+        if(goal.completed_on!=null){
+            DateTime completedDate = new DateTime(goal.completed_on*1000L);
+            String date = JodaUtil.format(completedDate,R.string.format_date_dashed,Application.getInstance().getLocale());
+            String completedOn = ViewUtil.replaceToken(ViewUtil.getString(R.string.status_done_withdate),R.string.token_date,date);
+            textViewDone.setText(completedOn);
+        }
+
+        if(showCompletionCollapsed){
+            linearLayoutHeader.setRadius(ViewUtil.dpToPx(8));
+            linearLayoutBody.setVisibility(GONE);
+        }
 
         if(goal.completed){
             frameLayoutDone.setVisibility(VISIBLE);
@@ -69,7 +91,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
         }
     }
 
-    private void initTwentyOneSessions(EarningOverview.Goals.Goal goal){
+    private void initTwentyOneSessions(EarningOverview.Goal goal){
         textViewHeader.setText(ViewUtil.getString(R.string.earnings_21tests_header));
         String body = ViewUtil.getString(R.string.earnings_21tests_body);
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
@@ -79,7 +101,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
         contentLayout.addView(view);
     }
 
-    private void initTwoADay(EarningOverview.Goals.Goal goal, int cycle){
+    private void initTwoADay(EarningOverview.Goal goal, int cycle){
         textViewHeader.setText(ViewUtil.getString(R.string.earnings_2aday_header));
         String body = ViewUtil.getString(R.string.earnings_2aday_body);
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
@@ -88,7 +110,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
         contentLayout.addView(new EarningsTwoADayView(getContext(), goal, cycle));
     }
 
-    private void initFourOutOfFour(EarningOverview.Goals.Goal goal){
+    private void initFourOutOfFour(EarningOverview.Goal goal){
         textViewHeader.setText(ViewUtil.getString(R.string.earnings_4of4_header));
         String body = ViewUtil.getString(R.string.earnings_4of4_body);
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
