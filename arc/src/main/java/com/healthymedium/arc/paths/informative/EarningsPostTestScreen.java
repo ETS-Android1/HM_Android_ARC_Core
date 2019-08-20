@@ -21,6 +21,7 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.TotalEarningsView;
+import com.healthymedium.arc.ui.earnings.EarningsAchievementView;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -34,6 +35,7 @@ public class EarningsPostTestScreen extends BaseFragment {
     TotalEarningsView weeklyTotal;
     TotalEarningsView studyTotal;
     LinearLayout goalLayout;
+    LinearLayout achievementLayout;
     ImageView imageViewConfetti;
 
     public EarningsPostTestScreen() {
@@ -63,6 +65,11 @@ public class EarningsPostTestScreen extends BaseFragment {
 
         studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setText(earnings.getPrevStudyTotal(),false);
+
+        achievementLayout = view.findViewById(R.id.achievementLayout);
+        for(EarningOverview.Achievement achievement : overview.new_achievements) {
+            achievementLayout.addView(new EarningsAchievementView(getContext(),achievement));
+        }
 
         for(EarningOverview.Goal goal : overview.goals) {
             boolean showCompletionCollapsed = (goal.completed && !overview.hasAchievementFor(goal));

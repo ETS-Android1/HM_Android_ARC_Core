@@ -494,6 +494,11 @@
     <string name="progress_schedule_status1">Only &lt;b>[#]&lt;/b> more to go today.</string>
     <string name="progress_schedule_status2">Done for the day!</string>
 
+    <string name="progress_earnings_status1">Completed test session</string>
+    <string name="progress_earnings_status2">Completed 21 Sessions Goal</string>
+    <string name="progress_earnings_status3">Completed 4 Out Of 4 Goal</string>
+    <string name="progress_earnings_status4">Completed 2-A-Day Goal</string>
+
     <string name="earnings_body1">You will receive an &lt;b>Amazon Gift Card&lt;/b> for the earned amount after each week of testing.</string>
     <string name="earnings_weektotal">This Week</string>
     <string name="earnings_studytotal">Study Total</string>
@@ -516,6 +521,8 @@
 
     <string name="earnings_sync">Last Synced:</string>
     <string name="earnings_sync_justnow">Just Now</string>
+
+    <string name="earnings_symbol">+</string>
 
     <string name="dateshift_picker">What week are you able to test?</string>
     <string name="dateshift_confirmation">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>.</string>

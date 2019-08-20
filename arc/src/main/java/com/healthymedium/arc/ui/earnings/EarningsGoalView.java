@@ -20,11 +20,11 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 
-public class EarningsGoalView extends RoundedLinearLayout {
+import static com.healthymedium.arc.api.models.EarningOverview.FOUR_OUT_OF_FOUR;
+import static com.healthymedium.arc.api.models.EarningOverview.TWENTY_ONE_SESSIONS;
+import static com.healthymedium.arc.api.models.EarningOverview.TWO_A_DAY;
 
-    static final String TWENTY_ONE_SESSIONS = "21-sessions";
-    static final String TWO_A_DAY = "2-a-day";
-    static final String FOUR_OUT_OF_FOUR = "4-out-of-4";
+public class EarningsGoalView extends RoundedLinearLayout {
 
     TextView textViewHeader;
     TextView textViewBody;
