@@ -1,7 +1,5 @@
 package com.healthymedium.arc.notifications.types;
 
-import android.content.Context;
-
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
@@ -40,44 +38,42 @@ public class TestTake extends NotificationType {
         int sessionId = node.id;
         TestSession session = testSessions.get(sessionId);
 
-        //if (session.getScheduledTime().isAfterNow()) {
-            expirationTime = session.getExpirationTime();
+        expirationTime = session.getExpirationTime();
 
-            // if first test of the cycle
-            if (session.getIndex() == 0 && session.getDayIndex() == 0) {
-                body = ViewUtil.getString(R.string.notification1_firstday);
-            }
+        // if first test of the cycle
+        if (session.getIndex() == 0 && session.getDayIndex() == 0) {
+            body = ViewUtil.getString(R.string.notification1_firstday);
+        }
 
-            // if first of day 4
-            else if (session.getIndex() == 0 && session.getDayIndex() == 3) {
-                body = ViewUtil.getString(R.string.notification1_halfway);
-            }
+        // if first of day 4
+        else if (session.getIndex() == 0 && session.getDayIndex() == 3) {
+            body = ViewUtil.getString(R.string.notification1_halfway);
+        }
 
-            // if first of day
-            else if (session.getIndex() == 0) {
-                body = ViewUtil.getString(R.string.notification1_default);
-            }
+        // if first of day
+        else if (session.getIndex() == 0) {
+            body = ViewUtil.getString(R.string.notification1_default);
+        }
 
-            // if second of day
-            else if (session.getIndex() == 1) {
-                body = ViewUtil.getString(R.string.notifications2_default);
-            }
+        // if second of day
+        else if (session.getIndex() == 1) {
+            body = ViewUtil.getString(R.string.notifications2_default);
+        }
 
-            // if third of day
-            else if (session.getIndex() == 2) {
-                body = ViewUtil.getString(R.string.notification3_default);
-            }
+        // if third of day
+        else if (session.getIndex() == 2) {
+            body = ViewUtil.getString(R.string.notification3_default);
+        }
 
-            // if last of cycle
-            else if (session.getIndex() == 3 && session.getDayIndex() == 6) {
-                body = ViewUtil.getString(R.string.notification4_lastday);
-            }
+        // if last of cycle
+        else if (session.getIndex() == 3 && session.getDayIndex() == 6) {
+            body = ViewUtil.getString(R.string.notification4_lastday);
+        }
 
-            // if last of day
-            else if (session.getIndex() == 3) {
-                body = ViewUtil.getString(R.string.notification4_default);
-            }
-        //}
+        // if last of day
+        else if (session.getIndex() == 3) {
+            body = ViewUtil.getString(R.string.notification4_default);
+        }
 
         DateTimeFormatter fmt = DateTimeFormat.forPattern("hh:mm a");
         String time = fmt.print(expirationTime);
@@ -89,11 +85,4 @@ public class TestTake extends NotificationType {
         return true;
     }
 
-//    public void setExpirationTime(DateTime time) {
-//        expirationTime = time;
-//    }
-//
-//    public void setBody(String text) {
-//        body = text;
-//    }
 }

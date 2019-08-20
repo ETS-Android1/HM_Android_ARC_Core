@@ -58,13 +58,6 @@ public class Application extends android.app.Application {
         types.add(NotificationTypes.TestMissed);
         types.add(NotificationTypes.TestNext);
         types.add(NotificationTypes.TestTake);
-//        types.add(NotificationTypes.TestTakeFirstOfDay);
-//        types.add(NotificationTypes.TestTakeSecondOfDay);
-//        types.add(NotificationTypes.TestTakeThirdOfDay);
-//        types.add(NotificationTypes.TestTakeLastOfDay);
-//        types.add(NotificationTypes.TestTakeFirstOfDay4);
-//        types.add(NotificationTypes.TestTakeFirstOfCycle);
-//        types.add(NotificationTypes.TestTakeLastOfCycle);
         if(Config.ENABLE_VIGNETTES) {
             types.add(NotificationTypes.VisitNextDay);
             types.add(NotificationTypes.VisitNextWeek);
