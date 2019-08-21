@@ -62,7 +62,7 @@ public class HeartbeatJobService extends JobService {
             return;
         }
 
-        client.setUploadListener(new RestClient.UploadListener() {
+        client.addUploadListener(new RestClient.UploadListener() {
             @Override
             public void onStart() {
 
@@ -70,7 +70,7 @@ public class HeartbeatJobService extends JobService {
 
             @Override
             public void onStop() {
-                Study.getRestClient().removeUploadListener();
+                Study.getRestClient().removeUploadListener(this);
                 checkState();
                 jobFinished(params,false);
             }

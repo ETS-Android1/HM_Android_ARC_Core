@@ -3,8 +3,6 @@ package com.healthymedium.arc.study;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.notifications.NotificationUtil;
-import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
-import com.healthymedium.arc.paths.questions.QuestionSingleButton;
 import com.healthymedium.arc.paths.templates.LandingTemplate;
 import com.healthymedium.arc.utilities.Log;
 
@@ -160,7 +158,6 @@ public class StateMachineAlpha extends StateMachine {
             cache.data.clear();
 
             RestClient client = Study.getRestClient();
-            client.setUploadListener(earningsListener);
             client.submitTest(participant.getCurrentTestSession());
             participant.moveOnToNextTestSession(true);
             save();
@@ -236,7 +233,6 @@ public class StateMachineAlpha extends StateMachine {
             participant.getCurrentTestSession().markMissed();
 
             RestClient client = Study.getRestClient();
-            client.setUploadListener(earningsListener);
             client.submitTest(participant.getCurrentTestSession());
             participant.moveOnToNextTestSession(true);
             participant.save();
@@ -325,7 +321,6 @@ public class StateMachineAlpha extends StateMachine {
                         loadTestDataFromCache();
 
                         RestClient client = Study.getRestClient();
-                        client.setUploadListener(earningsListener);
                         client.submitTest(Study.getCurrentTestSession());
                         Study.getParticipant().moveOnToNextTestSession(true);
                         save();

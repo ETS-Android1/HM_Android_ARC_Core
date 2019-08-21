@@ -29,17 +29,42 @@ public class Earnings {
 
     public void refreshOverview(final Listener listener){
 
-        RestClient client = Study.getRestClient();
+        overviewRefresh = -1;
 
-        if(!client.isUploadQueueEmpty()){
+        final RestClient client = Study.getRestClient();
+
+        if(client.isUploading()) {
+            client.addUploadListener(new RestClient.UploadListener() {
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onStop() {
+                    client.removeUploadListener(this);
+                    if(client.isUploadQueueEmpty()) {
+                        internalRefreshOverview(listener);
+                    } else if(listener!=null){
+                        overviewRefresh = 0;
+                        listener.onFailure();
+                    }
+                }
+            });
+        } else if(client.isUploadQueueEmpty()) {
+            internalRefreshOverview(listener);
+        } else {
+            overviewRefresh = 0;
             if(listener!=null){
                 listener.onFailure();
             }
-            return;
         }
 
-        // check the upload queue first. if it has anything, mark failed
-        overviewRefresh = -1;
+    }
+
+    public void internalRefreshOverview(final Listener listener){
+
+        final RestClient client = Study.getRestClient();
 
         client.getEarningOverview(new RestClient.Listener() {
             @Override
@@ -89,19 +114,44 @@ public class Earnings {
 
     public void refreshDetails(final Listener listener){
 
-        RestClient client = Study.getRestClient();
+        detailsRefresh = -1;
 
-        // check the upload queue first. if it has anything, mark failed
-        if(!client.isUploadQueueEmpty()){
+        final RestClient client = Study.getRestClient();
+
+        if(client.isUploading()) {
+            client.addUploadListener(new RestClient.UploadListener() {
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onStop() {
+                    client.removeUploadListener(this);
+                    if(client.isUploadQueueEmpty()) {
+                        internalRefreshDetails(listener);
+                    } else if(listener!=null){
+                        detailsRefresh = 0;
+                        listener.onFailure();
+                    }
+                }
+            });
+        } else if(client.isUploadQueueEmpty()) {
+            internalRefreshDetails(listener);
+        } else {
+            detailsRefresh = 0;
             if(listener!=null){
                 listener.onFailure();
             }
-            return;
         }
 
-        detailsRefresh = -1;
+    }
 
-        client.getEarningDetails(new RestClient.Listener() {
+    public void internalRefreshDetails(final Listener listener){
+
+        final RestClient client = Study.getRestClient();
+
+        client.getEarningOverview(new RestClient.Listener() {
             @Override
             public void onSuccess(RestResponse response) {
                 detailsRefresh = 1;

@@ -9,8 +9,6 @@ import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsPostTestLoadingScreen;
-import com.healthymedium.arc.paths.informative.EarningsPostTestScreen;
-import com.healthymedium.arc.paths.informative.EarningsScreen;
 import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
@@ -164,7 +162,6 @@ public class StateMachine {
         cache.data.clear();
 
         RestClient client = Study.getRestClient();
-        client.setUploadListener(earningsListener);
         client.submitTest(participant.getCurrentTestSession());
         participant.moveOnToNextTestSession(true);
         save();
@@ -829,23 +826,5 @@ public class StateMachine {
         cognitiveTest.load(cache.data);
         Study.getCurrentTestSession().addTestData(cognitiveTest);
     }
-
-    protected RestClient.UploadListener earningsListener = new RestClient.UploadListener() {
-        @Override
-        public void onStart() {
-
-        }
-
-        @Override
-        public void onStop() {
-            RestClient client = Study.getRestClient();
-            client.removeUploadListener();
-            if (client.isUploadQueueEmpty()) {
-//                Earnings earnings = Study.getParticipant().getEarnings();
-//                earnings.refreshOverview(null);
-//                earnings.refreshDetails(null);
-            }
-        }
-    };
 
 }

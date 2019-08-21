@@ -68,7 +68,7 @@ public class RestClient <Api>{
     protected Retrofit retrofit;
 
     protected List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
-    private UploadListener uploadListener = null;
+    private List<UploadListener> uploadListeners = new ArrayList<>();
     protected boolean uploading = false;
 
     public RestClient(Class<Api> type) {
@@ -718,8 +718,10 @@ public class RestClient <Api>{
         if(!uploading) {
             Log.i("RestClient","upload started");
             uploading = true;
-            if (uploadListener != null) {
-                uploadListener.onStart();
+            for(UploadListener uploadListener : uploadListeners){
+                if (uploadListener != null) {
+                    uploadListener.onStart();
+                }
             }
         }
     }
@@ -728,8 +730,10 @@ public class RestClient <Api>{
         if(uploading) {
             Log.i("RestClient","upload stopped");
             uploading = false;
-            if (uploadListener != null) {
-                uploadListener.onStop();
+            for(UploadListener uploadListener : uploadListeners){
+                if (uploadListener != null) {
+                    uploadListener.onStop();
+                }
             }
         }
     }
@@ -738,12 +742,16 @@ public class RestClient <Api>{
         return uploadQueue.size()==0;
     }
 
-    public void setUploadListener(UploadListener listener){
-        uploadListener = listener;
+    public boolean isUploading(){
+        return uploading;
     }
 
-    public void removeUploadListener(){
-        uploadListener = null;
+    public void addUploadListener(UploadListener listener){
+        uploadListeners.add(listener);
+    }
+
+    public void removeUploadListener(UploadListener listener){
+        uploadListeners.remove(listener);
     }
 
     // listener interfaces -------------------------------------------------------------------------
