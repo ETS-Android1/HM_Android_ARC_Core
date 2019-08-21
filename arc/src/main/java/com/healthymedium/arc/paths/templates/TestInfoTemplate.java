@@ -11,6 +11,7 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class TestInfoTemplate extends BaseFragment {
     private static final String HINT_SYMBOL_TUTORIAL = "HINT_SYMBOL_TUTORIAL";
     private static final String HINT_REPEAT_TUTORIAL = "HINT_REPEAT_TUTORIAL";
 
-    LinearLayout headerLayout;
+    ImageView backgroundImageView;
 
     String stringTestNumber;
     String stringHeader;
@@ -79,15 +80,16 @@ public class TestInfoTemplate extends BaseFragment {
         View view = inflater.inflate(R.layout.template_test_info, container, false);
         content = view.findViewById(R.id.linearLayoutContent);
 
-        headerLayout = view.findViewById(R.id.headerLayout);
+        backgroundImageView = view.findViewById(R.id.backgroundImageView);
+
         if (stringType.equals("grids")) {
-            headerLayout.setBackground(ViewUtil.getDrawable(R.drawable.ic_grids_bg));
+            backgroundImageView.setImageDrawable(ViewUtil.getDrawable(R.drawable.ic_grids_bg));
         }
         else if (stringType.equals("symbols")) {
-            headerLayout.setBackground(ViewUtil.getDrawable(R.drawable.ic_symbols_bg));
+            backgroundImageView.setImageDrawable(ViewUtil.getDrawable(R.drawable.ic_symbols_bg));
         }
         else if (stringType.equals("prices")) {
-            headerLayout.setBackground(ViewUtil.getDrawable(R.drawable.ic_prices_bg));
+            backgroundImageView.setImageDrawable(ViewUtil.getDrawable(R.drawable.ic_prices_bg));
         }
 
         textViewTestNumber = view.findViewById(R.id.textViewTestNumber);
