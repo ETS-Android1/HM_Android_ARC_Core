@@ -42,6 +42,7 @@ public class Rating extends LinearLayoutCompat{
         textLow = view.findViewById(R.id.textviewRatingLow);
         textHigh = view.findViewById(R.id.textviewRatingHigh);
         seekBar = view.findViewById(R.id.seekbarRating);
+        seekBar.setThumbOffset(0);
 
         padding = ViewUtil.dpToPx(49);
 
