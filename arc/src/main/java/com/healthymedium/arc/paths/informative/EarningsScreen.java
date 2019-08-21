@@ -85,10 +85,14 @@ public class EarningsScreen extends BaseFragment {
         DateTime lastSyncTime = Study.getParticipant().getEarnings().getOverviewRefreshTime();
         if(lastSyncTime != null) {
             if(lastSyncTime.plusMinutes(1).isAfterNow()) {
-                syncString += JodaUtil.format(
-                        lastSyncTime,
-                        R.string.format_date,
-                        Application.getInstance().getLocale());
+                String date = JodaUtil.format(lastSyncTime, R.string.format_date, Application.getInstance().getLocale());
+                String time = JodaUtil.format(lastSyncTime, R.string.format_time, Application.getInstance().getLocale());
+                String dateTime = getString(R.string.earnings_sync_datetime);
+
+                dateTime = ViewUtil.replaceToken(dateTime,R.string.token_date,date);
+                dateTime = ViewUtil.replaceToken(dateTime,R.string.token_time,time);
+
+                syncString += dateTime;
             } else {
                 syncString += getString(R.string.earnings_sync_justnow);
             }

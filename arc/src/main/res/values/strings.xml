@@ -521,7 +521,7 @@
 
     <string name="earnings_sync">Last Synced:</string>
     <string name="earnings_sync_justnow">Just Now</string>
-
+    <string name="earnings_sync_datetime">{DATE} at {TIME}</string>
     <string name="earnings_symbol">+</string>
 
     <string name="dateshift_picker">What week are you able to test?</string>
