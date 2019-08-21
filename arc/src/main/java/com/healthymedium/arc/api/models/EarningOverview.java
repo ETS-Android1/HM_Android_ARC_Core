@@ -7,12 +7,6 @@ import java.util.List;
 
 public class EarningOverview {
 
-    public static final String TWENTY_ONE_SESSIONS = "21-sessions";
-    public static final String TWO_A_DAY = "2-a-day";
-    public static final String FOUR_OUT_OF_FOUR = "4-out-of-4";
-    public static final String TEST_SESSION = "test-session";
-
-
     public String total_earnings;
     public Integer cycle;
     public String cycle_earnings;

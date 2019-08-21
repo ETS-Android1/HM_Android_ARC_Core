@@ -20,9 +20,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 
-import static com.healthymedium.arc.api.models.EarningOverview.FOUR_OUT_OF_FOUR;
-import static com.healthymedium.arc.api.models.EarningOverview.TWENTY_ONE_SESSIONS;
-import static com.healthymedium.arc.api.models.EarningOverview.TWO_A_DAY;
+import static com.healthymedium.arc.study.Earnings.FOUR_OUT_OF_FOUR;
+import static com.healthymedium.arc.study.Earnings.TWENTY_ONE_SESSIONS;
+import static com.healthymedium.arc.study.Earnings.TWO_A_DAY;
 
 public class EarningsGoalView extends RoundedLinearLayout {
 

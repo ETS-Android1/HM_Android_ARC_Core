@@ -9,10 +9,10 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.ui.base.RoundedRelativeLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import static com.healthymedium.arc.api.models.EarningOverview.FOUR_OUT_OF_FOUR;
-import static com.healthymedium.arc.api.models.EarningOverview.TEST_SESSION;
-import static com.healthymedium.arc.api.models.EarningOverview.TWENTY_ONE_SESSIONS;
-import static com.healthymedium.arc.api.models.EarningOverview.TWO_A_DAY;
+import static com.healthymedium.arc.study.Earnings.FOUR_OUT_OF_FOUR;
+import static com.healthymedium.arc.study.Earnings.TEST_SESSION;
+import static com.healthymedium.arc.study.Earnings.TWENTY_ONE_SESSIONS;
+import static com.healthymedium.arc.study.Earnings.TWO_A_DAY;
 
 public class EarningsAchievementView extends RoundedRelativeLayout {
 

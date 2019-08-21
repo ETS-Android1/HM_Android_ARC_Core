@@ -11,6 +11,11 @@ import org.joda.time.DateTime;
 
 public class Earnings {
 
+    public static final String TWENTY_ONE_SESSIONS = "21-sessions";
+    public static final String TWO_A_DAY = "2-a-day";
+    public static final String FOUR_OUT_OF_FOUR = "4-out-of-4";
+    public static final String TEST_SESSION = "test-session";
+
     private EarningOverview overview;
     private int overviewRefresh;
     private DateTime overviewUpdateTime;
