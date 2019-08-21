@@ -1,5 +1,6 @@
 package com.healthymedium.arc.api.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EarningDetails {
@@ -7,15 +8,27 @@ public class EarningDetails {
     public String total_earnings;
     public List<Cycle> cycles;
 
-    public class Cycle {
+    public EarningDetails(){
+        total_earnings = new String();
+        cycles = new ArrayList<>();
+    }
+
+    public static class Cycle {
         public Integer cycle;
         public String total;
         public Long start_date;
         public Long end_date;
         public List<Goal> details;
+
+        public Cycle() {
+            cycle = new Integer(-1);
+            total = new String();
+            end_date = new Long(0);
+            details = new ArrayList<>();
+        }
     }
 
-    public class Goal {
+    public static class Goal {
         public String name;
         public String value;
         public Integer count_completed;
