@@ -62,7 +62,7 @@ public class Earnings {
 
     }
 
-    public void internalRefreshOverview(final Listener listener){
+    private void internalRefreshOverview(final Listener listener){
 
         final RestClient client = Study.getRestClient();
 
@@ -147,7 +147,7 @@ public class Earnings {
 
     }
 
-    public void internalRefreshDetails(final Listener listener){
+    private void internalRefreshDetails(final Listener listener){
 
         final RestClient client = Study.getRestClient();
 
