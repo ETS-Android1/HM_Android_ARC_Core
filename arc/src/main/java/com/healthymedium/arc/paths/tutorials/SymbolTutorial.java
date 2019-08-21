@@ -84,8 +84,14 @@ public class SymbolTutorial extends Tutorial {
         buttonTop2 = view.findViewById(R.id.symbolbutton_top2);
         buttonTop3 = view.findViewById(R.id.symbolbutton_top3);
 
+        buttonTop1.setVisibility(View.GONE);
+        buttonTop3.setVisibility(View.GONE);
+
         buttonBottom1 = view.findViewById(R.id.symbolbutton_bottom1);
         buttonBottom2 = view.findViewById(R.id.symbolbutton_bottom2);
+
+        buttonBottom1.setVisibility(View.GONE);
+        buttonBottom2.setVisibility(View.GONE);
 
         progressView = view.findViewById(R.id.progressView);
         progressIncrement = 17;
@@ -94,6 +100,9 @@ public class SymbolTutorial extends Tutorial {
         checkmark = view.findViewById(R.id.checkmark);
 
         textView20 = view.findViewById(R.id.textView20);
+
+        textView20.setVisibility(View.GONE);
+
         textViewComplete = view.findViewById(R.id.textViewComplete);
         textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
@@ -246,6 +255,9 @@ public class SymbolTutorial extends Tutorial {
 
     // Displays hints for the entire top set of tiles
     private void stepAllTopTiles() {
+        buttonTop1.setVisibility(View.VISIBLE);
+        buttonTop3.setVisibility(View.VISIBLE);
+
         topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
         topSymbolsHighlight.show();
 
@@ -276,6 +288,10 @@ public class SymbolTutorial extends Tutorial {
 
     // Displays hints for the entire bottom set of tiles
     private void stepBottomTiles() {
+        buttonBottom1.setVisibility(View.VISIBLE);
+        buttonBottom2.setVisibility(View.VISIBLE);
+        textView20.setVisibility(View.VISIBLE);
+
         bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
         bottomSymbolsHighlight.show();
 
