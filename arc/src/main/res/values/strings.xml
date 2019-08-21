@@ -382,6 +382,12 @@
     <string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> &lt;br /&gt;One more&#8230;</string>
 
     <string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
+    <string name="prices_tutorial_item1">Bananas</string>
+    <string name="prices_tutorial_price1">$3.27</string>
+    <string name="prices_tutorial_item2">Soup</string>
+    <string name="prices_tutorial_price2">$10.82</string>
+    <string name="prices_tutorial_price1_match">$6.78</string>
+    <string name="prices_tutorial_price2_match">$4.01</string>
     <string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the answer that makes sense to you.</string>
     <string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> &lt;br /&gt;Let\'s try another.</string>
     <string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>

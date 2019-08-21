@@ -192,8 +192,8 @@ public class PricesTutorial extends Tutorial {
     }
 
     private void setFirstPricesCompare() {
-        textviewFood.setText("Bananas");
-        textviewPrice.setText("$3.27");
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
 
         firstPriceContainerHighlight.addTarget(priceContainer, 10);
         firstPriceContainerHighlight.show();
@@ -299,8 +299,8 @@ public class PricesTutorial extends Tutorial {
     }
 
     private void setSecondPricesCompare() {
-        textviewFood.setText("Soup");
-        textviewPrice.setText("$10.82");
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item2));
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
 
         runnableWhatDoYouThink = new Runnable() {
             @Override
@@ -399,13 +399,13 @@ public class PricesTutorial extends Tutorial {
     }
 
     private void setFirstPriceMatch() {
-        textviewFood.setText("Bananas");
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
         textviewPrice.setVisibility(View.GONE);
 
         textView12.setText(ViewUtil.getString(R.string.prices_whatwasprice));
 
-        buttonYes.setText("$6.78");
-        buttonNo.setText("$3.27");
+        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price1_match));
+        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
 
         buttonYes.showButton(false);
         buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
@@ -510,11 +510,11 @@ public class PricesTutorial extends Tutorial {
     }
 
     private void setSecondPriceMatch() {
-        textviewFood.setText("Soup");
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item2));
         textviewPrice.setVisibility(View.GONE);
 
-        buttonYes.setText("$10.82");
-        buttonNo.setText("$4.01");
+        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
+        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price2_match));
 
         buttonYes.showButton(false);
         buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
