@@ -45,13 +45,11 @@ public class StudyProgressView extends LinearLayout {
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER_VERTICAL);
 
-        if(!isInEditMode()){
-            // Todo: actually get data
-        }
-
         Participant participant = Study.getParticipant();
         TestCycle cycle = participant.getCurrentTestCycle();
         int currentWeek = cycle.getId()+1; // Cycles are 0-indexed
+
+        boolean isInCycle = (cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow());
 
         int dp1 = ViewUtil.dpToPx(1);
         int dp2 = ViewUtil.dpToPx(2);
@@ -77,7 +75,7 @@ public class StudyProgressView extends LinearLayout {
             view.setBackground(drawable);
 
             LayoutParams params;
-            if(i==currentWeek-1){
+            if(i==currentWeek-1 && isInCycle){
                 params = new LayoutParams(dp8,dp42);
             } else {
                 params = new LayoutParams(dp8,dp32);
