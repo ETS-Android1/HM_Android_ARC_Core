@@ -77,7 +77,7 @@ public class PriceTestCompareFragment extends BaseFragment {
         item = priceTest.getPriceSet().get(index);
 
         buttonYes = view.findViewById(R.id.radioButtonYes);
-        buttonYes.setText(ViewUtil.getString(R.string.YES));
+        buttonYes.setText(ViewUtil.getString(R.string.radio_yes));
         buttonYes.setCheckable(false);
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -94,7 +94,7 @@ public class PriceTestCompareFragment extends BaseFragment {
         });
 
         buttonNo = view.findViewById(R.id.radioButtonNo);
-        buttonNo.setText(ViewUtil.getString(R.string.NO));
+        buttonNo.setText(ViewUtil.getString(R.string.radio_no));
         buttonNo.setCheckable(false);
         buttonNo.setOnTouchListener(new View.OnTouchListener() {
             @Override

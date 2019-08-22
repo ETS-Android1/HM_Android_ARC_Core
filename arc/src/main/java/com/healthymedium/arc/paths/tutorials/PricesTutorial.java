@@ -69,11 +69,11 @@ public class PricesTutorial extends Tutorial {
         priceContainer = view.findViewById(R.id.priceContainer);
 
         buttonYes = view.findViewById(R.id.radioButtonYes);
-        buttonYes.setText(ViewUtil.getString(R.string.YES));
+        buttonYes.setText(ViewUtil.getString(R.string.radio_yes));
         buttonYes.setCheckable(false);
 
         buttonNo = view.findViewById(R.id.radioButtonNo);
-        buttonNo.setText(ViewUtil.getString(R.string.NO));
+        buttonNo.setText(ViewUtil.getString(R.string.radio_no));
         buttonNo.setCheckable(false);
 
         progressView = view.findViewById(R.id.progressView);
