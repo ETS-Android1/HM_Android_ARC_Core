@@ -429,7 +429,11 @@
     <string name="resources_faq_link">Frequently Asked Questions</string>
     <string name="resources_privacy_link">Privacy Policy</string>
 
-    
+    <string name="resources_nav_home">Home</string>
+    <string name="resources_nav_progress">Progress</string>
+    <string name="resources_nav_earnings">Earnings</string>
+    <string name="resources_nav_resources">Resources</string>
+
     <string name="faq_header">Frequently Asked Questions Topics</string>
     <string name="faq_testing">Testing</string>
     <string name="faq_earnings">Earnings</string>

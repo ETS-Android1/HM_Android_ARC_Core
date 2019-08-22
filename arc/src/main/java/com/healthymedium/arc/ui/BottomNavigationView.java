@@ -72,7 +72,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
         selectedColor = ViewUtil.getColor(getContext(),R.color.primary);
 
         home = new MenuItem(context,
-                "Home",
+                ViewUtil.getString(R.string.resources_nav_home),
                 R.drawable.ic_home_inactive,
                 R.drawable.ic_home_active,
                 new OnClickListener() {
@@ -84,7 +84,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
         });
 
         progress = new MenuItem(context,
-                "Progress",
+                ViewUtil.getString(R.string.resources_nav_progress),
                 R.drawable.ic_progress_inactive,
                 R.drawable.ic_progress_active,
                 new OnClickListener() {
@@ -96,7 +96,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
         });
 
         earnings = new MenuItem(context,
-                "Earnings",
+                ViewUtil.getString(R.string.resources_nav_earnings),
                 R.drawable.ic_earnings_inactive,
                 R.drawable.ic_earnings_active,
                 new OnClickListener() {
@@ -108,7 +108,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
         });
 
         resources = new MenuItem(context,
-                "Resources",
+                ViewUtil.getString(R.string.resources_nav_resources),
                 R.drawable.ic_resources_inactive,
                 R.drawable.ic_resources_active,
                 new OnClickListener() {
