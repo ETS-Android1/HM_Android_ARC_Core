@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.informative;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,8 @@ import org.w3c.dom.Text;
 
 public class EarningsDetailsScreen extends BaseFragment {
 
+    SwipeRefreshLayout refreshLayout;
+
     Button viewFaqButton;
     TextView studyTotal;
     TextView lastSync;
@@ -41,6 +44,35 @@ public class EarningsDetailsScreen extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_earnings_details, container, false);
+
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!Study.getRestClient().isUploadQueueEmpty()){
+                    refreshLayout.setRefreshing(false);
+                    return;
+                }
+
+                Study.getParticipant().getEarnings().refreshDetails(new Earnings.Listener() {
+                    @Override
+                    public void onSuccess() {
+                        if(refreshLayout!=null) {
+                            refreshLayout.setRefreshing(false);
+                            Study.getParticipant().save();
+                            populateViews();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        if(refreshLayout!=null) {
+                            refreshLayout.setRefreshing(false);
+                        }
+                    }
+                });
+            }
+        });
 
         TextView textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setOnClickListener(new View.OnClickListener() {
@@ -59,14 +91,32 @@ public class EarningsDetailsScreen extends BaseFragment {
             }
         });
 
+        studyTotal = view.findViewById(R.id.studyTotal);
+        lastSync = view.findViewById(R.id.textViewLastSync);
+        cycleLayout = view.findViewById(R.id.cycleLayout);
+
+        populateViews();
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        int top = view.getPaddingTop();
+        view.setPadding(0,top,0,0);
+        getMainActivity().showNavigationBar();
+    }
+
+    private void populateViews() {
+
         Earnings earnings = Study.getParticipant().getEarnings();
         EarningDetails details = earnings.getDetails();
 
         if(details==null){
-            return view;
+            return;
         }
 
-        studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setText(details.total_earnings);
 
         String syncString = getString(R.string.earnings_sync) + " ";
@@ -85,23 +135,13 @@ public class EarningsDetailsScreen extends BaseFragment {
                 syncString += getString(R.string.earnings_sync_justnow);
             }
         }
-        lastSync = view.findViewById(R.id.textViewLastSync);
         lastSync.setText(syncString);
 
-        cycleLayout = view.findViewById(R.id.cycleLayout);
+        cycleLayout.removeAllViews();
         for(EarningDetails.Cycle cycle : details.cycles){
             EarningsDetailedCycleView cycleView = new EarningsDetailedCycleView(getContext(),cycle);
             cycleLayout.addView(cycleView);
         }
-
-        return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        int top = view.getPaddingTop();
-        view.setPadding(0,top,0,0);
-        getMainActivity().showNavigationBar();
-    }
 }

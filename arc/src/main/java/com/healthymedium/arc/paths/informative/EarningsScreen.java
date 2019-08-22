@@ -63,8 +63,7 @@ public class EarningsScreen extends BaseFragment {
                         if(refreshLayout!=null) {
                             refreshLayout.setRefreshing(false);
                             Study.getParticipant().save();
-                            NavigationManager.getInstance().popBackStack();
-                            NavigationManager.getInstance().open(new EarningsScreen());
+                            populateViews();
                         }
                     }
 
@@ -103,16 +102,31 @@ public class EarningsScreen extends BaseFragment {
         });
 
         goalLayout = view.findViewById(R.id.goalLayout);
+        weeklyTotal = view.findViewById(R.id.weeklyTotal);
+        studyTotal = view.findViewById(R.id.studyTotal);
+        lastSync = view.findViewById(R.id.textViewLastSync);
 
+        populateViews();
+
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        int top = view.getPaddingTop();
+        view.setPadding(0,top,0,0);
+        getMainActivity().showNavigationBar();
+    }
+
+    private void populateViews() {
         EarningOverview overview = Study.getParticipant().getEarnings().getOverview();
         if(overview==null){
-            overview = EarningOverview.getTestObject();
+            return;
         }
 
-        weeklyTotal = view.findViewById(R.id.weeklyTotal);
         weeklyTotal.setText(overview.cycle_earnings);
-
-        studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setText(overview.total_earnings);
 
         String syncString = getString(R.string.earnings_sync) + " ";
@@ -131,21 +145,12 @@ public class EarningsScreen extends BaseFragment {
                 syncString += getString(R.string.earnings_sync_justnow);
             }
         }
-        lastSync = view.findViewById(R.id.textViewLastSync);
         lastSync.setText(syncString);
 
+        goalLayout.removeAllViews();
         for(EarningOverview.Goal goal : overview.goals){
             goalLayout.addView(new EarningsGoalView(getContext(),goal, overview.cycle,false));
         }
-
-        return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        int top = view.getPaddingTop();
-        view.setPadding(0,top,0,0);
-        getMainActivity().showNavigationBar();
-    }
 }
