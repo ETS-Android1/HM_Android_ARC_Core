@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_above="@+id/frameLayoutAvailability"
-                    android:background="#003245">
+                    android:background="#223465">
 
                 </FrameLayout>
 
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_above="@+id/linearLayout"
-                    android:background="#003245">
+                    android:background="#223465">
 
                 </FrameLayout>
 
@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_above="@+id/frameLayoutAbout"
-                    android:background="#003245">
+                    android:background="#223465">
 
                 </FrameLayout>
 
@@ -142,7 +142,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_above="@+id/frameLayoutFAQ"
-                    android:background="#003245">
+                    android:background="#223465">
 
                 </FrameLayout>
 
@@ -172,7 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_above="@+id/frameLayoutPrivacyPolicy"
-                    android:background="#003245">
+                    android:background="#223465">
 
                 </FrameLayout>
 
@@ -202,7 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_below="@+id/frameLayoutPrivacyPolicy"
-                    android:background="#003245">
+                    android:background="#223465">
 
                 </FrameLayout>
 
