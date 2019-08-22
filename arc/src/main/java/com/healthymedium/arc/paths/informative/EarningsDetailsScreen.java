@@ -13,6 +13,7 @@ import com.healthymedium.arc.api.models.EarningDetails;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.time.JodaUtil;
@@ -33,6 +34,7 @@ public class EarningsDetailsScreen extends BaseFragment {
 
     public EarningsDetailsScreen() {
         allowBackPress(false);
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Nullable
