@@ -21,12 +21,12 @@ public class RestResponse {
     public JsonObject optional = new JsonObject();
     public JsonObject errors = new JsonObject();
 
-    public <T> T getOptionalAs(Class<T> tClass){
+    public <T> T getOptionalAs(String key, Class<T> tClass){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapterFactory(new ItemTypeAdapterFactory())
                 .setLenient()
                 .create();
-        return gson.fromJson(optional, tClass);
+        return gson.fromJson(optional.get(key), tClass);
     }
 
     public static RestResponse fromRetrofitResponse(retrofit2.Response<ResponseBody> retrofitResponse){

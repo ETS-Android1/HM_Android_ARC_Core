@@ -85,7 +85,7 @@ public class Earnings {
             @Override
             public void onSuccess(RestResponse response) {
                 overviewRefresh = 1;
-                overview = response.getOptionalAs(EarningOverview.class);
+                overview = response.getOptionalAs("earnings",EarningOverview.class);
                 overviewUpdateTime = DateTime.now();
                 if(overviewListener!=null) {
                     overviewListener.onSuccess();
@@ -158,11 +158,11 @@ public class Earnings {
 
         detailsRefresh = -1;
 
-        client.getEarningOverview(new RestClient.Listener() {
+        client.getEarningDetails(new RestClient.Listener() {
             @Override
             public void onSuccess(RestResponse response) {
                 detailsRefresh = 1;
-                details = response.getOptionalAs(EarningDetails.class);
+                details = response.getOptionalAs("earnings",EarningDetails.class);
                 detailsUpdateTime = DateTime.now();
                 if(detailsListener!=null){
                     detailsListener.onSuccess();
