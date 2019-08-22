@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.informative;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
@@ -24,6 +26,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import org.joda.time.DateTime;
 
 public class EarningsScreen extends BaseFragment {
+
+    SwipeRefreshLayout refreshLayout;
 
     TextView weeklyTotal;
     TextView studyTotal;
@@ -43,6 +47,36 @@ public class EarningsScreen extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_earnings, container, false);
+
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!Study.getRestClient().isUploadQueueEmpty()){
+                    refreshLayout.setRefreshing(false);
+                    return;
+                }
+
+                Study.getParticipant().getEarnings().refreshOverview(new Earnings.Listener() {
+                    @Override
+                    public void onSuccess() {
+                        if(refreshLayout!=null) {
+                            refreshLayout.setRefreshing(false);
+                            Study.getParticipant().save();
+                            NavigationManager.getInstance().popBackStack();
+                            NavigationManager.getInstance().open(new EarningsScreen());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        if(refreshLayout!=null) {
+                            refreshLayout.setRefreshing(false);
+                        }
+                    }
+                });
+            }
+        });
 
         earningsBody1 = view.findViewById(R.id.earningsBody1);
         earningsBody1.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_body1)));
