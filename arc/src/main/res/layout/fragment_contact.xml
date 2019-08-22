@@ -82,7 +82,7 @@
                 android:id="@+id/lineFrameLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#003245">
+                android:background="#223465">
 
             </FrameLayout>
 
