@@ -42,6 +42,14 @@ public class EarningsDetailsScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_earnings_details, container, false);
 
+        TextView textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavigationManager.getInstance().popBackStack();
+            }
+        });
+
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
         viewFaqButton.setOnClickListener(new View.OnClickListener() {
             @Override
