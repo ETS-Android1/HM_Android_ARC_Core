@@ -336,9 +336,10 @@ public class AvailabilityConfirm extends BaseFragment {
             Study.getParticipant().save();
             Study.getRestClient().submitWakeSleepSchedule();
 
-            DateTime start = Study.getParticipant().getState().studyStartDate;
+            DateTime start = Study.getParticipant().getStartDate();
             if(start==null){
                 start = DateTime.now();
+                Study.getParticipant().getState().studyStartDate = start;
             } else {
                 start = start.withTime(LocalTime.now());
             }

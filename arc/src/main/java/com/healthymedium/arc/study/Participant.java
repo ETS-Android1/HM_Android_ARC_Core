@@ -203,4 +203,16 @@ public class Participant {
         return state.earnings;
     }
 
+    public DateTime getStartDate() {
+        return state.studyStartDate;
+    }
+
+    public DateTime getFinishDate() {
+        int size = state.testCycles.size();
+        if(size>0) {
+            return state.testCycles.get(size-1).getActualEndDate();
+        }
+        return null;
+    }
+
 }
