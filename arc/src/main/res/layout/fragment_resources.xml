@@ -24,7 +24,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
-                android:text="RESOURCES"
+                android:text="@string/resources_header"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                         android:drawableLeft="@drawable/ic_alarm_clock_solid_teal"
                         android:drawablePadding="13dp"
                         android:gravity="center"
-                        android:text="@string/home_availability_reset_link"
+                        android:text="@string/resources_availability"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
 
@@ -91,7 +91,7 @@
                         android:drawableLeft="@drawable/ic_avatar_solid_teal"
                         android:drawablePadding="13dp"
                         android:gravity="center"
-                        android:text="@string/home_contact_link"
+                        android:text="@string/resources_contact"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
 
@@ -121,7 +121,7 @@
                         android:drawableLeft="@drawable/ic_app_solid_teal"
                         android:drawablePadding="13dp"
                         android:gravity="center"
-                        android:text="About This App"
+                        android:text="@string/resources_about_link"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
 
@@ -151,7 +151,7 @@
                         android:drawableLeft="@drawable/ic_info_solid_teal"
                         android:drawablePadding="13dp"
                         android:gravity="center"
-                        android:text="Frequently Asked Questions"
+                        android:text="@string/resources_faq_link"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
 
@@ -181,7 +181,7 @@
                         android:drawableLeft="@drawable/ic_privacy_solid_teal"
                         android:drawablePadding="13dp"
                         android:gravity="center"
-                        android:text="Privacy Policy"
+                        android:text="@string/resources_privacy_link"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
 

@@ -422,6 +422,14 @@
 
     <string name="grids_subheader_fs">Tap on the F\'s</string>
 
+    <string name="resources_header">Resources</string>
+    <string name="resources_availability">Change My Availability</string>
+    <string name="resources_contact">Contact Study Coordinator</string>
+    <string name="resources_about_link">About this App</string>
+    <string name="resources_faq_link">Frequently Asked Questions</string>
+    <string name="resources_privacy_link">Privacy Policy</string>
+
+    
     <string name="faq_header">Frequently Asked Questions Topics</string>
     <string name="faq_testing">Testing</string>
     <string name="faq_earnings">Earnings</string>
