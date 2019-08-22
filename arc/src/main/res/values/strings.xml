@@ -545,7 +545,7 @@
     <string name="earnings_details_4of4">4 Out of 4 Goal</string>
     <string name="earnings_details_2aday">2-A-Day Goal</string>
     <string name="earnings_details_21sessions">21 Sessions Goal</string>
-    <string name="earnings_details_dates">{DATE1}-{DATE2}</string>
+    <string name="earnings_details_dates">{DATE1} – {DATE2}</string>
 
     <string name="earnings_sync">Last Synced:</string>
     <string name="earnings_sync_justnow">Just Now</string>

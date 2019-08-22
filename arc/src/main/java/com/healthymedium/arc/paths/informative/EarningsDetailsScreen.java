@@ -62,7 +62,7 @@ public class EarningsDetailsScreen extends BaseFragment {
         String syncString = getString(R.string.earnings_sync) + " ";
         DateTime lastSyncTime = earnings.getDetailsRefreshTime();
         if(lastSyncTime != null) {
-            if(lastSyncTime.plusMinutes(1).isAfterNow()) {
+            if(lastSyncTime.plusMinutes(1).isBeforeNow()) {
                 String date = JodaUtil.format(lastSyncTime, R.string.format_date, Application.getInstance().getLocale());
                 String time = JodaUtil.format(lastSyncTime, R.string.format_time, Application.getInstance().getLocale());
                 String dateTime = getString(R.string.earnings_sync_datetime);

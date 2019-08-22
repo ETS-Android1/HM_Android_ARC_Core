@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/secondary"
@@ -15,7 +16,7 @@
         android:layout_marginRight="32dp"
         android:text="@string/earnings_details_complete_test_session"
         android:textColor="@color/white"
-        android:textSize="22dp"
+        android:textSize="17dp"
         android:textStyle="bold" />
 
     <RelativeLayout

@@ -9,6 +9,7 @@ import com.healthymedium.arc.api.models.EarningDetails;
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.ui.base.RoundedFrameLayout;
 import com.healthymedium.arc.ui.base.RoundedLinearLayout;
 import com.healthymedium.arc.ui.base.RoundedRelativeLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -26,7 +27,7 @@ public class EarningsDetailedCycleView extends LinearLayout {
     TextView textViewDates;
 
     LinearLayout goalLayout;
-    RoundedLinearLayout ongoingLayout;
+    RoundedFrameLayout ongoingLayout;
 
     TextView cycleTotal;
 
@@ -38,16 +39,17 @@ public class EarningsDetailedCycleView extends LinearLayout {
         DateTime start = new DateTime(cycle.start_date*1000L);
         DateTime end = new DateTime(cycle.end_date*1000L);
 
-        boolean isCurrent = (end.isAfterNow()&start.isBeforeNow());
+        boolean isCurrent = (end.isAfterNow()&&start.isBeforeNow());
 
         textViewTitle = view.findViewById(R.id.textViewTitle);
         if(isCurrent){
             textViewTitle.setText(ViewUtil.getString(R.string.earnings_details_subheader1));
+            ongoingLayout = view.findViewById(R.id.ongoingLayout);
             ongoingLayout.setVisibility(VISIBLE);
         }
 
-        String startString = JodaUtil.format(start,R.string.format_date_long);
-        String endString = JodaUtil.format(end,R.string.format_date_long);
+        String startString = JodaUtil.format(start,R.string.format_date_lo);
+        String endString = JodaUtil.format(end,R.string.format_date_lo);
         String dates = ViewUtil.getString(R.string.earnings_details_dates);
         dates = ViewUtil.replaceToken(dates,R.string.token_date1,startString);
         dates = ViewUtil.replaceToken(dates,R.string.token_date2,endString);

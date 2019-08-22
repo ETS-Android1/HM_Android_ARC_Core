@@ -21,10 +21,12 @@ public class EarningsDetailedGoalView extends LinearLayout {
     TextView textViewName;
     TextView textViewDesc;
     TextView textViewValue;
+    LinearLayout linearLayout;
 
     public EarningsDetailedGoalView(Context context, EarningDetails.Goal goal) {
         super(context);
         View view = inflate(context, R.layout.custom_earnings_cycle_details_goal,this);
+        linearLayout = view.findViewById(R.id.linearLayout);
 
         textViewName = view.findViewById(R.id.textViewName);
         textViewDesc = view.findViewById(R.id.textViewDesc);
@@ -57,7 +59,7 @@ public class EarningsDetailedGoalView extends LinearLayout {
     }
 
     public void highlight() {
-        setBackgroundColor(ViewUtil.getColor(R.color.earningsDetailsBlue));
+        linearLayout.setBackgroundColor(ViewUtil.getColor(R.color.earningsDetailsBlue));
     }
 
 }
