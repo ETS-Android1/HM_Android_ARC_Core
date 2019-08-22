@@ -7,32 +7,29 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.TestDay;
+import com.healthymedium.arc.study.TestSession;
+import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.WeekProgressView;
 import com.healthymedium.arc.utilities.NavigationManager;
-import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.Months;
 
 public class ProgressScreen extends BaseFragment {
 
-    TextView weeklyStatus;
-    WeekProgressView weekProgressView;
-    TextView startDate;
-    TextView startDate_date;
-    TextView endDate;
-    TextView endDate_date;
     TextView studyStatus;
     TextView joinedDate;
     TextView joinedDate_date;
@@ -52,77 +49,44 @@ public class ProgressScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_progress, container, false);
 
         Participant participant = Study.getParticipant();
-
-        int currDay = participant.getCurrentTestDay().getDayIndex();
-
-        weeklyStatus = view.findViewById(R.id.weeklyStatus);
-        weeklyStatus.setText(Html.fromHtml(ViewUtil.getString(R.string.progess_weeklystatus).replace("{#}", Integer.toString(currDay))));
-
-        weekProgressView = view.findViewById(R.id.weekProgressView);
-        weekProgressView.setDays(new String[]{"S", "M", "T", "W", "T", "F", "S"});
+        TestCycle testCycle = participant.getCurrentTestCycle();
+        TestDay testDay = participant.getCurrentTestDay();
 
 
+        if(testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow()) {
+            setupTodaysSessions(view, testDay);
+            setupWeekView(view, testCycle, testDay);
+        }
 
-        // Start and end dates for current week
-
-        startDate = view.findViewById(R.id.startDate);
-        startDate.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_startdate)));
-
-        TestCycle cycle = participant.getCurrentTestCycle();
-
-        DateTime visitStart = cycle.getActualStartDate();
-        DateTime visitEnd = cycle.getActualEndDate();
-
-        String language = com.healthymedium.arc.utilities.PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
-        String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
-        java.util.Locale locale = new java.util.Locale(language, country);
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
-
-        String start = fmt.print(visitStart);
-        String end = fmt.print(visitEnd.minusDays(1));
-
-        startDate_date = view.findViewById(R.id.startDate_date);
-        startDate_date.setText(ViewUtil.getString(R.string.progress_startdate_date).replace("{DATE}", start));
-
-        endDate = view.findViewById(R.id.endDate);
-        endDate.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_enddate)));
-
-        endDate_date = view.findViewById(R.id.endDate_date);
-        endDate_date.setText(ViewUtil.getString(R.string.progress_enddate_date).replace("{DATE}", end));
-
-
-
-        // Study dates and times
+        // study view partition
 
         studyStatus = view.findViewById(R.id.studyStatus);
-        int currCycle = cycle.getId()+1; // Cycles are 0-indexed
+        int currCycle = 0;// cycle.getId()+1; // Cycles are 0-indexed
         studyStatus.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_studystatus).replace("{#}", Integer.toString(currCycle))));
 
-        joinedDate = view.findViewById(R.id.joinedDate);
-        joinedDate.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_joindate)));
-
-        // TODO
         // The join date should be the start date of test cycle 0
+        DateTime joinedDate = Study.getParticipant().getStartDate();
+        String joinedDateString = JodaUtil.format(joinedDate,R.string.format_date_longer);
+        String joinedString = getString(R.string.progress_joindate_date);
+        joinedString = ViewUtil.replaceToken(joinedString,R.string.token_date,joinedDateString);
         joinedDate_date = view.findViewById(R.id.joinedDate_date);
-        joinedDate_date.setText(ViewUtil.getString(R.string.progress_joindate_date).replace("{DATE}", "x"));
+        joinedDate_date.setText(joinedString);
 
-        finishDate = view.findViewById(R.id.finishDate);
-        finishDate.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_finishdate)));
-
-        // TODO
-        // The finish date should be the end date of test cycle 11
+        DateTime finishDate = Study.getParticipant().getFinishDate();
+        String finishDateString = JodaUtil.format(finishDate,R.string.format_date_longer);
+        String finishString = getString(R.string.progress_finishdate_date);
+        finishString = ViewUtil.replaceToken(finishString,R.string.token_date,finishDateString);
         finishDate_date = view.findViewById(R.id.finishDate_date);
-        finishDate_date.setText(ViewUtil.getString(R.string.progress_finishdate_date).replace("{DATE}", "x"));
+        finishDate_date.setText(finishString);
 
         timeBetween = view.findViewById(R.id.timeBetween);
         timeBetween.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_timebtwtesting)));
 
+        int monthsBetween = Months.monthsBetween(joinedDate,finishDate).getMonths();
         timeBetween_units = view.findViewById(R.id.timeBetween_units);
         String units = ViewUtil.getString(R.string.progress_timebtwtesting_unit);
-        // TODO: We know the number and units in advance when we schedule
-        // Make a function to grab them
-        units = units.replace("{#}", "6");
-        units = units.replace("{UNIT}", "months");
+        units = units.replace(getString(R.string.token_number), String.valueOf(monthsBetween));
+        units = units.replace(getString(R.string.token_unit), "Months");
         timeBetween_units.setText(units);
 
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
@@ -137,7 +101,77 @@ public class ProgressScreen extends BaseFragment {
         return view;
     }
 
-    @Override
+    private void setupTodaysSessions(View view, TestDay testDay) {
+
+        LinearLayout layout = view.findViewById(R.id.sessions);
+        layout.setVisibility(View.VISIBLE);
+
+        LinearLayout sessionProgressLayout = view.findViewById(R.id.sessionProgressLayout);
+        int margin = ViewUtil.dpToPx(4);
+
+        for(TestSession session : testDay.getTestSessions()){
+            CircleProgressView progressView = new CircleProgressView(getContext());
+            sessionProgressLayout.addView(progressView);
+
+            progressView.setBaseColor(R.color.secondaryAccent);
+            progressView.setCheckmarkColor(R.color.secondaryAccent);
+            progressView.setSweepColor(R.color.secondary);
+            progressView.setStrokeWidth(6);
+            progressView.setMargin(margin,0,margin,0);
+            progressView.setProgress(session.getProgress(), false);
+        }
+
+        int testsCompleted = testDay.getNumberOfTestsFinished();
+        String complete = getString(R.string.progress_dailystatus_complete);
+        complete = ViewUtil.replaceToken(complete,R.string.token_number,String.valueOf(testsCompleted));
+
+        TextView textViewComplete = view.findViewById(R.id.complete);
+        textViewComplete.setText(Html.fromHtml(complete));
+
+        int testsRemaining = testDay.getNumberOfTestsLeft();
+        String remaining = getString(R.string.progress_dailystatus_remaining);
+        remaining = ViewUtil.replaceToken(remaining,R.string.token_number,String.valueOf(testsRemaining));
+
+        TextView textViewRemaining = view.findViewById(R.id.remaining);
+        textViewRemaining.setText(Html.fromHtml(remaining));
+
+    }
+
+    private void setupWeekView(View view, TestCycle testCycle, TestDay testDay) {
+
+        LinearLayout layout = view.findViewById(R.id.week);
+        layout.setVisibility(View.VISIBLE);
+
+        int dayIndex = testDay.getDayIndex();
+
+        String daysString = getString(R.string.progess_weeklystatus);
+        daysString = ViewUtil.replaceToken(daysString,R.string.token_number,String.valueOf(dayIndex+1));
+
+        TextView weeklyStatus = view.findViewById(R.id.weeklyStatus);
+        weeklyStatus.setText(Html.fromHtml(daysString));
+
+        WeekProgressView weekProgressView = view.findViewById(R.id.weekProgressView);
+        weekProgressView.setDays(new String[]{"S", "M", "T", "W", "T", "F", "S"});
+
+        TextView startDate = view.findViewById(R.id.startDate);
+        startDate.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_startdate)));
+
+        String start = JodaUtil.format(testCycle.getActualStartDate(),R.string.format_date_long,Application.getInstance().getLocale());
+        String end = JodaUtil.format(testCycle.getActualEndDate().minusDays(1),R.string.format_date_long,Application.getInstance().getLocale());
+
+        TextView startDate_date = view.findViewById(R.id.startDate_date);
+        startDate_date.setText(getString(R.string.progress_startdate_date).replace("{DATE}", start));
+
+        TextView endDate = view.findViewById(R.id.endDate);
+        endDate.setText(Html.fromHtml(getString(R.string.progress_enddate)));
+
+        TextView endDate_date = view.findViewById(R.id.endDate_date);
+        endDate_date.setText(getString(R.string.progress_enddate_date).replace("{DATE}", end));
+
+    }
+
+
+        @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();

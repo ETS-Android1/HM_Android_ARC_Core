@@ -4,6 +4,7 @@
     <string name="line_break"><br /> <br /></string>
     <string name="token_date">{DATE}</string>
     <string name="token_time">{TIME}</string>
+    <string name="token_unit">{UNIT}</string>
 
     <string name="token_date1">{DATE1}</string>
     <string name="token_date2">{DATE2}</string>
@@ -14,6 +15,8 @@
 
     <string name="format_date_dashed">MM-dd-yy</string>
     <string name="format_date_long">EEEE, MMMM d</string>
+    <string name="format_date_longer">MMMM d, yyyy</string>
+
     <string name="format_time">h:mm a</string>
 
 </resources>

@@ -486,23 +486,24 @@
     <string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
 
     <string name="progress_daily_header">Today\'s Sessions</string>
-    <string name="progess_dailystatus">&lt;b>{#}&lt;/b> Complete</string>
+    <string name="progress_dailystatus_complete">&lt;b>[#]&lt;/b> Complete</string>
+    <string name="progress_dailystatus_remaining">&lt;b>[#]&lt;/b> Remaining</string>
 
     <string name="progress_weekly_header">This Week</string>
-    <string name="progess_weeklystatus">Day &lt;b>{#}&lt;/b> of &lt;b>7&lt;/b></string>
-    <string name="progress_startdate">&lt;b>Start Date:&lt;/b></string>
+    <string name="progess_weeklystatus">Day &lt;b>[#]&lt;/b> of &lt;b>7&lt;/b></string>
+    <string name="progress_startdate">Start Date:</string>
     <string name="progress_startdate_date">{DATE}</string>
-    <string name="progress_enddate">&lt;b>End Date:&lt;/b></string>
+    <string name="progress_enddate">End Date:</string>
     <string name="progress_enddate_date">{DATE}</string>
 
     <string name="progress_study_header">This Study</string>
     <string name="progress_studystatus">Week &lt;b>{#}&lt;/b> of &lt;b>12&lt;/b></string>
-    <string name="progress_joindate">&lt;b>Joined Date:&lt;/b></string>
+    <string name="progress_joindate">Joined Date:</string>
     <string name="progress_joindate_date">{DATE}</string>
-    <string name="progress_finishdate">&lt;b>Estimated Finish Date&lt;/b></string>
+    <string name="progress_finishdate">Estimated Finish Date</string>
     <string name="progress_finishdate_date">{DATE}</string>
-    <string name="progress_timebtwtesting">&lt;b>Time Between Testing Weeks:&lt;/b></string>
-    <string name="progress_timebtwtesting_unit">{#} {UNIT}</string>
+    <string name="progress_timebtwtesting">Time Between Testing Weeks</string>
+    <string name="progress_timebtwtesting_unit">[#] {UNIT}</string>
 
     <string name="progress_practice_body1">Practice Session Complete!</string>
     <string name="progress_practice_body2">Starting tomorrow, &lt;b>you\'ll earn money&lt;/b> for each session you complete!</string>

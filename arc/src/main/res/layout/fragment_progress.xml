@@ -7,16 +7,19 @@
     android:layout_gravity="center"
     android:background="@color/secondary">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/sessions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical"
-            android:background="@color/white">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/textViewSessionsHeader"
@@ -27,6 +30,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
                 android:text="@string/progress_daily_header"
+                android:textColor="@color/secondaryDark"
                 android:textSize="26dp"
                 android:textStyle="bold" />
 
@@ -40,39 +44,38 @@
                 android:layout_weight="1"
                 android:background="@color/yellow" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/sessionProgressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
-                android:text="Session circles here"
-                android:textSize="26dp"
-                android:textStyle="bold" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginBottom="26dp">
+                android:layout_marginBottom="24dp">
 
                 <TextView
                     android:id="@+id/complete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2 Complete"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
+                    android:textColor="@color/secondary"
+                    android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/complete"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:text="|"
+                    android:textColor="@color/secondary"
                     android:textSize="17dp"
                     android:textStyle="bold" />
 
@@ -80,11 +83,10 @@
                     android:id="@+id/remaining"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/bar"
                     android:text="1 Remaining"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:textColor="@color/secondary"
+                    android:textSize="17dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -92,9 +94,10 @@
             android:id="@+id/week"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/sessions"
             android:orientation="vertical"
-            android:background="@color/progressWeekBackground">
+            android:background="@color/progressWeekBackground"
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <TextView
                 android:id="@+id/textViewWeekHeader"
@@ -105,7 +108,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
                 android:text="@string/progress_weekly_header"
-                android:textColor="@color/black"
+                android:textColor="@color/secondaryDark"
                 android:textSize="26dp"
                 android:textStyle="bold" />
 
@@ -127,15 +130,15 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Day 6 of 7"
-                android:textColor="@color/black"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textColor="@color/secondaryDark"
+                android:textSize="21dp" />
 
             <com.healthymedium.arc.ui.WeekProgressView
                 android:id="@+id/weekProgressView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="32dp">
 
             </com.healthymedium.arc.ui.WeekProgressView>
@@ -149,9 +152,8 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
                 android:text="Start Date"
-                android:textColor="@color/tealSubheader"
-                android:textSize="17dp"
-                />
+                android:textColor="@color/primary"
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/startDate_date"
@@ -174,9 +176,8 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
                 android:text="End Date"
-                android:textColor="@color/tealSubheader"
-                android:textSize="17dp"
-                />
+                android:textColor="@color/primary"
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/endDate_date"
@@ -263,10 +264,9 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
-                android:text="Joined Date"
+                android:text="@string/progress_joindate"
                 android:textColor="@color/tealSubheader"
-                android:textSize="17dp"
-                />
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/joinedDate_date"
@@ -290,10 +290,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="32dp"
-                    android:text="Estimated Finish Date"
+                    android:text="@string/progress_finishdate"
                     android:textColor="@color/tealSubheader"
-                    android:textSize="17dp"
-                    />
+                    android:textSize="17dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -324,10 +323,9 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
-                android:text="Time Between Testing Weeks"
+                android:text="@string/progress_timebtwtesting"
                 android:textColor="@color/tealSubheader"
-                android:textSize="17dp"
-                />
+                android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/timeBetween_units"
@@ -385,6 +383,6 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>
