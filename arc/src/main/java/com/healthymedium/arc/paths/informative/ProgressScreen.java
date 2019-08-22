@@ -60,9 +60,10 @@ public class ProgressScreen extends BaseFragment {
 
         // study view partition
 
+        int currCycle = testCycle.getId()+1; // Cycles are 0-indexed
+        String status = ViewUtil.getString(R.string.progress_studystatus);
         studyStatus = view.findViewById(R.id.studyStatus);
-        int currCycle = 0;// cycle.getId()+1; // Cycles are 0-indexed
-        studyStatus.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_studystatus).replace("{#}", Integer.toString(currCycle))));
+        studyStatus.setText(Html.fromHtml(ViewUtil.replaceToken(status,R.string.token_number,Integer.toString(currCycle))));
 
         // The join date should be the start date of test cycle 0
         DateTime joinedDate = Study.getParticipant().getStartDate();
