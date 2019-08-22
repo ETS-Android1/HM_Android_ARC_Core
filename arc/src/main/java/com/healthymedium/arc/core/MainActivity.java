@@ -257,4 +257,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.showHomeHint(activity);
     }
 
+    public void bottomNavSetHomeSelected() {
+        bottomNavigationView.setHomeSelected();
+    }
 }

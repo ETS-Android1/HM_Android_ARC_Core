@@ -141,6 +141,12 @@ public class LandingTemplate extends BaseFragment {
         view.setPadding(0,top,0,0);
     }
 
+    @Override
+    public void onResume() {
+        getMainActivity().bottomNavSetHomeSelected();
+        super.onResume();
+    }
+
     private void determineStrings() {
         // TODO
         // Bugs with wrong state displaying when a test is available

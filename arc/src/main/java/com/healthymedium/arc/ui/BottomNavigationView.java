@@ -131,6 +131,14 @@ public class BottomNavigationView extends RoundedLinearLayout {
         lastSelected = home;
     }
 
+    public void setHomeSelected() {
+        home.setSelected(true);
+        if (lastSelected != home) {
+            lastSelected.setSelected(false);
+        }
+        lastSelected = home;
+    }
+
     public class MenuItem extends LinearLayout {
 
         private Drawable drawableNormal;
