@@ -395,7 +395,7 @@ public class StateMachine {
                 false,
                 res.getString(R.string.chronotype_header),
                 res.getString(R.string.chronotype_subhead),
-                res.getString(R.string.chronotype_0_body),
+                res.getString(R.string.chronotype_body1),
                 res.getString(R.string.button_beginsurvey)));
 
         fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_1_q1),""));

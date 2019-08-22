@@ -36,7 +36,6 @@
     <string name="home_contact_link">Contact and About</string>
 
     <string name="chronotype_subhead">6 Questions</string>
-    <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.&lt;br /> &lt;br />Please estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>
     <string name="chronotype_1_q1">I have been a shift- or night-worker in the past three months.</string>
     <string name="chronotype_1_q2">Normally, I work ____\n\ndays/week.</string>
 
@@ -337,6 +336,8 @@
     <string name="availability_maximum_error">Please set a maximum of {HOURS} hours of availability.</string>
     <string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
     <string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
+
+    <string name="chronotype_body1">Answer questions in regard to your sleep and wake behavior on work and work-free days.&lt;br />&lt;br />&lt;i>Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.&lt;/i></string>
 
     <string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b>&lt;br /&gt;&lt;br /&gt;Let\'s take a look at the rest of the app.</string>
     <string name="popup_tab_home">&lt;b>This is the Home tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Check here to see if it\'s time to take a test.</string>
