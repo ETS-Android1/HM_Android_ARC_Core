@@ -56,28 +56,33 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
         handler.postDelayed(runnable,10000);
 
         earnings = Study.getParticipant().getEarnings();
-        earnings.refreshOverview(new Earnings.Listener() {
-            @Override
-            public void onSuccess() {
-                checkLoading();
-            }
+        if(!earnings.hasCurrentOverview()) {
+            earnings.refreshOverview(new Earnings.Listener() {
+                @Override
+                public void onSuccess() {
+                    checkLoading();
+                }
 
-            @Override
-            public void onFailure() {
-                checkLoading();
-            }
-        });
-        earnings.refreshDetails(new Earnings.Listener() {
-            @Override
-            public void onSuccess() {
-                checkLoading();
-            }
+                @Override
+                public void onFailure() {
+                    checkLoading();
+                }
+            });
+        }
+        if(!earnings.hasCurrentDetails()) {
+            earnings.refreshDetails(new Earnings.Listener() {
+                @Override
+                public void onSuccess() {
+                    checkLoading();
+                }
 
-            @Override
-            public void onFailure() {
-                checkLoading();
-            }
-        });
+                @Override
+                public void onFailure() {
+                    checkLoading();
+                }
+            });
+        }
+        checkLoading();
 
         return view;
     }

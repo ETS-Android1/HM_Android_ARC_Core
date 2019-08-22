@@ -3,6 +3,7 @@ package com.healthymedium.arc.study;
 import android.content.Context;
 
 import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 //import com.healthymedium.arc.study.PrivacyPolicy;
 import com.healthymedium.arc.utilities.MigrationUtil;
@@ -259,6 +260,10 @@ public class Study{
 
             participant.load();
             stateMachine.load();
+        }
+
+        if(Config.ENABLE_EARNINGS){
+            participant.getEarnings().linkAgainstRestClient();
         }
 
         valid = true;

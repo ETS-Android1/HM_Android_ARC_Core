@@ -19,6 +19,7 @@ public class Earnings {
     private EarningOverview overview;
     private int overviewRefresh;
     private DateTime overviewUpdateTime;
+    Listener overviewListener;
 
     private String prevWeeklyTotal = new String();
     private String prevStudyTotal = new String();
@@ -26,50 +27,59 @@ public class Earnings {
     private EarningDetails details;
     private int detailsRefresh;
     private DateTime detailsUpdateTime;
+    Listener detailsListener;
 
     public Earnings(){
         overviewRefresh = 0;
         detailsRefresh = 0;
     }
 
-    public void refreshOverview(final Listener listener){
-
-        overviewRefresh = -1;
-
-        final RestClient client = Study.getRestClient();
-
-        if(client.isUploading()) {
-            client.addUploadListener(new RestClient.UploadListener() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onStop() {
-                    client.removeUploadListener(this);
-                    if(client.isUploadQueueEmpty()) {
-                        internalRefreshOverview(listener);
-                    } else if(listener!=null){
-                        overviewRefresh = 0;
-                        listener.onFailure();
-                    }
-                }
-            });
-        } else if(client.isUploadQueueEmpty()) {
-            internalRefreshOverview(listener);
-        } else {
-            overviewRefresh = 0;
-            if(listener!=null){
-                listener.onFailure();
+    public void linkAgainstRestClient(){
+        RestClient client = Study.getRestClient();
+        client.addUploadListener(new RestClient.UploadListener() {
+            @Override
+            public void onStart() {
+                invalidate();
             }
-        }
 
+            @Override
+            public void onStop() {
+                if(Study.getRestClient().isUploadQueueEmpty()) {
+                    internalRefreshOverview();
+                    internalRefreshDetails();
+                }
+            }
+        });
     }
 
-    private void internalRefreshOverview(final Listener listener){
+    public void refreshOverview(Listener listener) {
 
-        final RestClient client = Study.getRestClient();
+        overviewListener = listener;
+
+        RestClient client = Study.getRestClient();
+        boolean isUploading = client.isUploading();
+        boolean isQueueEmpty = client.isUploadQueueEmpty();
+
+        if(isUploading) {
+            return;
+        }
+
+        if(isQueueEmpty) {
+            internalRefreshOverview();
+        } else {
+            overviewRefresh = 0;
+            if(overviewListener!=null) {
+                overviewListener.onFailure();
+                overviewListener = null;
+            }
+        }
+    }
+
+    private void internalRefreshOverview() {
+
+        RestClient client = Study.getRestClient();
+
+        overviewRefresh = -1;
 
         client.getEarningOverview(new RestClient.Listener() {
             @Override
@@ -77,16 +87,18 @@ public class Earnings {
                 overviewRefresh = 1;
                 overview = response.getOptionalAs(EarningOverview.class);
                 overviewUpdateTime = DateTime.now();
-                if(listener!=null){
-                    listener.onSuccess();
+                if(overviewListener!=null) {
+                    overviewListener.onSuccess();
+                    overviewListener = null;
                 }
             }
 
             @Override
             public void onFailure(RestResponse response) {
                 overviewRefresh = 0;
-                if(listener!=null){
-                    listener.onFailure();
+                if(overviewListener!=null) {
+                    overviewListener.onFailure();
+                    overviewListener = null;
                 }
             }
         });
@@ -117,44 +129,34 @@ public class Earnings {
         return prevStudyTotal;
     }
 
-    public void refreshDetails(final Listener listener){
+    public void refreshDetails(Listener listener){
 
-        detailsRefresh = -1;
+        detailsListener = listener;
 
-        final RestClient client = Study.getRestClient();
+        RestClient client = Study.getRestClient();
+        boolean isUploading = client.isUploading();
+        boolean isQueueEmpty = client.isUploadQueueEmpty();
 
-        if(client.isUploading()) {
-            client.addUploadListener(new RestClient.UploadListener() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onStop() {
-                    client.removeUploadListener(this);
-                    if(client.isUploadQueueEmpty()) {
-                        internalRefreshDetails(listener);
-                    } else if(listener!=null){
-                        detailsRefresh = 0;
-                        listener.onFailure();
-                    }
-                }
-            });
-        } else if(client.isUploadQueueEmpty()) {
-            internalRefreshDetails(listener);
-        } else {
-            detailsRefresh = 0;
-            if(listener!=null){
-                listener.onFailure();
-            }
+        if(isUploading) {
+            return;
         }
 
+        if(isQueueEmpty) {
+            internalRefreshDetails();
+        } else {
+            detailsRefresh = 0;
+            if(detailsListener!=null) {
+                detailsListener.onFailure();
+                detailsListener = null;
+            }
+        }
     }
 
-    private void internalRefreshDetails(final Listener listener){
+    private void internalRefreshDetails(){
 
-        final RestClient client = Study.getRestClient();
+        RestClient client = Study.getRestClient();
+
+        detailsRefresh = -1;
 
         client.getEarningOverview(new RestClient.Listener() {
             @Override
@@ -162,16 +164,18 @@ public class Earnings {
                 detailsRefresh = 1;
                 details = response.getOptionalAs(EarningDetails.class);
                 detailsUpdateTime = DateTime.now();
-                if(listener!=null){
-                    listener.onSuccess();
+                if(detailsListener!=null){
+                    detailsListener.onSuccess();
+                    detailsListener = null;
                 }
             }
 
             @Override
             public void onFailure(RestResponse response) {
                 detailsRefresh = 0;
-                if(listener!=null){
-                    listener.onFailure();
+                if(detailsListener!=null){
+                    detailsListener.onFailure();
+                    detailsListener = null;
                 }
             }
         });
