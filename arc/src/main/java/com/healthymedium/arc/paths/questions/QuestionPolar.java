@@ -45,7 +45,7 @@ public class QuestionPolar extends QuestionTemplate {
         yesButton = new RadioButton(getContext());
 
         if (yesText == null) {
-            yesButton.setText(ViewUtil.getString(R.string.YES));
+            yesButton.setText(ViewUtil.getString(R.string.radio_yes));
         } else {
             yesButton.setText(yesText);
         }
@@ -71,7 +71,7 @@ public class QuestionPolar extends QuestionTemplate {
         noButton = new RadioButton(getContext());
 
         if (noText == null) {
-            noButton.setText(ViewUtil.getString(R.string.NO));
+            noButton.setText(ViewUtil.getString(R.string.radio_no));
         } else {
             noButton.setText(noText);
         }

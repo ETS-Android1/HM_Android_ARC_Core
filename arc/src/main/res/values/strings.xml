@@ -413,6 +413,9 @@
     <string name="popup_tour">&lt;b>Tour the App&lt;/b></string>
     <string name="grids_subheader_boxes">Tap the boxes where the items were located in part one.</string>
 
+    <string name="radio_yes">Yes</string>
+    <string name="radio_no">No</string>
+
     <string name="prices_whatwasprice">What was the price?</string>
 
     <string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
