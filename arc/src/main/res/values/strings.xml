@@ -355,7 +355,7 @@
     <string name="onboarding_commit_header">Thank you!</string>
     <string name="onboarding_commit_body">Your participation in this study and every task you complete contributes to advancing Alzheimer\'s Disease research.</string>
     <string name="onboarding_notifications_header1">A Note on Notifications</string>
-    <string name="onboarding_notifications_body1">We use notifications to let you know it\'s time to take a test. <b>Notifications are essential for the study to function properly.</b> Please allow notifications for this app throughout the duration of the study.</string>
+    <string name="onboarding_notifications_body1">We use notifications to let you know it\'s time to take a test. &lt;b>Notifications are essential for the study to function properly.&lt;/b> Please allow notifications for this app throughout the duration of the study.</string>
     <string name="onboarding_notifications_header2">Please turn on notifications.</string>
     <string name="onboarding_notifications_body2">You must turn on notifications for the study to function properly. Please visit settings and flip the notifications switch on.</string>
 
