@@ -182,18 +182,24 @@ public class ProgressScreen extends BaseFragment {
         WeekProgressView weekProgressView = view.findViewById(R.id.weekProgressView);
         String daysString;
 
+        int dayIndex = testDay.getDayIndex();
+        if(isBaseline){
+            dayIndex--;
+        }
+
         if(isPractice){
             daysString = getString(R.string.progress_baseline_notice);
             weeklyStatus.setTextSize(TypedValue.COMPLEX_UNIT_DIP,17);
             weekProgressView.setVisibility(View.GONE);
         } else {
-            int dayIndex = testDay.getDayIndex();
-            if(isBaseline){
-                dayIndex--;
-            }
             daysString = getString(R.string.progess_weeklystatus);
             daysString = ViewUtil.replaceToken(daysString,R.string.token_number,String.valueOf(dayIndex+1));
-            weekProgressView.setDays(new String[]{"S", "M", "T", "W", "T", "F", "S"});
+
+            DateTime startDate = testCycle.getActualStartDate();
+            if(isBaseline){
+                startDate = startDate.plusDays(1);
+            }
+            weekProgressView.setupView(startDate,dayIndex);
         }
 
         weeklyStatus.setText(Html.fromHtml(daysString));

@@ -7,7 +7,10 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.ViewUtil;
+
+import org.joda.time.DateTime;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -22,19 +25,26 @@ import java.util.HashMap;
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-        Set days array in Java:
+        Set cycle start date and current day index in Java:
             WeekProgressView weekProgressView = view.findViewById(R.id.weekProgressView);
-            weekProgressView.setDays(new String[]{"M", "T", "W", "T", "F"});
+            weekProgressView.setupView(DateTime startDate, int currentDay);
 
         Current day of the week will highlight itself
 */
 
 public class WeekProgressView extends LinearProgressView {
 
-    private HashMap<Integer, Integer> dayMap = new HashMap<>();
-    private String[] defaultDays = new String[]{"S", "M", "T", "W", "T", "F", "S"};
-    private String[] days;
+    protected DateTime startDate;
     protected int currentDay = 0;
+    private int days[] = new int[]{
+            R.string.Day_Abbrev_Sun,
+            R.string.Day_Abbrev_Mon,
+            R.string.Day_Abbrev_Tue,
+            R.string.Day_Abbrev_Wed,
+            R.string.Day_Abbrev_Thur,
+            R.string.Day_Abbrev_Fri,
+            R.string.Day_Abbrev_Sat
+    };
 
     public WeekProgressView(Context context) {
         super(context);
@@ -61,7 +71,7 @@ public class WeekProgressView extends LinearProgressView {
     @Override
     protected void initOnMeasure() {
         if(padding == null) {
-                indicatorWidth = Math.max(indicatorWidth, unitWidth);
+            indicatorWidth = Math.max(indicatorWidth, unitWidth);
             padding = 0;
             if (indicatorWidth > unitWidth) {
                 padding = (indicatorWidth - unitWidth) / 2;
@@ -69,87 +79,66 @@ public class WeekProgressView extends LinearProgressView {
             backgroundLayout.setPadding(padding, 0, padding, 0);
         }
 
+        DateTime day = startDate;
         for (int i = 0; i <= currentDay; i++) {
+            int dayIndex = getDayIndex(day);
+            day = day.plusDays(1);
+
             int width = backgroundLayout.getChildAt(i).getMeasuredWidth() - padding*2/7;
             LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT);
-            String day = days[i];
             TextView dayTextView = new TextView(getContext());
             dayTextView.setLayoutParams(dayTextParams);
             dayTextView.setTypeface(Fonts.robotoBold);
             dayTextView.setTextSize(16);
             dayTextView.setTextColor(ViewUtil.getColor(getContext(), R.color.white));
             dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-            dayTextView.setText(day);
+            dayTextView.setText(ViewUtil.getString(days[dayIndex]));
             dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
             progressLayout.addView(dayTextView);
         }
         progressLayout.setPadding(padding, 0, padding, 0);
 
-        progressText = days[currentDay];
+        progressText = ViewUtil.getString(days[getDayIndex(startDate.plusDays(currentDay))]);
 
         super.initOnMeasure();
     }
 
 
     private void buildView() {
+        backgroundLayout.removeAllViews();
         LinearLayout.LayoutParams dayTextParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         dayTextParams.weight = 1;
-        for(String day : days) {
+        DateTime day = startDate;
+        for(int i=0;i<7;i++) {
+            int dayIndex = getDayIndex(day);
+            day = day.plusDays(1);
+
             TextView dayTextView = new TextView(getContext());
             dayTextView.setLayoutParams(dayTextParams);
             dayTextView.setTypeface(Fonts.robotoBold);
             dayTextView.setTextSize(16);
             dayTextView.setTextColor(ViewUtil.getColor(getContext(), R.color.text));
             dayTextView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
-            dayTextView.setText(day);
+            dayTextView.setText(ViewUtil.getString(days[dayIndex]));
             dayTextView.setPadding(0, ViewUtil.dpToPx(5), 0, ViewUtil.dpToPx(5));
             backgroundLayout.addView(dayTextView);
         }
     }
 
-    private void parseDays() {
-        Calendar calendar = Calendar.getInstance();
-        currentDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-
-        for(int i=0; i < days.length; i++) {
-            int nextDay = (i == days.length-1) ? 0:i+1;
-            String a = days[i];
-            String b = days[nextDay];
-
-            if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Sun))) {
-                if(b.equals(getContext().getResources().getString(R.string.Day_Abbrev_Mon))) {
-                    dayMap.put(0, i);
-                } else {
-                    dayMap.put(6, i);
-                }
-            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Tue))) {
-                if(b.equals(getContext().getResources().getString(R.string.Day_Abbrev_Wed))) {
-                    dayMap.put(2, i);
-                } else {
-                    dayMap.put(4, i);
-                }
-            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Mon))) {
-                dayMap.put(1, i);
-            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Wed))) {
-                dayMap.put(3, i);
-            } else if(a.equals(getContext().getResources().getString(R.string.Day_Abbrev_Fri))) {
-                dayMap.put(5, i);
-            }
-        }
-
-        currentDay = dayMap.get(currentDay);
-
-        progress = currentDay;
-    }
-
-    public String[] getDays() {
-        return days;
-    }
-
-    public void setDays(String[] days) {
-        this.days = days;
-        maxValue = days.length-1;
-        parseDays();
+    public void setupView(DateTime startDate, int currentDay) {
+        this.startDate = startDate;
+        this.currentDay = currentDay;
+        this.progress = currentDay;
+        this.maxValue = days.length-1;
         buildView();
     }
+
+    private int getDayIndex(DateTime dateTime) {
+        int dayIndex = dateTime.getDayOfWeek();
+        if(dayIndex==7){
+            dayIndex = 0;
+        }
+        return dayIndex;
+    }
+
 }
