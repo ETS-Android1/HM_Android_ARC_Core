@@ -202,10 +202,15 @@ public class Scheduler {
     }
 
     protected void scheduleTestsForFirstBaselineDay(TestDay day, DateTime now, DateTime bed) {
+        day.setStartTime(now);
+        day.setEndTime(bed);
         day.getTestSession(0).setPrescribedTime(now);
     }
 
     protected void scheduleTestsForDay(TestDay day, DateTime wake, DateTime bed) {
+
+        day.setStartTime(wake);
+        day.setEndTime(bed);
 
         int numTests = day.getNumberOfTests();
         int secondsLeft = Seconds.secondsBetween(wake,bed).getSeconds();

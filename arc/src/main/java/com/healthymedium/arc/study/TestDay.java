@@ -8,6 +8,8 @@ public class TestDay {
 
     int dayIndex;
     List<TestSession> sessions;
+    DateTime start;
+    DateTime end;
 
     public TestDay(int index, List<TestSession> sessions) {
         this.dayIndex = index;
@@ -91,5 +93,22 @@ public class TestDay {
         }
         return (int) progress;
     }
+
+    public void setStartTime(DateTime start) {
+        this.start = start;
+    }
+
+    public DateTime getStartTime() {
+        return start;
+    }
+
+    public void setEndTime(DateTime end) {
+        this.end = end;
+    }
+
+    public DateTime getEndTime() {
+        return end;
+    }
+
 
 }
