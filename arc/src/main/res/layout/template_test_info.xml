@@ -85,7 +85,8 @@
                 android:paddingLeft="32dp"
                 android:paddingTop="19dp"
                 android:paddingRight="32dp"
-                android:textSize="18dp"
+                android:textSize="17dp"
+                android:lineHeight="26dp"
                 android:textColor="@color/white"
                 tools:text="This is the body text"
                 tools:visibility="visible" />
