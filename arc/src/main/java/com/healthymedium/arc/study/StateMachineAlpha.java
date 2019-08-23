@@ -167,7 +167,7 @@ public class StateMachineAlpha extends StateMachine {
 
         currentlyInTestPath = true;
 
-        if (participant.getState().currentTestSession == 0) {
+        if (!participant.getCurrentTestCycle().hasThereBeenAFinishedTest()){
             Log.i("StateMachine", "setting path for first of baseline");
             state.currentPath = PATH_TEST_FIRST_OF_BASELINE;
             return;
