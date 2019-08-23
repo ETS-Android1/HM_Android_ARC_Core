@@ -23,7 +23,7 @@ public class VisitNextWeek extends NotificationType {
 
     @Override
     public String getContent(NotificationNode node) {
-        return ViewUtil.getString(R.string.notification_1week);
+        return ViewUtil.getString(R.string.notification_weekbefore);
     }
 
     @Override

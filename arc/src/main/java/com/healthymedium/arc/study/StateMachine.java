@@ -394,11 +394,11 @@ public class StateMachine {
         fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.chronotype_header),
-                res.getString(R.string.chronotype_subhead),
+                res.getString(R.string.chronotype_subheader),
                 res.getString(R.string.chronotype_body1),
                 res.getString(R.string.button_beginsurvey)));
 
-        fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_1_q1),""));
+        fragments.add(new QuestionPolar(true, res.getString(R.string.chronotype_q1),""));
 
         List<String> workingDayCountOptions = new ArrayList<>();
         workingDayCountOptions.add("0");
@@ -410,13 +410,13 @@ public class StateMachine {
         workingDayCountOptions.add("6");
         workingDayCountOptions.add("7");
 
-        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_1_q2), res.getString(R.string.list_selectone ),workingDayCountOptions));
+        fragments.add(new QuestionRadioButtons(true,false, res.getString(R.string.chronotype_q2), res.getString(R.string.list_selectone ),workingDayCountOptions));
 
         fragments.add(new StateInfoTemplate(
                 false,
                 "",
                 "",
-                res.getString(R.string.chronotype_2_body),
+                res.getString(R.string.chronotype_body2),
                 res.getString(R.string.button_next)));
 
         CircadianClock clock;
@@ -446,10 +446,10 @@ public class StateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_work_days_sleep), res.getString(R.string.chronotype_body_sleep), bedTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_work_days_wake), res.getString(R.string.chronotype_body_wake), wakeTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_sleep), res.getString(R.string.chronotype_body_sleep), bedTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_wake), res.getString(R.string.chronotype_body_wake), wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_sleep), res.getString(R.string.chronotype_disclaim1), bedTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_wake), res.getString(R.string.chronotype_disclaim2), wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_sleep), res.getString(R.string.chronotype_disclaim1), bedTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_wake), res.getString(R.string.chronotype_disclaim2), wakeTime));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);
@@ -463,9 +463,9 @@ public class StateMachine {
 
         fragments.add(new StateInfoTemplate(
                 false,
-                res.getString(R.string.sleepwakesurvey_header),
-                res.getString(R.string.sleepwakesurvey_subhead),
-                res.getString(R.string.sleepwakesurvey_body),
+                res.getString(R.string.wakesurvey_header),
+                res.getString(R.string.wakesurvey_subheader),
+                res.getString(R.string.wakesurvey_body),
                 res.getString(R.string.button_beginsurvey)));
 
         CircadianClock clock;
@@ -495,12 +495,12 @@ public class StateMachine {
             bedTime = clock.getRhythm(weekday).getBedTime();
         }
 
-        fragments.add(new QuestionTime(true, res.getString(R.string.wake_0_q1),"",bedTime));
-        fragments.add(new QuestionDuration(true, res.getString(R.string.wake_0_q2)," "));
-        fragments.add(new QuestionInteger(true, res.getString(R.string.wake_0_q3a), res.getString(R.string.wake_0_q3b),2));
-        fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q1)," ",wakeTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.wake_1_q2)," ",wakeTime));
-        fragments.add(new QuestionRating(true, res.getString(R.string.wake_1_q3), "", res.getString(R.string.wake_poor), res.getString(R.string.wake_excellent)));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_q1),"",bedTime));
+        fragments.add(new QuestionDuration(true, res.getString(R.string.wake_q2)," "));
+        fragments.add(new QuestionInteger(true, res.getString(R.string.wake_q3a), res.getString(R.string.wake_q3b),2));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_q4)," ",wakeTime));
+        fragments.add(new QuestionTime(true, res.getString(R.string.wake_q5)," ",wakeTime));
+        fragments.add(new QuestionRating(true, res.getString(R.string.wake_q6), "", res.getString(R.string.wake_poor), res.getString(R.string.wake_excellent)));
 
         PathSegment segment = new PathSegment(fragments,WakePathData.class);
         enableTransition(segment,true);
@@ -515,44 +515,44 @@ public class StateMachine {
         fragments.add(new StateInfoTemplate(
                 false,
                 res.getString(R.string.context_header),
-                res.getString(R.string.context_subhead),
+                res.getString(R.string.context_subheader),
                 res.getString(R.string.context_body),
                 res.getString(R.string.button_beginsurvey)));
 
         List<String> who = new ArrayList<>();
-        who.add(res.getString(R.string.context_q1_answers1));
-        who.add(res.getString(R.string.context_q1_answers2));
-        who.add(res.getString(R.string.context_q1_answers3));
-        who.add(res.getString(R.string.context_q1_answers4));
-        who.add(res.getString(R.string.context_q1_answers5));
-        who.add(res.getString(R.string.context_q1_answers6));
-        who.add(res.getString(R.string.context_q1_answers7));
-        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.Context_q1_sub), who, res.getString(R.string.context_q1_answers1)));
+        who.add(res.getString(R.string.context_q1_a1));
+        who.add(res.getString(R.string.context_q1_a2));
+        who.add(res.getString(R.string.context_q1_a3));
+        who.add(res.getString(R.string.context_q1_a4));
+        who.add(res.getString(R.string.context_q1_a5));
+        who.add(res.getString(R.string.context_q1_a6));
+        who.add(res.getString(R.string.context_q1_a7));
+        fragments.add(new QuestionCheckBoxes(true, res.getString(R.string.context_q1), res.getString(R.string.list_selectall), who, res.getString(R.string.context_q1_a1)));
 
         List<String> where = new ArrayList<>();
-        where.add(res.getString(R.string.context_q2_answers1));
-        where.add(res.getString(R.string.context_q2_answers2));
-        where.add(res.getString(R.string.context_q2_answers3));
-        where.add(res.getString(R.string.context_q2_answers4));
-        where.add(res.getString(R.string.context_q2_answers5));
-        where.add(res.getString(R.string.context_q2_answers6));
-        where.add(res.getString(R.string.context_q2_answers7));
-        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.Context_q2_sub), where));
+        where.add(res.getString(R.string.context_q2_a1));
+        where.add(res.getString(R.string.context_q2_a2));
+        where.add(res.getString(R.string.context_q2_a3));
+        where.add(res.getString(R.string.context_q2_a4));
+        where.add(res.getString(R.string.context_q2_a5));
+        where.add(res.getString(R.string.context_q2_a6));
+        where.add(res.getString(R.string.context_q2_a7));
+        fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q2), res.getString(R.string.list_selectone), where));
 
         fragments.add(new QuestionRating(true, res.getString(R.string.context_q3), "", res.getString(R.string.context_bad), res.getString(R.string.context_good)));
         fragments.add(new QuestionRating(true, res.getString(R.string.context_q4), "", res.getString(R.string.context_tired), res.getString(R.string.context_active)));
 
         List<String> what = new ArrayList<>();
-        what.add(res.getString(R.string.context_q5_answers1));
-        what.add(res.getString(R.string.context_q5_answers2));
-        what.add(res.getString(R.string.context_q5_answers3));
-        what.add(res.getString(R.string.context_q5_answers4));
-        what.add(res.getString(R.string.context_q5_answers5));
-        what.add(res.getString(R.string.context_q5_answers6));
-        what.add(res.getString(R.string.context_q5_answers7));
-        what.add(res.getString(R.string.context_q5_answers8));
-        what.add(res.getString(R.string.context_q5_answers9));
-        what.add(res.getString(R.string.context_q5_answers10));
+        what.add(res.getString(R.string.context_q5_a1));
+        what.add(res.getString(R.string.context_q5_a2));
+        what.add(res.getString(R.string.context_q5_a3));
+        what.add(res.getString(R.string.context_q5_a4));
+        what.add(res.getString(R.string.context_q5_a5));
+        what.add(res.getString(R.string.context_q5_a6));
+        what.add(res.getString(R.string.context_q5_a7));
+        what.add(res.getString(R.string.context_q5_a8));
+        what.add(res.getString(R.string.context_q5_a9));
+        what.add(res.getString(R.string.context_q5_a10));
         fragments.add(new QuestionRadioButtons(true, false, res.getString(R.string.context_q5), "", what));
 
         PathSegment segment = new PathSegment(fragments,ContextPathData.class);
@@ -607,7 +607,7 @@ public class StateMachine {
 
         TestInfoTemplate info = new TestInfoTemplate(
                 testNumber,
-                res.getString(R.string.price_header),
+                res.getString(R.string.prices_header),
                 res.getString(R.string.prices_body),
                 "prices",
                 res.getString(R.string.button_begintest));
@@ -621,7 +621,7 @@ public class StateMachine {
         }
 
         fragments.add(new SimplePopupScreen(
-                res.getString(R.string.price_overlay),
+                res.getString(R.string.prices_overlay),
                 res.getString(R.string.button_begin),
                 3000,
                 15000,
@@ -669,7 +669,7 @@ public class StateMachine {
 
         TestInfoTemplate info0 = new TestInfoTemplate(
                 testNumber,
-                res.getString(R.string.grid_header),
+                res.getString(R.string.grids_header),
                 res.getString(R.string.grid_body),
                 "grids",
                 res.getString(R.string.button_begintest));
@@ -695,7 +695,7 @@ public class StateMachine {
         Resources res = Application.getInstance().getResources();
 
         List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new QuestionInterrupted(false, res.getString(R.string.interrupted_body),""));
+        fragments.add(new QuestionInterrupted(false, res.getString(R.string.testing_interrupted_body),""));
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }

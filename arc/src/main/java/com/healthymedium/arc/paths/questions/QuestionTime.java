@@ -36,7 +36,7 @@ public class QuestionTime extends QuestionTemplate {
     boolean showHint;
 
     public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime) {
-        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submit));
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submittime));
         time = defaultTime;
         type = "time";
     }

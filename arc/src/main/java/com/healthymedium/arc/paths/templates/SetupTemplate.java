@@ -461,18 +461,18 @@ public class SetupTemplate extends StandardTemplate {
         int code = response.code;
         switch (code){
             case 400:
-                return getResources().getString(R.string.error3);
+                return getResources().getString(R.string.login_error3);
             case 401:
-                return getResources().getString(R.string.error1);
+                return getResources().getString(R.string.login_error1);
             case 409:
-                return getResources().getString(R.string.error2);
+                return getResources().getString(R.string.login_error2);
         }
         if(response.errors.keySet().size()>0){
             String key = response.errors.keySet().toArray()[0].toString();
             return response.errors.get(key).getAsString();
         }
         if(!response.successful || failed){
-            return getResources().getString(R.string.error3);
+            return getResources().getString(R.string.login_error3);
         }
         return null;
     }

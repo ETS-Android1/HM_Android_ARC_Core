@@ -58,7 +58,7 @@
                     android:paddingTop="22dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="22dp"
-                    android:text="@string/help"
+                    android:text="@string/button_help"
                     android:textAllCaps="true"
                     android:textColor="@color/primary"
                     android:textSize="14dp" />

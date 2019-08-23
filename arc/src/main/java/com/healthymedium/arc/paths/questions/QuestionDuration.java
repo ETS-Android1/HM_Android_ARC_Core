@@ -23,7 +23,7 @@ public class QuestionDuration extends QuestionTemplate {
     boolean valid = true;
 
     public QuestionDuration(boolean allowBack, String header, String subheader) {
-        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submit));
+        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submittime));
         type = "duration";
     }
 

@@ -61,7 +61,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
-                android:text="@string/change_button"
+                android:text="@string/button_change"
                 app:buttonTheme="light"/>
 
             <FrameLayout
@@ -97,7 +97,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_gravity="left"
                 android:layout_marginBottom="24dp"
-                android:text="@string/change_button"
+                android:text="@string/button_change"
                 app:buttonTheme="light"/>
 
         </LinearLayout>

@@ -23,7 +23,7 @@ public class SetupParticipantConfirm extends SetupTemplate {
         if (sequence.toString().equals(previousCharacterSequence.toString())) {
             return true;
         } else {
-            showError(Application.getInstance().getResources().getString(R.string.error1));
+            showError(Application.getInstance().getResources().getString(R.string.login_error1));
             return false;
         }
     }

@@ -58,7 +58,7 @@
                     android:paddingTop="22dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="22dp"
-                    android:text="@string/help"
+                    android:text="@string/button_help"
                     android:textAllCaps="true"
                     android:textColor="@color/primary"
                     android:textSize="14dp" />
@@ -104,7 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Sun"
+                        android:text="@string/day_abbrev_sun"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>
@@ -114,7 +114,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Mon"
+                        android:text="@string/day_abbrev_mon"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>
@@ -124,7 +124,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Tue"
+                        android:text="@string/day_abbrev_tues"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>
@@ -134,7 +134,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Wed"
+                        android:text="@string/day_abbrev_weds"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>
@@ -144,7 +144,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Thur"
+                        android:text="@string/day_abbrev_thurs"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>
@@ -154,7 +154,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Fri"
+                        android:text="@string/day_abbrev_fri"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>
@@ -164,7 +164,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/Day_Abbrev_Sat"
+                        android:text="@string/day_abbrev_sat"
                         android:textSize="26dp"
                         android:textStyle="bold"
                         android:gravity="center"/>

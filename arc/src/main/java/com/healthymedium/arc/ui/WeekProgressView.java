@@ -37,13 +37,13 @@ public class WeekProgressView extends LinearProgressView {
     protected DateTime startDate;
     protected int currentDay = 0;
     private int days[] = new int[]{
-            R.string.Day_Abbrev_Sun,
-            R.string.Day_Abbrev_Mon,
-            R.string.Day_Abbrev_Tue,
-            R.string.Day_Abbrev_Wed,
-            R.string.Day_Abbrev_Thur,
-            R.string.Day_Abbrev_Fri,
-            R.string.Day_Abbrev_Sat
+            R.string.day_abbrev_sun,
+            R.string.day_abbrev_mon,
+            R.string.day_abbrev_tues,
+            R.string.day_abbrev_weds,
+            R.string.day_abbrev_thurs,
+            R.string.day_abbrev_fri,
+            R.string.day_abbrev_sat
     };
 
     public WeekProgressView(Context context) {

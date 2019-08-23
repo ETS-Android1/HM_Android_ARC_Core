@@ -43,7 +43,7 @@ public class AvailabilityWeekdayConfirm extends QuestionPolar {
 
         textViewHeader.setText(Html.fromHtml(header));
 
-        buttonNext.setText(ViewUtil.getString(R.string.button_submit));
+        buttonNext.setText(ViewUtil.getString(R.string.button_submittime));
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

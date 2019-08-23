@@ -52,7 +52,7 @@
             android:paddingTop="32dp"
             android:paddingRight="14dp"
             android:paddingBottom="25dp"
-            android:text="@string/aboutapp_header"
+            android:text="@string/about_header"
             android:textColor="@color/primary"
             android:textSize="15dp" />
 
@@ -79,7 +79,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="25dp"
-        android:text="@string/Button_signin" />
+        android:text="@string/button_signin" />
 
 
     <TextView

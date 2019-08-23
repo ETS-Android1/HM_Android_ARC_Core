@@ -23,7 +23,7 @@ public class VisitNextDay extends NotificationType {
 
     @Override
     public String getContent(NotificationNode node) {
-        return ViewUtil.getString(R.string.notification_1day);
+        return ViewUtil.getString(R.string.notification_daybefore);
     }
 
     @Override

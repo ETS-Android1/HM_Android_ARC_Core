@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/gridLayout"
         android:layout_alignParentStart="true"
-        android:text="@string/grid_tap_instructions"
+        android:text="@string/grids_subheader_fs"
         android:textAlignment="center" />
 
     <GridLayout

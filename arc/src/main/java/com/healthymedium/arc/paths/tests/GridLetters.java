@@ -41,7 +41,7 @@ public class GridLetters extends BaseFragment {
         @Override
         public void run() {
             if(isVisible()){
-                dialog = new TimedDialogMultipart(getString(R.string.grids_popup2), getString(R.string.grids_popup1), 3000, 6000);
+                dialog = new TimedDialogMultipart(getString(R.string.grids_overlay3), getString(R.string.grids_popup1), 3000, 6000);
                 dialog.setOnDialogDismissListener(new TimedDialogMultipart.OnDialogDismiss() {
                     @Override
                     public void dismiss() {

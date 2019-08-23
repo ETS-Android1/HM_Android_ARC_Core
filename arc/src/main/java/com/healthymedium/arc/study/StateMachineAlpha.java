@@ -400,8 +400,8 @@ public class StateMachineAlpha extends StateMachine {
         fragments.add(new QuestionSignature(
                 false,
                 allowHelp,
-                ViewUtil.getString(R.string.idverification_header),
-                ViewUtil.getString(R.string.idverification_body)));
+                ViewUtil.getString(R.string.idverify_header),
+                ViewUtil.getString(R.string.testing_id_header)));
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }

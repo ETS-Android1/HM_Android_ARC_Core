@@ -43,7 +43,7 @@ public class RestResponse {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
+                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.login_error3));
                 response.errors.addProperty("format","Invalid response format received");
                 response.successful = retrofitResponse.isSuccessful();
                 return response;
@@ -53,7 +53,7 @@ public class RestResponse {
             try {
                 json = new JsonParser().parse(responseData).getAsJsonObject();
             } catch (JsonSyntaxException e) {
-                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
+                response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.login_error3));
                 response.errors.addProperty("unknown","Server Error "+response.code);
                 return response;
             }
@@ -78,7 +78,7 @@ public class RestResponse {
         response.successful = false;
         response.code = -1;
         if(throwable!=null) {
-            response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.error3));
+            response.errors.addProperty("show", Application.getInstance().getResources().getString(R.string.login_error3));
             response.errors.addProperty(throwable.getClass().getSimpleName(),throwable.getMessage());
         }
         return response;

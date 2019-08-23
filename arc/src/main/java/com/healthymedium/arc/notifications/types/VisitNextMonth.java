@@ -31,7 +31,7 @@ public class VisitNextMonth extends NotificationType {
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d");
         DateTime startDate = Study.getInstance().getParticipant().getCurrentTestCycle().getActualStartDate();
         String start = fmt.print(startDate);
-        return ViewUtil.getString(R.string.notification_1month).replace("{DATE}", start);
+        return ViewUtil.getString(R.string.notification_monthbefore).replace("{DATE}", start);
     }
 
     @Override

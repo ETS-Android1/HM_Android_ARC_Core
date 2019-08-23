@@ -1,123 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">library</string>
-    <string name="country_key">US</string>
-    <string name="language_key">en</string>
 
-    <string name="language_prefer">Please select your &lt;b>preferred language.&lt;/b></string>
+    <string name="okay">Okay</string>
 
-    <string name="gen_welcome_key">Welcome to the app</string>
-
-    <string name="login_enter_ARCID">Please enter your\n&lt;b>ARC ID&lt;/b> below.</string>
-    <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter your ARC ID&lt;/b>.</string>
-    <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
-
-    <string name="bysigning_key">By signing in you agree to our Privacy Policy.</string>
-    <string name="privacy_linked">Privacy Policy</string>
-
-    <string name="Button_signin">SIGN IN</string>
-    <string name="button_begin">BEGIN</string>
-    <string name="button_next">NEXT</string>
-    <string name="thankyou_button_return_to_home">RETURN TO HOME</string>
-    <string name="button_submit">SUBMIT TIME</string>
-    <string name="button_back">BACK</string>
     <string name="button_continue">CONTINUE</string>
-    <string name="help">HELP</string>
-    <string name="change_button">CHANGE</string>
-    <string name="button_confirm">CONFIRM</string>
-    <string name="button_adjust_sched">ADJUST SCHEDULE</string>
-    <string name="button_chooseanswer">CHOOSE ANSWER</string>
-    <string name="button_close">CLOSE</string>
-    <string name="button_settings">GO TO SETTINGS</string>
-
-    <string name="radio_understand">I understand</string>
-
-    <string name="home_availability_reset_link">Change My Availability</string>
-    <string name="home_contact_link">Contact and About</string>
-
-    <string name="chronotype_subhead">6 Questions</string>
-    <string name="chronotype_1_q1">I have been a shift- or night-worker in the past three months.</string>
-    <string name="chronotype_1_q2">Normally, I work ____\n\ndays/week.</string>
-
-    <string name="chronotype_2_body">Please answer all of the following questions even if you do not work 7 days per week.&lt;br /> &lt;br />&lt;i>Please don\'t forget to indicate AM or PM.&lt;/i></string>
-
-    <string name="chronotype_body_sleep">This is NOT when you go to bed.</string>
-    <string name="chronotype_body_wake">This is NOT when you get out of bed.</string>
-
-    <string name="chronotype_work_days_sleep">On &lt;b>workdays&lt;/b>, I normally &lt;b>fall asleep&lt;/b> at:</string>
-    <string name="chronotype_work_days_wake">On &lt;b>workdays&lt;/b>, I normally &lt;b>wake up&lt;/b> at:</string>
-
-    <string name="chronotype_workfree_sleep">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>fall asleep&lt;/b> at:</string>
-    <string name="chronotype_workfree_wake">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>wake up&lt;/b> at:</string>
-
-    <string name="sleepwakesurvey_header">Wake Survey</string>
-    <string name="sleepwakesurvey_subhead">6 Questions</string>
-    <string name="sleepwakesurvey_body">The following questions will ask you about sleep specific to last night and waking this morning.</string>
-
-    <string name="chronotype_header">Chronotype</string>
-
-    <string name="context_bad">Bad</string>
-    <string name="context_good">Good</string>
-
-    <string name="context_header">Context Survey</string>
-    <string name="context_subhead">5 Questions</string>
-    <string name="context_body">These questions will briefly ask you about what is happening around you right now in this moment.</string>
-
-    <string name="context_q1">Who is with you right now?</string>
-    <string name="Context_q1_sub">Select all that apply</string>
-    <string name="context_q1_answers1">Nobody</string>
-    <string name="context_q1_answers2">Partner/spouse</string>
-    <string name="context_q1_answers3">Family</string>
-    <string name="context_q1_answers4">Friends</string>
-    <string name="context_q1_answers5">Co-workers</string>
-    <string name="context_q1_answers6">Pet</string>
-    <string name="context_q1_answers7">Other</string>
-
-    <string name="context_q2">Where are you right now?</string>
-    <string name="Context_q2_sub">Select One</string>
-    <string name="context_q2_answers1">My Home</string>
-    <string name="context_q2_answers2">My Work</string>
-    <string name="context_q2_answers3">School</string>
-    <string name="context_q2_answers4">Other Person\'s Home</string>
-    <string name="context_q2_answers5">Vehicle</string>
-    <string name="context_q2_answers6">Outside</string>
-    <string name="context_q2_answers7">Other</string>
-
-    <string name="context_q3">How would you rate &lt;b>your overall mood&lt;/b> right now?</string>
-
-    <string name="context_q4">How would you rate &lt;b>how you feel&lt;/b> right now?</string>
-
-    <string name="context_q5">In the past 5 minutes, what were you mostly doing?</string>
-    <string name="context_q5_answers1">Sitting at a Desk</string>
-    <string name="context_q5_answers2">Watching Television</string>
-    <string name="context_q5_answers3">Eating</string>
-    <string name="context_q5_answers4">Exercising</string>
-    <string name="context_q5_answers5">Household Chores (cooking cleaning)</string>
-    <string name="context_q5_answers6">Driving</string>
-    <string name="context_q5_answers7">Socializing</string>
-    <string name="context_q5_answers8">Personal Care</string>
-    <string name="context_q5_answers9">Resting</string>
-    <string name="context_q5_answers10">Other</string>
-
-    <string name="context_tired">Sleepy/Tired</string>
-    <string name="context_active">Active/Alert</string>
-
-    <string name="grid_header">Grids</string>
-    <string name="grid_body1">In this test you will see a 5 x 5 grid with three items placed in that grid.\n\nStudy the grid and try to remember the location of the three items.</string>
-    <string name="grid_body2">You will then do a different task where you will touch all the letter “F”s that you find as quickly as you can.</string>
-    <string name="grid_body3">Finally, you will be shown a blank grid. Tap the boxes where the items were previously located.\n\nPress Begin to start the test.</string>
-    <string name="grid_transition_overlay">Try to remember the location of the items!</string>
-    <string name="grid_example_test">EXAMPLE GRID EXCERPT</string>
-    <string name="grid_example_letters">EXAMPLE TASK EXCERPT</string>
-    <string name="grid_subheader">Grids Instructions</string>
-    <string name="grid_tap_instructions">Tap On the F\'s</string>
-
-    <string name="idverification_body">Please sign your initials on the line below to verify your identity.</string>
-    <string name="idverification_body2">By signing my initials on the line below, I attest that I completed these tests.</string>
-    <string name="idverification_header">Id Verification</string>
-
-    <string name="interrupted_body">Thanks! &lt;br /&gt; &lt;br /&gt; Were you interrupted or did you have to stop while taking any of these tests?</string>
-    <string name="interrupted_header">Final Questions</string>
 
     <string name="thank_you_header1">Thank you!</string>
     <string name="thankyou_testcomplete_subhead1">Test Complete</string>
@@ -133,77 +19,17 @@
     <string name="thankyou_alldone_subhead1">All Done for Today!</string>
     <string name="thankyou_alldone_body1">Thanks for your hard work. We\'ll notify you tomorrow with your next test.</string>
 
-    <string name="list_selectall">Select all that apply:</string>
-    <string name="list_selectone">Select one:</string>
-
     <string name="money_prefix">$</string>
     <string name="money_suffix"></string>
 
-    <string name="month_january">January</string>
-    <string name="month_febuary">February</string>
-    <string name="month_march">March</string>
-    <string name="month_april">April</string>
-    <string name="month_may">May</string>
-    <string name="month_june">June</string>
-    <string name="month_july">July</string>
-    <string name="month_august">August</string>
-    <string name="month_september">September</string>
-    <string name="month_october">October</string>
-    <string name="month_november">November</string>
-    <string name="month_december">December</string>
-
     <string name="NO">NO</string>
-    <string name="okay">Okay</string>
-
-    <string name="popup_first">You finished this test, ready for the next one?</string>
-    <string name="popup_last">You finished this test!</string>
-
-    <string name="price_header">Prices</string>
-    <string name="price_overlay">You will now start the test. You will see an item and two prices. Please select the price that matches the item you studied.</string>
-    <string name="price_test_isgood">Is this a good price?</string>
 
     <string name="grids_popup1">Ready</string>
-    <string name="grids_popup2">Next: Tap on the location of the items</string>
-
-    <string name="startdate_header">SET START DATE</string>
-
-    <string name="symbols_header">Symbols</string>
-    <string name="symbols_match">Which pair below matches one of the pairs on the top?</string>
-    <string name="symbols_or">Or</string>
 
     <string name="test_intro_body">You will now complete three quick tests. \n\nYou cannot pause this test once it has been started.\n \nPress Next to begin.</string>
     <string name="test_intro_header">INSTRUCTIONS</string>
 
-    <string name="wake_0_q1">What time did you get in bed last night?</string>
-    <string name="wake_0_q2">How long did it take you to fall asleep last night?</string>
-    <string name="wake_0_q3a">How many times did you wake up for 5 minutes or longer?</string>
-    <string name="wake_0_q3b">Number of times</string>
-    <string name="wake_1_q1">What time did you wake up this morning?</string>
-    <string name="wake_1_q2">What time did you get out of bed this morning?</string>
-    <string name="wake_1_q3">How would you rate the quality of your sleep?</string>
-    <string name="wake_drag">Drag to select</string>
-    <string name="wake_excellent">Excellent</string>
-    <string name="wake_poor">Poor</string>
-
-    <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
-    <string name="availability_stop">What time should we &lt;b>stop&lt;/b> your notifications each day?</string>
-
-    <string name="availability_wake_monday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Monday&lt;/b>?</string>
-    <string name="availability_sleep_monday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Monday&lt;/b>?</string>
-
     <string name="availability_same_tuesday_friday">Do you usually wake up around &lt;b>{TIME1}&lt;/b> and go to bed around &lt;b>{TIME2}&lt;/b> on &lt;b>Tuesday - Friday&lt;/b> ?</string>
-
-    <string name="availability_wake_tuesday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Tuesday?&lt;/b></string>
-    <string name="availability_sleep_tuesday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Tuesday?&lt;/b></string>
-
-    <string name="availability_wake_wednesday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Wednesday&lt;/b>?</string>
-    <string name="availability_sleep_wednesday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Wednesday&lt;/b>?</string>
-
-    <string name="availability_wake_thursday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Thursday&lt;/b>?</string>
-    <string name="availability_sleep_thursday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Thursday&lt;/b>?</string>
-
-    <string name="availability_wake_friday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Friday?&lt;/b></string>
-    <string name="availability_sleep_friday">When do you usually &lt;b>go to bed &lt;/b>on &lt;b>Friday?&lt;/b></string>
 
     <string name="availability_wake_saturday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Saturday&lt;/b>?</string>
     <string name="availability_sleep_saturday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Saturday&lt;/b>?</string>
@@ -217,101 +43,59 @@
     <string name="setup_avail_subheader">A Few Questions</string>
     <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
 
-    <string name="notest_adjust">I NEED TO ADJUST MY START DATE</string>
-    <string name="notification_take">It’s time to take a quick test!</string>
     <string name="format_date">MM/dd/yy</string>
 
     <string name="notification_missed">You\'ve missed your tests. If you\'re unable \nto finish this week, please contact your site \ncoordinator.</string>
     <string name="notification_confirm">Please confirm your next testing start date.</string>
 
-    <string name="notification_testproctor_header">Test Proctor Service Running</string>
-    <string name="notification_testproctor_body">This service ensures that you\'re notified when a test becomes available in the ARC app.</string>
-
-    <string name="confirm_header">CONFIRM START DATE</string>
-
     <string name="notification_next">Your next test will be on {DATE}.</string>
 
-    <string name="time_hr">hr</string>
-    <string name="time_min">min</string>
-
-    <string name="test">TEST </string>
-
-    <string name="testing_intro_header">Testing</string>
-    <string name="testing_intro_subhead">You Will Now Complete 3 Quick Tests</string>
-    <string name="testing_intro_body">You cannot pause a test once it has been started. You cannot go back to the previous screen.</string>
-
-    <string name="aboutapp_header">About this App</string>
-    <string name="aboutapp_body"></string>
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
     <string name="about">About</string>
 
     <string name="help_header">Help</string>
     <string name="help_body">If you have questions about this app, difficulties using the app, or any concerns about the study, please contact the study Investigator at the telephone number listed on the first page of your informed consent document.</string>
 
-    <string name="error_id_mismatch">Subject ID doesn’t match</string>
-    <string name="error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
-    <string name="error1">Invalid Subject ID or Site Code</string>
-    <string name="error2">Already enrolled on another device</string>
-    <string name="error4">Please set a minimum of 4 hours of wake time.</string>
-
     <string name="notification_confirm_adjust_1">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule. </string>
-    <string name="notification_1month">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
-    <string name="notification_1week">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
-    <string name="notification_1day">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
 
     <string name="testing_header_one">Test {Value1} of {Value2}</string>
 
     <string name="scroll">Scroll</string>
 
-    <string name="Day_Abbrev_Sun">S</string>
-    <string name="Day_Abbrev_Mon">M</string>
-    <string name="Day_Abbrev_Tue">T</string>
-    <string name="Day_Abbrev_Wed">W</string>
-    <string name="Day_Abbrev_Thur">T</string>
-    <string name="Day_Abbrev_Fri">F</string>
-    <string name="Day_Abbrev_Sat">S</string>
-
-    <string name="status_ongoing">Ongoing</string>
-    <string name="status_inprogress">In Progress</string>
-    <string name="status_done">Done!</string>
-    <string name="status_done_withdate">Done {DATE}</string>
-    <string name="status_nonedone">None! You\'re all done!</string>
-
-    <string name="popup_scroll">Scroll to select</string>
-
-    <string name="ChangeAvail_date_picker_body"></string>
-    <string name="ChangeAvail_date_picker_confirm_body"></string>
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
 
-    <string name="ChangeAvail_time"></string>
-    <string name="ChangeAvail_date"></string>
-
-    <string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
-    
-    <string name="home_header1">&lt;b>Hello!&lt;/b></string>
     <string name="home_body1">&lt;br /&gt; &lt;br /&gt;You have a new test available.</string>
 
-    <string name="home_header2">&lt;b>There are no tests to take right now.&lt;/b></string>
-    <string name="home_body2">You will receive a notification later today when it\'s time to take your next test.</string>
-
-    <string name="home_header3">&lt;b>You\'re done with today\'s tests.&lt;/b></string>
-    <string name="home_body3">We\'ll notify you tomorrow when it\'s time to take a test.</string>
-
-    <string name="home_header4">&lt;b>There are no tests available right now.&lt;/b></string>
-    <string name="home_body4">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. &lt;br /> &lt;br /> We\'ll notify you when it\'s time to take a test.</string>
-
-    <string name="home_header5">&lt;b>Your testing cycle starts tomorrow and runs through {DATE}.&lt;/b></string>
-    <string name="home_body5">We\'ll notify you when it\'s time to take a test.</string>
-
-    <string name="home_header6">&lt;b>You\'ve finished the study!&lt;/b></string>
-    <string name="home_body6">There are no more tests to take.</string>
 
 
 
 
 
 
+
+
+
+
+    <!--All keys below here exist on the current spreadsheet-->
+
+    <string name="app_name">ARC 2.0</string>
+    <string name="country_key">US</string>
+    <string name="language_key">en</string>
+
+    <string name="language_prefer">Please select your &lt;b>preferred language.&lt;/b></string>
+
+    <string name="gen_welcome_key">Welcome to the &lt;b>ARC App&lt;/b></string>
+    <string name="bysigning_key">By signing in you agree to our Privacy Policy.</string>
+    <string name="privacy_linked">Privacy Policy</string>
+
+    <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
+    <string name="login_enter_ARCID">Please enter your\n&lt;b>ARC ID&lt;/b> below.</string>
+    <string name="login_confirm_ARCID">For confirmation\n purposes, please\n&lt;b>re-enter your ARC ID&lt;/b>.</string>
+
+    <string name="notification_monthbefore">Your next week of testing begins in one month, on {DATE}. You may adjust this schedule up to 7 days.</string>
+    <string name="notification_weekbefore">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
+    <string name="notification_daybefore">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
     <string name="notification1_firstday">It\'s time for the first test of the week! Start your streak by completing this test by {TIME}.</string>
     <string name="notification1_default">It\'s time for the first test of the day! This test will be available until {TIME}.</string>
     <string name="notification1_halfway">You\'re halfway through the week. Keep it up! Today\'s first test will be available until {TIME}.</string>
@@ -319,6 +103,8 @@
     <string name="notification3_default">Your third test of the day is now available. Please complete this test by {TIME}.</string>
     <string name="notification4_default">The last test of the day is here! Finish strong by completing this test by {TIME}.</string>
     <string name="notification4_lastday">It\'s time to take your last test of the week! Please finish it by {TIME}. Your coordinator will contact you about your earnings shortly.</string>
+    <string name="notification_testproctor_header">Test Proctor Service Running</string>
+    <string name="notification_testproctor_body">This service ensures that you\'re notified when a test becomes available in the ARC app.</string>
 
     <string name="button_viewfaq">VIEW FAQ</string>
     <string name="button_viewdetails">VIEW DETAILS</string>
@@ -334,17 +120,30 @@
 
     <string name="availability_minimum_error">Please set a minimum of {HOURS} hours of availability.</string>
     <string name="availability_maximum_error">Please set a maximum of {HOURS} hours of availability.</string>
-    <string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
-    <string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
 
     <string name="chronotype_body1">Answer questions in regard to your sleep and wake behavior on work and work-free days.&lt;br />&lt;br />&lt;i>Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.&lt;/i></string>
 
-    <string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b>&lt;br /&gt;&lt;br /&gt;Let\'s take a look at the rest of the app.</string>
     <string name="popup_tab_home">&lt;b>This is the Home tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Check here to see if it\'s time to take a test.</string>
     <string name="popup_tab_progress">&lt;b>This is the Progress tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Tap here to see where you are in the testing week.</string>
     <string name="popup_tab_earnings">&lt;b>This is the Earnings tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;See what you\'ve earned and how to get bonuses.</string>
     <string name="popup_tab_resources">&lt;b>Questions?&lt;/b>&lt;br /&gt;&lt;br /&gt;Find more information in the resources tab.</string>
+    <string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b>&lt;br /&gt;&lt;br /&gt;Let\'s take a look at the rest of the app.</string>
 
+    <string name="day_abbrev_sun">S</string>
+    <string name="day_abbrev_mon">M</string>
+    <string name="day_abbrev_tues">T</string>
+    <string name="day_abbrev_weds">W</string>
+    <string name="day_abbrev_thurs">T</string>
+    <string name="day_abbrev_fri">F</string>
+    <string name="day_abbrev_sat">S</string>
+
+    <string name="status_ongoing">Ongoing</string>
+    <string name="status_inprogress">In Progress</string>
+    <string name="status_done">Done!</string>
+    <string name="status_done_withdate">Done {DATE}</string>
+    <string name="status_nonedone">None! You\'re all done!</string>
+
+    <string name="popup_scroll">Scroll to select</string>
     <string name="popup_begin">Let\'s begin the first test.</string>
 
     <string name="onboarding_header">Testing Committment</string>
@@ -360,6 +159,9 @@
     <string name="onboarding_notifications_header2">Please turn on notifications.</string>
     <string name="onboarding_notifications_body2">You must turn on notifications for the study to function properly. Please visit settings and flip the notifications switch on.</string>
 
+    <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
+    <string name="availability_stop">What time should we &lt;b>stop&lt;/b> your notifications each day?</string>
+
     <string name="prices_body">Please decide if the displayed price is a good bargain for that item.&lt;br /&gt;&lt;br /&gt;The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
     <string name="grid_body">Study the grid and try to remember the location of the three items.</string>
     <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom.&lt;br /&gt;&lt;br /&gt;As quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
@@ -367,6 +169,19 @@
     <string name="testing_begin">&lt;b>Test will begin in&lt;/b></string>
     
     <string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
+
+    <string name="button_help">HELP</string>
+    <string name="button_begin">BEGIN</string>
+    <string name="button_back">BACK</string>
+    <string name="button_submittime">SUBMIT TIME</string>
+    <string name="button_next">NEXT</string>
+    <string name="button_change">CHANGE</string>
+    <string name="button_signin">SIGN IN</string>
+    <string name="button_chooseanswer">CHOOSE ANSWER</string>
+    <string name="button_settings">GO TO SETTINGS</string>
+    <string name="button_close">CLOSE</string>
+    <string name="button_confirm">CONFIRM</string>
+    <string name="button_adjustschedule">ADJUST SCHEDULE</string>
 
     <string name="popup_gotit">&lt;b>Got It&lt;/b></string>
 
@@ -424,7 +239,24 @@
     <string name="testing_loading">&lt;i>Loading next test&#8230;&lt;/i></string>
     <string name="testing_done">&lt;i>Well Done!&lt;/i></string>
 
-    <string name="grids_subheader_fs">Tap on the F\'s</string>
+    <string name="idverify_header">Id Verification</string>
+
+    <string name="home_header1">&lt;b>Hello!&lt;/b></string>
+
+    <string name="home_header2">&lt;b>There are no tests to take right now.&lt;/b></string>
+    <string name="home_body2">You will receive a notification later today when it\'s time to take your next test.</string>
+
+    <string name="home_header3">&lt;b>You\'re done with today\'s tests.&lt;/b></string>
+    <string name="home_body3">We\'ll notify you tomorrow when it\'s time to take a test.</string>
+
+    <string name="home_header4">&lt;b>There are no tests available right now.&lt;/b></string>
+    <string name="home_body4">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. &lt;br /> &lt;br /> We\'ll notify you when it\'s time to take a test.</string>
+
+    <string name="home_header5">&lt;b>Your testing cycle starts tomorrow and runs through {DATE}.&lt;/b></string>
+    <string name="home_body5">We\'ll notify you when it\'s time to take a test.</string>
+
+    <string name="home_header6">&lt;b>You\'ve finished the study!&lt;/b></string>
+    <string name="home_body6">There are no more tests to take.</string>
 
     <string name="resources_header">Resources</string>
     <string name="resources_availability">Change My Availability</string>
@@ -437,6 +269,13 @@
     <string name="resources_nav_progress">Progress</string>
     <string name="resources_nav_earnings">Earnings</string>
     <string name="resources_nav_resources">Resources</string>
+
+    <string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
+    <string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
+
+    <string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
+
+    <string name="about_header">About this App</string>
 
     <string name="faq_header">Frequently Asked Questions Topics</string>
     <string name="faq_testing">Testing</string>
@@ -488,6 +327,23 @@
     <string name="faq_earnings_a3">You will be paid via an electronic Amazon gift card.</string>
     <string name="faq_earnings_a4">"This week" refers to the amount of money you have earned during the current testing cycle. "Study total" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
     <string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
+
+    <string name="testing_interrupted_body">Thanks! &lt;br /&gt; &lt;br /&gt; Were you interrupted or did you have to stop while taking any of these tests?</string>
+    <string name="testing_id_header">Please sign your initials on the line below to verify your identity.</string>
+    <string name="testing_id_body">By signing my initials on the line below, I attest that I completed these tests.</string>
+
+    <string name="prices_header">Prices</string>
+    <string name="prices_isthisgood">Is this a good price?</string>
+    <string name="prices_overlay">You will now start the test. You will see an item and two prices. Please select the price that matches the item you studied.</string>
+
+    <string name="symbols_header">Symbols</string>
+    <string name="symbols_match">Which pair below matches one of the pairs on the top?</string>
+    <string name="symbols_or">OR</string>
+
+    <string name="grids_header">Grids</string>
+    <string name="grids_overlay1">Try to remember the location of the items!</string>
+    <string name="grids_subheader_fs">Tap on the F\'s</string>
+    <string name="grids_overlay3">Next: Tap on the location of the items</string>
 
     <string name="progress_daily_header">Today\'s Sessions</string>
     <string name="progress_dailystatus_complete">&lt;b>[#]&lt;/b> Complete</string>
@@ -554,8 +410,107 @@
     <string name="earnings_sync_datetime">{DATE} at {TIME}</string>
     <string name="earnings_symbol">+</string>
 
+    <string name="chronotype_header">Chronotype</string>
+    <string name="chronotype_subheader">6 Questions</string>
+
+    <string name="chronotype_q1">I have been a shift- or night-worker in the past three months.</string>
+    <string name="chronotype_q2">Normally, I work ____\n\ndays/week.</string>
+
+    <string name="chronotype_body2">Please answer all of the following questions even if you do not work 7 days per week.&lt;br /> &lt;br />&lt;i>Please don\'t forget to indicate AM or PM.&lt;/i></string>
+
+    <string name="chronotype_workdays_sleep">On &lt;b>workdays&lt;/b>, I normally &lt;b>fall asleep&lt;/b> at:</string>
+    <string name="chronotype_workdays_wake">On &lt;b>workdays&lt;/b>, I normally &lt;b>wake up&lt;/b> at:</string>
+
+    <string name="chronotype_workfree_sleep">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>fall asleep&lt;/b> at:</string>
+    <string name="chronotype_workfree_wake">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>wake up&lt;/b> at:</string>
+
+    <string name="chronotype_disclaim1">This is NOT when you go to bed.</string>
+    <string name="chronotype_disclaim2">This is NOT when you get out of bed.</string>
+
+    <string name="wakesurvey_header">Wake Survey</string>
+    <string name="wakesurvey_subheader">6 Questions</string>
+    <string name="wakesurvey_body">The following questions will ask you about sleep specific to last night and waking this morning.</string>
+
+    <string name="wake_q1">What time did you get in bed last night?</string>
+    <string name="wake_q2">How long did it take you to fall asleep last night?</string>
+    <string name="wake_q3a">How many times did you wake up for 5 minutes or longer?</string>
+    <string name="wake_q3b">Number of times</string>
+    <string name="wake_q4">What time did you wake up this morning?</string>
+    <string name="wake_q5">What time did you get out of bed this morning?</string>
+    <string name="wake_q6">How would you rate the quality of your sleep?</string>
+
+    <string name="wake_poor">Poor</string>
+    <string name="wake_excellent">Excellent</string>
+
+    <string name="context_header">Context Survey</string>
+    <string name="context_subheader">5 Questions</string>
+    <string name="context_body">These questions will briefly ask you about what is happening around you right now in this moment.</string>
+
+    <string name="context_q1">Who is with you right now?</string>
+    <string name="context_q1_a1">Nobody</string>
+    <string name="context_q1_a2">Partner/spouse</string>
+    <string name="context_q1_a3">Family</string>
+    <string name="context_q1_a4">Friends</string>
+    <string name="context_q1_a5">Co-workers</string>
+    <string name="context_q1_a6">Pet</string>
+    <string name="context_q1_a7">Other</string>
+
+    <string name="context_q2">Where are you right now?</string>
+    <string name="context_q2_a1">My Home</string>
+    <string name="context_q2_a2">My Work</string>
+    <string name="context_q2_a3">School</string>
+    <string name="context_q2_a4">Other Person\'s Home</string>
+    <string name="context_q2_a5">Vehicle</string>
+    <string name="context_q2_a6">Outside</string>
+    <string name="context_q2_a7">Other</string>
+
+    <string name="context_q3">How would you rate &lt;b>your overall mood&lt;/b> right now?</string>
+
+    <string name="context_bad">Bad</string>
+    <string name="context_good">Good</string>
+
+    <string name="context_q4">How would you rate &lt;b>how you feel&lt;/b> right now?</string>
+
+    <string name="context_tired">Sleepy/Tired</string>
+    <string name="context_active">Active/Alert</string>
+
+    <string name="context_q5">In the past 5 minutes, what were you mostly doing?</string>
+    <string name="context_q5_a1">Sitting at a Desk</string>
+    <string name="context_q5_a2">Watching Television</string>
+    <string name="context_q5_a3">Eating</string>
+    <string name="context_q5_a4">Exercising</string>
+    <string name="context_q5_a5">Household Chores (cooking cleaning)</string>
+    <string name="context_q5_a6">Driving</string>
+    <string name="context_q5_a7">Socializing</string>
+    <string name="context_q5_a8">Personal Care</string>
+    <string name="context_q5_a9">Resting</string>
+    <string name="context_q5_a10">Other</string>
+
+    <string name="testing_intro_header">You Will Now Complete 3 Quick Tests</string>
+    <string name="testing_intro_body">You cannot pause a test once it has been started. You cannot go back to the previous screen.</string>
+
     <string name="dateshift_picker">What week are you able to test?</string>
     <string name="dateshift_confirmation">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>.</string>
+
+    <string name="list_selectone">Select one:</string>
+    <string name="list_selectall">Select all that apply</string>
+
+    <string name="month_january">January</string>
+    <string name="month_febuary">February</string>
+    <string name="month_march">March</string>
+    <string name="month_april">April</string>
+    <string name="month_may">May</string>
+    <string name="month_june">June</string>
+    <string name="month_july">July</string>
+    <string name="month_august">August</string>
+    <string name="month_september">September</string>
+    <string name="month_october">October</string>
+    <string name="month_november">November</string>
+    <string name="month_december">December</string>
+
+    <string name="login_error1">Invalid Rater ID or ARC ID.</string>
+    <string name="login_error2">Already enrolled on another device</string>
+    <string name="login_error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
 
     <string name="footnote_symbol">*</string>
 </resources>
