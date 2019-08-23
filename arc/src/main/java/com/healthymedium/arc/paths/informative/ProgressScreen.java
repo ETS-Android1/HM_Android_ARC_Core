@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
@@ -30,10 +32,16 @@ import org.joda.time.Months;
 
 public class ProgressScreen extends BaseFragment {
 
+    TestCycle testCycle;
+    TestDay testDay;
+    TestSession testSession;
+
+    boolean isPractice = false;
+    boolean isBaseline = false;
+
+
     TextView studyStatus;
-    TextView joinedDate;
     TextView joinedDate_date;
-    TextView finishDate;
     TextView finishDate_date;
     TextView timeBetween;
     TextView timeBetween_units;
@@ -49,9 +57,31 @@ public class ProgressScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_progress, container, false);
 
         Participant participant = Study.getParticipant();
-        TestCycle testCycle = participant.getCurrentTestCycle();
-        TestDay testDay = participant.getCurrentTestDay();
+        testCycle = participant.getCurrentTestCycle();
+        testDay = participant.getCurrentTestDay();
+        testSession = participant.getCurrentTestSession();
 
+        ParticipantState state = participant.getState();
+        int sessionIndex = state.currentTestSession-1;
+        int dayIndex = state.currentTestDay;
+        int cycleIndex = state.currentTestCycle;
+
+        if(testDay.getStartTime().isAfterNow()) {
+            if(sessionIndex<0) {
+                dayIndex--;
+                if (dayIndex < 0) {
+                    cycleIndex--;
+                    testCycle = state.testCycles.get(cycleIndex);
+                    dayIndex = testCycle.getNumberOfTestDays() - 1;
+                }
+                testDay = testCycle.getTestDay(dayIndex);
+                sessionIndex = testDay.getNumberOfTests() - 1;
+                testSession = testDay.getTestSession(sessionIndex);
+            }
+        }
+
+        isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
+        isBaseline = (cycleIndex==0);
 
         if(testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow()) {
             setupTodaysSessions(view, testDay);
@@ -83,7 +113,10 @@ public class ProgressScreen extends BaseFragment {
         timeBetween = view.findViewById(R.id.timeBetween);
         timeBetween.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_timebtwtesting)));
 
-        int monthsBetween = Months.monthsBetween(joinedDate,finishDate).getMonths();
+        DateTime endOfFirstCycle = state.testCycles.get(0).getActualEndDate();
+        DateTime startOfSecondCycle = state.testCycles.get(1).getActualStartDate();
+
+        int monthsBetween = Months.monthsBetween(endOfFirstCycle,startOfSecondCycle).getMonths();
         timeBetween_units = view.findViewById(R.id.timeBetween_units);
         String units = ViewUtil.getString(R.string.progress_timebtwtesting_unit);
         units = units.replace(getString(R.string.token_number), String.valueOf(monthsBetween));
@@ -143,16 +176,27 @@ public class ProgressScreen extends BaseFragment {
         LinearLayout layout = view.findViewById(R.id.week);
         layout.setVisibility(View.VISIBLE);
 
-        int dayIndex = testDay.getDayIndex();
 
-        String daysString = getString(R.string.progess_weeklystatus);
-        daysString = ViewUtil.replaceToken(daysString,R.string.token_number,String.valueOf(dayIndex+1));
 
         TextView weeklyStatus = view.findViewById(R.id.weeklyStatus);
-        weeklyStatus.setText(Html.fromHtml(daysString));
-
         WeekProgressView weekProgressView = view.findViewById(R.id.weekProgressView);
-        weekProgressView.setDays(new String[]{"S", "M", "T", "W", "T", "F", "S"});
+        String daysString;
+
+        if(isPractice){
+            daysString = getString(R.string.progress_baseline_notice);
+            weeklyStatus.setTextSize(TypedValue.COMPLEX_UNIT_DIP,17);
+            weekProgressView.setVisibility(View.GONE);
+        } else {
+            int dayIndex = testDay.getDayIndex();
+            if(isBaseline){
+                dayIndex--;
+            }
+            daysString = getString(R.string.progess_weeklystatus);
+            daysString = ViewUtil.replaceToken(daysString,R.string.token_number,String.valueOf(dayIndex+1));
+            weekProgressView.setDays(new String[]{"S", "M", "T", "W", "T", "F", "S"});
+        }
+
+        weeklyStatus.setText(Html.fromHtml(daysString));
 
         TextView startDate = view.findViewById(R.id.startDate);
         startDate.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_startdate)));
