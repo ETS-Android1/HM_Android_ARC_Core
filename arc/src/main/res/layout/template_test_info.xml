@@ -59,7 +59,7 @@
                         android:layout_centerHorizontal="true"
                         android:paddingLeft="32dp"
                         android:paddingRight="32dp"
-                        android:textSize="26dp"
+                        android:textSize="32dp"
                         android:textColor="@color/white"
                         tools:text="This is a header" />
 
