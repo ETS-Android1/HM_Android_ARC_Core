@@ -82,11 +82,11 @@ public class StudyProgressView extends LinearLayout {
             }
 
             if(i==0){
-                params.setMargins(0,0,dp4,0);
+                params.setMargins(0,0,dp2,0);
             } else if(i==weekCount-1){
-                params.setMargins(dp4,0,0,0);
+                params.setMargins(dp2,0,0,0);
             } else {
-                params.setMargins(dp4,0,dp4,0);
+                params.setMargins(dp2,0,dp2,0);
             }
 
             view.setLayoutParams(params);
