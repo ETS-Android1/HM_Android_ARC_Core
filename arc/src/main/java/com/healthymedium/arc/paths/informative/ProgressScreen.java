@@ -20,6 +20,7 @@ import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.CircleProgressView;
+import com.healthymedium.arc.ui.StudyProgressView;
 import com.healthymedium.arc.ui.WeekProgressView;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -82,18 +83,29 @@ public class ProgressScreen extends BaseFragment {
 
         isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
         isBaseline = (cycleIndex==0);
+        boolean isInCycle = testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow();
 
-        if(testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow()) {
+
+
+        if(isInCycle) {
             setupTodaysSessions(view, testDay);
             setupWeekView(view, testCycle, testDay);
         }
 
         // study view partition
-
-        int currCycle = testCycle.getId()+1; // Cycles are 0-indexed
-        String status = ViewUtil.getString(R.string.progress_studystatus);
         studyStatus = view.findViewById(R.id.studyStatus);
-        studyStatus.setText(Html.fromHtml(ViewUtil.replaceToken(status,R.string.token_number,Integer.toString(currCycle))));
+
+        if(isPractice){
+            StudyProgressView studyProgressView = view.findViewById(R.id.studyProgressView);
+            studyProgressView.setVisibility(View.GONE);
+            view.findViewById(R.id.studyStatusLayout).setVisibility(View.GONE);
+        } else {
+            int currCycle = testCycle.getId()+1; // Cycles are 0-indexed
+            String status = ViewUtil.getString(R.string.progress_studystatus);
+            studyStatus.setText(Html.fromHtml(ViewUtil.replaceToken(status,R.string.token_number,Integer.toString(currCycle))));
+        }
+
+
 
         // The join date should be the start date of test cycle 0
         DateTime joinedDate = Study.getParticipant().getStartDate();
@@ -122,6 +134,61 @@ public class ProgressScreen extends BaseFragment {
         units = units.replace(getString(R.string.token_number), String.valueOf(monthsBetween));
         units = units.replace(getString(R.string.token_unit), "Months");
         timeBetween_units.setText(units);
+
+        if(!isInCycle){
+            int weeksCompleted = 0;
+            int weeksRemaining = 0;
+
+            for(TestCycle cycle : state.testCycles){
+                if(cycle.isOver()){
+                    weeksCompleted++;
+                } else {
+                    weeksRemaining++;
+                }
+            }
+
+            String textCompleted = getString(R.string.progress_weekscompleted);
+            textCompleted = ViewUtil.replaceToken(textCompleted,R.string.token_number,String.valueOf(weeksCompleted));
+
+            TextView studyStatus2 = view.findViewById(R.id.studyStatus2);
+            studyStatus2.setText(Html.fromHtml(textCompleted));
+            studyStatus2.setVisibility(View.VISIBLE);
+
+            String textRemaining = getString(R.string.progress_weeksremaining);
+            textRemaining = ViewUtil.replaceToken(textRemaining,R.string.token_number,String.valueOf(weeksRemaining));
+
+            studyStatus.setText(Html.fromHtml(textRemaining));
+
+            if(weeksRemaining==0){
+                TextView studyStatusBadgeTextView = view.findViewById(R.id.studyStatusBadgeTextView);
+                studyStatusBadgeTextView.setText(R.string.status_done);
+                view.findViewById(R.id.asterisk).setVisibility(View.GONE);
+            } else {
+                view.findViewById(R.id.studyStatusBadge).setVisibility(View.GONE);
+            }
+
+            view.findViewById(R.id.textViewNextCycle).setVisibility(View.VISIBLE);
+            if (weeksRemaining>0) {
+                TextView textViewNextCycleDates= view.findViewById(R.id.textViewNextCycleDates);
+                textViewNextCycleDates.setVisibility(View.VISIBLE);
+
+                TestCycle nextCycle = state.testCycles.get(cycleIndex);
+                String dates = getString(R.string.earnings_details_dates);
+                String start = JodaUtil.format(nextCycle.getActualStartDate(),R.string.format_date_lo);
+                String end = JodaUtil.format(nextCycle.getActualEndDate().minusDays(1),R.string.format_date_lo);
+
+                dates = ViewUtil.replaceToken(dates,R.string.token_date1,start);
+                dates = ViewUtil.replaceToken(dates,R.string.token_date2,end);
+
+                textViewNextCycleDates.setText(dates);
+            } else {
+                view.findViewById(R.id.nextCycleBadge).setVisibility(View.VISIBLE);
+            }
+
+
+
+
+        }
 
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
         viewFaqButton.setOnClickListener(new View.OnClickListener() {
@@ -162,12 +229,20 @@ public class ProgressScreen extends BaseFragment {
         TextView textViewComplete = view.findViewById(R.id.complete);
         textViewComplete.setText(Html.fromHtml(complete));
 
-        int testsRemaining = testDay.getNumberOfTestsLeft();
-        String remaining = getString(R.string.progress_dailystatus_remaining);
-        remaining = ViewUtil.replaceToken(remaining,R.string.token_number,String.valueOf(testsRemaining));
-
         TextView textViewRemaining = view.findViewById(R.id.remaining);
-        textViewRemaining.setText(Html.fromHtml(remaining));
+
+        int testsRemaining = testDay.getNumberOfTestsLeft();
+        if(testsRemaining==0 && !isPractice){
+            textViewRemaining.setVisibility(View.GONE);
+            view.findViewById(R.id.bar).setVisibility(View.GONE);
+            view.findViewById(R.id.dayStatusBadge).setVisibility(View.VISIBLE);
+        } else {
+            String remaining = getString(R.string.progress_dailystatus_remaining);
+            remaining = ViewUtil.replaceToken(remaining,R.string.token_number,String.valueOf(testsRemaining));
+            textViewRemaining.setText(Html.fromHtml(remaining));
+        }
+
+
 
     }
 

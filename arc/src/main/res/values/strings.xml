@@ -494,7 +494,9 @@
     <string name="progress_dailystatus_remaining">&lt;b>[#]&lt;/b> Remaining</string>
 
     <string name="progress_baseline_notice">Thanks for completing the practice session today! &lt;b>Your testing week officially begins tomorrow.&lt;/b></string>
-
+    <string name="progress_weekscompleted">&lt;b>[#]&lt;/b> Weeks Completed</string>
+    <string name="progress_weeksremaining">&lt;b>[#]&lt;/b> Weeks Remaining</string>
+    <string name="progress_nextcycle">Next Testing Cycle</string>
     <string name="progress_weekly_header">This Week</string>
     <string name="progess_weeklystatus">Day &lt;b>[#]&lt;/b> of &lt;b>7&lt;/b></string>
     <string name="progress_startdate">Start Date:</string>
@@ -504,7 +506,7 @@
 
     <string name="progress_study_header">This Study</string>
     <string name="progress_studystatus">Week &lt;b>[#]&lt;/b> of &lt;b>12&lt;/b></string>
-    <string name="progress_joindate">Joined Date:</string>
+    <string name="progress_joindate">Joined Date</string>
     <string name="progress_joindate_date">{DATE}</string>
     <string name="progress_finishdate">Estimated Finish Date</string>
     <string name="progress_finishdate_date">{DATE}</string>
