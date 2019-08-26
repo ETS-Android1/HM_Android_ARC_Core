@@ -365,7 +365,7 @@ public class StateMachine {
 
         fragments.add(new StateInfoTemplate(
                 false,
-                res.getString(R.string.setup_avail_header),
+                res.getString(R.string.availability_header),
                 null,
                 res.getString(R.string.availability_body),
                 res.getString(R.string.button_beginsurvey)));

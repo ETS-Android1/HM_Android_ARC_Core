@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
+    <!--Causes a resource linking failed error when removed-->
     <string name="okay">Okay</string>
 
-    <string name="button_continue">CONTINUE</string>
-
+    <!--These are all used by addFinishedPage, which is not currently used in arc_v2-->
     <string name="thank_you_header1">Thank you!</string>
     <string name="thankyou_testcomplete_subhead1">Test Complete</string>
     <string name="thankyou_testcomplete_body1">You\'ll get a notification later today when your next test is available.</string>
@@ -12,59 +12,46 @@
     <string name="thankyou_header3">Congratulations</string>
     <string name="thankyou_finished_subhead3">You\'ve Finished the Study!</string>
     <string name="thankyou_body3">There are no more tests to take.</string>
-
     <string name="thankyou_cycle_subhead2">You\'ve Finished This Cycle!</string>
     <string name="thankyou_cycle_body2">&lt;b>There are no tests to take right now.&lt;/b> Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>.</string>
-
     <string name="thankyou_alldone_subhead1">All Done for Today!</string>
     <string name="thankyou_alldone_body1">Thanks for your hard work. We\'ll notify you tomorrow with your next test.</string>
 
-    <string name="money_prefix">$</string>
-    <string name="money_suffix"></string>
-
-    <string name="NO">NO</string>
-
-    <string name="grids_popup1">Ready</string>
-
-    <string name="test_intro_body">You will now complete three quick tests. \n\nYou cannot pause this test once it has been started.\n \nPress Next to begin.</string>
-    <string name="test_intro_header">INSTRUCTIONS</string>
-
     <string name="availability_same_tuesday_friday">Do you usually wake up around &lt;b>{TIME1}&lt;/b> and go to bed around &lt;b>{TIME2}&lt;/b> on &lt;b>Tuesday - Friday&lt;/b> ?</string>
 
+    <!--Used by AvailabilitySaturdayWake, which is only used by arc_testing-->
     <string name="availability_wake_saturday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Saturday&lt;/b>?</string>
     <string name="availability_sleep_saturday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Saturday&lt;/b>?</string>
 
+    <!--Used by AvailabilitySundayWake, which is only used by arc_testing-->
     <string name="availability_wake_sunday">When do you usually &lt;b>wake up&lt;/b> on &lt;b>Sunday&lt;/b>?</string>
     <string name="availability_sleep_sunday">When do you usually &lt;b>go to bed&lt;/b> on &lt;b>Sunday&lt;/b>?</string>
 
-    <string name="YES">YES</string>
-
-    <string name="setup_avail_header">Availability</string>
-    <string name="setup_avail_subheader">A Few Questions</string>
-    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
-
-    <string name="format_date">MM/dd/yy</string>
-
+    <!--Old notification types, I don't believe they are still used-->
     <string name="notification_missed">You\'ve missed your tests. If you\'re unable \nto finish this week, please contact your site \ncoordinator.</string>
     <string name="notification_confirm">Please confirm your next testing start date.</string>
-
     <string name="notification_next">Your next test will be on {DATE}.</string>
 
+    <!--3rd party materials are not used in all 2.0 apps, but could be used in some-->
     <string name="about_3rd_party_button"><u>3rd Party Materials</u></string>
-    <string name="about">About</string>
 
+    <!--Used on what I believe is an old, no longer needed, alternative help screen-->
     <string name="help_header">Help</string>
     <string name="help_body">If you have questions about this app, difficulties using the app, or any concerns about the study, please contact the study Investigator at the telephone number listed on the first page of your informed consent document.</string>
-
-    <string name="notification_confirm_adjust_1">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule. </string>
-
-    <string name="testing_header_one">Test {Value1} of {Value2}</string>
-
-    <string name="scroll">Scroll</string>
-
+    <string name="about">About</string>
     <string name="Contact_header"></string>
     <string name="contact_body"></string>
 
+    <!--Adjust schedule popup-->
+    <string name="notification_confirm_adjust_1">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule. </string>
+
+    <!--This is probably on the spreadsheet, I just can't find it-->
+    <string name="testing_header_one">Test {Value1} of {Value2}</string>
+
+    <!--Old scroll indicator, not yet updated-->
+    <string name="scroll">Scroll</string>
+
+    <!--Currently the default home copy-->
     <string name="home_body1">&lt;br /&gt; &lt;br /&gt;You have a new test available.</string>
 
 
@@ -159,6 +146,8 @@
     <string name="onboarding_notifications_header2">Please turn on notifications.</string>
     <string name="onboarding_notifications_body2">You must turn on notifications for the study to function properly. Please visit settings and flip the notifications switch on.</string>
 
+    <string name="availability_header">Availability</string>
+    <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
     <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
     <string name="availability_stop">What time should we &lt;b>stop&lt;/b> your notifications each day?</string>
 
@@ -344,6 +333,7 @@
     <string name="grids_overlay1">Try to remember the location of the items!</string>
     <string name="grids_subheader_fs">Tap on the F\'s</string>
     <string name="grids_overlay3">Next: Tap on the location of the items</string>
+    <string name="grids_overlay3_pt2">Ready</string>
 
     <string name="progress_daily_header">Today\'s Sessions</string>
     <string name="progress_dailystatus_complete">&lt;b>[#]&lt;/b> Complete</string>
@@ -515,4 +505,9 @@
     <string name="login_error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
 
     <string name="footnote_symbol">*</string>
+
+    <string name="format_date">MM/dd/yy</string>
+
+    <string name="money_prefix">$</string>
+    <string name="money_suffix"></string>
 </resources>
