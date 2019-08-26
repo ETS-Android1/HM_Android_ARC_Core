@@ -100,7 +100,7 @@ public class SymbolTutorial extends Tutorial {
         checkmark = view.findViewById(R.id.checkmark);
 
         textView20 = view.findViewById(R.id.textView20);
-
+        textView20.setText(Html.fromHtml(ViewUtil.getString(R.string.popup_tutorial_middle_instructions)));
         textView20.setVisibility(View.GONE);
 
         textViewComplete = view.findViewById(R.id.textViewComplete);
