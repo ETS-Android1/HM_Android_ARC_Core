@@ -29,7 +29,7 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 
 import org.joda.time.DateTime;
-import org.joda.time.Months;
+import org.joda.time.Weeks;
 
 public class ProgressScreen extends BaseFragment {
 
@@ -81,7 +81,7 @@ public class ProgressScreen extends BaseFragment {
             }
         }
 
-        isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
+        isPractice = false;//(dayIndex==0 && sessionIndex==0 && cycleIndex==0);
         isBaseline = (cycleIndex==0);
         boolean isInCycle = testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow();
 
@@ -125,13 +125,14 @@ public class ProgressScreen extends BaseFragment {
         timeBetween = view.findViewById(R.id.timeBetween);
         timeBetween.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_timebtwtesting)));
 
-        DateTime endOfFirstCycle = state.testCycles.get(0).getActualEndDate();
+        DateTime startOfFirstCycle = state.testCycles.get(0).getActualStartDate();
         DateTime startOfSecondCycle = state.testCycles.get(1).getActualStartDate();
 
-        int monthsBetween = Months.monthsBetween(endOfFirstCycle,startOfSecondCycle).getMonths();
+        int weeksBetween = Weeks.weeksBetween(startOfFirstCycle,startOfSecondCycle).getWeeks();
+
         timeBetween_units = view.findViewById(R.id.timeBetween_units);
         String units = ViewUtil.getString(R.string.progress_timebtwtesting_unit);
-        units = units.replace(getString(R.string.token_number), String.valueOf(monthsBetween));
+        units = units.replace(getString(R.string.token_number), String.valueOf(weeksBetween/4));
         units = units.replace(getString(R.string.token_unit), "Months");
         timeBetween_units.setText(units);
 

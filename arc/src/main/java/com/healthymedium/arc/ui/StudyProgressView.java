@@ -51,6 +51,9 @@ public class StudyProgressView extends LinearLayout {
         weekCount = participant.getState().testCycles.size();
 
         boolean isInCycle = (cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow());
+        if(!isInCycle){
+            currentWeek--;
+        }
 
         int dp1 = ViewUtil.dpToPx(1);
         int dp2 = ViewUtil.dpToPx(2);
