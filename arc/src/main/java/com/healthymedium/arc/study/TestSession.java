@@ -84,6 +84,11 @@ public class TestSession {
         return (int) progress;
     }
 
+    public void setProgress(int progress) {
+        testPercentages.clear();
+        testPercentages.add(progress);
+    }
+
     public DateTime getExpirationTime() {
         if(scheduledDate!=null) {
             return getPrescribedTime().withDate(scheduledDate).plusHours(2);

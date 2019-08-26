@@ -9,11 +9,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import com.healthymedium.arc.api.models.CachedObject;
+import com.healthymedium.arc.api.models.CycleProgress;
+import com.healthymedium.arc.api.models.DayProgress;
 import com.healthymedium.arc.api.models.DeviceRegistration;
 import com.healthymedium.arc.api.models.ExistingData;
 import com.healthymedium.arc.api.models.Heartbeat;
 import com.healthymedium.arc.api.models.CachedSignature;
 import com.healthymedium.arc.api.models.SessionInfo;
+import com.healthymedium.arc.api.models.SessionProgress;
 import com.healthymedium.arc.api.models.TestSchedule;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.api.models.TestSubmission;
@@ -151,6 +154,12 @@ public class RestClient <Api>{
         if(Config.CHECK_SESSION_INFO) {
             Call<ResponseBody> sessionInfo = getService().getSessionInfo(Device.getId());
             chain.addLink(sessionInfo, sessionListener);
+        }
+
+        if(Config.CHECK_PROGRESS_INFO) {
+            int cycle = Study.getParticipant().getState().currentTestCycle;
+            Call<ResponseBody> cycleProgress = getService().getCycleProgress(Device.getId(),cycle);
+            chain.addLink(cycleProgress, progressListener);
         }
 
         chain.execute(listener);
@@ -592,6 +601,42 @@ public class RestClient <Api>{
                 Call<ResponseBody> wakeSleepSchedule = getService().getWakeSleepSchedule(Device.getId());
                 chain.addLink(wakeSleepSchedule, wakeSleepListener);
 
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onFailure(CallbackChain chain, RestResponse response) {
+            return false;
+        }
+    };
+
+    CallbackChain.Listener progressListener = new CallbackChain.Listener() {
+        @Override
+        public boolean onResponse(CallbackChain chain, RestResponse response) {
+            if(response.successful){
+                CycleProgress progress = response.getOptionalAs("cycle_progress", CycleProgress.class);
+                for(DayProgress dayProgress : progress.days) {
+                    for(SessionProgress sessionProgress : dayProgress.sessions) {
+                        TestSession session = Study.getParticipant().getState().testCycles.get(progress.cycle).getTestDay(dayProgress.day).getTestSession(sessionProgress.session_index);
+                        session.setProgress(sessionProgress.percent_complete);
+                        switch (sessionProgress.status) {
+                            case "not_yet_taken":
+                                break;
+                            case "incomplete":
+                                session.markStarted();
+                                session.markAbandoned();
+                                break;
+                            case "completed":
+                                session.markCompleted();
+                                break;
+                            case "missed":
+                                session.markMissed();
+                                break;
+                        }
+                    }
+                }
                 return true;
             }
             return false;

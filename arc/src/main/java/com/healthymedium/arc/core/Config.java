@@ -15,6 +15,7 @@ public class Config {
     public static boolean REST_HEARTBEAT = true; // heartbeat will fail if blackhole is enabled
     public static boolean CHECK_SESSION_INFO = false; // if true, an api is called after registration to check for existing session info
     public static boolean CHECK_CONTACT_INFO = false; // if true, an api is called after registration to check for contact info
+    public static boolean CHECK_PROGRESS_INFO = false; //
 
     //
     public static boolean ENABLE_SIGNATURES = false; // if true, signatures will be required before and after every test
