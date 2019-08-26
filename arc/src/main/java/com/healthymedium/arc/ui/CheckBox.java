@@ -48,6 +48,7 @@ public class CheckBox extends FrameLayout {
         paddingRight = frameLayoutCheckBox.getPaddingRight();
         paddingBottom = frameLayoutCheckBox.getPaddingBottom();
 
+        frameLayoutCheckBox.setBackgroundResource(R.drawable.background_checkbox_rounded_unselected);
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -56,7 +57,7 @@ public class CheckBox extends FrameLayout {
                     frameLayoutCheckBox.setBackgroundResource(R.drawable.background_checkbox_rounded);
                     checkBox.setTypeface(Fonts.robotoBold);
                 } else {
-                    frameLayoutCheckBox.setBackground(null);
+                    frameLayoutCheckBox.setBackgroundResource(R.drawable.background_checkbox_rounded_unselected);
                     checkBox.setTypeface(Fonts.roboto);
                 }
                 frameLayoutCheckBox.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
