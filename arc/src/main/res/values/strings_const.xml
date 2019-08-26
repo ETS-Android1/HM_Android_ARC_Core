@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools"  tools:ignore="MissingTranslation">
 
-    <string name="line_break"><br /> <br /></string>
+    <string name="line_break">&lt;br /> &lt;br /></string>
     <string name="token_date">{DATE}</string>
     <string name="token_time">{TIME}</string>
     <string name="token_unit">{UNIT}</string>

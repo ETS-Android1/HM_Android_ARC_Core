@@ -16,7 +16,12 @@ import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Earnings;
+import com.healthymedium.arc.study.Participant;
+import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.TestCycle;
+import com.healthymedium.arc.study.TestDay;
+import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
@@ -48,6 +53,32 @@ public class EarningsScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_earnings, container, false);
 
+        Participant participant = Study.getParticipant();
+        TestCycle testCycle = participant.getCurrentTestCycle();
+        TestDay testDay = participant.getCurrentTestDay();
+        TestSession testSession = participant.getCurrentTestSession();
+
+        ParticipantState state = participant.getState();
+        int sessionIndex = state.currentTestSession-1;
+        int dayIndex = state.currentTestDay;
+        int cycleIndex = state.currentTestCycle;
+
+        if(testDay.getStartTime().isAfterNow()) {
+            if(sessionIndex<0) {
+                dayIndex--;
+                if (dayIndex < 0) {
+                    cycleIndex--;
+                    testCycle = state.testCycles.get(cycleIndex);
+                    dayIndex = testCycle.getNumberOfTestDays() - 1;
+                }
+                testDay = testCycle.getTestDay(dayIndex);
+                sessionIndex = testDay.getNumberOfTests() - 1;
+                testSession = testDay.getTestSession(sessionIndex);
+            }
+        }
+
+        boolean isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
+
         refreshLayout = view.findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -77,8 +108,15 @@ public class EarningsScreen extends BaseFragment {
             }
         });
 
+        String body = new String();
+        if(isPractice){
+            body += ViewUtil.getString(R.string.earnings_body0);
+            body += ViewUtil.getString(R.string.line_break);
+        }
+        body += ViewUtil.getString(R.string.earnings_body1);
+
         earningsBody1 = view.findViewById(R.id.earningsBody1);
-        earningsBody1.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_body1)));
+        earningsBody1.setText(Html.fromHtml(body));
 
         viewDetailsButton = view.findViewById(R.id.viewDetailsButton);
         viewDetailsButton.setOnClickListener(new View.OnClickListener() {
