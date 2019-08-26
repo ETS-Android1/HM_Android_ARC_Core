@@ -81,7 +81,7 @@ public class ProgressScreen extends BaseFragment {
             }
         }
 
-        isPractice = false;//(dayIndex==0 && sessionIndex==0 && cycleIndex==0);
+        isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
         isBaseline = (cycleIndex==0);
         boolean isInCycle = testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow();
 
