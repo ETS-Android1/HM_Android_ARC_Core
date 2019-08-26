@@ -9,6 +9,8 @@ import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsPostTestLoadingScreen;
+import com.healthymedium.arc.paths.informative.FinishedCycleScreen;
+import com.healthymedium.arc.paths.informative.FinishedStudyScreen;
 import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
@@ -795,6 +797,25 @@ public class StateMachine {
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }
+
+    public void addCycleFinishedScreen(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new FinishedCycleScreen());
+
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
+    }
+
+    public void addStudyFinishedScreen(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new FinishedStudyScreen());
+
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
+    }
+
 
     // -----------------------
 
