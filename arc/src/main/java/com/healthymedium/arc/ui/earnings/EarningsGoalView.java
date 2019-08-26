@@ -118,9 +118,10 @@ public class EarningsGoalView extends RoundedLinearLayout {
 
         int dp56 = ViewUtil.dpToPx(56);
         int dp4 = ViewUtil.dpToPx(4);
+        int size = goal.progress_components.size();
         contentLayout.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,dp56));
 
-        for(Integer progress : goal.progress_components){
+        for(int i=0;i<4;i++){
             CircleProgressView progressView = new CircleProgressView(getContext());
             contentLayout.addView(progressView);
 
@@ -129,6 +130,11 @@ public class EarningsGoalView extends RoundedLinearLayout {
             progressView.setBaseColor(R.color.secondaryAccent);
             progressView.setCheckmarkColor(R.color.secondaryAccent);
             progressView.setSweepColor(R.color.secondary);
+
+            int progress = 0;
+            if(i<size){
+                progress = goal.progress_components.get(i);
+            }
             progressView.setProgress(progress,false);
         }
 

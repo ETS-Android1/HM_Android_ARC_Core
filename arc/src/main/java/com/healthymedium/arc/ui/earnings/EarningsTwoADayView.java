@@ -69,7 +69,8 @@ public class EarningsTwoADayView extends LinearLayout {
         }
 
         List<Integer> components = goal.progress_components;
-        for(int i=0;i<components.size();i++){
+        int size = components.size();
+        for(int i=0;i<abbreviations.length;i++){
 
             int dayOfWeek = day.getDayOfWeek();
             if(dayOfWeek==7){
@@ -81,7 +82,12 @@ public class EarningsTwoADayView extends LinearLayout {
             int bgColor = colors[highlight ? 1:0];
             highlight = !highlight;
 
-            DayView dayView = new DayView(context,bgColor,components.get(i),abbr);
+            int progress = 0;
+            if(i<size){
+                progress = components.get(i);
+            }
+
+            DayView dayView = new DayView(context,bgColor,progress,abbr);
             addView(dayView);
         }
 
