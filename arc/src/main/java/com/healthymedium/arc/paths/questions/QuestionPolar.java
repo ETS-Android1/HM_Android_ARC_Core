@@ -96,7 +96,7 @@ public class QuestionPolar extends QuestionTemplate {
 
         content.addView(yesButton);
         content.addView(noButton);
-        buttonNext.setText(ViewUtil.getString(R.string.button_confirm));
+        buttonNext.setText(ViewUtil.getString(R.string.button_chooseanswer));
 
         return view;
     }
