@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.setup;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.VersionUtil;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SetupWelcome extends BaseFragment {
 
@@ -34,6 +36,7 @@ public class SetupWelcome extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setup_welcome, container, false);
         textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.gen_welcome_key)));
 
         // textViewAppName = view.findViewById(R.id.textViewAppName);
         // textViewAppName.setText(ViewUtil.getString(R.string.app_name)+" app");
