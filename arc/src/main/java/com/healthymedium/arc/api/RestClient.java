@@ -156,12 +156,6 @@ public class RestClient <Api>{
             chain.addLink(sessionInfo, sessionListener);
         }
 
-        if(Config.CHECK_PROGRESS_INFO) {
-            int cycle = Study.getParticipant().getState().currentTestCycle;
-            Call<ResponseBody> cycleProgress = getService().getCycleProgress(Device.getId(),cycle);
-            chain.addLink(cycleProgress, progressListener);
-        }
-
         chain.execute(listener);
     }
 
@@ -588,55 +582,24 @@ public class RestClient <Api>{
 
                 JsonElement firstElement = response.optional.get("first_test");
                 JsonElement latestElement = response.optional.get("latest_test");
-                if(firstElement.isJsonNull() || latestElement.isJsonNull()){
+                if(firstElement.isJsonNull()){
                     return true;
                 }
 
                 ExistingData existingData = new ExistingData();
                 existingData.first_test = gson.fromJson(firstElement,SessionInfo.class);
-                existingData.latest_test = gson.fromJson(latestElement,SessionInfo.class);
+
+                if(latestElement.isJsonNull()) {
+                    existingData.latest_test = existingData.first_test;
+                } else {
+                    existingData.latest_test = gson.fromJson(latestElement,SessionInfo.class);
+                }
 
                 chain.setPersistentObject(existingData);
 
                 Call<ResponseBody> wakeSleepSchedule = getService().getWakeSleepSchedule(Device.getId());
                 chain.addLink(wakeSleepSchedule, wakeSleepListener);
 
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean onFailure(CallbackChain chain, RestResponse response) {
-            return false;
-        }
-    };
-
-    CallbackChain.Listener progressListener = new CallbackChain.Listener() {
-        @Override
-        public boolean onResponse(CallbackChain chain, RestResponse response) {
-            if(response.successful){
-                CycleProgress progress = response.getOptionalAs("cycle_progress", CycleProgress.class);
-                for(DayProgress dayProgress : progress.days) {
-                    for(SessionProgress sessionProgress : dayProgress.sessions) {
-                        TestSession session = Study.getParticipant().getState().testCycles.get(progress.cycle).getTestDay(dayProgress.day).getTestSession(sessionProgress.session_index);
-                        session.setProgress(sessionProgress.percent_complete);
-                        switch (sessionProgress.status) {
-                            case "not_yet_taken":
-                                break;
-                            case "incomplete":
-                                session.markStarted();
-                                session.markAbandoned();
-                                break;
-                            case "completed":
-                                session.markCompleted();
-                                break;
-                            case "missed":
-                                session.markMissed();
-                                break;
-                        }
-                    }
-                }
                 return true;
             }
             return false;
@@ -661,7 +624,7 @@ public class RestClient <Api>{
                 ExistingData existingData = (ExistingData) chain.getPersistentObject();
                 existingData.wake_sleep_schedule = gson.fromJson(wakeSleepJson,WakeSleepSchedule.class);
 
-                Call<ResponseBody> testScheduleCall = service.getTestSchedule(Device.getId());
+                Call<ResponseBody> testScheduleCall = getService().getTestSchedule(Device.getId());
                 chain.addLink(testScheduleCall,testScheduleListener);
 
                 return true;
@@ -696,6 +659,18 @@ public class RestClient <Api>{
                 Study.getParticipant().setState(state);
                 Study.getScheduler().scheduleNotifications(Study.getCurrentTestCycle(), false);
 
+                if(Config.CHECK_PROGRESS_INFO) {
+                    int cycle = state.currentTestCycle;
+                    int day = state.currentTestDay;
+                    if(state.currentTestSession==0) {
+                        day--;
+                    }
+                    if(day>=0){
+                        Call<ResponseBody> cycleProgress = getService().getDayProgress(Device.getId(), cycle, day);
+                        chain.addLink(cycleProgress, progressListener);
+                    }
+                }
+
                 return true;
             }
             return false;
@@ -707,6 +682,40 @@ public class RestClient <Api>{
         }
     };
 
+    CallbackChain.Listener progressListener = new CallbackChain.Listener() {
+        @Override
+        public boolean onResponse(CallbackChain chain, RestResponse response) {
+            if(response.successful){
+                DayProgress progress = response.getOptionalAs("day_progress", DayProgress.class);
+                List<TestSession> testSessions = Study.getParticipant().getState().testCycles.get(progress.cycle).getTestDay(progress.day).getTestSessions();
+                for(SessionProgress sessionProgress : progress.sessions) {
+                    TestSession session = testSessions.get(sessionProgress.session_index);
+                    session.setProgress(sessionProgress.percent_complete);
+                    switch (sessionProgress.status) {
+                        case "not_yet_taken":
+                            break;
+                        case "incomplete":
+                            session.markStarted();
+                            session.markAbandoned();
+                            break;
+                        case "completed":
+                            session.markCompleted();
+                            break;
+                        case "missed":
+                            session.markMissed();
+                            break;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onFailure(CallbackChain chain, RestResponse response) {
+            return false;
+        }
+    };
 
     // upload queue --------------------------------------------------------------------------------
 

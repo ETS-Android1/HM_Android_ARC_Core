@@ -245,6 +245,7 @@ public class Scheduler {
         state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
 
         DateTime startDate = JodaUtil.fromUtcDouble(existingData.first_test.session_date);
+        state.studyStartDate = startDate;
         Study.getScheduler().initializeCycles(startDate,Study.getParticipant());
         Study.getScheduler().scheduleTests(startDate,Study.getParticipant());
 
