@@ -53,4 +53,20 @@ public class VersionUtil {
         return library_name;
     }
 
+    public static long getVersionCode(int major,int minor, int patch, int build){
+        return major * 1000000 + minor * 10000 + patch * 100 + build;
+    }
+
+    public static long getVersionCode(int major,int minor, int patch){
+        return getVersionCode(major,minor,patch,0);
+    }
+
+    public static long getVersionCode(int major,int minor){
+        return getVersionCode(major,minor,0,0);
+    }
+
+    public static long getVersionCode(int major){
+        return getVersionCode(major,0,0,0);
+    }
+
 }
