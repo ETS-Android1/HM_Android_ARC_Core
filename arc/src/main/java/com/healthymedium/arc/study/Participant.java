@@ -215,4 +215,17 @@ public class Participant {
         return null;
     }
 
+    public TestSession getSessionById(int id) {
+        for(TestCycle cycle : state.testCycles) {
+            for(TestDay day : cycle.getTestDays()) {
+                for(TestSession session : day.getTestSessions()) {
+                    if(session.getId()==id){
+                        return session;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 }

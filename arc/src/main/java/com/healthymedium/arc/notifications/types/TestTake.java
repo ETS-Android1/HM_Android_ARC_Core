@@ -3,16 +3,14 @@ package com.healthymedium.arc.notifications.types;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
+import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-
-import java.util.List;
 
 public class TestTake extends NotificationType {
 
@@ -33,10 +31,13 @@ public class TestTake extends NotificationType {
 
     @Override
     public String getContent(NotificationNode node) {
-        TestCycle cycle = Study.getCurrentTestCycle();
-        List<TestSession> testSessions = cycle.getTestSessions();
-        int sessionId = node.id;
-        TestSession session = testSessions.get(sessionId);
+
+        Participant participant = Study.getParticipant();
+        TestSession session = participant.getSessionById(node.id);
+
+        if(session==null) {
+            return "";
+        }
 
         expirationTime = session.getExpirationTime();
 
