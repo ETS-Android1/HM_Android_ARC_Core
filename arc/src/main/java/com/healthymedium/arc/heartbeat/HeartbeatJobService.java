@@ -21,10 +21,6 @@ public class HeartbeatJobService extends JobService {
         this.params = jobParameters;
         Log.i(tag,"onStartJob");
 
-        if(!Study.getStateMachine().isIdle()){
-            return false;
-        }
-
         if(!Config.REST_HEARTBEAT){
             checkUploadQueue();
             return true;

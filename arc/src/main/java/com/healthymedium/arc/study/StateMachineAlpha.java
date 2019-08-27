@@ -47,11 +47,6 @@ public class StateMachineAlpha extends StateMachine {
         state.currentPath = PATH_SETUP_PARTICIPANT;
     }
 
-    @Override
-    public boolean isIdle() {
-        return state.lifecycle==LIFECYCLE_IDLE;
-    }
-
     // deciding paths ------------------------------------------------------------------------------
 
     @Override

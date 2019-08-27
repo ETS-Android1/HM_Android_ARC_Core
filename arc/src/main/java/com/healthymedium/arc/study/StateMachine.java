@@ -276,11 +276,6 @@ public class StateMachine {
         return currentlyInTestPath;
     }
 
-    public boolean isIdle(){
-        return false;
-    }
-
-
     public boolean hasValidFragments() {
         if(cache.segments.size() == 0) {
             return false;
