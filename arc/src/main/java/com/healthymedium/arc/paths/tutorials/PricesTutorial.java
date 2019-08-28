@@ -22,6 +22,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class PricesTutorial extends Tutorial {
 
+    protected static final String HINT_PROGRESS_TUTORIAL_PRICES = "HINT_PROGRESS_TUTORIAL_PRICES";
+    protected static final String HINT_CLOSE_TUTORIAL_PRICES = "HINT_CLOSE_TUTORIAL_PRICES";
+
     Runnable runnableWhatDoYouThink;
     Handler handlerWhatDoYouThink = new Handler();
 
@@ -129,21 +132,36 @@ public class PricesTutorial extends Tutorial {
     }
 
     @Override
+    protected void onEnterTransitionStart(boolean popped) {
+        super.onEnterTransitionStart(popped);
+        if(!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_PRICES)) {
+            closeButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        if (!Hints.hasBeenShown(HINT_FIRST_TUTORIAL)) {
-            final Runnable next = new Runnable() {
-                @Override
-                public void run() {
-                    setFirstPricesCompare();
-                }
-            };
+        final Runnable next = new Runnable() {
+            @Override
+            public void run() {
+                setFirstPricesCompare();
+            }
+        };
 
+        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_PRICES)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showTutorial(next);
+                    showProgressTutorial(HINT_PROGRESS_TUTORIAL_PRICES, next);
+                }
+            }, 1200);
+        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL_PRICES)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showCloseTutorial(HINT_CLOSE_TUTORIAL_PRICES, next);
                 }
             }, 1200);
         } else {

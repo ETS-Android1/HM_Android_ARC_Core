@@ -21,6 +21,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SymbolTutorial extends Tutorial {
 
+    protected static final String HINT_PROGRESS_TUTORIAL_SYMBOLS = "HINT_PROGRESS_TUTORIAL_SYMBOLS";
+    protected static final String HINT_CLOSE_TUTORIAL_SYMBOLS = "HINT_CLOSE_TUTORIAL_SYMBOLS";
+
     final Handler handlerOutline = new Handler();
     final Handler handlerPulsate = new Handler();
     final Handler handlerCoachmark = new Handler();
@@ -152,30 +155,40 @@ public class SymbolTutorial extends Tutorial {
     }
 
     @Override
+    protected void onEnterTransitionStart(boolean popped) {
+        super.onEnterTransitionStart(popped);
+        if(!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_SYMBOLS)) {
+            closeButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        if (!Hints.hasBeenShown(HINT_FIRST_TUTORIAL)) {
-            final Runnable next = new Runnable() {
-                @Override
-                public void run() {
-                    stepMiddleTopTile();
-                }
-            };
+        final Runnable next = new Runnable() {
+            @Override
+            public void run() {
+                stepMiddleTopTile();
+            }
+        };
 
+        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_SYMBOLS)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showTutorial(next);
+                    showProgressTutorial(HINT_PROGRESS_TUTORIAL_SYMBOLS, next);
+                }
+            }, 1200);
+        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL_SYMBOLS)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showCloseTutorial(HINT_CLOSE_TUTORIAL_SYMBOLS, next);
                 }
             }, 1200);
         } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    stepMiddleTopTile();
-                }
-            },1200);
+            new Handler().postDelayed(next,1200);
         }
 
         new Handler().postDelayed(new Runnable() {

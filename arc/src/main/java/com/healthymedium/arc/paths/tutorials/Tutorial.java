@@ -21,8 +21,6 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Tutorial extends BaseFragment {
 
-    protected static final String HINT_FIRST_TUTORIAL = "HINT_FIRST_TUTORIAL";
-
     protected int shortAnimationDuration;
 
     protected HintHighlighter welcomeHighlight;
@@ -62,10 +60,28 @@ public class Tutorial extends BaseFragment {
     }
 
     // Display the hints for the progress bar and quit button
-    protected void showTutorial(final Runnable nextSection) {
+    protected void showProgressTutorial(final String tag, final Runnable nextSection) {
         welcomeHighlight.addTarget(progressView, 10, 2);
         welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
 
+        View.OnClickListener welcomeListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                welcomeHint.dismiss();
+                welcomeHighlight.dismiss();
+                Hints.markShown(tag);
+
+                Handler handler = new Handler();
+                handler.postDelayed(nextSection,600);
+            }
+        };
+
+        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
+        welcomeHighlight.show();
+        welcomeHint.show();
+    }
+
+    protected void showCloseTutorial(final String tag, final Runnable nextSection) {
         quitHighlight.addTarget(closeButton, 50, 10);
         quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
 
@@ -74,7 +90,7 @@ public class Tutorial extends BaseFragment {
             public void onClick(View view) {
                 quitHint.dismiss();
                 quitHighlight.dismiss();
-                Hints.markShown(HINT_FIRST_TUTORIAL);
+                Hints.markShown(tag);
 
                 Handler handler = new Handler();
                 handler.postDelayed(nextSection,600);
@@ -82,29 +98,10 @@ public class Tutorial extends BaseFragment {
         };
 
         quitHint.addButton(ViewUtil.getString(R.string.popup_gotit), quitListener);
-
-        View.OnClickListener welcomeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                welcomeHint.dismiss();
-                welcomeHighlight.dismiss();
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        quitHighlight.show();
-                        quitHint.show();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        };
-
-        welcomeHint.addButton(ViewUtil.getString(R.string.popup_gotit), welcomeListener);
-
-        welcomeHighlight.show();
-        welcomeHint.show();
+        quitHighlight.show();
+        quitHint.show();
     }
+
 
     protected void fadeInView(View view, Float opacity) {
         view.setAlpha(0f);
