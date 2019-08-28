@@ -21,7 +21,8 @@ public class StateMachineAlpha extends StateMachine {
 
     public static final int PATH_SETUP_PARTICIPANT = 0;         //
     public static final int PATH_COMMITMENT = 9;
-    public static final int PATH_NOTIFICATIONS_OVERVIEW = 10;
+    public static final int PATH_COMMITMENT_REBUKED = 10;
+    public static final int PATH_NOTIFICATIONS_OVERVIEW = 11;
     public static final int PATH_SETUP_AVAILABILITY = 1;        //
 
     public static final int PATH_TEST_FIRST_OF_BASELINE = 2;    // first test of the baseline
@@ -79,6 +80,11 @@ public class StateMachineAlpha extends StateMachine {
 
         if(!participant.hasId()){
             state.currentPath = PATH_SETUP_PARTICIPANT;
+            return;
+        }
+
+        if(participant.hasRebukedCommitmentToStudy()){
+            state.currentPath = PATH_COMMITMENT_REBUKED;
             return;
         }
 
@@ -507,6 +513,8 @@ public class StateMachineAlpha extends StateMachine {
                 return "STUDY_OVER";
             case PATH_COMMITMENT:
                 return "PATH_COMMITMENT";
+            case PATH_COMMITMENT_REBUKED:
+                return "PATH_COMMITMENT_REBUKED";
             case PATH_NOTIFICATIONS_OVERVIEW:
                 return "PATH_NOTIFICATIONS_OVERVIEW";
             default:

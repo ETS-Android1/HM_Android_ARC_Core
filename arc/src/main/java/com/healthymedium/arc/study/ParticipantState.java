@@ -21,7 +21,7 @@ public class ParticipantState {
     public CircadianClock circadianClock;
     public boolean hasValidSchedule;
     public boolean isStudyRunning;
-    public boolean hasCommittedToStudy;
+    public int hasCommittedToStudy;
     public boolean hasBeenShownNotificationOverview;
 
     // These are variables only used during runtime
@@ -32,6 +32,7 @@ public class ParticipantState {
         lastPauseTime = new DateTime();
         testCycles = new ArrayList<>();
         earnings = new Earnings();
+        hasCommittedToStudy = -1;
     }
 
 }

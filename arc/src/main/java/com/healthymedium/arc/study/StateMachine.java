@@ -11,6 +11,7 @@ import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsPostTestLoadingScreen;
 import com.healthymedium.arc.paths.informative.FinishedCycleScreen;
 import com.healthymedium.arc.paths.informative.FinishedStudyScreen;
+import com.healthymedium.arc.paths.informative.RebukedCommitmentScreen;
 import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
@@ -324,6 +325,37 @@ public class StateMachine {
 
         fragments.add(new QuestionRemoteStudyCommitment(
                 false,
+                res.getString(R.string.onboarding_header),
+                res.getString(R.string.onboarding_body),
+                res.getString(R.string.radio_commit),
+                res.getString(R.string.radio_nocommit)
+        ));
+
+        fragments.add(new StateInfoTemplate(
+                false,
+                res.getString(R.string.onboarding_commit_header),
+                null,
+                res.getString(R.string.onboarding_commit_body),
+                res.getString(R.string.button_next)));
+
+        PathSegment segment = new PathSegment(fragments);
+        enableTransition(segment,true);
+        cache.segments.add(segment);
+    }
+
+    public void setPathCommitmentRebuked(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        Resources res = Application.getInstance().getResources();
+
+        fragments.add(new RebukedCommitmentScreen(
+                res.getString(R.string.onboarding_nocommit_landing_header),
+                res.getString(R.string.onboarding_nocommit_landing_body),
+                res.getString(R.string.button_next)
+        ));
+
+        fragments.add(new QuestionRemoteStudyCommitment(
+                true,
                 res.getString(R.string.onboarding_header),
                 res.getString(R.string.onboarding_body),
                 res.getString(R.string.radio_commit),

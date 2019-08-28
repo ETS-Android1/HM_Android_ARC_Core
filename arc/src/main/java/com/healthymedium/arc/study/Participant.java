@@ -46,11 +46,19 @@ public class Participant {
     }
 
     public boolean hasCommittedToStudy(){
-        return state.hasCommittedToStudy;
+        return state.hasCommittedToStudy==1;
+    }
+
+    public boolean hasRebukedCommitmentToStudy(){
+        return state.hasCommittedToStudy==0;
     }
 
     public void markCommittedToStudy(){
-        state.hasCommittedToStudy = true;
+        state.hasCommittedToStudy = 1;
+    }
+
+    public void rebukeCommitmentToStudy(){
+        state.hasCommittedToStudy = 0;
     }
 
     public boolean hasBeenShownNotificationOverview(){

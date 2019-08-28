@@ -146,6 +146,9 @@
     <string name="onboarding_notifications_header2">Please turn on notifications.</string>
     <string name="onboarding_notifications_body2">You must turn on notifications for the study to function properly. Please visit settings and flip the notifications switch on.</string>
 
+    <string name="onboarding_nocommit_landing_header">Study Participation</string>
+    <string name="onboarding_nocommit_landing_body">To participate in the ARC study, you must commit to the required testing schedule. You previously indicated that you were unable to do so.&lt;br /> &lt;br />If you\'d like to participate, tap Next to review the requirements. If you\'d like to leave the study, please contact your study coordinator.</string>
+
     <string name="availability_header">Availability</string>
     <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
     <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
