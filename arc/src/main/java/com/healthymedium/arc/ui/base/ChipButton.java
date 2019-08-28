@@ -109,12 +109,12 @@ public class ChipButton extends LinearLayout {
         if(enabled) {
             gradientLayer.setAlpha(255);
             topLayer.setAlpha(255);
-            setElevation(elevation);
+            super.setElevation(elevation);
             setAlpha(1.0f);
         } else {
             gradientLayer.setAlpha(0);
             topLayer.setAlpha(0);
-            setElevation(0);
+            super.setElevation(0);
             setAlpha(0.5f);
         }
     }
