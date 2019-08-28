@@ -68,7 +68,7 @@ public class StateInfoTemplate extends BaseFragment {
         content = view.findViewById(R.id.linearLayoutContent);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        //textViewHeader.setTypeface(Fonts.georgiaItalic);
+        textViewHeader.setTypeface(Fonts.robotoMedium);
         textViewHeader.setText(stringHeader);
 
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
