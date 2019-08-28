@@ -20,6 +20,8 @@ public class TestBegin extends BaseFragment {
     TextView number;
 
     int count = 3;
+    boolean paused = false;
+    boolean done = false;
 
     Handler handler;
     Runnable runnableCountdown = new Runnable() {
@@ -31,6 +33,8 @@ public class TestBegin extends BaseFragment {
                         .alpha(0)
                         .setDuration(100)
                         .withEndAction(runnableDisappear);
+            } else if(paused) {
+                done = true;
             } else {
                 Study.openNextFragment();
             }
@@ -81,4 +85,21 @@ public class TestBegin extends BaseFragment {
 
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(paused && done) {
+            Study.openNextFragment();
+        } else {
+            paused = false;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        paused = true;
+    }
+
 }
