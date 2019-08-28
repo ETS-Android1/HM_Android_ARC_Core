@@ -55,8 +55,7 @@ public class LandingTemplate extends BaseFragment {
     HintPointer beginTestHint;
     HintHighlighter beginTestHighlight;
 
-    public LandingTemplate(Boolean testReady) {
-        boolTestReady = testReady;
+    public LandingTemplate() {
         determineStrings();
     }
 
@@ -87,7 +86,9 @@ public class LandingTemplate extends BaseFragment {
             }
         }
 
-        if (boolTestReady) {
+        boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
+
+        if (isTestReady) {
             Button button = new Button(getContext());
             button.setText(Application.getInstance().getResources().getString(R.string.button_begin));
             button.setOnClickListener(new View.OnClickListener() {

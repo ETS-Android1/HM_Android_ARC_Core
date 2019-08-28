@@ -385,7 +385,7 @@ public class StateMachineAlpha extends StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
 
         // Default
-        fragments.add(new LandingTemplate(true));
+        fragments.add(new LandingTemplate());
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }

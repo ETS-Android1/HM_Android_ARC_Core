@@ -79,7 +79,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
             @Override
             public void onClick(View v) {
                 NavigationManager.getInstance().popBackStack();
-                NavigationManager.getInstance().open(new LandingTemplate(false));
+                NavigationManager.getInstance().open(new LandingTemplate());
             }
         });
 

@@ -17,7 +17,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class LandingTestReady extends LandingTemplate {
 
     public LandingTestReady(Boolean testReady) {
-        super(testReady);
+        super();
     }
 
     @Override
