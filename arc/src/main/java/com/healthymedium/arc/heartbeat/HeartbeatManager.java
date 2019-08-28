@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 public class HeartbeatManager {
 
     private static final String tag = "HeartbeatManager";
-    private static final String TAG_LAST_HEARTBEAT = "TAG_LAST_HEARTBEAT";
+    public static final String TAG_LAST_HEARTBEAT = "TAG_LAST_HEARTBEAT";
     private static final int jobId = 9000;
 
     private static HeartbeatManager instance;
