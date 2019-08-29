@@ -95,6 +95,7 @@ public class AltStandardTemplate extends BaseFragment {
         content = view.findViewById(R.id.linearLayoutContent);
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
+        textViewHeader.setTypeface(Fonts.robotoMedium);
 
         if(stringSubHeader!=null){
             textViewSubheader = view.findViewById(R.id.textViewSubHeader);
