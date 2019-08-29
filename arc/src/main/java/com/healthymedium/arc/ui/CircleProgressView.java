@@ -187,7 +187,7 @@ public class CircleProgressView extends View {
 
     public void setProgress(int value, boolean animate) {
         if(animate) {
-            progressAnimator.setValues(PropertyValuesHolder.ofInt(PROPERTY_PROGRESS, 0, value));
+            progressAnimator.setValues(PropertyValuesHolder.ofInt(PROPERTY_PROGRESS, progress, value));
             progressAnimator.start();
         } else {
             progress = value;

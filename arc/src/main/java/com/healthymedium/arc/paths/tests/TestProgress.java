@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.tests;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -84,16 +85,20 @@ public class TestProgress extends BaseFragment {
 
         circleProgressView = view.findViewById(R.id.circleProgressView);
         circleProgressView.setProgress(percentageFrom,false);
-        circleProgressView.setProgress(percentageTo,true);
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        circleProgressView.setProgress(percentageTo,true);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Study.openNextFragment();
             }
         },5000);
-
-        return view;
     }
 
 }
