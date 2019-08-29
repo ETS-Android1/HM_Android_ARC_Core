@@ -125,7 +125,7 @@ public class LandingTemplate extends BaseFragment {
             if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
                 getMainActivity().enableNavigationBar(false);
 
-                beginTestHint = new HintPointer(getActivity(), landing_layout, true, false);
+                beginTestHint = new HintPointer(getActivity(), button, true, false);
                 beginTestHint.setText(ViewUtil.getString(R.string.popup_begin));
                 beginTestHighlight = new HintHighlighter(getActivity());
                 beginTestHighlight.addTarget(landing_layout, 10);
