@@ -232,7 +232,7 @@
     <string name="testing_loading">&lt;i>Loading next test&#8230;&lt;/i></string>
     <string name="testing_done">&lt;i>Well Done!&lt;/i></string>
 
-    <string name="idverify_header">Id Verification</string>
+    <string name="idverify_header">ID Verification</string>
 
     <string name="home_header1">&lt;b>Hello!&lt;/b></string>
 
