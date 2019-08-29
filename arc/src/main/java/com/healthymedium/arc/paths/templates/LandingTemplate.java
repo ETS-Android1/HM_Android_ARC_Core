@@ -33,6 +33,9 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.util.Locale;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 @SuppressLint("ValidFragment")
 public class LandingTemplate extends BaseFragment {
 
@@ -108,10 +111,14 @@ public class LandingTemplate extends BaseFragment {
                     Study.openNextFragment();
                 }
             });
+            LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
+            buttonLayoutParams.bottomMargin = ViewUtil.dpToPx(8);
+            button.setLayoutParams(buttonLayoutParams);
             content.addView(button);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
             params.leftMargin = ViewUtil.dpToPx(32);
+            params.rightMargin = ViewUtil.dpToPx(32);
             params.topMargin = ViewUtil.dpToPx(16);
             content.setLayoutParams(params);
 
