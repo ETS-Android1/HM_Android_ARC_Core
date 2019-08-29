@@ -13,10 +13,9 @@
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:textColor="@color/secondary"
             android:text="Test will begin in"
-            />
+            android:textColor="@color/secondary"
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/number"
@@ -24,10 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/header"
             android:layout_centerHorizontal="true"
-            android:textSize="80dp"
-            android:textColor="@color/secondary"
             android:text="3"
-            />
+            android:textColor="@color/secondary"
+            android:textSize="96dp" />
 
         <TextView
             android:id="@+id/textView7"

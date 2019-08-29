@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -79,6 +80,7 @@ public class TestBegin extends BaseFragment {
         begin.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_begin)));
 
         number = view.findViewById(R.id.number);
+        number.setTypeface(Fonts.georgiaItalic);
 
         handler = new Handler();
         handler.postDelayed(runnableCountdown,900);

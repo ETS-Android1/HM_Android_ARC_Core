@@ -158,7 +158,7 @@
     <string name="grid_body">Study the grid and try to remember the location of the three items.</string>
     <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom.&lt;br /&gt;&lt;br /&gt;As quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
 
-    <string name="testing_begin">&lt;b>Test will begin in&lt;/b></string>
+    <string name="testing_begin">Test will begin in</string>
     
     <string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
 
