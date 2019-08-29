@@ -26,6 +26,7 @@ public class Button extends ChipButton {
     public Button(Context context) {
         super(context);
         init(context);
+        applyAttributeSet(context,null);
     }
 
     public Button(Context context, AttributeSet attrs) {
