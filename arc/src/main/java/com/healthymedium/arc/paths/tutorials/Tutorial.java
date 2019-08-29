@@ -127,16 +127,21 @@ public class Tutorial extends BaseFragment {
 
     // Displays the tutorial complete screen
     protected void showComplete() {
-        fadeInView(checkmark, 1f);
-        fadeInView(textViewComplete, 1f);
-        fadeInView(endButton, 1f);
-
-        endButton.setOnClickListener(new View.OnClickListener() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                exit();
+            public void run() {
+                fadeInView(checkmark, 1f);
+                fadeInView(textViewComplete, 1f);
+                fadeInView(endButton, 1f);
+
+                endButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        exit();
+                    }
+                });
             }
-        });
+        }, 1000);
     }
 
     protected void exit(){
