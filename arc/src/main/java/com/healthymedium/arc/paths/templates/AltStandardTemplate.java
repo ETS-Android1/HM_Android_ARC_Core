@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -189,6 +190,14 @@ public class AltStandardTemplate extends BaseFragment {
                 }
             }, 50);
         }
+    }
+
+    public void setSubHeaderTextSize(float size) {
+        textViewSubheader.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
+    }
+
+    public void setSubHeaderLineSpacing(float add, float multi) {
+        textViewSubheader.setLineSpacing(add, multi);
     }
 
     protected void setHelpVisible(boolean visible){

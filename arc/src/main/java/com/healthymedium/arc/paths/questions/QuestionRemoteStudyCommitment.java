@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
+import android.util.TypedValue;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
@@ -16,6 +17,13 @@ public class QuestionRemoteStudyCommitment extends QuestionPolarAlt {
 
     public QuestionRemoteStudyCommitment(boolean allowBack, String header, String subheader, String yesAnswer, String noAnswer) {
         super(allowBack,header,subheader, yesAnswer, noAnswer);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setSubHeaderTextSize(17);
+        setSubHeaderLineSpacing(ViewUtil.dpToPx(9), 1);
     }
 
     @Override
