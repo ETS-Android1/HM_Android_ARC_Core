@@ -123,19 +123,29 @@
         android:layout_marginRight="32dp"
         android:text="OKAY" />
 
-    <TextView
+    <com.healthymedium.arc.ui.Button
+        android:id="@+id/textViewScrollTop"
+        android:visibility="gone"
+        android:text="Show More"
+        app:allCaps="true"
+        app:iconRight="@drawable/ic_arrow_up_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        app:buttonTheme="dark"/>
+
+    <com.healthymedium.arc.ui.Button
         android:id="@+id/textViewScroll"
+        android:visibility="gone"
+        android:text="Show More"
+        app:allCaps="true"
+        app:iconRight="@drawable/ic_arrow_down_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:background="@drawable/ic_rating_scroll_indicator"
-        android:gravity="center"
-        android:paddingBottom="10dp"
-        android:text="Scroll"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        android:visibility="gone" />
+        app:buttonTheme="dark"/>
 
 </RelativeLayout>

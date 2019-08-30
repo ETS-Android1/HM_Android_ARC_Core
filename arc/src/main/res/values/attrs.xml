@@ -48,6 +48,8 @@
         <attr name="android:enabled"/>
         <attr name="buttonTheme" />
         <attr name="icon" format="reference" />
+        <attr name="iconRight" format="reference" />
+        <attr name="allCaps" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="WeekdayButton">

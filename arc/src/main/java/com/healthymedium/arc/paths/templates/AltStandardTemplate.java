@@ -35,6 +35,7 @@ public class AltStandardTemplate extends BaseFragment {
     TranslateAnimation showAnimation;
     TranslateAnimation hideAnimation;
     boolean buttonShowing;
+    boolean autoscroll = false;
 
     String stringButton;
     String stringHeader;
@@ -51,7 +52,8 @@ public class AltStandardTemplate extends BaseFragment {
     ScrollView scrollView;
 
     protected Button buttonNext;
-    TextView textViewScroll;
+    Button textViewScroll;
+    Button textViewScrollTop;
 
     boolean allowBack;
     boolean disableScrollBehavior;
@@ -140,8 +142,37 @@ public class AltStandardTemplate extends BaseFragment {
         }
 
         textViewScroll = view.findViewById(R.id.textViewScroll);
+        textViewScrollTop = view.findViewById(R.id.textViewScrollTop);
 
         scrollView = view.findViewById(R.id.scrollView);
+
+        textViewScroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollView.smoothScrollTo(0, scrollView.getHeight());
+                autoscroll = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        autoscroll = false;
+                    }
+                }, 300);
+            }
+        });
+
+        textViewScrollTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollView.smoothScrollTo(0, 0);
+                autoscroll = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        autoscroll = false;
+                    }
+                }, 300);
+            }
+        });
 
         showAnimation = new TranslateAnimation(0,0,ViewUtil.dpToPx(100),0);
         showAnimation.setDuration(250);
@@ -169,6 +200,8 @@ public class AltStandardTemplate extends BaseFragment {
                 buttonShowing = false;
             }  else {
                 buttonNext.setVisibility(View.VISIBLE);
+                textViewScrollTop.setAlpha(0);
+                textViewScrollTop.setVisibility(View.VISIBLE);
                 buttonShowing = true;
             }
         } else {
@@ -240,6 +273,17 @@ public class AltStandardTemplate extends BaseFragment {
                     buttonShowing = false;
                     buttonNext.startAnimation(hideAnimation);
                 }
+                if (!autoscroll) {
+                    textViewScroll.animate().alpha(0.0f).setDuration(300);
+                    textViewScrollTop.animate().alpha(0.0f).setDuration(300);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            textViewScroll.setVisibility(View.GONE);
+                            textViewScrollTop.setVisibility(View.GONE);
+                        }
+                    }, 300);
+                }
             }
         });
         scrollView.setOnTouchListener(new View.OnTouchListener() {
@@ -268,7 +312,13 @@ public class AltStandardTemplate extends BaseFragment {
         @Override
         public void onAnimationStart(Animation animation) {
             buttonNext.setVisibility(View.VISIBLE);
-            textViewScroll.animate().alpha(0.0f).setDuration(250);
+            textViewScroll.animate().alpha(0.0f).setDuration(300);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    textViewScrollTop.animate().alpha(1.0f).setDuration(300);
+                }
+            }, 300);
         }
 
         @Override
@@ -285,7 +335,13 @@ public class AltStandardTemplate extends BaseFragment {
     private Animation.AnimationListener hideAnimationListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
-            textViewScroll.animate().alpha(1.0f).setDuration(500);
+            textViewScrollTop.animate().alpha(0.0f).setDuration(300);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    textViewScroll.animate().alpha(1.0f).setDuration(300);
+                }
+            }, 300);
         }
 
         @Override

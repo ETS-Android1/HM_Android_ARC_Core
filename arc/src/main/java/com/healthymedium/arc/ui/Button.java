@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
+import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,7 +44,7 @@ public class Button extends ChipButton {
     }
 
     private void init(Context context){
-
+        setOrientation(HORIZONTAL);
         textView = new TextView(context);
         textView.setTypeface(Fonts.robotoBold);
         textView.setTextSize(18);
@@ -88,6 +90,18 @@ public class Button extends ChipButton {
             topLayer.setFillGradient(SimpleGradient.LINEAR_VERTICAL, ViewUtil.getColor(context,normalTop), ViewUtil.getColor(context,normalBottom));
             bottomLayer.setFillColor(ViewUtil.getColor(context,selected));
             textView.setTextColor(ViewUtil.getColor(context,textColor));
+
+            if(a.getDrawable(R.styleable.Button_iconRight) != null) {
+                ImageView imageViewRight = new ImageView(context);
+                imageViewRight.setBackground(a.getDrawable(R.styleable.Button_iconRight));
+                LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.gravity = Gravity.CENTER_VERTICAL;
+                params.leftMargin = ViewUtil.dpToPx(8);
+                imageViewRight.setLayoutParams(params);
+                addView(imageViewRight);
+            }
+
+            textView.setAllCaps(a.getBoolean(R.styleable.Button_allCaps, false));
 
             setIcon(a.getDrawable(R.styleable.Button_icon));
             boolean enabled = a.getBoolean(R.styleable.Button_android_enabled,true);
