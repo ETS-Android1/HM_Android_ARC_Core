@@ -229,6 +229,8 @@ public class LandingTemplate extends BaseFragment {
     }
 
     private void showTourHints(String body, String btn, String hint) {
+        getMainActivity().enableNavigationBar(false);
+
         // Mark the hint type as shown
         // Should be either HINT_POST_BASELINE or HINT_POST_PAID_TEST
         Hints.markShown(hint);
