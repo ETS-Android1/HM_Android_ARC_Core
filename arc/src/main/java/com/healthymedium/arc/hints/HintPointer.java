@@ -272,7 +272,9 @@ public class HintPointer extends LinearLayout {
     }
 
     public void show() {
-
+        if(getParent()!=null) {
+           return; // single use only
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
