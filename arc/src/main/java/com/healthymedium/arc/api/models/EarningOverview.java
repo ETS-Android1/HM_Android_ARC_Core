@@ -3,7 +3,13 @@ package com.healthymedium.arc.api.models;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import static com.healthymedium.arc.study.Earnings.FOUR_OUT_OF_FOUR;
+import static com.healthymedium.arc.study.Earnings.TWENTY_ONE_SESSIONS;
+import static com.healthymedium.arc.study.Earnings.TWO_A_DAY;
 
 public class EarningOverview {
 
@@ -69,6 +75,8 @@ public class EarningOverview {
         twentyOneSessions.value = "$5.00";
         overview.goals.add(twentyOneSessions);
 
+        Collections.sort(overview.goals,new GoalComparator());
+
         return overview;
     }
 
@@ -123,6 +131,25 @@ public class EarningOverview {
         public boolean equals(@Nullable Object obj) {
             return name.equals(obj);
         }
+    }
+
+    public static class GoalComparator implements Comparator<Goal> {
+        @Override
+        public int compare(Goal a, Goal b) {
+            return getIndex(a.name).compareTo(getIndex(b.name));
+        }
+
+        Integer getIndex(String name) {
+            if(name.equals(FOUR_OUT_OF_FOUR)) {
+                return 0;
+            } else if(name.equals(TWO_A_DAY)) {
+                return 1;
+            } else if(name.equals(TWENTY_ONE_SESSIONS)) {
+                return 2;
+            }
+            return -1;
+        }
+
     }
 
 }

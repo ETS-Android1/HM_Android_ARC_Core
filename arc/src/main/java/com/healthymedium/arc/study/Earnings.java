@@ -9,6 +9,8 @@ import com.healthymedium.arc.api.models.EarningOverview;
 
 import org.joda.time.DateTime;
 
+import java.util.Collections;
+
 public class Earnings {
 
     public static final String TWENTY_ONE_SESSIONS = "21-sessions";
@@ -87,6 +89,7 @@ public class Earnings {
                 overviewRefresh = 1;
                 overview = response.getOptionalAs("earnings",EarningOverview.class);
                 overviewUpdateTime = DateTime.now();
+                Collections.sort(overview.goals,new EarningOverview.GoalComparator());
                 if(overviewListener!=null) {
                     overviewListener.onSuccess();
                     overviewListener = null;
