@@ -259,8 +259,8 @@
             android:visibility="gone">
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -268,8 +268,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -277,8 +277,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -286,8 +286,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -295,8 +295,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
 
@@ -305,8 +305,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
 
                 android:gravity="center"
                 android:text="E"
@@ -315,8 +315,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
 
                 android:gravity="center"
                 android:text="E"
@@ -325,8 +325,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -334,8 +334,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -343,8 +343,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -352,8 +352,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -361,8 +361,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -370,8 +370,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
 
                 android:gravity="center"
                 android:text="E"
@@ -381,8 +381,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -390,8 +390,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -399,8 +399,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -408,8 +408,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -417,8 +417,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -426,8 +426,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -436,8 +436,8 @@
 
             <TextView
                 android:id="@+id/tapThisF"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -445,8 +445,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -454,8 +454,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -463,8 +463,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -472,8 +472,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -481,8 +481,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -490,8 +490,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -499,8 +499,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -508,8 +508,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -517,8 +517,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -526,8 +526,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -535,8 +535,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -544,8 +544,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -553,8 +553,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -562,8 +562,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -571,8 +571,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -580,8 +580,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -589,8 +589,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -598,8 +598,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -607,8 +607,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -616,8 +616,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -625,8 +625,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -634,8 +634,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -643,8 +643,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -652,8 +652,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -661,8 +661,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -670,8 +670,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -679,8 +679,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -688,8 +688,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="F"
                 android:textAllCaps="true"
@@ -697,8 +697,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -706,8 +706,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -715,8 +715,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -724,8 +724,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -733,8 +733,8 @@
                 android:textSize="36dp" />
 
             <TextView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -743,8 +743,8 @@
 
             <TextView
                 android:id="@+id/textView23"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -753,8 +753,8 @@
 
             <TextView
                 android:id="@+id/textView24"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -763,8 +763,8 @@
 
             <TextView
                 android:id="@+id/textView25"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -773,8 +773,8 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -783,8 +783,8 @@
 
             <TextView
                 android:id="@+id/textView27"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"
@@ -793,8 +793,8 @@
 
             <TextView
                 android:id="@+id/textView28"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
 
@@ -804,8 +804,8 @@
 
             <TextView
                 android:id="@+id/textView50"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
                 android:gravity="center"
                 android:text="E"
                 android:textAllCaps="true"

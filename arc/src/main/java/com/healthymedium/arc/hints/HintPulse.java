@@ -23,6 +23,7 @@ public class HintPulse extends View{
     private View view;
     private boolean running = false;
 
+    private int strokeWidth;
     private int radius = 0;
     private int height;
     private int width;
@@ -32,8 +33,9 @@ public class HintPulse extends View{
         super(context);
         this.view = view;
 
+        strokeWidth = ViewUtil.dpToPx(2);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(ViewUtil.dpToPx(2));
+        paint.setStrokeWidth(strokeWidth);
         paint.setColor(ViewUtil.getColor(R.color.hintDark));
     }
 
@@ -47,17 +49,23 @@ public class HintPulse extends View{
         x = locations[0];
         y = locations[1];
 
+        boolean isCircle = radius==width/2 || radius==height/2;
+        if(isCircle){
+            int offset = strokeWidth/2;
+            x -= offset;
+            y -= offset;
+        }
+
         setPivotX(x+(width/2));
         setPivotY(y+(height/2));
 
-        bitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
-        RectF rect = new RectF(0,0, width, height);
-
+        bitmap = Bitmap.createBitmap(width+strokeWidth,height+strokeWidth, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
 
-        if(radius==width/2 || radius==height/2){
-            canvas.drawCircle(width/2,height/2, radius, paint);
+        if(isCircle){
+            canvas.drawCircle((width+strokeWidth)/2,(height+strokeWidth)/2, radius, paint);
         } else {
+            RectF rect = new RectF(0,0, width, height);
             canvas.drawRoundRect(rect, radius, radius, paint);
         }
 
