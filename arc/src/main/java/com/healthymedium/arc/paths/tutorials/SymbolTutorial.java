@@ -21,8 +21,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SymbolTutorial extends Tutorial {
 
-    protected static final String HINT_PROGRESS_TUTORIAL_SYMBOLS = "HINT_PROGRESS_TUTORIAL_SYMBOLS";
-    protected static final String HINT_CLOSE_TUTORIAL_SYMBOLS = "HINT_CLOSE_TUTORIAL_SYMBOLS";
+    protected static final String HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS = "HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS";
 
     final Handler handlerOutline = new Handler();
     final Handler handlerPulsate = new Handler();
@@ -157,8 +156,9 @@ public class SymbolTutorial extends Tutorial {
     @Override
     protected void onEnterTransitionStart(boolean popped) {
         super.onEnterTransitionStart(popped);
-        if(!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_SYMBOLS)) {
+        if(!Hints.hasBeenShown(HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS)) {
             closeButton.setVisibility(View.GONE);
+            Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS);
         }
     }
 
@@ -173,18 +173,18 @@ public class SymbolTutorial extends Tutorial {
             }
         };
 
-        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_SYMBOLS)) {
+        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showProgressTutorial(HINT_PROGRESS_TUTORIAL_SYMBOLS, next);
+                    showProgressTutorial(HINT_PROGRESS_TUTORIAL, next);
                 }
             }, 1200);
-        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL_SYMBOLS)) {
+        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showCloseTutorial(HINT_CLOSE_TUTORIAL_SYMBOLS, next);
+                    showCloseTutorial(HINT_CLOSE_TUTORIAL, next);
                 }
             }, 1200);
         } else {

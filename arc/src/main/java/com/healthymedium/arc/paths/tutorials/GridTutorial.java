@@ -27,8 +27,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class GridTutorial extends Tutorial {
 
-    protected static final String HINT_PROGRESS_TUTORIAL_GRIDS = "HINT_PROGRESS_TUTORIAL_GRIDS";
-    protected static final String HINT_CLOSE_TUTORIAL_GRIDS = "HINT_CLOSE_TUTORIAL_GRIDS";
+    protected static final String HINT_PREVENT_TUTORIAL_CLOSE_GRIDS = "HINT_PREVENT_TUTORIAL_CLOSE_GRIDS";
 
     int selectedCount;
     Boolean image33Selected = false;
@@ -224,8 +223,9 @@ public class GridTutorial extends Tutorial {
     @Override
     protected void onEnterTransitionStart(boolean popped) {
         super.onEnterTransitionStart(popped);
-        if(!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_GRIDS)) {
+        if(!Hints.hasBeenShown(HINT_PREVENT_TUTORIAL_CLOSE_GRIDS)) {
             closeButton.setVisibility(View.GONE);
+            Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_GRIDS);
         }
     }
 
@@ -240,18 +240,18 @@ public class GridTutorial extends Tutorial {
             }
         };
 
-        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL_GRIDS)) {
+        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showProgressTutorial(HINT_PROGRESS_TUTORIAL_GRIDS, next);
+                    showProgressTutorial(HINT_PROGRESS_TUTORIAL, next);
                 }
             }, 1200);
-        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL_GRIDS)) {
+        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL)) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    showCloseTutorial(HINT_CLOSE_TUTORIAL_GRIDS, next);
+                    showCloseTutorial(HINT_CLOSE_TUTORIAL, next);
                 }
             }, 1200);
         } else {

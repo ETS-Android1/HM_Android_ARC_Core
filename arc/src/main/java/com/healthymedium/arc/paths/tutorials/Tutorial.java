@@ -21,6 +21,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Tutorial extends BaseFragment {
 
+    protected static final String HINT_PROGRESS_TUTORIAL = "HINT_PROGRESS_TUTORIAL";
+    protected static final String HINT_CLOSE_TUTORIAL = "HINT_CLOSE_TUTORIAL";
+
     protected int shortAnimationDuration;
 
     protected HintHighlighter welcomeHighlight;
