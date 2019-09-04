@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
@@ -335,6 +336,27 @@ public class SymbolTutorial extends Tutorial {
 
     // The first set of tiles to match
     private void initialTiles() {
+
+        View.OnTouchListener touchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                int action = event.getAction();
+                switch (action){
+                    case MotionEvent.ACTION_DOWN:
+                        view.setSelected(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        view.setSelected(false);
+                        break;
+                }
+                return false;
+            }
+        };
+
+        buttonBottom1.setOnTouchListener(touchListener);
+        buttonBottom2.setOnTouchListener(touchListener);
+
         initialTilesOutline.addTarget(buttonBottom1,8);
         initialTilesOutline.addTarget(buttonTop3,8);
 
@@ -368,7 +390,7 @@ public class SymbolTutorial extends Tutorial {
         handlerPulsate.postDelayed(runnableTilePulsate,10000);
         handlerCoachmark.postDelayed(runnableCoachmark, 15000);
 
-        buttonBottom1.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -381,6 +403,7 @@ public class SymbolTutorial extends Tutorial {
                 initialPointer.dismiss();
 
                 buttonBottom1.setOnClickListener(null);
+                buttonBottom2.setOnClickListener(null);
                 incrementProgress();
 
                 final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
@@ -406,7 +429,10 @@ public class SymbolTutorial extends Tutorial {
 
                 greatJobHint.show();
             }
-        });
+        };
+
+        buttonBottom1.setOnClickListener(listener);
+        buttonBottom2.setOnClickListener(listener);
     }
 
     // The second set of tiles to match
@@ -450,7 +476,7 @@ public class SymbolTutorial extends Tutorial {
         handlerPulsate.postDelayed(runnableTilePulsate,10000);
         handlerCoachmark.postDelayed(runnableCoachmark, 15000);
 
-        buttonBottom2.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -462,6 +488,7 @@ public class SymbolTutorial extends Tutorial {
                 secondTilesPulsate.dismiss();
                 secondPointer.dismiss();
 
+                buttonBottom1.setOnClickListener(null);
                 buttonBottom2.setOnClickListener(null);
                 incrementProgress();
 
@@ -488,7 +515,9 @@ public class SymbolTutorial extends Tutorial {
 
                 niceHint.show();
             }
-        });
+        };
+        buttonBottom1.setOnClickListener(listener);
+        buttonBottom2.setOnClickListener(listener);
     }
 
     // The final set of tiles to match
@@ -532,7 +561,7 @@ public class SymbolTutorial extends Tutorial {
         handlerPulsate.postDelayed(runnableTilePulsate,10000);
         handlerCoachmark.postDelayed(runnableCoachmark, 15000);
 
-        buttonBottom1.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -549,11 +578,15 @@ public class SymbolTutorial extends Tutorial {
                 fadeOutView(bottomSymbolsButtons);
 
                 buttonBottom1.setOnClickListener(null);
+                buttonBottom2.setOnClickListener(null);
                 incrementProgress();
 
                 showComplete();
             }
-        });
+        };
+
+        buttonBottom1.setOnClickListener(listener);
+        buttonBottom2.setOnClickListener(listener);
     }
 
 }
