@@ -15,6 +15,10 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.study.ParticipantState;
+import com.healthymedium.arc.study.TestDay;
+import com.healthymedium.arc.study.TestSession;
+import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.hints.HintHighlighter;
@@ -46,7 +50,8 @@ public class LandingTemplate extends BaseFragment {
 
     String stringHeader;
     String stringSubheader;
-    Boolean boolTestReady;
+
+    boolean isTestReady = false;
 
     protected LinearLayout landing_layout;
     protected TextView textViewHeader;
@@ -156,76 +161,71 @@ public class LandingTemplate extends BaseFragment {
     }
 
     private void determineStrings() {
-        // TODO
-        // Bugs with wrong state displaying when a test is available
-        // Possibly fix by getting the state from StudyStateMachine
 
         Participant participant = Study.getParticipant();
 
-        String language = PreferencesManager.getInstance().getString("language", "en");
-        String country = PreferencesManager.getInstance().getString("country", "US");
-        Locale locale = new Locale(language, country);
+        // No more tests, end of study
+        if (!participant.isStudyRunning()) {
+            stringHeader = ViewUtil.getString(R.string.home_header6);
+            stringSubheader = ViewUtil.getString(R.string.home_body6);
+            return;
+        }
 
         // Default
-        String header = Application.getInstance().getResources().getString(R.string.home_header1) + Application.getInstance().getResources().getString(R.string.home_body1);
-        String body = "";
+        stringHeader = ViewUtil.getString(R.string.home_header1) + ViewUtil.getString(R.string.home_body1);
+        stringSubheader = "";
 
-        if (participant.getState().currentTestCycle == 0 && participant.getCurrentTestSession().getId() == 0) {
-            // default
-        }
-        else if (participant.shouldCurrentlyBeInTestSession()) {
-            // default
-        }
-        else if (participant.getState().currentTestCycle != 5) {
-            TestCycle cycle = participant.getCurrentTestCycle();
-
-            DateTime today = new DateTime().withTimeAtStartOfDay();
-            DateTime schedStartDateMinusOne = cycle.getActualStartDate().minusDays(1);
-
-            // After the cycle, one day before the start of the next session
-            if (schedStartDateMinusOne.isEqual(today)) {
-                header = Application.getInstance().getResources().getString(R.string.home_header5);
-
-                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
-                DateTime endDate = participant.getCurrentTestCycle().getActualEndDate();
-                String endDateFmt = fmt.print(endDate.minusDays(1));
-
-                header = header.replace("{DATE}", endDateFmt);
-                body = Application.getInstance().getResources().getString(R.string.home_body5);
-            }
-            // After the cycle before the start of the next session
-            else if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests() && participant.getState().currentTestCycle != 0) {
-                header = Application.getInstance().getResources().getString(R.string.home_header4);
-
-                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
-                DateTime startDate = participant.getCurrentTestCycle().getActualStartDate();
-                String startDateFmt = fmt.print(startDate);
-
-                DateTime endDate = cycle.getActualEndDate();
-                String endDateFmt = fmt.print(endDate.minusDays(1));
-
-                body = Application.getInstance().getResources().getString(R.string.home_body4).replace("{DATE1}", startDateFmt);
-                body = body.replace("{DATE2}", endDateFmt);
-            }
-            // After 4th test of the day
-            else if (participant.getCurrentTestDay().getNumberOfTestsLeft() == 0) {
-                header = Application.getInstance().getResources().getString(R.string.home_header3);
-                body = Application.getInstance().getResources().getString(R.string.home_body3);
-            }
-            // Open the app, no test, still in a cycle
-            else if (cycle.getNumberOfTestsLeft() > 0) {
-                header = Application.getInstance().getResources().getString(R.string.home_header2);
-                body = Application.getInstance().getResources().getString(R.string.home_body2);
-            }
-        }
-        // No more tests, end of study
-        else if (!Study.getParticipant().isStudyRunning()) {
-            header = Application.getInstance().getResources().getString(R.string.home_header6);
-            body = Application.getInstance().getResources().getString(R.string.home_body6);
+        isTestReady = participant.shouldCurrentlyBeInTestSession();
+        if(isTestReady){
+            return;
         }
 
-        stringHeader = header;
-        stringSubheader = body;
+        TestCycle testCycle = participant.getCurrentTestCycle();
+        TestDay testDay = participant.getCurrentTestDay();
+        TestSession testSession = participant.getCurrentTestSession();
+
+        DateTime cycleStartDate = testCycle.getActualStartDate();
+        String startDateFmt = JodaUtil.format(cycleStartDate,R.string.format_date_long);
+
+        DateTime cycleEndDate = testCycle.getActualEndDate().minusDays(1);
+        String endDateFmt = JodaUtil.format(cycleEndDate,R.string.format_date_long);
+
+        DateTime dayStartTime = testDay.getStartTime();
+
+        // after
+        if(testSession.getId() == 1 && dayStartTime.isAfterNow()) {
+            stringHeader = ViewUtil.getString(R.string.home_header7);
+            stringSubheader = ViewUtil.getString(R.string.home_body7);
+
+            String startTime = JodaUtil.format(dayStartTime,R.string.format_time);
+            String endTime = JodaUtil.format(testDay.getEndTime(),R.string.format_time);
+
+            stringSubheader = ViewUtil.replaceToken(stringSubheader,R.string.token_time1,startTime);
+            stringSubheader = ViewUtil.replaceToken(stringSubheader,R.string.token_time2,endTime);
+        }
+        // After the cycle, one day before the start of the next session
+        else if (testDay.getDayIndex()==0 && cycleStartDate.minusDays(1).isBeforeNow() && dayStartTime.isAfterNow()) {
+            stringHeader = ViewUtil.getString(R.string.home_header5);
+            stringHeader = ViewUtil.replaceToken(stringHeader,R.string.token_date,endDateFmt);
+            stringSubheader = ViewUtil.getString(R.string.home_body5);
+        }
+        // After the cycle before the start of the next session
+        else if (cycleStartDate.isAfterNow()) {
+            stringHeader = ViewUtil.getString(R.string.home_header4);
+            stringSubheader = ViewUtil.replaceToken(ViewUtil.getString(R.string.home_body4),R.string.token_date1,startDateFmt);
+            stringSubheader = ViewUtil.replaceToken(stringSubheader,R.string.token_date2,endDateFmt);
+        }
+        // After 4th test of the day
+        else if (dayStartTime.isAfterNow()) {
+            stringHeader = ViewUtil.getString(R.string.home_header3);
+            stringSubheader = ViewUtil.getString(R.string.home_body3);
+        }
+        // Open the app, no test, still in a cycle
+        else if (testCycle.getNumberOfTestsLeft() > 0) {
+            stringHeader = ViewUtil.getString(R.string.home_header2);
+            stringSubheader = ViewUtil.getString(R.string.home_body2);
+        }
+
     }
 
     private void showTourHints(String body, String btn, String hint) {
