@@ -9,6 +9,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -34,6 +35,22 @@ public class ViewUtil {
 
     public static int spToPx(int sp) {
         return (int) (sp * Resources.getSystem().getDisplayMetrics().scaledDensity);
+    }
+
+    public static float mmToPx(float mm) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, mm, Resources.getSystem().getDisplayMetrics());
+    }
+
+    public static int mmToPx(int mm) {
+        return (int) mmToPx((float)mm);
+    }
+
+    public static float inToPx(float in) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_IN, in, Resources.getSystem().getDisplayMetrics());
+    }
+
+    public static int inToPx(int in) {
+        return (int) inToPx((float)in);
     }
 
     public static int getColor(Context context, @ColorRes int id){
