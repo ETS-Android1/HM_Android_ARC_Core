@@ -46,7 +46,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -71,6 +73,7 @@ public class RestClient <Api>{
     protected Retrofit retrofit;
 
     protected List<Object> uploadQueue = Collections.synchronizedList(new ArrayList<>());
+    protected Map<Class, UploadBehavior> uploadBehaviorMap = Collections.synchronizedMap(new HashMap<Class, UploadBehavior>());
     private List<UploadListener> uploadListeners = new ArrayList<>();
     protected boolean uploading = false;
 
@@ -120,6 +123,43 @@ public class RestClient <Api>{
         } else {
             uploadQueue = Collections.synchronizedList(new ArrayList<>());
         }
+
+        uploadBehaviorMap.put(TestSchedule.class, new UploadBehavior() {
+            @Override
+            public Call callRequested(Object object, JsonObject json) {
+                return getService().submitTestSchedule(Device.getId(),json);
+            }
+        });
+
+        uploadBehaviorMap.put(TestSchedule.class, new UploadBehavior() {
+            @Override
+            public Call callRequested(Object object, JsonObject json) {
+                return getService().submitTestSchedule(Device.getId(),json);
+            }
+        });
+
+        uploadBehaviorMap.put(WakeSleepSchedule.class, new UploadBehavior() {
+            @Override
+            public Call callRequested(Object object, JsonObject json) {
+                return getService().submitWakeSleepSchedule(Device.getId(),json);
+            }
+        });
+
+        uploadBehaviorMap.put(TestSubmission.class, new UploadBehavior() {
+            @Override
+            public Call callRequested(Object object, JsonObject json) {
+                return getService().submitTest(Device.getId(),json);
+            }
+        });
+
+        uploadBehaviorMap.put(CachedSignature.class, new UploadBehavior() {
+            @Override
+            public Call callRequested(Object object, JsonObject json) {
+                RequestBody requestBody = ((CachedSignature)object).getRequestBody();
+                return getService().submitSignature(requestBody,Device.getId());
+            }
+        });
+
     }
 
     public RestAPI getService() {
@@ -726,15 +766,9 @@ public class RestClient <Api>{
             String deviceId = Device.getId();
             Call<ResponseBody> call = null;
 
-            if(TestSchedule.class.isInstance(object)) {
-                call = getService().submitTestSchedule(deviceId,json);
-            } else if(WakeSleepSchedule.class.isInstance(object)) {
-                call = getService().submitWakeSleepSchedule(deviceId,json);
-            } else if(TestSubmission.class.isInstance(object)) {
-                call = getService().submitTest(deviceId,json);
-            } else if(CachedSignature.class.isInstance(object)) {
-                RequestBody requestBody = ((CachedSignature)object).getRequestBody();
-                call = getService().submitSignature(requestBody,deviceId);
+            Class key = object.getClass();
+            if(uploadBehaviorMap.containsKey(key)) {
+               call = uploadBehaviorMap.get(key).callRequested(object,json);
             }
 
             if(call!=null) {
@@ -818,5 +852,9 @@ public class RestClient <Api>{
     public interface UploadListener{
         void onStart();
         void onStop();
+    }
+
+    protected interface UploadBehavior {
+        Call callRequested(Object object, JsonObject json);
     }
 }
