@@ -2,9 +2,8 @@ package com.healthymedium.arc.utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
-import com.healthymedium.arc.utilities.Log;
+import android.webkit.MimeTypeMap;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,18 +26,10 @@ import com.healthymedium.arc.time.LocalTimeTypeAdapter;
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,24 +37,41 @@ import java.util.Map;
 
 public class CacheManager {
 
+    private static final String TYPE_OBJECT = "";
+    private static final String TYPE_BITMAP = "png";
+    private static final String TYPE_ZIP = "zip";
+
     private static final String tag = "CacheManager";
     private static CacheManager instance;
 
-    private class Cache{
+    private class Cache {
         String content;
         File file;
-        boolean read;
-        boolean saved;
+        String type;
+        boolean isInMemory;
+        boolean isPersistent;
 
         Cache(){
             content = "{}";
             file = null;
-            read = false;
-            saved = false;
+            isInMemory = false;
+            isPersistent = false;
         }
+
+        public boolean isObject() {
+            return type.equals(TYPE_OBJECT);
+        }
+
+        public boolean isBitmap() {
+            return type.equals(TYPE_BITMAP);
+        }
+
+        public boolean isZip() {
+            return type.equals(TYPE_ZIP);
+        }
+
     }
 
-    private Map<String, File> bitmaps = new HashMap<>();
     private Map<String, Cache> map = new HashMap<>();
 
     private File cacheDir;
@@ -73,45 +81,29 @@ public class CacheManager {
 
         cacheDir = context.getCacheDir();
 
-        // collect bitmaps
-        FileFilter bitmapFilter = new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.getName().contains(".png");
-            }
-        };
-
-        File[] bitampFiles = cacheDir.listFiles(bitmapFilter);
-        int bitmapCount = bitampFiles.length;
-
-        for(int i=0;i<bitmapCount;i++) {
-            File file = bitampFiles[i];
-            String name = file.getName().replace(".png","");
-            Log.d(tag,"found bitmap = "+name);
-            bitmaps.put(name,file);
-        }
-
-        // everthing else should be json objects
-        FileFilter objectFilter = new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return !pathname.getName().contains(".png");
-            }
-        };
-        File[] files = cacheDir.listFiles(objectFilter);
+        File[] files = cacheDir.listFiles();
         int count = files.length;
 
         for(int i=0;i<count;i++) {
             File file = files[i];
             Cache cache = new Cache();
             cache.file = file;
-            String name  = file.getName();
-            Log.d(tag,"found object = "+name);
-            map.put(file.getName(), cache);
+            cache.type = MimeTypeMap.getFileExtensionFromUrl(file.toString());
+            cache.isPersistent = true;
+            cache.isInMemory = false;
+
+            String name = file.getName();
+            if(!cache.type.isEmpty()) {
+                name = name.replace("." + cache.type, "");
+            }
+            Log.d(tag,"found "+name);
+
+            map.put(name, cache);
         }
 
         buildObjectGson();
     }
+
 
     public static synchronized void initialize(Context context) {
         instance = new CacheManager(context);
@@ -132,6 +124,10 @@ public class CacheManager {
                 .create();
     }
 
+    public File getCacheDir() {
+        return cacheDir;
+    }
+
     public Gson getGson() {
         return objectGson;
     }
@@ -144,51 +140,42 @@ public class CacheManager {
         Log.i(tag,"remove "+key);
         if(map.containsKey(key)){
             File file = map.get(key).file;
-            file.delete();
+            if(file!=null){
+                file.delete();
+            }
             map.remove(key);
-        } else if(bitmaps.containsKey(key)){
-            File file = bitmaps.get(key);
-            file.delete();
-            bitmaps.remove(key);
         }
     }
 
     public void removeAll() {
         Log.i(tag,"removeAll");
-        for(Map.Entry<String,Cache> entry : map.entrySet()){
-            entry.getValue().file.delete();
+        for(Map.Entry<String,Cache> entry : map.entrySet()) {
+            File file = entry.getValue().file;
+            if(file!=null){
+                file.delete();
+            }
         }
         map.clear();
-        for(Map.Entry<String,File> entry : bitmaps.entrySet()){
-            entry.getValue().delete();
-        }
-        bitmaps.clear();
     }
 
     public void save(String key) {
-        if(map.containsKey(key)){
-            Cache cache = map.get(key);
-            if(cache.saved){
-               return;
-            }
-            boolean written = writeTextFile(cache.file,cache.content);
-            Log.i(tag,"key("+key+") save = "+written);
-            if(written){
-                cache.saved = true;
-            }
+        if(!map.containsKey(key)) {
+            return;
+        }
+        Cache cache = map.get(key);
+        if(!cache.isPersistent && cache.isObject()) {
+            cache.isPersistent =  FileUtil.writeTextFile(cache.file,cache.content);
+            Log.i(tag,"key("+key+") save = "+cache.isPersistent);
         }
     }
 
     public void saveAll() {
         Log.i(tag,"saveAll");
-        for(Map.Entry<String,Cache> entry : map.entrySet()){
+        for(Map.Entry<String,Cache> entry : map.entrySet()) {
             Cache cache = entry.getValue();
-            if(!cache.saved) {
-                boolean written = writeTextFile(cache.file, cache.content);
-                Log.i(tag,"key( "+entry.getKey()+") save = "+written);
-                if(written){
-                    cache.saved = true;
-                }
+            if(!cache.isPersistent && cache.isObject()) {
+                cache.isPersistent = FileUtil.writeTextFile(cache.file, cache.content);
+                Log.i(tag,"key( "+entry.getKey()+") save = "+cache.isPersistent);
             }
         }
     }
@@ -199,28 +186,30 @@ public class CacheManager {
             Log.i(tag,"invalid object, failed to store");
             return;
         }
+        Cache cache;
         if(!map.containsKey(key)){
             File file = new File(cacheDir, key);
             if(!file.exists()){
                 try {
                     file.createNewFile();
-                    writeTextFile(file,"{}");
                 } catch (IOException e) {
                     e.printStackTrace();
                     return;
                 }
             }
-            Cache cache_t = new Cache();
-            cache_t.file = file;
-            cache_t.read = true;
-            map.put(key,cache_t);
+            cache = new Cache();
+            cache.file = file;
+            cache.type = TYPE_OBJECT;
+            map.put(key,cache);
+        } else {
+            cache = map.get(key);
         }
 
-        Cache cache = map.get(key);
         String content = objectGson.toJson(object);
         if(!cache.content.equals(content)){
             cache.content = content;
-            cache.saved = false;
+            cache.isInMemory = false;
+            cache.isPersistent = false;
         }
     }
 
@@ -238,9 +227,9 @@ public class CacheManager {
             }
         }
         Cache cache = map.get(key);
-        if(!cache.read){
-            cache.content = readTextFile(cache.file);
-            cache.read = true;
+        if(!cache.isInMemory && cache.isObject()){
+            cache.content = FileUtil.readTextFile(cache.file);
+            cache.isInMemory = true;
         }
         return objectGson.fromJson(cache.content, clazz);
     }
@@ -250,9 +239,7 @@ public class CacheManager {
         if(map.containsKey(key)){
             return map.get(key).file;
         }
-        if(bitmaps.containsKey(key)){
-            return bitmaps.get(key);
-        }
+
         File file = new File(cacheDir, key);
         if(!file.exists()){
             try {
@@ -262,25 +249,28 @@ public class CacheManager {
                 return null;
             }
         }
-        Cache cache_t = new Cache();
-        cache_t.file = file;
-        cache_t.read = true;
-        map.put(key,cache_t);
-        return null;
+        return file;
     }
 
     public Bitmap getBitmap(String key) {
         Log.i(tag,"getBitmap("+key+")");
-        if(!bitmaps.containsKey(key)){
+        if(!map.containsKey(key)){
             return null;
         }
-        return readBitmap(bitmaps.get(key));
+        Cache cache = map.get(key);
+        if(!cache.isBitmap()) {
+            return null;
+        }
+        return FileUtil.readBitmap(cache.file);
     }
 
     public boolean putBitmap(String key, Bitmap bitmap, int quality) {
         Log.i(tag, "putBitmap(" + key + ")");
-        if (!bitmaps.containsKey(key)) {
-            File file = new File(cacheDir, key+".png");
+
+        Cache cache;
+
+        if (!map.containsKey(key)) {
+            File file = new File(cacheDir, key+"."+TYPE_BITMAP);
             if (!file.exists()) {
                 try {
                     file.createNewFile();
@@ -289,82 +279,22 @@ public class CacheManager {
                     return false;
                 }
             }
-            bitmaps.put(key, file);
+            cache = new Cache();
+            cache.file = file;
+            cache.type = TYPE_BITMAP;
+            map.put(key, cache);
+        } else {
+            cache = map.get(key);
         }
-        return writeBitmap(bitmaps.get(key), bitmap, quality);
+        return FileUtil.writeBitmap(cache.file, bitmap, quality);
     }
-
-    private String readTextFile(File file){
-        Log.i(tag,"readTextFile("+file.getName()+")");
-        StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String currentLine;
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                contentBuilder.append(currentLine).append("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "{}";
-        }
-        return contentBuilder.toString();
-    }
-
-    private boolean writeTextFile(File file, String string){
-        Log.i(tag,"writeTextFile("+file.getName()+")");
-        try {
-            RandomAccessFile stream = new RandomAccessFile(file, "rw");
-            stream.setLength(0);
-            FileChannel channel = stream.getChannel();
-            byte[] strBytes = string.getBytes();
-            ByteBuffer buffer = ByteBuffer.allocate(strBytes.length);
-            buffer.put(strBytes);
-            buffer.flip();
-            channel.write(buffer);
-            stream.close();
-            channel.close();
-        } catch (IOException e){
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    private Bitmap readBitmap(File file){
-        Log.i(tag,"readBitmap("+file.getName()+")");
-        String path =  file.getPath();
-        return BitmapFactory.decodeFile(path);
-    }
-
-    private boolean writeBitmap(File file, Bitmap bitmap, int quality){
-        Log.i(tag,"writeBitmap("+file.getName()+")");
-
-        FileOutputStream fileOutputStream = null;
-        boolean compressed = false;
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            compressed = bitmap.compress(Bitmap.CompressFormat.PNG, quality, fileOutputStream);
-            fileOutputStream.flush();
-            fileOutputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return compressed;
-    }
-
-
-
 
     private class UriAdapter extends TypeAdapter<Uri> {
         @Override
         public void write(JsonWriter out, Uri uri) throws IOException {
             if (uri != null) {
                 out.value(uri.toString());
-            }
-            else {
+            } else {
                 out.nullValue();
             }
         }
