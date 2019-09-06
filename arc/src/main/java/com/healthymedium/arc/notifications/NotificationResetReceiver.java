@@ -9,16 +9,23 @@ import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 
-public class NotificationRebootReceiver extends BroadcastReceiver {
+public class NotificationResetReceiver extends BroadcastReceiver {
 
-    static private final String tag = "NotificationRebootRecvr";
+    static private final String tag = "NotificationResetReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(tag,"onReceive");
-        if (!intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED)){
+
+        String action = intent.getAction();
+        boolean isUpdate = action.equals(Intent.ACTION_MY_PACKAGE_REPLACED);
+        boolean isReboot = action.equals(Intent.ACTION_BOOT_COMPLETED);
+
+        // if intent is not from either a reboot or an update, nope out
+        if (!(isReboot||isUpdate)){
             return;
         }
+
         NotificationManager.getInstance().scheduleAllNotifications();
         TestCycle cycle = Study.getCurrentTestCycle();
         if(cycle ==null){
