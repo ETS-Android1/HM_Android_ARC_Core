@@ -23,10 +23,6 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name="com.healthymedium.arc.notifications.NotificationRebootJob"
-            android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
             android:name="com.healthymedium.arc.heartbeat.HeartbeatJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
@@ -36,7 +32,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver android:name="com.healthymedium.arc.notifications.NotificationAlarmReceiver"/>
-        <receiver android:name="com.healthymedium.arc.notifications.NotificationRebootReceiver">
+        <receiver android:name="com.healthymedium.arc.notifications.NotificationResetReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
