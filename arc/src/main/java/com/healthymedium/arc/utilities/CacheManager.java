@@ -78,9 +78,13 @@ public class CacheManager {
     private Gson objectGson;
 
     private CacheManager(Context context) {
-
         cacheDir = context.getCacheDir();
+        resetCache();
+        buildObjectGson();
+    }
 
+    public void resetCache() {
+        map.clear();
         File[] files = cacheDir.listFiles();
         int count = files.length;
 
@@ -93,15 +97,13 @@ public class CacheManager {
             cache.isInMemory = false;
 
             String name = file.getName();
-            if(!cache.type.isEmpty()) {
+            if (!cache.type.isEmpty()) {
                 name = name.replace("." + cache.type, "");
             }
-            Log.d(tag,"found "+name);
+            Log.d(tag, "found " + name);
 
             map.put(name, cache);
         }
-
-        buildObjectGson();
     }
 
 
