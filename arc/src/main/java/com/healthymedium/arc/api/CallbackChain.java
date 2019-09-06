@@ -20,7 +20,7 @@ public class CallbackChain {
     Object persistentObject;
     Gson gson;
 
-    CallbackChain(Gson gson){
+    public CallbackChain(Gson gson){
         this.gson = gson;
     }
 
@@ -32,7 +32,7 @@ public class CallbackChain {
         persistentObject = object;
     }
 
-    boolean addLink(Call call){
+    public boolean addLink(Call call){
         return addLink(call,null);
     }
 
@@ -47,7 +47,7 @@ public class CallbackChain {
         return true;
     }
 
-    void execute(RestClient.Listener clientListener){
+    public void execute(RestClient.Listener clientListener){
         this.clientListener = clientListener;
         if(links.size()==0){
             Log.e(tag,"no calls to execute, aborting");
