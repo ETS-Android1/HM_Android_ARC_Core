@@ -131,13 +131,6 @@ public class RestClient <Api>{
             }
         });
 
-        uploadBehaviorMap.put(TestSchedule.class, new UploadBehavior() {
-            @Override
-            public Call callRequested(Object object, JsonObject json) {
-                return getService().submitTestSchedule(Device.getId(),json);
-            }
-        });
-
         uploadBehaviorMap.put(WakeSleepSchedule.class, new UploadBehavior() {
             @Override
             public Call callRequested(Object object, JsonObject json) {
