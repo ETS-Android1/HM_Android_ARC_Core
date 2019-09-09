@@ -216,6 +216,7 @@ public class GridTutorial extends Tutorial {
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
 
         progressView = view.findViewById(R.id.progressView);
+        progressView.setProgress(5,false);
         progressIncrement = 17;
 
         closeButton = view.findViewById(R.id.closeButton);
