@@ -79,11 +79,31 @@ public class Study{
         return true;
     }
 
-    public boolean registerRestApi(Class clientClass){
-        return registerRestApi(clientClass, null,false);
+    public boolean registerRestApi(Class clientClass) {
+        return registerRestApi(clientClass,false);
     }
 
-    public boolean registerRestApi(Class clientClass,Class apiClass){
+    public boolean registerRestApi(Class clientClass, boolean overwrite){
+        if(restClient!=null && !overwrite){
+            return false;
+        }
+        if(clientClass==null){
+            return false;
+        }
+        if(!RestClient.class.isAssignableFrom(clientClass)){
+            return false;
+        }
+        try {
+            restClient = (RestClient) clientClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean registerRestApi(Class clientClass, Class apiClass){
         return registerRestApi(clientClass, apiClass,false);
     }
 
