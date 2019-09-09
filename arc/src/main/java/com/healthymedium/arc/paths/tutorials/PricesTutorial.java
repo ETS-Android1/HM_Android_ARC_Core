@@ -79,6 +79,7 @@ public class PricesTutorial extends Tutorial {
         buttonNo.setCheckable(false);
 
         progressView = view.findViewById(R.id.progressView);
+        progressView.setProgress(5,false);
         progressIncrement = 25;
 
         closeButton = view.findViewById(R.id.closeButton);
