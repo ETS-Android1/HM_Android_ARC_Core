@@ -97,7 +97,8 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom2.setVisibility(View.GONE);
 
         progressView = view.findViewById(R.id.progressView);
-        progressIncrement = 17;
+        progressView.setProgress(5,false);
+        progressIncrement = 34;
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
@@ -231,7 +232,6 @@ public class SymbolTutorial extends Tutorial {
             public void onClick(View view) {
                 buttonTop2Highlight.dismiss();
                 buttonTop2Hint.dismiss();
-                incrementProgress();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -264,7 +264,6 @@ public class SymbolTutorial extends Tutorial {
             public void onClick(View view) {
                 topSymbolsHighlight.dismiss();
                 topSymbolsHint.dismiss();
-                incrementProgress();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -298,7 +297,6 @@ public class SymbolTutorial extends Tutorial {
             public void onClick(View view) {
                 bottomSymbolsHighlight.dismiss();
                 bottomSymbolsHint.dismiss();
-                incrementProgress();
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
