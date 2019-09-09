@@ -47,6 +47,13 @@ public class CallbackChain {
         return true;
     }
 
+    public boolean addLink(ShallowListener listener){
+        ShallowLink link = new ShallowLink();
+        link.listener = listener;
+        links.add(link);
+        return true;
+    }
+
     public void execute(RestClient.Listener clientListener){
         this.clientListener = clientListener;
         if(links.size()==0){
@@ -57,7 +64,7 @@ public class CallbackChain {
         }
         Log.i(tag,"starting first link");
         links.get(0).call.enqueue(callback);
-    }
+        }
 
     private Callback callback = new Callback<ResponseBody>() {
         @Override
@@ -91,21 +98,7 @@ public class CallbackChain {
                 return;
             }
 
-            if(links.size()==0){
-                Log.i(tag,"stopping at the end of the chain");
-                if(clientListener!=null) {
-                    clientListener.onSuccess(response);
-                }
-                return;
-            }
-
-            if(links.get(0).call==null){
-                Log.e(tag,"call is null, aborting");
-                return;
-            }
-
-            Log.i(tag,"starting new link");
-            links.get(0).call.enqueue(this);
+            handleTail(response);
         }
 
         @Override
@@ -139,34 +132,55 @@ public class CallbackChain {
                 return;
             }
 
-            if(links.size()==0){
-                Log.i(tag,"stopping at the end of the chain");
-                if(clientListener!=null) {
-                    clientListener.onSuccess(response);
-                }
-                return;
-            }
-
-            if(links.get(0).call==null){
-                Log.e(tag,"call is null, aborting");
-                if(clientListener!=null) {
-                    clientListener.onFailure(response);
-                }
-                return;
-            }
-
-            Log.i(tag,"starting new link");
-            links.get(0).call.enqueue(this);
+            handleTail(response);
         }
     };
+
+    private void handleTail(RestResponse response) {
+        Log.i(tag,"handling tail");
+
+        if(links.size()==0) {
+            Log.i(tag,"stopping at the end of the chain");
+            if(clientListener!=null) {
+                clientListener.onSuccess(response);
+            }
+            return;
+        }
+
+        if(links.get(0) instanceof ShallowLink) {
+            Log.i(tag,"executing shadow link");
+            ((ShallowLink)links.remove(0)).listener.onExecute(CallbackChain.this);
+            handleTail(response);
+            return;
+        }
+
+        if(links.get(0).call==null) {
+            Log.e(tag,"call is null, aborting");
+            if(clientListener!=null) {
+                clientListener.onFailure(response);
+            }
+            return;
+        }
+
+        Log.i(tag,"starting new link");
+        links.get(0).call.enqueue(callback);
+    }
 
     private class Link {
         Call call;
         Listener listener;
     }
 
-    public interface Listener{
+    public interface Listener {
         boolean onResponse(CallbackChain chain, RestResponse response);
         boolean onFailure(CallbackChain chain, RestResponse response);
+    }
+
+    private class ShallowLink extends Link {
+        ShallowListener listener;
+    }
+
+    public interface ShallowListener {
+        void onExecute(CallbackChain chain);
     }
 }
