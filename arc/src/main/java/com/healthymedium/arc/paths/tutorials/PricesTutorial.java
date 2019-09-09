@@ -143,35 +143,12 @@ public class PricesTutorial extends Tutorial {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        final Runnable next = new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 setFirstPricesCompare();
             }
-        };
-
-        if (!Hints.hasBeenShown(HINT_PROGRESS_TUTORIAL)) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    showProgressTutorial(HINT_PROGRESS_TUTORIAL, next);
-                }
-            }, 1200);
-        } else if(!Hints.hasBeenShown(HINT_CLOSE_TUTORIAL)) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    showCloseTutorial(HINT_CLOSE_TUTORIAL, next);
-                }
-            }, 1200);
-        } else {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setFirstPricesCompare();
-                }
-            }, 1200);
-        }
+        }, 1200);
 
         new Handler().postDelayed(new Runnable() {
             @Override
