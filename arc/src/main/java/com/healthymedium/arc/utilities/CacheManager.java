@@ -238,6 +238,12 @@ public class CacheManager {
 
     public File getFile(String key) {
         Log.i(tag,"getFile("+key+")");
+
+        String type = MimeTypeMap.getFileExtensionFromUrl(key);
+        if(!type.isEmpty()) {
+            key = key.replace("." + type, "");
+        }
+
         if(map.containsKey(key)){
             return map.get(key).file;
         }
