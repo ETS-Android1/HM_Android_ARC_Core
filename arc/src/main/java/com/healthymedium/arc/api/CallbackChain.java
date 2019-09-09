@@ -36,7 +36,7 @@ public class CallbackChain {
         return addLink(call,null);
     }
 
-    boolean addLink(Call call, Listener listener){
+    public boolean addLink(Call call, Listener listener){
         if(call==null){
             return false;
         }
