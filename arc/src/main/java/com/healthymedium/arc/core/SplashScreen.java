@@ -1,5 +1,6 @@
 package com.healthymedium.arc.core;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -20,19 +21,28 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
+@SuppressLint("ValidFragment")
 public class SplashScreen extends BaseFragment {
 
     boolean paused = false;
     boolean ready = false;
     boolean skipSegment = false;
+    boolean visible = true;
 
     public SplashScreen() {
+    }
+
+    public SplashScreen(boolean visible) {
+        this.visible = visible;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.core_fragment_splash, container, false);
+        if(!visible) {
+            view.setVisibility(View.INVISIBLE);
+        }
         AsyncLoader loader = new AsyncLoader();
         loader.execute();
         return view;
