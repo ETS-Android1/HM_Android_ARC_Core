@@ -156,6 +156,7 @@ public class GridTutorial extends Tutorial {
             recallHint.show();
 
             pulsateGridItem.addPulsingTarget(image33);
+            pulsateGridItem.addTarget(progressBar);
             pulsateGridItem.show();
         }
     };
@@ -414,6 +415,7 @@ public class GridTutorial extends Tutorial {
             @Override
             public void run() {
                 pulsateF.addPulsingTarget(tapThisF,22);
+                pulsateF.addTarget(progressBar);
                 pulsateF.show();
 
                 tapThisFHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf1));
@@ -655,6 +657,7 @@ public class GridTutorial extends Tutorial {
     private void remindMeHighlights(int maxTargets) {
         int targetCount = 0;
         remindMeTapHighlight = new HintHighlighter(getActivity());
+        remindMeTapHighlight.addTarget(progressBar);
 
         if (!image33Selected) {
             targetCount++;

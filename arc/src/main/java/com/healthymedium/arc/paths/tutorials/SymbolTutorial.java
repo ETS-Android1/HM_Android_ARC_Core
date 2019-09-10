@@ -224,6 +224,7 @@ public class SymbolTutorial extends Tutorial {
     // Explains what a tile is
     private void stepMiddleTopTile() {
         buttonTop2Highlight.addTarget(buttonTop2, 10, 10);
+        buttonTop2Highlight.addTarget(progressBar);
         buttonTop2Highlight.show();
 
         buttonTop2Hint.setText(ViewUtil.getString(R.string.popup_tutorial_tile));
@@ -256,6 +257,7 @@ public class SymbolTutorial extends Tutorial {
         buttonTop3.setVisibility(View.VISIBLE);
 
         topSymbolsHighlight.addTarget(topSymbolsInnerLayout, 10, 0);
+        topSymbolsHighlight.addTarget(progressBar);
         topSymbolsHighlight.show();
 
         topSymbolsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tilestop));
@@ -289,6 +291,7 @@ public class SymbolTutorial extends Tutorial {
         textView20.setVisibility(View.VISIBLE);
 
         bottomSymbolsHighlight.addTarget(bottomSymbolsButtons, 10, 0);
+        bottomSymbolsHighlight.addTarget(progressBar);
         bottomSymbolsHighlight.show();
 
         bottomSymbolsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tilesbottom));
@@ -340,9 +343,11 @@ public class SymbolTutorial extends Tutorial {
 
         initialTilesOutline.addTarget(buttonBottom1,8);
         initialTilesOutline.addTarget(buttonTop3,8);
+        initialTilesOutline.addTarget(progressBar);
 
         initialTilesPulsate.addPulsingTarget(buttonBottom1,8);
         initialTilesPulsate.addTarget(buttonTop3,8);
+        initialTilesPulsate.addTarget(progressBar);
 
         runnableTileOutline = new Runnable() {
             @Override
@@ -426,9 +431,11 @@ public class SymbolTutorial extends Tutorial {
 
         secondTilesOutline.addTarget(buttonBottom2,8);
         secondTilesOutline.addTarget(buttonTop2,8);
+        secondTilesOutline.addTarget(progressBar);
 
         secondTilesPulsate.addPulsingTarget(buttonBottom2,8);
         secondTilesPulsate.addTarget(buttonTop2,8);
+        secondTilesPulsate.addTarget(progressBar);
 
         runnableTileOutline = new Runnable() {
             @Override
@@ -511,9 +518,11 @@ public class SymbolTutorial extends Tutorial {
 
         finalTilesOutline.addTarget(buttonBottom1,8);
         finalTilesOutline.addTarget(buttonTop1,8);
+        finalTilesOutline.addTarget(progressBar);
 
         finalTilesPulsate.addPulsingTarget(buttonBottom1,8);
         finalTilesPulsate.addTarget(buttonTop1,8);
+        finalTilesPulsate.addTarget(progressBar);
 
         runnableTileOutline = new Runnable() {
             @Override

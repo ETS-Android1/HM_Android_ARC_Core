@@ -195,6 +195,7 @@ public class PricesTutorial extends Tutorial {
         textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
 
         firstPriceContainerHighlight.addTarget(priceContainer, 10);
+        firstPriceContainerHighlight.addTarget(progressBar);
         firstPriceContainerHighlight.show();
 
         initialViewHint.setText(ViewUtil.getString(R.string.popup_tutorial_price_intro));
@@ -305,6 +306,7 @@ public class PricesTutorial extends Tutorial {
             @Override
             public void run() {
                 secondPriceContainerHighlight.addTarget(priceContainer, 10);
+                secondPriceContainerHighlight.addTarget(progressBar);
                 secondPriceContainerHighlight.show();
 
                 secondPriceHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose1));
@@ -415,6 +417,7 @@ public class PricesTutorial extends Tutorial {
             @Override
             public void run() {
                 firstMatchContainerHighlight.addTarget(priceContainer, 10);
+                firstMatchContainerHighlight.addTarget(progressBar);
                 firstMatchContainerHighlight.show();
 
                 firstMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_recall));
@@ -524,6 +527,7 @@ public class PricesTutorial extends Tutorial {
             @Override
             public void run() {
                 secondMatchContainerHighlight.addTarget(priceContainer, 10);
+                secondMatchContainerHighlight.addTarget(progressBar);
                 secondMatchContainerHighlight.show();
 
                 secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose2));
