@@ -9,6 +9,7 @@ import com.healthymedium.arc.api.models.EarningOverview;
 
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 public class Earnings {
@@ -167,6 +168,9 @@ public class Earnings {
                 detailsRefresh = 1;
                 details = response.getOptionalAs("earnings",EarningDetails.class);
                 detailsUpdateTime = DateTime.now();
+                if(details.cycles==null) {
+                    details.cycles = new ArrayList<>();
+                }
                 if(detailsListener!=null){
                     detailsListener.onSuccess();
                     detailsListener = null;
