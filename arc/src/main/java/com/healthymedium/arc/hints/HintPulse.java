@@ -49,7 +49,9 @@ public class HintPulse extends View{
         x = locations[0];
         y = locations[1];
 
-        boolean isCircle = radius==width/2 || radius==height/2;
+        boolean radiusMatchesWidth = isApproximatelyEqual(radius,width/2,20);
+        boolean radiusMatchesHeight = isApproximatelyEqual(radius,height/2,20);
+        boolean isCircle = radiusMatchesWidth || radiusMatchesHeight;
         if(isCircle){
             int offset = strokeWidth/2;
             x -= offset;
@@ -69,6 +71,10 @@ public class HintPulse extends View{
             canvas.drawRoundRect(rect, radius, radius, paint);
         }
 
+    }
+
+    private boolean isApproximatelyEqual(int val0, int val1, int variance){
+        return (Math.abs(val0-val1) < variance);
     }
 
     public void setRadius(int dp) {

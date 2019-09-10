@@ -59,7 +59,10 @@ public class HintHighlightTarget extends View {
 
         path = new Path();
 
-        if(radius==width/2 || radius==height/2){
+        boolean radiusMatchesWidth = isApproximatelyEqual(radius,width/2,20);
+        boolean radiusMatchesHeight = isApproximatelyEqual(radius,height/2,20);
+
+        if(radiusMatchesWidth || radiusMatchesHeight){
             path.addCircle(x+width/2,y+height/2, radius, Path.Direction.CW);
         } else {
             path.addRoundRect(rect, radius, radius, Path.Direction.CW);
@@ -69,6 +72,10 @@ public class HintHighlightTarget extends View {
             pulse.setRadius(ViewUtil.pxToDp(radius));
             pulse.process();
         }
+    }
+
+    private boolean isApproximatelyEqual(int val0, int val1, int variance){
+        return (Math.abs(val0-val1) < variance);
     }
 
     public void setRadius(int dp) {
