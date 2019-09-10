@@ -236,4 +236,30 @@ public class Participant {
         return null;
     }
 
+    public TestCycle getCycleBySessionId(int id) {
+        for(TestCycle cycle : state.testCycles) {
+            for(TestDay day : cycle.getTestDays()) {
+                for(TestSession session : day.getTestSessions()) {
+                    if(session.getId()==id){
+                        return cycle;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public TestDay getDayBySessionId(int id) {
+        for(TestCycle cycle : state.testCycles) {
+            for(TestDay day : cycle.getTestDays()) {
+                for(TestSession session : day.getTestSessions()) {
+                    if(session.getId()==id){
+                        return day;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 }

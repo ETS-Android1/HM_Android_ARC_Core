@@ -5,6 +5,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -34,6 +35,7 @@ public class TestTake extends NotificationType {
 
         Participant participant = Study.getParticipant();
         TestSession session = participant.getSessionById(node.id);
+        TestCycle cycle = participant.getCycleBySessionId(node.id);
 
         if(session==null) {
             return "";
@@ -67,7 +69,7 @@ public class TestTake extends NotificationType {
         }
 
         // if last of cycle
-        else if (session.getIndex() == 3 && session.getDayIndex() == 6) {
+        else if (session.getIndex() == 3 && session.getDayIndex() == cycle.getNumberOfTestDays()-1) {
             body = ViewUtil.getString(R.string.notification4_lastday);
         }
 
