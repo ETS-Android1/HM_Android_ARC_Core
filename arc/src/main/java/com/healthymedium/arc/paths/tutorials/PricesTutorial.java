@@ -157,6 +157,7 @@ public class PricesTutorial extends Tutorial {
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        closeButton.setEnabled(false);
                         handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
 
                         welcomeHighlight.dismiss();

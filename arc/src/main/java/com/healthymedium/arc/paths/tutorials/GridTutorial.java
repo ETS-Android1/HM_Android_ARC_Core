@@ -304,6 +304,7 @@ public class GridTutorial extends Tutorial {
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        closeButton.setEnabled(false);
                         welcomeHighlight.dismiss();
                         welcomeHint.dismiss();
 

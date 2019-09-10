@@ -181,6 +181,7 @@ public class SymbolTutorial extends Tutorial {
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        closeButton.setEnabled(false);
                         handlerOutline.removeCallbacks(runnableTileOutline);
                         handlerPulsate.removeCallbacks(runnableTilePulsate);
                         handlerCoachmark.removeCallbacks(runnableCoachmark);
