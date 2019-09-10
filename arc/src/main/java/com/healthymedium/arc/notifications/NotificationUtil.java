@@ -6,6 +6,7 @@ import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.Build;
@@ -137,7 +138,9 @@ public class NotificationUtil {
     public static Notification buildNotification(Context context, NotificationNode node, NotificationType type) {
         Log.i(tag,"buildNotification(channel=\""+type.getChannelName()+"\")");
 
-        Intent main = new Intent(context, MainActivity.class);
+        PackageManager packageManager = context.getPackageManager();
+        String packageName = context.getPackageName();
+        Intent main = packageManager.getLaunchIntentForPackage(packageName);
 
         if(type.hasExtra()){
             main.putExtra(type.getExtra(), true);

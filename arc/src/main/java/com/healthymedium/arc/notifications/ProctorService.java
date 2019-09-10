@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
@@ -107,7 +108,10 @@ public class ProctorService extends Service {
 
         NotificationUtil.createChannel(this,NotificationTypes.TestProctor);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        PackageManager packageManager = getPackageManager();
+        String packageName = getPackageName();
+        Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationTypes.TestProctor.getChannelId())
