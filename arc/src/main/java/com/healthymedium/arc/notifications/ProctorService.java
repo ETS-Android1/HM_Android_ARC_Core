@@ -84,6 +84,7 @@ public class ProctorService extends Service {
                 break;
 
             case ACTION_REFRESH_DATA:
+                startForegroundService();
                 if(serviceHandler==null) {
                     serviceHandler = new ProctorServiceHandler(listener);
                 } else {
