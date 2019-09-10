@@ -60,7 +60,9 @@ public class EarningsDetailsScreen extends BaseFragment {
                         if(refreshLayout!=null) {
                             refreshLayout.setRefreshing(false);
                             Study.getParticipant().save();
-                            populateViews();
+                            if(getContext()!=null) {
+                                populateViews();
+                            }
                         }
                     }
 
