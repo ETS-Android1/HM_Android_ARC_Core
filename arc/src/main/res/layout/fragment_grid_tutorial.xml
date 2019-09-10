@@ -215,7 +215,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -224,7 +224,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -233,7 +233,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -242,7 +242,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -252,7 +252,7 @@
 
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -262,7 +262,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -272,7 +272,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -281,7 +281,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -290,7 +290,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -299,7 +299,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -308,7 +308,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -317,7 +317,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -328,7 +328,7 @@
 
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -337,7 +337,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -346,7 +346,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -355,7 +355,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -364,7 +364,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -373,7 +373,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -382,7 +382,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/tapThisF"
@@ -392,7 +392,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -401,7 +401,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -410,7 +410,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -419,7 +419,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -428,7 +428,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -437,7 +437,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -446,7 +446,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -455,7 +455,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -464,7 +464,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -473,7 +473,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -482,7 +482,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -491,7 +491,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -500,7 +500,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -509,7 +509,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -518,7 +518,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -527,7 +527,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -536,7 +536,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -545,7 +545,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -554,7 +554,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -563,7 +563,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -572,7 +572,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -581,7 +581,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -590,7 +590,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -599,7 +599,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -608,7 +608,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -617,7 +617,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -626,7 +626,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -635,7 +635,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -644,7 +644,7 @@
                 android:text="F"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -653,7 +653,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -662,7 +662,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -671,7 +671,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -680,7 +680,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:layout_width="44dp"
@@ -689,7 +689,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView23"
@@ -699,7 +699,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView24"
@@ -709,7 +709,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView25"
@@ -719,7 +719,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView26"
@@ -729,7 +729,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView27"
@@ -739,7 +739,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView28"
@@ -750,7 +750,7 @@
 
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
             <TextView
                 android:id="@+id/textView50"
@@ -760,7 +760,7 @@
                 android:text="E"
                 android:textAllCaps="true"
                 android:textColor="@color/gridSelected"
-                android:textSize="36dp" />
+                android:textSize="32dp" />
 
         </GridLayout>
 
