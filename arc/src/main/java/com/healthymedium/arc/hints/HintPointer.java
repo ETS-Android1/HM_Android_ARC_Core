@@ -251,9 +251,17 @@ public class HintPointer extends LinearLayout {
     }
 
 
-    public void addButton(String text, OnClickListener listener) {
+    public void addButton(String text, final OnClickListener listener) {
         textViewButton.setText(Html.fromHtml(text));
-        textViewButton.setOnClickListener(listener);
+        textViewButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setEnabled(false);
+                if(listener!=null) {
+                    listener.onClick(v);
+                }
+            }
+        });
         border.setVisibility(VISIBLE);
         textViewButton.setVisibility(VISIBLE);
     }
