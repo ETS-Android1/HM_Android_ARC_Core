@@ -154,7 +154,6 @@ public class TestInfoTemplate extends BaseFragment {
         textViewTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getMainActivity().getWindow().setBackgroundDrawableResource(R.color.secondary);
                 if(tutorialHint!=null) {
                     tutorialHint.dismiss();
                 }
@@ -184,17 +183,6 @@ public class TestInfoTemplate extends BaseFragment {
         setupDebug(view,R.id.textViewHeader);
 
         return view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getMainActivity().getWindow().setBackgroundDrawableResource(R.drawable.core_background);
-            }
-        }, 1000);
     }
 
     private void enableButton() {
