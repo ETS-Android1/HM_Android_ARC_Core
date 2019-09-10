@@ -283,6 +283,7 @@ public class HintPointer extends LinearLayout {
         if(getParent()!=null) {
            return; // single use only
         }
+        textViewButton.setEnabled(true);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
