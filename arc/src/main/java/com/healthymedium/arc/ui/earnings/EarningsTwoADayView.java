@@ -84,7 +84,11 @@ public class EarningsTwoADayView extends LinearLayout {
 
             int progress = 0;
             if(i<size){
-                progress = components.get(i);
+                int testCount = components.get(i);
+                progress = 50*testCount;
+                if(progress>100) {
+                    progress = 100;
+                }
             }
 
             DayView dayView = new DayView(context,bgColor,progress,abbr);
