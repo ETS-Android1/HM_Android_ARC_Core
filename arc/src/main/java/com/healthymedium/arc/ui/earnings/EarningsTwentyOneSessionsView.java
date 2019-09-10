@@ -106,11 +106,12 @@ public class EarningsTwentyOneSessionsView extends View {
         if(value<0){
             value = 0;
         }
-        if (value>21){
-            value = 21;
+        if (value>100){
+            value = 100;
         }
-        progress = ((float)value/21);
-        text = String.valueOf(value);
+        progress = value/100f;
+        int testCount = (int)(progress*21);
+        text = String.valueOf(testCount);
         invalidate();
     }
 
