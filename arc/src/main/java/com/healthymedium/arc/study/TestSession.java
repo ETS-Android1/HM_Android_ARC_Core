@@ -135,7 +135,7 @@ public class TestSession {
     public void addTestData(BaseTest data) {
         Log.i("TestSession","addTestData("+data.getClass().getName()+")");
         testData.add(data);
-        testPercentages.add(data.getProgress());
+        testPercentages.add(data.getProgress(finishedSession));
     }
 
     public boolean isOver() {

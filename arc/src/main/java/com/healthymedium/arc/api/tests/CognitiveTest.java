@@ -21,7 +21,11 @@ public class CognitiveTest extends BaseTest {
     }
 
     @Override
-    public int getProgress(){
+    public int getProgress(boolean testCompleted){
+        if(testCompleted){
+            return 100;
+        }
+
         int progress = 0;
         int divisor = 4;
 

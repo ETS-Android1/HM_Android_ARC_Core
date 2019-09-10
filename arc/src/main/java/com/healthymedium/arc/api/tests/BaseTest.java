@@ -37,7 +37,7 @@ public class BaseTest {
         }
     }
 
-    public int getProgress(){
+    public int getProgress(boolean testCompleted){
         return 0;
     }
 
