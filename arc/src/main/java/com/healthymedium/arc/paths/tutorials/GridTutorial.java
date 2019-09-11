@@ -187,7 +187,6 @@ public class GridTutorial extends Tutorial {
                     view.setSelectable(false);
 
                     selectedCount++;
-                    incrementProgress();
 
                     firstGridReminderHandler.removeCallbacks(firstGridReminderRunnable);
                     remindMeHandler.removeCallbacks(remindMeRunnable);
@@ -199,6 +198,7 @@ public class GridTutorial extends Tutorial {
 
                     hideGridImages();
                     if (selectedCount == 3) {
+                        incrementProgress();
                         setGridsSelectable(false);
                         fadeOutView(gridLayout);
                         fadeOutView(textViewInstructions);
@@ -218,7 +218,7 @@ public class GridTutorial extends Tutorial {
 
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(5,false);
-        progressIncrement = 17;
+        progressIncrement = 25;
 
         closeButton = view.findViewById(R.id.closeButton);
         checkmark = view.findViewById(R.id.checkmark);
