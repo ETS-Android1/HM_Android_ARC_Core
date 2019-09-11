@@ -587,7 +587,7 @@ public class RestClient <Api>{
         });
     }
 
-    CallbackChain.Listener contactListener = new CallbackChain.Listener() {
+    protected CallbackChain.Listener contactListener = new CallbackChain.Listener() {
         @Override
         public boolean onResponse(CallbackChain chain, RestResponse response) {
             if(response.successful) {

@@ -112,7 +112,7 @@ public class Scheduler {
 
     }
 
-    protected void initializeCycles(DateTime now, Participant participant) {
+    public void initializeCycles(DateTime now, Participant participant) {
         List<TestCycle> cycles = participant.getState().testCycles;
         DateTime midnight = JodaUtil.setMidnight(now);
 
