@@ -5,7 +5,11 @@ import com.healthymedium.arc.utilities.Log;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -15,21 +19,28 @@ public class CallbackChain {
 
     private static final String tag = "CallbackChain";
 
-    List<Link> links = new ArrayList<>();
+    AtomicBoolean stopped = new AtomicBoolean(false);
+
+    
+    List<Link> links = Collections.synchronizedList(new ArrayList<Link>());
     RestClient.Listener clientListener;
-    Object persistentObject;
+
+    AtomicReference<Object> cache = new AtomicReference<>();
+    Object cachedObject = new Object();
+
     Gson gson;
 
     public CallbackChain(Gson gson){
         this.gson = gson;
+        cache.set(cachedObject);
     }
 
-    public Object getPersistentObject(){
-        return persistentObject;
+    public Object getCachedObject(){
+        return cache.get();
     }
 
-    public void setPersistentObject(Object object){
-        persistentObject = object;
+    public void setCachedObject(Object object){
+        cache.compareAndSet(cachedObject,object);
     }
 
     public boolean addLink(Call call){
@@ -64,7 +75,13 @@ public class CallbackChain {
         }
         Log.i(tag,"starting first link");
         links.get(0).call.enqueue(callback);
+    }
+
+    public void stop() {
+        if(links.size()>0){
+            stopped.compareAndSet(false,true);
         }
+    }
 
     private Callback callback = new Callback<ResponseBody>() {
         @Override
@@ -144,6 +161,12 @@ public class CallbackChain {
             if(clientListener!=null) {
                 clientListener.onSuccess(response);
             }
+            return;
+        }
+
+        if(stopped.get()){
+            Log.i(tag,"stopping as requested");
+            stopped.compareAndSet(true,false);
             return;
         }
 
