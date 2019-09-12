@@ -113,6 +113,9 @@ public class TestCycle {
     }
 
     public boolean isOver() {
+        if(getActualEndDate().isBeforeNow()) {
+            return true;
+        }
         if(days.size()==0) {
             return true;
         }
