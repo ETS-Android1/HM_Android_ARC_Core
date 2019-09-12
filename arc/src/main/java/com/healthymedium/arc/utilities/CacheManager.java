@@ -140,6 +140,7 @@ public class CacheManager {
 
     public void remove(String key) {
         Log.i(tag,"remove "+key);
+        key = sanitizeKey(key);
         if(map.containsKey(key)){
             File file = map.get(key).file;
             if(file!=null){
@@ -161,6 +162,7 @@ public class CacheManager {
     }
 
     public void save(String key) {
+        key = sanitizeKey(key);
         if(!map.containsKey(key)) {
             return;
         }
@@ -238,12 +240,7 @@ public class CacheManager {
 
     public File getFile(String key) {
         Log.i(tag,"getFile("+key+")");
-
-        String type = MimeTypeMap.getFileExtensionFromUrl(key);
-        if(!type.isEmpty()) {
-            key = key.replace("." + type, "");
-        }
-
+        key = sanitizeKey(key);
         if(map.containsKey(key)){
             return map.get(key).file;
         }
@@ -262,6 +259,7 @@ public class CacheManager {
 
     public Bitmap getBitmap(String key) {
         Log.i(tag,"getBitmap("+key+")");
+        key = sanitizeKey(key);
         if(!map.containsKey(key)){
             return null;
         }
@@ -274,9 +272,8 @@ public class CacheManager {
 
     public boolean putBitmap(String key, Bitmap bitmap, int quality) {
         Log.i(tag, "putBitmap(" + key + ")");
-
+        key = sanitizeKey(key);
         Cache cache;
-
         if (!map.containsKey(key)) {
             File file = new File(cacheDir, key+"."+TYPE_BITMAP);
             if (!file.exists()) {
@@ -295,6 +292,14 @@ public class CacheManager {
             cache = map.get(key);
         }
         return FileUtil.writeBitmap(cache.file, bitmap, quality);
+    }
+
+    private String sanitizeKey(String key) {
+        String type = MimeTypeMap.getFileExtensionFromUrl(key);
+        if(!type.isEmpty()) {
+            key = key.replace("." + type, "");
+        }
+        return key;
     }
 
     private class UriAdapter extends TypeAdapter<Uri> {
