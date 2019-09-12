@@ -67,14 +67,10 @@ public class CallbackChain {
 
     public void execute(RestClient.Listener clientListener){
         this.clientListener = clientListener;
-        if(links.size()==0){
-            Log.e(tag,"no calls to execute, aborting");
-        }
-        if(links.get(0).call==null){
-            Log.e(tag,"call is null, aborting");
-        }
-        Log.i(tag,"starting first link");
-        links.get(0).call.enqueue(callback);
+        RestResponse response = new RestResponse();
+        response.successful = true;
+        response.code = 200;
+        handleTail(response);
     }
 
     public void stop() {
