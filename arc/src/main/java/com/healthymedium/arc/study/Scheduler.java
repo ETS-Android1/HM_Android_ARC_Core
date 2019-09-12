@@ -241,7 +241,8 @@ public class Scheduler {
 
     public ParticipantState getExistingParticipantState(ExistingData existingData) {
 
-        ParticipantState state = Study.getParticipant().getState();
+        Participant participant = Study.getParticipant();
+        ParticipantState state = participant.getState();
         state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
 
         DateTime startDate = JodaUtil.fromUtcDouble(existingData.first_test.session_date);
@@ -253,7 +254,6 @@ public class Scheduler {
 
         int index = 0;
         int last = scheduleSessions.size()-1;
-        int lastCycle = 0;
 
         for(TestCycle cycle : state.testCycles ) {
 
@@ -272,10 +272,6 @@ public class Scheduler {
                     session.setPrescribedTime(prescribedDateTime);
                     session.setScheduledDate(scheduledDateTime.toLocalDate());
 
-                    if(existingData.latest_test.session==session.getId()){
-                        lastCycle = cycleId;
-                    }
-
                     Log.i(tag,"cycleIndex = "+cycleId+", testIndex = "+sessionId+" - "+scheduledDateTime.toString());
 
                     index++;
@@ -292,14 +288,15 @@ public class Scheduler {
             cycle.setActualEndDate(cycle.getTestSession(lastSession).getScheduledTime().plusDays(1));
         }
 
-        SessionInfo latestSession = existingData.latest_test;
-        state.currentTestCycle = lastCycle;
-        state.currentTestDay = latestSession.day;
-        state.currentTestSession = latestSession.session;
-        state.currentTestSession++;
+        int sessionId = existingData.latest_test.session_id;
+        TestCycle currentCycle = participant.getCycleBySessionId(sessionId);
+        TestDay currentDay = participant.getDayBySessionId(sessionId);
+        TestSession currentSession = participant.getSessionById(sessionId);
 
-        TestCycle currentCycle = state.testCycles.get(state.currentTestCycle);
-        TestDay currentDay = currentCycle.getTestDay(state.currentTestDay);
+        state.currentTestCycle = currentCycle.getId();
+        state.currentTestDay = currentDay.getDayIndex();
+        state.currentTestSession = currentSession.getIndex();
+        state.currentTestSession++;
 
         if(currentDay.getNumberOfTests()<=state.currentTestSession){
             state.currentTestSession = 0;
