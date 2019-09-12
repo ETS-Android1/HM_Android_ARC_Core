@@ -22,7 +22,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class PricesTutorial extends Tutorial {
 
-    protected static final String HINT_PREVENT_TUTORIAL_CLOSE_PRICES = "HINT_PREVENT_TUTORIAL_CLOSE_PRICES";
+    public static final String HINT_PREVENT_TUTORIAL_CLOSE_PRICES = "HINT_PREVENT_TUTORIAL_CLOSE_PRICES";
 
     Runnable runnableWhatDoYouThink;
     Handler handlerWhatDoYouThink = new Handler();

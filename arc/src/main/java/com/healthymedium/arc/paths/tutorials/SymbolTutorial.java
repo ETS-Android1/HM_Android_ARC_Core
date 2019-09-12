@@ -22,7 +22,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class SymbolTutorial extends Tutorial {
 
-    protected static final String HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS = "HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS";
+    public static final String HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS = "HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS";
 
     final Handler handlerOutline = new Handler();
     final Handler handlerPulsate = new Handler();

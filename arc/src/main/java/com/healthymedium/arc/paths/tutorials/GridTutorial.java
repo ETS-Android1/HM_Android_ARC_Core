@@ -28,7 +28,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class GridTutorial extends Tutorial {
 
-    protected static final String HINT_PREVENT_TUTORIAL_CLOSE_GRIDS = "HINT_PREVENT_TUTORIAL_CLOSE_GRIDS";
+    public static final String HINT_PREVENT_TUTORIAL_CLOSE_GRIDS = "HINT_PREVENT_TUTORIAL_CLOSE_GRIDS";
 
     int selectedCount;
     Boolean image33Selected = false;

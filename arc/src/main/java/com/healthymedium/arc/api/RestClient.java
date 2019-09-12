@@ -25,6 +25,7 @@ import com.healthymedium.arc.api.models.WakeSleepSchedule;
 import com.healthymedium.arc.api.models.VerificationCodeRequest;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Device;
+import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.CircadianRhythm;
 import com.healthymedium.arc.study.Participant;
@@ -61,6 +62,9 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.healthymedium.arc.paths.tutorials.GridTutorial.HINT_PREVENT_TUTORIAL_CLOSE_GRIDS;
+import static com.healthymedium.arc.paths.tutorials.PricesTutorial.HINT_PREVENT_TUTORIAL_CLOSE_PRICES;
+import static com.healthymedium.arc.paths.tutorials.SymbolTutorial.HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS;
 import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
 
 @SuppressWarnings("unchecked")
@@ -703,6 +707,10 @@ public class RestClient <Api>{
                         chain.addLink(cycleProgress, progressListener);
                     }
                 }
+
+                Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_GRIDS);
+                Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_PRICES);
+                Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS);
 
                 return true;
             }
