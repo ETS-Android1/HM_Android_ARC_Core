@@ -98,7 +98,11 @@ public class CallbackChain {
 
             boolean proceed;
             if(link.listener!=null) {
-                proceed = link.listener.onResponse(CallbackChain.this,response);
+                if(response.successful) {
+                    proceed = link.listener.onResponse(CallbackChain.this,response);
+                } else {
+                    proceed = link.listener.onFailure(CallbackChain.this,response);
+                }
             } else {
                 proceed = response.successful;
             }
@@ -132,7 +136,11 @@ public class CallbackChain {
 
             boolean proceed;
             if(link.listener!=null) {
-                proceed = link.listener.onFailure(CallbackChain.this,response);
+                if(response.successful) {
+                    proceed = link.listener.onResponse(CallbackChain.this,response);
+                } else {
+                    proceed = link.listener.onFailure(CallbackChain.this,response);
+                }
             } else {
                 proceed = response.successful;
             }
