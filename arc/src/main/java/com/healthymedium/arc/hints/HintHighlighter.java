@@ -128,7 +128,12 @@ public class HintHighlighter extends FrameLayout {
     OnTouchListener touchListener = new OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            return false;
+            for(HintHighlightTarget target : targets){
+                if(target.wasTouched(event)){
+                    return false;
+                }
+            }
+            return true;
         }
     };
 

@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 
@@ -115,6 +116,18 @@ public class HintHighlightTarget extends View {
         if(pulse!=null){
             pulse.cleanup();
         }
+    }
+
+    public boolean wasTouched(MotionEvent event){
+        int touch_x = (int) event.getX();
+        int touch_y = (int) event.getY();
+        if(touch_x<x || touch_x>(x+width)){
+            return false;
+        }
+        if(touch_y<y || touch_y>(y+height)){
+            return false;
+        }
+        return true;
     }
 
     ViewTreeObserver.OnGlobalLayoutListener globalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
