@@ -215,6 +215,12 @@ public class GridTutorial extends Tutorial {
         gridLayoutLetters = view.findViewById(R.id.gridLettersLayout);
 
         fullScreenGray = view.findViewById(R.id.fullScreenGray);
+        fullScreenGray.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(5,false);
