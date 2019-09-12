@@ -404,11 +404,14 @@ public class AvailabilityConfirm extends BaseFragment {
             Study.getRestClient().submitTestSchedule();
             Study.getScheduler().scheduleNotifications(Study.getCurrentTestCycle(), reschedule);
 
-            if(reschedule) {
-                Proctor.refreshData(getContext());
-            } else {
-                Proctor.startService(getContext());
+            if(Study.getParticipant().shouldCurrentlyBeInTestCycle()) {
+                if (reschedule) {
+                    Proctor.refreshData(getContext());
+                } else {
+                    Proctor.startService(getContext());
+                }
             }
+            
             return null;
         }
 

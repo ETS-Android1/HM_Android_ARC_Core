@@ -117,6 +117,14 @@ public class Participant {
         return getCurrentTestSession().getScheduledTime().isBeforeNow();
     }
 
+    public boolean shouldCurrentlyBeInTestCycle() {
+        TestCycle cycle = getCurrentTestCycle();
+        if(cycle==null) {
+            return false;
+        }
+        return cycle.getActualStartDate().isBeforeNow();
+    }
+
     public TestCycle getCurrentTestCycle(){
         if(state.testCycles.size()>0) {
             return state.testCycles.get(state.currentTestCycle);
