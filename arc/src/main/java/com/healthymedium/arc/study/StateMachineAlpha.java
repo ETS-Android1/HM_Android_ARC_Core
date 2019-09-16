@@ -410,7 +410,7 @@ public class StateMachineAlpha extends StateMachine {
     // --------------------------------------------------------------------------
 
     public void setPathFirstOfBaseline(){
-        addTestLandingPage();
+        checkForLandingPage();
         checkForSignaturePage(true);
         addChronotypeSurvey();
         addWakeSurvey();
