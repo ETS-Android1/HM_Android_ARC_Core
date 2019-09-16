@@ -2,6 +2,7 @@ package com.healthymedium.arc.utilities;
 
 import android.os.AsyncTask;
 import com.healthymedium.arc.core.LoadingDialog;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 public class AsyncLoader extends AsyncTask<AsyncLoader.Listener, Void, Void> {
 

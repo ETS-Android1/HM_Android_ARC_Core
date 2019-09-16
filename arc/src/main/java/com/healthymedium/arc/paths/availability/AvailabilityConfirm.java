@@ -27,7 +27,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;

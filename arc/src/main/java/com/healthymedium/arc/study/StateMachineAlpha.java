@@ -11,7 +11,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionSignature;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;

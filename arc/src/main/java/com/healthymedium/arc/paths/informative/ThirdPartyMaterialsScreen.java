@@ -11,7 +11,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 
 public class ThirdPartyMaterialsScreen extends BaseFragment {

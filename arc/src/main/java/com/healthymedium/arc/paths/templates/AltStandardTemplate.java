@@ -24,7 +24,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;

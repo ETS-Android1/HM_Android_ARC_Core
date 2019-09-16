@@ -60,7 +60,7 @@ import com.healthymedium.arc.paths.tests.QuestionInterrupted;
 import com.healthymedium.arc.paths.tests.SymbolTest;
 import com.healthymedium.arc.paths.tests.TestBegin;
 import com.healthymedium.arc.utilities.CacheManager;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;

@@ -3,7 +3,7 @@ package com.healthymedium.arc.study;
 import android.content.Context;
 
 import com.healthymedium.arc.paths.informative.PrivacyScreen;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 public class PrivacyPolicy {
 

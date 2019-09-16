@@ -3,7 +3,6 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.SpannableString;
@@ -25,7 +24,7 @@ import com.healthymedium.arc.paths.tutorials.GridTutorial;
 import com.healthymedium.arc.paths.tutorials.PricesTutorial;
 import com.healthymedium.arc.paths.tutorials.SymbolTutorial;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")

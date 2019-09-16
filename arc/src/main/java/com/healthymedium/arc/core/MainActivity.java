@@ -16,7 +16,7 @@ import com.healthymedium.arc.study.AbandonmentJobService;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import java.util.ArrayList;

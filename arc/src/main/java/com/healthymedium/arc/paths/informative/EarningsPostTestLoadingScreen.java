@@ -16,7 +16,7 @@ import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 public class EarningsPostTestLoadingScreen extends BaseFragment {
 

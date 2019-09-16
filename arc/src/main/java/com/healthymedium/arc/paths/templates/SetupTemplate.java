@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -36,7 +35,7 @@ import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.paths.setup.SetupResendCode;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;

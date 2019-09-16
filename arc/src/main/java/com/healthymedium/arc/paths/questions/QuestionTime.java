@@ -17,7 +17,7 @@ import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.LocalTime;

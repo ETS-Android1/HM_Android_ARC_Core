@@ -1,7 +1,6 @@
 package com.healthymedium.arc.paths.home;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,15 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.hints.HintPointer;
-import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.paths.informative.EarningsDetailsScreen;
 import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.SlidingNavigationController;
-import com.healthymedium.arc.utilities.NavigationManager;
-import com.healthymedium.arc.utilities.ViewUtil;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 import static com.healthymedium.arc.ui.BottomNavigationView.TAG_EARNINGS;
 import static com.healthymedium.arc.ui.BottomNavigationView.TAG_HOME;

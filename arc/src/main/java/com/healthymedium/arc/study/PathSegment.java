@@ -4,7 +4,7 @@ import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 import java.util.ArrayList;
 import java.util.List;

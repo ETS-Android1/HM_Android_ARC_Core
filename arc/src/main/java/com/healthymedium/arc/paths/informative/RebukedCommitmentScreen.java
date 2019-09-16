@@ -3,8 +3,6 @@ package com.healthymedium.arc.paths.informative;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Html;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +13,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
-import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.ui.Button;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")

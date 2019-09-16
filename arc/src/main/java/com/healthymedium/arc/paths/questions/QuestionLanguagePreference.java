@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SplashScreen;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
 import java.util.HashMap;

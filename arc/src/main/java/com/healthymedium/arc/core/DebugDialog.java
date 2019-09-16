@@ -19,11 +19,10 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationNode;
 import com.healthymedium.arc.notifications.NotificationTypes;
-import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.State;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 
 public class DebugDialog extends DialogFragment {
 

@@ -16,7 +16,7 @@ import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Tutorial extends BaseFragment {

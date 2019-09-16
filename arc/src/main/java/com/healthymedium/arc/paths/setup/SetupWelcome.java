@@ -15,7 +15,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 import com.healthymedium.arc.utilities.ViewUtil;
 

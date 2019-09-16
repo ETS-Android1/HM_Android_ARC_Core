@@ -16,7 +16,7 @@ import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 import com.healthymedium.arc.ui.Button;

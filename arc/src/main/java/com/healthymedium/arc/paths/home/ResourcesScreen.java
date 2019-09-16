@@ -16,7 +16,7 @@ import com.healthymedium.arc.paths.informative.ChangeAvailabilityScreen;
 import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.paths.informative.FAQScreen;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class ResourcesScreen extends BaseFragment {

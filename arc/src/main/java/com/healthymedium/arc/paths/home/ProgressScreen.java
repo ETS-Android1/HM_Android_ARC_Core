@@ -23,7 +23,7 @@ import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.StudyProgressView;
 import com.healthymedium.arc.ui.WeekProgressView;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;

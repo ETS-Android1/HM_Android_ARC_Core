@@ -1,12 +1,10 @@
-package com.healthymedium.arc.utilities;
+package com.healthymedium.arc.navigation;
 
-import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.navigation.NavigationController;
 
 public class NavigationManager {
 

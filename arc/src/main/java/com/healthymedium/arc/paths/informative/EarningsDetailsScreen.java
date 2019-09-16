@@ -20,7 +20,7 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsDetailedCycleView;
-import com.healthymedium.arc.utilities.NavigationManager;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
