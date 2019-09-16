@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
@@ -54,17 +55,20 @@ public class HomeScreen extends BaseFragment {
     protected FrameLayout frameLayoutContact;
     protected TextView textViewContact;
 
+    HintPointer tourHint;
     HintPointer beginTestHint;
     HintHighlighter beginTestHighlight;
     BottomNavigationView bottomNavigationView;
 
     public HomeScreen() {
-        determineStrings();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.template_landing, container, false);
+
+        determineStrings();
 
         landing_layout = view.findViewById(R.id.landing_layout);
 
@@ -89,6 +93,7 @@ public class HomeScreen extends BaseFragment {
                         bottomNavigationView.setEnabled(true);
                         Hints.markShown(HINT_FIRST_TEST);
                     }
+                    NavigationManager.getInstance().removeController();
                     Study.getCurrentTestSession().markStarted();
                     Study.getParticipant().save();
                     Study.getStateMachine().save();
@@ -143,6 +148,15 @@ public class HomeScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(tourHint!=null) {
+            tourHint.setVisibility(View.GONE);
+            tourHint.dismiss();
+        }
     }
 
     private void determineStrings() {
@@ -217,34 +231,28 @@ public class HomeScreen extends BaseFragment {
         this.bottomNavigationView = bottomNavigationView;
     }
 
-    private void showTourHints(String body, String btn, String hint) {
-        bottomNavigationView.setEnabled(false);
-
-        // Mark the hint type as shown
-        // Should be either HINT_POST_BASELINE or HINT_POST_PAID_TEST
-        Hints.markShown(hint);
-
-        final HintPointer tourHint = new HintPointer(getActivity(), landing_layout, false, false);
-
-        tourHint.setText(body);
-
-        View.OnClickListener listener = new View.OnClickListener() {
+    private void showTourHints(String body, String btn, final String hint) {
+        tourHint = new HintPointer(getActivity(), landing_layout, false, false);
+        tourHint.addButton(btn, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tourHint.dismiss();
+
+                // Mark the hint type as shown
+                // Should be either HINT_POST_BASELINE or HINT_POST_PAID_TEST
+                Hints.markShown(hint);
 
                 // Once the tour has started, assume the user has seen it
                 Hints.markShown(HINT_TOUR);
                 bottomNavigationView.showHomeHint(getActivity());
             }
-        };
-
-        tourHint.addButton(btn, listener);
-
-        if (body.equals("")) {
+        });
+        if (body.isEmpty()) {
             tourHint.hideText();
+        } else {
+            tourHint.setText(body);
+            bottomNavigationView.setEnabled(false);
         }
-
         tourHint.show();
     }
 
