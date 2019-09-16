@@ -3,6 +3,10 @@ package com.healthymedium.arc.time;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
+
+import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.library.BuildConfig;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.Proctor;
@@ -23,6 +27,12 @@ public class TimeChangeReceiver extends BroadcastReceiver {
         Study.getParticipant().save();
 
         Proctor.refreshData(context);
+
+        String flavor = BuildConfig.FLAVOR;
+        if(flavor.equals(Config.FLAVOR_DEV) || flavor.equals(Config.FLAVOR_QA)) {
+            Toast.makeText(context,"Time Change Acknowledged",Toast.LENGTH_LONG).show();
+        }
+
     }
 
 }
