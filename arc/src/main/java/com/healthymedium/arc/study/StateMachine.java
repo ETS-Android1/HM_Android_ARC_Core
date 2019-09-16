@@ -230,6 +230,7 @@ public class StateMachine {
         cache.segments.remove(0);
 
         NavigationManager.getInstance().clearBackStack();
+        NavigationManager.getInstance().removeController();
         Study.getInstance().getParticipant().save();
         save();
 

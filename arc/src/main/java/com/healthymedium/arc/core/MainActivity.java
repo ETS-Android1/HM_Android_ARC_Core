@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setup(){
-        NavigationManager.initializeInstance(getSupportFragmentManager());
+        NavigationManager.initialize(getSupportFragmentManager());
         if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
             return;
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() <= 1) {
+        if (NavigationManager.getInstance().getBackStackEntryCount() <= 1) {
             /*
             if(homeWatcher != null){
                 homeWatcher.stopWatch();

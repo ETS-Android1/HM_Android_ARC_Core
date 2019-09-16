@@ -6,27 +6,21 @@ import android.support.v4.app.FragmentManager;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.paths.informative.AboutScreen;
-import com.healthymedium.arc.paths.informative.EarningsScreen;
-import com.healthymedium.arc.paths.informative.ProgressScreen;
-import com.healthymedium.arc.paths.informative.ResourcesScreen;
-import com.healthymedium.arc.paths.templates.LandingTemplate;
+import com.healthymedium.arc.navigation.NavigationController;
 
 public class NavigationManager {
 
     private static NavigationManager instance;
-    private FragmentManager fragmentManager;
-    private NavigationListener navigationListener;
-
-    private int currentFragmentId = -1;
+    private NavigationController defaultController;
+    private NavigationController registeredController;
 
     private NavigationManager() {
         // Make empty constructor private
     }
 
-    public static synchronized void initializeInstance(final FragmentManager fragmentManager) {
+    public static synchronized void initialize(final FragmentManager fragmentManager) {
         instance = new NavigationManager();
-        instance.fragmentManager = fragmentManager;
+        instance.defaultController = new NavigationController(fragmentManager,R.id.content_frame);
     }
 
     public static synchronized NavigationManager getInstance() {
@@ -37,71 +31,54 @@ public class NavigationManager {
     }
 
     public FragmentManager getFragmentManager() {
-        return fragmentManager;
+        return getController().getFragmentManager();
     }
 
-    public NavigationListener getNavigationListener() {
-        return navigationListener;
+    public NavigationController.Listener getListener() {
+        return getController().getListener();
     }
 
-    public void setNavigationListener(NavigationListener navigationListener) {
-        this.navigationListener = navigationListener;
+    public void setListener(NavigationController.Listener listener) {
+        getController().setListener(listener);
     }
 
     public void open(BaseFragment fragment) {
-        if (fragmentManager != null) {
+        getController().open(fragment);
+    }
 
-            TransitionSet transitions = fragment.getTransitionSet();
-            String tag = fragment.getSimpleTag() + "." + SystemClock.uptimeMillis();
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(
-                            transitions.enter,
-                            transitions.exit,
-                            transitions.popEnter,
-                            transitions.popExit)
-                    .replace(R.id.content_frame, fragment, tag)
-                    .addToBackStack(tag)
-                    .commitAllowingStateLoss();
-            currentFragmentId = fragment.getId();
-            if(navigationListener!=null){
-                navigationListener.onOpen();
-            }
-        }
+    public void open(BaseFragment fragment, TransitionSet transition) {
+        getController().open(fragment,transition);
     }
 
     public void popBackStack() {
-        if (fragmentManager != null) {
-            fragmentManager.popBackStack();
-            if(navigationListener!=null){
-                navigationListener.onPopBack();
-            }
-        }
+        getController().popBackStack();
     }
 
     public int getBackStackEntryCount() {
-        return fragmentManager.getBackStackEntryCount();
+        return getController().getBackStackEntryCount();
     }
 
     public void clearBackStack() {
-        int count = fragmentManager.getBackStackEntryCount();
-        for (int i = 0; i < count; i++) {
-            int id = fragmentManager.getBackStackEntryAt(i).getId();
-            //String tag = fragmentManager.getBackStackEntryAt(i).getName();
-            /*Fragment fragment = fragmentManager.findFragmentByTag(tag);
-            if (fragment instanceof BaseFragment) {
-                ((BaseFragment) fragment).disableFragmentAnimation = true;
-            }*/
-            fragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
+        getController().clearBackStack();
     }
 
     public BaseFragment getCurrentFragment(){
-        return (BaseFragment) fragmentManager.findFragmentById(instance.currentFragmentId);
+        return getController().getCurrentFragment();
     }
 
-    public interface NavigationListener {
-        void onOpen();
-        void onPopBack();
+    public void setController(NavigationController controller) {
+        registeredController = controller;
+    }
+
+    public NavigationController getController() {
+        if(registeredController!=null) {
+            return registeredController;
+        }
+        return defaultController;
+    }
+
+    public void removeController() {
+        registeredController = null;
     }
 
 }
