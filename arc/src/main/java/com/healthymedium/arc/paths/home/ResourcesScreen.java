@@ -1,4 +1,4 @@
-package com.healthymedium.arc.paths.informative;
+package com.healthymedium.arc.paths.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.informative.AboutScreen;
+import com.healthymedium.arc.paths.informative.ChangeAvailabilityScreen;
+import com.healthymedium.arc.paths.informative.ContactScreen;
+import com.healthymedium.arc.paths.informative.FAQScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -33,15 +37,13 @@ public class ResourcesScreen extends BaseFragment {
     protected TextView textViewPrivacyPolicy;
 
     public ResourcesScreen() {
-        allowBackPress(false);
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resources, container, false);
-
-        getMainActivity().showNavigationBar();
 
         textViewAvailability = view.findViewById(R.id.textViewAvailability);
         ViewUtil.underlineTextView(textViewAvailability);

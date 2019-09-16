@@ -1,35 +1,18 @@
 package com.healthymedium.arc.ui.earnings;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.icu.util.MeasureUnit;
-import android.os.Handler;
-import android.support.annotation.DrawableRes;
-import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.font.Fonts;
-import com.healthymedium.arc.hints.HintHighlighter;
-import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.informative.EarningsScreen;
-import com.healthymedium.arc.paths.informative.ProgressScreen;
-import com.healthymedium.arc.paths.informative.ResourcesScreen;
-import com.healthymedium.arc.paths.templates.LandingTemplate;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.ui.CircleProgressView;
-import com.healthymedium.arc.ui.base.RoundedLinearLayout;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;

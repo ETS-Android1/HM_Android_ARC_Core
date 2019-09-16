@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.annotation.DrawableRes;
-import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -16,19 +15,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.informative.EarningsScreen;
-import com.healthymedium.arc.paths.informative.ProgressScreen;
-import com.healthymedium.arc.paths.informative.ResourcesScreen;
-import com.healthymedium.arc.paths.templates.LandingTemplate;
 import com.healthymedium.arc.ui.base.RoundedLinearLayout;
-import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class BottomNavigationView extends RoundedLinearLayout {
+
+    public static final int TAG_HOME = 0;
+    public static final int TAG_PROGRESS = 1;
+    public static final int TAG_EARNINGS = 2;
+    public static final int TAG_RESOURCES = 3;
 
     private MenuItem home;
     private MenuItem progress;
@@ -40,6 +38,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
     private MenuItem lastSelected;
     private int normalColor;
     private int selectedColor;
+    private Listener listener;
 
     boolean enabled = true;
 
@@ -75,49 +74,25 @@ public class BottomNavigationView extends RoundedLinearLayout {
                 ViewUtil.getString(R.string.resources_nav_home),
                 R.drawable.ic_home_inactive,
                 R.drawable.ic_home_active,
-                new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigationManager.getInstance().popBackStack();
-                NavigationManager.getInstance().open(new LandingTemplate());
-            }
-        });
+                TAG_HOME);
 
         progress = new MenuItem(context,
                 ViewUtil.getString(R.string.resources_nav_progress),
                 R.drawable.ic_progress_inactive,
                 R.drawable.ic_progress_active,
-                new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigationManager.getInstance().popBackStack();
-                NavigationManager.getInstance().open(new ProgressScreen());
-            }
-        });
+                TAG_PROGRESS);
 
         earnings = new MenuItem(context,
                 ViewUtil.getString(R.string.resources_nav_earnings),
                 R.drawable.ic_earnings_inactive,
                 R.drawable.ic_earnings_active,
-                new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigationManager.getInstance().popBackStack();
-                NavigationManager.getInstance().open(new EarningsScreen());
-            }
-        });
+                TAG_EARNINGS);
 
         resources = new MenuItem(context,
                 ViewUtil.getString(R.string.resources_nav_resources),
                 R.drawable.ic_resources_inactive,
                 R.drawable.ic_resources_active,
-                new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigationManager.getInstance().popBackStack();
-                NavigationManager.getInstance().open(new ResourcesScreen());
-            }
-        });
+                TAG_RESOURCES);
 
         addView(home);
         addView(progress);
@@ -147,7 +122,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
         private ImageView imageView;
         private TextView textView;
 
-        public MenuItem(Context context, String name, @DrawableRes int resNormal, @DrawableRes int resSelected, final OnClickListener listener){
+        public MenuItem(Context context, String name, @DrawableRes int resNormal, @DrawableRes int resSelected, final int tag){
             super(context);
 
             setOnClickListener(new OnClickListener() {
@@ -159,7 +134,7 @@ public class BottomNavigationView extends RoundedLinearLayout {
                     setSelected(true);
                     lastSelected = MenuItem.this;
                     if(listener!=null){
-                        listener.onClick(MenuItem.this);
+                        listener.onSelected(tag);
                     }
                 }
             });
@@ -334,6 +309,14 @@ public class BottomNavigationView extends RoundedLinearLayout {
 
         resourcesHint.show();
         resourcesHighlight.show();
+    }
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    public interface Listener {
+        void onSelected(int tag);
     }
 
 }

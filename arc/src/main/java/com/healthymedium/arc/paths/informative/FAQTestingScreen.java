@@ -40,8 +40,6 @@ public class FAQTestingScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_faq_testing, container, false);
 
-        getMainActivity().hideNavigationBar();
-
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {

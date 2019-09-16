@@ -1,8 +1,8 @@
-package com.healthymedium.arc.paths.templates;
+package com.healthymedium.arc.paths.home;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
@@ -28,25 +27,20 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import java.util.Locale;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 @SuppressLint("ValidFragment")
-public class LandingTemplate extends BaseFragment {
+public class HomeScreen extends BaseFragment {
 
-    protected static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
     protected static final String HINT_TOUR = "HINT_TOUR";
     protected static final String HINT_POST_BASELINE = "HINT_POST_BASELINE";
     protected static final String HINT_POST_PAID_TEST = "HINT_POST_PAID_TEST";
+    protected static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
 
     String stringHeader;
     String stringSubheader;
@@ -62,8 +56,9 @@ public class LandingTemplate extends BaseFragment {
 
     HintPointer beginTestHint;
     HintHighlighter beginTestHighlight;
+    BottomNavigationView bottomNavigationView;
 
-    public LandingTemplate() {
+    public HomeScreen() {
         determineStrings();
     }
 
@@ -80,20 +75,6 @@ public class LandingTemplate extends BaseFragment {
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
-        // The "tour" hints are the same for both post-baseline and post-paid test
-        // The only difference is the first hint
-        // HINT_TOUR - have the tour hints been shown at all?
-        // HINT_POST_BASELINE - are we showing the post-baseline hints?
-        // HINT_POST_PAID_TEST - are we showing the post-paid test hints?
-        if (!Hints.hasBeenShown(HINT_TOUR) && Hints.hasBeenShown(HINT_FIRST_TEST)) {
-            if (!Hints.hasBeenShown(HINT_POST_BASELINE)) {
-                showTourHints("", ViewUtil.getString(R.string.popup_tour), HINT_POST_BASELINE);
-            }
-            else {
-                showTourHints(ViewUtil.getString(R.string.popup_nicejob), ViewUtil.getString(R.string.button_next), HINT_POST_PAID_TEST);
-            }
-        }
-
         boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
 
         if (isTestReady) {
@@ -105,11 +86,9 @@ public class LandingTemplate extends BaseFragment {
                     if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
                         beginTestHighlight.dismiss();
                         beginTestHint.dismiss();
-//                        getMainActivity().enableNavigationBar(true);
+                        bottomNavigationView.setEnabled(true);
                         Hints.markShown(HINT_FIRST_TEST);
                     }
-
-//                    getMainActivity().hideNavigationBar();
                     Study.getCurrentTestSession().markStarted();
                     Study.getParticipant().save();
                     Study.getStateMachine().save();
@@ -128,7 +107,8 @@ public class LandingTemplate extends BaseFragment {
             content.setLayoutParams(params);
 
             if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
-//                getMainActivity().enableNavigationBar(false);
+                bottomNavigationView.setEnabled(false);
+
 
                 beginTestHint = new HintPointer(getActivity(), button, true, false);
                 beginTestHint.setText(ViewUtil.getString(R.string.popup_begin));
@@ -140,7 +120,18 @@ public class LandingTemplate extends BaseFragment {
             }
         }
 
-//        getMainActivity().showNavigationBar();
+        // The "tour" hints are the same for both post-baseline and post-paid test
+        // The only difference is the first hint
+        // HINT_TOUR - have the tour hints been shown at all?
+        // HINT_POST_BASELINE - are we showing the post-baseline hints?
+        // HINT_POST_PAID_TEST - are we showing the post-paid test hints?
+        if (!Hints.hasBeenShown(HINT_TOUR) && Hints.hasBeenShown(HINT_FIRST_TEST)) {
+            if (!Hints.hasBeenShown(HINT_POST_BASELINE)) {
+                showTourHints("", ViewUtil.getString(R.string.popup_tour), HINT_POST_BASELINE);
+            } else {
+                showTourHints(ViewUtil.getString(R.string.popup_nicejob), ViewUtil.getString(R.string.button_next), HINT_POST_PAID_TEST);
+            }
+        }
 
         setupDebug(view,R.id.textViewHeader);
 
@@ -152,12 +143,6 @@ public class LandingTemplate extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
-    }
-
-    @Override
-    public void onResume() {
-//        getMainActivity().bottomNavSetHomeSelected();
-        super.onResume();
     }
 
     private void determineStrings() {
@@ -228,8 +213,12 @@ public class LandingTemplate extends BaseFragment {
 
     }
 
+    public void setBottomNavigationView(BottomNavigationView bottomNavigationView) {
+        this.bottomNavigationView = bottomNavigationView;
+    }
+
     private void showTourHints(String body, String btn, String hint) {
-//        getMainActivity().enableNavigationBar(false);
+        bottomNavigationView.setEnabled(false);
 
         // Mark the hint type as shown
         // Should be either HINT_POST_BASELINE or HINT_POST_PAID_TEST
@@ -246,8 +235,7 @@ public class LandingTemplate extends BaseFragment {
 
                 // Once the tour has started, assume the user has seen it
                 Hints.markShown(HINT_TOUR);
-
-//                getMainActivity().showHomeHint(getActivity());
+                bottomNavigationView.showHomeHint(getActivity());
             }
         };
 

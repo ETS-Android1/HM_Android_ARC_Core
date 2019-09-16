@@ -51,8 +51,6 @@ public class ContactScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
-        getMainActivity().hideNavigationBar();
-
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
 

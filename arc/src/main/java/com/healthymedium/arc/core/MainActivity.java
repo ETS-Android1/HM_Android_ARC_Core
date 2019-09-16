@@ -1,12 +1,10 @@
 package com.healthymedium.arc.core;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.utilities.Log;
 
 import android.view.View;
@@ -32,14 +30,11 @@ public class MainActivity extends AppCompatActivity {
     boolean hasNewIntent = false;
     int backInStudySkips = 0;
 
-    int lastNavigationBarItem = R.id.menu_home;
-
     boolean checkAbandonment = false;
 
     FrameLayout contentView;
     HomeWatcher homeWatcher;
     KeyboardWatcher keyboardWatcher;
-    BottomNavigationView bottomNavigationView;
 
 
     @Override
@@ -68,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.core_activity_main);
         contentView = findViewById(R.id.content_frame);
-
-        bottomNavigationView = findViewById(R.id.navigation);
 
         setup();
     }
@@ -241,23 +234,5 @@ public class MainActivity extends AppCompatActivity {
         return contentView;
     }
 
-    public void enableNavigationBar(boolean enabled) {
-        bottomNavigationView.setEnabled(enabled);
-    }
 
-    public void showNavigationBar() {
-        bottomNavigationView.setVisibility(View.VISIBLE);
-    }
-
-    public void hideNavigationBar() {
-        bottomNavigationView.setVisibility(View.GONE);
-    }
-
-    public void showHomeHint(Activity activity) {
-        bottomNavigationView.showHomeHint(activity);
-    }
-
-    public void bottomNavSetHomeSelected() {
-        bottomNavigationView.setHomeSelected();
-    }
 }

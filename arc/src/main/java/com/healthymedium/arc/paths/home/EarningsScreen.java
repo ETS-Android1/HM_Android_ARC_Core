@@ -1,4 +1,4 @@
-package com.healthymedium.arc.paths.informative;
+package com.healthymedium.arc.paths.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +15,9 @@ import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
+import com.healthymedium.arc.paths.informative.EarningsDetailsScreen;
+import com.healthymedium.arc.paths.informative.FAQScreen;
 import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
@@ -45,7 +48,7 @@ public class EarningsScreen extends BaseFragment {
     Button viewFaqButton;
 
     public EarningsScreen() {
-        allowBackPress(false);
+
     }
 
     @Nullable
@@ -157,7 +160,6 @@ public class EarningsScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
-        getMainActivity().showNavigationBar();
     }
 
     private void populateViews() {

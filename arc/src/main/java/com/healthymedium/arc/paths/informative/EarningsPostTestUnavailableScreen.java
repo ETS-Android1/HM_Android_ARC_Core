@@ -1,22 +1,17 @@
 package com.healthymedium.arc.paths.informative;
 
-import android.animation.Animator;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
-import com.healthymedium.arc.utilities.NavigationManager;
 
 public class EarningsPostTestUnavailableScreen extends BaseFragment {
 

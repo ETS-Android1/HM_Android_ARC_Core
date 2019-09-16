@@ -3,7 +3,7 @@ package com.healthymedium.arc.study;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.notifications.NotificationUtil;
-import com.healthymedium.arc.paths.templates.LandingTemplate;
+import com.healthymedium.arc.paths.home.LandingScreen;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -385,7 +385,7 @@ public class StateMachineAlpha extends StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
 
         // Default
-        fragments.add(new LandingTemplate());
+        fragments.add(new LandingScreen());
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }

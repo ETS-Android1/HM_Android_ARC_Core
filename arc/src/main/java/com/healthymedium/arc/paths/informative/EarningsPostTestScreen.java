@@ -1,32 +1,23 @@
 package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.TotalEarningsView;
 import com.healthymedium.arc.ui.earnings.EarningsAchievementView;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
-import com.healthymedium.arc.utilities.NavigationManager;
-import com.healthymedium.arc.utilities.ViewUtil;
-
-import org.joda.time.DateTime;
 
 public class EarningsPostTestScreen extends BaseFragment {
 

@@ -1,4 +1,4 @@
-package com.healthymedium.arc.paths.informative;
+package com.healthymedium.arc.paths.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.informative.FAQScreen;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
@@ -40,7 +41,6 @@ public class ProgressScreen extends BaseFragment {
     boolean isPractice = false;
     boolean isBaseline = false;
 
-
     TextView studyStatus;
     TextView joinedDate_date;
     TextView finishDate_date;
@@ -49,7 +49,7 @@ public class ProgressScreen extends BaseFragment {
     Button viewFaqButton;
 
     public ProgressScreen() {
-        allowBackPress(false);
+
     }
 
     @Nullable
@@ -303,6 +303,6 @@ public class ProgressScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
-        getMainActivity().showNavigationBar();
     }
+
 }

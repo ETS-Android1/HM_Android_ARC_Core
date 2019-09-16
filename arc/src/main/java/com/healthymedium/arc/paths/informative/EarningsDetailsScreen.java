@@ -24,7 +24,6 @@ import com.healthymedium.arc.utilities.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-import org.w3c.dom.Text;
 
 public class EarningsDetailsScreen extends BaseFragment {
 
@@ -107,7 +106,6 @@ public class EarningsDetailsScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
-        getMainActivity().showNavigationBar();
     }
 
     private void populateViews() {
