@@ -123,6 +123,8 @@ public class HomeScreen extends BaseFragment {
                 beginTestHighlight.show();
                 beginTestHint.show();
             }
+        } else if(!Hints.hasBeenShown(HINT_FIRST_TEST)) {
+            Hints.markShown(HINT_FIRST_TEST);
         }
 
         // The "tour" hints are the same for both post-baseline and post-paid test
