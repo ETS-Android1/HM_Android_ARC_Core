@@ -418,7 +418,6 @@ public class StateMachineAlpha extends StateMachine {
         addTests();
         addInterruptedPage();
         checkForSignaturePage(false);
-        Study.getCurrentTestSession().markStarted();
     }
 
     public void setPathBaselineTest(){
