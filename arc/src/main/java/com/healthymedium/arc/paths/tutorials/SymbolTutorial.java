@@ -24,13 +24,10 @@ public class SymbolTutorial extends Tutorial {
 
     public static final String HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS = "HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS";
 
-    final Handler handlerOutline = new Handler();
-    final Handler handlerPulsate = new Handler();
-    final Handler handlerCoachmark = new Handler();
+    final Handler handler = new Handler();
 
-    Runnable runnableTileOutline;
-    Runnable runnableTilePulsate;
-    Runnable runnableCoachmark;
+    Runnable runnableTileFirst;
+    Runnable runnableTileSecond;
 
     RelativeLayout topSymbols;
     RelativeLayout topSymbolsInnerLayout;
@@ -54,7 +51,6 @@ public class SymbolTutorial extends Tutorial {
     HintPointer bottomSymbolsHint;
 
     HintHighlighter initialTilesOutline;
-    HintHighlighter initialTilesPulsate;
     HintPointer initialPointer;
 
     HintHighlighter secondTilesOutline;
@@ -136,7 +132,6 @@ public class SymbolTutorial extends Tutorial {
         bottomSymbolsHint = new HintPointer(getActivity(), bottomSymbolsButtons, true, true);
 
         initialTilesOutline = new HintHighlighter(getActivity());
-        initialTilesPulsate = new HintHighlighter(getActivity());
         initialPointer = new HintPointer(getActivity(), buttonBottom1, true, false);
 
         secondTilesOutline = new HintHighlighter(getActivity());
@@ -182,9 +177,8 @@ public class SymbolTutorial extends Tutorial {
                     @Override
                     public void onClick(View view) {
                         closeButton.setEnabled(false);
-                        handlerOutline.removeCallbacks(runnableTileOutline);
-                        handlerPulsate.removeCallbacks(runnableTilePulsate);
-                        handlerCoachmark.removeCallbacks(runnableCoachmark);
+                        handler.removeCallbacks(runnableTileFirst);
+                        handler.removeCallbacks(runnableTileSecond);
 
                         welcomeHighlight.dismiss();
                         welcomeHint.dismiss();
@@ -202,7 +196,6 @@ public class SymbolTutorial extends Tutorial {
                         bottomSymbolsHint.dismiss();
 
                         initialTilesOutline.dismiss();
-                        initialTilesPulsate.dismiss();
                         initialPointer.dismiss();
 
                         secondTilesOutline.dismiss();
@@ -341,51 +334,30 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setOnTouchListener(touchListener);
         buttonBottom2.setOnTouchListener(touchListener);
 
-        initialTilesOutline.addTarget(buttonBottom1,8);
-        initialTilesOutline.addTarget(buttonTop3,8);
+        initialTilesOutline.addPulsingTarget(buttonBottom1,4);
+        initialTilesOutline.addTarget(buttonTop3,6);
         initialTilesOutline.addTarget(progressBar);
 
-        initialTilesPulsate.addPulsingTarget(buttonBottom1,8);
-        initialTilesPulsate.addTarget(buttonTop3,8);
-        initialTilesPulsate.addTarget(progressBar);
-
-        runnableTileOutline = new Runnable() {
+        runnableTileFirst = new Runnable() {
             @Override
             public void run() {
                 initialTilesOutline.show();
-            }
-        };
-
-        runnableTilePulsate = new Runnable() {
-            @Override
-            public void run() {
-                initialTilesOutline.dismiss();
-                initialTilesPulsate.show();
-            }
-        };
-
-        runnableCoachmark = new Runnable() {
-            @Override
-            public void run() {
                 initialPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
                 initialPointer.show();
             }
         };
 
-        handlerOutline.postDelayed(runnableTileOutline,5000);
-        handlerPulsate.postDelayed(runnableTilePulsate,10000);
-        handlerCoachmark.postDelayed(runnableCoachmark, 15000);
+        handler.postDelayed(runnableTileFirst,10000);
+        handler.postDelayed(runnableTileSecond, 10000);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                handlerOutline.removeCallbacks(runnableTileOutline);
-                handlerPulsate.removeCallbacks(runnableTilePulsate);
-                handlerCoachmark.removeCallbacks(runnableCoachmark);
+                handler.removeCallbacks(runnableTileFirst);
+                handler.removeCallbacks(runnableTileSecond);
 
                 initialTilesOutline.dismiss();
-                initialTilesPulsate.dismiss();
                 initialPointer.dismiss();
 
                 buttonBottom1.setOnClickListener(null);
@@ -429,48 +401,36 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setImages(R.drawable.ic_symbol_5_tutorial, R.drawable.ic_symbol_2_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        secondTilesOutline.addTarget(buttonBottom2,8);
-        secondTilesOutline.addTarget(buttonTop2,8);
+        secondTilesOutline.addPulsingTarget(buttonBottom2,4);
+        secondTilesOutline.addTarget(buttonTop2,6);
         secondTilesOutline.addTarget(progressBar);
+        secondTilesOutline.setShadowEnabled(false,false);
 
-        secondTilesPulsate.addPulsingTarget(buttonBottom2,8);
-        secondTilesPulsate.addTarget(buttonTop2,8);
-        secondTilesPulsate.addTarget(progressBar);
-
-        runnableTileOutline = new Runnable() {
+        runnableTileFirst = new Runnable() {
             @Override
             public void run() {
                 secondTilesOutline.show();
             }
         };
 
-        runnableTilePulsate = new Runnable() {
+        runnableTileSecond = new Runnable() {
             @Override
             public void run() {
-                secondTilesOutline.dismiss();
-                secondTilesPulsate.show();
-            }
-        };
-
-        runnableCoachmark = new Runnable() {
-            @Override
-            public void run() {
+                secondTilesOutline.setShadowEnabled(true,true);
                 secondPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
                 secondPointer.show();
             }
         };
 
-        handlerOutline.postDelayed(runnableTileOutline,5000);
-        handlerPulsate.postDelayed(runnableTilePulsate,10000);
-        handlerCoachmark.postDelayed(runnableCoachmark, 15000);
+        handler.postDelayed(runnableTileFirst,10000);
+        handler.postDelayed(runnableTileSecond,15000);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                handlerOutline.removeCallbacks(runnableTileOutline);
-                handlerPulsate.removeCallbacks(runnableTilePulsate);
-                handlerCoachmark.removeCallbacks(runnableCoachmark);
+                handler.removeCallbacks(runnableTileFirst);
+                handler.removeCallbacks(runnableTileSecond);
 
                 secondTilesOutline.dismiss();
                 secondTilesPulsate.dismiss();
@@ -516,48 +476,36 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_7_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        finalTilesOutline.addTarget(buttonBottom1,8);
-        finalTilesOutline.addTarget(buttonTop1,8);
+        finalTilesOutline.addPulsingTarget(buttonBottom1,4);
+        finalTilesOutline.addTarget(buttonTop1,6);
         finalTilesOutline.addTarget(progressBar);
+        finalTilesOutline.setShadowEnabled(false,false);
 
-        finalTilesPulsate.addPulsingTarget(buttonBottom1,8);
-        finalTilesPulsate.addTarget(buttonTop1,8);
-        finalTilesPulsate.addTarget(progressBar);
-
-        runnableTileOutline = new Runnable() {
+        runnableTileFirst = new Runnable() {
             @Override
             public void run() {
                 finalTilesOutline.show();
             }
         };
 
-        runnableTilePulsate = new Runnable() {
+        runnableTileSecond = new Runnable() {
             @Override
             public void run() {
-                finalTilesOutline.dismiss();
-                finalTilesPulsate.show();
-            }
-        };
-
-        runnableCoachmark = new Runnable() {
-            @Override
-            public void run() {
+                finalTilesOutline.setShadowEnabled(true,true);
                 finalPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
                 finalPointer.show();
             }
         };
 
-        handlerOutline.postDelayed(runnableTileOutline,5000);
-        handlerPulsate.postDelayed(runnableTilePulsate,10000);
-        handlerCoachmark.postDelayed(runnableCoachmark, 15000);
+        handler.postDelayed(runnableTileFirst,10000);
+        handler.postDelayed(runnableTileSecond,15000);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                handlerOutline.removeCallbacks(runnableTileOutline);
-                handlerPulsate.removeCallbacks(runnableTilePulsate);
-                handlerCoachmark.removeCallbacks(runnableCoachmark);
+                handler.removeCallbacks(runnableTileFirst);
+                handler.removeCallbacks(runnableTileSecond);
 
                 finalTilesOutline.dismiss();
                 finalTilesPulsate.dismiss();
