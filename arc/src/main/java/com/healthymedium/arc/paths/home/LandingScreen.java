@@ -59,7 +59,7 @@ public class LandingScreen extends BaseFragment {
     navigationController.addFragmentToSet(earnings);
     navigationController.addFragmentToSet(new EarningsDetailsScreen());
     navigationController.addFragmentToSet(resources);
-    navigationController.open(home);
+    navigationController.open(home,transitionSet);
 
     bottomNavigationView.setHomeSelected();
     bottomNavigationView.setListener(new BottomNavigationView.Listener() {
