@@ -1,5 +1,7 @@
 package com.healthymedium.arc.hints;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -16,6 +18,8 @@ import java.util.List;
 public class HintHighlighter extends FrameLayout {
 
     private static final int backgroundColor = ViewUtil.getColor(R.color.shadow);
+    private static final int transparentColor = ViewUtil.getColor(R.color.transparent);
+
     private List<HintHighlightTarget> targets;
     private ViewGroup parent;
 
@@ -61,6 +65,27 @@ public class HintHighlighter extends FrameLayout {
             }
         }
         return null;
+    }
+
+    public void setShadowEnabled(boolean enabled, boolean animate) {
+        if(!animate) {
+            setBackgroundColor(enabled ? backgroundColor:transparentColor);
+            return;
+        }
+
+        int colorFrom = (enabled ? transparentColor:backgroundColor);
+        int colorTo = (enabled ? backgroundColor:transparentColor);
+
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.setDuration(250);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                setBackgroundColor((int) animator.getAnimatedValue());
+            }
+
+        });
+        colorAnimation.start();
     }
 
     public void addPulsingTarget(View view) {
