@@ -86,6 +86,10 @@ public class Scheduler {
             int sessionId = session.getId();
             Log.i(tag, "Scheduling notifications for " + visitId + "." + sessionId);
 
+            if(session.isOver()) {
+                continue;
+            }
+
             if (session.getScheduledTime().isAfterNow()) {
                 notificationManager.scheduleNotification(sessionId, NotificationTypes.TestTake, session.getScheduledTime());
             }
