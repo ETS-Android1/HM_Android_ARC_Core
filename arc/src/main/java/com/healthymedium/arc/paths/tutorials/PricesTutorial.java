@@ -425,7 +425,7 @@ public class PricesTutorial extends Tutorial {
             }
         };
 
-        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink,10000);
+        handlerWhatDoYouThink.post(runnableWhatDoYouThink);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
