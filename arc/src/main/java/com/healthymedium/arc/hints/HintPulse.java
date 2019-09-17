@@ -40,14 +40,16 @@ public class HintPulse extends View{
     }
 
     void process(){
-        width = view.getWidth();
-        height = view.getHeight();
+        int halfWidth = strokeWidth/2;
+
+        width = view.getWidth()+halfWidth;
+        height = view.getHeight()+halfWidth;
 
         int locations[] = new int[2];
         view.getLocationOnScreen(locations);
 
-        x = locations[0];
-        y = locations[1];
+        x = locations[0]-halfWidth;
+        y = locations[1]-halfWidth;
 
         boolean radiusMatchesWidth = isApproximatelyEqual(radius,width/2,20);
         boolean radiusMatchesHeight = isApproximatelyEqual(radius,height/2,20);
@@ -67,7 +69,7 @@ public class HintPulse extends View{
         if(isCircle){
             canvas.drawCircle((width+strokeWidth)/2,(height+strokeWidth)/2, radius, paint);
         } else {
-            RectF rect = new RectF(0,0, width, height);
+            RectF rect = new RectF(halfWidth,halfWidth, width, height);
             canvas.drawRoundRect(rect, radius, radius, paint);
         }
 
