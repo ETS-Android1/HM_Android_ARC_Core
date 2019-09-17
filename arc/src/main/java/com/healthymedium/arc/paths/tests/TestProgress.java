@@ -36,6 +36,9 @@ public class TestProgress extends BaseFragment {
     int percentageFrom;
     int percentageTo;
 
+    boolean wasPaused = false;
+    boolean ready = false;
+
     public TestProgress(String header, int index) {
         this.headerText = header;
         this.testNumber = String.valueOf(index+1);
@@ -92,13 +95,38 @@ public class TestProgress extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        if(wasPaused) {
+            checkExit();
+            return;
+        }
+
         circleProgressView.setProgress(percentageTo,true);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Study.openNextFragment();
+                ready = true;
+                checkExit();
             }
         },5000);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        wasPaused = true;
+    }
+
+    private void checkExit() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(ready && isVisible()) {
+                    Study.openNextFragment();
+                }
+            }
+        },100);
+    }
+
 
 }
