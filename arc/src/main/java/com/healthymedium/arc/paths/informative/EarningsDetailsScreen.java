@@ -45,6 +45,7 @@ public class EarningsDetailsScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_earnings_details, container, false);
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setEnabled(false);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

@@ -82,6 +82,7 @@ public class EarningsScreen extends BaseFragment {
         boolean isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setEnabled(false);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
