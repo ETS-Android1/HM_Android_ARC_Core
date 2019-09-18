@@ -8,7 +8,7 @@ public class TestProctor extends NotificationType {
 
     public TestProctor(){
         super();
-        id = 8;
+        id = -1;
         channelId = "TEST_PROCTOR_SERVICE";
         channelName = "Test Proctor Service";
         channelDesc = "Handles time critical notifications for testing";

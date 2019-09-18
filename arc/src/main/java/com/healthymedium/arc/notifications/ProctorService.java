@@ -112,7 +112,8 @@ public class ProctorService extends Service {
         String packageName = getPackageName();
         Intent intent = packageManager.getLaunchIntentForPackage(packageName);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        int notificationId = NotificationTypes.TestProctor.getId();
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NotificationTypes.TestProctor.getChannelId())
                 .setContentTitle(ViewUtil.getString(R.string.notification_testproctor_header))
@@ -123,7 +124,7 @@ public class ProctorService extends Service {
                 .setOngoing(true);
 
         Notification notification = builder.build();
-        startForeground(1, notification);
+        startForeground(notificationId, notification);
     }
 
     private void stopForegroundService() {
