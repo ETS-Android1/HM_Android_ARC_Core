@@ -159,6 +159,7 @@ public class EarningsScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
+        refreshLayout.setProgressViewOffset(true, 0,top+ViewUtil.dpToPx(16));
     }
 
     private void populateViews() {
