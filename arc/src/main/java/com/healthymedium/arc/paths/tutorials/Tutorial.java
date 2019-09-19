@@ -137,6 +137,7 @@ public class Tutorial extends BaseFragment {
                 endButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        endButton.setEnabled(false);
                         exit();
                     }
                 });
