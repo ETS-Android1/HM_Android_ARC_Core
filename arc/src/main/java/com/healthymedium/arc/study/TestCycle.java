@@ -4,6 +4,7 @@ import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.Log;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +147,22 @@ public class TestCycle {
             progress += ((float)day.getProgress()/numEntries);
         }
         return (int) progress;
+    }
+
+    public void shiftSchedule(int numDays) {
+        setActualStartDate(getScheduledStartDate().plusDays(numDays));
+        setActualEndDate(getScheduledEndDate().plusDays(numDays));
+
+        for(TestDay day : days) {
+            day.setStartTime(day.getStartTime().plusDays(numDays));
+            day.setEndTime(day.getEndTime().plusDays(numDays));
+
+            List<TestSession> sessions = day.getTestSessions();
+            for(TestSession session : sessions) {
+                LocalDate date = session.getPrescribedTime().plusDays(numDays).toLocalDate();
+                session.setScheduledDate(date);
+            }
+        }
     }
 
 }
