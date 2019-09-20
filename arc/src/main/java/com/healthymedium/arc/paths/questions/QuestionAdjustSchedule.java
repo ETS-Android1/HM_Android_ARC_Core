@@ -16,15 +16,14 @@ import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
+import com.healthymedium.arc.study.Scheduler;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -185,22 +184,12 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     }
 
     public void updateDates() {
-
         TestCycle cycle = Study.getCurrentTestCycle();
-        List<TestSession> sessions = cycle.getTestSessions();
+        Scheduler scheduler = Study.getScheduler();
 
-        Study.getScheduler().unscheduleNotifications(cycle);
-
-        for (int i = 0; i < sessions.size(); i++) {
-            LocalDate date = sessions.get(i).getPrescribedTime().plusDays(shiftDays).toLocalDate();
-            sessions.get(i).setScheduledDate(date);
-        }
-
-        int last = sessions.size()-1;
-        cycle.setActualStartDate(sessions.get(0).getScheduledTime());
-        cycle.setActualEndDate(sessions.get(last).getScheduledTime().plusDays(1));
-
-        Study.getScheduler().scheduleNotifications(cycle, false);
+        scheduler.unscheduleNotifications(cycle);
+        cycle.shiftSchedule(shiftDays);
+        scheduler.scheduleNotifications(cycle, false);
     }
 
     public void enableNextButton() {

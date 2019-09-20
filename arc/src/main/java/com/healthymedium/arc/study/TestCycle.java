@@ -150,9 +150,6 @@ public class TestCycle {
     }
 
     public void shiftSchedule(int numDays) {
-        setActualStartDate(getScheduledStartDate().plusDays(numDays));
-        setActualEndDate(getScheduledEndDate().plusDays(numDays));
-
         for(TestDay day : days) {
             day.setStartTime(day.getStartTime().plusDays(numDays));
             day.setEndTime(day.getEndTime().plusDays(numDays));
@@ -163,6 +160,10 @@ public class TestCycle {
                 session.setScheduledDate(date);
             }
         }
+        List<TestSession> sessions = getTestSessions();
+        int last = sessions.size()-1;
+        setActualStartDate(sessions.get(0).getScheduledTime());
+        setActualEndDate(sessions.get(last).getScheduledTime().plusDays(1));
     }
 
 }
