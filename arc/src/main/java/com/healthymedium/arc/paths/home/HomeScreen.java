@@ -133,7 +133,8 @@ public class HomeScreen extends BaseFragment {
         // HINT_POST_BASELINE - are we showing the post-baseline hints?
         // HINT_POST_PAID_TEST - are we showing the post-paid test hints?
         if (!Hints.hasBeenShown(HINT_TOUR) && Hints.hasBeenShown(HINT_FIRST_TEST)) {
-            if (!Hints.hasBeenShown(HINT_POST_BASELINE)) {
+            boolean isRightAfterPracticeTest = Study.getCurrentTestSession().getId()==1;
+            if (isRightAfterPracticeTest) {
                 showTourHints("", ViewUtil.getString(R.string.popup_tour), HINT_POST_BASELINE);
             } else {
                 showTourHints(ViewUtil.getString(R.string.popup_nicejob), ViewUtil.getString(R.string.button_next), HINT_POST_PAID_TEST);
