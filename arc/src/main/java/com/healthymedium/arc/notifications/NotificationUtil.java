@@ -153,6 +153,7 @@ public class NotificationUtil {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setContentTitle(context.getString(R.string.app_name))
                 .setContentText(type.getContent(node))
+                .setStyle(new NotificationCompat.BigTextStyle())
                 .setVibrate(new long[]{500,250,125,250})
                 .setAutoCancel(true)
                 .setColor(ContextCompat.getColor(context,R.color.primary))
