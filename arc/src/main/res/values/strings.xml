@@ -240,7 +240,7 @@
     <string name="home_body2">You will receive a notification later today when it\'s time to take your next test.</string>
 
     <string name="home_header3">&lt;b>You\'re done with today\'s tests.&lt;/b></string>
-    <string name="home_body3">We\'ll notify you tomorrow when it\'s time to take a test.</string>
+    <string name="home_body3">We\'ll notify you tomorrow between &lt;b>{TIME1} and {TIME2}&lt;/b> when it\'s time to take a test.</string>
 
     <string name="home_header4">&lt;b>There are no tests available right now.&lt;/b></string>
     <string name="home_body4">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. &lt;br /> &lt;br /> We\'ll notify you when it\'s time to take a test.</string>

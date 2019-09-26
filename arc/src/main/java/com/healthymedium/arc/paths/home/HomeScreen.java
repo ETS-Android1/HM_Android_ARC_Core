@@ -232,6 +232,12 @@ public class HomeScreen extends BaseFragment {
         else if (dayStartTime.isAfterNow()) {
             stringHeader = ViewUtil.getString(R.string.home_header3);
             stringSubheader = ViewUtil.getString(R.string.home_body3);
+
+            String start = JodaUtil.format(testDay.getStartTime(),R.string.format_time);
+            stringSubheader = ViewUtil.replaceToken(stringSubheader,R.string.token_time1,start);
+
+            String end = JodaUtil.format(testDay.getEndTime(),R.string.format_time);
+            stringSubheader = ViewUtil.replaceToken(stringSubheader,R.string.token_time2,end);
         }
         // Open the app, no test, still in a cycle
         else if (testCycle.getNumberOfTestsLeft() > 0) {
