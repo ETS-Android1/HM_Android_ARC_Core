@@ -50,23 +50,17 @@ public class QuestionSignature extends QuestionTemplate {
             @Override
             public void onSigned() {
                 //Event triggered when the pad is signed
-                enableNextButton();
+                buttonNext.setEnabled(true);
             }
 
             @Override
             public void onClear() {
                 //Event triggered when the pad is cleared
+                buttonNext.setEnabled(false);
             }
         });
 
         return view;
-    }
-
-    public void enableNextButton() {
-        if(!buttonNext.isEnabled()){
-            buttonNext.setEnabled(true);
-            onNextButtonEnabled(true);
-        }
     }
 
     @Override
