@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.home;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
@@ -87,16 +88,26 @@ public class HomeScreen extends BaseFragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
-                        beginTestHighlight.dismiss();
-                        beginTestHint.dismiss();
-                        bottomNavigationView.setEnabled(true);
-                        Hints.markShown(HINT_FIRST_TEST);
-                    }
+                    v.setEnabled(false);
                     NavigationManager.getInstance().removeController();
                     Study.getCurrentTestSession().markStarted();
                     Study.getParticipant().save();
                     Study.getStateMachine().save();
+
+                    if (!Hints.hasBeenShown(HINT_FIRST_TEST)) {
+                        Hints.markShown(HINT_FIRST_TEST);
+                        beginTestHint.dismiss();
+                        beginTestHighlight.dismiss();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                bottomNavigationView.setEnabled(true);
+                                Study.openNextFragment();
+                            }
+                        },500);
+                        return;
+                    }
+
                     Study.openNextFragment();
                 }
             });
