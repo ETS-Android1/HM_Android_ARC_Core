@@ -53,8 +53,6 @@ public class HomeScreen extends BaseFragment {
     protected TextView textViewHeader;
     protected TextView textViewSubheader;
     protected LinearLayout content;
-    protected FrameLayout frameLayoutContact;
-    protected TextView textViewContact;
 
     HintPointer tourHint;
     HintPointer beginTestHint;
@@ -69,19 +67,40 @@ public class HomeScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.template_landing, container, false);
 
-        determineStrings();
-
         landing_layout = view.findViewById(R.id.landing_layout);
-
         content = view.findViewById(R.id.linearLayoutContent);
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(Html.fromHtml(stringHeader));
-
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
+
+        setupDebug(view,R.id.textViewHeader);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        int top = view.getPaddingTop();
+        view.setPadding(0,top,0,0);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(tourHint!=null) {
+            tourHint.setVisibility(View.GONE);
+            tourHint.dismiss();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        determineStrings();
+        textViewHeader.setText(Html.fromHtml(stringHeader));
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
         boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
-
         if (isTestReady) {
             Button button = new Button(getContext());
             button.setText(Application.getInstance().getResources().getString(R.string.button_begin));
@@ -152,25 +171,6 @@ public class HomeScreen extends BaseFragment {
             }
         }
 
-        setupDebug(view,R.id.textViewHeader);
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        int top = view.getPaddingTop();
-        view.setPadding(0,top,0,0);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if(tourHint!=null) {
-            tourHint.setVisibility(View.GONE);
-            tourHint.dismiss();
-        }
     }
 
     private void determineStrings() {
