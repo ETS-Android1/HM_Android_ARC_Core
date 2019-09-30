@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
-import com.healthymedium.arc.utilities.Log;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
+import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.notifications.types.NotificationType;
@@ -28,6 +31,8 @@ public class Application extends android.app.Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Fabric.with(this, new Crashlytics());
+
         JodaTimeAndroid.init(this);
         VersionUtil.initialize(this);
         PreferencesManager.initialize(this);
