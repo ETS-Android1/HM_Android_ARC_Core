@@ -1,8 +1,10 @@
 package com.healthymedium.arc.core;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.healthymedium.arc.utilities.Log;
@@ -18,6 +20,7 @@ import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
         if(intent!=null) {
             Config.OPENED_FROM_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_NOTIFICATION,false);
             Config.OPENED_FROM_VISIT_NOTIFICATION = intent.getBooleanExtra(Config.INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION,false);
+            boolean restart = intent.getBooleanExtra(Application.TAG_RESTART,false);
+            if(restart){
+                PreferencesManager.getInstance().putBoolean(Application.TAG_RESTART,true);
+                Log.i("MainActivity","APPLICATION_RESTART = "+restart);
+            }
         }
         Log.i("MainActivity","OPENED_FROM_NOTIFICATION = "+Config.OPENED_FROM_NOTIFICATION);
         Log.i("MainActivity","OPENED_FROM_VISIT_NOTIFICATION = "+Config.OPENED_FROM_VISIT_NOTIFICATION);
@@ -87,6 +95,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void setup(){
         NavigationManager.initialize(getSupportFragmentManager());
+
+        if(PreferencesManager.getInstance().getBoolean(Application.TAG_RESTART,false)){
+            PreferencesManager.getInstance().putBoolean(Application.TAG_RESTART,false);
+
+            String body = getString(R.string.low_memory_restart_dialogue_body);
+            String appName = getString(R.string.app_name);
+            body = ViewUtil.replaceToken(body,R.string.token_app_name,appName);
+
+            new AlertDialog.Builder(this)
+                    .setCancelable(true)
+                    .setTitle(getString(R.string.low_memory_restart_dialogue_header))
+                    .setMessage(body)
+                    .setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
+
         if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE){
             NavigationManager.getInstance().open(new SplashScreen());
             return;
