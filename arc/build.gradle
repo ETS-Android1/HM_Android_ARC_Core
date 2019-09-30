@@ -41,6 +41,17 @@ android {
         }
     }
 
+    productFlavors {
+        prod {
+
+        }
+        qa {
+
+        }
+        dev {
+
+        }
+    }
 }
 
 dependencies {
