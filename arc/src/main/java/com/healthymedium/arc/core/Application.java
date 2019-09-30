@@ -1,6 +1,8 @@
 package com.healthymedium.arc.core;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
@@ -25,6 +27,8 @@ import java.util.List;
 public class Application extends android.app.Application {
 
     private static final String tag = "Application";
+    public static final String TAG_RESTART = "TAG_APPLICATION_RESTARTING";
+
     static Application instance;
 
     @Override
@@ -125,6 +129,18 @@ public class Application extends android.app.Application {
     public void onLowMemory() {
         Log.w(tag,"onLowMemory");
         super.onLowMemory();
+    }
+
+    public void restart() {
+        Context context = instance;
+        PackageManager packageManager = context.getPackageManager();
+        String packageName = context.getPackageName();
+        Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+
+        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(TAG_RESTART, true);
+        instance.startActivity(intent);
+        Runtime.getRuntime().exit(0);
     }
 
     public static Application getInstance(){
