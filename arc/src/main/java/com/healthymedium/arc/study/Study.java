@@ -2,7 +2,9 @@ package com.healthymedium.arc.study;
 
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.healthymedium.arc.api.RestClient;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 //import com.healthymedium.arc.study.PrivacyPolicy;
@@ -331,11 +333,22 @@ public class Study{
     }
 
     public static PathSegmentData getCurrentSegmentData() {
-        return stateMachine.cache.segments.get(0).dataObject;
+        try {
+            return stateMachine.cache.segments.get(0).dataObject;
+        } catch (IndexOutOfBoundsException e) {
+            Crashlytics.logException(e);
+            Application.getInstance().restart();
+            return new PathSegmentData();
+        }
     }
 
     public static void setCurrentSegmentData(Object object) {
-        stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
+        try {
+            stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
+        } catch (IndexOutOfBoundsException e) {
+            Crashlytics.logException(e);
+            Application.getInstance().restart();
+        }
     }
 
     // operations ----------------------------------------------------------------------------------
