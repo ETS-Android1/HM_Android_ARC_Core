@@ -1,4 +1,4 @@
-package com.healthymedium.test_data;
+package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.study.CircadianClock;
 import org.junit.Assert;

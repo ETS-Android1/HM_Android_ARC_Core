@@ -26,5 +26,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':arc')
+//    implementation project(':arc')
+    implementation 'junit:junit:4.12'
 }

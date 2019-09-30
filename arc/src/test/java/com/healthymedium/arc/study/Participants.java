@@ -1,10 +1,8 @@
-package com.healthymedium.test_data;
+package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
-
-import org.junit.Assert;
 
 public class Participants {
 
