@@ -518,4 +518,9 @@
 
     <string name="money_prefix">$</string>
     <string name="money_suffix"></string>
+
+    <string name="low_memory_toast">Please close other apps to improve performance.</string>
+    <string name="low_memory_restart_dialogue_header">Oops</string>
+    <string name="low_memory_restart_dialogue_body">{APP_NAME} was forced to close due to low memory on your device. For the best performance, please close other apps before starting a test session.\n\nIf you continue to see this message, please contact your study coordinator.</string>
+
 </resources>
