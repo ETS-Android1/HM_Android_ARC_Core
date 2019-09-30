@@ -75,7 +75,7 @@ public class GridTutorial extends Tutorial {
 
     Handler remindMeHandler = new Handler();
     Handler firstGridReminderHandler = new Handler();
-    Handler handler;
+    Handler handler = new Handler();
 
     // Run after the user has studied the initial layout of the items in the grid
     // Advances the user to setInitialLetterLayout(), the letter tapping test
@@ -89,7 +89,6 @@ public class GridTutorial extends Tutorial {
                 public void onClick(View view) {
                     partTwoHint.dismiss();
 
-                    Handler handler = new Handler();
                     Runnable runnable = new Runnable() {
                         @Override
                         public void run() {
@@ -128,7 +127,6 @@ public class GridTutorial extends Tutorial {
                 public void onClick(View view) {
                     niceWorkHint.dismiss();
 
-                    Handler handler = new Handler();
                     Runnable runnable = new Runnable() {
                         @Override
                         public void run() {
@@ -161,6 +159,17 @@ public class GridTutorial extends Tutorial {
         }
     };
 
+    Runnable otherTwoRunnable = new Runnable() {
+        @Override
+        public void run() {
+            otherTwoHint.dismiss();
+            gridHighlight.dismiss();
+
+            // If no response for 5 seconds after the hint has disappeared then show another hint
+            remindMeHandler.postDelayed(remindMeRunnable, 5000);
+        }
+    };
+
     public GridTutorial() {
         setTransitionSet(TransitionSet.getFadingDefault(true));
     }
@@ -186,6 +195,21 @@ public class GridTutorial extends Tutorial {
                 public boolean onSelected(GridBoxView view, boolean selected) {
                     view.setSelectable(false);
 
+                    Integer tag = (Integer) view.getTag();
+                    if(tag!=null) {
+                        switch (tag) {
+                            case 24:
+                                image24Selected = true;
+                                break;
+                            case 33:
+                                image33Selected = true;
+                                break;
+                            case 41:
+                                image41Selected = true;
+                                break;
+                        }
+                    }
+
                     selectedCount++;
 
                     firstGridReminderHandler.removeCallbacks(firstGridReminderRunnable);
@@ -197,15 +221,31 @@ public class GridTutorial extends Tutorial {
                     remindMeTapHighlight.dismiss();
 
                     hideGridImages();
+                    if (selectedCount == 1) {
+                        gridHighlight.addTarget(gridLayout, 10, 10);
+                        otherTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox));
+                        otherTwoHint.show();
+                        gridHighlight.show();
+
+                        handler.postDelayed(otherTwoRunnable, 3000);
+                        return true;
+                    }
+
+                    if (selectedCount == 2) {
+                        otherTwoHint.dismiss();
+                        gridHighlight.dismiss();
+                        // If no response for 5 seconds after selection then show a hint
+                        remindMeHandler.postDelayed(remindMeRunnable, 5000);
+                        return true;
+                    }
+
                     if (selectedCount == 3) {
                         incrementProgress();
                         setGridsSelectable(false);
                         fadeOutView(gridLayout);
                         fadeOutView(textViewInstructions);
                         showComplete();
-                    } else {
-                        // If no response for 5 seconds after selection then show a hint
-                        remindMeHandler.postDelayed(remindMeRunnable, 5000);
+                        return true;
                     }
 
                     return true;
@@ -298,20 +338,25 @@ public class GridTutorial extends Tutorial {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 setInitialItemLayout();
             }
         },1200);
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         closeButton.setEnabled(false);
+
+                        handler.removeCallbacksAndMessages(null);
+                        remindMeHandler.removeCallbacksAndMessages(null);
+                        firstGridReminderHandler.removeCallbacksAndMessages(null);
+
                         welcomeHighlight.dismiss();
                         welcomeHint.dismiss();
 
@@ -356,7 +401,6 @@ public class GridTutorial extends Tutorial {
             public void onClick(View view) {
                 itemsHint.dismiss();
 
-                Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
@@ -392,7 +436,6 @@ public class GridTutorial extends Tutorial {
                 gridsHint.dismiss();
                 fadeOutView(fullScreenGray);
 
-                Handler handler = new Handler();
                 handler.postDelayed(runnableProceedToPartTwo,3000);
             }
         };
@@ -417,7 +460,7 @@ public class GridTutorial extends Tutorial {
             ((TextView)gridLayoutLetters.getChildAt(i)).setTypeface(font);
         }
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 pulsateF.addPulsingTarget(tapThisF,22);
@@ -474,7 +517,6 @@ public class GridTutorial extends Tutorial {
 
     // Responds to letter that are tapped, changes their color
     private void tapLetters() {
-        handler = new Handler();
         handler.postDelayed(runnableTapTheFs,8000);
 
         View.OnTouchListener listener = new View.OnTouchListener() {
@@ -522,7 +564,6 @@ public class GridTutorial extends Tutorial {
             public void onClick(View view) {
                 secondItemsHint.dismiss();
 
-                Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
@@ -572,7 +613,7 @@ public class GridTutorial extends Tutorial {
                     remindMeTapHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox2));
                 }
 
-                new Handler().postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         remindMeTapHint.show();
@@ -585,78 +626,9 @@ public class GridTutorial extends Tutorial {
         remindMeHint.setText(ViewUtil.getString(R.string.popup_tutorial_needhelp));
         remindMeHint.addButton(ViewUtil.getString(R.string.popup_tutorial_remindme), remindMeListener);
 
-        View.OnTouchListener image33Listener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN) {
-                    image33Selected = true;
-                }
-                return false;
-            }
-        };
-
-//                int action = event.getAction();
-//                switch (action){
-//                    case MotionEvent.ACTION_DOWN:
-//                        getImageView(2,2).removeImage();
-//                        image33Selected = true;
-//
-//                        // Now tap on the locations of the other two items.
-//                        if (neededInitialHint) {
-//                            Handler handler = new Handler();
-//                            Runnable runnable = new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    gridHighlight.addTarget(gridLayout, 10, 10);
-//                                    otherTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox));
-//                                    otherTwoHint.show();
-//                                    gridHighlight.show();
-//
-//                                    // Disappear after a few seconds
-//                                    Handler handler = new Handler();
-//                                    Runnable runnable = new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            otherTwoHint.dismiss();
-//                                            gridHighlight.dismiss();
-//
-//                                            // If no response for 5 seconds after the hint has disappeared then show another hint
-//                                            remindMeHandler.postDelayed(remindMeRunnable, 5000);
-//                                        }
-//                                    };
-//                                    handler.postDelayed(runnable, 3000);
-//                                }
-//                            };
-//                            handler.postDelayed(runnable, 1000);
-//                        }
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        break;
-
-
-        View.OnTouchListener image24Listener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN) {
-                    image24Selected = true;
-                }
-                return false;
-            }
-        };
-
-        View.OnTouchListener image41Listener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN) {
-                    image41Selected = true;
-                }
-                return false;
-            }
-        };
-
-        gridLayout.getChildAt(8).setOnTouchListener(image24Listener);
-        gridLayout.getChildAt(12).setOnTouchListener(image33Listener);
-        gridLayout.getChildAt(15).setOnTouchListener(image41Listener);
+        gridLayout.getChildAt(8).setTag(24);
+        gridLayout.getChildAt(12).setTag(33);
+        gridLayout.getChildAt(15).setTag(41);
     }
 
     // Determines which items to highlight for the remind me hints in the grid recall
