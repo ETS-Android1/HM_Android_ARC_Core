@@ -61,6 +61,9 @@ public class SymbolTutorial extends Tutorial {
     HintHighlighter finalTilesPulsate;
     HintPointer finalPointer;
 
+    HintPointer greatJobHint;
+    HintPointer niceHint;
+
     public SymbolTutorial() {
         setTransitionSet(TransitionSet.getFadingDefault(true));
     }
@@ -205,6 +208,14 @@ public class SymbolTutorial extends Tutorial {
                         finalTilesOutline.dismiss();
                         finalTilesPulsate.dismiss();
                         finalPointer.dismiss();
+
+                        if(greatJobHint!=null){
+                            greatJobHint.dismiss();
+                        }
+
+                        if(niceHint!=null){
+                            niceHint.dismiss();
+                        }
 
                         exit();
                     }
@@ -364,7 +375,7 @@ public class SymbolTutorial extends Tutorial {
                 buttonBottom2.setOnClickListener(null);
                 incrementProgress();
 
-                final HintPointer greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
+                greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 greatJobHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
 
                 View.OnClickListener listener = new View.OnClickListener() {
@@ -440,7 +451,7 @@ public class SymbolTutorial extends Tutorial {
                 buttonBottom2.setOnClickListener(null);
                 incrementProgress();
 
-                final HintPointer niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
+                niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 niceHint.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
 
                 View.OnClickListener listener = new View.OnClickListener() {
