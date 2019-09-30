@@ -41,24 +41,13 @@ android {
         }
     }
 
-    productFlavors {
-        prod {
-
-        }
-        qa {
-
-        }
-        dev {
-
-        }
-
-    }
-
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.github.gcacace:signature-pad:1.2.1'
+
+    testImplementation project(':test_data')
     testImplementation 'junit:junit:4.12'
     testImplementation 'joda-time:joda-time:2.9.9'
 

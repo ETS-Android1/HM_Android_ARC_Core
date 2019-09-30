@@ -1,7 +1,5 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.arc.api.models.TestSchedule;
-import com.healthymedium.arc.presets.CircadianClocks;
 import com.healthymedium.arc.presets.Participants;
 import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.utilities.Log;
