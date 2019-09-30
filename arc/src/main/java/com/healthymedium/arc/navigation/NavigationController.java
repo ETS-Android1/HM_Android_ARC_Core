@@ -3,11 +3,15 @@ package com.healthymedium.arc.navigation;
 import android.os.SystemClock;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.misc.TransitionSet;
 
 public class NavigationController {
+
+    protected static String tag = "NavigationController";
 
     protected FragmentManager fragmentManager;
     protected Listener listener;
@@ -90,10 +94,14 @@ public class NavigationController {
     }
 
     public void clearBackStack() {
-        int count = fragmentManager.getBackStackEntryCount();
-        for (int i = 0; i < count; i++) {
-            int id = fragmentManager.getBackStackEntryAt(i).getId();
-            fragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        try {
+            int count = fragmentManager.getBackStackEntryCount();
+            for (int i = 0; i < count; i++) {
+                int id = fragmentManager.getBackStackEntryAt(i).getId();
+                fragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            }
+        } catch (IllegalStateException e) {
+            Crashlytics.log(Log.WARN,tag,e.getMessage());
         }
     }
 
