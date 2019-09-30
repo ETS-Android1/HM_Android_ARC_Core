@@ -6,6 +6,7 @@
     <string name="token_time">{TIME}</string>
     <string name="token_unit">{UNIT}</string>
 
+    <string name="token_app_name">{APP_NAME}</string>
     <string name="token_date1">{DATE1}</string>
     <string name="token_date2">{DATE2}</string>
     <string name="token_time1">{TIME1}</string>
