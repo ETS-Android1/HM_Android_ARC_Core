@@ -17,15 +17,12 @@ android {
     }
 
     buildTypes {
-        prod {
+        debug {
+
+        }
+        release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        qa {
-            debuggable true
-        }
-        dev {
-            debuggable true
         }
     }
 
