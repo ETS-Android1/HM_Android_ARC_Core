@@ -111,9 +111,9 @@
     <string name="chronotype_body1">Answer questions in regard to your sleep and wake behavior on work and work-free days.&lt;br />&lt;br />&lt;i>Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.&lt;/i></string>
 
     <string name="popup_tab_home">&lt;b>This is the Home tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Check here to see if it\'s time to take a test.</string>
-    <string name="popup_tab_progress">&lt;b>This is the Progress tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;Tap here to see where you are in the testing week.</string>
+    <string name="popup_tab_progress">&lt;b>This is the Progress tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;See where you are in the testing week.</string>
     <string name="popup_tab_earnings">&lt;b>This is the Earnings tab.&lt;/b>&lt;br /&gt;&lt;br /&gt;See what you\'ve earned and how to get bonuses.</string>
-    <string name="popup_tab_resources">&lt;b>Questions?&lt;/b>&lt;br /&gt;&lt;br /&gt;Find more information in the resources tab.</string>
+    <string name="popup_tab_resources">&lt;b>Questions?&lt;/b>&lt;br /&gt;&lt;br /&gt;Change your availability, contact your study coordinator, and more in the Resources tab.</string>
     <string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b>&lt;br /&gt;&lt;br /&gt;Let\'s take a look at the rest of the app.</string>
 
     <string name="day_abbrev_sun">S</string>
@@ -271,7 +271,7 @@
 
     <string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
 
-    <string name="about_header">About this App</string>
+    <string name="about_header">About This App</string>
 
     <string name="faq_header">Frequently Asked Questions Topics</string>
     <string name="faq_testing">Testing</string>
@@ -319,7 +319,7 @@
     <string name="faq_earnings_q4">What\'s the different between "this week" and "study total"?</string>
     <string name="faq_earnings_q5">How do bonus goals work?</string>
     <string name="faq_earnings_a1">You can earn up to $32 per 7-day testing cycle for as long as you are in the study. You earn $0.50 for each test you complete (up to $14 per cycle). You also can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests.</string>
-    <string name="faq_earnings_a2">Your payment will be processed immediately upon completion of a testing cycle. It may take up to [X] business days for your payment to be processed. Please contact your study coordinator if you have any questions about when you will receive your payment.</string>
+    <string name="faq_earnings_a2">Your payment will be processed immediately upon completion of a testing cycle. It may take several business days for your payment to be processed. Please contact your study coordinator if you have any questions about when you will receive your payment.</string>
     <string name="faq_earnings_a3">You will be paid via an electronic Amazon gift card.</string>
     <string name="faq_earnings_a4">"This week" refers to the amount of money you have earned during the current testing cycle. "Study total" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
     <string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
