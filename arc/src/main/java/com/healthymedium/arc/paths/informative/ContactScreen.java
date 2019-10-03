@@ -23,7 +23,6 @@ import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
 
 public class ContactScreen extends BaseFragment {
 
-    String stringHeader;
     String stringPhoneNumber;
 
     TextView textViewBack;
@@ -39,8 +38,7 @@ public class ContactScreen extends BaseFragment {
     Button emailButton;
 
     public ContactScreen() {
-        stringHeader = "I would like to <b>contact study site</b>.";
-        stringPhoneNumber = PreferencesManager.getInstance().getString(TAG_CONTACT_INFO ,"555-555-5555");
+        stringPhoneNumber = PreferencesManager.getInstance().getString(TAG_CONTACT_INFO ,ViewUtil.getString(R.string.contact_phone_default));
         allowBackPress(false);
         setTransitionSet(TransitionSet.getSlidingDefault());
 
@@ -52,7 +50,7 @@ public class ContactScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(Html.fromHtml(stringHeader));
+        textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.contact_call1)));
 
         textViewPhoneNumber = view.findViewById(R.id.textViewSubHeader);
         textViewPhoneNumber.setText(stringPhoneNumber);
@@ -61,7 +59,7 @@ public class ContactScreen extends BaseFragment {
         textViewEmailHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.contact_email1)));
 
         textViewEmailAddress = view.findViewById(R.id.textViewEmailSubHeader);
-        textViewEmailAddress.setText("sample@email.com");
+        textViewEmailAddress.setText(ViewUtil.getString(R.string.contact_email_default));
 
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
@@ -87,9 +85,9 @@ public class ContactScreen extends BaseFragment {
         emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String number = stringPhoneNumber.replace("-","");
-//                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
-//                startActivity(intent);
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto",ViewUtil.getString(R.string.contact_email_default), null));
+                startActivity(Intent.createChooser(intent,""));
             }
         });
 
