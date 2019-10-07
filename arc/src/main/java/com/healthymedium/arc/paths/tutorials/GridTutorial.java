@@ -240,6 +240,9 @@ public class GridTutorial extends Tutorial {
                     }
 
                     if (selectedCount == 3) {
+                        remindMeHandler.removeCallbacksAndMessages(null);
+                        handler.removeCallbacksAndMessages(null);
+
                         incrementProgress();
                         setGridsSelectable(false);
                         fadeOutView(gridLayout);
