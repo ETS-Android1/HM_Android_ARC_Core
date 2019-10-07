@@ -36,8 +36,10 @@
                 android:layout_marginTop="120dp"
                 android:layout_marginRight="32dp"
                 android:text="Today's Progress"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
-                android:textSize="26dp" />
+                android:textSize="26dp"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:id="@+id/linearLayout"
