@@ -1,7 +1,6 @@
 package com.healthymedium.arc.paths.home;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -10,13 +9,15 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.paths.informative.ChangeAvailabilityScreen;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.JodaUtil;
@@ -53,6 +54,8 @@ public class HomeScreen extends BaseFragment {
     protected TextView textViewHeader;
     protected TextView textViewSubheader;
     protected LinearLayout content;
+    protected RelativeLayout rootView;
+    protected TextView textViewAvailability;
 
     HintPointer tourHint;
     HintPointer beginTestHint;
@@ -67,10 +70,32 @@ public class HomeScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.template_landing, container, false);
 
+        rootView = view.findViewById(R.id.rootView);
         landing_layout = view.findViewById(R.id.landing_layout);
         content = view.findViewById(R.id.linearLayoutContent);
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
+
+        textViewAvailability = new TextView(getContext());
+        textViewAvailability.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangeAvailabilityScreen screen = new ChangeAvailabilityScreen();
+                NavigationManager.getInstance().open(screen);
+            }
+        });
+        textViewAvailability.setVisibility(View.GONE);
+        textViewAvailability.setTextColor(ViewUtil.getColor(R.color.primary));
+        textViewAvailability.setTypeface(Fonts.robotoBold);
+        ViewUtil.underlineTextView(textViewAvailability);
+        textViewAvailability.setText(ViewUtil.getString(R.string.change_availability));
+
+        RelativeLayout.LayoutParams textViewLayoutParams = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+        textViewLayoutParams.bottomMargin = ViewUtil.dpToPx(26);
+        textViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        textViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        textViewAvailability.setLayoutParams(textViewLayoutParams);
+        rootView.addView(textViewAvailability);
 
         setupDebug(view,R.id.textViewHeader);
 
@@ -185,6 +210,7 @@ public class HomeScreen extends BaseFragment {
         }
 
         // Default
+        textViewAvailability.setVisibility(View.GONE);
         stringHeader = ViewUtil.getString(R.string.home_header1) + ViewUtil.getString(R.string.home_body1);
         stringSubheader = "";
 
@@ -227,6 +253,7 @@ public class HomeScreen extends BaseFragment {
             stringHeader = ViewUtil.getString(R.string.home_header4);
             stringSubheader = ViewUtil.replaceToken(ViewUtil.getString(R.string.home_body4),R.string.token_date1,startDateFmt);
             stringSubheader = ViewUtil.replaceToken(stringSubheader,R.string.token_date2,endDateFmt);
+            textViewAvailability.setVisibility(View.VISIBLE);
         }
         // After 4th test of the day
         else if (dayStartTime.isAfterNow()) {

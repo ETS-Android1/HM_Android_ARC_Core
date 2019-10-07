@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -49,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:textSize="26dp"
+                android:textSize="18dp"
                 tools:text="This is a subheader" />
 
             <LinearLayout
