@@ -138,7 +138,7 @@
     <string name="radio_commit">I commit to participate for the length of the study</string>
     <string name="radio_nocommit">I\'m NOT able to commit to this study</string>
     <string name="onboarding_nocommit_header">Thank you for your time.</string>
-    <string name="onboarding_nocommit_body">Your study coordinator will be notified that you do not wish to participate at this time. Your study coordinator may also contact you to confirm this information.</string>
+    <string name="onboarding_nocommit_body">Thank you for letting us know you are not able to commit to the study at this time. If you need any questions answered before continuing with the study, please contact the study team by clicking HELP in the upper right hand corner of the screen.</string>
     <string name="onboarding_commit_header">Thank you!</string>
     <string name="onboarding_commit_body">Your participation in this study and every task you complete contributes to advancing Alzheimer\'s Disease research.</string>
     <string name="onboarding_notifications_header1">A Note on Notifications</string>
