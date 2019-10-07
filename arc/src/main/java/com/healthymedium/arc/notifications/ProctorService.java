@@ -57,6 +57,7 @@ public class ProctorService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(intent == null) {
+            stopForegroundService();
             return START_STICKY;
         }
 
@@ -65,11 +66,11 @@ public class ProctorService extends Service {
 
         switch (action) {
             case ACTION_START_SERVICE:
+                startForegroundService();
                 if(serviceHandler!=null){
                     Log.d(tag, "service handler is not null, exiting");
                     break;
                 }
-                startForegroundService();
                 serviceHandler = new ProctorServiceHandler(listener);
                 serviceHandler.start();
                 ProctorWatchdogJob.start(this);
