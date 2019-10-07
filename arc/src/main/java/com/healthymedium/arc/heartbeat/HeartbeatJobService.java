@@ -2,6 +2,8 @@ package com.healthymedium.arc.heartbeat;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.RestClient;
@@ -22,7 +24,9 @@ public class HeartbeatJobService extends JobService {
         Log.i(tag,"onStartJob");
 
         if(!Config.REST_HEARTBEAT){
-            checkUploadQueue();
+            if(!Application.getInstance().isVisible()) {
+                checkUploadQueue();
+            }
             return true;
         }
 
@@ -31,7 +35,9 @@ public class HeartbeatJobService extends JobService {
         HeartbeatManager.getInstance().tryHeartbeat(getRestClient(), participantId, new HeartbeatManager.Listener() {
             @Override
             public void onSuccess(boolean tried) {
-                checkUploadQueue();
+                if(!Application.getInstance().isVisible()) {
+                    checkUploadQueue();
+                }
             }
 
             @Override
