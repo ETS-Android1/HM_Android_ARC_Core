@@ -90,8 +90,8 @@
     <string name="notification3_default">Your third test of the day is now available. Please complete this test by {TIME}.</string>
     <string name="notification4_default">The last test of the day is here! Finish strong by completing this test by {TIME}.</string>
     <string name="notification4_lastday">It\'s time to take your last test of the week! Please finish it by {TIME}. Your coordinator will contact you about your earnings shortly.</string>
-    <string name="notification_testproctor_header">Test Proctor Service Running</string>
-    <string name="notification_testproctor_body">This service ensures that you\'re notified when a test becomes available in the ARC app.</string>
+    <string name="notification_testproctor_header">Test Scheduler Service Running</string>
+    <string name="notification_testproctor_body">This ensures that you\'re notified of tests at the correct time.</string>
 
     <string name="button_viewfaq">VIEW FAQ</string>
     <string name="button_viewdetails">VIEW DETAILS</string>
