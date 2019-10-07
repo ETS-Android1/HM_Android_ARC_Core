@@ -1,5 +1,9 @@
 package com.healthymedium.arc.core;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,19 +28,20 @@ import net.danlew.android.joda.JodaTimeAndroid;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Application extends android.app.Application {
+public class Application extends android.app.Application implements LifecycleObserver {
 
     private static final String tag = "Application";
     public static final String TAG_RESTART = "TAG_APPLICATION_RESTARTING";
 
     static Application instance;
+    boolean visible = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
         Fabric.with(this, new Crashlytics());
-
         JodaTimeAndroid.init(this);
         VersionUtil.initialize(this);
         PreferencesManager.initialize(this);
@@ -141,6 +146,20 @@ public class Application extends android.app.Application {
         intent.putExtra(TAG_RESTART, true);
         instance.startActivity(intent);
         Runtime.getRuntime().exit(0);
+    }
+
+    public boolean isVisible(){
+        return visible;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStartForeground() {
+        visible = true;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStopForeground() {
+        visible = false;
     }
 
     public static Application getInstance(){
