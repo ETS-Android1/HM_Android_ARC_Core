@@ -126,6 +126,7 @@ public class StateMachineAlpha extends StateMachine {
         Participant participant = Study.getInstance().getParticipant();
 
         if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+            Log.i("StateMachine", "notifications are not enabled");
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }
@@ -188,6 +189,7 @@ public class StateMachineAlpha extends StateMachine {
         Participant participant = Study.getInstance().getParticipant();
 
         if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+            Log.i("StateMachine", "notifications are not enabled");
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }
