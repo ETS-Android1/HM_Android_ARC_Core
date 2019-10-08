@@ -111,7 +111,7 @@ public class StateMachineAlpha extends StateMachine {
         if(participant.getState().currentTestCycle == 0){
             Log.i("StateMachine", "init finished, setting lifecycle to baseline");
             state.lifecycle = LIFECYCLE_BASELINE;
-        } else if(participant.getState().currentTestCycle == 4) {
+        } else if(participant.getCurrentTestCycle() == null) {
             Log.i("StateMachine", "init finished, setting lifecycle to over");
             state.lifecycle = LIFECYCLE_OVER;
         } else {
@@ -194,7 +194,7 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
-        if(participant.getState().currentTestCycle == 4) {
+        if(participant.getCurrentTestCycle() == null) {
             state.lifecycle = LIFECYCLE_OVER;
             decidePath();
             return;
