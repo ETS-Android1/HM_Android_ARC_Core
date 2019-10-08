@@ -126,7 +126,7 @@ public class Participant {
     }
 
     public TestCycle getCurrentTestCycle(){
-        if(state.testCycles.size()>0) {
+        if(state.testCycles.size() > state.currentTestCycle) {
             return state.testCycles.get(state.currentTestCycle);
         }
         return null;
