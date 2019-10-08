@@ -16,6 +16,8 @@ import static com.healthymedium.arc.notifications.types.TestMissed.TAG_TEST_MISS
 
 public class TestSession {
 
+    static private final String tag = "TestSession";
+
     private int dayIndex;               // The day in the cycle
     private int index;                  // Which test this is on a given day
     private int id;
@@ -62,16 +64,19 @@ public class TestSession {
     public void markCompleted() {
         completeTime = DateTime.now();
         finishedSession = true;
+        Log.i(tag,"markCompleted()");
     }
 
     public void markAbandoned() {
         completeTime = DateTime.now();
         finishedSession = false;
+        Log.i(tag,"markAbandoned()");
     }
 
     public void markMissed() {
         missedSession = true;
         finishedSession = false;
+        Log.i(tag,"markMissed()");
     }
 
     public int getProgress() {
@@ -87,6 +92,7 @@ public class TestSession {
     public void setProgress(int progress) {
         testPercentages.clear();
         testPercentages.add(progress);
+        Log.i(tag,"setProgress("+progress+")");
     }
 
     public DateTime getExpirationTime() {
@@ -109,6 +115,7 @@ public class TestSession {
 
     public void setScheduledDate(LocalDate scheduledDate) {
         this.scheduledDate = scheduledDate;
+        Log.i(tag,"setScheduledDate()");
     }
 
     public DateTime getPrescribedTime() {
@@ -117,6 +124,8 @@ public class TestSession {
 
     public void setPrescribedTime(DateTime prescribedTime) {
         this.prescribedTime = prescribedTime;
+        Log.i(tag,"setPrescribedTime()");
+
     }
 
     public DateTime getStartTime() {
@@ -130,10 +139,12 @@ public class TestSession {
         if(PreferencesManager.getInstance()!=null) {
             PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, 0);
         }
+        Log.i(tag,"markStarted()");
+
     }
 
     public void addTestData(BaseTest data) {
-        Log.i("TestSession","addTestData("+data.getClass().getName()+")");
+        Log.i(tag,"addTestData("+data.getClass().getName()+")");
         testData.add(data);
         testPercentages.add(data.getProgress(finishedSession));
     }
@@ -173,11 +184,13 @@ public class TestSession {
 
     public void markInterrupted(boolean interrupted) {
         this.interrupted = interrupted?1:0;
+        Log.i(tag,"markInterrupted("+interrupted+")");
     }
 
     public void purgeData(){
         testData.clear();
         interrupted = -99;
+        Log.i(tag,"purgeData()");
     }
 
 }
