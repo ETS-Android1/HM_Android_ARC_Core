@@ -42,6 +42,7 @@ public class RadioButton extends FrameLayout {
         View view = inflate(context,R.layout.custom_radio_button,this);
         radioButton = view.findViewById(R.id.radioButton);
         radioButton.setText(text);
+        radioButton.setTypeface(Fonts.robotoMedium);
 
         frameLayoutRadioButton = view.findViewById(R.id.frameLayoutRadioButton);
         paddingLeft = frameLayoutRadioButton.getPaddingLeft();

@@ -41,6 +41,7 @@ public class CheckBox extends FrameLayout {
         View view = inflate(context,R.layout.custom_checkbox,this);
         checkBox = view.findViewById(R.id.checkBox);
         checkBox.setText(text);
+        checkBox.setTypeface(Fonts.robotoMedium);
 
         frameLayoutCheckBox = view.findViewById(R.id.frameLayoutCheckBox);
         paddingLeft = frameLayoutCheckBox.getPaddingLeft();
