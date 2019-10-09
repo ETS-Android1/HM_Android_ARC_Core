@@ -28,9 +28,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:height="32dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
                 android:textSize="26dp"
+                android:textStyle="bold"
                 tools:text="This is a header" />
 
             <TextView
@@ -48,9 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:height="26dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 tools:text="This is a subheader" />
 
             <LinearLayout
