@@ -73,7 +73,7 @@
     <string name="language_prefer">Please select your &lt;b>preferred language.&lt;/b></string>
 
     <string name="gen_welcome_key">Welcome to the &lt;b>ARC App&lt;/b></string>
-    <string name="bysigning_key">By signing in you agree to our </string>
+    <string name="bysigning_key">By signing in you agree to our Privacy Policy.</string>
     <string name="privacy_linked">Privacy Policy</string>
 
     <string name="login_enter_raterID">Please enter the\n &lt;b>Site Code&lt;/b> below.</string>
