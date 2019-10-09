@@ -55,10 +55,10 @@ public class CheckBox extends FrameLayout {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     frameLayoutCheckBox.setBackgroundResource(R.drawable.background_checkbox_rounded);
-                    checkBox.setTypeface(Fonts.robotoBold);
+                    checkBox.setTypeface(Fonts.robotoBlack);
                 } else {
                     frameLayoutCheckBox.setBackgroundResource(R.drawable.background_checkbox_rounded_unselected);
-                    checkBox.setTypeface(Fonts.roboto);
+                    checkBox.setTypeface(Fonts.robotoMedium);
                 }
                 frameLayoutCheckBox.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
                 listener.onCheckedChanged(compoundButton, b);

@@ -65,10 +65,10 @@ public class RadioButton extends FrameLayout {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     frameLayoutRadioButton.setBackgroundResource(R.drawable.background_accent_rounded);
-                    radioButton.setTypeface(Fonts.robotoBold);
+                    radioButton.setTypeface(Fonts.robotoBlack);
                 } else {
                     frameLayoutRadioButton.setBackgroundResource(R.drawable.btn_border_unselected);
-                    radioButton.setTypeface(Fonts.roboto);
+                    radioButton.setTypeface(Fonts.robotoMedium);
                 }
                 frameLayoutRadioButton.setPadding(paddingLeft,paddingTop,paddingRight,paddingBottom);
                 compoundButton.setChecked(b);

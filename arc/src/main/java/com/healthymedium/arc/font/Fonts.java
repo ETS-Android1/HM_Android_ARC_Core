@@ -11,6 +11,7 @@ public class Fonts {
     public static Typeface roboto;
     public static Typeface robotoMedium;
     public static Typeface robotoBold;
+    public static Typeface robotoBlack;
 
     public static void load(){
         if(loaded){
@@ -24,6 +25,7 @@ public class Fonts {
             roboto = fontFactory.getFont("fonts/Roboto-Regular.ttf");
             robotoMedium = fontFactory.getFont("fonts/Roboto-Medium.ttf");
             robotoBold = fontFactory.getFont("fonts/Roboto-Bold.ttf");
+            robotoBlack = fontFactory.getFont("fonts/Roboto-Black.ttf");
 
             loaded = true;
         }
