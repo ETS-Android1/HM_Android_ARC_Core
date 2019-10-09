@@ -35,7 +35,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="120dp"
                 android:layout_marginRight="32dp"
-                android:text="Today's Progress"
+                android:text="@string/progress_schedule_header"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/white"
                 android:textSize="26dp"
