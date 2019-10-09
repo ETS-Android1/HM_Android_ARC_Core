@@ -10,7 +10,7 @@ public class RoundedDrawable extends SimpleDrawable {
     private int radiusTopLeft;
     private int radiusTopRight;
     private int radiusBottomLeft;
-    private int radiusBottonRight;
+    private int radiusBottomRight;
 
     public RoundedDrawable(){
         super();
@@ -35,8 +35,8 @@ public class RoundedDrawable extends SimpleDrawable {
             if (radiusBottomLeft > maxRadius) {
                 radiusBottomLeft = maxRadius;
             }
-            if (radiusBottonRight > maxRadius) {
-                radiusBottonRight = maxRadius;
+            if (radiusBottomRight > maxRadius) {
+                radiusBottomRight = maxRadius;
             }
         }
     }
@@ -45,14 +45,14 @@ public class RoundedDrawable extends SimpleDrawable {
         radiusTopLeft = radius;
         radiusTopRight = radius;
         radiusBottomLeft = radius;
-        radiusBottonRight = radius;
+        radiusBottomRight = radius;
     }
 
     public void setRadius(int topLeft, int topRight, int bottomLeft, int bottomRight) {
         radiusTopLeft = topLeft;
         radiusTopRight = topRight;
         radiusBottomLeft = bottomLeft;
-        radiusBottonRight = bottomRight;
+        radiusBottomRight = bottomRight;
     }
 
 
@@ -70,10 +70,10 @@ public class RoundedDrawable extends SimpleDrawable {
         path.arcTo(topRightRect, 270F, 90F, false);
 
         // right line
-        path.lineTo(rect.right, rect.bottom - radiusBottonRight);
+        path.lineTo(rect.right, rect.bottom - radiusBottomRight);
 
         // bottom right corner
-        RectF bottomRightRect = new RectF(rect.right - radiusBottonRight,rect.bottom - radiusBottonRight,rect.right,rect.bottom);
+        RectF bottomRightRect = new RectF(rect.right - radiusBottomRight,rect.bottom - radiusBottomRight,rect.right,rect.bottom);
         path.arcTo(bottomRightRect, 0F, 90F, false);
 
         // bottom line
