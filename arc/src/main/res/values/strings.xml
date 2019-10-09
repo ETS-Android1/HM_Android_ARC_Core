@@ -512,7 +512,7 @@
     <string name="month_november">November</string>
     <string name="month_december">December</string>
 
-    <string name="login_error1">Invalid Rater ID or ARC ID.</string>
+    <string name="login_error1">Incorrect log-in credentials</string>
     <string name="login_error2">Already enrolled on another device</string>
     <string name="login_error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
 
