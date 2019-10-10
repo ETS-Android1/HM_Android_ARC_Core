@@ -134,7 +134,7 @@
     <string name="popup_begin">Let\'s begin the first test.</string>
 
     <string name="onboarding_header">Testing Committment</string>
-    <string name="onboarding_body">Every [six] months, you will be asked to complete &lt;b>one week&lt;/b> of cognitive tests. During the week, you will be reminded &lt;b>4 times a day&lt;/b> to complete tests within the app. You may be in the study for as long as &lt;b>5 years&lt;/b> (10 weeks of testing).</string>
+    <string name="onboarding_body">Every six months, you will be asked to complete &lt;b>one week&lt;/b> of cognitive tests. During the week, you will be reminded &lt;b>4 times a day&lt;/b> to complete tests within the app. You may be in the study for as long as &lt;b>5 years&lt;/b> (10 weeks of testing).</string>
     <string name="radio_commit">I commit to participate for the length of the study</string>
     <string name="radio_nocommit">I\'m NOT able to commit to this study</string>
     <string name="onboarding_nocommit_header">Thank you for your time.</string>
