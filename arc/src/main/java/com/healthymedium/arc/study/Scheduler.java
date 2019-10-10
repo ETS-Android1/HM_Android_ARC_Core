@@ -314,6 +314,8 @@ public class Scheduler {
 
         state.hasValidSchedule = true;
         state.isStudyRunning = true;
+        state.hasCommittedToStudy = 1;
+        state.hasBeenShownNotificationOverview = true;
 
         return state;
     }

@@ -40,10 +40,11 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 @SuppressLint("ValidFragment")
 public class HomeScreen extends BaseFragment {
 
-    protected static final String HINT_TOUR = "HINT_TOUR";
-    protected static final String HINT_POST_BASELINE = "HINT_POST_BASELINE";
-    protected static final String HINT_POST_PAID_TEST = "HINT_POST_PAID_TEST";
-    protected static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
+    public static final String HINT_TOUR = "HINT_TOUR";
+    public static final String HINT_POST_BASELINE = "HINT_POST_BASELINE";
+    public static final String HINT_POST_PAID_TEST = "HINT_POST_PAID_TEST";
+    public static final String HINT_FIRST_TEST = "HINT_FIRST_TEST";
+
 
     String stringHeader;
     String stringSubheader;

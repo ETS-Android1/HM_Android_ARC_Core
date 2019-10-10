@@ -30,10 +30,10 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class TestInfoTemplate extends BaseFragment {
 
-    private static final String HINT_GRID_TUTORIAL = "HINT_GRID_TUTORIAL";
-    private static final String HINT_PRICES_TUTORIAL = "HINT_PRICES_TUTORIAL";
-    private static final String HINT_SYMBOL_TUTORIAL = "HINT_SYMBOL_TUTORIAL";
-    private static final String HINT_REPEAT_TUTORIAL = "HINT_REPEAT_TUTORIAL";
+    public static final String HINT_GRID_TUTORIAL = "HINT_GRID_TUTORIAL";
+    public static final String HINT_PRICES_TUTORIAL = "HINT_PRICES_TUTORIAL";
+    public static final String HINT_SYMBOL_TUTORIAL = "HINT_SYMBOL_TUTORIAL";
+    public static final String HINT_REPEAT_TUTORIAL = "HINT_REPEAT_TUTORIAL";
 
     ImageView backgroundImageView;
 

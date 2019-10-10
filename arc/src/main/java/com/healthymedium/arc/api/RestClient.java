@@ -62,6 +62,14 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.healthymedium.arc.paths.home.HomeScreen.HINT_FIRST_TEST;
+import static com.healthymedium.arc.paths.home.HomeScreen.HINT_POST_PAID_TEST;
+import static com.healthymedium.arc.paths.home.HomeScreen.HINT_TOUR;
+import static com.healthymedium.arc.paths.home.HomeScreen.HINT_POST_BASELINE;
+import static com.healthymedium.arc.paths.templates.TestInfoTemplate.HINT_GRID_TUTORIAL;
+import static com.healthymedium.arc.paths.templates.TestInfoTemplate.HINT_PRICES_TUTORIAL;
+import static com.healthymedium.arc.paths.templates.TestInfoTemplate.HINT_REPEAT_TUTORIAL;
+import static com.healthymedium.arc.paths.templates.TestInfoTemplate.HINT_SYMBOL_TUTORIAL;
 import static com.healthymedium.arc.paths.tutorials.GridTutorial.HINT_PREVENT_TUTORIAL_CLOSE_GRIDS;
 import static com.healthymedium.arc.paths.tutorials.PricesTutorial.HINT_PREVENT_TUTORIAL_CLOSE_PRICES;
 import static com.healthymedium.arc.paths.tutorials.SymbolTutorial.HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS;
@@ -711,6 +719,16 @@ public class RestClient <Api>{
                 Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_GRIDS);
                 Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_PRICES);
                 Hints.markShown(HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS);
+
+                Hints.markShown(HINT_GRID_TUTORIAL);
+                Hints.markShown(HINT_PRICES_TUTORIAL);
+                Hints.markShown(HINT_SYMBOL_TUTORIAL);
+                Hints.markShown(HINT_REPEAT_TUTORIAL);
+
+                Hints.markShown(HINT_TOUR);
+                Hints.markShown(HINT_POST_BASELINE);
+                Hints.markShown(HINT_POST_PAID_TEST);
+                Hints.markShown(HINT_FIRST_TEST);
 
                 return true;
             }
