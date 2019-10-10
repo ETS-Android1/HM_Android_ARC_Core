@@ -14,6 +14,8 @@ import com.healthymedium.arc.paths.questions.QuestionSignature;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -377,6 +379,7 @@ public class StateMachineAlpha extends StateMachine {
 
             // In a visit
             // Try to start a test
+            Study.getParticipant().getState().lastPauseTime = DateTime.now();
             Study.getCurrentTestSession().markStarted();
         } else {
             addTestLandingPage();
