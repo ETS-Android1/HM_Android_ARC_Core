@@ -145,5 +145,14 @@ public class Log {
         return android.util.Log.wtf(tag,msg);
     }
 
+    public static int wtf(String tag, Throwable throwable) {
+        String msg = getStackTraceString(throwable);
+        return wtf(tag,msg);
+    }
+
+    public static String getStackTraceString(Throwable throwable) {
+        return android.util.Log.getStackTraceString(throwable);
+    }
+
     // add other methods if required...
 }
