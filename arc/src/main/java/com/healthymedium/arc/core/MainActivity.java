@@ -188,15 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (NavigationManager.getInstance().getBackStackEntryCount() <= 1) {
-            /*
-            if(homeWatcher != null){
-                homeWatcher.stopWatch();
-                homeWatcher = null;
-            }
-            finish();
-            */
-        } else if(backAllowed){
+        if(backAllowed){
             if(Study.isValid() && backInStudy){
                 Study.openPreviousFragment(backInStudySkips);
             } else {
