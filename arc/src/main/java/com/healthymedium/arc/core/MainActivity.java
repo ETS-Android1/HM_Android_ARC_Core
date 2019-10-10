@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
     boolean hasNewIntent = false;
     int backInStudySkips = 0;
 
-    boolean checkAbandonment = false;
-
     FrameLayout contentView;
     HomeWatcher homeWatcher;
     KeyboardWatcher keyboardWatcher;
@@ -141,14 +139,7 @@ public class MainActivity extends AppCompatActivity {
         homeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
             @Override
             public void onHomePressed() {
-                paused = true;
-                checkAbandonment = false;
-                if(Study.isValid()){
 
-                    if(Study.getInstance().getParticipant().isCurrentlyInTestSession()){
-                        checkAbandonment = true;
-                    }
-                }
             }
             @Override
             public void onHomeLongPressed() {
