@@ -484,7 +484,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="32dp"
                     android:layout_marginBottom="26dp"
-                    android:text="End Date and number of testing weeks is dependent upon some stuff for placeholder like if you reschedule a week or get moved to the drug trial and may change."
+                    android:text="@string/progress_studydisclaimer"
                     android:textColor="@color/white"
                     android:textSize="17dp"
                     />
