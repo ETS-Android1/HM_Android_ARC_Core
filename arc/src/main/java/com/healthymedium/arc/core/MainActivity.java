@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        Log.i("MainActivity","onResume");
         if(Study.isValid()){
             AbandonmentJobService.unscheduleSelf(getApplicationContext());
             //if we were paused, then we need to call the resume handler.
@@ -228,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i("MainActivity","onPause");
         paused = true;
         if(Study.isValid()){
             Study.getParticipant().markPaused();
