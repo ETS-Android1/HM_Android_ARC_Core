@@ -1,6 +1,7 @@
 package com.healthymedium.arc.hints;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.home.HomeScreen;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 
@@ -61,7 +63,7 @@ public class HintPointer extends LinearLayout {
 
         this.showArrow = false;
         this.target = view;
-        init();
+        init(view);
     }
 
     public HintPointer(Activity activity, View view, boolean showArrow, boolean showAbove) {
@@ -71,10 +73,10 @@ public class HintPointer extends LinearLayout {
         this.showArrow = showArrow;
         this.showAbove = showAbove;
         this.target = view;
-        init();
+        init(view);
     }
 
-    private void init() {
+    private void init(View view) {
         setWillNotDraw(false);
 
         radius = ViewUtil.dpToPx(16); // default to 16dp radius
@@ -100,7 +102,13 @@ public class HintPointer extends LinearLayout {
         addView(border);
 
         textViewButton = new TextView(getContext());
-        textViewButton.setPadding(dp16,dp16,dp16,dp16);
+
+        //Padding needs to be different on landing screen for tutorial buttons.
+        if(view.getId() != R.id.landing_layout)
+            textViewButton.setPadding(dp16,dp8,dp16,dp16);
+        else
+            textViewButton.setPadding(dp16,ViewUtil.dpToPx(12),dp16,dp16);
+
         textViewButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textViewButton.setTypeface(Fonts.robotoBold);
         ViewUtil.underlineTextView(textViewButton);
