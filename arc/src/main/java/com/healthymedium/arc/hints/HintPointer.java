@@ -85,7 +85,7 @@ public class HintPointer extends LinearLayout {
         setLayoutParams(layoutParams);
 
         textView = new TextView(getContext());
-        textView.setPadding(dp16, dp16, dp16, dp16);
+        textView.setPadding(dp16,dp16,dp16,dp16);
         textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textView.setTypeface(Fonts.roboto);
         textView.setTextColor(getResources().getColor(R.color.black));
@@ -100,7 +100,7 @@ public class HintPointer extends LinearLayout {
         addView(border);
 
         textViewButton = new TextView(getContext());
-        textViewButton.setPadding(dp16,dp16,dp16,dp16);
+        textViewButton.setPadding(dp16,dp8,dp16,dp16);
         textViewButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textViewButton.setTypeface(Fonts.robotoBold);
         ViewUtil.underlineTextView(textViewButton);
