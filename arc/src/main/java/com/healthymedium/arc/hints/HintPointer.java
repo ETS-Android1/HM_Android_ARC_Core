@@ -100,7 +100,7 @@ public class HintPointer extends LinearLayout {
         addView(border);
 
         textViewButton = new TextView(getContext());
-        textViewButton.setPadding(dp16,dp8,dp16,dp16);
+        textViewButton.setPadding(dp16,dp16,dp16,dp16);
         textViewButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textViewButton.setTypeface(Fonts.robotoBold);
         ViewUtil.underlineTextView(textViewButton);
