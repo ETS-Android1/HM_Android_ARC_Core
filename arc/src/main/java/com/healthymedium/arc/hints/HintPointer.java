@@ -1,7 +1,6 @@
 package com.healthymedium.arc.hints;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.home.HomeScreen;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 
@@ -26,6 +24,7 @@ public class HintPointer extends LinearLayout {
 
     int dp4 = ViewUtil.dpToPx(4);
     int dp8 = ViewUtil.dpToPx(8);
+    int dp12 = ViewUtil.dpToPx(12);
     int dp16 = ViewUtil.dpToPx(16);
     int dp44 = ViewUtil.dpToPx(44);
 
@@ -63,7 +62,7 @@ public class HintPointer extends LinearLayout {
 
         this.showArrow = false;
         this.target = view;
-        init(view);
+        init();
     }
 
     public HintPointer(Activity activity, View view, boolean showArrow, boolean showAbove) {
@@ -73,10 +72,10 @@ public class HintPointer extends LinearLayout {
         this.showArrow = showArrow;
         this.showAbove = showAbove;
         this.target = view;
-        init(view);
+        init();
     }
 
-    private void init(View view) {
+    private void init() {
         setWillNotDraw(false);
 
         radius = ViewUtil.dpToPx(16); // default to 16dp radius
@@ -102,12 +101,7 @@ public class HintPointer extends LinearLayout {
         addView(border);
 
         textViewButton = new TextView(getContext());
-
-        //Padding needs to be different on landing screen for tutorial buttons.
-        if(view.getId() != R.id.landing_layout)
-            textViewButton.setPadding(dp16,dp8,dp16,dp16);
-        else
-            textViewButton.setPadding(dp16,ViewUtil.dpToPx(12),dp16,dp16);
+        textViewButton.setPadding(dp16,dp8,dp16,dp16);
 
         textViewButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textViewButton.setTypeface(Fonts.robotoBold);
@@ -281,6 +275,7 @@ public class HintPointer extends LinearLayout {
     public void hideText() {
         border.setVisibility(GONE);
         textView.setVisibility(GONE);
+        textViewButton.setPadding(dp16,dp12,dp16,dp16);
     }
 
     public void setRadius(int dp) {
