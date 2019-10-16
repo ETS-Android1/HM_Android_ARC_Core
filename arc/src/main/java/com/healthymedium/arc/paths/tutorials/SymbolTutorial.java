@@ -104,7 +104,7 @@ public class SymbolTutorial extends Tutorial {
 
         textView20 = view.findViewById(R.id.textView20);
         textView20.setText(Html.fromHtml(ViewUtil.getString(R.string.popup_tutorial_middle_instructions)));
-        textView20.setVisibility(View.GONE);
+        textView20.setVisibility(View.INVISIBLE);
 
         textViewComplete = view.findViewById(R.id.textViewComplete);
         textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
