@@ -19,6 +19,7 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -97,14 +98,13 @@ public class MainActivity extends AppCompatActivity {
         if(PreferencesManager.getInstance().getBoolean(Application.TAG_RESTART,false)){
             PreferencesManager.getInstance().putBoolean(Application.TAG_RESTART,false);
 
-            String body = getString(R.string.low_memory_restart_dialogue_body);
-            String appName = getString(R.string.app_name);
-            body = ViewUtil.replaceToken(body,R.string.token_app_name,appName);
+            Phrase phrase = new Phrase(R.string.low_memory_restart_dialogue_body);
+            phrase.replace(R.string.token_app_name, R.string.app_name);
 
             new AlertDialog.Builder(this)
                     .setCancelable(true)
                     .setTitle(getString(R.string.low_memory_restart_dialogue_header))
-                    .setMessage(body)
+                    .setMessage(phrase.toString())
                     .setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

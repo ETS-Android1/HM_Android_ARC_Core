@@ -28,6 +28,7 @@ import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
@@ -176,14 +177,12 @@ public class EarningsScreen extends BaseFragment {
         DateTime lastSyncTime = Study.getParticipant().getEarnings().getOverviewRefreshTime();
         if(lastSyncTime != null) {
             if(lastSyncTime.plusMinutes(1).isBeforeNow()) {
-                String date = JodaUtil.format(lastSyncTime, R.string.format_date, Application.getInstance().getLocale());
-                String time = JodaUtil.format(lastSyncTime, R.string.format_time, Application.getInstance().getLocale());
-                String dateTime = getString(R.string.earnings_sync_datetime);
 
-                dateTime = ViewUtil.replaceToken(dateTime,R.string.token_date,date);
-                dateTime = ViewUtil.replaceToken(dateTime,R.string.token_time,time);
+                Phrase phrase = new Phrase(R.string.earnings_sync_datetime);
+                phrase.replaceDate(R.string.format_date, lastSyncTime);
+                phrase.replaceTime(R.string.format_time, lastSyncTime);
 
-                syncString += dateTime;
+                syncString += phrase.toString();
             } else {
                 syncString += getString(R.string.earnings_sync_justnow);
             }
