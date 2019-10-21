@@ -6,7 +6,7 @@ import com.healthymedium.arc.api.tests.data.GridTestImage;
 import com.healthymedium.arc.api.tests.data.GridTestSection;
 import com.healthymedium.arc.api.tests.data.GridTestTap;
 import com.healthymedium.arc.study.PathSegmentData;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 
 import org.joda.time.DateTime;
 
@@ -60,7 +60,7 @@ public class GridTestPathData extends PathSegmentData {
 
         if(start != null)
         {
-            test.date = JodaUtil.toUtcDouble(start);
+            test.date = TimeUtil.toUtcDouble(start);
             startTime = start.getMillis();
         }
 

@@ -10,7 +10,7 @@ import org.joda.time.DateTime;
 import java.util.Locale;
 
 
-public class JodaUtil {
+public class TimeUtil {
 
     public static double toUtcDouble(DateTime dateTime){
         double utc = dateTime.getMillis();
@@ -61,6 +61,5 @@ public class JodaUtil {
                 .withMillisOfSecond(0);
         return newDate;
     }
-
 
 }

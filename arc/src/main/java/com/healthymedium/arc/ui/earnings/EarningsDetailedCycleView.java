@@ -6,20 +6,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningDetails;
-import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.ui.base.RoundedFrameLayout;
-import com.healthymedium.arc.ui.base.RoundedLinearLayout;
-import com.healthymedium.arc.ui.base.RoundedRelativeLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
-
-import static com.healthymedium.arc.study.Earnings.FOUR_OUT_OF_FOUR;
-import static com.healthymedium.arc.study.Earnings.TEST_SESSION;
-import static com.healthymedium.arc.study.Earnings.TWENTY_ONE_SESSIONS;
-import static com.healthymedium.arc.study.Earnings.TWO_A_DAY;
 
 public class EarningsDetailedCycleView extends LinearLayout {
 
@@ -48,8 +40,8 @@ public class EarningsDetailedCycleView extends LinearLayout {
             ongoingLayout.setVisibility(VISIBLE);
         }
 
-        String startString = JodaUtil.format(start,R.string.format_date_lo);
-        String endString = JodaUtil.format(end,R.string.format_date_lo);
+        String startString = TimeUtil.format(start,R.string.format_date_lo);
+        String endString = TimeUtil.format(end,R.string.format_date_lo);
         String dates = ViewUtil.getString(R.string.earnings_details_dates);
         dates = ViewUtil.replaceToken(dates,R.string.token_date1,startString);
         dates = ViewUtil.replaceToken(dates,R.string.token_date2,endString);

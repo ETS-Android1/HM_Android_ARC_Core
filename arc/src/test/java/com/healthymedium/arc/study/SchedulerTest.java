@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.utilities.Log;
 
 import org.joda.time.DateTime;
@@ -73,7 +73,7 @@ public class SchedulerTest {
         public void initializeCycles(DateTime now, Participant participant) {
 
             List<TestCycle> cycles = participant.getState().testCycles;
-            DateTime midnight = JodaUtil.setMidnight(now);
+            DateTime midnight = TimeUtil.setMidnight(now);
 
             TestCycle baseline = initializeBaselineCycle(midnight,4);
             cycles.add(baseline);

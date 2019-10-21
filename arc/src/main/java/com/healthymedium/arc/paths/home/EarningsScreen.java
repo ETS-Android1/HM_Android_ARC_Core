@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.EarningsDetailsScreen;
@@ -24,7 +23,6 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
 import com.healthymedium.arc.navigation.NavigationManager;

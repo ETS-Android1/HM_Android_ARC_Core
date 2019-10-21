@@ -4,7 +4,7 @@ import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.api.tests.data.SymbolTest;
 import com.healthymedium.arc.api.tests.data.SymbolTestSection;
 import com.healthymedium.arc.study.PathSegmentData;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 
 import org.joda.time.DateTime;
 
@@ -46,7 +46,7 @@ public class SymbolsTestPathData extends PathSegmentData {
 
         if(start != null)
         {
-            test.date = JodaUtil.toUtcDouble(start);
+            test.date = TimeUtil.toUtcDouble(start);
             startTime = start.getMillis();
         }
 

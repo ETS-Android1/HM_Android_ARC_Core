@@ -20,7 +20,7 @@ import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.paths.informative.ChangeAvailabilityScreen;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.hints.HintHighlighter;
@@ -226,10 +226,10 @@ public class HomeScreen extends BaseFragment {
         TestSession testSession = participant.getCurrentTestSession();
 
         DateTime cycleStartDate = testCycle.getActualStartDate();
-        String startDateFmt = JodaUtil.format(cycleStartDate,R.string.format_date_long);
+        String startDateFmt = TimeUtil.format(cycleStartDate,R.string.format_date_long);
 
         DateTime cycleEndDate = testCycle.getActualEndDate().minusDays(1);
-        String endDateFmt = JodaUtil.format(cycleEndDate,R.string.format_date_long);
+        String endDateFmt = TimeUtil.format(cycleEndDate,R.string.format_date_long);
 
         DateTime dayStartTime = testDay.getStartTime();
 

@@ -11,10 +11,8 @@ import android.widget.TextView;
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.ui.CircleProgressView;
-import com.healthymedium.arc.ui.WeekProgressView;
 import com.healthymedium.arc.ui.base.RoundedLinearLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -60,7 +58,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
 
             if(goal.completed_on!=null){
                 DateTime completedDate = new DateTime(goal.completed_on*1000L);
-                String date = JodaUtil.format(completedDate,R.string.format_date_dashed,Application.getInstance().getLocale());
+                String date = TimeUtil.format(completedDate,R.string.format_date_dashed,Application.getInstance().getLocale());
                 String completedOn = ViewUtil.replaceToken(ViewUtil.getString(R.string.status_done_withdate),R.string.token_date,date);
                 textViewDone.setText(completedOn);
             }
