@@ -1,8 +1,11 @@
 package com.healthymedium.arc.time;
 
 
+import android.content.ContentResolver;
+import android.provider.Settings;
 import android.support.annotation.StringRes;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
@@ -10,7 +13,7 @@ import org.joda.time.DateTime;
 import java.util.Locale;
 
 
-public class JodaUtil {
+public class TimeUtil {
 
     public static double toUtcDouble(DateTime dateTime){
         double utc = dateTime.getMillis();
@@ -62,5 +65,11 @@ public class JodaUtil {
         return newDate;
     }
 
+    public static boolean isAutoTimeEnabled(){
+        ContentResolver resolver = Application.getInstance().getContentResolver();
+        boolean autoTimeEnabled = Settings.Global.getInt(resolver, Settings.Global.AUTO_TIME, 0)==1;
+        boolean autoTimeZoneEnabled = Settings.Global.getInt(resolver, Settings.Global.AUTO_TIME_ZONE, 0)==1;
+        return autoTimeEnabled && autoTimeZoneEnabled;
+    }
 
 }

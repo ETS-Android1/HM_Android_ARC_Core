@@ -1,7 +1,6 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.arc.time.JodaUtil;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.arc.time.TimeUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -22,8 +21,8 @@ public class TestCycle {
 
     public TestCycle(int id, DateTime start, DateTime end) {
         this.id = id;
-        scheduledStartDate = JodaUtil.setMidnight(start);
-        scheduledEndDate = JodaUtil.setMidnight(end);
+        scheduledStartDate = TimeUtil.setMidnight(start);
+        scheduledEndDate = TimeUtil.setMidnight(end);
         days = new ArrayList<>();
     }
 
@@ -47,7 +46,7 @@ public class TestCycle {
     }
 
     public void setActualStartDate(DateTime actualStartDate) {
-        this.actualStartDate = JodaUtil.setMidnight(actualStartDate);
+        this.actualStartDate = TimeUtil.setMidnight(actualStartDate);
     }
 
     public DateTime getActualEndDate() {
@@ -58,7 +57,7 @@ public class TestCycle {
     }
 
     public void setActualEndDate(DateTime actualEndDate) {
-        this.actualEndDate = JodaUtil.setMidnight(actualEndDate);
+        this.actualEndDate = TimeUtil.setMidnight(actualEndDate);
     }
 
     public List<TestDay> getTestDays() {

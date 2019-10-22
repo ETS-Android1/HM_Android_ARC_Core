@@ -11,16 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningDetails;
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Earnings;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.time.JodaUtil;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.earnings.EarningsDetailedCycleView;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
@@ -125,14 +124,12 @@ public class EarningsDetailsScreen extends BaseFragment {
         DateTime lastSyncTime = earnings.getDetailsRefreshTime();
         if(lastSyncTime != null) {
             if(lastSyncTime.plusMinutes(1).isBeforeNow()) {
-                String date = JodaUtil.format(lastSyncTime, R.string.format_date, Application.getInstance().getLocale());
-                String time = JodaUtil.format(lastSyncTime, R.string.format_time, Application.getInstance().getLocale());
-                String dateTime = getString(R.string.earnings_sync_datetime);
 
-                dateTime = ViewUtil.replaceToken(dateTime,R.string.token_date,date);
-                dateTime = ViewUtil.replaceToken(dateTime,R.string.token_time,time);
+                Phrase phrase = new Phrase(R.string.earnings_sync_datetime);
+                phrase.replaceDate(R.string.format_date, lastSyncTime);
+                phrase.replaceTime(R.string.format_time, lastSyncTime);
 
-                syncString += dateTime;
+                syncString += phrase.toString();
             } else {
                 syncString += getString(R.string.earnings_sync_justnow);
             }

@@ -9,7 +9,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import com.healthymedium.arc.api.models.CachedObject;
-import com.healthymedium.arc.api.models.CycleProgress;
 import com.healthymedium.arc.api.models.DayProgress;
 import com.healthymedium.arc.api.models.DeviceRegistration;
 import com.healthymedium.arc.api.models.ExistingData;
@@ -34,7 +33,7 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -409,7 +408,7 @@ public class RestClient <Api>{
                     TestScheduleSession scheduleSession = new TestScheduleSession();
                     scheduleSession.session = session.getIndex();
                     scheduleSession.session_id = String.valueOf(session.getId());
-                    scheduleSession.session_date = JodaUtil.toUtcDouble(session.getScheduledTime());
+                    scheduleSession.session_date = TimeUtil.toUtcDouble(session.getScheduledTime());
                     scheduleSession.week = Weeks.weeksBetween(state.testCycles.get(0).getScheduledStartDate(), session.getScheduledTime()).getWeeks();
                     scheduleSession.day = day.getDayIndex();
                     scheduleSession.types = new ArrayList<>();
@@ -493,9 +492,9 @@ public class RestClient <Api>{
 
         test.session_id = String.valueOf(session.getId());
         test.id = test.session_id;
-        test.session_date = JodaUtil.toUtcDouble(session.getScheduledTime());
+        test.session_date = TimeUtil.toUtcDouble(session.getScheduledTime());
         if(session.getStartTime()!=null){
-            test.start_time = JodaUtil.toUtcDouble(session.getStartTime());
+            test.start_time = TimeUtil.toUtcDouble(session.getStartTime());
         }
         test.day = session.getDayIndex();
 

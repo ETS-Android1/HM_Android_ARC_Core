@@ -1,12 +1,11 @@
 package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.api.models.ExistingData;
-import com.healthymedium.arc.api.models.SessionInfo;
 import com.healthymedium.arc.api.models.TestScheduleSession;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationTypes;
-import com.healthymedium.arc.time.JodaUtil;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.utilities.Log;
 
 import org.joda.time.DateTime;
@@ -118,7 +117,7 @@ public class Scheduler {
 
     public void initializeCycles(DateTime now, Participant participant) {
         List<TestCycle> cycles = participant.getState().testCycles;
-        DateTime midnight = JodaUtil.setMidnight(now);
+        DateTime midnight = TimeUtil.setMidnight(now);
 
         TestCycle cycle = new TestCycle(0,midnight,midnight.plusDays(1));
         TestSession testSession = new TestSession(0,0,0);
@@ -249,7 +248,7 @@ public class Scheduler {
         ParticipantState state = participant.getState();
         state.circadianClock = CircadianClock.fromWakeSleepSchedule(existingData.wake_sleep_schedule);
 
-        DateTime startDate = JodaUtil.fromUtcDouble(existingData.first_test.session_date);
+        DateTime startDate = TimeUtil.fromUtcDouble(existingData.first_test.session_date);
         state.studyStartDate = startDate;
         Study.getScheduler().initializeCycles(startDate,Study.getParticipant());
         Study.getScheduler().scheduleTests(startDate,Study.getParticipant());
@@ -261,7 +260,7 @@ public class Scheduler {
 
         for(TestCycle cycle : state.testCycles ) {
 
-            DateTime sessionDate = JodaUtil.fromUtcDouble(scheduleSessions.get(index).session_date);
+            DateTime sessionDate = TimeUtil.fromUtcDouble(scheduleSessions.get(index).session_date);
             int daysShifted = Days.daysBetween(sessionDate,cycle.getScheduledStartDate()).getDays();
             int cycleId = cycle.getId();
 
@@ -270,7 +269,7 @@ public class Scheduler {
 
                     TestScheduleSession scheduleSession  = scheduleSessions.get(index);
                     int sessionId = Integer.valueOf(scheduleSession.session_id);
-                    DateTime scheduledDateTime = JodaUtil.fromUtcDouble(scheduleSession.session_date);
+                    DateTime scheduledDateTime = TimeUtil.fromUtcDouble(scheduleSession.session_date);
 
                     DateTime prescribedDateTime = scheduledDateTime.plusDays(daysShifted);
                     session.setPrescribedTime(prescribedDateTime);
