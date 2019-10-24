@@ -14,6 +14,7 @@ import com.healthymedium.arc.paths.informative.FinishedStudyScreen;
 import com.healthymedium.arc.paths.informative.RebukedCommitmentScreen;
 import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
+import com.healthymedium.arc.paths.questions.QuestionNonRemoteStudyCommitment;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
@@ -324,13 +325,27 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        fragments.add(new QuestionRemoteStudyCommitment(
-                false,
-                res.getString(R.string.onboarding_header),
-                res.getString(R.string.onboarding_body),
-                res.getString(R.string.radio_commit),
-                res.getString(R.string.radio_nocommit)
-        ));
+        if (Config.IS_REMOTE) {
+            fragments.add(new QuestionRemoteStudyCommitment(
+                    false,
+                    res.getString(R.string.onboarding_header),
+                    res.getString(R.string.onboarding_body),
+                    res.getString(R.string.radio_commit),
+                    res.getString(R.string.radio_nocommit)
+            ));
+        }
+        else {
+            List<String> opts = new ArrayList<>();
+            opts.add(res.getString(R.string.checkbox_commit));
+
+            fragments.add(new QuestionNonRemoteStudyCommitment(
+               false,
+                    res.getString(R.string.onboarding_header),
+                    res.getString(R.string.onboarding_body),
+                    opts,
+               ""
+            ));
+        }
 
         fragments.add(new StateInfoTemplate(
                 false,
