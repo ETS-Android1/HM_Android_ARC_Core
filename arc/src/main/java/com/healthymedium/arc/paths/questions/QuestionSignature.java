@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,8 @@ public class QuestionSignature extends QuestionTemplate {
 
         signature = new Signature(getContext());
         content.addView(signature);
+
+        textViewSubheader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17.0f);
 
         signature.clear.setOnClickListener(new View.OnClickListener() {
             @Override

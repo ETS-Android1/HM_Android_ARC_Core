@@ -42,7 +42,7 @@ public class StandardTemplate extends BaseFragment {
     String stringSubHeader;
 
     protected TextView textViewHeader;
-    TextView textViewSubheader;
+    protected TextView textViewSubheader;
 
     protected LinearLayout content;
 
