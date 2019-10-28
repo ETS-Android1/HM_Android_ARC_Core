@@ -35,6 +35,7 @@ public class QuestionSignature extends QuestionTemplate {
         content.addView(signature);
 
         textViewSubheader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 17.0f);
+        textViewSubheader.setLineSpacing(26, 1);
 
         signature.clear.setOnClickListener(new View.OnClickListener() {
             @Override
