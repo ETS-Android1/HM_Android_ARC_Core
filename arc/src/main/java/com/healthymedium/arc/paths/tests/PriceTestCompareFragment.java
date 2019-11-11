@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -37,6 +38,7 @@ public class PriceTestCompareFragment extends BaseFragment {
     RadioButton buttonNo;
     TextView textviewFood;
     TextView textviewPrice;
+    TextView textviewGoodPrice;
 
     boolean paused;
     Random random;
@@ -110,11 +112,19 @@ public class PriceTestCompareFragment extends BaseFragment {
             }
         });
 
+        textviewGoodPrice = view.findViewById(R.id.textView12);
+
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);
 
         textviewPrice = view.findViewById(R.id.textviewPrice);
         textviewPrice.setTypeface(Fonts.georgiaItalic);
+
+        if (Config.USE_REVISED_PRICES_TEST) {
+            textviewGoodPrice.setVisibility(View.INVISIBLE);
+            buttonNo.setVisibility(View.INVISIBLE);
+            buttonYes.setVisibility(View.INVISIBLE);
+        }
 
         handler = new Handler();
         setupIteration();
