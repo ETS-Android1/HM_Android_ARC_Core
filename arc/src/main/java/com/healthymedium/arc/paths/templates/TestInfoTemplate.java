@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.hints.HintHighlighter;
+import com.healthymedium.arc.paths.tutorials.PricesTutorialRevised;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
@@ -173,8 +175,13 @@ public class TestInfoTemplate extends BaseFragment {
                 }
                 else if (stringType.equals("prices")) {
                     Hints.markShown(HINT_PRICES_TUTORIAL);
-                    PricesTutorial pricesTutorial = new PricesTutorial();
-                    NavigationManager.getInstance().open(pricesTutorial);
+                    if (Config.USE_REVISED_PRICES_TEST) {
+                        PricesTutorialRevised pricesTutorialRevised = new PricesTutorialRevised();
+                        NavigationManager.getInstance().open(pricesTutorialRevised);
+                    } else {
+                        PricesTutorial pricesTutorial = new PricesTutorial();
+                        NavigationManager.getInstance().open(pricesTutorial);
+                    }
                 }
             }
         });
