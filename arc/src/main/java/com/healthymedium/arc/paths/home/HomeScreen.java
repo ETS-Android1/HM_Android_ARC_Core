@@ -109,6 +109,9 @@ public class HomeScreen extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
+
+        //Font adjustments
+        textViewHeader.setTypeface(Fonts.robotoMedium);
     }
 
     @Override
