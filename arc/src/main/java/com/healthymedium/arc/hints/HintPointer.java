@@ -275,7 +275,7 @@ public class HintPointer extends LinearLayout {
     public void hideText() {
         border.setVisibility(GONE);
         textView.setVisibility(GONE);
-        textViewButton.setPadding(dp16,dp12,dp16,dp16);
+        textViewButton.setPadding(dp16, ViewUtil.dpToPx(18), dp16, ViewUtil.dpToPx(22));
     }
 
     public void setRadius(int dp) {

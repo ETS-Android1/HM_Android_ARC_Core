@@ -13,9 +13,7 @@
         android:background="@drawable/ic_availability_bg">
 
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -79,11 +77,11 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="32dp"
-                    android:gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:lineSpacingExtra="3dp"
+                    android:gravity="center_horizontal"
+                    android:lineSpacingExtra="9dp"
                     android:textColor="@color/white"
-                    android:textSize="18dp"
+                    android:textSize="17dp"
                     tools:text="Finally, you will be shown a blank grid. Tap the boxes where the items were previously located.\n\nPress Begin to start the test." />
             </LinearLayout>
 
