@@ -11,9 +11,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
-
+import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.NotificationTypes;
@@ -41,7 +39,8 @@ public class Application extends android.app.Application implements LifecycleObs
         super.onCreate();
         instance = this;
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
-        Fabric.with(this, new Crashlytics());
+        Analytics.initialize(this);
+
         JodaTimeAndroid.init(this);
         VersionUtil.initialize(this);
         PreferencesManager.initialize(this);

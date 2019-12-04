@@ -5,7 +5,7 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
+import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.misc.TransitionSet;
 
@@ -101,7 +101,7 @@ public class NavigationController {
                 fragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         } catch (IllegalStateException e) {
-            Crashlytics.log(Log.WARN,tag,e.getMessage());
+            Analytics.logException(Analytics.WARNING,tag,e);
         }
     }
 

@@ -70,14 +70,6 @@ dependencies {
     api 'net.danlew:android.joda:2.9.9'
     api 'com.squareup.retrofit2:converter-gson:2.5.0'
     api 'com.squareup.retrofit2:retrofit:2.5.0'
-
-    if (analytics) {
-        println "configured with analytics"
-        api 'com.google.firebase:firebase-core:16.0.6'
-        api 'com.crashlytics.sdk.android:crashlytics:2.9.5'
-    } else {
-        println "configured without analytics"
-        api project(':mock_analytics')
-    }
+    api project(':analytics')
 
 }
