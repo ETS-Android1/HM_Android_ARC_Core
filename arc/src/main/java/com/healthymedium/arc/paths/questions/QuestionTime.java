@@ -34,6 +34,7 @@ public class QuestionTime extends QuestionTemplate {
     protected LocalTime time;
     boolean enabled;
     boolean showHint;
+    boolean didDismissPointer = false;
 
     public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime) {
         super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submittime));
@@ -103,6 +104,10 @@ public class QuestionTime extends QuestionTemplate {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
+        if (didDismissPointer) {
+            return;
+        }
+
         if(!Hints.hasBeenShown(HINT_QUESTION_TIME)){
             pointer = new HintPointer(getMainActivity(),timeInput.getTimePicker(),true,false);
             pointer.setText("Scroll to select");
@@ -140,6 +145,7 @@ public class QuestionTime extends QuestionTemplate {
     }
 
     protected void dismissPointer() {
+        didDismissPointer = true;
         if(pointer!=null){
             pointer.dismiss();
             pointer = null;
