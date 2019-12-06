@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.paths.informative.ChangeAvailabilityScreen;
@@ -20,6 +21,8 @@ import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class ResourcesScreen extends BaseFragment {
+
+    protected TextView textViewHeader;
 
     protected FrameLayout frameLayoutAvailability;
     protected TextView textViewAvailability;
@@ -44,6 +47,9 @@ public class ResourcesScreen extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_resources, container, false);
+
+        textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setTypeface(Fonts.robotoMedium);
 
         textViewAvailability = view.findViewById(R.id.textViewAvailability);
         ViewUtil.underlineTextView(textViewAvailability);
