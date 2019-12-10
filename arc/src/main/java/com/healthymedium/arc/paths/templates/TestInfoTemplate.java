@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.paths.tutorials.PricesTutorialRevised;
 import com.healthymedium.arc.ui.Button;
@@ -100,7 +101,7 @@ public class TestInfoTemplate extends BaseFragment {
         textViewTestNumber.setText(stringTestNumber);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        //textViewHeader.setTypeface(Fonts.georgiaItalic);
+        textViewHeader.setTypeface(Fonts.robotoMedium);
         textViewHeader.setText(stringHeader);
 
         textViewBody = view.findViewById(R.id.textViewBody);
