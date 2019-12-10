@@ -1,12 +1,14 @@
 package com.healthymedium.arc.paths.templates;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,6 +110,7 @@ public class TestInfoTemplate extends BaseFragment {
         // textViewTutorial.setText("View a Tutorial");
         SpannableString content = new SpannableString("View a Tutorial");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        content.setSpan(new StyleSpan(Typeface.BOLD), 0, content.length(), 0);
         textViewTutorial.setText(content);
         textViewTutorial.setVisibility(View.VISIBLE);
 
