@@ -42,7 +42,7 @@ public class StandardTemplate extends BaseFragment {
 
     protected LinearLayout content;
 
-    TextView textViewBack;
+    protected TextView textViewBack;
     protected TextView textViewHelp;
 
     ScrollView scrollView;

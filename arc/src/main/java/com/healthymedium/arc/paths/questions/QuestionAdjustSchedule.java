@@ -35,6 +35,7 @@ import java.util.List;
 public class QuestionAdjustSchedule extends QuestionTemplate {
 
     boolean allowHelp;
+    private boolean overrideBackButton;
 
     int index = 0;
     int shiftDays = 0;
@@ -44,12 +45,34 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
         super(allowBack,header,subheader, ViewUtil.getString(R.string.button_confirm));
         this.allowHelp = allowHelp;
+        this.overrideBackButton = false;
     }
+
+    //Constructor which allows an overridden back button without enabling back.
+    public QuestionAdjustSchedule(String header, String subheader) {
+        super(false, header,subheader, ViewUtil.getString(R.string.button_confirm));
+        this.allowHelp = true;
+        this.overrideBackButton = true;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(allowHelp);
+
+        if(overrideBackButton) {
+            textViewBack.setVisibility(View.VISIBLE);
+            textViewBack.setText("HOME");
+            textViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Study.goHome();
+                }
+            });
+        }
+
+
 
         NumberPicker picker = new NumberPicker(Application.getInstance());
         picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);

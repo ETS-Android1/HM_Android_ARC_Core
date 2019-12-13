@@ -38,6 +38,7 @@ public class InfoTemplate extends BaseFragment {
 
     Button button;
     boolean allowBack;
+    private boolean overrideBackButton;
 
     public InfoTemplate(boolean allowBack, String header, String subheader, String body, @Nullable String buttonText) {
         this.allowBack = allowBack;
@@ -49,6 +50,8 @@ public class InfoTemplate extends BaseFragment {
         if(allowBack){
             allowBackPress(true);
         }
+
+        overrideBackButton = false;
     }
 
     public InfoTemplate(boolean allowBack, String header, String subheader, String body, @Nullable Drawable buttonImage) {
@@ -61,7 +64,22 @@ public class InfoTemplate extends BaseFragment {
         if(allowBack){
             allowBackPress(true);
         }
+
+        overrideBackButton = false;
     }
+
+    //Constructor which displays back button without enabling back.
+    public InfoTemplate(String header, String subheader, String body, @Nullable String buttonText) {
+        this.allowBack = false;
+        stringHeader = header;
+        stringSubHeader = subheader;
+        stringBody = body;
+        stringButton = buttonText;
+
+        allowBackPress(false);
+        overrideBackButton = true;
+    }
+
 
     @Nullable
     @Override
@@ -95,12 +113,24 @@ public class InfoTemplate extends BaseFragment {
 
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
-        textViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Study.getInstance().openPreviousFragment();
-            }
-        });
+        if(overrideBackButton) {
+            textViewBack.setText("HOME");
+            textViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Study.goHome();
+                }
+            });
+        }
+        else {
+            textViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Study.getInstance().openPreviousFragment();
+                }
+            });
+        }
+
 
 
         button = view.findViewById(R.id.button);
@@ -116,7 +146,7 @@ public class InfoTemplate extends BaseFragment {
             }
         });
 
-        if(allowBack){
+        if(allowBack || overrideBackButton){
             textViewBack.setVisibility(View.VISIBLE);
         }
 

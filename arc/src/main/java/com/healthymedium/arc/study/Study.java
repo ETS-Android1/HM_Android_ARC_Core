@@ -367,4 +367,8 @@ public class Study{
         stateMachine.setPathAdjustSchedule();
         stateMachine.openNext();
     }
+
+    public static void goHome() {
+        stateMachine.goHome();
+    }
 }
