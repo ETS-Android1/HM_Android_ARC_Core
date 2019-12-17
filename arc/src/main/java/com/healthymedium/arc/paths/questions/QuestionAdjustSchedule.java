@@ -67,7 +67,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             textViewBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Study.goHome();
+                    Study.resetPathSegment();
                 }
             });
         }

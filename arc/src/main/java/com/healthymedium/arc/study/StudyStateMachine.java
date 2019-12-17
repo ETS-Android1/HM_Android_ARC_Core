@@ -870,6 +870,6 @@ public class StudyStateMachine {
     }
 
     //Overridden
-    public void goHome() {}
+    public void resetPathSegment() {}
 
 }

@@ -368,7 +368,7 @@ public class Study{
         stateMachine.openNext();
     }
 
-    public static void goHome() {
-        stateMachine.goHome();
+    public static void resetPathSegment() {
+        stateMachine.resetPathSegment();
     }
 }
