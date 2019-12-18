@@ -833,7 +833,7 @@ public class StudyStateMachine {
     public void addSchedulePicker() {
         List<BaseFragment> fragments = new ArrayList<>();
 
-        fragments.add(new QuestionAdjustSchedule(ViewUtil.getString(R.string.ChangeAvail_date_picker_body), ""));
+        fragments.add(new QuestionAdjustSchedule(true, true, ViewUtil.getString(R.string.ChangeAvail_date_picker_body), ""));
 
         fragments.add(new ScheduleCalendar());
 
@@ -870,6 +870,6 @@ public class StudyStateMachine {
     }
 
     //Overridden
-    public void resetPathSegment() {}
+    public void resetPathGoNext() {}
 
 }

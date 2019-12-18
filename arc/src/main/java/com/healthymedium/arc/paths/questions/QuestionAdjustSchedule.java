@@ -41,20 +41,11 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     int shiftDays = 0;
     int[] shiftAmount = new int[15];
 
-
-    public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
-        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_confirm));
-        this.allowHelp = allowHelp;
-        this.overrideBackButton = false;
-    }
-
-    //Constructor which allows an overridden back button without enabling back.
-    public QuestionAdjustSchedule(String header, String subheader) {
+    public QuestionAdjustSchedule(boolean overrideBackButton, boolean allowHelp, String header, String subheader) {
         super(false, header,subheader, ViewUtil.getString(R.string.button_confirm));
-        this.allowHelp = true;
-        this.overrideBackButton = true;
+        this.allowHelp = allowHelp;
+        this.overrideBackButton = overrideBackButton;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,11 +54,11 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         if(overrideBackButton) {
             textViewBack.setVisibility(View.VISIBLE);
-            textViewBack.setText("HOME");
+            textViewBack.setText(ViewUtil.getString(R.string.home_literal));
             textViewBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Study.resetPathSegment();
+                    Study.resetPathGoNext();
                 }
             });
         }
