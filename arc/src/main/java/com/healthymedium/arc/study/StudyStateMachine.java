@@ -868,8 +868,4 @@ public class StudyStateMachine {
     public void loadTestDataFromCache() {
 
     }
-
-    //Overridden
-    public void resetPathGoNext() {}
-
 }

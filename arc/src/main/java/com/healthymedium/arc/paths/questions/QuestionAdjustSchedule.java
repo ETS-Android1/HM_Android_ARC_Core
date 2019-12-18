@@ -35,16 +35,16 @@ import java.util.List;
 public class QuestionAdjustSchedule extends QuestionTemplate {
 
     boolean allowHelp;
-    private boolean overrideBackButton;
+    private boolean allowHome;
 
     int index = 0;
     int shiftDays = 0;
     int[] shiftAmount = new int[15];
 
-    public QuestionAdjustSchedule(boolean overrideBackButton, boolean allowHelp, String header, String subheader) {
+    public QuestionAdjustSchedule(boolean allowHome, boolean allowHelp, String header, String subheader) {
         super(false, header,subheader, ViewUtil.getString(R.string.button_confirm));
         this.allowHelp = allowHelp;
-        this.overrideBackButton = overrideBackButton;
+        this.allowHome = allowHome;
     }
 
     @Override
@@ -52,13 +52,14 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(allowHelp);
 
-        if(overrideBackButton) {
+        if(allowHome) {
             textViewBack.setVisibility(View.VISIBLE);
             textViewBack.setText(ViewUtil.getString(R.string.home_literal));
             textViewBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Study.resetPathGoNext();
+                    Study.resetPath();
+                    Study.openNextFragment();
                 }
             });
         }
