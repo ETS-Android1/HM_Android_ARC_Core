@@ -27,6 +27,7 @@
 
     <string name="home_availability_reset_link">Change My Availability</string>
     <string name="home_contact_link">Contact and About</string>
+    <string name="home_literal">HOME</string>
 
     <string name="chronotype_subhead">Six Questions</string>
     <string name="chronotype_0_body">The following section will ask you questions in regards to your sleep and wake behaviour on work- and work-free days.\n\nPlease estimate an average of your normal sleep behaviour over the past 6 weeks when you were able to follow your usual routines.</string>

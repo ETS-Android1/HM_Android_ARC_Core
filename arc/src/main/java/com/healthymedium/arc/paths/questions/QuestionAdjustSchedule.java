@@ -35,21 +35,36 @@ import java.util.List;
 public class QuestionAdjustSchedule extends QuestionTemplate {
 
     boolean allowHelp;
+    private boolean allowHome;
 
     int index = 0;
     int shiftDays = 0;
     int[] shiftAmount = new int[15];
 
-
-    public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
-        super(allowBack,header,subheader, ViewUtil.getString(R.string.button_confirm));
+    public QuestionAdjustSchedule(boolean allowHome, boolean allowHelp, String header, String subheader) {
+        super(false, header,subheader, ViewUtil.getString(R.string.button_confirm));
         this.allowHelp = allowHelp;
+        this.allowHome = allowHome;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(allowHelp);
+
+        if(allowHome) {
+            textViewBack.setVisibility(View.VISIBLE);
+            textViewBack.setText(ViewUtil.getString(R.string.home_literal));
+            textViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Study.resetPath();
+                    Study.openNextFragment();
+                }
+            });
+        }
+
+
 
         NumberPicker picker = new NumberPicker(Application.getInstance());
         picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);

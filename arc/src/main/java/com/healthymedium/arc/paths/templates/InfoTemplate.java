@@ -29,7 +29,7 @@ public class InfoTemplate extends BaseFragment {
 
     Drawable buttonImage;
 
-    TextView textViewBack;
+    protected TextView textViewBack;
     TextView textViewHeader;
     TextView textViewSubheader;
     TextView textViewBody;
@@ -91,8 +91,6 @@ public class InfoTemplate extends BaseFragment {
             textViewBody.setLayoutParams(params);
         }
 
-
-
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
@@ -102,13 +100,14 @@ public class InfoTemplate extends BaseFragment {
             }
         });
 
-
         button = view.findViewById(R.id.button);
         if(stringButton!=null){
             button.setText(stringButton);
-        } else if (buttonImage!=null) {
+        }
+        else if (buttonImage!=null) {
             button.setIcon(buttonImage);
         }
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

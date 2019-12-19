@@ -367,4 +367,9 @@ public class Study{
         stateMachine.setPathAdjustSchedule();
         stateMachine.openNext();
     }
+
+    public static void resetPath() {
+        stateMachine.cache.segments.clear();
+        stateMachine.setupPath();
+    }
 }
