@@ -28,7 +28,7 @@ public class StateInfoTemplate extends BaseFragment {
     Drawable buttonImage;
 
     TextView textViewBack;
-    TextView textViewHeader;
+    protected TextView textViewHeader;
     TextView textViewSubheader;
     TextView textViewBody;
 
