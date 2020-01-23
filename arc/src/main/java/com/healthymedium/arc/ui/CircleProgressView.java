@@ -35,6 +35,7 @@ public class CircleProgressView extends View {
     private float sweepAngle;
     private float radius;
     private RectF rect;
+    private Rect checkRect;
 
     private Paint basePaint;
     private Paint shadowPaint;
@@ -65,9 +66,10 @@ public class CircleProgressView extends View {
         Context context = getContext();
         setLayerType(LAYER_TYPE_HARDWARE,null);
 
-        // initialize member variables
+        // Initialize member variables
         manualStrokeWidth = false;
         rect = new RectF(0,0,0,0);
+        checkRect = new Rect();
 
         basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         basePaint.setStyle(Paint.Style.STROKE);
@@ -164,11 +166,13 @@ public class CircleProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        if(progress==0) {
+        //After first test
+        if(progress == 0) {
             canvas.drawCircle(rect.centerX(),rect.centerY(),radius,basePaint);
             return;
         }
 
+        //After second test
         if(progress<100) {
             canvas.drawCircle(rect.centerX(),rect.centerY(),radius,basePaint);
             canvas.drawArc(rect, startAngle, sweepAngle, false, shadowPaint);
@@ -176,12 +180,19 @@ public class CircleProgressView extends View {
             return;
         }
 
+        //After third test
         canvas.drawCircle(rect.centerX(),rect.centerY(),radius,fillPaint);
+
+        // Assign the checkRect bounding rectangle to the rounded values
+        // of the circle bounding rect
+        rect.round(checkRect);
+
+        //Purely eyeballed adjustments
+        checkRect.bottom =  (int)(checkRect.top + checkRect.width() * 0.8);
+        checkRect.left = checkRect.left + 15;
+
         checkmark.setAlpha(checkmarkAlpha);
-        Rect rect = checkmark.getBounds();
-        rect.top = (int) checkmarkY;
-        rect.bottom = rect.top+(size/2);
-        checkmark.setBounds(rect);
+        checkmark.setBounds(checkRect);
         checkmark.draw(canvas);
     }
 
