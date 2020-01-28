@@ -75,7 +75,7 @@ public class AvailabilityConfirm extends BaseFragment {
 
     public AvailabilityConfirm(int minWakeTime, int maxWakeTime, boolean reschedule, boolean allowBack) {
         this.allowBack = allowBack;
-        stringButton = "NEXT";
+        stringButton = ViewUtil.getString(R.string.button_next);
 
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;

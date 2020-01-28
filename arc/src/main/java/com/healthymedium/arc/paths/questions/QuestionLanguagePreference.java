@@ -5,8 +5,10 @@ import android.annotation.SuppressLint;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SplashScreen;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +58,7 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
     @Override
     protected void onNextButtonEnabled(boolean enabled) {
         if (enabled) {
-            buttonNext.setText("NEXT");
+            buttonNext.setText(ViewUtil.getString(R.string.button_next));
         }
     }
 
