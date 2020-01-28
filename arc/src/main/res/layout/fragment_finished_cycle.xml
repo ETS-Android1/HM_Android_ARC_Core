@@ -43,7 +43,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="24dp"
-                android:text="You’ve Finished This Testing Cycle!"
+                android:text="@string/progress_cyclecomplete_header"
                 android:textColor="@color/white"
                 android:textSize="26dp" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="20dp"
-                android:text="Thank you for contributing to our research. Your time and hard work are truly valuable. "
+                android:text="@string/progress_cycleorstudycomplete_body"
                 android:textColor="@color/white"
                 android:textSize="18dp" />
 

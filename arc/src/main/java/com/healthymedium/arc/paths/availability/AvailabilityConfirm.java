@@ -120,10 +120,11 @@ public class AvailabilityConfirm extends BaseFragment {
         String wakeTime = clock.getRhythm("Monday").getWakeTime().toString("h:mm a");
         String bedTime = clock.getRhythm("Monday").getBedTime().toString("h:mm a");
 
-        stringHeader = "Great! We'll only send you reminders between <b>" + wakeTime + "</b> and <b>" + bedTime + ".</b>";
+        stringHeader = ViewUtil.getString(R.string.availability_confirm);
         if(reschedule) {
-            stringHeader = "Great! Starting tomorrow, we'll only send you reminders between <b>" + wakeTime + "</b> and <b>" + bedTime + ".</b>";
+            stringHeader = ViewUtil.getString(R.string.availability_change_confirm);
         }
+        stringHeader.replace("[TIME1]", wakeTime).replace("[TIME2]", bedTime);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
@@ -159,7 +160,7 @@ public class AvailabilityConfirm extends BaseFragment {
         });
 
         textViewChangeTimes = view.findViewById(R.id.textViewChangeTimes);
-        textViewChangeTimes.setText(Html.fromHtml("<u>Change Times</u>"));
+        textViewChangeTimes.setText(Html.fromHtml(ViewUtil.getString(R.string.availability_change_linked)));
         textViewChangeTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

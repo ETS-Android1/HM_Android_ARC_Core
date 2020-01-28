@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.ui.Rating;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
 public class QuestionRating extends QuestionTemplate {
@@ -73,7 +75,7 @@ public class QuestionRating extends QuestionTemplate {
 
         if(!Hints.hasBeenShown(HINT_QUESTION_RATING)){
             pointer = new HintPointer(getMainActivity(),rating.getSeekBar(),true,true);
-            pointer.setText("Drag to select");
+            pointer.setText(ViewUtil.getString(R.string.popup_drag));
             pointer.show();
             Hints.markShown(HINT_QUESTION_RATING);
         }

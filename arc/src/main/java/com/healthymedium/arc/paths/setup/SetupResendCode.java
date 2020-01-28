@@ -76,13 +76,13 @@ public class SetupResendCode extends BaseFragment {
         textViewProblems = new TextView(getContext());
         textViewProblems.setTypeface(Fonts.robotoMedium);
         textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
-        textViewProblems.setText("I need more help");
+        textViewProblems.setText(ViewUtil.getString(R.string.login_2FA_morehelp_linked));
         textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
         textViewProblems.setVisibility(View.VISIBLE);
         textViewProblems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FAQAnswerScreen helpScreen = new FAQAnswerScreen("How do I resolve two-step verification issues?", "I don't know.");
+                FAQAnswerScreen helpScreen = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q5), ViewUtil.getString(R.string.faq_tech_a5));
                 NavigationManager.getInstance().open(helpScreen);
             }
         });
