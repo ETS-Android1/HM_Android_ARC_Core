@@ -156,9 +156,9 @@
     <string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications.&lt;br />&lt;br />&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
     <string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>
     <string name="availability_stop">What time should we &lt;b>stop&lt;/b> your notifications each day?</string>
-    <string name="availability_confirm">Great! We\'ll only send you reminders between &lt;b>[TIME1]&lt;/b> and &lt;b>[TIME2]&lt;/b>.</string>
+    <string name="availability_confirm">Great! We\'ll only send you reminders between &lt;b>{TIME1}&lt;/b> and &lt;b>{TIME2}&lt;/b>.</string>
     <string name="availability_change_linked">Change Times</string>
-    <string name="availability_change_confirm">Great! Starting tomorrow, we\'ll only send you reminders between &lt;b>[TIME1]&lt;/b> and &lt;b>[TIME2]&lt;/b>.</string>
+    <string name="availability_change_confirm">Great! Starting tomorrow, we\'ll only send you reminders between &lt;b>{TIME1}&lt;/b> and &lt;b>{TIME2}&lt;/b>.</string>
 
     <string name="prices_body">Please decide if the displayed price is a good bargain for that item.&lt;br /&gt;&lt;br /&gt;The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
     <string name="grid_body">Study the grid and try to remember the location of the three items.</string>

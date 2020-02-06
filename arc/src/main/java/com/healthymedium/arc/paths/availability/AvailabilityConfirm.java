@@ -28,6 +28,7 @@ import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.study.CircadianClock;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
@@ -79,7 +80,7 @@ public class AvailabilityConfirm extends BaseFragment {
 
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;
-        this.reschedule =reschedule;
+        this.reschedule = reschedule;
 
         if(allowBack){
             allowBackPress(true);
@@ -100,40 +101,24 @@ public class AvailabilityConfirm extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_availability_confirm, container, false);
 
-//        if (getArguments() != null) {
-//            if (getArguments().containsKey("minWakeTime")) {
-//                minWakeTime = getArguments().getInt("minWakeTime");
-//            }
-//
-//            if (getArguments().containsKey("maxWakeTime")) {
-//                maxWakeTime = getArguments().getInt("maxWakeTime");
-//            }
-//
-//            if (getArguments().containsKey("reschedule")) {
-//                reschedule = getArguments().getBoolean("reschedule");
-//            }
-//        }
-
         content = view.findViewById(R.id.linearLayoutContent);
 
         clock = Study.getParticipant().getCircadianClock();
         String wakeTime = clock.getRhythm("Monday").getWakeTime().toString("h:mm a");
         String bedTime = clock.getRhythm("Monday").getBedTime().toString("h:mm a");
 
-        stringHeader = ViewUtil.getString(R.string.availability_confirm);
-        if(reschedule) {
-            stringHeader = ViewUtil.getString(R.string.availability_change_confirm);
-        }
-        stringHeader.replace("[TIME1]", wakeTime).replace("[TIME2]", bedTime);
+        //Place user inputted times into confirmation page header string time slots
+        Phrase confirmPhrase;
+        if(reschedule)
+            confirmPhrase = new Phrase(R.string.availability_change_confirm, wakeTime, bedTime);
+        else
+            confirmPhrase = new Phrase(R.string.availability_confirm, wakeTime, bedTime);
 
+        stringHeader = confirmPhrase.toString();
+
+        //Header textview init
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(stringHeader));
-
-//        if(stringSubHeader!=null){
-//            textViewSubheader = view.findViewById(R.id.textViewSubHeader);
-//            textViewSubheader.setText(Html.fromHtml(stringSubHeader));
-//            textViewSubheader.setVisibility(View.VISIBLE);
-//        }
 
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
@@ -150,11 +135,11 @@ public class AvailabilityConfirm extends BaseFragment {
             @Override
             public void onClick(View view) {
                 BaseFragment helpScreen;
-                if (USE_HELP_SCREEN) {
+                if (USE_HELP_SCREEN)
                     helpScreen = new HelpScreen();
-                } else {
+                else
                     helpScreen = new ContactScreen();
-                }
+
                 NavigationManager.getInstance().open(helpScreen);
             }
         });
@@ -220,9 +205,8 @@ public class AvailabilityConfirm extends BaseFragment {
         hideAnimation.setDuration(500);
         hideAnimation.setAnimationListener(hideAnimationListener);
 
-        if(allowBack){
+        if(allowBack)
             textViewBack.setVisibility(View.VISIBLE);
-        }
 
         setupDebug(view,R.id.textViewHeader);
 
@@ -235,7 +219,8 @@ public class AvailabilityConfirm extends BaseFragment {
         if(disableScrollBehavior) {
             buttonNext.setVisibility(View.VISIBLE);
             buttonShowing = true;
-        } else {
+        }
+        else {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -260,8 +245,7 @@ public class AvailabilityConfirm extends BaseFragment {
     boolean scrollViewIsAtBottom(){
         View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
         int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
-        //Log.i("scroll", "view.getBottom()="+view.getBottom()+" scrollView.getHeight()="+scrollView.getHeight()+" scrollView.getScrollY()=" + scrollView.getScrollY());
-        return (diff < 50);
+        return diff < 50;
     }
 
     protected void disableScrollBehavior(){
@@ -280,19 +264,22 @@ public class AvailabilityConfirm extends BaseFragment {
         scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-                if(disableScrollBehavior){
+                if(disableScrollBehavior)
+                    return;
+
+                boolean needsToShow = scrollViewIsAtBottom();
+                if(needsToShow == buttonShowing) {
                     return;
                 }
-                boolean needsToShow = scrollViewIsAtBottom();
-                if(needsToShow==buttonShowing){
-                    return;
-                } else if(needsToShow){
+                else if(needsToShow) {
                     buttonShowing = true;
                     buttonNext.startAnimation(showAnimation);
-                } else {
+                }
+                else {
                     buttonShowing = false;
                     buttonNext.startAnimation(hideAnimation);
                 }
+
                 if (!autoscroll) {
                     textViewScroll.animate().alpha(0.0f).setDuration(300);
                     textViewScrollTop.animate().alpha(0.0f).setDuration(300);
@@ -344,14 +331,10 @@ public class AvailabilityConfirm extends BaseFragment {
         }
 
         @Override
-        public void onAnimationEnd(Animation animation) {
-            //textViewScroll.setVisibility(View.GONE);
-        }
-
+        public void onAnimationEnd(Animation animation) {}
         @Override
-        public void onAnimationRepeat(Animation animation) {
+        public void onAnimationRepeat(Animation animation) {}
 
-        }
     };
 
     private Animation.AnimationListener hideAnimationListener = new Animation.AnimationListener() {
@@ -397,7 +380,8 @@ public class AvailabilityConfirm extends BaseFragment {
             if(start==null){
                 start = DateTime.now();
                 Study.getParticipant().getState().studyStartDate = start;
-            } else {
+            }
+            else {
                 start = start.withTime(LocalTime.now());
             }
 
@@ -408,7 +392,8 @@ public class AvailabilityConfirm extends BaseFragment {
             if(Study.getParticipant().shouldCurrentlyBeInTestCycle()) {
                 if (reschedule) {
                     Proctor.refreshData(getContext());
-                } else {
+                }
+                else {
                     Proctor.startService(getContext());
                 }
             }

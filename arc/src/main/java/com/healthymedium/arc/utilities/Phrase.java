@@ -37,6 +37,12 @@ public class Phrase {
         phrase = string;
     }
 
+    public Phrase(@StringRes int stringId, String time1, String time2) {
+        this.context = Application.getInstance();
+        this.phrase = getString(stringId);
+        this.replaceTimes(time1, time2);
+    }
+
     private String getString(@StringRes int id){
         return context.getString(id);
     }
@@ -111,6 +117,7 @@ public class Phrase {
         replace(tokenId, string);
     }
 
+    //Should be private, but didn't want to refactor.
     public void replaceTimes(@StringRes int format, DateTime time1, DateTime time2){
         replaceTime(R.string.token_time1, format, time1);
         replaceTime(R.string.token_time2, format, time2);
