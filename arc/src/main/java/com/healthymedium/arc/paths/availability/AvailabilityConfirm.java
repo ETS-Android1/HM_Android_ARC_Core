@@ -110,9 +110,17 @@ public class AvailabilityConfirm extends BaseFragment {
         //Place user inputted times into confirmation page header string time slots
         Phrase confirmPhrase;
         if(reschedule)
-            confirmPhrase = new Phrase(R.string.availability_change_confirm, wakeTime, bedTime);
+            confirmPhrase = Phrase.getTimeReplacedPhrase (
+                    R.string.availability_change_confirm,
+                    wakeTime,
+                    bedTime
+            );
         else
-            confirmPhrase = new Phrase(R.string.availability_confirm, wakeTime, bedTime);
+            confirmPhrase = Phrase.getTimeReplacedPhrase (
+                    R.string.availability_confirm,
+                    wakeTime,
+                    bedTime
+            );
 
         stringHeader = confirmPhrase.toString();
 

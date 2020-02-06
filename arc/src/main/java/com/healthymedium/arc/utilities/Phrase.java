@@ -36,11 +36,11 @@ public class Phrase {
         this.context = Application.getInstance();
         phrase = string;
     }
-
-    public Phrase(@StringRes int stringId, String time1, String time2) {
-        this.context = Application.getInstance();
-        this.phrase = getString(stringId);
-        this.replaceTimes(time1, time2);
+    
+    public static Phrase getTimeReplacedPhrase(int stringResId, String time1, String time2) {
+        Phrase timeReplacePhrase = new Phrase(stringResId);
+        timeReplacePhrase.replaceTimes(time1, time2);
+        return timeReplacePhrase;
     }
 
     private String getString(@StringRes int id){
