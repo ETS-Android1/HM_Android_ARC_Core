@@ -2,12 +2,15 @@ package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.widget.LinearLayout;
 
 import com.healthymedium.arc.ui.Signature;
 import com.github.gcacace.signaturepad.views.SignaturePad;
@@ -29,8 +32,21 @@ public class QuestionSignature extends QuestionTemplate {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
+
         setHelpVisible(allowHelp);
 
+        //Add spacer
+        View spacer = new View(getContext());
+        LinearLayout.LayoutParams spacerParams =
+                new LinearLayout.LayoutParams (
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewUtil.dpToPx(100)
+                );
+        spacer.setLayoutParams(spacerParams);
+        spacer.setBackgroundColor(Color.RED);
+        spacer.setVisibility(View.INVISIBLE);
+        content.addView(spacer);
+        
         signature = new Signature(getContext());
         content.addView(signature);
 
