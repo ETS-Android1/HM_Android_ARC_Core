@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -49,7 +51,13 @@ public class PriceTestMatchFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_price_test_match, container, false);
+        int layout;
+        if (Config.PRICE_TEST_STYLE == PriceTestStyle.REVISED.getStyle()) {
+            layout = R.layout.fragment_revised_price_test_match;
+        } else {
+            layout = R.layout.fragment_price_test_match;
+        }
+        View view = inflater.inflate(layout, container, false);
 
         priceTest = (PriceTestPathData) Study.getCurrentSegmentData();
         priceSet = priceTest.getPriceSet();
