@@ -6,17 +6,6 @@ def versionPatch = 1 // max=99   // bump for fixes (crashes, unintended behavior
 def versionBuild = 4 // max=99   // bump for qa builds
 
 def flavor = getGradle().getStartParameter().getTaskRequests().toString().toLowerCase()
-def analytics = false
-
-if (flavor.contains("dev")) {
-    analytics = devAnalytics
-}
-if (flavor.contains("qa")) {
-    analytics = qaAnalytics
-}
-if (flavor.contains("prod")) {
-    analytics = prodAnalytics
-}
 
 android {
 
