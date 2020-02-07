@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.EarningsDetailsScreen;
 import com.healthymedium.arc.paths.informative.FAQScreen;
@@ -35,6 +36,7 @@ public class EarningsScreen extends BaseFragment {
 
     SwipeRefreshLayout refreshLayout;
 
+    TextView headerText;
     TextView weeklyTotal;
     TextView studyTotal;
     TextView lastSync;
@@ -42,6 +44,7 @@ public class EarningsScreen extends BaseFragment {
 
     TextView earningsBody1;
     Button viewDetailsButton;
+    TextView bonusHeader;
     TextView bonusBody;
     Button viewFaqButton;
 
@@ -119,7 +122,11 @@ public class EarningsScreen extends BaseFragment {
         }
         body += ViewUtil.getString(R.string.earnings_body1);
 
+        headerText = view.findViewById(R.id.textViewHeader);
+        headerText.setTypeface(Fonts.robotoMedium);
+
         earningsBody1 = view.findViewById(R.id.earningsBody1);
+        earningsBody1.setTypeface(Fonts.robotoMedium);
         earningsBody1.setText(Html.fromHtml(body));
 
         viewDetailsButton = view.findViewById(R.id.viewDetailsButton);
@@ -130,6 +137,9 @@ public class EarningsScreen extends BaseFragment {
                 NavigationManager.getInstance().open(earningsDetailsScreen);
             }
         });
+
+        bonusHeader = view.findViewById(R.id.bonusGoalsHeader);
+        bonusHeader.setTypeface(Fonts.robotoMedium);
 
         bonusBody = view.findViewById(R.id.bonusBody);
         bonusBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_body)));
@@ -146,6 +156,7 @@ public class EarningsScreen extends BaseFragment {
         goalLayout = view.findViewById(R.id.goalLayout);
         weeklyTotal = view.findViewById(R.id.weeklyTotal);
         studyTotal = view.findViewById(R.id.studyTotal);
+        studyTotal.setTypeface(Fonts.robotoMedium);
         lastSync = view.findViewById(R.id.textViewLastSync);
 
         populateViews();

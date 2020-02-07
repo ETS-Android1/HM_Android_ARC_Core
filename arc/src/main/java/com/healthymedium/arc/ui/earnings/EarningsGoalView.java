@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.font.FontFactory;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.ui.CircleProgressView;
@@ -51,6 +53,9 @@ public class EarningsGoalView extends RoundedLinearLayout {
         bonusTextView = view.findViewById(R.id.bonusTextView);
         linearLayoutBody = view.findViewById(R.id.linearLayoutBody);
         linearLayoutHeader = view.findViewById(R.id.linearLayoutHeader);
+
+        textViewHeader.setTypeface(Fonts.robotoMedium);
+        bonusTextView.setTypeface(Fonts.robotoBold);
 
         if(showCompletionCollapsed){
             linearLayoutHeader.setRadius(ViewUtil.dpToPx(8));
@@ -124,7 +129,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
             contentLayout.addView(progressView);
 
             progressView.setMargin(dp4,0,dp4,0);
-            progressView.setStrokeWidth((int)ViewUtil.dpToPx(1.5f));
+            progressView.setStrokeWidth((int)ViewUtil.dpToPx(2.0f));
             progressView.setBaseColor(R.color.secondaryAccent);
             progressView.setCheckmarkColor(R.color.secondaryAccent);
             progressView.setSweepColor(R.color.secondary);
