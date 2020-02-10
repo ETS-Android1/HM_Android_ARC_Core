@@ -29,7 +29,9 @@ public class TranslationDoc {
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
     private static final String TOKENS_DIRECTORY_PATH = System.getProperty("user.dir")+"/tokens";
 
-    public static List<List<String>> grabData() throws IOException, GeneralSecurityException {
+    public static List<LocaleResource> grabData() throws IOException, GeneralSecurityException {
+
+        System.out.println("building client service");
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1OWIiUaUDlGwbYMKfeE1hvw8BeWM7MolmrokIfja8oYs";
@@ -37,12 +39,21 @@ public class TranslationDoc {
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
+
+        System.out.println("requesting sheet data");
         ValueRange response = service.spreadsheets().values()
                 .get(spreadsheetId, range)
                 .execute();
 
         // copy the generic structure into something we expect
         List<List<Object>> values = response.getValues();
+
+        if (values == null || values.isEmpty()) {
+            System.out.println("no sheet available, quiting");
+            return null;
+        }
+        System.out.println("sheet data received");
+
         List<List<String>> data = new ArrayList<>();
         for(List<Object> objectList : values){
             List<String> row = new ArrayList<>();
@@ -55,7 +66,27 @@ public class TranslationDoc {
             }
             data.add(row);
         }
-        return data;
+
+        System.out.println("parsing sheet data into more formal structures");
+        List<LocaleResource> resources = new ArrayList<>();
+        List<String> localeNames = data.get(0);
+
+        for(int i=1;i<localeNames.size();i++) {
+            LocaleResource resource = new LocaleResource();
+            resource.name = localeNames.get(i);
+            resources.add(resource);
+        }
+
+        for(int i=1;i<data.size();i++) {
+            List<String> row = data.get(i);
+            String key = row.get(0);
+            for(int j=1;j<row.size();j++) {
+                String value = row.get(j);
+                resources.get(j-1).map.put(key,value);
+            }
+        }
+
+        return resources;
     }
 
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
