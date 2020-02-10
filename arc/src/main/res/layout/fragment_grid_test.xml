@@ -10,13 +10,912 @@
         android:id="@+id/gridLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="false"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="15dp"
         android:columnCount="5"
         android:rowCount="5">
 
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
 
+            <!-- Unselected view -->
+            <View
+                android:id="@+id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@+id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@+id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+        <!-- Grid Cell -->
+        <FrameLayout
+            android:layout_width="50dp"
+            android:layout_height="80dp"
+            android:layout_margin="1dp">
+
+            <!-- Unselected view -->
+            <View
+                android:id="@id/cellUnselectedView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridNormal"
+                android:layout_gravity="center">
+            </View>
+
+            <!-- Selected View -->
+            <View
+                android:id="@id/cellSelectedBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gridSelected"
+                android:visibility="invisible">
+            </View>
+
+            <!-- Selected Dot -->
+            <View
+                android:id="@id/cellSelectedForeground"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:foreground="@drawable/drawable_circle"
+                android:visibility="invisible">
+            </View>
+        </FrameLayout>
+
+<!--
         <ImageView
             android:id="@+id/image11"
             android:layout_width="10mm"
@@ -190,6 +1089,6 @@
             android:layout_width="10mm"
             android:layout_height="16mm"
             android:layout_margin="1dp"
-            android:background="@color/gridNormal" />
+            android:background="@color/gridNormal" /> -->
     </GridLayout>
 </FrameLayout>
