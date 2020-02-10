@@ -203,6 +203,7 @@
     <string name="prices_tutorial_price2">$10.82</string>
     <string name="prices_tutorial_price1_match">$6.78</string>
     <string name="prices_tutorial_price2_match">$4.01</string>
+    <string name="popup_tutorial_pricetap">Tap this matching price.</string>
     <string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the answer that makes sense to you.</string>
     <string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> &lt;br /&gt;Let\'s try another.</string>
     <string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>

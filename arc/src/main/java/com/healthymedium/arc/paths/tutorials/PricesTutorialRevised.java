@@ -23,9 +23,13 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class PricesTutorialRevised extends Tutorial {
 
     public static final String HINT_PREVENT_TUTORIAL_CLOSE_PRICES = "HINT_PREVENT_TUTORIAL_CLOSE_PRICES";
+    private static final long WHAT_DO_YOU_THINK_HINT_DELAY = 10000;
+    private static final long TAP_THIS_PRICE_HINT_DELAY = 4000;
 
     Runnable runnableWhatDoYouThink;
     Handler handlerWhatDoYouThink = new Handler();
+    Runnable runnableCorrectAnswer;
+    Handler handlerCorrectAnswer = new Handler();
 
     RelativeLayout priceContainer;
 
@@ -48,6 +52,13 @@ public class PricesTutorialRevised extends Tutorial {
 
     HintHighlighter secondMatchContainerHighlight;
     HintPointer secondMatchHint;
+
+
+    HintHighlighter firstMatchAnswerHilighter;
+    HintPointer firstMatchAnswerPointer;
+    HintHighlighter secondMatchAnswerHilighter;
+    HintPointer secondMatchAnswerPointer;
+
 
 
     public PricesTutorialRevised() {
@@ -97,6 +108,12 @@ public class PricesTutorialRevised extends Tutorial {
 
         secondMatchContainerHighlight = new HintHighlighter(getActivity());
         secondMatchHint = new HintPointer(getActivity(), priceContainer, true, false);
+
+        firstMatchAnswerHilighter = new HintHighlighter(getActivity());
+        firstMatchAnswerPointer = new HintPointer(getActivity(), buttonNo, true, false);
+
+        secondMatchAnswerHilighter = new HintHighlighter(getActivity());
+        secondMatchAnswerPointer = new HintPointer(getActivity(), buttonYes, true, false);
 
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);
@@ -277,40 +294,33 @@ public class PricesTutorialRevised extends Tutorial {
 
         handlerWhatDoYouThink.post(runnableWhatDoYouThink);
 
+        runnableCorrectAnswer = new Runnable() {
+            @Override
+            public void run() {
+                firstMatchContainerHighlight.dismiss();
+                firstMatchHint.dismiss();
+                firstMatchAnswerHilighter.addPulsingTarget(buttonNo.findViewById(R.id.frameLayoutRadioButton),42);
+                firstMatchAnswerHilighter.addTarget(progressBar);
+                firstMatchAnswerHilighter.show();
+
+                firstMatchAnswerPointer.setText(ViewUtil.getString(R.string.popup_tutorial_pricetap));
+                firstMatchAnswerPointer.show();
+            }
+        };
+
+        handlerCorrectAnswer.postDelayed(runnableCorrectAnswer, TAP_THIS_PRICE_HINT_DELAY);
+
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
-                        firstMatchContainerHighlight.dismiss();
-                        firstMatchHint.dismiss();
                         handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
-                        incrementProgress();
-                        updateButtons(true);
+                        handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
+                        handlerCorrectAnswer.post(runnableCorrectAnswer);
 
-                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
-
-                        View.OnClickListener listener = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                firstMatchGreatChoiceHint.dismiss();
-
-                                Handler handler = new Handler();
-                                Runnable runnable = new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        buttonYes.setChecked(false);
-                                        setSecondPriceMatch();
-                                    }
-                                };
-                                handler.postDelayed(runnable,600);
-                            }
-                        };
-
-                        firstMatchGreatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
-
-                        firstMatchGreatChoiceHint.show();
+                        buttonYes.setChecked(false);
 
                         break;
                 }
@@ -326,7 +336,10 @@ public class PricesTutorialRevised extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
+                        firstMatchAnswerHilighter.dismiss();
+                        firstMatchAnswerPointer.dismiss();
                         handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
+                        handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
                         incrementProgress();
                         updateButtons(false);
 
@@ -385,7 +398,23 @@ public class PricesTutorialRevised extends Tutorial {
             }
         };
 
-        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink,10000);
+        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink, WHAT_DO_YOU_THINK_HINT_DELAY);
+
+        runnableCorrectAnswer = new Runnable() {
+            @Override
+            public void run() {
+                secondMatchContainerHighlight.dismiss();
+                secondMatchHint.dismiss();
+                secondMatchAnswerHilighter.addPulsingTarget(buttonYes.findViewById(R.id.frameLayoutRadioButton),42);
+                secondMatchAnswerHilighter.addTarget(progressBar);
+                secondMatchAnswerHilighter.show();
+
+                secondMatchAnswerPointer.setText(ViewUtil.getString(R.string.popup_tutorial_pricetap));
+                secondMatchAnswerPointer.show();
+            }
+        };
+
+        handlerCorrectAnswer.postDelayed(runnableCorrectAnswer, WHAT_DO_YOU_THINK_HINT_DELAY + TAP_THIS_PRICE_HINT_DELAY);
 
         buttonYes.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -395,7 +424,10 @@ public class PricesTutorialRevised extends Tutorial {
                     case MotionEvent.ACTION_DOWN:
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
+                        secondMatchAnswerHilighter.dismiss();
+                        secondMatchAnswerPointer.dismiss();
                         handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
+                        handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
                         incrementProgress();
                         updateButtons(true);
 
@@ -419,19 +451,9 @@ public class PricesTutorialRevised extends Tutorial {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
-                        secondMatchContainerHighlight.dismiss();
-                        secondMatchHint.dismiss();
                         handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
-                        incrementProgress();
-                        updateButtons(false);
-
-                        fadeOutView(textView12);
-                        fadeOutView(buttonNo);
-                        fadeOutView(buttonYes);
-                        fadeOutView(textviewFood);
-                        fadeOutView(textviewPrice);
-
-                        showComplete();
+                        handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
+                        handlerCorrectAnswer.post(runnableCorrectAnswer);
 
                         break;
                 }

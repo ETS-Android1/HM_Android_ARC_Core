@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -40,6 +41,7 @@ public class PriceTestCompareFragment extends BaseFragment {
     TextView textviewPrice;
     TextView textviewGoodPrice;
 
+    private boolean revised = false;
     boolean paused;
     Random random;
     Handler handler;
@@ -66,6 +68,40 @@ public class PriceTestCompareFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        revised = (Config.PRICE_TEST_STYLE == PriceTestStyle.REVISED.getStyle());
+        if (revised) {
+            return createRevisedFragment(inflater, container, savedInstanceState);
+        } else {
+            return createFullFragment(inflater, container, savedInstanceState);
+        }
+    }
+
+    private View createRevisedFragment(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_revised_price_test_compare, container, false);
+        random = new Random(System.currentTimeMillis());
+        prefix = getString(R.string.money_prefix);
+        suffix = getString(R.string.money_suffix);
+
+        priceTest = (PriceTestPathData) Study.getCurrentSegmentData();
+        if(!priceTest.hasStarted()){
+            priceTest.markStarted();
+        }
+        section = priceTest.getSections().get(index);
+        item = priceTest.getPriceSet().get(index);
+
+        textviewFood = view.findViewById(R.id.textviewFood);
+        textviewFood.setTypeface(Fonts.georgiaItalic);
+
+        textviewPrice = view.findViewById(R.id.textviewPrice);
+        textviewPrice.setTypeface(Fonts.georgiaItalic);
+
+        handler = new Handler();
+        setupIteration();
+
+        return view;
+    }
+
+    private View createFullFragment(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_price_test_compare, container, false);
         random = new Random(System.currentTimeMillis());
         prefix = getString(R.string.money_prefix);
@@ -120,12 +156,6 @@ public class PriceTestCompareFragment extends BaseFragment {
         textviewPrice = view.findViewById(R.id.textviewPrice);
         textviewPrice.setTypeface(Fonts.georgiaItalic);
 
-        if (Config.USE_REVISED_PRICES_TEST) {
-            textviewGoodPrice.setVisibility(View.INVISIBLE);
-            buttonNo.setVisibility(View.INVISIBLE);
-            buttonYes.setVisibility(View.INVISIBLE);
-        }
-
         handler = new Handler();
         setupIteration();
 
@@ -141,22 +171,40 @@ public class PriceTestCompareFragment extends BaseFragment {
         if(random.nextBoolean()){
             textviewFood.setText(item.item);
             textviewPrice.setText(price+" ");
+            setFonts(false);
         } else {
             textviewFood.setText(price+" ");
             textviewPrice.setText(item.item);
+            setFonts(true);
         }
 
         section.markStimulusDisplayed();
         handler.postDelayed(runnable,3000);
     }
 
+    private void setFonts(Boolean flipped) {
+        if (revised) { //only for the updated version of prices test
+            if (flipped) {
+                textviewFood.setTypeface(Fonts.georgia);
+                textviewPrice.setTypeface(Fonts.georgiaItalic);
+            } else {
+                textviewFood.setTypeface(Fonts.georgiaItalic);
+                textviewPrice.setTypeface(Fonts.georgia);
+            }
+        }
+    }
+
     private void saveIteration(){
-        if(buttonYes.isChecked()){
-            section.selectGoodPrice(1);
-        } else if (buttonNo.isChecked()){
-            section.selectGoodPrice(0);
-        } else {
+        if (buttonYes == null || buttonNo == null) {
             section.selectGoodPrice(99);
+        } else {
+            if(buttonYes.isChecked()){
+                section.selectGoodPrice(1);
+            } else if (buttonNo.isChecked()){
+                section.selectGoodPrice(0);
+            } else {
+                section.selectGoodPrice(99);
+            }
         }
         priceTest.getSections().set(index,section);
     }

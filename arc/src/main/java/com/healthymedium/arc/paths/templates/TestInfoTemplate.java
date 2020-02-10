@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.paths.tutorials.PricesTutorialRevised;
@@ -181,7 +182,7 @@ public class TestInfoTemplate extends BaseFragment {
                 }
                 else if (stringType.equals("prices")) {
                     Hints.markShown(HINT_PRICES_TUTORIAL);
-                    if (Config.USE_REVISED_PRICES_TEST) {
+                    if (Config.PRICE_TEST_STYLE == PriceTestStyle.REVISED.getStyle()) {
                         PricesTutorialRevised pricesTutorialRevised = new PricesTutorialRevised();
                         NavigationManager.getInstance().open(pricesTutorialRevised);
                     } else {
