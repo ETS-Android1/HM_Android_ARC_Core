@@ -90,26 +90,32 @@ public class DebugDialog extends DialogFragment {
 
         }
 
-        // Get current visit
-        int currVisitId = Study.getCurrentTestCycle().getId();
+        if(Study.getCurrentTestCycle() != null) {
+            // Get current visit
+            int currVisitId = Study.getCurrentTestCycle().getId();
 
-        // Notification one month before next visit
-        NotificationNode month = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextMonth.getId(), currVisitId);
-        if (month != null) {
-            status += "month notification: " + month.time + "\n";
+            // Notification one month before next visit
+            NotificationNode month = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextMonth.getId(), currVisitId);
+            if (month != null) {
+                status += "month notification: " + month.time + "\n";
+            }
+
+            // Notification one week before next visit
+            NotificationNode week = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextWeek.getId(), currVisitId);
+            if (week != null) {
+                status += "week notification: " + week.time + "\n";
+            }
+
+            // Notification one day before next visit
+            NotificationNode day = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextDay.getId(), currVisitId);
+            if (day != null) {
+                status += "day notification: " + day.time + "\n";
+            }
+        }
+        else {
+            status += " -- uninitialized -- \n";
         }
 
-        // Notification one week before next visit
-        NotificationNode week = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextWeek.getId(), currVisitId);
-        if (week != null) {
-            status += "week notification: " + week.time + "\n";
-        }
-
-        // Notification one day before next visit
-        NotificationNode day = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextDay.getId(), currVisitId);
-        if (day != null) {
-            status += "day notification: " + day.time + "\n";
-        }
 
         textView = v.findViewById(R.id.textviewState);
         textView.setText(status);
