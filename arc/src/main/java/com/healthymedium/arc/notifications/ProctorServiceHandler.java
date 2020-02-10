@@ -3,6 +3,8 @@ package com.healthymedium.arc.notifications;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+
+import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.types.NotificationType;
@@ -58,6 +60,8 @@ public class ProctorServiceHandler {
             if(node.time.isAfterNow()){
                 nodes.add(node);
             } else {
+                long now = System.currentTimeMillis();
+                analyzeTimeout("posthumous",now,node.time.getMillis());
                 listener.onNotify(node);
             }
         }
@@ -144,6 +148,8 @@ public class ProctorServiceHandler {
         @Override
         public void onFinish() {
             Log.i(tag,"onFinish");
+            long now = System.currentTimeMillis();
+            analyzeTimeout("finished",now,time);
             onTimeout();
         }
 
@@ -152,6 +158,7 @@ public class ProctorServiceHandler {
             long now = System.currentTimeMillis();
             if(now>time){
                 Log.i(tag,"onTick - timing out");
+                analyzeTimeout("preemptive",now,time);
                 onTimeout();
 //            } else { // uncomment for logging
 //                int seconds = (int) ((millisUntilFinished-tenSeconds)/1000);
@@ -164,6 +171,23 @@ public class ProctorServiceHandler {
             }
         }
 
+    }
+
+    private static long five_min = 5*60*1000;
+
+    private static void analyzeTimeout(String type, long now, long target) {
+        long delta = Math.abs(target-now);
+        if(delta>five_min){
+            int seconds = (int) ((delta)/1000);
+            int minutes = seconds/60;
+            int hours = minutes/60;
+
+            seconds -= minutes*60;
+            minutes -= hours*60;
+
+            String field = (target > now) ? "late":"early";
+            Analytics.logInfo("Proctor Deviation","Timeout was "+type+". Timed out at "+now+" when target was "+target+". Timeout was "+hours+"hr "+minutes+"min "+seconds+"sec "+field);
+        }
     }
 
 }
