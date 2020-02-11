@@ -59,6 +59,8 @@ public class HomeScreen extends BaseFragment {
     protected RelativeLayout rootView;
     protected TextView textViewAvailability;
 
+    private View yellowBar;
+
     HintPointer tourHint;
     HintPointer beginTestHint;
     HintHighlighter beginTestHighlight;
@@ -75,7 +77,12 @@ public class HomeScreen extends BaseFragment {
         rootView = view.findViewById(R.id.rootView);
         landing_layout = view.findViewById(R.id.landing_layout);
         content = view.findViewById(R.id.linearLayoutContent);
+
         textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setTypeface(Fonts.robotoMedium);
+
+        yellowBar = view.findViewById(R.id.yellowBar);
+
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
 
         textViewAvailability = new TextView(getContext());
@@ -216,11 +223,12 @@ public class HomeScreen extends BaseFragment {
 
         // Default
         textViewAvailability.setVisibility(View.GONE);
-        stringHeader = ViewUtil.getString(R.string.home_header1) + ViewUtil.getString(R.string.home_body1);
+        stringHeader = ViewUtil.getString(R.string.home_body1);
         stringSubheader = "";
 
         isTestReady = participant.shouldCurrentlyBeInTestSession();
         if(isTestReady){
+            yellowBar.setVisibility(View.GONE);
             return;
         }
 

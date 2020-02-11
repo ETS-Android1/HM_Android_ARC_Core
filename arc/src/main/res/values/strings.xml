@@ -52,7 +52,7 @@
     <string name="scroll">Scroll</string>
 
     <!--Currently the default home copy-->
-    <string name="home_body1">&lt;br /&gt; &lt;br /&gt;You have a new test available.</string>
+    <string name="home_body1">You have a new test available.</string>
 
     <!-- Used on the Testing Commitment screen for non-remote studies -->
     <string name="checkbox_commit">I understand</string>
