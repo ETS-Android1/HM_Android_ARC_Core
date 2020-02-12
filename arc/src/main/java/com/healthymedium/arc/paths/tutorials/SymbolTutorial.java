@@ -61,6 +61,7 @@ public class SymbolTutorial extends Tutorial {
     HintHighlighter finalTilesPulsate;
     HintPointer finalPointer;
 
+    HintHighlighter greatJobHighlight;
     HintPointer greatJobHint;
     HintPointer niceHint;
 
@@ -377,11 +378,15 @@ public class SymbolTutorial extends Tutorial {
 
                 greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 greatJobHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
+                greatJobHighlight = new HintHighlighter(getActivity());
+                greatJobHighlight.addTarget(progressBar);
+                greatJobHighlight.show();
 
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         greatJobHint.dismiss();
+                        greatJobHighlight.dismiss();
 
                         Handler handler = new Handler();
                         Runnable runnable = new Runnable() {
@@ -453,11 +458,15 @@ public class SymbolTutorial extends Tutorial {
 
                 niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
                 niceHint.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
+                greatJobHighlight = new HintHighlighter(getActivity());
+                greatJobHighlight.addTarget(progressBar);
+                greatJobHighlight.show();
 
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         niceHint.dismiss();
+                        greatJobHighlight.dismiss();
 
                         Handler handler = new Handler();
                         Runnable runnable = new Runnable() {
