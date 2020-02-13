@@ -181,12 +181,14 @@ public class ProctorServiceHandler {
             int seconds = (int) ((delta)/1000);
             int minutes = seconds/60;
             int hours = minutes/60;
+            int days = hours/24;
 
+            hours -= days*24;
             seconds -= minutes*60;
             minutes -= hours*60;
 
-            String field = (target > now) ? "late":"early";
-            Analytics.logInfo("Proctor Deviation","Timeout was "+type+". Timed out at "+now+" when target was "+target+". Timeout was "+hours+"hr "+minutes+"min "+seconds+"sec "+field);
+            String field = (target < now) ? "late":"early";
+            Analytics.logInfo("Proctor Deviation","Timeout was "+type+". Timed out at "+now+" when target was "+target+". Timeout was "+days+"day(s) "+hours+"hr "+minutes+"min "+seconds+"sec "+field);
         }
     }
 
