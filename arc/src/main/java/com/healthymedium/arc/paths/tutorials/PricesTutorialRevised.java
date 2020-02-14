@@ -1,9 +1,13 @@
 package com.healthymedium.arc.paths.tutorials;
 
+import android.graphics.Color;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,19 +22,29 @@ import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.ui.RadioButton;
+import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.utilities.ViewUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PricesTutorialRevised extends Tutorial {
 
     public static final String HINT_PREVENT_TUTORIAL_CLOSE_PRICES = "HINT_PREVENT_TUTORIAL_CLOSE_PRICES";
     private static final long WHAT_DO_YOU_THINK_HINT_DELAY = 10000;
-    private static final long TAP_THIS_PRICE_HINT_DELAY = 4000;
+    private static final long TAP_THIS_PRICE_HINT_DELAY = 10000;
 
     Runnable runnableWhatDoYouThink;
     Handler handlerWhatDoYouThink = new Handler();
     Runnable runnableCorrectAnswer;
     Handler handlerCorrectAnswer = new Handler();
 
+    Runnable progressRunnable;
+    Handler handler;
+
+    List<View> childSet;
+
+    RelativeLayout mainContainer;
     RelativeLayout priceContainer;
 
     RadioButton buttonYes;
@@ -39,6 +53,8 @@ public class PricesTutorialRevised extends Tutorial {
     TextView textviewFood;
     TextView textviewPrice;
     TextView textView12;
+
+    View hintHandle;
 
     HintPointer initialViewHint;
 
@@ -59,10 +75,12 @@ public class PricesTutorialRevised extends Tutorial {
     HintHighlighter secondMatchAnswerHilighter;
     HintPointer secondMatchAnswerPointer;
 
-
+    HintHighlighter highlighter;
+    HintPointer pointer;
 
     public PricesTutorialRevised() {
         setTransitionSet(TransitionSet.getFadingDefault(true));
+        childSet = new ArrayList<>();
     }
 
     @Override
@@ -75,7 +93,13 @@ public class PricesTutorialRevised extends Tutorial {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_prices_tutorial, container, false);
 
+        handler = new Handler();
+
+        mainContainer = view.findViewById(R.id.mainContainer);
+        mainContainer.setBackgroundColor(Color.parseColor("#EDEDEF"));
+
         priceContainer = view.findViewById(R.id.priceContainer);
+        priceContainer.setVisibility(View.INVISIBLE);
 
         buttonYes = view.findViewById(R.id.radioButtonYes);
         buttonYes.setText(ViewUtil.getString(R.string.radio_yes));
@@ -89,10 +113,15 @@ public class PricesTutorialRevised extends Tutorial {
 
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(5,false);
-        progressIncrement = 25;
+        progressIncrement = 17;
 
         closeButton = view.findViewById(R.id.closeButton);
+        closeButton.setEnabled(false);
+        closeButton.setVisibility(View.GONE);
+
         checkmark = view.findViewById(R.id.checkmark);
+
+        hintHandle = view.findViewById(R.id.hintHandle);
 
         welcomeHighlight = new HintHighlighter(getActivity());
         welcomeHint = new HintPointer(getActivity(), progressView, true, false);
@@ -104,7 +133,6 @@ public class PricesTutorialRevised extends Tutorial {
 
         firstMatchContainerHighlight = new HintHighlighter(getActivity());
         firstMatchHint = new HintPointer(getActivity(), priceContainer, true, false);
-        firstMatchGreatChoiceHint = new HintPointer(getActivity(), priceContainer, false, false);
 
         secondMatchContainerHighlight = new HintHighlighter(getActivity());
         secondMatchHint = new HintPointer(getActivity(), priceContainer, true, false);
@@ -115,14 +143,17 @@ public class PricesTutorialRevised extends Tutorial {
         secondMatchAnswerHilighter = new HintHighlighter(getActivity());
         secondMatchAnswerPointer = new HintPointer(getActivity(), buttonYes, true, false);
 
+
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);
+
+        firstMatchGreatChoiceHint = new HintPointer(getActivity(), hintHandle, false, false);
 
         textviewPrice = view.findViewById(R.id.textviewPrice);
         textviewPrice.setTypeface(Fonts.georgiaItalic);
 
-        initialViewHint = new HintPointer(getActivity(), textviewFood, false, false);
-        greatChoiceHint = new HintPointer(getActivity(), textviewFood, false, false);
+        initialViewHint = new HintPointer(getActivity(), hintHandle, false, false);
+        greatChoiceHint = new HintPointer(getActivity(), hintHandle, false, false);
 
         textView12=view.findViewById(R.id.textView12);
         textView12.setVisibility(View.INVISIBLE);
@@ -134,12 +165,94 @@ public class PricesTutorialRevised extends Tutorial {
         progressBar = view.findViewById(R.id.progressBar);
         loadingView = view.findViewById(R.id.loadingView);
 
-        progressBar.animate()
-                .setStartDelay(800)
-                .setDuration(400)
-                .alpha(1.0f);
+        highlighter = new HintHighlighter(getActivity());
+
+        //Store children of priceContainer to be reinjected
+        saveChildren(priceContainer);
+
+        injectMemorizationViews();
+
+        //Rounded rectangle background active during memorization portion
+        priceContainer.setBackgroundResource(R.drawable.background_rounded_white);
 
         return view;
+    }
+
+    private void injectMemorizationViews() {
+        priceContainer.removeAllViews();
+
+        //Resize container
+        priceContainer.getLayoutParams().height = ViewUtil.dpToPx(210);
+        priceContainer.getLayoutParams().width = ViewUtil.dpToPx(350);
+
+        TextView viewUpdater;
+        RelativeLayout.LayoutParams paramManip;
+
+        //Update textViewFood attributes for revised prices test
+        viewUpdater = textviewFood;
+        viewUpdater.setVisibility(View.VISIBLE);
+        viewUpdater.setGravity(Gravity.CENTER);
+        viewUpdater.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35);
+        viewUpdater.setPadding(0, 0, 0, 0);
+        viewUpdater.setLineSpacing(0, 0);
+
+        resetLayoutParams(viewUpdater);
+        paramManip = (RelativeLayout.LayoutParams) viewUpdater.getLayoutParams();
+        paramManip.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        viewUpdater.setLayoutParams(paramManip);
+
+        priceContainer.addView(viewUpdater);
+
+        //Update textviewPrices attributes for revised prices test
+        viewUpdater = textviewPrice;
+        viewUpdater.setVisibility(View.VISIBLE);
+        viewUpdater.setGravity(Gravity.CENTER);
+        viewUpdater.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35);
+        viewUpdater.setPadding(0,0,0,0);
+        viewUpdater.setLineSpacing(0, 0);
+
+        resetLayoutParams(viewUpdater);
+        paramManip = (RelativeLayout.LayoutParams) viewUpdater.getLayoutParams();
+        paramManip.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        paramManip.addRule(RelativeLayout.BELOW, textviewFood.getId());
+        viewUpdater.setLayoutParams(paramManip);
+
+        priceContainer.addView(viewUpdater);
+}
+
+    private void saveChildren(ViewGroup container) {
+        childSet.clear();
+        for(int i = 0; i < container.getChildCount(); ++i)
+            childSet.add(i, container.getChildAt(i));
+    }
+
+    private void injectSavedChildren() {
+        //Ensure that inject children will not execute without a preceding saveChildren()
+        if(childSet.isEmpty())
+            return;
+
+        priceContainer.removeAllViews();
+
+        for(View view : childSet) {
+            if(view.equals(textviewFood))
+                resetLayoutParams((TextView)view);
+
+            if(view.equals(textView12))
+                resetLayoutParams((TextView)view);
+
+            priceContainer.addView(view, childSet.indexOf(view));
+        }
+
+        childSet.clear();
+    }
+
+    private void resetLayoutParams(TextView tv) {
+        RelativeLayout.LayoutParams defaultParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        if(tv.equals(textView12)) {
+            defaultParams.addRule(RelativeLayout.BELOW, textviewFood.getId());
+        }
+
+        tv.setLayoutParams(defaultParams);
     }
 
     @Override
@@ -201,16 +314,17 @@ public class PricesTutorialRevised extends Tutorial {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
         textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
 
-//        firstPriceContainerHighlight.addTarget(priceContainer, 10);
-//        firstPriceContainerHighlight.addTarget(progressBar);
-//        firstPriceContainerHighlight.show();
-
         initialViewHint.setText(ViewUtil.getString(R.string.popup_tutorial_price_intro));
+        highlighter.addTarget(progressBar);
+        highlighter.show();
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 initialViewHint.dismiss();
+                highlighter.dismiss();
+                highlighter.clearTargets();
+                priceContainer.setVisibility(View.VISIBLE);
 
                 Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
@@ -233,6 +347,23 @@ public class PricesTutorialRevised extends Tutorial {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item2));
         textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
 
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                incrementProgress();
+                setThirdPricesCompare();
+            }
+        };
+        handler.postDelayed(runnable,3000);
+
+
+    }
+
+    private void setThirdPricesCompare() {
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item3));
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price3));
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -242,12 +373,26 @@ public class PricesTutorialRevised extends Tutorial {
                     @Override
                     public void onClick(View view) {
                         incrementProgress();
+
                         greatChoiceHint.dismiss();
+                        highlighter.dismiss();
+                        highlighter.clearTargets();
 
                         Handler handler = new Handler();
                         Runnable runnable = new Runnable() {
                             @Override
                             public void run() {
+                                //add back original children
+                                injectSavedChildren();
+
+                                priceContainer.setBackground(null);
+                                priceContainer.removeView(textviewPrice);
+                                priceContainer.setVisibility(View.VISIBLE);
+                                priceContainer.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                                priceContainer.setPadding(0, 20, 0, 20);
+
+                                mainContainer.setBackgroundColor(Color.WHITE);
+
                                 setFirstPriceMatch();
                             }
                         };
@@ -256,14 +401,19 @@ public class PricesTutorialRevised extends Tutorial {
                 };
 
                 greatChoiceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
-
                 greatChoiceHint.show();
+
+                highlighter.addTarget(progressBar);
+                highlighter.show();
+
+                priceContainer.setVisibility(View.INVISIBLE);
             }
         }, 3000);
     }
 
     private void setFirstPriceMatch() {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
+        textviewFood.setGravity(Gravity.CENTER_HORIZONTAL);
         textviewPrice.setVisibility(View.GONE);
 
         textView12.setVisibility(View.VISIBLE);
@@ -271,6 +421,7 @@ public class PricesTutorialRevised extends Tutorial {
         buttonNo.setVisibility(View.VISIBLE);
 
         textView12.setText(ViewUtil.getString(R.string.prices_whatwasprice));
+        textView12.setGravity(Gravity.CENTER_HORIZONTAL);
 
         buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price1_match));
         buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
@@ -343,19 +494,27 @@ public class PricesTutorialRevised extends Tutorial {
                         incrementProgress();
                         updateButtons(false);
 
-                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatchoice1));
+                        //priceContainer.setVisibility(View.INVISIBLE);
+
+                        highlighter.addTarget(progressBar);
+                        highlighter.show();
+                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob2));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 firstMatchGreatChoiceHint.dismiss();
+                                highlighter.dismiss();
+                                highlighter.clearTargets();
 
                                 Handler handler = new Handler();
                                 Runnable runnable = new Runnable() {
                                     @Override
                                     public void run() {
                                         buttonNo.setChecked(false);
+                                        buttonYes.setChecked(false);
                                         setSecondPriceMatch();
+                                        priceContainer.setVisibility(View.VISIBLE);
                                     }
                                 };
                                 handler.postDelayed(runnable,600);
@@ -389,11 +548,7 @@ public class PricesTutorialRevised extends Tutorial {
         runnableWhatDoYouThink = new Runnable() {
             @Override
             public void run() {
-                secondMatchContainerHighlight.addTarget(priceContainer, 10);
-                secondMatchContainerHighlight.addTarget(progressBar);
-                secondMatchContainerHighlight.show();
-
-                secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_choose2));
+                secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_recall));
                 secondMatchHint.show();
             }
         };
@@ -422,12 +577,121 @@ public class PricesTutorialRevised extends Tutorial {
                 int action = motionEvent.getAction();
                 switch (action){
                     case MotionEvent.ACTION_DOWN:
+
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
                         secondMatchAnswerHilighter.dismiss();
                         secondMatchAnswerPointer.dismiss();
                         handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
                         handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
+                        incrementProgress();
+                        updateButtons(true);
+
+                        progressRunnable = new Runnable() {
+                            @Override
+                            public void run() {
+                                pointer = new HintPointer(getActivity(), hintHandle, false, false);
+                                pointer.setText(ViewUtil.getString(R.string.popup_tutorial_onemore));
+                                pointer.addButton(ViewUtil.getString(R.string.button_next), new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        pointer.dismiss();
+                                        highlighter.dismiss();
+                                        setThirdPriceMatch();
+                                    }
+                                });
+                                highlighter = new HintHighlighter(getActivity());
+                                highlighter.addTarget(progressBar);
+                                highlighter.show();
+                                pointer.show();
+                            }
+                        };
+
+                        handler.post(progressRunnable);
+
+                        break;
+                }
+                return true;
+            }
+        });
+
+        buttonNo.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                switch (action){
+                    case MotionEvent.ACTION_DOWN:
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
+                        handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
+                        handlerCorrectAnswer.post(runnableCorrectAnswer);
+
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    private void setThirdPriceMatch() {
+        priceContainer.setVisibility(View.VISIBLE);
+
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item3));
+
+        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price3));
+        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price3_match));
+
+        buttonYes.setChecked(false);
+        buttonNo.setChecked(false);
+
+        buttonYes.showButton(false);
+        buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
+        buttonNo.showButton(false);
+        buttonNo.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
+
+        runnableWhatDoYouThink = new Runnable() {
+            @Override
+            public void run() {
+                secondMatchHint.setText(ViewUtil.getString(R.string.popup_tutorial_recall));
+                secondMatchHint.show();
+            }
+        };
+
+        handlerWhatDoYouThink.postDelayed(runnableWhatDoYouThink, WHAT_DO_YOU_THINK_HINT_DELAY);
+
+        runnableCorrectAnswer = new Runnable() {
+            @Override
+            public void run() {
+                secondMatchHint.dismiss();
+
+                highlighter = new HintHighlighter(getActivity());
+                highlighter.addPulsingTarget(buttonYes.findViewById(R.id.frameLayoutRadioButton), 42);
+                highlighter.addTarget(progressBar);
+
+                pointer = new HintPointer(getActivity(), buttonYes.findViewById(R.id.frameLayoutRadioButton), true, false);
+                pointer.setText(ViewUtil.getString(R.string.popup_tutorial_pricetap));
+
+                highlighter.show();
+                pointer.show();
+            }
+        };
+
+        handlerCorrectAnswer.postDelayed(runnableCorrectAnswer, WHAT_DO_YOU_THINK_HINT_DELAY + TAP_THIS_PRICE_HINT_DELAY);
+
+        buttonYes.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                switch (action){
+                    case MotionEvent.ACTION_DOWN:
+                        if(pointer != null && highlighter != null) {
+                            highlighter.dismiss();
+                            pointer.dismiss();
+                            highlighter.clearTargets();
+                        }
+
+                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
+                        handlerCorrectAnswer.removeCallbacks(runnableCorrectAnswer);
+
                         incrementProgress();
                         updateButtons(true);
 
@@ -473,5 +737,25 @@ public class PricesTutorialRevised extends Tutorial {
 
         buttonYes.setOnTouchListener(null);
         buttonNo.setOnTouchListener(null);
+    }
+
+    /* ----- Utility ----- */
+
+    private int getIndexOfChildInParent(ViewGroup parent, View child) {
+        for(int i = 0; i < parent.getChildCount(); ++i) {
+            if(parent.getChildAt(i).equals(child))
+                return i;
+        }
+
+        //Error logging
+        Log.d (
+                "PricesTutRevised",
+                String.format (
+                        "CHILD(%s) not found in PARENT(%s)",
+                        parent.toString(),
+                        child.toString()
+                )
+        );
+        return -1;
     }
 }

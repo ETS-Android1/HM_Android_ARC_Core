@@ -197,19 +197,26 @@
     <string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> &lt;br /&gt;One more&#8230;</string>
 
     <string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
+
     <string name="prices_tutorial_item1">Bananas</string>
-    <string name="prices_tutorial_price1">$3.27</string>
     <string name="prices_tutorial_item2">Soup</string>
+    <string name="prices_tutorial_item3">Dental floss</string>
+    <string name="prices_tutorial_price1">$3.27</string>
     <string name="prices_tutorial_price2">$10.82</string>
+    <string name="prices_tutorial_price3">$2.33</string>
     <string name="prices_tutorial_price1_match">$6.78</string>
     <string name="prices_tutorial_price2_match">$4.01</string>
+    <string name="prices_tutorial_price3_match">$9.38</string>
+
     <string name="popup_tutorial_pricetap">Tap this matching price.</string>
     <string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the answer that makes sense to you.</string>
     <string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> &lt;br /&gt;Let\'s try another.</string>
     <string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> &lt;br /&gt;Let\'s proceed to part two.</string>
     <string name="popup_tutorial_recall">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Try your best to recall the price from part one.</string>
+    <string name="popup_tutorial_greatjob2">&lt;b>Great job!&lt;/b>\n &lt;br/> Let\'s try a couple more &lt;br/> for practice.</string>
     <string name="popup_tutorial_choose2">&lt;b>What do you think?&lt;/b> &lt;br /&gt;Choose the price that you saw in part one.</string>
-    <string name="popup_tutorial_complete">&lt;b>Congratulations on completing the tutorial!&lt;/b&gt; &lt;br /&gt;If you\'d like to take it again, you can always tap here.</string>
+    <string name="popup_tutorial_onemore">&lt;b>Nice!&lt;/b> &lt;br /> One more&#8230;</string>
+    <string name="popup_tutorial_complete">&lt;b>Congratulations on completing&lt;br/>the tutorial!&lt;/b&gt; &lt;br /&gt; If you\'d like to take it again, &lt;br /> you can always tap here.</string>
 
     <string name="popup_tutorial_grid_recall">In this three part test, you\'ll be asked to &lt;b>recall the location&lt;/b> of these items.</string>
     <string name="popup_tutorial_rememberbox">The items will be placed in a grid of boxes. &lt;b>Remember which box each item is in.&lt;/b> You will have 3 seconds.</string>
