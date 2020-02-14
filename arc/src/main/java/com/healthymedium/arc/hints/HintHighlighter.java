@@ -118,6 +118,10 @@ public class HintHighlighter extends FrameLayout {
         targets.add(target);
     }
 
+    public void clearTargets() {
+        targets.clear();
+    }
+
     public void show() {
         setAlpha(0.0f);
 
