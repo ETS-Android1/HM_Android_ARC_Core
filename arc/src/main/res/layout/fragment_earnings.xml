@@ -34,8 +34,7 @@
                     android:layout_marginRight="32dp"
                     android:text="Earnings"
                     android:textColor="@color/white"
-                    android:textSize="26dp"
-                    android:textStyle="bold" />
+                    android:textSize="26dp" />
 
                 <TextView
                     android:id="@+id/textViewSessionDivider"
@@ -43,6 +42,7 @@
                     android:layout_height="2dp"
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="19dp"
+                    android:layout_marginBottom="19dp"
                     android:layout_weight="1"
                     android:background="@color/yellow" />
 
@@ -52,8 +52,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="32dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginRight="32dp"
+                    android:lineSpacingExtra="9dp"
                     android:text="@string/earnings_body1"
                     android:textColor="@color/white"
                     android:textSize="17dp" />
@@ -74,7 +74,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="32dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginRight="32dp"
@@ -86,14 +86,13 @@
                             android:id="@+id/weeklyTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="32dp"
                             android:layout_marginTop="2dp"
                             android:layout_marginRight="32dp"
                             android:text="$0.00"
                             android:textColor="@color/white"
-                            android:textSize="32dp"
-                            android:textStyle="bold" />
+                            android:textSize="32dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -105,7 +104,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="32dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginRight="32dp"
@@ -117,14 +116,13 @@
                             android:id="@+id/studyTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
                             android:layout_marginLeft="32dp"
                             android:layout_marginTop="2dp"
                             android:layout_marginRight="32dp"
                             android:text="$0.00"
                             android:textColor="@color/white"
-                            android:textSize="32dp"
-                            android:textStyle="bold" />
+                            android:textSize="32dp" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -161,6 +159,7 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:id="@+id/bonusGoalsHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -169,8 +168,7 @@
                     android:layout_marginRight="32dp"
                     android:text="@string/earnings_bonus_header"
                     android:textColor="@color/black"
-                    android:textSize="26dp"
-                    android:textStyle="bold" />
+                    android:textSize="26dp" />
 
                 <TextView
                     android:layout_width="50dp"
@@ -187,8 +185,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="24dp"
                     android:layout_marginRight="32dp"
+                    android:layout_marginBottom="24dp"
+                    android:lineSpacingExtra="9dp"
                     android:text="@string/earnings_bonus_body"
                     android:textColor="@color/black"
                     android:textSize="17dp" />
