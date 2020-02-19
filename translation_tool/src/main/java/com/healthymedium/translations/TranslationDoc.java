@@ -14,7 +14,9 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,6 +24,7 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class TranslationDoc {
     private static final String APPLICATION_NAME = "HealthyMedium Translation Tool";
@@ -35,7 +38,7 @@ public class TranslationDoc {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1OWIiUaUDlGwbYMKfeE1hvw8BeWM7MolmrokIfja8oYs";
-        final String range = "Master Dev Data!B1:H";
+        final String range = "Master Dev Data!A1:J";
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
@@ -73,7 +76,7 @@ public class TranslationDoc {
 
         for(int i=1;i<localeNames.size();i++) {
             LocaleResource resource = new LocaleResource();
-            resource.name = localeNames.get(i);
+            resource.ARC2key = localeNames.get(i);
             resources.add(resource);
         }
 
@@ -82,7 +85,20 @@ public class TranslationDoc {
             String key = row.get(0);
             for(int j=1;j<row.size();j++) {
                 String value = row.get(j);
-                resources.get(j-1).map.put(key,value);
+                switch (i) {
+                    case 1:
+                        resources.get(j-1).app_name = value;
+                        break;
+                    case 2:
+                        resources.get(j-1).country_key = value;
+                        break;
+                    case 3:
+                        resources.get(j-1).language_key = value;
+                        break;
+                    default:
+                        resources.get(j-1).map.put(key,value);
+                        break;
+                }
             }
         }
 
@@ -107,6 +123,79 @@ public class TranslationDoc {
 
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+    }
+
+    public static List<LocaleResource> sanitizeData(List<LocaleResource> localeResources) {
+
+        for (LocaleResource resource : localeResources) {
+            for(Map.Entry<String, String> entry : resource.map.entrySet()) {
+                String value = entry.getValue();
+
+                // replace less than signs, escape single quotes, replace line breaks with \n (some breaks have odd spaces around them)
+                entry.setValue(value.replace("<", "&lt;")
+                        .replace("'", "\\'")
+                        .replace(" \n ", "\\n")
+                        .replace("\n ", "\\n")
+                        .replace("\n", "\\n"));
+            }
+        }
+
+        return localeResources;
+    }
+
+    public static void createXMLfiles(List<LocaleResource> localeResources) {
+        for (LocaleResource resource : localeResources) {
+
+            // create or find language directories
+            if(new File(resource.getFilePath()).mkdir()) {
+                System.out.println("Created directory for " + resource.ARC2key);
+            } else {
+                if(new File(resource.getFilePath()).exists()) {
+                    System.out.println("Directory already exists for " + resource.ARC2key);
+                } else {
+                    System.out.println("\nERROR: Unable to created directory for " + resource.ARC2key);
+                    System.out.println("\nExiting\n");
+                    return;
+                }
+            }
+
+            try {
+                // write to strings.xml in directory
+                File stringsFile = new File(resource.getFileNameWithPath());
+                if (stringsFile.createNewFile()) {
+                    System.out.println("Created XML file.");
+                } else {
+                    System.out.println("Found existing XML file.");
+                }
+
+                System.out.println("Writing to XML file...");
+                writeXMLfile(resource.getFileNameWithPath(), resource);
+
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void writeXMLfile(String fileName, LocaleResource resource) {
+        try {
+            FileWriter myWriter = new FileWriter(fileName);
+            myWriter.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+            myWriter.write("<resources>\n");
+            for(Map.Entry<String, String> entry : resource.map.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+
+                myWriter.write("\t<string name=\"" + key + "\">" + value + "</string>\n");
+            }
+            myWriter.write("</resources>");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
 

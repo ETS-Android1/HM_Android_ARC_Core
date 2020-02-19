@@ -11,6 +11,12 @@ public class TranslationTool {
 
         System.out.println("\nHealthyMedium Translation Tool\n------------------------------\n");
 
+        // check that paths are correctly set up for file creation
+        if(!LocaleResource.localPathsSet()) {
+            System.out.println("ERROR: Please define local paths in LocaleResource.java\n\nExiting");
+            return;
+        }
+
         System.out.println("grabbing translation data from the google sheet");
         List<LocaleResource>  data = null;
         try {
@@ -29,16 +35,16 @@ public class TranslationTool {
 
 
         System.out.println("sanitizing translation data");
-        // todo: filter data
+        data = TranslationDoc.sanitizeData(data);
 
 
 
         System.out.println("exporting xml files for android to consume");
-        // todo: format into xml files that android can use
+        TranslationDoc.createXMLfiles(data);
 
 
 
-        System.out.println("that's all folks");
+        System.out.println("\nthat's all folks");
     }
 
 }
