@@ -72,7 +72,6 @@ import static com.healthymedium.arc.paths.templates.TestInfoTemplate.HINT_SYMBOL
 import static com.healthymedium.arc.paths.tutorials.GridTutorial.HINT_PREVENT_TUTORIAL_CLOSE_GRIDS;
 import static com.healthymedium.arc.paths.tutorials.PricesTutorial.HINT_PREVENT_TUTORIAL_CLOSE_PRICES;
 import static com.healthymedium.arc.paths.tutorials.SymbolTutorial.HINT_PREVENT_TUTORIAL_CLOSE_SYMBOLS;
-import static com.healthymedium.arc.study.Study.TAG_CONTACT_EMAIL;
 import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
 
 @SuppressWarnings("unchecked")
@@ -602,22 +601,16 @@ public class RestClient <Api>{
     protected CallbackChain.Listener contactListener = new CallbackChain.Listener() {
         @Override
         public boolean onResponse(CallbackChain chain, RestResponse response) {
-            boolean success = false;
             if(response.successful) {
                 if (response.optional.has("contact_info")) {
                     JsonObject contactJson = response.optional.get("contact_info").getAsJsonObject();
                     if (contactJson.has("phone")) {
                         PreferencesManager.getInstance().putString(TAG_CONTACT_INFO, contactJson.get("phone").getAsString());
-                        success = true;
-                    }
-
-                    if(contactJson.has("email")) {
-                        PreferencesManager.getInstance().putString(TAG_CONTACT_EMAIL, contactJson.get("email").getAsString());
-                        success = true;
+                        return true;
                     }
                 }
             }
-            return success;
+            return false;
         }
 
         @Override
