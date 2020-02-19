@@ -18,6 +18,7 @@ public class Study{
 
     public static final String TAG_INITIALIZED = "initialized";
     public static final String TAG_CONTACT_INFO = "ContactInfo";
+    public static final String TAG_CONTACT_EMAIL = "ContactInfoEmail";
 
 
     protected static Study instance;

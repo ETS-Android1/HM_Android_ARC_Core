@@ -62,6 +62,7 @@ public class QuestionTime extends QuestionTemplate {
             public void onTimeChanged() {
                 response_time = System.currentTimeMillis();
                 dismissPointer();
+                Hints.markShown(HINT_QUESTION_TIME);
             }
         });
 
@@ -112,15 +113,15 @@ public class QuestionTime extends QuestionTemplate {
             pointer = new HintPointer(getMainActivity(),timeInput.getTimePicker(),true,false);
             pointer.setText(ViewUtil.getString(R.string.popup_scroll));
             pointer.show();
-            Hints.markShown(HINT_QUESTION_TIME);
         }
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
         time = timeInput.getTime();
+        dismissPointer();
+        didDismissPointer = false;
     }
 
     @Override
@@ -151,5 +152,4 @@ public class QuestionTime extends QuestionTemplate {
             pointer = null;
         }
     }
-
 }
