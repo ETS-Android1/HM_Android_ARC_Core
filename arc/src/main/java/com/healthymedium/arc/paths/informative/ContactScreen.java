@@ -86,7 +86,7 @@ public class ContactScreen extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",ViewUtil.getString(R.string.contact_email2), null));
+                        "mailto",stringEmail, null));
                 startActivity(Intent.createChooser(intent,""));
             }
         });
