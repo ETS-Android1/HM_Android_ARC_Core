@@ -15,6 +15,7 @@ public class TestProctor extends NotificationType {
         importance = NotificationImportance.LOW;
         extra = "";
         proctored = false;
+        showBadge = false;
     }
 
     @Override
