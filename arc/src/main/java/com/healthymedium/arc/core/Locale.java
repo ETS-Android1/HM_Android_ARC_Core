@@ -18,6 +18,9 @@ public class Locale {
     public static String COUNTRY_MEXICO = "MX";
     public static String COUNTRY_NETHERLANDS = "NL";
     public static String COUNTRY_UNITED_STATES = "US";
+    public static String COUNTRY_EUROPE = "EU";
+    public static String COUNTRY_JAPAN = "JP";
+    public static String COUNTRY_AMERICA_LATINA = "AL";
 
     public static String LANGUAGE_GERMAN = "de";
     public static String LANGUAGE_ENGLISH = "en";
@@ -25,6 +28,7 @@ public class Locale {
     public static String LANGUAGE_FRENCH = "fr";
     public static String LANGUAGE_ITALIAN = "it";
     public static String LANGUAGE_DUTCH = "nl";
+    public static String LANGUAGE_JAPANESE = "ja";
 
     private String label;
     private String country;
@@ -50,6 +54,8 @@ public class Locale {
             label = getDutchLabel(country);
         } else if(language==LANGUAGE_ITALIAN) {
             label = getItalianLabel(country);
+        } else if(language==LANGUAGE_JAPANESE) {
+            label = getJapaneseLabel(country);
         } else {
             label = "";
         }
@@ -78,7 +84,7 @@ public class Locale {
         } else if(country==COUNTRY_UNITED_KINGDOM){
             return "United Kingdom - English";
         } else if(country==COUNTRY_UNITED_STATES){
-            return "United States - English";
+            return "US - English";
         } else if(country==COUNTRY_IRELAND) {
             return "Ireland - English";
         } else {
@@ -107,6 +113,10 @@ public class Locale {
             return "Argentina - Español";
         } else if(country==COUNTRY_MEXICO){
             return "Mexico - Español";
+        } else if(country==COUNTRY_EUROPE){
+            return "Europa - Español";
+        } else if(country==COUNTRY_AMERICA_LATINA){
+            return "America Latina - Español";
         } else {
             return "";
         }
@@ -131,6 +141,14 @@ public class Locale {
     private String getItalianLabel(String country){
         if(country==COUNTRY_ITALY){
             return "Italia - Italiano";
+        } else {
+            return "";
+        }
+    }
+
+    private String getJapaneseLabel(String country){
+        if(country==COUNTRY_JAPAN){
+            return "日本 - 日本語";
         } else {
             return "";
         }
