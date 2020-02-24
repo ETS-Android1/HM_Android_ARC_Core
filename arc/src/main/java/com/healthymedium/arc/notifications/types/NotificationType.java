@@ -14,6 +14,7 @@ public abstract class NotificationType {
     protected String channelDesc;
     protected String extra;
     protected boolean proctored;
+    protected boolean showBadge = true;
 
     @RawRes
     protected int soundResource = -1;
@@ -52,6 +53,10 @@ public abstract class NotificationType {
 
     public boolean isProctored(){
         return proctored;
+    }
+
+    public boolean shouldShowBadge(){
+        return showBadge;
     }
 
     public int getSoundResource() {

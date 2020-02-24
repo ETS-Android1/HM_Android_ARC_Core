@@ -67,6 +67,7 @@ public class NotificationUtil {
         NotificationChannel channel = new NotificationChannel(type.getChannelId(), type.getChannelName(), type.getImportance());
         channel.setDescription(type.getChannelDesc());
         channel.setVibrationPattern(new long[]{500,250,125,250});
+        channel.setShowBadge(type.shouldShowBadge());
         channel.enableVibration(true);
         channel.enableLights(true);
 
