@@ -36,6 +36,7 @@ import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
 
@@ -607,7 +608,8 @@ public class RestClient <Api>{
                 if (response.optional.has("contact_info")) {
                     JsonObject contactJson = response.optional.get("contact_info").getAsJsonObject();
                     if (contactJson.has("phone")) {
-                        PreferencesManager.getInstance().putString(TAG_CONTACT_INFO, contactJson.get("phone").getAsString());
+                        String rawPhoneNumber = contactJson.get("phone").getAsString();
+                        PreferencesManager.getInstance().putString(TAG_CONTACT_INFO, Phrase.formatPhoneNumber(rawPhoneNumber));
                         success = true;
                     }
 

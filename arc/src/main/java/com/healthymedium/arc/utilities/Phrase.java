@@ -12,6 +12,9 @@ import com.healthymedium.arc.library.R;
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Phrase {
 
     Context context;
@@ -161,6 +164,52 @@ public class Phrase {
     public void replaceNumber(double number){
         String string = String.valueOf(number);
         replace(R.string.token_number,string);
+    }
+
+    public static String formatPhoneNumber(final String unformatted) {
+
+        //Convert the string into a list of characters
+        List<Character> charList = new ArrayList<>(17);
+        for(int i = 0; i < unformatted.length(); ++i) {
+            charList.add(i, unformatted.charAt(i));
+        }
+
+        //Create a container to contain character removal indices
+        //Init all valuess to -1
+        int index = 0;
+        int [] removeIndices = new int[charList.size()];
+        for(int i = 0; i < removeIndices.length; ++i)
+            removeIndices[i] = -1;
+
+        //Get indices of all non-digit characters
+        for(int i = 0; i < charList.size(); ++i) {
+            if(!Character.isDigit(charList.get(i))) {
+                //Save the index
+                removeIndices[index++] = i;
+            }
+        }
+
+        //Clean non-digit characters out of charList
+        for(int i = charList.size() - 1; i >= 0; --i) {
+            if(removeIndices[i] > -1) {
+                charList.remove(removeIndices[i]);
+            }
+        }
+
+        //Build formatted phone number string
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < charList.size(); ++i) {
+            //Add non-digit characters in appropriate places.
+            if(i == 0)
+                builder.append('+');
+
+            if(i == 1 || i == 4 || i == 7)
+                builder.append(Character.toChars(8212)); //em dash
+
+            builder.append(charList.get(i));
+        }
+
+        return builder.toString();
     }
 
     // ---------------------------------------------------------------------------------------------
