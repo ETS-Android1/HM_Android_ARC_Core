@@ -18,6 +18,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.PriceTestPathData;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.PriceManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +37,7 @@ public class PriceTestMatchFragment extends BaseFragment {
     RadioButton radioButtonTop;
     RadioButton radioButtonBottom;
     TextView textviewFood;
+    TextView textViewIsIt;
     int iteration = 0;
     boolean paused;
 
@@ -63,7 +65,7 @@ public class PriceTestMatchFragment extends BaseFragment {
         priceSet = priceTest.getPriceSet();
         Collections.shuffle(priceSet);
 
-        prefix = getString(R.string.money_prefix);
+        prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);
 
         radioButtonTop = view.findViewById(R.id.buttonTop);
@@ -122,6 +124,9 @@ public class PriceTestMatchFragment extends BaseFragment {
 
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);
+
+        textViewIsIt = view.findViewById(R.id.textView12);
+        textViewIsIt.setText(ViewUtil.getHtmlString(R.string.prices_whatwasprice));
 
         setupNextIteration();
 

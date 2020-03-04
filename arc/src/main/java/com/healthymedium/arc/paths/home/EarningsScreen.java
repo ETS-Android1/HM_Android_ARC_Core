@@ -42,6 +42,9 @@ public class EarningsScreen extends BaseFragment {
     TextView lastSync;
     LinearLayout goalLayout;
 
+    TextView weeklyTotalLabel;
+    TextView studyTotalLabel;
+
     TextView earningsBody1;
     Button viewDetailsButton;
     TextView bonusHeader;
@@ -124,12 +127,14 @@ public class EarningsScreen extends BaseFragment {
 
         headerText = view.findViewById(R.id.textViewHeader);
         headerText.setTypeface(Fonts.robotoMedium);
+        headerText.setText(ViewUtil.getString(R.string.resources_nav_earnings));
 
         earningsBody1 = view.findViewById(R.id.earningsBody1);
         earningsBody1.setTypeface(Fonts.robotoMedium);
         earningsBody1.setText(Html.fromHtml(body));
 
         viewDetailsButton = view.findViewById(R.id.viewDetailsButton);
+        viewDetailsButton.setText(ViewUtil.getString(R.string.button_viewdetails));
         viewDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,12 +144,14 @@ public class EarningsScreen extends BaseFragment {
         });
 
         bonusHeader = view.findViewById(R.id.bonusGoalsHeader);
+        bonusHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_header)));
         bonusHeader.setTypeface(Fonts.robotoMedium);
 
         bonusBody = view.findViewById(R.id.bonusBody);
         bonusBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_body)));
 
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
+        viewFaqButton.setText(ViewUtil.getString(R.string.button_viewfaq));
         viewFaqButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +165,12 @@ public class EarningsScreen extends BaseFragment {
         studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setTypeface(Fonts.robotoMedium);
         lastSync = view.findViewById(R.id.textViewLastSync);
+
+        weeklyTotalLabel = view.findViewById(R.id.weeklyTotalLabel);
+        studyTotalLabel = view.findViewById(R.id.studyTotalLabel);
+
+        weeklyTotalLabel.setText(ViewUtil.getString(R.string.earnings_weektotal));
+        studyTotalLabel.setText(ViewUtil.getString(R.string.earnings_studytotal));
 
         populateViews();
 

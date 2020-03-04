@@ -129,6 +129,7 @@ public class AvailabilityConfirm extends BaseFragment {
         textViewHeader.setText(Html.fromHtml(stringHeader));
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +139,7 @@ public class AvailabilityConfirm extends BaseFragment {
         });
 
         textViewHelp = view.findViewById(R.id.textViewHelp);
+        textViewHelp.setText(ViewUtil.getString(R.string.button_help));
         textViewHelp.setTypeface(Fonts.robotoMedium);
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override

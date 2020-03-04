@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="progress_finishdate">Voraussichtliches Enddatum</string>
+
 	<string name="notification_monthbefore">Ihre nächste Woche mit Tests beginnt in einem Monat, und zwar am {DATE}. Sie können diesen Zeitplan um bis zu 7 Tage verschieben.</string>
 	<string name="notification_weekbefore">Zur Erinnerung: Ihr nächster Testzyklus beginnt in einer Woche. Tippen Sie hier, um dies zu bestätigen oder einen anderen Zeitraum festzulegen.</string>
 	<string name="notification_daybefore">Zur Erinnerung: Ihr nächster Testzyklus beginnt morgen. Tippen Sie hier, um dies zu bestätigen oder einen anderen Zeitraum festzulegen.</string>

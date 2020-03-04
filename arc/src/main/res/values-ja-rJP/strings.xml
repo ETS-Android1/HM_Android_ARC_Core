@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="progress_finishdate">終了予定日</string>
+
 	<string name="notification_monthbefore">次のテストの週は1ヵ月以内の{DATE}に始まります。このスケジュールを7日以内に調整することができます。</string>
 	<string name="notification_weekbefore">注意：あなたの次のテストサイクルは1週間以内に始まります。タップして確認するか、スケジュールを調整してください。</string>
 	<string name="notification_daybefore">注意：あなたの次のテストサイクルは明日始まります。タップして確認するか、スケジュールを調整してください。</string>

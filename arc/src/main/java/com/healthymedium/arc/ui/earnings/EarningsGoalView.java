@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -63,7 +64,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
 
             if(goal.completed_on!=null){
                 DateTime completedDate = new DateTime(goal.completed_on*1000L);
-                String date = TimeUtil.format(completedDate,R.string.format_date_dashed,Application.getInstance().getLocale());
+                String date = TimeUtil.format(completedDate,R.string.format_date_dashed, Locale.getCurrent());
                 String completedOn = ViewUtil.replaceToken(ViewUtil.getString(R.string.status_done_withdate),R.string.token_date,date);
                 textViewDone.setText(completedOn);
             }

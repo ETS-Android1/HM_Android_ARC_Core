@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -29,7 +30,7 @@ public class SetupWelcome extends BaseFragment {
     TextView textViewVersion;
 
     public SetupWelcome() {
-
+        //Locale.update(Locale.getDefault(), getContext());
     }
 
     @Override
@@ -43,6 +44,7 @@ public class SetupWelcome extends BaseFragment {
 
         textViewAboutApp = view.findViewById(R.id.textViewAboutApp);
         textViewAboutApp.setTypeface(Fonts.robotoMedium);
+        textViewAboutApp.setText(Html.fromHtml(ViewUtil.getString(R.string.about_header)));
 
         textViewAboutApp.setPaintFlags(textViewAboutApp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewAboutApp.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +56,7 @@ public class SetupWelcome extends BaseFragment {
         });
 
         textViewPrivacyPolicy = view.findViewById(R.id.textViewPrivacyPolicy);
+        textViewPrivacyPolicy.setText(ViewUtil.getString(R.string.privacy_linked));
         textViewPrivacyPolicy.setTypeface(Fonts.robotoMedium);
         textViewPrivacyPolicy.setPaintFlags(textViewPrivacyPolicy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +71,7 @@ public class SetupWelcome extends BaseFragment {
         textViewVersion.setText(ver);
 
         button = view.findViewById(R.id.button);
+        button.setText(ViewUtil.getHtmlString(R.string.button_signin));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,4 +82,8 @@ public class SetupWelcome extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 }

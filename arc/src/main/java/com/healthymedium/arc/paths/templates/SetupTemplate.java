@@ -145,7 +145,7 @@ public class SetupTemplate extends StandardTemplate {
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         textViewPolicy = new TextView(getContext());
-        textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
+        textViewPolicy.setText(ViewUtil.getHtmlString(R.string.bysigning_key));
         textViewPolicy.setGravity(Gravity.CENTER_HORIZONTAL);
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);

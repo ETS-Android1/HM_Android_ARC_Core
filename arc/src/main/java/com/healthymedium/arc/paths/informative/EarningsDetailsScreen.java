@@ -32,6 +32,7 @@ public class EarningsDetailsScreen extends BaseFragment {
     TextView studyTotal;
     TextView lastSync;
     LinearLayout cycleLayout;
+    TextView textViewBack;
 
     public EarningsDetailsScreen() {
         allowBackPress(false);
@@ -95,6 +96,9 @@ public class EarningsDetailsScreen extends BaseFragment {
         studyTotal = view.findViewById(R.id.studyTotal);
         lastSync = view.findViewById(R.id.textViewLastSync);
         cycleLayout = view.findViewById(R.id.cycleLayout);
+
+        textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getHtmlString(R.string.button_back));
 
         populateViews();
 

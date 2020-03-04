@@ -23,6 +23,7 @@ import com.healthymedium.arc.study.State;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.PreferencesManager;
 
 public class DebugDialog extends DialogFragment {
 
@@ -71,7 +72,11 @@ public class DebugDialog extends DialogFragment {
         State studyState = Study.getStateMachine().getState();
         Participant participant = Study.getParticipant();
 
-        String status = "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";
+        String status = "";
+        status += "localeConfig: " + Application.getInstance().getResources().getConfiguration().locale.getDisplayName() + "\n";
+        status += "localePrefs: " + PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, "null") + "_" +
+                PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, "null") + "\n\n";
+        status += "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";
         status += "path: "+Study.getStateMachine().getPathName(studyState.currentPath).toLowerCase()+"\n\n";
 
         status += "cycle: "+participant.getState().currentTestCycle +"\n";

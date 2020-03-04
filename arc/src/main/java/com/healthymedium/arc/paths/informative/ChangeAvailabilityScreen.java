@@ -20,6 +20,7 @@ import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 
@@ -89,6 +90,7 @@ public class ChangeAvailabilityScreen extends BaseFragment {
         }
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getHtmlString(R.string.button_back));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override

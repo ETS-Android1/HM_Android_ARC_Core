@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,18 +49,19 @@ public class ContactScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.contact_call1)));
+        textViewHeader.setText(ViewUtil.getHtmlString(R.string.contact_call1));
 
         textViewPhoneNumber = view.findViewById(R.id.textViewSubHeader);
         textViewPhoneNumber.setText(stringPhoneNumber);
 
         textViewEmailHeader = view.findViewById(R.id.textViewEmailHeader);
-        textViewEmailHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.contact_email1)));
+        textViewEmailHeader.setText(ViewUtil.getHtmlString(R.string.contact_email1));
 
         textViewEmailAddress = view.findViewById(R.id.textViewEmailSubHeader);
         textViewEmailAddress.setText(stringEmail);
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getHtmlString(R.string.button_back));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override

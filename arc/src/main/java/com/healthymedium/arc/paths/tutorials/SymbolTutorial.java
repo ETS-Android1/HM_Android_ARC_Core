@@ -111,6 +111,8 @@ public class SymbolTutorial extends Tutorial {
         textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
         endButton = view.findViewById(R.id.endButton);
+        endButton.setText(ViewUtil.getHtmlString(R.string.button_close));
+
         progressBar = view.findViewById(R.id.progressBar);
         loadingView = view.findViewById(R.id.loadingView);
 

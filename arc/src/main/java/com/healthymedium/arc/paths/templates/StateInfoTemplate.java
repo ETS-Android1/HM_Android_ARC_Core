@@ -69,7 +69,7 @@ public class StateInfoTemplate extends BaseFragment {
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setTypeface(Fonts.robotoMedium);
-        textViewHeader.setText(stringHeader);
+        textViewHeader.setText(Html.fromHtml(stringHeader));
 
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
         textViewSubheader.setText(stringSubHeader);

@@ -110,16 +110,20 @@ public class PricesTutorial extends Tutorial {
 
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);
+        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
 
         textviewPrice = view.findViewById(R.id.textviewPrice);
         textviewPrice.setTypeface(Fonts.georgiaItalic);
 
-        textView12=view.findViewById(R.id.textView12);
+        textView12 = view.findViewById(R.id.textView12);
+        textView12.setText(ViewUtil.getHtmlString(R.string.prices_isthisgood));
 
         textViewComplete = view.findViewById(R.id.textViewComplete);
         textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
         endButton = view.findViewById(R.id.endButton);
+        endButton.setText(ViewUtil.getHtmlString(R.string.button_close));
+
         progressBar = view.findViewById(R.id.progressBar);
         loadingView = view.findViewById(R.id.loadingView);
 
@@ -191,7 +195,6 @@ public class PricesTutorial extends Tutorial {
     }
 
     private void setFirstPricesCompare() {
-        textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
         textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
 
         firstPriceContainerHighlight.addTarget(priceContainer, 10);

@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class FAQEarningsScreen extends BaseFragment {
 
     TextView textViewBack;
+
+    TextView header;
+    TextView subheader;
 
     RelativeLayout earnings_q1;
     RelativeLayout earnings_q2;
@@ -36,6 +40,7 @@ public class FAQEarningsScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_faq_earnings, container, false);
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +50,15 @@ public class FAQEarningsScreen extends BaseFragment {
         });
         textViewBack.setVisibility(View.VISIBLE);
 
+        header = view.findViewById(R.id.textViewHeader);
+        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_earnings_header)));
+
+        subheader = view.findViewById(R.id.textViewSubheader);
+        subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));
+
         earnings_q1 = view.findViewById(R.id.earnings_q1);
+        TextView earnings_q1Label = (TextView) earnings_q1.getChildAt(0);
+        earnings_q1Label.setText(ViewUtil.getString(R.string.faq_earnings_q1));
         earnings_q1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +68,8 @@ public class FAQEarningsScreen extends BaseFragment {
         });
 
         earnings_q2 = view.findViewById(R.id.earnings_q2);
+        TextView earnings_q2Label = (TextView) earnings_q2.getChildAt(0);
+        earnings_q2Label.setText(ViewUtil.getString(R.string.faq_earnings_q2));
         earnings_q2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,6 +79,8 @@ public class FAQEarningsScreen extends BaseFragment {
         });
 
         earnings_q3 = view.findViewById(R.id.earnings_q3);
+        TextView earnings_q3Label = (TextView) earnings_q3.getChildAt(0);
+        earnings_q3Label.setText(ViewUtil.getString(R.string.faq_earnings_q3));
         earnings_q3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +90,8 @@ public class FAQEarningsScreen extends BaseFragment {
         });
 
         earnings_q4 = view.findViewById(R.id.earnings_q4);
+        TextView earnings_q4Label = (TextView) earnings_q4.getChildAt(0);
+        earnings_q4Label.setText(ViewUtil.getString(R.string.faq_earnings_q4));
         earnings_q4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +101,8 @@ public class FAQEarningsScreen extends BaseFragment {
         });
 
         earnings_q5 = view.findViewById(R.id.earnings_q5);
+        TextView earnings_q5Label = (TextView) earnings_q5.getChildAt(0);
+        earnings_q5Label.setText(ViewUtil.getString(R.string.faq_earnings_q5));
         earnings_q5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
@@ -108,12 +109,13 @@ public class TestInfoTemplate extends BaseFragment {
         textViewBody = view.findViewById(R.id.textViewBody);
         textViewBody.setText(Html.fromHtml(stringBody));
 
+        SpannableString styledViewTutorialString =
+                new SpannableString(Html.fromHtml(Application.getInstance().getResources().getString(R.string.testing_tutorial_link)));
+        styledViewTutorialString.setSpan(new UnderlineSpan(), 0, styledViewTutorialString.length(), 0);
+        styledViewTutorialString.setSpan(new StyleSpan(Typeface.BOLD), 0, styledViewTutorialString.length(), 0);
+
         textViewTutorial = view.findViewById(R.id.textViewTutorial);
-        // textViewTutorial.setText("View a Tutorial");
-        SpannableString content = new SpannableString("View a Tutorial");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        content.setSpan(new StyleSpan(Typeface.BOLD), 0, content.length(), 0);
-        textViewTutorial.setText(content);
+        textViewTutorial.setText(styledViewTutorialString);
         textViewTutorial.setVisibility(View.VISIBLE);
 
         button = view.findViewById(R.id.button);

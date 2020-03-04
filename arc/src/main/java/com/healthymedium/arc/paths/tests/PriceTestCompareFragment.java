@@ -79,7 +79,7 @@ public class PriceTestCompareFragment extends BaseFragment {
     private View createRevisedFragment(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_revised_price_test_compare, container, false);
         random = new Random(System.currentTimeMillis());
-        prefix = getString(R.string.money_prefix);
+        prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);
 
         priceTest = (PriceTestPathData) Study.getCurrentSegmentData();
@@ -104,7 +104,7 @@ public class PriceTestCompareFragment extends BaseFragment {
     private View createFullFragment(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_price_test_compare, container, false);
         random = new Random(System.currentTimeMillis());
-        prefix = getString(R.string.money_prefix);
+        prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);
 
         priceTest = (PriceTestPathData) Study.getCurrentSegmentData();
@@ -149,6 +149,7 @@ public class PriceTestCompareFragment extends BaseFragment {
         });
 
         textviewGoodPrice = view.findViewById(R.id.textView12);
+        textviewGoodPrice.setText(ViewUtil.getString(R.string.prices_isthisgood));
 
         textviewFood = view.findViewById(R.id.textviewFood);
         textviewFood.setTypeface(Fonts.georgiaItalic);

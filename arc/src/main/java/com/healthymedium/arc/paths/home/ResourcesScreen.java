@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,11 @@ public class ResourcesScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_resources, container, false);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_header)));
         textViewHeader.setTypeface(Fonts.robotoMedium);
 
         textViewAvailability = view.findViewById(R.id.textViewAvailability);
+        textViewAvailability.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_availability)));
         ViewUtil.underlineTextView(textViewAvailability);
 
         frameLayoutAvailability = view.findViewById(R.id.frameLayoutAvailability);
@@ -65,6 +68,7 @@ public class ResourcesScreen extends BaseFragment {
 
 
         textViewContact = view.findViewById(R.id.textViewContact);
+        textViewContact.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_contact)));
         ViewUtil.underlineTextView(textViewContact);
 
         frameLayoutContact = view.findViewById(R.id.frameLayoutContact);
@@ -78,6 +82,7 @@ public class ResourcesScreen extends BaseFragment {
 
 
         textViewAbout = view.findViewById(R.id.textViewAbout);
+        textViewAbout.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_about_link)));
         ViewUtil.underlineTextView(textViewAbout);
 
         frameLayoutAbout = view.findViewById(R.id.frameLayoutAbout);
@@ -91,6 +96,7 @@ public class ResourcesScreen extends BaseFragment {
 
 
         textViewFAQ = view.findViewById(R.id.textViewFAQ);
+        textViewFAQ.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_faq_link)));
         ViewUtil.underlineTextView(textViewFAQ);
 
         frameLayoutFAQ = view.findViewById(R.id.frameLayoutFAQ);
@@ -104,6 +110,7 @@ public class ResourcesScreen extends BaseFragment {
 
 
         textViewPrivacyPolicy = view.findViewById(R.id.textViewPrivacyPolicy);
+        textViewPrivacyPolicy.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_privacy_link)));
         ViewUtil.underlineTextView(textViewPrivacyPolicy);
 
         frameLayoutPrivacyPolicy = view.findViewById(R.id.frameLayoutPrivacyPolicy);

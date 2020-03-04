@@ -79,8 +79,8 @@ public class SplashScreen extends BaseFragment {
 //            getMainActivity().setupHomeWatcher();
             getMainActivity().setupKeyboardWatcher();
 
-            String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE,Locale.LANGUAGE_ENGLISH);
-            String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY,Locale.COUNTRY_UNITED_STATES);
+            String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.getDefault().getLanguage());
+            String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.getDefault().getCountry());
             Resources res = getResources();
             Configuration conf = res.getConfiguration();
             conf.setLocale(new java.util.Locale(language,country));

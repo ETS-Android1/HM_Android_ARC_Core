@@ -8,6 +8,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -71,6 +73,10 @@ public class ViewUtil {
 
     public static String getString(Context context, @StringRes int id){
         return context.getString(id);
+    }
+
+    public static String getHtmlString(@StringRes int id) {
+        return Html.fromHtml(Application.getInstance().getString(id)).toString();
     }
 
     public static String getString(@StringRes int id){
