@@ -440,5 +440,4 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/aa</string>
 	<string name="money_prefix">$</string>
-	<string name="money_suffix">Se informará al coordinador del estudio que usted no desea participar en este momento. El coordinador del estudio podrá también comunicarse con usted para confirmar esta información.</string>
 </resources>

@@ -439,5 +439,4 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/jj/aa</string>
 	<string name="money_prefix">$</string>
-	<string name="money_suffix">Votre coordonnateur(trice) de l\'étude sera avisé(e) que vous ne désirez plus participer pour le moment. Votre coordonnateur(trice) de l\'étude pourrait aussi vous contacter pour confirmer cette information.</string>
 </resources>

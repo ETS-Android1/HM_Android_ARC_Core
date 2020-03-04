@@ -439,5 +439,4 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
-	<string name="money_suffix">今回、あなたが参加を希望していないことは、治験コーディネーターに通知されます。治験コーディネーターはこの情報を確認するために、あなたに問い合わせる可能性もあります。</string>
 </resources>

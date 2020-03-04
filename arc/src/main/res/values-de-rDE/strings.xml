@@ -439,5 +439,4 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/TT/JJ</string>
 	<string name="money_prefix">$</string>
-	<string name="money_suffix">Ihr Studienkoordinator wird benachrichtigt, dass Sie zu diesem Zeitpunkt nicht teilnehmen möchten. Ihr Studienkoordinator kann sich auch mit Ihnen in Verbindung setzen, um sich diese Information bestätigen zu lassen.</string>
 </resources>
