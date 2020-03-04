@@ -431,7 +431,7 @@ public class SetupTemplate extends StandardTemplate {
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
         if(authenticate){
-            textViewProblems.setText(getResources().getString(R.string.login_problems_linked));
+            textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
             textViewProblems.setVisibility(View.VISIBLE);
             updateView(editText.getText());
         }
