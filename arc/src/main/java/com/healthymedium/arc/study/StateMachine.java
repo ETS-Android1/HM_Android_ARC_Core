@@ -339,11 +339,11 @@ public class StateMachine {
             opts.add(res.getString(R.string.checkbox_commit));
 
             fragments.add(new QuestionNonRemoteStudyCommitment(
-               false,
-                    res.getString(R.string.onboarding_header),
-                    res.getString(R.string.onboarding_body),
-                    opts,
-               ""
+                false,
+                res.getString(R.string.onboarding_header),
+                res.getString(R.string.onboarding_body),
+                opts,
+                ""
             ));
         }
 

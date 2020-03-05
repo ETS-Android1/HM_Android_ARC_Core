@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import static android.content.Intent.ACTION_DIAL;
+import static android.content.Intent.ACTION_SENDTO;
+
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
@@ -34,7 +37,7 @@ public class ContactScreen extends BaseFragment {
     TextView textViewEmailHeader;
     TextView textViewEmailAddress;
 
-    Button button;
+    Button callButton;
     Button emailButton;
 
     public ContactScreen() {
@@ -71,21 +74,24 @@ public class ContactScreen extends BaseFragment {
         });
 
 
-        button = view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        callButton = view.findViewById(R.id.button);
+        callButton.setText(ViewUtil.getString(R.string.button_call));
+        callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String number = stringPhoneNumber.replace("-","");
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                number = number.replace("+", "");
+                Intent intent = new Intent(ACTION_DIAL, Uri.parse("tel:" + number));
                 startActivity(intent);
             }
         });
 
         emailButton = view.findViewById(R.id.emailButton);
+        emailButton.setText(ViewUtil.getString(R.string.button_email));
         emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                Intent intent = new Intent(ACTION_SENDTO, Uri.fromParts(
                         "mailto",stringEmail, null));
                 startActivity(Intent.createChooser(intent,""));
             }
