@@ -91,7 +91,7 @@
 	<string name="availability_changetime">テスト使用可能&lt;b>時刻&lt;/b>を変更したい。</string>
 	<string name="availability_changedates">次の&lt;b>テストサイクル&lt;/b>の&lt;b>日付&lt;/b>を変更したい。</string>
 	<string name="contact_call1">治験コーディネーターに&lt;b>電話&lt;/b>したい。</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2">+1&#8211;314&#8211;273&#8211;7112</string>
 	<string name="contact_email1">治験コーディネーターに&lt;b>Eメール&lt;/b>を送りたい。</string>
 	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
 	<string name="about_header">&lt;b>このアプリについて&lt;/b></string>

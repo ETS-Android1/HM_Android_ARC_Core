@@ -92,7 +92,7 @@
 	<string name="availability_changetime">Me gustaría cambiar la &lt;b>hora del día&lt;/b> en la cual estoy disponible para las pruebas.</string>
 	<string name="availability_changedates">Me gustaría cambiar las &lt;b>fechas&lt;/b> de mi próximo &lt;b>ciclo de prueba&lt;/b>.</string>
 	<string name="contact_call1">Me gustaría &lt;b>llamar&lt;/b> a mi coordinador del estudio.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2">+1&#8211;314&#8211;273&#8211;7112</string>
 	<string name="contact_email1">Me gustaría enviar un &lt;b>correo electrónico&lt;/b> a mi coordinador del estudio.</string>
 	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
 	<string name="about_header">&lt;b>Sobre esta aplicación&lt;/b></string>
