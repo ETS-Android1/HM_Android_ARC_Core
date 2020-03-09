@@ -358,11 +358,14 @@
 	<string name="popup_tutorial_quit">Tap here to quit the tutorial.</string>
 	<string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
 	<string name="prices_tutorial_item1">Bananas</string>
-	<string name="prices_tutorial_price1">$3.27 </string>
 	<string name="prices_tutorial_item2">Soup</string>
-	<string name="prices_tutorial_price2">$10.82 </string>
-	<string name="prices_tutorial_price1_match">$6.78 </string>
-	<string name="prices_tutorial_price2_match">$4.01 </string>
+	<string name="prices_tutorial_item3">Dental floss</string>
+	<string name="prices_tutorial_price1">£3.27</string>
+	<string name="prices_tutorial_price2">£10.82</string>
+	<string name="prices_tutorial_price3">£2.33</string>
+	<string name="prices_tutorial_price1_match">£6.78</string>
+	<string name="prices_tutorial_price2_match">£4.01</string>
+	<string name="prices_tutorial_price3_match">£9.38</string>
 	<string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b>\nChoose the answer that makes sense to you.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> \nLet\'s try another.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> \nLet\'s proceed to part two.</string>
@@ -438,5 +441,5 @@
 	<string name="earnings_symbol">+</string>
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
-	<string name="money_prefix">$</string>
+	<string name="money_prefix">£</string>
 </resources>

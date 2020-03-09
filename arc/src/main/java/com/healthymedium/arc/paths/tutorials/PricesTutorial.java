@@ -114,6 +114,7 @@ public class PricesTutorial extends Tutorial {
 
         textviewPrice = view.findViewById(R.id.textviewPrice);
         textviewPrice.setTypeface(Fonts.georgiaItalic);
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
 
         textView12 = view.findViewById(R.id.textView12);
         textView12.setText(ViewUtil.getHtmlString(R.string.prices_isthisgood));
