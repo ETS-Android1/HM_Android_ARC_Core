@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
+    <!--    Had to add these to match the translation doc   -->
+    <string name="testing_tutorial_link">&lt;b>View a Tutorial&lt;/b></string>
+    <string name="testing_header_1">Test 1 of 3</string>
+    <string name="testing_header_2">Test 2 of 3</string>
+    <string name="testing_header_3">Test 3 of 3</string>
+    <string name="button_call">CALL</string>
+    <string name="button_email">EMAIL</string>
+    <string name="button_done">DONE</string>
+
     <!--Causes a resource linking failed error when removed-->
     <string name="okay">Okay</string>
 

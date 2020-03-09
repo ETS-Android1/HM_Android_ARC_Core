@@ -47,6 +47,7 @@ public class AltStandardTemplate extends BaseFragment {
     protected LinearLayout content;
 
     TextView textViewBack;
+
     protected TextView textViewHelp;
 
     ScrollView scrollView;
@@ -304,7 +305,7 @@ public class AltStandardTemplate extends BaseFragment {
 
     protected void onBackRequested() {
         Log.i("StandardTemplate","onBackRequested");
-        Study.getInstance().openPreviousFragment();
+        Study.openPreviousFragment();
     }
 
 

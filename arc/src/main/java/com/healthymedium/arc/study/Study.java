@@ -7,7 +7,6 @@ import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
-//import com.healthymedium.arc.study.PrivacyPolicy;
 import com.healthymedium.arc.utilities.MigrationUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;

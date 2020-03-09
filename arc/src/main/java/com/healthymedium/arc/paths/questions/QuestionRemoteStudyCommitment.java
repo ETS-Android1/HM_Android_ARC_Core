@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.paths.templates.AltStandardTemplate;
+import com.healthymedium.arc.paths.informative.RebukedCommitmentThankYouScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -35,7 +35,7 @@ public class QuestionRemoteStudyCommitment extends QuestionPolarAlt {
                 // go to thank you screen
                 Study.getParticipant().rebukeCommitmentToStudy();
                 Study.getParticipant().save();
-                BaseFragment fragment = new AltStandardTemplate(false, ViewUtil.getString(R.string.onboarding_nocommit_header), ViewUtil.getString(R.string.onboarding_nocommit_body), false);
+                BaseFragment fragment = new RebukedCommitmentThankYouScreen(true, ViewUtil.getString(R.string.onboarding_nocommit_header), ViewUtil.getString(R.string.onboarding_nocommit_body), false);
                 fragment.setTransitionSet(TransitionSet.getSlidingDefault());
                 NavigationManager.getInstance().open(fragment);
             }
