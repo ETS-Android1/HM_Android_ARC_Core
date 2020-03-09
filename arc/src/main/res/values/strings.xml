@@ -11,6 +11,62 @@
     <string name="button_email">EMAIL</string>
     <string name="button_done">DONE</string>
 
+    <string name="notification1_lastday">You\'re on the last day of testing this week! Your first test of the day will be available until {TIME}.</string>
+    <string name="notification3_variation">Here\'s another chance to earn money and help science Please complete test #3 by {TIME}.</string>
+    <string name="notification_missedtests">You\'ve missed your tests. If you\'re unable \nto finish this week, please contact your study coordinator.</string>
+    <string name="about_linked">About This App</string>
+    <string name="login_2FA_body">We\'ve sent a security code to your phone with number ending in &lt;b>{##}&lt;/b>.</string>
+    <string name="login_2FA_text">Your ARC security code is {######}.</string>
+    <string name="onboarding_notifications_popup">&lt;b>Please tap "allow"&lt;/b> so we can tell you when tests are available.</string>
+    <string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap [APP NAME] and turn on the Allow Notifications switch.</string>
+    <string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for [APP NAME] are turned on.</string>
+    <string name="availability_change_week">What week are you able to test?</string>
+    <string name="availability_change_week_confirm">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>.</string>
+    <string name="idverify_body">Please sign your initials on the line below to verify your identity.</string>
+    <string name="home_body_6">There are no more tests to take.</string>
+    <string name="faq_tech_q6">What is the Test Scheduler Service?</string>
+    <string name="faq_tech_q7">Why am I getting a message telling me to close other apps?</string>
+    <string name="faq_tech_a6">During testing weeks, you may see a notification that the Test Scheduler Service is running. This service allows us to send you testing notifications at specific times. Since this is required for the study, it cannot be disabled.\n\nThe Test Scheduler Service will only run during testing weeks and will not significantly impact the battery life of your phone.</string>
+    <string name="faq_tech_a7">You may see this message appear during a test session: “Please close other apps to improve performance.” This may mean your device is not capable of running other apps at the same time as EXR. For the best performance, please close other apps before starting a test session.</string>
+    <string name="progess_finishdate">Estimated Finish Date</string>
+    <string name="progress_cycledates">{DATE1}-{DATE2}</string>
+    <string name="earnings_details_currenttotal">Current Total</string>
+    <string name="testing_interrupted_header">&lt;b>Thanks!&lt;/b></string>
+    <string name="grids_overlay2">Next: Tap on the F\'s</string>
+    <string name="progress_earnings_header">&lt;b>Total Earnings&lt;/b></string>
+    <string name="progress_earnings_body1">This Week</string>
+    <string name="progress_earnings_body2">Study Total</string>
+    <string name="progress_goal_header">&lt;b>Goal Progress&lt;/b></string>
+    <string name="overlay_nextcycle">&lt;b>Your next testing cycle will be {DATE1} through {DATE2}.&lt;/b> \n\nPlease confirm these testing dates or adjust your schedule.</string>
+    <string name="progress_studycomplete_header">&lt;b>You\'ve Finish the Study!&lt;/b></string>
+    <string name="progress_studytotals_header">&lt;b>Study Totals&lt;/b></string>
+    <string name="progress_studytotals_body">Your study coordinator will be in touch shortly with further instructions. In the meantime, check out all you accomplished:</string>
+    <string name="progress_studytotals_earned">Total Earned</string>
+    <string name="progress_studytotals_tests">Tests Taken</string>
+    <string name="progress_studytotals_days">Days Tested</string>
+    <string name="progress_studytotals_goals">Goals Met</string>
+    <string name="progress_endoftest_syncing">Just a moment while we update your earnings&#8230;</string>
+    <string name="button_sendnewcode">SEND NEW CODE</string>
+    <string name="button_submitdates">SUBMIT DATES</string>
+    <string name="button_okay">OKAY</string>
+    <string name="button_returntohome">RETURN TO HOME</string>
+    <string name="popup_showmore">SHOW MORE</string>
+    <string name="popup_next">Next</string>
+    <string name="popup_done">Done</string>
+    <string name="low_memory_restart_dialogue">&lt;b>Oops&lt;/b>\nYour device is not capable of running other apps at the same time as {APPNAME}. Please close other apps before starting a test session.</string>
+    <string name="radio_0">0</string>
+    <string name="radio_1">1</string>
+    <string name="radio_2">2</string>
+    <string name="radio_3">3</string>
+    <string name="radio_4">4</string>
+    <string name="radio_5">5</string>
+    <string name="radio_6">6</string>
+    <string name="radio_7">7</string>
+    <string name="time_format">h:mm a</string>
+
+
+
+
     <!--Causes a resource linking failed error when removed-->
     <string name="okay">Okay</string>
 
