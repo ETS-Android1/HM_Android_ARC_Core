@@ -594,6 +594,7 @@
     <string name="login_error1">Incorrect log-in credentials</string>
     <string name="login_error2">Already enrolled on another device</string>
     <string name="login_error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
+    <string name="login_error4"></string>
 
     <string name="footnote_symbol">*</string>
 
