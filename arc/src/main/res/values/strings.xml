@@ -6,6 +6,7 @@
     <string name="testing_header_1">Test 1 of 3</string>
     <string name="testing_header_2">Test 2 of 3</string>
     <string name="testing_header_3">Test 3 of 3</string>
+
     <string name="button_call">CALL</string>
     <string name="button_email">EMAIL</string>
     <string name="button_done">DONE</string>
@@ -54,21 +55,11 @@
     <!--Adjust schedule popup-->
     <string name="notification_confirm_adjust_1">Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>. Please confirm these testing dates or adjust your schedule. </string>
 
-    <!--This is probably on the spreadsheet, I just can't find it-->
-    <string name="testing_header_one">Test {Value1} of {Value2}</string>
-
     <!--Old scroll indicator, not yet updated-->
     <string name="scroll">Scroll</string>
 
-    <!--Currently the default home copy-->
-    <string name="home_body1">You have a new test available.</string>
-
     <!-- Used on the Testing Commitment screen for non-remote studies -->
     <string name="checkbox_commit">I understand</string>
-
-
-
-
 
 
 
@@ -109,7 +100,7 @@
     <string name="button_begintest">BEGIN TEST</string>
 
     <string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
-    
+
     <string name="login_enter_2FA">Please enter your &lt;b>login verification code&lt;/b>.</string>
     <string name="login_problems_linked">&lt;b>Problems logging in?&lt;/b></string>
     <string name="login_problems_2FA">Didn\'t receive code?</string>
@@ -171,11 +162,11 @@
     <string name="availability_change_confirm">Great! Starting tomorrow, we\'ll only send you reminders between &lt;b>{TIME1}&lt;/b> and &lt;b>{TIME2}&lt;/b>.</string>
 
     <string name="prices_body">Please decide if the displayed price is a good bargain for that item.&lt;br /&gt;&lt;br /&gt;The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
-    <string name="grid_body">Study the grid and try to remember the location of the three items.</string>
+    <string name="grids_body">Study the grid and try to remember the location of the three items.</string>
     <string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom.&lt;br /&gt;&lt;br /&gt;As quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
 
     <string name="testing_begin">Test will begin in</string>
-    
+
     <string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
 
     <string name="button_help">HELP</string>
@@ -257,8 +248,9 @@
     <string name="testing_done">&lt;i>Well Done!&lt;/i></string>
 
     <string name="idverify_header">ID Verification</string>
+    <string name="idverify_undo">Undo</string>
 
-    <string name="home_header1">&lt;b>Hello!&lt;/b></string>
+    <string name="home_header1">&lt;b>You have a new test available.&lt;/b></string>
 
     <string name="home_header2">&lt;b>There are no tests to take right now.&lt;/b></string>
     <string name="home_body2">You will receive a notification later today when it\'s time to take your next test.</string>
@@ -372,15 +364,15 @@
     <string name="grids_overlay3_pt2">Ready</string>
 
     <string name="progress_daily_header">Today\'s Sessions</string>
-    <string name="progress_dailystatus_complete">&lt;b>[#]&lt;/b> Complete</string>
-    <string name="progress_dailystatus_remaining">&lt;b>[#]&lt;/b> Remaining</string>
+    <string name="progress_dailystatus_complete">&lt;b>{#}&lt;/b> Complete</string>
+    <string name="progress_dailystatus_remaining">&lt;b>{#}&lt;/b> Remaining</string>
 
     <string name="progress_baseline_notice">Thanks for completing the practice session today! &lt;b>Your testing week officially begins tomorrow.&lt;/b></string>
-    <string name="progress_weekscompleted">&lt;b>[#]&lt;/b> Weeks Completed</string>
-    <string name="progress_weeksremaining">&lt;b>[#]&lt;/b> Weeks Remaining</string>
+    <string name="progress_weekscompleted">&lt;b>{#}&lt;/b> Weeks Completed</string>
+    <string name="progress_weeksremaining">&lt;b>{#}&lt;/b> Weeks Remaining</string>
     <string name="progress_nextcycle">Next Testing Cycle</string>
     <string name="progress_weekly_header">This Week</string>
-    <string name="progess_weeklystatus">Day &lt;b>[#]&lt;/b> of &lt;b>7&lt;/b></string>
+    <string name="progess_weeklystatus">Day &lt;b>{#}&lt;/b> of &lt;b>7&lt;/b></string>
     <string name="progress_startdate">Start Date:</string>
     <string name="progress_startdate_date">{DATE}</string>
     <string name="progress_enddate">End Date:</string>
@@ -390,21 +382,21 @@
     <string name="progress_cycleorstudycomplete_body">Thank you for contributing to our research. Your time and hard work are truly valuable.</string>
 
     <string name="progress_study_header">This Study</string>
-    <string name="progress_studystatus">Week &lt;b>[#]&lt;/b> of &lt;b>10&lt;/b></string>
+    <string name="progress_studystatus">Week &lt;b>{#}&lt;/b> of &lt;b>10&lt;/b></string>
     <string name="progress_joindate">Joined Date</string>
     <string name="progress_joindate_date">{DATE}</string>
     <string name="progress_finishdate">Estimated Finish Date</string>
     <string name="progress_finishdate_date">{DATE}</string>
     <string name="progress_timebtwtesting">Time Between Testing Weeks</string>
-    <string name="progress_timebtwtesting_unit">[#] {UNIT}</string>
+    <string name="progress_timebtwtesting_unit">{#} {UNIT}</string>
 
     <string name="progress_practice_body1">Practice Session Complete!</string>
     <string name="progress_practice_body2">Starting tomorrow, &lt;b>you\'ll earn money&lt;/b> for each session you complete!</string>
 
     <string name="progress_schedule_header">Today\'s Progress</string>
     <string name="progress_schedule_body1">&lt;b>1&lt;/b> Session Complete!</string>
-    <string name="progress_schedule_body2">&lt;b>[#]&lt;/b> Sessions Complete!</string>
-    <string name="progress_schedule_status1">Only &lt;b>[#]&lt;/b> more to go today.</string>
+    <string name="progress_schedule_body2">&lt;b>{#}&lt;/b> Sessions Complete!</string>
+    <string name="progress_schedule_status1">Only &lt;b>{#}&lt;/b> more to go today.</string>
     <string name="progress_schedule_status2">Done for the day!</string>
 
     <string name="progress_earnings_status1">Completed test session</string>
@@ -420,21 +412,21 @@
     <string name="earnings_studytotal">Study Total</string>
     <string name="earnings_bonus_header">Bonus Goals</string>
     <string name="earnings_bonus_body">Complete the following testing goals to &lt;b>earn bonuses&lt;/b>.</string>
-    <string name="earnings_bonus_incomplete"><b>[AMOUNT] Bonus</b></string>
-    <string name="earnings_bonus_complete"><b>[AMOUNT] Bonus Earned!</b></string>
+    <string name="earnings_bonus_incomplete"><b>{AMOUNT} Bonus</b></string>
+    <string name="earnings_bonus_complete"><b>{AMOUNT} Bonus Earned!</b></string>
     <string name="earnings_4of4_header">4 Out Of 4</string>
-    <string name="earnings_4of4_body">Complete &lt;b>all 4&lt;/b> test sessions for the day to earn &lt;b>[AMOUNT]&lt;/b>.</string>
+    <string name="earnings_4of4_body">Complete &lt;b>all 4&lt;/b> test sessions for the day to earn &lt;b>{AMOUNT}&lt;/b>.</string>
     <string name="earnings_2aday_header">2-A-Day</string>
-    <string name="earnings_2aday_body">Complete &lt;b>at least 2&lt;/b> test sessions every day of the week to earn &lt;b>[AMOUNT]&lt;/b>.</string>
+    <string name="earnings_2aday_body">Complete &lt;b>at least 2&lt;/b> test sessions every day of the week to earn &lt;b>{AMOUNT}&lt;/b>.</string>
     <string name="earnings_21tests_header">21 Tests</string>
-    <string name="earnings_21tests_body">Earn &lt;b>[AMOUNT]&lt;/b> when you complete &lt;b>21 tests&lt;/b>.</string>
+    <string name="earnings_21tests_body">Earn &lt;b>{AMOUNT}&lt;/b> when you complete &lt;b>21 tests&lt;/b>.</string>
 
     <string name="earnings_details_header">Earnings Details</string>
     <string name="earnings_details_subheader1">This Week</string>
     <string name="earnings_details_complete_test_session">Complete Test Session</string>
     <string name="earnings_details_subheader2">Completed Testing Cycle</string>
     <string name="earnings_details_cycletotal">Cycle Total</string>
-    <string name="earnings_details_number_sessions">([#] times)</string>
+    <string name="earnings_details_number_sessions">({#} times)</string>
     <string name="earnings_details_4of4">4 Out of 4 Goal</string>
     <string name="earnings_details_2aday">2-A-Day Goal</string>
     <string name="earnings_details_21sessions">21 Sessions Goal</string>

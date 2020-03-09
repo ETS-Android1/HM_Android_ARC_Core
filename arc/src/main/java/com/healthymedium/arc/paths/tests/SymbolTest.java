@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.ui.SymbolButton;
@@ -14,6 +15,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.SymbolView;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +58,9 @@ public class SymbolTest extends BaseFragment {
         }
     };
 
+    TextView textViewWhichMatches;
+    TextView textViewOr;
+
     SymbolsTestPathData symbolsTest;
     SymbolsTestPathData.Section symbolsTestSection;
 
@@ -76,6 +81,12 @@ public class SymbolTest extends BaseFragment {
         buttonTop1 = view.findViewById(R.id.symbolbutton_top1);
         buttonTop2 = view.findViewById(R.id.symbolbutton_top2);
         buttonTop3 = view.findViewById(R.id.symbolbutton_top3);
+
+        textViewWhichMatches = view.findViewById(R.id.textViewWhichMatches);
+        textViewWhichMatches.setText(ViewUtil.getHtmlString(R.string.symbols_match));
+
+        textViewOr = view.findViewById(R.id.textView19);
+        textViewOr.setText(ViewUtil.getHtmlString(R.string.symbols_or));
 
         buttonBottom1 = view.findViewById(R.id.symbolbutton_bottom1);
         buttonBottom1.setOnTouchListener(new View.OnTouchListener() {

@@ -223,7 +223,7 @@ public class HomeScreen extends BaseFragment {
 
         // Default
         textViewAvailability.setVisibility(View.GONE);
-        stringHeader = ViewUtil.getString(R.string.home_body1);
+        stringHeader = ViewUtil.getString(R.string.home_header1);
         stringSubheader = "";
 
         isTestReady = participant.shouldCurrentlyBeInTestSession();

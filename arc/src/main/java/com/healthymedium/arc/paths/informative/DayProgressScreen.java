@@ -50,9 +50,16 @@ public class DayProgressScreen extends BaseFragment {
         TextView textViewTestsComplete = view.findViewById(R.id.textViewTestsComplete);
         TextView textViewTestsLeft = view.findViewById(R.id.textViewTestsLeft);
         TextView textView = view.findViewById(R.id.textView);
+
         RoundedFrameLayout frameLayoutDone = view.findViewById(R.id.frameLayoutDone);
+        TextView textViewDoneForDay = view.findViewById(R.id.textViewDoneForDay);
+        textViewDoneForDay.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_schedule_status2)));
+
         Button button = view.findViewById(R.id.button);
         confetti = view.findViewById(R.id.imageViewConfetti);
+
+        TextView textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_schedule_header)));
 
 
 
@@ -101,11 +108,11 @@ public class DayProgressScreen extends BaseFragment {
 
         if(cycleIndex==0 && dayIndex==0) {
             textView.setVisibility(View.VISIBLE);
-            textView.setText(Html.fromHtml(getString(R.string.progress_practice_body2)));
-            textViewTestsComplete.setText(getString(R.string.progress_practice_body1));
+            textView.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_practice_body2)));
+            textViewTestsComplete.setText(ViewUtil.getString(R.string.progress_practice_body1));
         } else {
             int id = (sessionsFinished == 1 ? R.string.progress_schedule_body1 : R.string.progress_schedule_body2);
-            String text = ViewUtil.replaceToken(getString(id), R.string.token_number, String.valueOf(sessionsFinished));
+            String text = ViewUtil.replaceToken(ViewUtil.getString(id), R.string.token_number, String.valueOf(sessionsFinished));
             textViewTestsComplete.setText(Html.fromHtml(text));
         }
 
@@ -113,18 +120,20 @@ public class DayProgressScreen extends BaseFragment {
             textViewTestsLeft.setVisibility(View.GONE);
             frameLayoutDone.setVisibility(View.VISIBLE);
         } else {
-            String text = getString(R.string.progress_schedule_status1);
+            String text = ViewUtil.getString(R.string.progress_schedule_status1);
             String left = String.valueOf(testDay.getNumberOfTestsLeft());
             text = ViewUtil.replaceToken(text, R.string.token_number, left);
             textViewTestsLeft.setText(Html.fromHtml(text));
         }
 
+        button.setText(ViewUtil.getString(R.string.button_next));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Study.openNextFragment();
             }
         });
+
         confetti.animate().translationYBy(-200);
 
         return view;

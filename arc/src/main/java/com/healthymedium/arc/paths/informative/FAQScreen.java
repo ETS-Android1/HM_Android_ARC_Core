@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,13 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class FAQScreen extends BaseFragment {
 
     TextView textViewBack;
+
+    TextView header;
 
     RelativeLayout testing;
     RelativeLayout earnings;
@@ -33,8 +37,12 @@ public class FAQScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
+        header = view.findViewById(R.id.textViewHeader);
+        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_header)));
+
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
+        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +52,8 @@ public class FAQScreen extends BaseFragment {
         textViewBack.setVisibility(View.VISIBLE);
 
         testing = view.findViewById(R.id.testing);
+        TextView testingLabel = (TextView) testing.getChildAt(0);
+        testingLabel.setText(ViewUtil.getString(R.string.faq_testing));
         testing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +63,8 @@ public class FAQScreen extends BaseFragment {
         });
 
         earnings = view.findViewById(R.id.earnings);
+        TextView earningsLabel = (TextView) earnings.getChildAt(0);
+        earningsLabel.setText(ViewUtil.getString(R.string.faq_earnings));
         earnings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +74,8 @@ public class FAQScreen extends BaseFragment {
         });
 
         technology = view.findViewById(R.id.technology);
+        TextView techLabel = (TextView) technology.getChildAt(0);
+        techLabel.setText(ViewUtil.getString(R.string.faq_technology));
         technology.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -3,6 +3,7 @@ package com.healthymedium.arc.paths.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,11 +40,20 @@ public class ProgressScreen extends BaseFragment {
     boolean isPractice = false;
     boolean isBaseline = false;
 
+    TextView sessionHeader;
+    TextView weekHeader;
+    TextView studyHeader;
+
     TextView studyStatus;
+    TextView joinedDate_label;
     TextView joinedDate_date;
+    TextView finishDate_label;
     TextView finishDate_date;
     TextView timeBetween;
     TextView timeBetween_units;
+
+    TextView endDependsDisclaimer;
+
     Button viewFaqButton;
 
     public ProgressScreen() {
@@ -105,6 +115,23 @@ public class ProgressScreen extends BaseFragment {
         }
 
 
+        sessionHeader = view.findViewById(R.id.textViewSessionsHeader);
+        sessionHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_daily_header)));
+
+        weekHeader = view.findViewById(R.id.textViewWeekHeader);
+        weekHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_weekly_header)));
+
+        studyHeader = view.findViewById(R.id.textViewStudyHeader);
+        studyHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_study_header)));
+
+        joinedDate_label = view.findViewById(R.id.joinedDate);
+        joinedDate_label.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_joindate)));
+
+        finishDate_label = view.findViewById(R.id.finishDate);
+        finishDate_label.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_finishdate)));
+
+        endDependsDisclaimer = view.findViewById(R.id.endDepends);
+        endDependsDisclaimer.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_studydisclaimer)));
 
         // The join date should be the start date of test cycle 0
         DateTime joinedDate = Study.getParticipant().getStartDate();
@@ -185,6 +212,7 @@ public class ProgressScreen extends BaseFragment {
         }
 
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
+        viewFaqButton.setText(ViewUtil.getString(R.string.button_viewfaq));
         viewFaqButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

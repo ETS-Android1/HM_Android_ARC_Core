@@ -7,6 +7,7 @@ import android.text.Html;
 import android.text.Spanned;
 
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 
 import org.joda.time.DateTime;
@@ -79,12 +80,12 @@ public class Phrase {
     }
 
     public void replaceDate(@StringRes int format, DateTime dateTime){
-        String string = dateTime.toString(getString(format), Application.getInstance().getLocale());
+        String string = dateTime.toString(getString(format), Locale.getCurrent());
         replaceDate(string);
     }
 
     public void replaceDate(@StringRes int tokenId, @StringRes int format, DateTime dateTime){
-        String string = dateTime.toString(getString(format), Application.getInstance().getLocale());
+        String string = dateTime.toString(getString(format), Locale.getCurrent());
         replace(tokenId,string);
     }
 
@@ -97,17 +98,17 @@ public class Phrase {
     // time
 
     public void replaceTime(@StringRes int format, DateTime time){
-        String string = time.toString(getString(format), Application.getInstance().getLocale());
+        String string = time.toString(getString(format), Locale.getCurrent());
         replaceTime(string);
     }
 
     public void replaceTime(@StringRes int format, LocalTime time){
-        String string = time.toString(getString(format), Application.getInstance().getLocale());
+        String string = time.toString(getString(format), Locale.getCurrent());
         replaceTime(string);
     }
 
     public void replaceTime(@StringRes int tokenId, @StringRes int format, LocalTime time){
-        String string = time.toString(getString(format), Application.getInstance().getLocale());
+        String string = time.toString(getString(format), Locale.getCurrent());
         replace(tokenId, string);
     }
 
@@ -116,7 +117,7 @@ public class Phrase {
     }
 
     public void replaceTime(@StringRes int tokenId, @StringRes int format, DateTime time){
-        String string = time.toString(getString(format), Application.getInstance().getLocale());
+        String string = time.toString(getString(format), Locale.getCurrent());
         replace(tokenId, string);
     }
 

@@ -61,6 +61,7 @@
                 android:background="@color/yellow" />
 
             <TextView
+                android:id="@+id/subheader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"

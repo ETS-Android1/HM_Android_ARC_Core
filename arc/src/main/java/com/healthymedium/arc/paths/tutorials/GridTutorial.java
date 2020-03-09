@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -284,6 +283,8 @@ public class GridTutorial extends Tutorial {
         tapThisF = view.findViewById(R.id.tapThisF);
 
         endButton = view.findViewById(R.id.endButton);
+        endButton.setText(ViewUtil.getHtmlString(R.string.button_close));
+
         progressBar = view.findViewById(R.id.progressBar);
         loadingView = view.findViewById(R.id.loadingView);
 

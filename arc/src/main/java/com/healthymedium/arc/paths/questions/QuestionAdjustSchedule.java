@@ -78,8 +78,8 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String range;
 
-        String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
-        String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+        String language = Locale.getLocaleFromPreferences(getContext()).getLanguage();
+        String country = Locale.getLocaleFromPreferences(getContext()).getCountry();
         java.util.Locale locale = new java.util.Locale(language, country);
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
 

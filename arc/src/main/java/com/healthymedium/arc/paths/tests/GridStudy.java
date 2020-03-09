@@ -15,6 +15,7 @@ import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class GridStudy extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_grid_study, container, false);
         gridLayout = view.findViewById(R.id.gridLayout);
 
-        dialog = new TimedDialog(getString(R.string.grids_overlay1),2000);
+        dialog = new TimedDialog(ViewUtil.getHtmlString(R.string.grids_overlay1),2000);
         dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
             @Override
             public void dismiss() {

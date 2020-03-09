@@ -113,16 +113,17 @@ public class MainActivity extends AppCompatActivity {
                     }).show();
         }
 
-        if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE){
+        if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE) {
             NavigationManager.getInstance().open(new SplashScreen());
             return;
         }
 
-        List<Locale> locales = Application.getInstance().getLocaleOptions();
+        List<java.util.Locale> locales = Locale.getSupported();
         List<String> options = new ArrayList<>();
-        for(Locale locale : locales) {
-            options.add(locale.getLabel());
+        for(java.util.Locale locale : locales) {
+            options.add(Locale.getLabel(locale));
         }
+
         QuestionLanguagePreference fragment = new QuestionLanguagePreference(
                 false,
                 true,
@@ -230,12 +231,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void attachBaseContext(Context context) {
         Log.i("MainActivity","attachBaseContext");
         super.attachBaseContext(context);
-        Application.getInstance().updateLocale(context);
+        //Locale.update(Locale.getCurrent(), getBaseContext());
     }
 
     public boolean isVisible() {

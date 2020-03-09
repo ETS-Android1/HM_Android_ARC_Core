@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="progress_finishdate">Fecha estimada de finalización</string>
+
+	<string name="key_native_language">America Latina - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza en un mes, el {DATE}. Puede ajustar este horario hasta por 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su siguiente ciclo de pruebas comienza en una semana. Toque para confirmar o reprogramar.</string>
 	<string name="notification_daybefore">Recordatorio: Su siguiente ciclo de pruebas comienza mañana. Toque para confirmar o reprogramar.</string>
@@ -155,7 +159,7 @@
 	<string name="progress_enddate">&lt;b>Fecha de finalización:&lt;/b></string>
 	<string name="progress_enddate_date">{DATE}</string>
 	<string name="progress_study_header">&lt;b>Este estudio&lt;/b></string>
-	<string name="progress_studystatus">Semana &lt;b>{#}&lt;/b> de &lt;b>12&lt;/b></string>
+	<string name="progress_studystatus">Semana &lt;b>{#}&lt;/b> de &lt;b>10&lt;/b></string>
 	<string name="progress_joindate">Fecha en que ingresó:</string>
 	<string name="progress_joindate_date">{DATE}</string>
 	<string name="progess_finishdate">Fecha estimada de finalización</string>
@@ -436,5 +440,4 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/aa</string>
 	<string name="money_prefix">$</string>
-	<string name="money_suffix">Se informará al coordinador del estudio que usted no desea participar en este momento. El coordinador del estudio podrá también comunicarse con usted para confirmar esta información.</string>
 </resources>

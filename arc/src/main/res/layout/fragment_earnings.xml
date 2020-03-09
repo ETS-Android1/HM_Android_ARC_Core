@@ -32,7 +32,7 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginRight="32dp"
-                    android:text="Earnings"
+                    android:text="@string/resources_nav_earnings"
                     android:textColor="@color/white"
                     android:textSize="26dp" />
 
@@ -72,6 +72,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/weeklyTotalLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -102,6 +103,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/studyTotalLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"

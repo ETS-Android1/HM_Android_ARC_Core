@@ -13,8 +13,8 @@
     <string name="token_time2">{TIME2}</string>
     <string name="token_value1">{Value1}</string>
     <string name="token_value2">{Value2}</string>
-    <string name="token_amount">[AMOUNT]</string>
-    <string name="token_number">[#]</string>
+    <string name="token_amount">{AMOUNT}</string>
+    <string name="token_number">{#}</string>
 
     <string name="format_date_dashed">MM-dd-yy</string>
     <string name="format_date_lo">E, MMMM d</string>

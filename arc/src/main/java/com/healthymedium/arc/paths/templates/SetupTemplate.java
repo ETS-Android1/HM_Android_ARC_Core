@@ -145,7 +145,7 @@ public class SetupTemplate extends StandardTemplate {
         linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
 
         textViewPolicy = new TextView(getContext());
-        textViewPolicy.setText(getResources().getString(R.string.bysigning_key));
+        textViewPolicy.setText(ViewUtil.getHtmlString(R.string.bysigning_key));
         textViewPolicy.setGravity(Gravity.CENTER_HORIZONTAL);
         textViewPolicy.setTextSize(15);
         linearLayout.addView(textViewPolicy);
@@ -431,7 +431,7 @@ public class SetupTemplate extends StandardTemplate {
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
         if(authenticate){
-            textViewProblems.setText(getResources().getString(R.string.login_problems_linked));
+            textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
             textViewProblems.setVisibility(View.VISIBLE);
             updateView(editText.getText());
         }

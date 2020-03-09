@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="progress_finishdate">終了予定日</string>
+
 	<string name="notification_monthbefore">次のテストの週は1ヵ月以内の{DATE}に始まります。このスケジュールを7日以内に調整することができます。</string>
 	<string name="notification_weekbefore">注意：あなたの次のテストサイクルは1週間以内に始まります。タップして確認するか、スケジュールを調整してください。</string>
 	<string name="notification_daybefore">注意：あなたの次のテストサイクルは明日始まります。タップして確認するか、スケジュールを調整してください。</string>
@@ -436,5 +439,4 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
-	<string name="money_suffix">今回、あなたが参加を希望していないことは、治験コーディネーターに通知されます。治験コーディネーターはこの情報を確認するために、あなたに問い合わせる可能性もあります。</string>
 </resources>

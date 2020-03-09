@@ -1,6 +1,7 @@
 package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
+import android.text.Html;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.tests.CognitiveTest;
@@ -349,7 +350,7 @@ public class StateMachine {
 
         fragments.add(new StateInfoTemplate(
                 false,
-                res.getString(R.string.onboarding_commit_header),
+                Html.fromHtml(res.getString(R.string.onboarding_commit_header)).toString(),
                 null,
                 res.getString(R.string.onboarding_commit_body),
                 res.getString(R.string.button_next)));
@@ -646,16 +647,14 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String testNumber = ViewUtil.getString(R.string.testing_header_one);
-        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
-        testNumber = testNumber.replace("{Value2}", "3");
+        String testNumber = getTestNumberString(index);
 
         TestInfoTemplate info = new TestInfoTemplate(
                 testNumber,
-                res.getString(R.string.prices_header),
-                res.getString(R.string.prices_body),
+                ViewUtil.getHtmlString(R.string.prices_header),
+                ViewUtil.getHtmlString(R.string.prices_body),
                 "prices",
-                res.getString(R.string.button_begintest));
+                ViewUtil.getHtmlString(R.string.button_begintest));
         fragments.add(info);
 
         fragments.add(new TestBegin());
@@ -666,8 +665,8 @@ public class StateMachine {
         }
 
         fragments.add(new SimplePopupScreen(
-                res.getString(R.string.prices_overlay),
-                res.getString(R.string.button_begin),
+                ViewUtil.getHtmlString(R.string.prices_overlay),
+                ViewUtil.getHtmlString(R.string.button_begin),
                 3000,
                 15000,
                 true));
@@ -683,16 +682,14 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String testNumber = ViewUtil.getString(R.string.testing_header_one);
-        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
-        testNumber = testNumber.replace("{Value2}", "3");
+        String testNumber = getTestNumberString(index);
 
         TestInfoTemplate info = new TestInfoTemplate(
                 testNumber,
-                res.getString(R.string.symbols_header),
-                res.getString(R.string.symbols_body),
+                ViewUtil.getHtmlString(R.string.symbols_header),
+                ViewUtil.getHtmlString(R.string.symbols_body),
                 "symbols",
-                res.getString(R.string.button_begintest));
+                ViewUtil.getHtmlString(R.string.button_begintest));
         fragments.add(info);
 
         fragments.add(new TestBegin());
@@ -708,16 +705,14 @@ public class StateMachine {
 
         Resources res = Application.getInstance().getResources();
 
-        String testNumber = ViewUtil.getString(R.string.testing_header_one);
-        testNumber = testNumber.replace("{Value1}", String.valueOf(index+1));
-        testNumber = testNumber.replace("{Value2}", "3");
+        String testNumber = getTestNumberString(index);
 
         TestInfoTemplate info0 = new TestInfoTemplate(
                 testNumber,
-                res.getString(R.string.grids_header),
-                res.getString(R.string.grid_body),
+                ViewUtil.getHtmlString(R.string.grids_header),
+                ViewUtil.getHtmlString(R.string.grids_body),
                 "grids",
-                res.getString(R.string.button_begintest));
+                ViewUtil.getHtmlString(R.string.button_begintest));
         fragments.add(info0);
 
         fragments.add(new TestBegin());
@@ -735,12 +730,31 @@ public class StateMachine {
         cache.segments.add(segment);
     }
 
+    private String getTestNumberString(final int index) {
+        String testNumberString = "invalid test index";
+        switch(index) {
+            case 0:
+                testNumberString = ViewUtil.getHtmlString(R.string.testing_header_1);
+                break;
+            case 1:
+                testNumberString = ViewUtil.getHtmlString(R.string.testing_header_2);
+                break;
+            case 2:
+                testNumberString = ViewUtil.getHtmlString(R.string.testing_header_3);
+                break;
+            default:
+                break;
+        }
+
+        return testNumberString;
+    }
+
     public void addInterruptedPage(){
 
         Resources res = Application.getInstance().getResources();
 
         List<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new QuestionInterrupted(false, res.getString(R.string.testing_interrupted_body),""));
+        fragments.add(new QuestionInterrupted(false, ViewUtil.getHtmlString(R.string.testing_interrupted_body),""));
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }
@@ -757,16 +771,16 @@ public class StateMachine {
         String body;
 
         // Default
-        header = res.getString(R.string.thank_you_header1);
-        subheader = res.getString(R.string.thankyou_testcomplete_subhead1);
-        body = res.getString(R.string.thankyou_testcomplete_body1);
+        header = ViewUtil.getHtmlString(R.string.thank_you_header1);
+        subheader = ViewUtil.getHtmlString(R.string.thankyou_testcomplete_subhead1);
+        body = ViewUtil.getHtmlString(R.string.thankyou_testcomplete_body1);
 
         // Finished with study
         if(!participant.isStudyRunning()){
             //at the end of the line
-            header = res.getString(R.string.thankyou_header3);
-            subheader = res.getString(R.string.thankyou_finished_subhead3);
-            body = res.getString(R.string.thankyou_body3);
+            header = ViewUtil.getHtmlString(R.string.thankyou_header3);
+            subheader = ViewUtil.getHtmlString(R.string.thankyou_finished_subhead3);
+            body = ViewUtil.getHtmlString(R.string.thankyou_body3);
         }
         else {
             TestCycle cycle = participant.getCurrentTestCycle();
@@ -774,16 +788,13 @@ public class StateMachine {
             // After the testCycles but before the next session
             if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests()) {
 
-                String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
-                String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
-                java.util.Locale locale = new java.util.Locale(language, country);
-                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
+                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(Locale.getCurrent());
 
                 //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
-                header = res.getString(R.string.thankyou_header2);
-                subheader = res.getString(R.string.thankyou_cycle_subhead2);
+                header = ViewUtil.getHtmlString(R.string.thankyou_header2);
+                subheader = ViewUtil.getHtmlString(R.string.thankyou_cycle_subhead2);
 
-                String body2 = res.getString(R.string.thankyou_cycle_body2);
+                String body2 = ViewUtil.getHtmlString(R.string.thankyou_cycle_body2);
 
                 // String startDate = testCycles.getActualStartDate().toString(format);
                 // String endDate = testCycles.getActualEndDate().toString(format);
@@ -798,9 +809,9 @@ public class StateMachine {
             }
             // After the 4th test of the day
             else if (participant.getCurrentTestDay().getNumberOfTestsLeft() == 0) {
-                header = res.getString(R.string.thank_you_header1);
-                subheader = res.getString(R.string.thankyou_alldone_subhead1);
-                body = res.getString(R.string.thankyou_alldone_body1);
+                header = ViewUtil.getHtmlString(R.string.thank_you_header1);
+                subheader = ViewUtil.getHtmlString(R.string.thankyou_alldone_subhead1);
+                body = ViewUtil.getHtmlString(R.string.thankyou_alldone_body1);
             }
 
         }
@@ -888,7 +899,7 @@ public class StateMachine {
         Log.i("StateMachine", "loadCognitiveTestFromCache");
         CognitiveTest cognitiveTest = new CognitiveTest();
         cognitiveTest.load(cache.data);
-        Study.getCurrentTestSession().addTestData(cognitiveTest);
+        Study.getInstance().getCurrentTestSession().addTestData(cognitiveTest);
     }
 
 }

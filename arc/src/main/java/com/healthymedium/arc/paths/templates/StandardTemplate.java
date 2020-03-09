@@ -94,6 +94,7 @@ public class StandardTemplate extends BaseFragment {
         }
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(Html.fromHtml(ViewUtil.getString(R.string.button_back)));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +104,7 @@ public class StandardTemplate extends BaseFragment {
         });
 
         textViewHelp = view.findViewById(R.id.textViewHelp);
+        textViewHelp.setText(Html.fromHtml(ViewUtil.getString(R.string.button_help)));
         textViewHelp.setTypeface(Fonts.robotoMedium);
         textViewHelp.setOnClickListener(new View.OnClickListener() {
             @Override

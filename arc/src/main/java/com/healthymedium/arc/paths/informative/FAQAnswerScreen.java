@@ -14,6 +14,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
 public class FAQAnswerScreen extends BaseFragment {
@@ -39,6 +40,7 @@ public class FAQAnswerScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_faq_answer, container, false);
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override

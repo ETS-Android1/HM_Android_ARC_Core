@@ -20,6 +20,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,13 +36,21 @@ public class GridLetters extends BaseFragment {
     protected int eCount = 0;
     protected int fCount = 0;
 
+    private TextView textViewTapFsLabel;
+
     protected TimedDialogMultipart dialog;
     Handler handler;
     protected Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if(isVisible()){
-                dialog = new TimedDialogMultipart(getString(R.string.grids_overlay3), getString(R.string.grids_overlay3_pt2), 3000, 6000);
+
+                dialog = new TimedDialogMultipart (
+                        ViewUtil.getHtmlString(R.string.grids_overlay3),
+                        ViewUtil.getHtmlString(R.string.grids_overlay3_pt2),
+                        3000,
+                        6000
+                );
                 dialog.setOnDialogDismissListener(new TimedDialogMultipart.OnDialogDismiss() {
                     @Override
                     public void dismiss() {
@@ -71,6 +80,9 @@ public class GridLetters extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_grid_letters, container, false);
         gridLayout = view.findViewById(R.id.gridLayout);
+
+        textViewTapFsLabel = view.findViewById(R.id.textView32);
+        textViewTapFsLabel.setText(ViewUtil.getHtmlString(R.string.grids_subheader_fs));
 
         View.OnTouchListener listener = new View.OnTouchListener() {
             @Override

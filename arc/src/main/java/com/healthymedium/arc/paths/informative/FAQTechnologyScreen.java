@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ public class FAQTechnologyScreen extends BaseFragment {
 
     TextView textViewBack;
 
+    TextView header, subheader;
+
     RelativeLayout tech_q1;
     RelativeLayout tech_q2;
     RelativeLayout tech_q3;
@@ -35,6 +38,7 @@ public class FAQTechnologyScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_faq_technology, container, false);
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +48,15 @@ public class FAQTechnologyScreen extends BaseFragment {
         });
         textViewBack.setVisibility(View.VISIBLE);
 
+        header = view.findViewById(R.id.textViewHeader);
+        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_tech_header)));
+
+        subheader = view.findViewById(R.id.textViewSubheader);
+        subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));
+
         tech_q1 = view.findViewById(R.id.tech_q1);
+        TextView tech_q1Label = (TextView) tech_q1.getChildAt(0);
+        tech_q1Label.setText(ViewUtil.getString(R.string.faq_tech_q1));
         tech_q1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +66,8 @@ public class FAQTechnologyScreen extends BaseFragment {
         });
 
         tech_q2 = view.findViewById(R.id.tech_q2);
+        TextView tech_q2Label = (TextView) tech_q2.getChildAt(0);
+        tech_q2Label.setText(ViewUtil.getString(R.string.faq_tech_q2));
         tech_q2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +77,8 @@ public class FAQTechnologyScreen extends BaseFragment {
         });
 
         tech_q3 = view.findViewById(R.id.tech_q3);
+        TextView tech_q3Label = (TextView) tech_q3.getChildAt(0);
+        tech_q3Label.setText(ViewUtil.getString(R.string.faq_tech_q3));
         tech_q3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +88,8 @@ public class FAQTechnologyScreen extends BaseFragment {
         });
 
         tech_q4 = view.findViewById(R.id.tech_q4);
+        TextView tech_q4Label = (TextView) tech_q4.getChildAt(0);
+        tech_q4Label.setText(ViewUtil.getString(R.string.faq_tech_q4));
         tech_q4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

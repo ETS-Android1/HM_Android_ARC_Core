@@ -51,8 +51,8 @@ public class ScheduleCalendar extends BaseFragment {
         DateTime visitStart = cycle.getActualStartDate();
         DateTime visitEnd = cycle.getActualEndDate();
 
-        String language = PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
-        String country = PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+        String language = Locale.getLocaleFromPreferences(getContext()).getLanguage();
+        String country = Locale.getLocaleFromPreferences(getContext()).getCountry();
         java.util.Locale locale = new java.util.Locale(language, country);
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
