@@ -274,7 +274,7 @@
 	<string name="testing_id_body">En apposant mes initiales sur la ligne ci-dessous, j’atteste que j’ai effectué ces tests. </string>
 	<string name="prices_header">&lt;b>Prix&lt;/b></string>
 	<string name="prices_body">Nous vous demandons de déterminer si le prix affiché représente une bonne affaire pour cet article. \n\nLa paire ne restera pas longtemps à l’écran, prenez donc une décision rapidement et prêtez une attention particulière.</string>
-	<string name="prices_isthisgood">Est-ce un bon prix?</string>
+	<string name="prices_isthisgood">Est-ce un coût avantageux?</string>
 	<string name="prices_overlay">Vous verrez maintenant un article et deux prix. Veuillez sélectionner le prix qui correspond à l\'article de la section précédente.</string>
 	<string name="prices_whatwasprice">Quel était le prix?</string>
 	<string name="prices_complete">&lt;b>Le test des prix est terminé!&lt;/b></string>
