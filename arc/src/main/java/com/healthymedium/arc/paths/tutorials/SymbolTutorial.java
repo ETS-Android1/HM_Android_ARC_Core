@@ -96,6 +96,9 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setVisibility(View.GONE);
         buttonBottom2.setVisibility(View.GONE);
 
+        buttonBottom1.setOnClickListener(null);
+        buttonBottom2.setOnClickListener(null);
+
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(5,false);
         progressIncrement = 34;
@@ -364,51 +367,57 @@ public class SymbolTutorial extends Tutorial {
         handler.postDelayed(runnableTileFirst,10000);
         handler.postDelayed(runnableTileSecond, 10000);
 
-        View.OnClickListener listener = new View.OnClickListener() {
+        View.OnTouchListener onPressListener = new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    handler.removeCallbacks(runnableTileFirst);
+                    handler.removeCallbacks(runnableTileSecond);
 
-                handler.removeCallbacks(runnableTileFirst);
-                handler.removeCallbacks(runnableTileSecond);
+                    initialTilesOutline.dismiss();
+                    initialPointer.dismiss();
 
-                initialTilesOutline.dismiss();
-                initialPointer.dismiss();
+                    buttonBottom1.setOnClickListener(null);
+                    buttonBottom2.setOnClickListener(null);
+                    buttonBottom1.setOnTouchListener(null);
+                    buttonBottom2.setOnTouchListener(null);
+                    incrementProgress();
 
-                buttonBottom1.setOnClickListener(null);
-                buttonBottom2.setOnClickListener(null);
-                incrementProgress();
+                    greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
+                    greatJobHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
+                    greatJobHighlight = new HintHighlighter(getActivity());
+                    greatJobHighlight.addTarget(progressBar);
+                    greatJobHighlight.show();
 
-                greatJobHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
-                greatJobHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
-                greatJobHighlight = new HintHighlighter(getActivity());
-                greatJobHighlight.addTarget(progressBar);
-                greatJobHighlight.show();
+                    View.OnClickListener listener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            greatJobHint.dismiss();
+                            greatJobHighlight.dismiss();
 
-                View.OnClickListener listener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        greatJobHint.dismiss();
-                        greatJobHighlight.dismiss();
+                            Handler handler = new Handler();
+                            Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    secondTiles();
+                                }
+                            };
+                            handler.postDelayed(runnable,600);
+                        }
+                    };
 
-                        Handler handler = new Handler();
-                        Runnable runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                secondTiles();
-                            }
-                        };
-                        handler.postDelayed(runnable,600);
-                    }
-                };
+                    greatJobHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
-                greatJobHint.addButton(ViewUtil.getString(R.string.button_next), listener);
+                    greatJobHint.show();
+                }
 
-                greatJobHint.show();
+                return v.performClick();
             }
+
         };
 
-        buttonBottom1.setOnClickListener(listener);
-        buttonBottom2.setOnClickListener(listener);
+         buttonBottom1.setOnTouchListener(onPressListener);
+         buttonBottom2.setOnTouchListener(onPressListener);
     }
 
     // The second set of tiles to match
@@ -443,51 +452,55 @@ public class SymbolTutorial extends Tutorial {
         handler.postDelayed(runnableTileFirst,10000);
         handler.postDelayed(runnableTileSecond,15000);
 
-        View.OnClickListener listener = new View.OnClickListener() {
+
+        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    handler.removeCallbacks(runnableTileFirst);
+                    handler.removeCallbacks(runnableTileSecond);
 
-                handler.removeCallbacks(runnableTileFirst);
-                handler.removeCallbacks(runnableTileSecond);
+                    secondTilesOutline.dismiss();
+                    secondTilesPulsate.dismiss();
+                    secondPointer.dismiss();
 
-                secondTilesOutline.dismiss();
-                secondTilesPulsate.dismiss();
-                secondPointer.dismiss();
+                    buttonBottom1.setOnClickListener(null);
+                    buttonBottom2.setOnClickListener(null);
+                    incrementProgress();
 
-                buttonBottom1.setOnClickListener(null);
-                buttonBottom2.setOnClickListener(null);
-                incrementProgress();
+                    niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
+                    niceHint.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
+                    greatJobHighlight = new HintHighlighter(getActivity());
+                    greatJobHighlight.addTarget(progressBar);
+                    greatJobHighlight.show();
 
-                niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
-                niceHint.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
-                greatJobHighlight = new HintHighlighter(getActivity());
-                greatJobHighlight.addTarget(progressBar);
-                greatJobHighlight.show();
+                    View.OnClickListener listener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            niceHint.dismiss();
+                            greatJobHighlight.dismiss();
 
-                View.OnClickListener listener = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        niceHint.dismiss();
-                        greatJobHighlight.dismiss();
+                            Handler handler = new Handler();
+                            Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    lastTiles();
+                                }
+                            };
+                            handler.postDelayed(runnable,600);
+                        }
+                    };
 
-                        Handler handler = new Handler();
-                        Runnable runnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                lastTiles();
-                            }
-                        };
-                        handler.postDelayed(runnable,600);
-                    }
-                };
+                    niceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
 
-                niceHint.addButton(ViewUtil.getString(R.string.button_next), listener);
-
-                niceHint.show();
+                    niceHint.show();
+                }
+                return v.performClick();
             }
         };
-        buttonBottom1.setOnClickListener(listener);
-        buttonBottom2.setOnClickListener(listener);
+
+        buttonBottom1.setOnTouchListener(onTouchListener);
+        buttonBottom2.setOnTouchListener(onTouchListener);
     }
 
     // The final set of tiles to match
@@ -498,10 +511,10 @@ public class SymbolTutorial extends Tutorial {
         buttonBottom1.setImages(R.drawable.ic_symbol_3_tutorial, R.drawable.ic_symbol_7_tutorial);
         buttonBottom2.setImages(R.drawable.ic_symbol_1_tutorial, R.drawable.ic_symbol_8_tutorial);
 
-        finalTilesOutline.addPulsingTarget(buttonBottom1,4);
-        finalTilesOutline.addTarget(buttonTop1,6);
+        finalTilesOutline.addPulsingTarget(buttonBottom1, 4);
+        finalTilesOutline.addTarget(buttonTop1, 6);
         finalTilesOutline.addTarget(progressBar);
-        finalTilesOutline.setShadowEnabled(false,false);
+        finalTilesOutline.setShadowEnabled(false, false);
 
         runnableTileFirst = new Runnable() {
             @Override
@@ -513,40 +526,42 @@ public class SymbolTutorial extends Tutorial {
         runnableTileSecond = new Runnable() {
             @Override
             public void run() {
-                finalTilesOutline.setShadowEnabled(true,true);
+                finalTilesOutline.setShadowEnabled(true, true);
                 finalPointer.setText(ViewUtil.getString(R.string.popup_tutorial_tiletap));
                 finalPointer.show();
             }
         };
 
-        handler.postDelayed(runnableTileFirst,10000);
-        handler.postDelayed(runnableTileSecond,15000);
+        handler.postDelayed(runnableTileFirst, 10000);
+        handler.postDelayed(runnableTileSecond, 15000);
 
-        View.OnClickListener listener = new View.OnClickListener() {
+        View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    handler.removeCallbacks(runnableTileFirst);
+                    handler.removeCallbacks(runnableTileSecond);
 
-                handler.removeCallbacks(runnableTileFirst);
-                handler.removeCallbacks(runnableTileSecond);
+                    finalTilesOutline.dismiss();
+                    finalTilesPulsate.dismiss();
+                    finalPointer.dismiss();
 
-                finalTilesOutline.dismiss();
-                finalTilesPulsate.dismiss();
-                finalPointer.dismiss();
+                    fadeOutView(topSymbols);
+                    fadeOutView(textView20);
+                    fadeOutView(bottomSymbolsButtons);
 
-                fadeOutView(topSymbols);
-                fadeOutView(textView20);
-                fadeOutView(bottomSymbolsButtons);
+                    buttonBottom1.setOnClickListener(null);
+                    buttonBottom2.setOnClickListener(null);
+                    incrementProgress();
 
-                buttonBottom1.setOnClickListener(null);
-                buttonBottom2.setOnClickListener(null);
-                incrementProgress();
+                    showComplete();
+                }
 
-                showComplete();
+                return v.performClick();
             }
         };
 
-        buttonBottom1.setOnClickListener(listener);
-        buttonBottom2.setOnClickListener(listener);
+        buttonBottom1.setOnTouchListener(onTouchListener);
+        buttonBottom2.setOnTouchListener(onTouchListener);
     }
-
 }

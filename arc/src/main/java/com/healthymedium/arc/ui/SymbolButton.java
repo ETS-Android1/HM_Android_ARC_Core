@@ -35,8 +35,8 @@ public class SymbolButton extends RoundedLinearLayout {
         init(context);
     }
 
-    private void init(Context context){
-        View view = inflate(context,R.layout.custom_symbol_button,this);
+    private void init(Context context) {
+        View view = inflate(context, R.layout.custom_symbol_button, this);
         layout = view.findViewById(R.id.linearLayout);
         topImage = view.findViewById(R.id.symbolTop);
         bottomImage = view.findViewById(R.id.symbolBottom);
@@ -45,7 +45,7 @@ public class SymbolButton extends RoundedLinearLayout {
 
     @Override
     public void setEnabled(boolean enabled) {
-        if(enabled){
+        if (enabled) {
             setAlpha(1.0f);
         } else {
             setAlpha(0.4f);
@@ -53,20 +53,14 @@ public class SymbolButton extends RoundedLinearLayout {
         super.setEnabled(enabled);
     }
 
-    public void setSelected(boolean selected){
-        if(selected){
-            layout.setStrokeColor(R.color.primary);
-            layout.setStrokeWidth(3);
-        } else {
-            layout.setStrokeWidth(1);
-            layout.setStrokeColor(R.color.headerGrey);
-        }
-        layout.refresh();
+    @Override
+    public boolean performClick() {
+        super.performClick();
+        return false;
     }
 
-    public void setImages(int topId,int bottomId){
+    public void setImages(int topId, int bottomId) {
         topImage.setImageResource(topId);
         bottomImage.setImageResource(bottomId);
     }
-
 }
