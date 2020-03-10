@@ -35,7 +35,7 @@ public class QuestionRemoteStudyCommitment extends QuestionPolarAlt {
                 // go to thank you screen
                 Study.getParticipant().rebukeCommitmentToStudy();
                 Study.getParticipant().save();
-                BaseFragment fragment = new RebukedCommitmentThankYouScreen(true, ViewUtil.getString(R.string.onboarding_nocommit_header), ViewUtil.getString(R.string.onboarding_nocommit_body), false);
+                BaseFragment fragment = new RebukedCommitmentThankYouScreen(ViewUtil.getString(R.string.onboarding_nocommit_header), ViewUtil.getString(R.string.onboarding_nocommit_body), false);
                 fragment.setTransitionSet(TransitionSet.getSlidingDefault());
                 NavigationManager.getInstance().open(fragment);
             }

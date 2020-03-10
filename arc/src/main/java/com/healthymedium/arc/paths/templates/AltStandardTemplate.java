@@ -46,7 +46,7 @@ public class AltStandardTemplate extends BaseFragment {
 
     protected LinearLayout content;
 
-    TextView textViewBack;
+    protected TextView textViewBack;
 
     protected TextView textViewHelp;
 
@@ -62,7 +62,7 @@ public class AltStandardTemplate extends BaseFragment {
 
     public AltStandardTemplate(boolean allowBack, String header, String subheader) {
         this.allowBack = allowBack;
-        stringButton = "NEXT";
+        stringButton = ViewUtil.getString(R.string.button_next);
         stringHeader = header;
         stringSubHeader = subheader;
 
