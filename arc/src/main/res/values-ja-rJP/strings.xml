@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	<string name="progress_finishdate">終了予定日</string>
-
+	<string name="key_native_language">日本 - 日本語</string>
 	<string name="notification_monthbefore">次のテストの週は1ヵ月以内の{DATE}に始まります。このスケジュールを7日以内に調整することができます。</string>
 	<string name="notification_weekbefore">注意：あなたの次のテストサイクルは1週間以内に始まります。タップして確認するか、スケジュールを調整してください。</string>
 	<string name="notification_daybefore">注意：あなたの次のテストサイクルは明日始まります。タップして確認するか、スケジュールを調整してください。</string>
@@ -49,7 +47,7 @@
 	<string name="onboarding_notifications_body1">テストを受ける時刻になったら、通知機能を使ってお知らせします。&lt;b>調査が適切に機能するために通知は欠かせません。&lt;/b>調査期間中を通して、このアプリの通知を有効にしてください。</string>
 	<string name="onboarding_notifications_popup">&lt;b>「許可」をタップしてください。&lt;/b>これによりテストが使用可能になったことをお知らせできます。</string>
 	<string name="onboarding_notifications_header2">&lt;b>通知を有効にしてください。&lt;/b></string>
-	<string name="onboarding_notifications_body2_ios">調査が適切に機能するために通知を有効にする必要があります。アプリの設定に移動して「通知」をタップし、次に「[APP NAME]」をタップして「通知を許可する」スイッチをオンにしてください。</string>
+	<string name="onboarding_notifications_body2_ios">調査が適切に機能するために通知を有効にする必要があります。アプリの設定に移動して「通知」をタップし、次に「EXR」をタップして「通知を許可する」スイッチをオンにしてください。</string>
 	<string name="onboarding_notifications_body2_android">調査が適切に機能するために通知を有効にする必要があります。設定に移動して、「[APP NAME]」の通知が有効になっていることを確認してください。</string>
 	<string name="availability_header">\n使用可能状況</string>
 	<string name="availability_body">ここでは、通知を送るタイミングを決定するために必要ないくつかの質問をします。&lt;br />&lt;br />\n&lt;i>通知はあなたが起きている時間帯にのみ送信されます。都合のよい時間帯は、最低でも8時間となるように設定してください。&lt;/i></string>
@@ -58,7 +56,7 @@
 	<string name="availability_minimum_error">都合のよい時間帯は、最低{HOURS}時間となるように設定してください。</string>
 	<string name="availability_maximum_error">都合のよい時間帯は、最高{HOURS}時間となるように設定してください。</string>
 	<string name="availability_confirm">それでは、&lt;b>{TIME1}&lt;/b>から&lt;b>{TIME2}&lt;/b>までの間にのみ通知を送ります。</string>
-	<string name="availability_change_linked">&lt;b>時間の変更&lt;/b></string>
+	<string name="availability_change_linked">時間の変更</string>
 	<string name="availability_change_confirm">それでは、明日より&lt;b>{TIME1}&lt;/b>から&lt;b>{TIME2}&lt;/b>までの間にのみ通知を送ります。</string>
 	<string name="availability_change_week">第何週にテストを受けられますか？</string>
 	<string name="availability_change_week_confirm">それでは、あなたの次のテストサイクルは&lt;b>{DATE1}&lt;/b>から&lt;b>{DATE2}&lt;/b>までとなります。</string>
@@ -77,7 +75,7 @@
 	<string name="home_header6">&lt;b>調査は終了しました！&lt;/b></string>
 	<string name="home_body_6">もうこれ以上受けるテストはありません。</string>
 	<string name="home_header7">&lt;b>あなたの最初のテストサイクルは明日始まります&lt;/b>。</string>
-	<string name="home_body7">7日間にわたり、毎日4つのテストセッションがあります。\n\n&lt;b>{TIME1}から{TIME2}&lt;/b>の間に、テストを受ける時刻になったら通知します。</string>
+	<string name="home_body7">7日間にわたり、毎日4つのテストセッションがあります。&lt;br />&lt;br />&lt;b>{TIME1}から{TIME2}&lt;/b>の間に、テストを受ける時刻になったら通知します。</string>
 	<string name="resources_header">リソース</string>
 	<string name="resources_availability">使用可能時間の変更</string>
 	<string name="resources_contact">治験コーディネーターに問い合わせ</string>
@@ -91,12 +89,12 @@
 	<string name="availability_changetime">テスト使用可能&lt;b>時刻&lt;/b>を変更したい。</string>
 	<string name="availability_changedates">次の&lt;b>テストサイクル&lt;/b>の&lt;b>日付&lt;/b>を変更したい。</string>
 	<string name="contact_call1">治験コーディネーターに&lt;b>電話&lt;/b>したい。</string>
-	<string name="contact_call2">+1&#8211;314&#8211;273&#8211;7112</string>
+	<string name="contact_call2">314-273-7112</string>
 	<string name="contact_email1">治験コーディネーターに&lt;b>Eメール&lt;/b>を送りたい。</string>
 	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
 	<string name="about_header">&lt;b>このアプリについて&lt;/b></string>
 	<string name="about_body">「自由行動下認知機能調査(ARC)」アプリは、優性遺伝性アルツハイマー病ネットワーク(DIAN)の研究に登録した参加者のために、セントルイスのワシントン大学神経学学部にある「認知技術調査研究所(CTRLab：Cognitive Technology Research Laboratory)」によって考案されました。ACRアプリは短時間ながら頻回に実施される認知テストを用いて認知を評価します。このアプリはDIAN研究に登録した参加者による使用だけを想定しています。</string>
-	<string name="faq_header">&lt;b>FAQ（よくある質問）のトピック&lt;/b></string>
+	<string name="faq_header">FAQ（よくある質問）のトピック</string>
 	<string name="faq_testing">テスト</string>
 	<string name="faq_earnings">獲得収入</string>
 	<string name="faq_technology">技術</string>
@@ -158,7 +156,7 @@
 	<string name="progress_enddate">&lt;b>終了日：&lt;/b></string>
 	<string name="progress_enddate_date">{DATE}</string>
 	<string name="progress_study_header">&lt;b>この調査&lt;/b></string>
-	<string name="progress_studystatus">&lt;b>{#}&lt;/b>週目（&lt;b>12&lt;/b>週中）</string>
+	<string name="progress_studystatus">&lt;b>{#}&lt;/b>週目（&lt;b>10&lt;/b>週中）</string>
 	<string name="progress_joindate">参加日：</string>
 	<string name="progress_joindate_date">{DATE}</string>
 	<string name="progess_finishdate">終了予定日</string>
@@ -263,7 +261,7 @@
 	<string name="testing_header_1">3つのテストのうち1つ目</string>
 	<string name="testing_header_2">3つのテストのうち2つ目</string>
 	<string name="testing_header_3">3つのテストのうち3つ目</string>
-	<string name="testing_tutorial_link">&lt;b>チュートリアルを見る&lt;/b></string>
+	<string name="testing_tutorial_link">チュートリアルを見る</string>
 	<string name="testing_tutorial_complete">&lt;b>チュートリアル終了&lt;/b></string>
 	<string name="testing_begin">&lt;b>テストが始まります：&lt;/b></string>
 	<string name="testing_loading">&lt;i>次のテストを読み込んでいます...&lt;/i></string>
@@ -272,18 +270,18 @@
 	<string name="testing_interrupted_body">テストを受けている間に中断ししたり、中止したりする必要がありましたか？</string>
 	<string name="testing_id_header">下の線上にイニシャルで署名してください。</string>
 	<string name="testing_id_body">私は、下の線上に署名をし、これらのテストを完了したことを証明します。</string>
-	<string name="prices_header">&lt;b>値段&lt;/b></string>
-	<string name="prices_body">表示された値段がその品物に対し、お買い得かどうかを決めてください。\n\nその組み合わせが画面に表示されるのはとても短い間だけですので、しっかりと注意を払って素早く決定してください。</string>
+	<string name="prices_header">値段</string>
+	<string name="prices_body">表示された値段がその品物に対し、お買い得かどうかを決めてください。 &lt;br />&lt;br />その組み合わせが画面に表示されるのはとても短い間だけですので、しっかりと注意を払って素早く決定してください。</string>
 	<string name="prices_isthisgood">これはお買い得ですか？</string>
 	<string name="prices_overlay">品物が1つと値段が2つ表示されます。前のセクションの品物の値段を選択してください。</string>
 	<string name="prices_whatwasprice">価格はいくらですか？</string>
 	<string name="prices_complete">&lt;b>価格テスト終了！&lt;/b></string>
-	<string name="symbols_header">&lt;b>記号&lt;/b></string>
-	<string name="symbols_body">画面上部に3つの記号ペア、画面下部に2つの記号ペアが表示されます。\n\n画面上部の記号のペアの1つと一致する画面下部の記号のペアをできる限り早くタップしてください。</string>
+	<string name="symbols_header">記号</string>
+	<string name="symbols_body">画面上部に3つの記号ペア、画面下部に2つの記号ペアが表示されます。 &lt;br />&lt;br />画面上部の記号のペアの1つと一致する画面下部の記号のペアをできる限り早くタップしてください。</string>
 	<string name="symbols_match">画面上部の記号ペアの1つと一致するペアはどれですか？</string>
 	<string name="symbols_or">または</string>
 	<string name="symbols_complete">&lt;b>記号テスト終了！&lt;/b></string>
-	<string name="grids_header">&lt;b>升目&lt;/b></string>
+	<string name="grids_header">升目</string>
 	<string name="grids_body">升目を調べて3つの品物の場所を忘れないようにしてください</string>
 	<string name="grids_overlay1">品物があった場所を忘れないようにしてください!</string>
 	<string name="grids_overlay2">次：「F」をタップしてください</string>
@@ -310,7 +308,7 @@
 	<string name="progress_goal_header">&lt;b>ゴールの進行状況&lt;/b></string>
 	<string name="progress_cyclecomplete_header">&lt;b>このテストサイクルを終了しました！&lt;/b></string>
 	<string name="progress_cycleorstudycomplete_body">研究に貢献していただきありがとうございます。お時間を割いてご協力いただいたことに感謝いたします。</string>
-	<string name="overlay_nextcycle">&lt;b>あなたの次のテストサイクルは{DATE1}から{DATE2}までとなります。&lt;/b>\n\nこれらのテストの日付を確認し、スケジュールを調整してください。</string>
+	<string name="overlay_nextcycle">&lt;b>あなたの次のテストサイクルは{DATE1}から{DATE2}までとなります。&lt;/b>&lt;br />&lt;br />これらのテストの日付を確認し、スケジュールを調整してください。</string>
 	<string name="progress_studycomplete_header">&lt;b>調査は終了しました！&lt;/b></string>
 	<string name="progress_studytotals_header">&lt;b>調査合計&lt;/b></string>
 	<string name="progress_studytotals_body">今後の手順について治験コーディネーターからまもなく連絡が届きます。それまでの間、あなたが達成した成果をご覧ください。</string>
@@ -358,11 +356,11 @@
 	<string name="popup_tutorial_quit">ここをタップしてチュートリアルを閉じます。</string>
 	<string name="popup_tutorial_price_intro">価格テストには2つのパートがあります。&lt;b>パート1は価格の評価です。&lt;/b></string>
 	<string name="prices_tutorial_item1">バナナ</string>
-	<string name="prices_tutorial_price1">3.27</string>
+	<string name="prices_tutorial_price1">¥3.27</string>
 	<string name="prices_tutorial_item2">スープ</string>
-	<string name="prices_tutorial_price2">10.82</string>
-	<string name="prices_tutorial_price1_match">6.78</string>
-	<string name="prices_tutorial_price2_match">4.01</string>
+	<string name="prices_tutorial_price2">¥10.82</string>
+	<string name="prices_tutorial_price1_match">¥6.78</string>
+	<string name="prices_tutorial_price2_match">¥4.01</string>
 	<string name="popup_tutorial_choose1">&lt;b>どう思いますか？&lt;/b>\nあなたが適切だと思われる回答を選択してください。</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>選択ありがとうございます。&lt;/b>\nもうひとつ試してみましょう。</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>この選択もありがとうございます。&lt;/b>\nパート2に進みましょう。</string>
@@ -438,5 +436,8 @@
 	<string name="earnings_symbol">+</string>
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
-	<string name="money_prefix">$</string>
+	<string name="money_prefix">¥</string>
+	<string name="money_suffix"></string>
+	<string name="prices_test_prefix">¥</string>
+	<string name="prices_test_suffix"></string>
 </resources>

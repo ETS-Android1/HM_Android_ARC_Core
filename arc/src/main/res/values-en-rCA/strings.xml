@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	<string name="progress_finishdate">Estimated Finish Date</string>
-
+	<string name="key_native_language">Canada - English</string>
 	<string name="notification_monthbefore">Your next week of testing begins in one month on {DATE}. You may adjust this schedule up to 7 days.</string>
 	<string name="notification_weekbefore">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
 	<string name="notification_daybefore">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
@@ -49,7 +47,7 @@
 	<string name="onboarding_notifications_body1">We use notifications to let you know it\'s time to take a test. &lt;b>Notifications are essential for the study to function properly.&lt;/b> Please allow notifications for this app throughout the duration of the study.</string>
 	<string name="onboarding_notifications_popup">&lt;b>Please tap "allow"&lt;/b> so we can tell you when tests are available.</string>
 	<string name="onboarding_notifications_header2">&lt;b>Please turn on notifications.&lt;/b></string>
-	<string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap [APP NAME] and turn on the Allow Notifications switch.</string>
+	<string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap EXR and turn on the Allow Notifications switch.</string>
 	<string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for [APP NAME] are turned on.</string>
 	<string name="availability_header">Availability</string>
 	<string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications. \n&lt;br />&lt;br />\n&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
@@ -91,12 +89,12 @@
 	<string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
 	<string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
 	<string name="contact_call1">I would like to &lt;b>call&lt;/b> my study coordinator.</string>
-	<string name="contact_call2">+1&#8211;314&#8211;273&#8211;7112</string>
+	<string name="contact_call2">314-273-7112</string>
 	<string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
 	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
 	<string name="about_header">&lt;b>About this App&lt;/b></string>
 	<string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
-	<string name="faq_header">&lt;b>Frequently Asked Questions Topics&lt;/b></string>
+	<string name="faq_header">Frequently Asked Questions Topics</string>
 	<string name="faq_testing">Testing</string>
 	<string name="faq_earnings">Earnings</string>
 	<string name="faq_technology">Technology</string>
@@ -263,7 +261,7 @@
 	<string name="testing_header_1">Test 1 of 3</string>
 	<string name="testing_header_2">Test 2 of 3</string>
 	<string name="testing_header_3">Test 3 of 3</string>
-	<string name="testing_tutorial_link">&lt;b>View a Tutorial&lt;/b></string>
+	<string name="testing_tutorial_link">View a Tutorial</string>
 	<string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
 	<string name="testing_begin">&lt;b>Test will begin in&lt;/b></string>
 	<string name="testing_loading">&lt;i>Loading next test...&lt;/i></string>
@@ -272,18 +270,18 @@
 	<string name="testing_interrupted_body">Were you interrupted or did you have to stop while taking any of these tests?</string>
 	<string name="testing_id_header">Please sign your initials on the line below.</string>
 	<string name="testing_id_body">By signing my initials on the line below, I attest that I completed these tests.</string>
-	<string name="prices_header">&lt;b>Prices&lt;/b></string>
+	<string name="prices_header">Prices</string>
 	<string name="prices_body">Please decide if the displayed price is a good bargain for that item. &lt;br />&lt;br />The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
 	<string name="prices_isthisgood">Is this a good price?</string>
 	<string name="prices_overlay">You will now see an item and two prices. Please select the price that matches the item from the previous section.</string>
 	<string name="prices_whatwasprice">What was the price?</string>
 	<string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
-	<string name="symbols_header">&lt;b>Symbols&lt;/b></string>
+	<string name="symbols_header">Symbols</string>
 	<string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom. &lt;br />&lt;br />\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
 	<string name="symbols_match">Which pair below matches one of the pairs on the top?</string>
 	<string name="symbols_or">OR</string>
 	<string name="symbols_complete">&lt;b>Symbols Test Complete!&lt;/b></string>
-	<string name="grids_header">&lt;b>Grids&lt;/b></string>
+	<string name="grids_header">Grids</string>
 	<string name="grids_body">Study the grid and try to remember the location of the three items.</string>
 	<string name="grids_overlay1">Try to remember the location of the items</string>
 	<string name="grids_overlay2">Next: Tap on the F\'s</string>
@@ -310,7 +308,7 @@
 	<string name="progress_goal_header">&lt;b>Goal Progress&lt;/b></string>
 	<string name="progress_cyclecomplete_header">&lt;b>You\'ve Finished This Testing Cycle!&lt;/b></string>
 	<string name="progress_cycleorstudycomplete_body">Thank you for contributing to our research. Your time and hard work are truly valuable.</string>
-	<string name="overlay_nextcycle">&lt;b>Your next testing cycle will be {DATE1} through {DATE2}.&lt;/b> \n\nPlease confirm these testing dates or adjust your schedule.</string>
+	<string name="overlay_nextcycle">&lt;b>Your next testing cycle will be {DATE1} through {DATE2}.&lt;/b>&lt;br />&lt;br />Please confirm these testing dates or adjust your schedule.</string>
 	<string name="progress_studycomplete_header">&lt;b>You\'ve Finish the Study!&lt;/b></string>
 	<string name="progress_studytotals_header">&lt;b>Study Totals&lt;/b></string>
 	<string name="progress_studytotals_body">Your study coordinator will be in touch shortly with further instructions. In the meantime, check out all you accomplished:</string>
@@ -368,7 +366,7 @@
 	<string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> \nLet\'s proceed to part two.</string>
 	<string name="popup_tutorial_recall">&lt;b>What do you think?&lt;/b> \nTry your best to recall the price from part one.</string>
 	<string name="popup_tutorial_choose2">&lt;b>What do you think?&lt;/b> \nChoose the price that you saw in part one.</string>
-	<string name="popup_tutorial_complete">&lt;b>Congratulations on completing the tutorial!&lt;/b>.&lt;br />If you\'d like to take it again, you can always tap here.</string>
+	<string name="popup_tutorial_complete">&lt;b>Congratulations on completing the tutorial!&lt;/b>&lt;br />If you\'d like to take it again, you can always tap here.</string>
 	<string name="popup_tutorial_tile">&lt;b>This is a tile.&lt;/b> \nEach tile includes a pair of symbols.</string>
 	<string name="popup_tutorial_tilestop">You will see &lt;b>three tiles&lt;/b> on the top of the screen...</string>
 	<string name="popup_tutorial_tilesbottom">...and &lt;b>two tiles&lt;/b> on the bottom.</string>
@@ -439,4 +437,5 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
+	<string name="prices_test_prefix">$</string>
 </resources>

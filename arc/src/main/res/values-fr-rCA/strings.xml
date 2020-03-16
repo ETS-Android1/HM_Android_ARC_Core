@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	<string name="progress_finishdate">Date de fin estimée</string>
-
+	<string name="key_native_language">Canada - Français</string>
 	<string name="notification_monthbefore">Votre prochaine semaine de tests commence dans un mois, le {DATE}. Vous pouvez modifier cet horaire d’au plus 7 jours.</string>
 	<string name="notification_weekbefore">Rappel : votre prochain cycle de tests commence dans une semaine. Appuyez pour confirmer ou modifier l’horaire.</string>
 	<string name="notification_daybefore">Rappel : votre prochain cycle de tests commence demain. Appuyez pour confirmer ou modifier l’horaire.</string>
@@ -49,7 +47,7 @@
 	<string name="onboarding_notifications_body1">Nous utilisons les notifications pour vous aviser quand il est temps d\'effectuer un test. &lt;b>Les notifications sont essentielles pour que l\'étude fonctionne correctement&lt;/b>. Veuillez autoriser les notifications pour cette application durant toute la durée de l\'étude.</string>
 	<string name="onboarding_notifications_popup">&lt;b>Veuillez appuyer sur "autoriser"&lt;/b> pour que nous puissions vous aviser lorsque les tests sont disponibles.</string>
 	<string name="onboarding_notifications_header2">&lt;b>Veuillez activer les notifications.&lt;/b></string>
-	<string name="onboarding_notifications_body2_ios">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application, appuyer sur Notifications, puis appuyer sur [APP NAME] et activer le bouton Autoriser les notifications.</string>
+	<string name="onboarding_notifications_body2_ios">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application, appuyer sur Notifications, puis appuyer sur EXR et activer le bouton Autoriser les notifications.</string>
 	<string name="onboarding_notifications_body2_android">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application et assurez-vous que les notifications pour [APP NAME] sont activées.</string>
 	<string name="availability_header">Disponibilité</string>
 	<string name="availability_body">Maintenant, nous vous poserons quelques questions pour nous aider à déterminer quand vous envoyer ces notifications.            &lt;br />&lt;br />\n&lt;i>Vous ne recevrez des notifications que pendant les heures où  vous êtes éveillé(e). Veuillez établir une période d\'au moins 8 heures de disponibilité.&lt;/i></string>
@@ -58,7 +56,7 @@
 	<string name="availability_minimum_error">Veuillez établir un minimum de {HOURS} heures de disponibilité.</string>
 	<string name="availability_maximum_error">Veuillez établir un maximum de {HOURS} heures de disponibilité.</string>
 	<string name="availability_confirm">Parfait! Nous vous enverrons des rappels uniquement entre &lt;b>{TIME1}&lt;/b> et &lt;b>{TIME2}&lt;/b>.</string>
-	<string name="availability_change_linked">&lt;b>Changer les heures&lt;/b></string>
+	<string name="availability_change_linked">Changer les heures</string>
 	<string name="availability_change_confirm">Parfait! À partir de demain, nous vous enverrons des rappels uniquement entre &lt;b>{TIME1}&lt;/b> et &lt;b>{TIME2}&lt;/b>.</string>
 	<string name="availability_change_week">Quelle semaine êtes-vous en mesure d’effectuer les tests?</string>
 	<string name="availability_change_week_confirm">Parfait! Votre prochain cycle de tests aura lieu du  &lt;b>{DATE1}&lt;/b> au &lt;b>{DATE2}&lt;/b>.</string>
@@ -77,7 +75,7 @@
 	<string name="home_header6">&lt;b>Vous avez terminé l’étude!&lt;/b></string>
 	<string name="home_body_6">Il n’y a aucun autre test à effectuer.</string>
 	<string name="home_header7">&lt;b>Votre premier cycle de tests commence demain.&lt;/b></string>
-	<string name="home_body7">Il y aura 4 sessions de tests par jour pendant 7 jours.\n\nNous vous enverrons une notification &lt;b>entre {TIME1} et {TIME2}&lt;/b> lorsqu\'il sera temps d\'effectuer un test.</string>
+	<string name="home_body7">Il y aura 4 sessions de tests par jour pendant 7 jours.&lt;br />&lt;br />Nous vous enverrons une notification &lt;b>entre {TIME1} et {TIME2}&lt;/b> lorsqu\'il sera temps d\'effectuer un test.</string>
 	<string name="resources_header">Ressources</string>
 	<string name="resources_availability">Modifier ma disponibilité</string>
 	<string name="resources_contact">Contacter votre coordonnateur(trice) de l\'étude</string>
@@ -91,12 +89,12 @@
 	<string name="availability_changetime">J’aimerais modifier l’&lt;b>heure du jour&lt;/b> à laquelle je suis disponible pour les tests.</string>
 	<string name="availability_changedates">J’aimerais modifier les &lt;b>dates&lt;/b> de mon prochain &lt;b>cycle de tests&lt;/b>.</string>
 	<string name="contact_call1">J’aimerais &lt;b>appeler&lt;/b> mon ou ma coordonnateur(trice) de l’étude.</string>
-	<string name="contact_call2">+1&#8211;314&#8211;273&#8211;7112</string>
+	<string name="contact_call2">314-273-7112</string>
 	<string name="contact_email1">J’aimerais  &lt;b>envoyer un courriel&lt;/b> à mon ou ma coordonnateur(trice) de l’étude.</string>
 	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
 	<string name="about_header">&lt;b>À propos de cette application&lt;/b></string>
 	<string name="about_body">L’application Recherche ambulatoire sur la cognition (Ambulatory Research in Cognition, ARC) a été conçue par le Cognitive Technology Research Laboratory (CTRLab) du service de neurologie de l’Université Washington de Saint-Louis pour les participants inscrits aux études du Réseau de la maladie d’Alzheimer à transmission autosomique dominante (Dominantly Inherited Alzheimer Network, DIAN). L’application ARC évalue la cognition à l’aide de tests cognitifs brefs, que l’on fait passer fréquemment. Cette application est réservée à l’usage des participants inscrits aux études DIAN.</string>
-	<string name="faq_header">&lt;b>Sujets de la Foire aux questions&lt;/b></string>
+	<string name="faq_header">Sujets de la Foire aux questions</string>
 	<string name="faq_testing">Tests</string>
 	<string name="faq_earnings">Gains</string>
 	<string name="faq_technology">Technologie</string>
@@ -158,7 +156,7 @@
 	<string name="progress_enddate">&lt;b>Date de fin :&lt;/b></string>
 	<string name="progress_enddate_date">{DATE}</string>
 	<string name="progress_study_header">&lt;b>Cette étude&lt;/b></string>
-	<string name="progress_studystatus">Semaine &lt;b>{#}&lt;/b> de &lt;b>12&lt;/b></string>
+	<string name="progress_studystatus">Semaine &lt;b>{#}&lt;/b> de &lt;b>10&lt;/b></string>
 	<string name="progress_joindate">Date d\'adhésion :</string>
 	<string name="progress_joindate_date">{DATE}</string>
 	<string name="progess_finishdate">Date de fin estimée</string>
@@ -203,7 +201,7 @@
 	<string name="chronotype_body1">Répondez à des questions concernant vos habitudes de sommeil et de réveil pour les jours avec et sans travail.                          &lt;br />&lt;br />\n&lt;i>Veuillez estimer en moyenne vos habitudes de sommeil normales au cours des six dernières semaines lorsque vous avez pu suivre vos routines habituelles.&lt;/i></string>
 	<string name="chronotype_q1">J’ai été un travailleur de quarts ou de nuit au cours des trois derniers mois.</string>
 	<string name="chronotype_q2">Normalement, je travaille ____ jours par semaine.</string>
-	<string name="chronotype_body2">Veuillez répondre à toutes les questions suivantes, même si vous ne travaillez pas, ou ne travaillez pas sept jours par semaine.                            &lt;br />&lt;br />                                            &lt;i>N’oubliez pas d’indiquer AM ou PM.&lt;/i>             </string>
+	<string name="chronotype_body2">Veuillez répondre à toutes les questions suivantes, même si vous ne travaillez pas, ou ne travaillez pas sept jours par semaine.&lt;br />&lt;br />                                            &lt;i>N’oubliez pas d’indiquer AM ou PM.&lt;/i>             </string>
 	<string name="chronotype_workdays_sleep">Les  &lt;b>jours de travail&lt;/b>, je &lt;b>m’endors&lt;/b> normalement à :</string>
 	<string name="chronotype_workdays_wake">Les &lt;b>jours de travail&lt;/b>, je &lt;b>me réveille&lt;/b> normalement à :</string>
 	<string name="chronotype_workfree_sleep">Les &lt;b>jours sans travail&lt;/b> lorsque je n’utilise pas de réveille-matin, je &lt;b>m’endors&lt;/b> normalement à :</string>
@@ -263,7 +261,7 @@
 	<string name="testing_header_1">Test 1 de 3</string>
 	<string name="testing_header_2">Test 2 de 3</string>
 	<string name="testing_header_3">Test 3 de 3</string>
-	<string name="testing_tutorial_link">&lt;b>Voir un tutoriel&lt;/b></string>
+	<string name="testing_tutorial_link">Voir un tutoriel</string>
 	<string name="testing_tutorial_complete">&lt;b>Tutoriel terminé&lt;/b></string>
 	<string name="testing_begin">&lt;b>Le test commencera dans&lt;/b></string>
 	<string name="testing_loading">&lt;i>Chargement du prochain test...&lt;/i></string>
@@ -272,18 +270,18 @@
 	<string name="testing_interrupted_body">Avez-vous été interrompu ou avez-vous dû arrêter lorsque vous effectuiez l’un de ces tests?</string>
 	<string name="testing_id_header">Veuillez apposer vos initiales sur la ligne ci-dessous.</string>
 	<string name="testing_id_body">En apposant mes initiales sur la ligne ci-dessous, j’atteste que j’ai effectué ces tests. </string>
-	<string name="prices_header">&lt;b>Prix&lt;/b></string>
-	<string name="prices_body">Nous vous demandons de déterminer si le prix affiché représente une bonne affaire pour cet article. \n\nLa paire ne restera pas longtemps à l’écran, prenez donc une décision rapidement et prêtez une attention particulière.</string>
+	<string name="prices_header">Prix</string>
+	<string name="prices_body">Nous vous demandons de déterminer si le prix affiché représente une bonne affaire pour cet article.  &lt;br />&lt;br />La paire ne restera pas longtemps à l’écran, prenez donc une décision rapidement et prêtez une attention particulière.</string>
 	<string name="prices_isthisgood">Est-ce un coût avantageux?</string>
 	<string name="prices_overlay">Vous verrez maintenant un article et deux prix. Veuillez sélectionner le prix qui correspond à l\'article de la section précédente.</string>
 	<string name="prices_whatwasprice">Quel était le prix?</string>
 	<string name="prices_complete">&lt;b>Le test des prix est terminé!&lt;/b></string>
-	<string name="symbols_header">&lt;b>Symboles&lt;/b></string>
-	<string name="symbols_body">Vous verrez trois paires de symboles en haut de l’écran et deux paires en bas.\n\nAussi rapidement que possible, appuyez sur la paire située au bas de l’écran qui correspond à une des paires du haut.</string>
+	<string name="symbols_header">Symboles</string>
+	<string name="symbols_body">Vous verrez trois paires de symboles en haut de l’écran et deux paires en bas. &lt;br />&lt;br />Aussi rapidement que possible, appuyez sur la paire située au bas de l’écran qui correspond à une des paires du haut.</string>
 	<string name="symbols_match">Quelle paire ci-dessous correspond à une des paires ci-dessus?</string>
 	<string name="symbols_or">Ou</string>
 	<string name="symbols_complete">&lt;b>Le test des symboles est terminé!&lt;/b></string>
-	<string name="grids_header">&lt;b>Grilles&lt;/b></string>
+	<string name="grids_header">Grilles</string>
 	<string name="grids_body">Étudiez la grille et essayez de vous souvenir de l’emplacement des trois articles.</string>
 	<string name="grids_overlay1">Essayez de vous souvenir de l’emplacement des articles! </string>
 	<string name="grids_overlay2">Ensuite : Apuyez sur les F</string>
@@ -310,7 +308,7 @@
 	<string name="progress_goal_header">&lt;b>Progrès des objectifs&lt;/b></string>
 	<string name="progress_cyclecomplete_header">&lt;b>Vous avez terminé ce cycle de test!&lt;/b></string>
 	<string name="progress_cycleorstudycomplete_body">Merci de contribuer à notre recherche. Votre temps et dur travail sont vraiment précieux.</string>
-	<string name="overlay_nextcycle">Votre prochain cycle de tests aura lieu du {DATE1} au {DATE2}. &lt;/b>\n\nVeuillez confirmer ces dates de tests ou modifier votre horaire ci-dessous.</string>
+	<string name="overlay_nextcycle">Votre prochain cycle de tests aura lieu du {DATE1} au {DATE2}. &lt;/b>&lt;br />&lt;br />Veuillez confirmer ces dates de tests ou modifier votre horaire ci-dessous.</string>
 	<string name="progress_studycomplete_header">&lt;b>Vous avez terminé l’étude!&lt;/b></string>
 	<string name="progress_studytotals_header">&lt;b>Totaux de l\'étude&lt;/b></string>
 	<string name="progress_studytotals_body">Votre coordonnateur(trice) de l\'étude vous contactera sous peu avec des instructions supplémentaires. Dans l\'intervalle, consultez ce que vous avez réalisé :</string>
@@ -328,7 +326,7 @@
 	<string name="button_back">PRÉCÉDENT</string>
 	<string name="button_sendnewcode">ENVOYER UN NOUVEAU CODE</string>
 	<string name="button_submittime">SOUMETTRE L’HEURE</string>
-	<string name="button_next">Suivant</string>
+	<string name="button_next">SUIVANT</string>
 	<string name="button_call">APPELER</string>
 	<string name="button_email">ENVOYER UN COURRIEL</string>
 	<string name="button_done">TERMINÉ</string>
@@ -368,7 +366,7 @@
 	<string name="popup_tutorial_greatchoice2">&lt;b>Un autre excellent choix!&lt;/b> \nPassons à la partie deux.</string>
 	<string name="popup_tutorial_recall">&lt;b>Qu\'en pensez-vous?&lt;/b> Faites de votre mieux pour vous rappeler le prix de la partie un.</string>
 	<string name="popup_tutorial_choose2">&lt;b>Qu\'en pensez-vous?&lt;/b> Choisissez le prix que vous avez vu dans la partie un.</string>
-	<string name="popup_tutorial_complete">&lt;b>Félicitations d\'avoir terminé le tutoriel!&lt;/b>.&lt;br />Si vous voulez le reprendre, vous pouvez toujours appuyer ici.</string>
+	<string name="popup_tutorial_complete">&lt;b>Félicitations d\'avoir terminé le tutoriel!&lt;/b>&lt;br />Si vous voulez le reprendre, vous pouvez toujours appuyer ici.</string>
 	<string name="popup_tutorial_tile">&lt;b>Ceci est une tuile.&lt;/b> \nChaque tuile comprend une paire de symboles.</string>
 	<string name="popup_tutorial_tilestop">Vous verrez &lt;b>trois tuiles&lt;/b> en haut de l\'écran…</string>
 	<string name="popup_tutorial_tilesbottom">…et &lt;b>deux tuiles&lt;/b> en bas.</string>
@@ -438,5 +436,8 @@
 	<string name="earnings_symbol">+</string>
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/jj/aa</string>
-	<string name="money_prefix">$</string>
+	<string name="money_prefix"></string>
+	<string name="money_suffix">$</string>
+	<string name="prices_test_prefix"></string>
+	<string name="prices_test_suffix">$</string>
 </resources>
