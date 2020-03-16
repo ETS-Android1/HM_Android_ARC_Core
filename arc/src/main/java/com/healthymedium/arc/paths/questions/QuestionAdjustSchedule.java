@@ -155,6 +155,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         }
 
         int curr = dataList.indexOf(currRange);
+        if(curr==-1){
+            curr = 0;
+        }
 
         String[] data = new String[dataList.size()];
 //        for (int i = 0; i < dataList.size(); i++) {
