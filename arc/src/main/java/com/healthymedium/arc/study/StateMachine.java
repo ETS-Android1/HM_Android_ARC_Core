@@ -832,8 +832,6 @@ public class StateMachine {
 
         fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.dateshift_picker), ""));
 
-        fragments.add(new ScheduleCalendar());
-
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);
     }
