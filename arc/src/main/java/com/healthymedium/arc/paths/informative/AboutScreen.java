@@ -35,7 +35,7 @@ public class AboutScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_about_app, container, false);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(ViewUtil.getHtmlString(R.string.about_header));
+        textViewHeader.setTypeface(Fonts.robotoMedium);
 
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setText(ViewUtil.getHtmlString(R.string.about_body));
