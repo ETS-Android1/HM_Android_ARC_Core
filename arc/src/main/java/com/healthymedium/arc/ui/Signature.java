@@ -26,5 +26,6 @@ public class Signature extends FrameLayout {
         mSignaturePad = findViewById(R.id.signature_pad);
         clear = findViewById(R.id.clear_signature);
         clear.setText(ViewUtil.getHtmlString(R.string.idverify_undo));
+        ViewUtil.underlineTextView(clear);
     }
 }
