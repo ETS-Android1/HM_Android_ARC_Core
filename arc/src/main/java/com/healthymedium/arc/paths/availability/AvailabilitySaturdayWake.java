@@ -19,7 +19,7 @@ public class AvailabilitySaturdayWake extends QuestionTime {
     AvailabilityPathData data;
 
     public AvailabilitySaturdayWake() {
-        super(true, ViewUtil.getString(R.string.availability_wake_saturday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_start),"",null);
     }
 
     @Override

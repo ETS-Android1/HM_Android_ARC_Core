@@ -306,7 +306,7 @@ public class StateMachine {
             fragments.add(new SetupAuthCode(true, true, authDigitCount, ViewUtil.getString(R.string.login_enter_2FA)));
         }
         else {
-            fragments.add(new SetupAuthCode(true, false, authDigitCount, ViewUtil.getString(R.string.login_enter_raterID)));
+            fragments.add(new SetupAuthCode(true, false, authDigitCount, ViewUtil.getString(R.string.login_enter_ARCID)));
         }
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
@@ -337,7 +337,7 @@ public class StateMachine {
         }
         else {
             List<String> opts = new ArrayList<>();
-            opts.add(res.getString(R.string.checkbox_commit));
+            opts.add(res.getString(R.string.radio_commit));
 
             fragments.add(new QuestionNonRemoteStudyCommitment(
                 false,

@@ -499,7 +499,7 @@ public class PricesTutorialRevised extends Tutorial {
 
                         highlighter.addTarget(progressBar);
                         highlighter.show();
-                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob2));
+                        firstMatchGreatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_greatjob));
 
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
@@ -592,7 +592,7 @@ public class PricesTutorialRevised extends Tutorial {
                             @Override
                             public void run() {
                                 pointer = new HintPointer(getActivity(), hintHandle, false, false);
-                                pointer.setText(ViewUtil.getString(R.string.popup_tutorial_onemore));
+                                pointer.setText(ViewUtil.getString(R.string.popup_tutorial_nice));
                                 pointer.addButton(ViewUtil.getString(R.string.button_next), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {

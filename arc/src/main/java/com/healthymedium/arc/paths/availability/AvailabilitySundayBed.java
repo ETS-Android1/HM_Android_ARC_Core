@@ -28,11 +28,11 @@ public class AvailabilitySundayBed extends QuestionTime {
     boolean reschedule = false;
 
     public AvailabilitySundayBed() {
-        super(true, ViewUtil.getString(R.string.availability_sleep_sunday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_stop),"",null);
     }
 
     public AvailabilitySundayBed(boolean reschedule, int minWakeTime, int maxWakeTime) {
-        super(true, ViewUtil.getString(R.string.availability_sleep_sunday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_stop),"",null);
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;
         this.reschedule = reschedule;

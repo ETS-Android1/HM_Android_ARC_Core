@@ -97,7 +97,7 @@ public class HomeScreen extends BaseFragment {
         textViewAvailability.setTextColor(ViewUtil.getColor(R.color.primary));
         textViewAvailability.setTypeface(Fonts.robotoBold);
         ViewUtil.underlineTextView(textViewAvailability);
-        textViewAvailability.setText(ViewUtil.getString(R.string.change_availability));
+        textViewAvailability.setText(ViewUtil.getString(R.string.availability_change_linked));
 
         RelativeLayout.LayoutParams textViewLayoutParams = new RelativeLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
         textViewLayoutParams.bottomMargin = ViewUtil.dpToPx(26);

@@ -98,14 +98,14 @@ public class MainActivity extends AppCompatActivity {
         if(PreferencesManager.getInstance().getBoolean(Application.TAG_RESTART,false)){
             PreferencesManager.getInstance().putBoolean(Application.TAG_RESTART,false);
 
-            Phrase phrase = new Phrase(R.string.low_memory_restart_dialogue_body);
+            Phrase phrase = new Phrase(R.string.low_memory_restart_dialogue);
             phrase.replace(R.string.token_app_name, R.string.app_name);
 
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.low_memory_restart_dialogue_header))
+                    .setTitle(getString(R.string.token_app_name))
                     .setMessage(phrase.toString())
-                    .setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.button_okay), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

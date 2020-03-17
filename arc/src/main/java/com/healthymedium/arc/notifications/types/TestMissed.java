@@ -26,7 +26,7 @@ public class TestMissed extends NotificationType {
 
     @Override
     public String getContent(NotificationNode node) {
-        return ViewUtil.getString(R.string.notification_missed);
+        return ViewUtil.getString(R.string.notification_missedtests);
     }
 
     @Override
