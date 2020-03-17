@@ -43,9 +43,7 @@ public class SetupWelcome extends BaseFragment {
         // textViewAppName.setText(ViewUtil.getString(R.string.app_name)+" app");
 
         textViewAboutApp = view.findViewById(R.id.textViewAboutApp);
-        textViewAboutApp.setTypeface(Fonts.robotoMedium);
-        textViewAboutApp.setText(Html.fromHtml(ViewUtil.getString(R.string.about_header)));
-
+        textViewAboutApp.setTypeface(Fonts.robotoBold);
         textViewAboutApp.setPaintFlags(textViewAboutApp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewAboutApp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +54,7 @@ public class SetupWelcome extends BaseFragment {
         });
 
         textViewPrivacyPolicy = view.findViewById(R.id.textViewPrivacyPolicy);
-        textViewPrivacyPolicy.setText(ViewUtil.getString(R.string.privacy_linked));
-        textViewPrivacyPolicy.setTypeface(Fonts.robotoMedium);
+        textViewPrivacyPolicy.setTypeface(Fonts.robotoBold);
         textViewPrivacyPolicy.setPaintFlags(textViewPrivacyPolicy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override

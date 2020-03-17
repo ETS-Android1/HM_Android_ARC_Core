@@ -52,9 +52,9 @@
             android:paddingTop="32dp"
             android:paddingRight="14dp"
             android:paddingBottom="25dp"
-            android:text="@string/about_header"
+            android:text="@string/about_linked"
             android:textColor="@color/primary"
-            android:textSize="15dp" />
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/textViewPrivacyPolicy"
@@ -67,7 +67,7 @@
             android:paddingBottom="25dp"
             android:text="@string/privacy_linked"
             android:textColor="@color/primary"
-            android:textSize="15dp" />
+            android:textSize="16dp" />
     </LinearLayout>
 
     <com.healthymedium.arc.ui.Button
