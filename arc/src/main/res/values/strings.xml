@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"
-	xmlns:arc="http://schemas.android.com/apk/res-auto"
-	tools:ignore="MissingTranslation"
-	tools:locale="en">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
 	<string name="key_native_language">US - English</string>
 	<string name="notification_monthbefore">Your next week of testing begins in one month on {DATE}. You may adjust this schedule up to 7 days.</string>
@@ -53,6 +50,7 @@
 	<string name="onboarding_notifications_header2">&lt;b>Please turn on notifications.&lt;/b></string>
 	<string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap EXR and turn on the Allow Notifications switch.</string>
 	<string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for [APP NAME] are turned on.</string>
+	<string name="button_home_notifications">Turn On Notificaitions</string>
 	<string name="button_proceed_without_notifications">Proceed Without Notifications</string>
 	<string name="availability_header">Availability</string>
 	<string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications. \n&lt;br />&lt;br />\n&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
@@ -65,21 +63,21 @@
 	<string name="availability_change_confirm">Great! Starting tomorrow, we\'ll only send you reminders between &lt;b>{TIME1}&lt;/b> and &lt;b>{TIME2}&lt;/b>.</string>
 	<string name="availability_change_week">What week are you able to test?</string>
 	<string name="availability_change_week_confirm">Great! Your next testing cycle will be &lt;b>{DATE1}&lt;/b> through &lt;b>{DATE2}&lt;/b>.</string>
-	<string name="idverify_header">&lt;b>ID Verification&lt;/b></string>
+	<string name="idverify_header">ID Verification</string>
 	<string name="idverify_body">Please sign your initials on the line below to verify your identity.</string>
 	<string name="idverify_undo">Undo</string>
-	<string name="home_header1">&lt;b>You have a new test available.&lt;/b></string>
-	<string name="home_header2">&lt;b>There are no tests to take right now.&lt;/b></string>
+	<string name="home_header1">You have a new test available.</string>
+	<string name="home_header2">There are no tests to take right now.</string>
 	<string name="home_body2">You will receive a notification &lt;b>later today&lt;/b> when it\'s time to take your next test.</string>
-	<string name="home_header3">&lt;b>You\'re done with today\'s tests.&lt;/b></string>
+	<string name="home_header3">You\'re done with today\'s tests.</string>
 	<string name="home_body3">We\'ll notify you tomorrow between &lt;b>{TIME1} and {TIME2}&lt;/b> when it\'s time to take a test.</string>
-	<string name="home_header4">&lt;b>There are no tests available right now.&lt;/b></string>
+	<string name="home_header4">There are no tests available right now.</string>
 	<string name="home_body4">Your next testing cycle will be &lt;b>{DATE1} through {DATE2}&lt;/b>. We\'ll notify you when it\'s time to take a test.</string>
-	<string name="home_header5">&lt;b>Your testing cycle starts tomorrow&lt;/b>.</string>
+	<string name="home_header5">Your testing cycle starts tomorrow.</string>
 	<string name="home_body5">It will run from &lt;b>{DATE1} to {DATE2}&lt;/b>. We\'ll notify you when it\'s time to take a test.</string>
-	<string name="home_header6">&lt;b>You\'ve finished the study!&lt;/b></string>
+	<string name="home_header6">You\'ve finished the study!</string>
 	<string name="home_body6">There are no more tests to take.</string>
-	<string name="home_header7">&lt;b>Your first testing cycle begins tomorrow.&lt;/b></string>
+	<string name="home_header7">Your first testing cycle begins tomorrow.</string>
 	<string name="home_body7">There will be 4 test sessions per day for 7 days.\n&lt;br />&lt;br />\nWe\'ll notify you &lt;b>between {TIME1} and {TIME2}&lt;/b> when it\'s time to take a test.</string>
 	<string name="resources_header">Resources</string>
 	<string name="resources_availability">Change My Availability</string>
@@ -97,14 +95,14 @@
 	<string name="contact_call2">314-273-7112</string>
 	<string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
 	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
-	<string name="about_header">&lt;b>About this App&lt;/b></string>
+	<string name="about_header">About this App</string>
 	<string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
 	<string name="faq_header">Frequently Asked Questions Topics</string>
 	<string name="faq_testing">Testing</string>
 	<string name="faq_earnings">Earnings</string>
 	<string name="faq_technology">Technology</string>
 	<string name="faq_subpage_subheader">Tap a question to see the answer.</string>
-	<string name="faq_testing_header">&lt;b>Testing FAQ&lt;/b></string>
+	<string name="faq_testing_header">Testing FAQ</string>
 	<string name="faq_testing_q1">How long do I have to take tests?</string>
 	<string name="faq_testing_q2">Do I have to take the test as soon as I get the notification?</string>
 	<string name="faq_testing_q3">What if I miss some tests?</string>
@@ -125,7 +123,7 @@
 	<string name="faq_testing_a8">You will not be able to see the results of the tests. The data collected during the tests is for research purposes only and is not intended to make a diagnosis or treat a condition. Please contact your study coordinator if you have any concerns.</string>
 	<string name="faq_testing_a9">We ask that you complete the tests yourself, as part of your participation in the study. Following each test, you will be asked to sign your initials to verify that you were the one who completed the test.</string>
 	<string name="faq_testing_a10">You can review the tutorials at any time as a way to "practice" taking the tests. To do this, choose "View a Tutorial" on the instruction screen of a test.</string>
-	<string name="faq_tech_header">&lt;b>Technical FAQ&lt;/b></string>
+	<string name="faq_tech_header">Technical FAQ</string>
 	<string name="faq_tech_q1">What do I do if I change phones?</string>
 	<string name="faq_tech_q2">The app isn\'t working. What should I do?</string>
 	<string name="faq_tech_q3">What data is being collected?</string>
@@ -140,7 +138,7 @@
 	<string name="faq_tech_a5">If you are having issues with two-step verification, the first step is to verify the phone digits on the page that asks you to enter a login verification code. These two digits should be the same as the last two digits of your phone number. If these digits do not match your phone number, please contact your study coordinator. If these digits do match your phone number, the next step is to send a new code to your phone number. You can do this by clicking "Didn\'t receive code?" on the page that asks you to enter a login verification code. If the new code does not work (or you do not receive a code), please contact your study coordinator.</string>
 	<string name="faq_tech_a6">During testing weeks, you may see a notification that the Test Scheduler Service is running. This service allows us to send you testing notifications at specific times. Since this is required for the study, it cannot be disabled.\n\nThe Test Scheduler Service will only run during testing weeks and will not significantly impact the battery life of your phone.</string>
 	<string name="faq_tech_a7">You may see this message appear during a test session: “Please close other apps to improve performance.” This may mean your device is not capable of running other apps at the same time as EXR. For the best performance, please close other apps before starting a test session.</string>
-	<string name="faq_earnings_header">&lt;b>Earnings&lt;/b></string>
+	<string name="faq_earnings_header">Earnings</string>
 	<string name="faq_earnings_q1">How much can I earn?</string>
 	<string name="faq_earnings_q2">When do I get paid?</string>
 	<string name="faq_earnings_q3">How do I get paid?</string>
@@ -151,16 +149,16 @@
 	<string name="faq_earnings_a3">You will be paid via an electronic Amazon gift card.</string>
 	<string name="faq_earnings_a4">"This week" refers to the amount of money you have earned during the current testing cycle. "Study total" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
 	<string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
-	<string name="progress_daily_header">&lt;b>Today\'s Sessions&lt;/b></string>
+	<string name="progress_daily_header">Today\'s Sessions</string>
 	<string name="progress_dailystatus_complete">&lt;b>{#}&lt;/b> Complete</string>
 	<string name="progress_dailystatus_remaining">&lt;b>{#}&lt;/b> Remaining</string>
-	<string name="progress_weekly_header">&lt;b>This Week&lt;/b></string>
+	<string name="progress_weekly_header">This Week</string>
 	<string name="progess_weeklystatus">Day &lt;b>{#}&lt;/b> of &lt;b>7&lt;/b></string>
 	<string name="progress_startdate">&lt;b>Start Date:&lt;/b></string>
 	<string name="progress_startdate_date">{DATE}</string>
 	<string name="progress_enddate">&lt;b>End Date:&lt;/b></string>
 	<string name="progress_enddate_date">{DATE}</string>
-	<string name="progress_study_header">&lt;b>This Study&lt;/b></string>
+	<string name="progress_study_header">This Study</string>
 	<string name="progress_studystatus">Week &lt;b>{#}&lt;/b> of &lt;b>10&lt;/b></string>
 	<string name="progress_joindate">Joined Date:</string>
 	<string name="progress_joindate_date">{DATE}</string>
@@ -201,7 +199,7 @@
 	<string name="earnings_details_currenttotal">Current Total</string>
 	<string name="earnings_details_subheader2">Completed Testing Cycle</string>
 	<string name="earnings_details_cycletotal">Cycle Total</string>
-	<string name="chronotype_header">&lt;b>Chronotype&lt;/b></string>
+	<string name="chronotype_header">Chronotype</string>
 	<string name="chronotype_subheader">6 Questions</string>
 	<string name="chronotype_body1">Answer questions in regard to your sleep and wake behavior on work and work-free days. \n&lt;br />&lt;br />\n&lt;i>Please estimate an average of your normal sleep behavior over the past 6 weeks when you were able to follow your usual routines.&lt;/i></string>
 	<string name="chronotype_q1">I have been a shift- or night-worker in the past three months.</string>
@@ -213,7 +211,7 @@
 	<string name="chronotype_workfree_wake">On &lt;b>work-free days&lt;/b> when I don\'t use an alarm clock, I normally &lt;b>wake up&lt;/b> at:</string>
 	<string name="chronotype_disclaim1">This is NOT when you go to bed.</string>
 	<string name="chronotype_disclaim2">This is NOT when you get out of bed.</string>
-	<string name="wakesurvey_header">&lt;b>Wake Survey&lt;/b></string>
+	<string name="wakesurvey_header">Wake Survey</string>
 	<string name="wakesurvey_subheader">6 Questions</string>
 	<string name="wakesurvey_body">The following questions will ask you about sleep specific to last night and waking this morning.</string>
 	<string name="wake_q1">What time did you get in bed last night?</string>
@@ -225,7 +223,7 @@
 	<string name="wake_q6">How would you rate the quality of your sleep?</string>
 	<string name="wake_poor">Poor</string>
 	<string name="wake_excellent">Excellent</string>
-	<string name="context_header">&lt;b>Context Survey&lt;/b></string>
+	<string name="context_header">Context Survey</string>
 	<string name="context_subheader">5 Questions</string>
 	<string name="context_body">These questions will briefly ask you about what is happening around you right now in this moment.</string>
 	<string name="context_q1">Who is with you right now?</string>
@@ -314,8 +312,8 @@
 	<string name="progress_cyclecomplete_header">&lt;b>You\'ve Finished This Testing Cycle!&lt;/b></string>
 	<string name="progress_cycleorstudycomplete_body">Thank you for contributing to our research. Your time and hard work are truly valuable.</string>
 	<string name="overlay_nextcycle">&lt;b>Your next testing cycle will be {DATE1} through {DATE2}.&lt;/b> &lt;br />&lt;br />Please confirm these testing dates or adjust your schedule.</string>
-	<string name="progress_studycomplete_header">&lt;b>You\'ve Finish the Study!&lt;/b></string>
-	<string name="progress_studytotals_header">&lt;b>Study Totals&lt;/b></string>
+	<string name="progress_studycomplete_header">You\'ve Finish the Study!</string>
+	<string name="progress_studytotals_header">Study Totals</string>
 	<string name="progress_studytotals_body">Your study coordinator will be in touch shortly with further instructions. In the meantime, check out all you accomplished:</string>
 	<string name="progress_studytotals_earned">Total Earned</string>
 	<string name="progress_studytotals_tests">Tests Taken</string>

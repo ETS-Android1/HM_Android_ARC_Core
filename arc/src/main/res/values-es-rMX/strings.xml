@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	<string name="progress_finishdate">Fecha estimada de finalización</string>
-
 	<string name="key_native_language">America Latina - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza en un mes, el {DATE}. Puede ajustar este horario hasta por 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su siguiente ciclo de pruebas comienza en una semana. Toque para confirmar o reprogramar.</string>
@@ -162,7 +159,7 @@
 	<string name="progress_studystatus">Semana &lt;b>{#}&lt;/b> de &lt;b>10&lt;/b></string>
 	<string name="progress_joindate">Fecha en que ingresó:</string>
 	<string name="progress_joindate_date">{DATE}</string>
-	<string name="progess_finishdate">Fecha estimada de finalización</string>
+	<string name="progress_finishdate">Fecha estimada de finalización</string>
 	<string name="progress_finishdate_date">{DATE}</string>
 	<string name="progress_timebtwtesting">Tiempo entre semanas de pruebas:</string>
 	<string name="progress_timebtwtesting_unit">{#} {UNIT}</string>

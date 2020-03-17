@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="progress_finishdate">Estimated Finish Date</string>
-
 	<string name="notification_monthbefore">Your next week of testing begins in one month on {DATE}. You may adjust this schedule up to 7 days.</string>
 	<string name="notification_weekbefore">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
 	<string name="notification_daybefore">Reminder: Your next testing cycle begins tomorrow. Tap to confirm or reschedule.</string>
@@ -161,7 +159,7 @@
 	<string name="progress_studystatus">Week &lt;b>{#}&lt;/b> of &lt;b>10&lt;/b></string>
 	<string name="progress_joindate">Joined Date:</string>
 	<string name="progress_joindate_date">{DATE}</string>
-	<string name="progess_finishdate">Estimated Finish Date</string>
+	<string name="progress_finishdate">Estimated Finish Date</string>
 	<string name="progress_finishdate_date">{DATE}</string>
 	<string name="progress_timebtwtesting">Time Between Testing Weeks:</string>
 	<string name="progress_timebtwtesting_unit">{#} {UNIT}</string>
