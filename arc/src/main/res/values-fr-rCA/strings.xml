@@ -73,7 +73,7 @@
 	<string name="home_header5">&lt;b>Votre cycle de tests commence demain&lt;/b>.</string>
 	<string name="home_body5">Il commencera le &lt;b>{DATE1} et prendra fin le {DATE2}&lt;/b>. Nous vous enverrons une notification lorsqu’il sera temps d’effectuer un test.</string>
 	<string name="home_header6">&lt;b>Vous avez terminé l’étude!&lt;/b></string>
-	<string name="home_body_6">Il n’y a aucun autre test à effectuer.</string>
+	<string name="home_body6">Il n’y a aucun autre test à effectuer.</string>
 	<string name="home_header7">&lt;b>Votre premier cycle de tests commence demain.&lt;/b></string>
 	<string name="home_body7">Il y aura 4 sessions de tests par jour pendant 7 jours.&lt;br />&lt;br />Nous vous enverrons une notification &lt;b>entre {TIME1} et {TIME2}&lt;/b> lorsqu\'il sera temps d\'effectuer un test.</string>
 	<string name="resources_header">Ressources</string>

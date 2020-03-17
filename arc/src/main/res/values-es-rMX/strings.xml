@@ -76,7 +76,7 @@
 	<string name="home_header5">&lt;b>Su ciclo de pruebas comienza mañana&lt;/b>.</string>
 	<string name="home_body5">Durará del &lt;b>{DATE1} al {DATE2}&lt;/b>. Le avisaremos cuando haya llegado el momento de hacer una prueba.</string>
 	<string name="home_header6">&lt;b>¡Ha terminado el estudio!&lt;/b></string>
-	<string name="home_body_6">No hay más pruebas para tomar.</string>
+	<string name="home_body6">No hay más pruebas para tomar.</string>
 	<string name="home_header7">&lt;b>Su primer ciclo de pruebas comienza mañana&lt;/b>.</string>
 	<string name="home_body7">Habrá cuatro sesiones de pruebas por día durante 7 días.\n\nLe avisaremos &lt;b>entre la/s {TIME1} y la/s {TIME2}&lt;/b> cuando sea hora de hacer una prueba.</string>
 	<string name="resources_header">Recursos</string>

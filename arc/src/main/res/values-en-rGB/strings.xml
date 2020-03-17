@@ -75,7 +75,7 @@
 	<string name="home_header5">&lt;b>Your testing cycle starts tomorrow&lt;/b>.</string>
 	<string name="home_body5">It will run from &lt;b>{DATE1} to {DATE2}&lt;/b>. We\'ll notify you when it\'s time to take a test.</string>
 	<string name="home_header6">&lt;b>You\'ve finished the study!&lt;/b></string>
-	<string name="home_body_6">There are no more tests to take.</string>
+	<string name="home_body6">There are no more tests to take.</string>
 	<string name="home_header7">&lt;b>Your first testing cycle begins tomorrow.&lt;/b></string>
 	<string name="home_body7">There will be 4 test sessions per day for 7 days.\n&lt;br />&lt;br />\nWe\'ll notify you &lt;b>between {TIME1} and {TIME2}&lt;/b> when it\'s time to take a test.</string>
 	<string name="resources_header">Resources</string>
@@ -359,13 +359,10 @@
 	<string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
 	<string name="prices_tutorial_item1">Bananas</string>
 	<string name="prices_tutorial_item2">Soup</string>
-	<string name="prices_tutorial_item3">Dental floss</string>
 	<string name="prices_tutorial_price1">£3.27</string>
 	<string name="prices_tutorial_price2">£10.82</string>
-	<string name="prices_tutorial_price3">£2.33</string>
 	<string name="prices_tutorial_price1_match">£6.78</string>
 	<string name="prices_tutorial_price2_match">£4.01</string>
-	<string name="prices_tutorial_price3_match">£9.38</string>
 	<string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b>\nChoose the answer that makes sense to you.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> \nLet\'s try another.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> \nLet\'s proceed to part two.</string>

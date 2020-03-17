@@ -73,7 +73,7 @@
 	<string name="home_header5">&lt;b>Ihr Testzyklus beginnt morgen&lt;/b>.</string>
 	<string name="home_body5">Er dauert von &lt;b>{DATE1} bis {DATE2}&lt;/b>. Wir werden Sie benachrichtigen, wenn es Zeit für einen Test ist.</string>
 	<string name="home_header6">&lt;b>Sie haben die Studie abgeschlossen!&lt;/b></string>
-	<string name="home_body_6">Es stehen keine weiteren Tests mehr an.</string>
+	<string name="home_body6">Es stehen keine weiteren Tests mehr an.</string>
 	<string name="home_header7">&lt;b>Ihr erster Testzyklus beginnt morgen.&lt;/b></string>
 	<string name="home_body7">Es gibt 4 Testsitzungen pro Tag über 7 Tage.&lt;br />&lt;br />Wir benachrichtigen Sie &lt;b>zwischen {TIME1} und {TIME2}&lt;/b>, wenn es Zeit für einen Test ist.</string>
 	<string name="resources_header">Ressourcen</string>

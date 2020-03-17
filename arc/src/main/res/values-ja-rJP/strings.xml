@@ -73,7 +73,7 @@
 	<string name="home_header5">&lt;b>あなたのテストサイクルは明日始まります&lt;/b>。</string>
 	<string name="home_body5">&lt;b>{DATE1}から{DATE2}&lt;/b>まで続きます。テストを受ける時刻になったら、通知します。</string>
 	<string name="home_header6">&lt;b>調査は終了しました！&lt;/b></string>
-	<string name="home_body_6">もうこれ以上受けるテストはありません。</string>
+	<string name="home_body6">もうこれ以上受けるテストはありません。</string>
 	<string name="home_header7">&lt;b>あなたの最初のテストサイクルは明日始まります&lt;/b>。</string>
 	<string name="home_body7">7日間にわたり、毎日4つのテストセッションがあります。&lt;br />&lt;br />&lt;b>{TIME1}から{TIME2}&lt;/b>の間に、テストを受ける時刻になったら通知します。</string>
 	<string name="resources_header">リソース</string>
