@@ -309,7 +309,7 @@
 	<string name="progress_earnings_status3">Completed 4 Out Of 4 Goal</string>
 	<string name="progress_earnings_status4">Completed 2-A-Day Goal</string>
 	<string name="progress_goal_header">&lt;b>Goal Progress&lt;/b></string>
-	<string name="progress_cyclecomplete_header">&lt;b>You\'ve Finished This Testing Cycle!&lt;/b></string>
+	<string name="progress_cyclecomplete_header">You\'ve Finished This Testing Cycle!</string>
 	<string name="progress_cycleorstudycomplete_body">Thank you for contributing to our research. Your time and hard work are truly valuable.</string>
 	<string name="overlay_nextcycle">&lt;b>Your next testing cycle will be {DATE1} through {DATE2}.&lt;/b> &lt;br />&lt;br />Please confirm these testing dates or adjust your schedule.</string>
 	<string name="progress_studycomplete_header">You\'ve Finish the Study!</string>

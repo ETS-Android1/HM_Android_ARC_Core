@@ -306,7 +306,7 @@
 	<string name="progress_earnings_status3">Objectif 4 de 4 terminé</string>
 	<string name="progress_earnings_status4">Objectif de 2 par jour terminé</string>
 	<string name="progress_goal_header">&lt;b>Progrès des objectifs&lt;/b></string>
-	<string name="progress_cyclecomplete_header">&lt;b>Vous avez terminé ce cycle de test!&lt;/b></string>
+	<string name="progress_cyclecomplete_header">Vous avez terminé ce cycle de test!</string>
 	<string name="progress_cycleorstudycomplete_body">Merci de contribuer à notre recherche. Votre temps et dur travail sont vraiment précieux.</string>
 	<string name="overlay_nextcycle">&lt;b>Votre prochain cycle de tests aura lieu du {DATE1} au {DATE2}. &lt;/b>&lt;br />&lt;br />Veuillez confirmer ces dates de tests ou modifier votre horaire ci-dessous.</string>
 	<string name="progress_studycomplete_header">Vous avez terminé l’étude!</string>

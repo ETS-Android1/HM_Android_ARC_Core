@@ -306,7 +306,7 @@
 	<string name="progress_earnings_status3">終了した「4個中4個」ゴール</string>
 	<string name="progress_earnings_status4">終了した「1日2個」ゴール</string>
 	<string name="progress_goal_header">&lt;b>ゴールの進行状況&lt;/b></string>
-	<string name="progress_cyclecomplete_header">&lt;b>このテストサイクルを終了しました！&lt;/b></string>
+	<string name="progress_cyclecomplete_header">このテストサイクルを終了しました！</string>
 	<string name="progress_cycleorstudycomplete_body">研究に貢献していただきありがとうございます。お時間を割いてご協力いただいたことに感謝いたします。</string>
 	<string name="overlay_nextcycle">&lt;b>あなたの次のテストサイクルは{DATE1}から{DATE2}までとなります。&lt;/b>&lt;br />&lt;br />これらのテストの日付を確認し、スケジュールを調整してください。</string>
 	<string name="progress_studycomplete_header">調査は終了しました！</string>

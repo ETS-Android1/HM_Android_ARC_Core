@@ -306,7 +306,7 @@
 	<string name="progress_earnings_status3">Ziel 4 von 4 abgeschlossen</string>
 	<string name="progress_earnings_status4">2-A-Tag-Ziel abgeschlossen</string>
 	<string name="progress_goal_header">&lt;b>Zielfortschritt&lt;/b></string>
-	<string name="progress_cyclecomplete_header">&lt;b>Sie haben diesen Testzyklus abgeschlossen!&lt;/b></string>
+	<string name="progress_cyclecomplete_header">Sie haben diesen Testzyklus abgeschlossen!</string>
 	<string name="progress_cycleorstudycomplete_body">Vielen Dank für Ihren Beitrag zu unserer Forschung. Wir schätzen Ihre Zeit und Ihre harte Arbeit sehr.</string>
 	<string name="overlay_nextcycle">&lt;b>Ihr nächster Testzyklus dauert vom {DATE1} bis {DATE2}.&lt;/b>&lt;br />&lt;br />Bitte bestätigen Sie diese Testdaten oder nehmen Sie Änderungen an Ihrem Zeitplan vor.</string>
 	<string name="progress_studycomplete_header">Sie haben die Studie abgeschlossen!</string>
