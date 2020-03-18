@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SplashScreen;
+import com.healthymedium.arc.font.FontFactory;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -22,6 +24,16 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
     public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<java.util.Locale> locales, String button) {
         super(allowBack, allowHelp, header, subheader, options, button);
         this.locales = locales;
+
+        if(FontFactory.getInstance()==null) {
+            FontFactory.initialize(Application.getInstance());
+        }
+
+        if(!Fonts.areLoaded()){
+            Fonts.load();
+            FontFactory.getInstance().setDefaultFont(Fonts.roboto);
+            FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
+        }
     }
 
     @Override
