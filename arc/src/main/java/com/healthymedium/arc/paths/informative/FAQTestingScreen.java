@@ -19,7 +19,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class FAQTestingScreen extends BaseFragment {
 
     TextView textViewBack;
-
+    TextView header;
     TextView textViewSubheader;
 
     RelativeLayout test_q1;
@@ -53,6 +53,9 @@ public class FAQTestingScreen extends BaseFragment {
             }
         });
         textViewBack.setVisibility(View.VISIBLE);
+
+        header = view.findViewById(R.id.textViewHeader);
+        header.setTypeface(Fonts.robotoMedium);
 
         textViewSubheader = view.findViewById(R.id.subheader);
         textViewSubheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));

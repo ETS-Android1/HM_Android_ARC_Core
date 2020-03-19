@@ -19,6 +19,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class FAQScreen extends BaseFragment {
 
     TextView textViewBack;
+    TextView header;
 
     RelativeLayout testing;
     RelativeLayout earnings;
@@ -43,6 +44,9 @@ public class FAQScreen extends BaseFragment {
             }
         });
         textViewBack.setVisibility(View.VISIBLE);
+
+        header = view.findViewById(R.id.textViewHeader);
+        header.setTypeface(Fonts.robotoMedium);
 
         testing = view.findViewById(R.id.testing);
         TextView testingLabel = (TextView) testing.getChildAt(0);
