@@ -47,6 +47,7 @@
                 android:layout_marginRight="32dp"
                 android:text="@string/about_header"
                 android:textColor="@color/white"
+                android:fontFamily="sans-serif-medium"
                 android:textSize="26dp" />
 
             <TextView
