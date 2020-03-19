@@ -106,15 +106,22 @@ public class Participant {
         if(state.testCycles.size()==0){
             return false;
         }
-
-        return getCurrentTestSession().isOngoing();
+        TestSession session = getCurrentTestSession();
+        if(session==null) {
+            return false;
+        }
+        return session.isOngoing();
     }
 
     public boolean shouldCurrentlyBeInTestSession(){
         if(state.testCycles.size()==0){
             return false;
         }
-        return getCurrentTestSession().getScheduledTime().isBeforeNow();
+        TestSession session = getCurrentTestSession();
+        if(session==null) {
+            return false;
+        }
+        return session.getScheduledTime().isBeforeNow();
     }
 
     public boolean shouldCurrentlyBeInTestCycle() {

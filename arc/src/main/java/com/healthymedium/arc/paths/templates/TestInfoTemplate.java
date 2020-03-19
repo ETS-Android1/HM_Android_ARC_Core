@@ -137,7 +137,7 @@ public class TestInfoTemplate extends BaseFragment {
             Hints.markShown(HINT_REPEAT_TUTORIAL);
 
             tutorialHintHighlighter = new HintHighlighter(getActivity());
-            tutorialHintHighlighter.addTarget(textViewTutorial, 5, 10);
+            tutorialHintHighlighter.addTarget(textViewTutorial, 5, 0);
             tutorialHintHighlighter.show();
 
             tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, true);

@@ -53,6 +53,11 @@ public class TestTake extends NotificationType {
             body = ViewUtil.getString(R.string.notification1_halfway);
         }
 
+        // if first session of last day of cycle
+        else if (session.getIndex() == 0 && session.getDayIndex() == cycle.getNumberOfTestDays()-1) {
+            body = ViewUtil.getString(R.string.notification1_lastday);
+        }
+
         // if first of day
         else if (session.getIndex() == 0) {
             body = ViewUtil.getString(R.string.notification1_default);

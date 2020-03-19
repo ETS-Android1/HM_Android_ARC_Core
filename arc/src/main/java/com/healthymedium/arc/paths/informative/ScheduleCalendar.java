@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
@@ -22,6 +23,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import com.healthymedium.arc.ui.Button;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -51,9 +53,7 @@ public class ScheduleCalendar extends BaseFragment {
         DateTime visitStart = cycle.getActualStartDate();
         DateTime visitEnd = cycle.getActualEndDate();
 
-        String language = Locale.getLocaleFromPreferences(getContext()).getLanguage();
-        String country = Locale.getLocaleFromPreferences(getContext()).getCountry();
-        java.util.Locale locale = new java.util.Locale(language, country);
+        java.util.Locale locale = Application.getInstance().getLocale();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
         String start = fmt.print(visitStart);
@@ -140,7 +140,9 @@ public class ScheduleCalendar extends BaseFragment {
 
         fmt = DateTimeFormat.forPattern("d");
 
-        if (startDay.equals("Mon")) {
+        int dayOfWeek = startTime.getDayOfWeek();
+
+        if (dayOfWeek == DateTimeConstants.MONDAY) {
             // start
             monday1.setText(fmt.print(startTime));
             monday1_left.setVisibility(View.VISIBLE);
@@ -184,7 +186,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             sunday2.setBackgroundResource(R.color.light);
             sunday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Tue")) {
+        } else if (dayOfWeek == DateTimeConstants.TUESDAY) {
             // start
             tuesday1.setText(fmt.print(startTime));
             tuesday1_left.setVisibility(View.VISIBLE);
@@ -228,7 +230,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             monday2.setBackgroundResource(R.color.light);
             monday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Wed")) {
+        } else if (dayOfWeek == DateTimeConstants.WEDNESDAY) {
             // start
             wednesday1.setText(fmt.print(startTime));
             wednesday1_left.setVisibility(View.VISIBLE);
@@ -272,7 +274,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             tuesday2.setBackgroundResource(R.color.light);
             tuesday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Thur")) {
+        } else if (dayOfWeek == DateTimeConstants.THURSDAY) {
             // start
             thursday1.setText(fmt.print(startTime));
             thursday1_left.setVisibility(View.VISIBLE);
@@ -316,7 +318,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             wednesday2.setBackgroundResource(R.color.light);
             wednesday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Fri")) {
+        } else if (dayOfWeek == DateTimeConstants.FRIDAY) {
             // start
             friday1.setText(fmt.print(startTime));
             friday1_left.setVisibility(View.VISIBLE);
@@ -360,7 +362,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             thursday2.setBackgroundResource(R.color.light);
             thursday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Sat")) {
+        } else if (dayOfWeek == DateTimeConstants.SATURDAY) {
             // start
             saturday1.setText(fmt.print(startTime));
             saturday1_left.setVisibility(View.VISIBLE);
@@ -404,7 +406,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             friday2.setBackgroundResource(R.color.light);
             friday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Sun")) {
+        } else if (dayOfWeek == DateTimeConstants.SUNDAY) {
             // start
             sunday1.setText(fmt.print(startTime));
             sunday1_left.setVisibility(View.VISIBLE);

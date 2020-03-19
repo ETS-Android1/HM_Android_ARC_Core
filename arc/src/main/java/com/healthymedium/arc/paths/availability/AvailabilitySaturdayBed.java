@@ -23,11 +23,11 @@ public class AvailabilitySaturdayBed extends QuestionTime {
     int maxWakeTime = 24;
 
     public AvailabilitySaturdayBed() {
-        super(true, ViewUtil.getString(R.string.availability_sleep_saturday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_stop),"",null);
     }
 
     public AvailabilitySaturdayBed(int minWakeTime, int maxWakeTime) {
-        super(true, ViewUtil.getString(R.string.availability_sleep_saturday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_stop),"",null);
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;
     }

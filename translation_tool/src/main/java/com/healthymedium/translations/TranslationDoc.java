@@ -16,10 +16,12 @@ import com.google.api.services.sheets.v4.model.ValueRange;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -82,6 +84,9 @@ public class TranslationDoc {
 
         for(int i=1;i<data.size();i++) {
             List<String> row = data.get(i);
+            if(row.size()==0) {
+                continue;
+            }
             String key = row.get(0);
             for(int j=1;j<row.size();j++) {
                 String value = row.get(j);
@@ -180,7 +185,11 @@ public class TranslationDoc {
 
     private static void writeXMLfile(String fileName, LocaleResource resource) {
         try {
-            FileWriter myWriter = new FileWriter(fileName);
+            OutputStreamWriter myWriter = new OutputStreamWriter(
+                    new FileOutputStream(fileName),
+                    Charset.forName("UTF-8").newEncoder()
+            );
+
             myWriter.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
             myWriter.write("<resources>\n");
             for(Map.Entry<String, String> entry : resource.map.entrySet()) {

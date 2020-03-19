@@ -35,6 +35,7 @@ public class QuestionTime extends QuestionTemplate {
     boolean enabled;
     boolean showHint;
     boolean didDismissPointer = false;
+    boolean didPause = false;
 
     public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime) {
         super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submittime));
@@ -105,7 +106,7 @@ public class QuestionTime extends QuestionTemplate {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
 
-        if (didDismissPointer) {
+        if (didDismissPointer || didPause) {
             return;
         }
 
@@ -119,6 +120,7 @@ public class QuestionTime extends QuestionTemplate {
     @Override
     public void onPause() {
         super.onPause();
+        didPause = true;
         time = timeInput.getTime();
         dismissPointer();
         didDismissPointer = false;
@@ -127,6 +129,7 @@ public class QuestionTime extends QuestionTemplate {
     @Override
     public void onResume() {
         super.onResume();
+        didPause = false;
         if(time !=null) {
             timeInput.setTime(time);
         }

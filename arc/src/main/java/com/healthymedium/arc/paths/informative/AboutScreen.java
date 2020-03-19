@@ -35,7 +35,7 @@ public class AboutScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_about_app, container, false);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(ViewUtil.getHtmlString(R.string.about_header));
+        textViewHeader.setTypeface(Fonts.robotoMedium);
 
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setText(ViewUtil.getHtmlString(R.string.about_body));
@@ -56,19 +56,19 @@ public class AboutScreen extends BaseFragment {
         Resources res = Application.getInstance().getResources();
         String name = res.getString(R.string.app_name);
 
-        button3rdParty = view.findViewById(R.id.button3rdParty);
-
-        if (!name.equals("CRI-ARC") && !name.equals("CRI-ARC QA") && !name.equals("CRI-ARC DEV")) {
-            button3rdParty.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ThirdPartyMaterialsScreen thirdPartyScreen = new ThirdPartyMaterialsScreen();
-                    NavigationManager.getInstance().open(thirdPartyScreen);
-                }
-            });
-        } else {
-            button3rdParty.setVisibility(View.GONE);
-        }
+//        button3rdParty = view.findViewById(R.id.button3rdParty);
+//
+//        if (!name.equals("CRI-ARC") && !name.equals("CRI-ARC QA") && !name.equals("CRI-ARC DEV")) {
+//            button3rdParty.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    ThirdPartyMaterialsScreen thirdPartyScreen = new ThirdPartyMaterialsScreen();
+//                    NavigationManager.getInstance().open(thirdPartyScreen);
+//                }
+//            });
+//        } else {
+//            button3rdParty.setVisibility(View.GONE);
+//        }
 
         return view;
     }

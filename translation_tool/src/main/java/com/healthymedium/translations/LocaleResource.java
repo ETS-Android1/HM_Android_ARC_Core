@@ -22,7 +22,7 @@ public class LocaleResource {
     public String language_key = new String();
 
     public String getFilePath() {
-        if(country_key.equals("US")) {
+        if(country_key.equals("US") && language_key.equals("en")) {
             return PATH_TO_RESOURCES + "values";
         }
         return PATH_TO_RESOURCES + "values-" + language_key + "-r" + country_key;

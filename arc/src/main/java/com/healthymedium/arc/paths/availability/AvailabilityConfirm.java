@@ -162,6 +162,7 @@ public class AvailabilityConfirm extends BaseFragment {
                 Study.updateAvailabilityOnboarding(8, 18);
             }
         });
+        ViewUtil.underlineTextView(textViewChangeTimes);
 
         buttonNext = view.findViewById(R.id.buttonNext);
         buttonNext.setOnClickListener(new View.OnClickListener() {

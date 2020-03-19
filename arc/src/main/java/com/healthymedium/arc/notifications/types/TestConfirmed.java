@@ -23,7 +23,7 @@ public class TestConfirmed extends NotificationType {
 
     @Override
     public String getContent(NotificationNode node) {
-        return ViewUtil.getString(R.string.notification_confirm);
+        return "";
     }
 
     @Override

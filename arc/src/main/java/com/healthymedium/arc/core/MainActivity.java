@@ -98,14 +98,14 @@ public class MainActivity extends AppCompatActivity {
         if(PreferencesManager.getInstance().getBoolean(Application.TAG_RESTART,false)){
             PreferencesManager.getInstance().putBoolean(Application.TAG_RESTART,false);
 
-            Phrase phrase = new Phrase(R.string.low_memory_restart_dialogue_body);
+            Phrase phrase = new Phrase(R.string.low_memory_restart_dialogue);
             phrase.replace(R.string.token_app_name, R.string.app_name);
 
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.low_memory_restart_dialogue_header))
+                    .setTitle(getString(R.string.token_app_name))
                     .setMessage(phrase.toString())
-                    .setPositiveButton(getString(R.string.okay), new DialogInterface.OnClickListener() {
+                    .setPositiveButton(getString(R.string.button_okay), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        List<java.util.Locale> locales = Locale.getSupported();
+        List<Locale> locales = Application.getInstance().getLocaleOptions();
         List<String> options = new ArrayList<>();
-        for(java.util.Locale locale : locales) {
-            options.add(Locale.getLabel(locale));
+        for(Locale locale : locales) {
+            options.add(locale.getLabel());
         }
 
         QuestionLanguagePreference fragment = new QuestionLanguagePreference(
@@ -235,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
     protected void attachBaseContext(Context context) {
         Log.i("MainActivity","attachBaseContext");
         super.attachBaseContext(context);
-        //Locale.update(Locale.getCurrent(), getBaseContext());
     }
 
     public boolean isVisible() {

@@ -73,7 +73,7 @@ public class DebugDialog extends DialogFragment {
         Participant participant = Study.getParticipant();
 
         String status = "";
-        status += "localeConfig: " + Application.getInstance().getResources().getConfiguration().locale.getDisplayName() + "\n";
+        status += "localeConfig: " + Application.getInstance().getLocale().getDisplayName() + "\n";
         status += "localePrefs: " + PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, "null") + "_" +
                 PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, "null") + "\n\n";
         status += "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";

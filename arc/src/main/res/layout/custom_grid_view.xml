@@ -9,7 +9,6 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@color/gridNormal"
-    android:layout_margin="1dp"
     tools:ignore="InOrMmUsage">
 
     <android.support.v7.widget.AppCompatImageView

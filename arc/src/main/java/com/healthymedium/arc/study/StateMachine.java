@@ -306,7 +306,7 @@ public class StateMachine {
             fragments.add(new SetupAuthCode(true, true, authDigitCount, ViewUtil.getString(R.string.login_enter_2FA)));
         }
         else {
-            fragments.add(new SetupAuthCode(true, false, authDigitCount, ViewUtil.getString(R.string.login_enter_raterID)));
+            fragments.add(new SetupAuthCode(true, false, authDigitCount, ViewUtil.getString(R.string.login_enter_ARCID)));
         }
 
         PathSegment segment = new PathSegment(fragments,SetupPathData.class);
@@ -337,7 +337,7 @@ public class StateMachine {
         }
         else {
             List<String> opts = new ArrayList<>();
-            opts.add(res.getString(R.string.checkbox_commit));
+            opts.add(res.getString(R.string.radio_commit));
 
             fragments.add(new QuestionNonRemoteStudyCommitment(
                 false,
@@ -759,80 +759,78 @@ public class StateMachine {
         cache.segments.add(segment);
     }
 
-    public void addFinishedPage(){
-        List<BaseFragment> fragments = new ArrayList<>();
-
-        Participant participant = Study.getParticipant();
-
-        Resources res = Application.getInstance().getResources();
-
-        String header;
-        String subheader;
-        String body;
-
-        // Default
-        header = ViewUtil.getHtmlString(R.string.thank_you_header1);
-        subheader = ViewUtil.getHtmlString(R.string.thankyou_testcomplete_subhead1);
-        body = ViewUtil.getHtmlString(R.string.thankyou_testcomplete_body1);
-
-        // Finished with study
-        if(!participant.isStudyRunning()){
-            //at the end of the line
-            header = ViewUtil.getHtmlString(R.string.thankyou_header3);
-            subheader = ViewUtil.getHtmlString(R.string.thankyou_finished_subhead3);
-            body = ViewUtil.getHtmlString(R.string.thankyou_body3);
-        }
-        else {
-            TestCycle cycle = participant.getCurrentTestCycle();
-
-            // After the testCycles but before the next session
-            if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests()) {
-
-                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(Locale.getCurrent());
-
-                //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
-                header = ViewUtil.getHtmlString(R.string.thankyou_header2);
-                subheader = ViewUtil.getHtmlString(R.string.thankyou_cycle_subhead2);
-
-                String body2 = ViewUtil.getHtmlString(R.string.thankyou_cycle_body2);
-
-                // String startDate = testCycles.getActualStartDate().toString(format);
-                // String endDate = testCycles.getActualEndDate().toString(format);
-
-                String startDate = fmt.print(cycle.getActualStartDate());
-                String endDate = fmt.print(cycle.getActualEndDate().minusDays(1));
-
-                body2 = body2.replace("{DATE1}", startDate);
-                body2 = body2.replace("{DATE2}", endDate);
-
-                body = body2;
-            }
-            // After the 4th test of the day
-            else if (participant.getCurrentTestDay().getNumberOfTestsLeft() == 0) {
-                header = ViewUtil.getHtmlString(R.string.thank_you_header1);
-                subheader = ViewUtil.getHtmlString(R.string.thankyou_alldone_subhead1);
-                body = ViewUtil.getHtmlString(R.string.thankyou_alldone_body1);
-            }
-
-        }
-
-        InfoTemplate info = new InfoTemplate(
-                false,
-                header ,
-                subheader,
-                body,
-                ViewUtil.getDrawable(R.drawable.ic_home_active));
-        fragments.add(info);
-        PathSegment segment = new PathSegment(fragments);
-        cache.segments.add(segment);
-    }
+//    public void addFinishedPage(){
+//        List<BaseFragment> fragments = new ArrayList<>();
+//
+//        Participant participant = Study.getParticipant();
+//
+//        Resources res = Application.getInstance().getResources();
+//
+//        String header;
+//        String subheader;
+//        String body;
+//
+//        // Default
+//        header = ViewUtil.getHtmlString(R.string.thankyou_header1);
+//        subheader = ViewUtil.getHtmlString(R.string.thankyou_testcomplete_subhead1);
+//        body = ViewUtil.getHtmlString(R.string.thankyou_testcomplete_body1);
+//
+//        // Finished with study
+//        if(!participant.isStudyRunning()){
+//            //at the end of the line
+//            header = ViewUtil.getHtmlString(R.string.thankyou_header3);
+//            subheader = ViewUtil.getHtmlString(R.string.thankyou_finished_subhead3);
+//            body = ViewUtil.getHtmlString(R.string.thankyou_body3);
+//        }
+//        else {
+//            TestCycle cycle = participant.getCurrentTestCycle();
+//
+//            // After the testCycles but before the next session
+//            if (cycle.getNumberOfTestsLeft() == cycle.getNumberOfTests()) {
+//
+//                DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(Locale.getCurrent());
+//
+//                //String format = ViewUtil.getString(com.healthymedium.arc.library.R.string.format_date);
+//                header = ViewUtil.getHtmlString(R.string.thankyou_header2);
+//                subheader = ViewUtil.getHtmlString(R.string.thankyou_cycle_subhead2);
+//
+//                String body2 = ViewUtil.getHtmlString(R.string.thankyou_cycle_body2);
+//
+//                // String startDate = testCycles.getActualStartDate().toString(format);
+//                // String endDate = testCycles.getActualEndDate().toString(format);
+//
+//                String startDate = fmt.print(cycle.getActualStartDate());
+//                String endDate = fmt.print(cycle.getActualEndDate().minusDays(1));
+//
+//                body2 = body2.replace("{DATE1}", startDate);
+//                body2 = body2.replace("{DATE2}", endDate);
+//
+//                body = body2;
+//            }
+//            // After the 4th test of the day
+//            else if (participant.getCurrentTestDay().getNumberOfTestsLeft() == 0) {
+//                header = ViewUtil.getHtmlString(R.string.thank_you_header1);
+//                subheader = ViewUtil.getHtmlString(R.string.thankyou_alldone_subhead1);
+//                body = ViewUtil.getHtmlString(R.string.thankyou_alldone_body1);
+//            }
+//
+//        }
+//
+//        InfoTemplate info = new InfoTemplate(
+//                false,
+//                header ,
+//                subheader,
+//                body,
+//                ViewUtil.getDrawable(R.drawable.ic_home_active));
+//        fragments.add(info);
+//        PathSegment segment = new PathSegment(fragments);
+//        cache.segments.add(segment);
+//    }
 
     public void addSchedulePicker() {
         List<BaseFragment> fragments = new ArrayList<>();
 
         fragments.add(new QuestionAdjustSchedule(false, true, ViewUtil.getString(R.string.dateshift_picker), ""));
-
-        fragments.add(new ScheduleCalendar());
 
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);

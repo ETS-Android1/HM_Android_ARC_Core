@@ -48,7 +48,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="26dp"
-                android:text="@string/help_header" />
+                android:text="N/A" />
 
             <TextView
                 android:id="@+id/textViewSubHeader"
@@ -60,7 +60,7 @@
                 android:paddingBottom="45dp"
                 android:textColor="@color/white"
                 android:textSize="18dp"
-                android:text="@string/help_body" />
+                android:text="N/A" />
 
 
         </LinearLayout>
@@ -94,7 +94,7 @@
             android:paddingTop="19dp"
             android:paddingRight="38dp"
             android:paddingBottom="22dp"
-            android:text="@string/about"
+            android:text="@string/about_linked"
             android:textStyle="bold"
             android:textColor="@color/white" />
 

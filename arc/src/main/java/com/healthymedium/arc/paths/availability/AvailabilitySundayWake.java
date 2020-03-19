@@ -17,7 +17,7 @@ public class AvailabilitySundayWake extends QuestionTime {
     CircadianClock clock;
 
     public AvailabilitySundayWake() {
-        super(true, ViewUtil.getString(R.string.availability_wake_sunday),"",null);
+        super(true, ViewUtil.getString(R.string.availability_start),"",null);
     }
 
     @Override

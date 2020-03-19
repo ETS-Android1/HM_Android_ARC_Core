@@ -14,6 +14,8 @@ import android.widget.NumberPicker;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Scheduler;
@@ -51,6 +53,18 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(allowHelp);
 
+        buttonNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonNext.setEnabled(false);
+
+                shiftDays = (int) onValueCollection();
+                updateDates();
+                Study.getRestClient().submitTestSchedule();
+                NavigationManager.getInstance().open(new ScheduleCalendar());
+            }
+        });
+
         NumberPicker picker = new NumberPicker(Application.getInstance());
         picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         setNumberPickerTextColor(picker, ContextCompat.getColor(Application.getInstance(), R.color.text));
@@ -60,7 +74,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 index = newVal;
-                enableNextButton();
+                if(!buttonNext.isEnabled()) {
+                    buttonNext.setEnabled(true);
+                }
             }
         });
 
@@ -78,9 +94,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String range;
 
-        String language = Locale.getLocaleFromPreferences(getContext()).getLanguage();
-        String country = Locale.getLocaleFromPreferences(getContext()).getCountry();
-        java.util.Locale locale = new java.util.Locale(language, country);
+        java.util.Locale locale = Application.getInstance().getLocale();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
 
         int visitAdjustIndex = 0;
@@ -139,6 +153,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         }
 
         int curr = dataList.indexOf(currRange);
+        if(curr==-1){
+            curr = 0;
+        }
 
         String[] data = new String[dataList.size()];
 //        for (int i = 0; i < dataList.size(); i++) {
@@ -190,23 +207,6 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         scheduler.unscheduleNotifications(cycle);
         cycle.shiftSchedule(shiftDays);
         scheduler.scheduleNotifications(cycle, false);
-    }
-
-    public void enableNextButton() {
-        if(!buttonNext.isEnabled()){
-            buttonNext.setEnabled(true);
-            onNextButtonEnabled(true);
-
-            buttonNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    shiftDays = (int) onValueCollection();
-                    updateDates();
-                    Study.getRestClient().submitTestSchedule();
-                    onNextRequested();
-                }
-            });
-        }
     }
 
     public void setNumberPickerTextColor(NumberPicker numberPicker, int color) {

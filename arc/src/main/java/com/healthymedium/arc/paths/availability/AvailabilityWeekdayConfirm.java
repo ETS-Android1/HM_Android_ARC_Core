@@ -38,8 +38,11 @@ public class AvailabilityWeekdayConfirm extends QuestionPolar {
         String wakeTime = monday.getWakeTime().toString("h:mm a");
         String bedTime = monday.getBedTime().toString("h:mm a");
 
-        String header = ViewUtil.getString(R.string.availability_same_tuesday_friday).replace("{TIME1}", wakeTime);
-        header = header.replace("{TIME2}", bedTime);
+        String header = "";
+//        String header = ViewUtil.getString(R.string.availability_same_tuesday_friday).replace("{TIME1}", wakeTime);
+//        header = header.replace("{TIME2}", bedTime);
+
+
 
         textViewHeader.setText(Html.fromHtml(header));
 

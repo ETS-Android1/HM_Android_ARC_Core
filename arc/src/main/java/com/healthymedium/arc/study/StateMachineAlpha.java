@@ -133,6 +133,12 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
+        if(participant.getCurrentTestCycle() == null) {
+            state.lifecycle = LIFECYCLE_OVER;
+            decidePath();
+            return;
+        }
+
         if (participant.getCurrentTestSession().isOngoing()) {
             Log.i("StateMachine", "loading in the middle of an indexed test, marking it abandoned");
             abandonTest();
