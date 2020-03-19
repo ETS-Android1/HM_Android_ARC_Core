@@ -32,6 +32,7 @@ public class Application extends android.app.Application implements LifecycleObs
     public static final String TAG_RESTART = "TAG_APPLICATION_RESTARTING";
 
     static Application instance;
+    java.util.Locale locale;
     boolean visible = false;
 
     @Override
@@ -83,13 +84,53 @@ public class Application extends android.app.Application implements LifecycleObs
     public void onConfigurationChanged(Configuration config) {
         Log.i("Application","onConfigurationChanged");
         super.onConfigurationChanged(config);
-        Locale.sync(getBaseContext());
+        updateLocale(getBaseContext());
     }
 
     @Override
     protected void attachBaseContext(Context context) {
         super.attachBaseContext(context);
-        Locale.sync(context);
+        updateLocale(context);
+    }
+
+    public void updateLocale(@Nullable Context context) {
+        PreferencesManager preferences = PreferencesManager.getInstance();
+        if (preferences == null) {
+            return;
+        }
+        if (preferences.contains(Locale.TAG_LANGUAGE)) {
+            String language = preferences.getString(Locale.TAG_LANGUAGE, Locale.LANGUAGE_ENGLISH);
+            String country = preferences.getString(Locale.TAG_COUNTRY, Locale.COUNTRY_UNITED_STATES);
+            locale = new java.util.Locale(language, country);
+
+            // update application
+            Resources appResources = getResources();
+            Configuration config = appResources.getConfiguration();
+            config.setLocale(locale);
+            appResources.updateConfiguration(config, appResources.getDisplayMetrics());
+
+            if (context != null) {
+                Resources activityResources = context.getResources();
+                activityResources.updateConfiguration(config, activityResources.getDisplayMetrics());
+            }
+        }
+    }
+
+    // list all locale options offered by the app
+    public List<Locale> getLocaleOptions() {
+        List<Locale> locales = new ArrayList<>();
+        locales.add(new Locale(Locale.LANGUAGE_ENGLISH,Locale.COUNTRY_UNITED_STATES));
+        return locales;
+    }
+
+    public java.util.Locale getLocale() {
+        if(locale==null){
+            PreferencesManager preferences = PreferencesManager.getInstance();
+            String language = preferences.getString(Locale.TAG_LANGUAGE,Locale.LANGUAGE_ENGLISH);
+            String country = preferences.getString(Locale.TAG_COUNTRY,Locale.COUNTRY_UNITED_STATES);
+            locale = new java.util.Locale(language,country);
+        }
+        return locale;
     }
 
     @Override

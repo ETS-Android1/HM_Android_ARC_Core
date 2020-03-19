@@ -80,12 +80,12 @@ public class Phrase {
     }
 
     public void replaceDate(@StringRes int format, DateTime dateTime){
-        String string = dateTime.toString(getString(format), Locale.getCurrent());
+        String string = dateTime.toString(getString(format), Application.getInstance().getLocale());
         replaceDate(string);
     }
 
     public void replaceDate(@StringRes int tokenId, @StringRes int format, DateTime dateTime){
-        String string = dateTime.toString(getString(format), Locale.getCurrent());
+        String string = dateTime.toString(getString(format), Application.getInstance().getLocale());
         replace(tokenId,string);
     }
 
@@ -98,17 +98,17 @@ public class Phrase {
     // time
 
     public void replaceTime(@StringRes int format, DateTime time){
-        String string = time.toString(getString(format), Locale.getCurrent());
+        String string = time.toString(getString(format), Application.getInstance().getLocale());
         replaceTime(string);
     }
 
     public void replaceTime(@StringRes int format, LocalTime time){
-        String string = time.toString(getString(format), Locale.getCurrent());
+        String string = time.toString(getString(format), Application.getInstance().getLocale());
         replaceTime(string);
     }
 
     public void replaceTime(@StringRes int tokenId, @StringRes int format, LocalTime time){
-        String string = time.toString(getString(format), Locale.getCurrent());
+        String string = time.toString(getString(format), Application.getInstance().getLocale());
         replace(tokenId, string);
     }
 
@@ -117,7 +117,7 @@ public class Phrase {
     }
 
     public void replaceTime(@StringRes int tokenId, @StringRes int format, DateTime time){
-        String string = time.toString(getString(format), Locale.getCurrent());
+        String string = time.toString(getString(format), Application.getInstance().getLocale());
         replace(tokenId, string);
     }
 

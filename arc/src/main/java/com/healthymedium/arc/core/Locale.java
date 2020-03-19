@@ -1,198 +1,74 @@
 package com.healthymedium.arc.core;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
 
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.Log;
-import com.healthymedium.arc.utilities.PreferencesManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 
-public final class Locale {
+public class Locale {
 
-    private static final String TAG = Locale.class.getSimpleName();
-
-    //SharedPreference keys
     public static final String TAG_LANGUAGE = "localeLanguage";
     public static final String TAG_COUNTRY = "localeCountry";
 
-    //Supported locales
-    private static final java.util.Locale US                = java.util.Locale.US;
-    private static final java.util.Locale CANADA            = java.util.Locale.CANADA;
-    private static final java.util.Locale CANADA_FRENCH     = java.util.Locale.CANADA_FRENCH;
-    private static final java.util.Locale MEXICO            = new java.util.Locale("es", "MX");
-    private static final java.util.Locale SPAIN             = new java.util.Locale("es", "ES");
-    private static final java.util.Locale GERMANY           = java.util.Locale.GERMANY;
-    private static final java.util.Locale JAPAN             = java.util.Locale.JAPAN;
-    private static final java.util.Locale AUSTRALIA         = new java.util.Locale("en", "AU");
-    private static final java.util.Locale UK                = new java.util.Locale("en", "GB");
+    public static String COUNTRY_ARGENTINA = "AR";
+    public static String COUNTRY_AUSTRALIA = "AU";
+    public static String COUNTRY_CANADA = "CA";
+    public static String COUNTRY_COLUMBIA = "CO";
+    public static String COUNTRY_GERMANY = "DE";
+    public static String COUNTRY_SPAIN = "ES";
+    public static String COUNTRY_FRANCE = "FR";
+    public static String COUNTRY_UNITED_KINGDOM = "GB";
+    public static String COUNTRY_IRELAND = "IE";
+    public static String COUNTRY_ITALY = "IT";
+    public static String COUNTRY_MEXICO = "MX";
+    public static String COUNTRY_NETHERLANDS = "NL";
+    public static String COUNTRY_UNITED_STATES = "US";
+    public static String COUNTRY_EUROPE = "EU";
+    public static String COUNTRY_JAPAN = "JP";
 
-    private static final List<java.util.Locale> supported;
-    private static final Map<String, String> labels;
+    public static String LANGUAGE_GERMAN = "de";
+    public static String LANGUAGE_ENGLISH = "en";
+    public static String LANGUAGE_SPANISH = "es";
+    public static String LANGUAGE_FRENCH = "fr";
+    public static String LANGUAGE_ITALIAN = "it";
+    public static String LANGUAGE_DUTCH = "nl";
+    public static String LANGUAGE_JAPANESE = "ja";
 
-    //Default locale
-    private static final java.util.Locale defaultLocale = US;
-    private static java.util.Locale currentLocale = defaultLocale;
+    private String country;
+    private String language;
 
-    static {
-        supported = new ArrayList<>();
-        labels = new HashMap<>();
-
-        //Initialize supported locales
-        supported.add(MEXICO);
-        supported.add(AUSTRALIA);
-        supported.add(CANADA);
-        supported.add(CANADA_FRENCH);
-        supported.add(GERMANY);
-        supported.add(SPAIN);
-        supported.add(JAPAN);
-        supported.add(UK);
-        supported.add(US);
-
-        //Initialize labels
-        labels.put("es_MX", "America Latina - Español");
-        labels.put("en_AU", "Australia - English");
-        labels.put("en_CA", "Canada - English");
-        labels.put("fr_CA", "Canada - Français");
-        labels.put("de_DE", "Deutschland - Deutsche");
-        labels.put("es_ES", "Europa - Español");
-        labels.put("ja_JP", "日本 - 日本語");
-        labels.put("en_GB", "United Kingdom - English");
-        labels.put("en_US", "United States - English");
+    public Locale(String language, String country){
+        this.country = country;
+        this.language = language;
     }
 
-    public static String getCountry() {
-        return currentLocale.getCountry();
+    public Locale(String language){
+        this.country = "";
+        this.language = language;
     }
 
-    public static String getLanguage() {
-        return currentLocale.getLanguage();
+    public String getLabel() {
+        Context context = Application.getInstance();
+        Configuration appConfig = context.getResources().getConfiguration();
+
+        Configuration localeConfig = new Configuration(appConfig);
+        localeConfig.setLocale(new java.util.Locale(language,country));
+
+        Context localeContext = context.createConfigurationContext(localeConfig);
+        String label = localeContext.getString(R.string.key_native_language);
+
+        return label;
     }
 
-    public static String getLabel() {
-        return getLabel(currentLocale);
+    public String getCountry() {
+        return country;
     }
 
-    public static String getCountry(final java.util.Locale locale) {
-        return locale.getCountry();
-    }
-
-    public static String getLanguage(final java.util.Locale locale) {
-        return locale.getLanguage();
-    }
-
-    public static String getLabel(java.util.Locale locale) {
-        String key = locale.getLanguage() + "_" + locale.getCountry();
-        return labels.get(key);
-    }
-
-    public static String getKey() {
-        return currentLocale.getLanguage() + "_" + currentLocale.getCountry();
-    }
-
-
-    public static List<java.util.Locale> getSupported() {
-        return new ArrayList<>(supported);
-    }
-
-    public static java.util.Locale getDefault() {
-        return new java.util.Locale(defaultLocale.getLanguage(), defaultLocale.getCountry());
-    }
-
-    public static List<String> getOptionList() {
-        List<String> options = new ArrayList<>(supported.size());
-
-        for(java.util.Locale locale : supported) {
-            options.add(getLabel(locale));
-        }
-
-        return options;
-    }
-
-    public static java.util.Locale getCurrent() {
-        return new java.util.Locale(currentLocale.getLanguage(), currentLocale.getCountry());
-    }
-
-    public static java.util.Locale getLocaleFromPreferences(Context context) {
-        if(context == null) {
-            Log.d(TAG, "Couldn't fetch locale from shared preferences (null) context");
-            return defaultLocale;
-        }
-        String language = PreferencesManager.getInstance().getString(TAG_LANGUAGE, currentLocale.getLanguage());
-        String country = PreferencesManager.getInstance().getString(TAG_COUNTRY, currentLocale.getCountry());
-
-        return new java.util.Locale(language, country);
-    }
-
-    public static void update(final java.util.Locale locale,  Context context) {
-        //Guard statements
-        if(context == null) {
-            Log.d(TAG, "Locale not set, (null) context");
-            return;
-        }
-
-        PreferencesManager preferences = PreferencesManager.getInstance();
-        if(preferences == null) {
-            Log.d(TAG, "Locale not set, (null) PreferenceManager");
-            return;
-        }
-
-        if(locale == null) {
-            Log.d(TAG, "Locale not set, (null) locale");
-            return;
-        }
-
-        //Set the locale and update config
-        final Resources resources = context.getResources();
-        final Configuration config = resources.getConfiguration();
-        final DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-
-        config.setLocale(locale);
-        resources.updateConfiguration(config, displayMetrics);
-
-        currentLocale = locale;
-
-        //Update shared preferences
-        preferences.putString(TAG_COUNTRY, getCountry());
-        preferences.putString(TAG_LANGUAGE, getLanguage());
-    }
-
-    /** Synchronize locale stored in the application configuration with the
-     * locale stored in shared preferences. **/
-    public static void sync(Context context) {
-        if(context == null) {
-            Log.d(TAG, "Not synced, (null) context");
-            return;
-        }
-
-        SharedPreferences prefs = context.getSharedPreferences(context.getPackageName()+".prefs", Context.MODE_PRIVATE);
-
-        if(prefs == null) {
-            Log.d(TAG, "Not synced, (null) SharedPreferences reference");
-            return;
-        }
-
-        String language = prefs.getString(Locale.TAG_LANGUAGE, "null");
-        String country = prefs.getString(Locale.TAG_COUNTRY, "null");
-
-        if(language.equals("null") || country.equals("null")) {
-            return;
-        }
-
-        currentLocale = new java.util.Locale(language, country);
-
-        Resources resources = context.getResources();
-        Configuration config = resources.getConfiguration();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-
-        config.setLocale(currentLocale);
-        resources.updateConfiguration(config, displayMetrics);
+    public String getLanguage() {
+        return language;
     }
 
 }

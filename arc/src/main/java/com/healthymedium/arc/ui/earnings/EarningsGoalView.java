@@ -64,7 +64,7 @@ public class EarningsGoalView extends RoundedLinearLayout {
 
             if(goal.completed_on!=null){
                 DateTime completedDate = new DateTime(goal.completed_on*1000L);
-                String date = TimeUtil.format(completedDate,R.string.format_date_dashed, Locale.getCurrent());
+                String date = TimeUtil.format(completedDate,R.string.format_date_dashed, Application.getInstance().getLocale());
                 String completedOn = ViewUtil.replaceToken(ViewUtil.getString(R.string.status_done_withdate),R.string.token_date,date);
                 textViewDone.setText(completedOn);
             }

@@ -118,10 +118,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        List<java.util.Locale> locales = Locale.getSupported();
+        List<Locale> locales = Application.getInstance().getLocaleOptions();
         List<String> options = new ArrayList<>();
-        for(java.util.Locale locale : locales) {
-            options.add(Locale.getLabel(locale));
+        for(Locale locale : locales) {
+            options.add(locale.getLabel());
         }
 
         QuestionLanguagePreference fragment = new QuestionLanguagePreference(
@@ -235,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
     protected void attachBaseContext(Context context) {
         Log.i("MainActivity","attachBaseContext");
         super.attachBaseContext(context);
-        //Locale.update(Locale.getCurrent(), getBaseContext());
     }
 
     public boolean isVisible() {

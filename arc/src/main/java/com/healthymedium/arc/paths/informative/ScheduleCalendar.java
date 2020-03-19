@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
@@ -52,9 +53,7 @@ public class ScheduleCalendar extends BaseFragment {
         DateTime visitStart = cycle.getActualStartDate();
         DateTime visitEnd = cycle.getActualEndDate();
 
-        String language = Locale.getLocaleFromPreferences(getContext()).getLanguage();
-        String country = Locale.getLocaleFromPreferences(getContext()).getCountry();
-        java.util.Locale locale = new java.util.Locale(language, country);
+        java.util.Locale locale = Application.getInstance().getLocale();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEEE, MMMM d").withLocale(locale);
 
         String start = fmt.print(visitStart);

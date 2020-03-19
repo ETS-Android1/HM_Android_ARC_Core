@@ -94,9 +94,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
         String range;
 
-        String language = Locale.getLocaleFromPreferences(getContext()).getLanguage();
-        String country = Locale.getLocaleFromPreferences(getContext()).getCountry();
-        java.util.Locale locale = new java.util.Locale(language, country);
+        java.util.Locale locale = Application.getInstance().getLocale();
         DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
 
         int visitAdjustIndex = 0;

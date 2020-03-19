@@ -19,9 +19,9 @@ import java.util.Map;
 @SuppressLint("ValidFragment")
 public class QuestionLanguagePreference extends QuestionRadioButtons {
 
-    public List<java.util.Locale> locales;
+    public List<Locale> locales;
 
-    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<java.util.Locale> locales, String button) {
+    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<Locale> locales, String button) {
         super(allowBack, allowHelp, header, subheader, options, button);
         this.locales = locales;
 
@@ -46,12 +46,21 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
             response.put("value", value);
         }
 
+        String language = Locale.LANGUAGE_ENGLISH;
+        String country = Locale.COUNTRY_UNITED_STATES;
 
-        for(java.util.Locale locale : locales){
-            if(Locale.getLabel(locale).equals(selection)){
-                Locale.update(locale, getApplication().getApplicationContext());
+        selection = options.get((int)value);
+
+        for(Locale locale : locales){
+            if(locale.getLabel().equals(selection)){
+                language = locale.getLanguage();
+                country = locale.getCountry();
+                break;
             }
         }
+
+        PreferencesManager.getInstance().putString(Locale.TAG_LANGUAGE, language);
+        PreferencesManager.getInstance().putString(Locale.TAG_COUNTRY, country);
 
         return response;
     }
