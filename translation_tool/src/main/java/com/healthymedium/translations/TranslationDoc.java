@@ -84,6 +84,9 @@ public class TranslationDoc {
 
         for(int i=1;i<data.size();i++) {
             List<String> row = data.get(i);
+            if(row.size()==0) {
+                continue;
+            }
             String key = row.get(0);
             for(int j=1;j<row.size();j++) {
                 String value = row.get(j);
