@@ -47,8 +47,7 @@
                 android:layout_marginRight="32dp"
                 android:text="Header"
                 android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textView7"

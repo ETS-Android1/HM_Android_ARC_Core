@@ -20,8 +20,6 @@ public class FAQScreen extends BaseFragment {
 
     TextView textViewBack;
 
-    TextView header;
-
     RelativeLayout testing;
     RelativeLayout earnings;
     RelativeLayout technology;
@@ -37,12 +35,7 @@ public class FAQScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
-        header = view.findViewById(R.id.textViewHeader);
-        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_header)));
-
         textViewBack = view.findViewById(R.id.textViewBack);
-        textViewBack.setTypeface(Fonts.robotoMedium);
-        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

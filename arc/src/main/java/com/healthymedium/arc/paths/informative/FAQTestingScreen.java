@@ -20,7 +20,6 @@ public class FAQTestingScreen extends BaseFragment {
 
     TextView textViewBack;
 
-    TextView textViewHeader;
     TextView textViewSubheader;
 
     RelativeLayout test_q1;
@@ -54,9 +53,6 @@ public class FAQTestingScreen extends BaseFragment {
             }
         });
         textViewBack.setVisibility(View.VISIBLE);
-
-        textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_testing_header)));
 
         textViewSubheader = view.findViewById(R.id.subheader);
         textViewSubheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));

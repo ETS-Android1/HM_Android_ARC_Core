@@ -20,7 +20,7 @@ public class FAQTechnologyScreen extends BaseFragment {
 
     TextView textViewBack;
 
-    TextView header, subheader;
+    TextView subheader;
 
     RelativeLayout tech_q1;
     RelativeLayout tech_q2;
@@ -47,9 +47,6 @@ public class FAQTechnologyScreen extends BaseFragment {
             }
         });
         textViewBack.setVisibility(View.VISIBLE);
-
-        header = view.findViewById(R.id.textViewHeader);
-        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_tech_header)));
 
         subheader = view.findViewById(R.id.textViewSubheader);
         subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));

@@ -47,8 +47,8 @@
                 android:layout_marginRight="32dp"
                 android:text="@string/faq_earnings_header"
                 android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:fontFamily="sans-serif-medium"
+                android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -68,8 +68,7 @@
                 android:layout_marginBottom="15dp"
                 android:text="@string/faq_subpage_subheader"
                 android:textColor="@color/tealSubheader"
-                android:textSize="17dp"
-                />
+                android:textSize="17dp" />
 
             <LinearLayout
                 android:id="@+id/bottomLinearLayout"
@@ -96,13 +95,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_earnings_q1"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -112,10 +110,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -135,13 +132,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_earnings_q2"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -151,10 +147,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -174,13 +169,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_earnings_q3"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -190,10 +184,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -213,13 +206,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_earnings_q4"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -229,10 +221,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -252,13 +243,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_earnings_q5"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -268,10 +258,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
