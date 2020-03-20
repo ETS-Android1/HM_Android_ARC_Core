@@ -129,6 +129,17 @@ public class StateMachine {
         }
         state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE, State.class);
         cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE, StateCache.class);
+
+        if(cache==null) {
+            cache = new StateCache();
+        }
+        if(cache.segments==null) {
+            cache.segments = new ArrayList<>();
+        }
+        if(cache.data==null) {
+            cache.data = new ArrayList<>();
+        }
+
     }
 
     public void save(){
