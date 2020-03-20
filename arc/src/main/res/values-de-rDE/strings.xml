@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>Fragen?&lt;/b>\nDieRegisterkarte „Ressourcen“ bietet Ihnen die Möglichkeit, Ihre Verfügbarkeit zu ändern, Ihren Studienkoordinator zu kontaktieren und vieles mehr.</string>
 	<string name="popup_nicejob">&lt;b>Gut gemacht mit den Tests!&lt;/b>\nSchauen wir uns den Rest der App an.</string>
 	<string name="low_memory_toast">Bitte schließen Sie andere Apps, um die Leistung zu verbessern.</string>
-	<string name="low_memory_restart_dialogue">&lt;b>Ups!&lt;/b>\nAuf Ihrem Gerät können keine anderen Apps gleichzeitig mit {APPNAME} ausgeführt werden. Bitte schließen Sie andere Apps, bevor Sie eine Testsitzung starten.</string>
+	<string name="low_memory_restart_dialogue_header">Ups!</string>
+	<string name="low_memory_restart_dialogue">Auf Ihrem Gerät können keine anderen Apps gleichzeitig mit {APP_NAME} ausgeführt werden. Bitte schließen Sie andere Apps, bevor Sie eine Testsitzung starten.</string>
 	<string name="day_abbrev_sun">S</string>
 	<string name="day_abbrev_mon">M</string>
 	<string name="day_abbrev_tues">Di</string>

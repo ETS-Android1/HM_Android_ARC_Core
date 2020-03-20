@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>質問がありますか？&lt;/b>\n「リソース」タブでは、あなたにとって都合のよい時間帯を変更したり、治験コーディネーターに連絡をしたり、その他の操作を行えます。</string>
 	<string name="popup_nicejob">&lt;b>テストお疲れさまでした！&lt;/b>\nアプリの他の機能を見てみましょう。</string>
 	<string name="low_memory_toast">パフォーマンスを向上させるため、他のアプリは閉じてください。</string>
-	<string name="low_memory_restart_dialogue">&lt;b>問題が発生しました&lt;/b>\nあなたがご使用の機器は、{APPNAME}と同時に他のアプリを実行することができません。テストセッションを開始する前に、他のアプリを閉じてください。</string>
+	<string name="low_memory_restart_dialogue_header">問題が発生しました</string>
+	<string name="low_memory_restart_dialogue">あなたがご使用の機器は、{APP_NAME}と同時に他のアプリを実行することができません。テストセッションを開始する前に、他のアプリを閉じてください。</string>
 	<string name="day_abbrev_sun">日曜日</string>
 	<string name="day_abbrev_mon">月曜日</string>
 	<string name="day_abbrev_tues">火曜日</string>

@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>Des questions?&lt;/b> Changez votre disponibilité, contactez votre coordonnateur(trice), et plus encore dans l\'onglet Ressources.</string>
 	<string name="popup_nicejob">&lt;b>Beau travail dans les tests!&lt;/b> \nJetons un coup d\'œil au reste de l\'application.</string>
 	<string name="low_memory_toast">Veuillez fermer d\'autres applications pour améliorer la performance.</string>
-	<string name="low_memory_restart_dialogue">&lt;b>Oups&lt;/b>\nVotre appareil n\'est pas capable de faire fonctionner d\'autres applications en même temps que {APPNAME}. Veuillez fermer d\'autres applications avant de commencer une session de tests.</string>
+	<string name="low_memory_restart_dialogue_header">Oups</string>
+	<string name="low_memory_restart_dialogue">Votre appareil n\'est pas capable de faire fonctionner d\'autres applications en même temps que {APP_NAME}. Veuillez fermer d\'autres applications avant de commencer une session de tests.</string>
 	<string name="day_abbrev_sun">D</string>
 	<string name="day_abbrev_mon">L</string>
 	<string name="day_abbrev_tues">M</string>

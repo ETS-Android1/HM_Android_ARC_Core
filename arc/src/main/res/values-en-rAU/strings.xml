@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>Questions?&lt;/b> \nChange your availability, contact your study coordinator, and more in the Resources tab.</string>
 	<string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b> \nLet\'s take a look at the rest of the app.</string>
 	<string name="low_memory_toast">Please close other apps to improve performance.</string>
-	<string name="low_memory_restart_dialogue">&lt;b>Oops&lt;/b>\nYour device is not capable of running other apps at the same time as {APPNAME}. Please close other apps before starting a test session.</string>
+	<string name="low_memory_restart_dialogue_header">Oops</string>
+	<string name="low_memory_restart_dialogue">Your device is not capable of running other apps at the same time as {APP_NAME}. Please close other apps before starting a test session.</string>
 	<string name="day_abbrev_sun">S</string>
 	<string name="day_abbrev_mon">M</string>
 	<string name="day_abbrev_tues">T</string>
