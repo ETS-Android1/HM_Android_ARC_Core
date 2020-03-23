@@ -48,7 +48,7 @@
 	<string name="onboarding_notifications_popup">&lt;b>Toque "permitir"&lt;/b> para que podamos avisarle cuando haya pruebas disponibles.</string>
 	<string name="onboarding_notifications_header2">Habilite las notificaciones.</string>
 	<string name="onboarding_notifications_body2_ios">Debe habilitar las notificaciones para que el estudio funcione como es debido. Ingrese a la aplicación Configuración, toque Notificaciones, luego toque EXR y active el interruptor Permitir notificaciones.</string>
-	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para [APP NAME] estén habilitadas.</string>
+	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para {APP_NAME} estén habilitadas.</string>
 	<string name="availability_header">Disponibilidad</string>
 	<string name="availability_body">Ahora le haremos algunas preguntas que nos ayudarán a determinar cuándo enviarle las notificaciones.\n&lt;br />&lt;br />\n&lt;i>Solo recibirá notificaciones durante las horas en las que esté despierto. Tenga a bien establecer un horario de disponibilidad de 8 horas como mínimo.&lt;/i></string>
 	<string name="availability_start">¿A qué hora deberíamos &lt;b>iniciar&lt;/b> las notificaciones todos los días?</string>
