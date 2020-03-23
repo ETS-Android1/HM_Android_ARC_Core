@@ -115,8 +115,6 @@ public class PricesTutorialRevised extends Tutorial {
         progressIncrement = 17;
 
         closeButton = view.findViewById(R.id.closeButton);
-        closeButton.setEnabled(false);
-        closeButton.setVisibility(View.GONE);
 
         checkmark = view.findViewById(R.id.checkmark);
 
@@ -283,7 +281,14 @@ public class PricesTutorialRevised extends Tutorial {
                     @Override
                     public void onClick(View view) {
                         closeButton.setEnabled(false);
-                        handlerWhatDoYouThink.removeCallbacks(runnableWhatDoYouThink);
+
+                        handler.removeCallbacksAndMessages(null);
+                        handlerWhatDoYouThink.removeCallbacksAndMessages(null);
+                        handlerCorrectAnswer.removeCallbacksAndMessages(null);
+
+                        handler = null;
+                        handlerWhatDoYouThink = null;
+                        handlerCorrectAnswer = null;
 
                         welcomeHighlight.dismiss();
                         welcomeHint.dismiss();
@@ -300,9 +305,18 @@ public class PricesTutorialRevised extends Tutorial {
                         firstMatchContainerHighlight.dismiss();
                         firstMatchHint.dismiss();
                         firstMatchGreatChoiceHint.dismiss();
+                        firstMatchAnswerHilighter.dismiss();
+                        firstMatchAnswerPointer.dismiss();
 
                         secondMatchContainerHighlight.dismiss();
                         secondMatchHint.dismiss();
+                        secondMatchAnswerHilighter.dismiss();
+                        secondMatchAnswerPointer.dismiss();
+
+                        highlighter.dismiss();
+
+                        if(pointer != null)
+                            pointer.dismiss();
 
                         exit();
                     }
@@ -327,7 +341,6 @@ public class PricesTutorialRevised extends Tutorial {
                 highlighter.clearTargets();
                 priceContainer.setVisibility(View.VISIBLE);
 
-                Handler handler = new Handler();
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
@@ -348,7 +361,6 @@ public class PricesTutorialRevised extends Tutorial {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item2));
         textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
 
-        Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -365,7 +377,7 @@ public class PricesTutorialRevised extends Tutorial {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item3));
         textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price3));
 
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 greatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_part2));
@@ -379,7 +391,6 @@ public class PricesTutorialRevised extends Tutorial {
                         highlighter.dismiss();
                         highlighter.clearTargets();
 
-                        Handler handler = new Handler();
                         Runnable runnable = new Runnable() {
                             @Override
                             public void run() {
@@ -508,7 +519,6 @@ public class PricesTutorialRevised extends Tutorial {
                                 highlighter.dismiss();
                                 highlighter.clearTargets();
 
-                                Handler handler = new Handler();
                                 Runnable runnable = new Runnable() {
                                     @Override
                                     public void run() {
