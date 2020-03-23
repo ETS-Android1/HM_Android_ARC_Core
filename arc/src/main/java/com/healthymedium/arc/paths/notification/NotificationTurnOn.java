@@ -22,7 +22,10 @@ public class NotificationTurnOn extends StateInfoTemplate {
         super(false,
                 ViewUtil.getString(R.string.onboarding_notifications_header2),
                 null,
-                ViewUtil.getString(R.string.onboarding_notifications_body2_android),
+                ViewUtil.replaceToken(
+                        R.string.onboarding_notifications_body2_android,
+                        R.string.token_app_name,
+                        R.string.app_name),
                 ViewUtil.getString(R.string.button_settings)
                 );
     }
