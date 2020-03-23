@@ -19,7 +19,6 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class FAQScreen extends BaseFragment {
 
     TextView textViewBack;
-
     TextView header;
 
     RelativeLayout testing;
@@ -37,12 +36,8 @@ public class FAQScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
-        header = view.findViewById(R.id.textViewHeader);
-        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_header)));
-
         textViewBack = view.findViewById(R.id.textViewBack);
         textViewBack.setTypeface(Fonts.robotoMedium);
-        textViewBack.setText(ViewUtil.getString(R.string.button_back));
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,6 +45,9 @@ public class FAQScreen extends BaseFragment {
             }
         });
         textViewBack.setVisibility(View.VISIBLE);
+
+        header = view.findViewById(R.id.textViewHeader);
+        header.setTypeface(Fonts.robotoMedium);
 
         testing = view.findViewById(R.id.testing);
         TextView testingLabel = (TextView) testing.getChildAt(0);

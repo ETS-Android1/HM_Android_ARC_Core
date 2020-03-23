@@ -49,7 +49,7 @@ public class FAQTechnologyScreen extends BaseFragment {
         textViewBack.setVisibility(View.VISIBLE);
 
         header = view.findViewById(R.id.textViewHeader);
-        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_tech_header)));
+        header.setTypeface(Fonts.robotoMedium);
 
         subheader = view.findViewById(R.id.textViewSubheader);
         subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));
