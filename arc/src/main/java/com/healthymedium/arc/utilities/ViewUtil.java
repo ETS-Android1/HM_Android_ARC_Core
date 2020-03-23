@@ -95,6 +95,13 @@ public class ViewUtil {
         return input.replace(getString(format), replacement);
     }
 
+    public static String replaceToken(@StringRes int input, @StringRes int format, @StringRes int replacement){
+        String inputString = getString(input);
+        String formatString = getString(format);
+        String replacementString = getString(replacement);
+        return inputString.replace(formatString,replacementString);
+    }
+
     public static void underlineTextView(TextView textView){
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
