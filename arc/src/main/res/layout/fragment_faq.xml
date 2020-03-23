@@ -33,7 +33,6 @@
                 android:text="@string/button_back"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:fontFamily="sans-serif-medium"
                 android:textSize="14dp"
                 android:visibility="invisible"
                 tools:visibility="visible" />

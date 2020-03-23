@@ -37,6 +37,7 @@ public class FAQScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
 
         textViewBack = view.findViewById(R.id.textViewBack);
+        textViewBack.setTypeface(Fonts.robotoMedium);
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
