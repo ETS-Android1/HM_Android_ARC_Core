@@ -72,6 +72,7 @@ public class GridTutorial extends Tutorial {
 
     HintPointer remindMeHint;
     HintPointer remindMeTapHint;
+    HintHighlighter remindMeHighlight;
     HintHighlighter remindMeTapHighlight;
 
     Handler remindMeHandler = new Handler();
@@ -113,6 +114,8 @@ public class GridTutorial extends Tutorial {
     Runnable remindMeRunnable = new Runnable() {
         @Override
         public void run() {
+            remindMeHighlight.addTarget(progressBar);
+            remindMeHighlight.show();
             remindMeHint.show();
         }
     };
@@ -224,6 +227,8 @@ public class GridTutorial extends Tutorial {
                     remindMeHint.dismiss();
                     remindMeTapHint.dismiss();
                     remindMeTapHighlight.dismiss();
+                    remindMeHighlight.dismiss();
+                    remindMeHighlight.clearTargets();
 
                     hideGridImages();
                     if (selectedCount == 1) {
@@ -323,11 +328,13 @@ public class GridTutorial extends Tutorial {
         remindMeHint = new HintPointer(getActivity(), image43, false, true);
         remindMeTapHint = new HintPointer(getActivity(), gridLayout, true, true);
         remindMeTapHighlight = new HintHighlighter(getActivity());
+        remindMeHighlight = new HintHighlighter(getActivity());
 
         progressBar.animate()
                 .setStartDelay(800)
                 .setDuration(400)
                 .alpha(1.0f);
+
 
         return view;
     }
@@ -398,6 +405,8 @@ public class GridTutorial extends Tutorial {
                         remindMeHint.dismiss();
                         remindMeTapHint.dismiss();
                         remindMeTapHighlight.dismiss();
+                        remindMeHighlight.dismiss();
+                        remindMeHighlight.clearTargets();
 
                         exit();
                     }
@@ -621,6 +630,9 @@ public class GridTutorial extends Tutorial {
             @Override
             public void onClick(View view) {
                 remindMeHint.dismiss();
+                remindMeHighlight.dismiss();
+                remindMeHighlight.clearTargets();
+
                 final int maxTargets;
                 if (selectedCount == 2) {
                     maxTargets = 1;
