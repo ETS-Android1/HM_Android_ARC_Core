@@ -181,7 +181,7 @@ public class SetupTemplate extends StandardTemplate {
             textViewProblems.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    HelpScreen contactScreen = new HelpScreen();
+                    ContactScreen contactScreen = new ContactScreen();
                     NavigationManager.getInstance().open(contactScreen);
                 }
             });

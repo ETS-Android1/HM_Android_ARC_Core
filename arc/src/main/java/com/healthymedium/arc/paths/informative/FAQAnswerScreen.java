@@ -51,6 +51,7 @@ public class FAQAnswerScreen extends BaseFragment {
         textViewBack.setVisibility(View.VISIBLE);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
+        textViewHeader.setTypeface(Fonts.robotoMedium);
         textViewHeader.setText(headerText);
 
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);

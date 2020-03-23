@@ -49,7 +49,7 @@
 	<string name="onboarding_notifications_popup">&lt;b>Please tap "allow"&lt;/b> so we can tell you when tests are available.</string>
 	<string name="onboarding_notifications_header2">Please turn on notifications.</string>
 	<string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap EXR and turn on the Allow Notifications switch.</string>
-	<string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for [APP NAME] are turned on.</string>
+	<string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for {APP_NAME} are turned on.</string>
 	<string name="button_home_notifications">Turn On Notificaitions</string>
 	<string name="button_proceed_without_notifications">Proceed Without Notifications</string>
 	<string name="availability_header">Availability</string>
@@ -398,7 +398,8 @@
 	<string name="popup_tab_resources">&lt;b>Questions?&lt;/b> \nChange your availability, contact your study coordinator, and more in the Resources tab.</string>
 	<string name="popup_nicejob">&lt;b>Nice job on the tests!&lt;/b> \nLet\'s take a look at the rest of the app.</string>
 	<string name="low_memory_toast">Please close other apps to improve performance.</string>
-	<string name="low_memory_restart_dialogue">&lt;b>Oops&lt;/b>\nYour device is not capable of running other apps at the same time as {APPNAME}. Please close other apps before starting a test session.</string>
+	<string name="low_memory_restart_dialogue_header">Oops</string>
+	<string name="low_memory_restart_dialogue">Your device is not capable of running other apps at the same time as {APP_NAME}. Please close other apps before starting a test session.</string>
 	<string name="day_abbrev_sun">S</string>
 	<string name="day_abbrev_mon">M</string>
 	<string name="day_abbrev_tues">T</string>

@@ -48,7 +48,7 @@
 	<string name="onboarding_notifications_popup">&lt;b>Toque "permitir"&lt;/b> para que podamos avisarle cuando haya pruebas disponibles.</string>
 	<string name="onboarding_notifications_header2">Habilite las notificaciones.</string>
 	<string name="onboarding_notifications_body2_ios">Debe habilitar las notificaciones para que el estudio funcione como es debido. Ingrese a la aplicación Configuración, toque Notificaciones, luego toque EXR y active el interruptor Permitir notificaciones.</string>
-	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para [APP NAME] estén habilitadas.</string>
+	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para {APP_NAME} estén habilitadas.</string>
 	<string name="availability_header">Disponibilidad</string>
 	<string name="availability_body">Ahora le haremos algunas preguntas que nos ayudarán a determinar cuándo enviarle las notificaciones.\n&lt;br />&lt;br />\n&lt;i>Solo recibirá notificaciones durante las horas en las que esté despierto. Tenga a bien establecer un horario de disponibilidad de 8 horas como mínimo.&lt;/i></string>
 	<string name="availability_start">¿A qué hora deberíamos &lt;b>iniciar&lt;/b> las notificaciones todos los días?</string>
@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>¿Preguntas?&lt;/b> \nCambie su disponibilidad, comuníquese con el coordinador del estudio y haga otras cosas más en la pestaña Recursos.</string>
 	<string name="popup_nicejob">&lt;b>¡Buen trabajo con las pruebas!&lt;/b> Echemos un vistazo al resto de la aplicación.</string>
 	<string name="low_memory_toast">Cierre las demás aplicaciones para mejorar el rendimiento.</string>
-	<string name="low_memory_restart_dialogue">&lt;b>Uy&lt;/b> \nSu dispositivo no tiene la capacidad de tener en marcha otras aplicaciones al mismo tiempo que {APPNAME}. Sírvase cerrar otras aplicaciones antes de comenzar una sesión de pruebas.</string>
+	<string name="low_memory_restart_dialogue_header">Uy</string>
+	<string name="low_memory_restart_dialogue">Su dispositivo no tiene la capacidad de tener en marcha otras aplicaciones al mismo tiempo que {APP_NAME}. Sírvase cerrar otras aplicaciones antes de comenzar una sesión de pruebas.</string>
 	<string name="day_abbrev_sun">D</string>
 	<string name="day_abbrev_mon">L</string>
 	<string name="day_abbrev_tues">M</string>

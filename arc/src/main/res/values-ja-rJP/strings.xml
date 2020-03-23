@@ -48,7 +48,7 @@
 	<string name="onboarding_notifications_popup">&lt;b>「許可」をタップしてください。&lt;/b>これによりテストが使用可能になったことをお知らせできます。</string>
 	<string name="onboarding_notifications_header2">通知を有効にしてください。</string>
 	<string name="onboarding_notifications_body2_ios">調査が適切に機能するために通知を有効にする必要があります。アプリの設定に移動して「通知」をタップし、次に「EXR」をタップして「通知を許可する」スイッチをオンにしてください。</string>
-	<string name="onboarding_notifications_body2_android">調査が適切に機能するために通知を有効にする必要があります。設定に移動して、「[APP NAME]」の通知が有効になっていることを確認してください。</string>
+	<string name="onboarding_notifications_body2_android">調査が適切に機能するために通知を有効にする必要があります。設定に移動して、「{APP_NAME}」の通知が有効になっていることを確認してください。</string>
 	<string name="availability_header">\n使用可能状況</string>
 	<string name="availability_body">ここでは、通知を送るタイミングを決定するために必要ないくつかの質問をします。&lt;br />&lt;br />\n&lt;i>通知はあなたが起きている時間帯にのみ送信されます。都合のよい時間帯は、最低でも8時間となるように設定してください。&lt;/i></string>
 	<string name="availability_start">毎日、何時に通知を&lt;b>開始&lt;/b>しますか？</string>
@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>質問がありますか？&lt;/b>\n「リソース」タブでは、あなたにとって都合のよい時間帯を変更したり、治験コーディネーターに連絡をしたり、その他の操作を行えます。</string>
 	<string name="popup_nicejob">&lt;b>テストお疲れさまでした！&lt;/b>\nアプリの他の機能を見てみましょう。</string>
 	<string name="low_memory_toast">パフォーマンスを向上させるため、他のアプリは閉じてください。</string>
-	<string name="low_memory_restart_dialogue">&lt;b>問題が発生しました&lt;/b>\nあなたがご使用の機器は、{APPNAME}と同時に他のアプリを実行することができません。テストセッションを開始する前に、他のアプリを閉じてください。</string>
+	<string name="low_memory_restart_dialogue_header">問題が発生しました</string>
+	<string name="low_memory_restart_dialogue">あなたがご使用の機器は、{APP_NAME}と同時に他のアプリを実行することができません。テストセッションを開始する前に、他のアプリを閉じてください。</string>
 	<string name="day_abbrev_sun">日曜日</string>
 	<string name="day_abbrev_mon">月曜日</string>
 	<string name="day_abbrev_tues">火曜日</string>

@@ -20,8 +20,7 @@ public class FAQEarningsScreen extends BaseFragment {
 
     TextView textViewBack;
 
-    TextView header;
-    TextView subheader;
+    TextView header, subheader;
 
     RelativeLayout earnings_q1;
     RelativeLayout earnings_q2;
@@ -51,7 +50,7 @@ public class FAQEarningsScreen extends BaseFragment {
         textViewBack.setVisibility(View.VISIBLE);
 
         header = view.findViewById(R.id.textViewHeader);
-        header.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_earnings_header)));
+        header.setTypeface(Fonts.robotoMedium);
 
         subheader = view.findViewById(R.id.textViewSubheader);
         subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));

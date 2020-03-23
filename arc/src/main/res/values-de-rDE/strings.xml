@@ -48,7 +48,7 @@
 	<string name="onboarding_notifications_popup">&lt;b>Bitte tippen Sie auf „Zulassen“&lt;/b>, damit wir Ihnen mitteilen können, wann Tests verfügbar sind.</string>
 	<string name="onboarding_notifications_header2">Bitte aktivieren Sie die Benachrichtigungen.</string>
 	<string name="onboarding_notifications_body2_ios">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Rufen Sie die Anwendung Einstellungen auf, tippen Sie auf Benachrichtigungen, tippen Sie dann auf EXR, und aktivieren Sie den Schalter Benachrichtigungen zulassen.</string>
-	<string name="onboarding_notifications_body2_android">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Bitte rufen Sie die Einstellungen auf und vergewissern Sie sich, dass die Benachrichtigungen für [APP NAME] aktiviert sind.</string>
+	<string name="onboarding_notifications_body2_android">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Bitte rufen Sie die Einstellungen auf und vergewissern Sie sich, dass die Benachrichtigungen für {APP_NAME} aktiviert sind.</string>
 	<string name="availability_header">Verfügbarkeit</string>
 	<string name="availability_body">Nun stellen wir Ihnen einige Fragen, die uns helfen sollen, zu bestimmen, wann wir Ihnen diese Benachrichtigungen senden sollen.\n&lt;br />&lt;br />\n&lt;i>Benachrichtigungen erhalten Sie nur während Ihrer Wachzeiten. Bitte legen Sie ein Verfügbarkeitsfenster von mindestens 8 Stunden fest.&lt;/i></string>
 	<string name="availability_start">Um wie viel Uhr sollen wir Ihre Benachrichtigungen jeden Tag &lt;b>starten&lt;/b>?</string>
@@ -395,7 +395,8 @@
 	<string name="popup_tab_resources">&lt;b>Fragen?&lt;/b>\nDieRegisterkarte „Ressourcen“ bietet Ihnen die Möglichkeit, Ihre Verfügbarkeit zu ändern, Ihren Studienkoordinator zu kontaktieren und vieles mehr.</string>
 	<string name="popup_nicejob">&lt;b>Gut gemacht mit den Tests!&lt;/b>\nSchauen wir uns den Rest der App an.</string>
 	<string name="low_memory_toast">Bitte schließen Sie andere Apps, um die Leistung zu verbessern.</string>
-	<string name="low_memory_restart_dialogue">&lt;b>Ups!&lt;/b>\nAuf Ihrem Gerät können keine anderen Apps gleichzeitig mit {APPNAME} ausgeführt werden. Bitte schließen Sie andere Apps, bevor Sie eine Testsitzung starten.</string>
+	<string name="low_memory_restart_dialogue_header">Ups!</string>
+	<string name="low_memory_restart_dialogue">Auf Ihrem Gerät können keine anderen Apps gleichzeitig mit {APP_NAME} ausgeführt werden. Bitte schließen Sie andere Apps, bevor Sie eine Testsitzung starten.</string>
 	<string name="day_abbrev_sun">S</string>
 	<string name="day_abbrev_mon">M</string>
 	<string name="day_abbrev_tues">Di</string>

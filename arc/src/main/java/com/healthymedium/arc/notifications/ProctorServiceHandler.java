@@ -10,6 +10,8 @@ import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.notifications.types.NotificationType;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -188,7 +190,10 @@ public class ProctorServiceHandler {
             minutes -= hours*60;
 
             String field = (target < now) ? "late":"early";
-            Analytics.logInfo("Proctor Deviation","Timeout was "+type+". Timed out at "+now+" when target was "+target+". Timeout was "+days+"day(s) "+hours+"hr "+minutes+"min "+seconds+"sec "+field);
+            DateTimeFormatter format = DateTimeFormat.mediumDateTime();
+            String nowString = format.print(now);
+            String targetString = format.print(target);
+            Analytics.logInfo("Proctor Deviation","Timeout was "+type+". Timed out at "+nowString+" ("+now+") when target was "+targetString+" ("+target+"). Timeout was "+days+"day(s) "+hours+"hr "+minutes+"min "+seconds+"sec "+field);
         }
     }
 

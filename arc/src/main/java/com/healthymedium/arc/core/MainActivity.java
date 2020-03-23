@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
             new AlertDialog.Builder(this)
                     .setCancelable(true)
-                    .setTitle(getString(R.string.token_app_name))
+                    .setTitle(getString(R.string.low_memory_restart_dialogue_header))
                     .setMessage(phrase.toString())
                     .setPositiveButton(getString(R.string.button_okay), new DialogInterface.OnClickListener() {
                         @Override

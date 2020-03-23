@@ -47,8 +47,7 @@
                 android:layout_marginRight="32dp"
                 android:text="@string/faq_header"
                 android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -85,13 +84,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_testing"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -101,10 +99,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -124,13 +121,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_earnings"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -140,10 +136,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
@@ -163,13 +158,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="32dp"
                         android:layout_marginRight="64dp"
-                        android:layout_centerVertical="true"
                         android:text="@string/faq_technology"
                         android:textColor="@color/white"
-                        android:textSize="17dp"
-                        />
+                        android:textSize="17dp" />
 
                     <TextView
                         android:layout_width="30dp"
@@ -179,10 +173,9 @@
                         android:layout_marginRight="20dp"
                         android:background="@drawable/background_back_button"
                         android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
                         android:paddingRight="5dp"
-                        />
+                        android:textAllCaps="true"
+                        android:textColor="@color/white" />
 
                 </RelativeLayout>
 
