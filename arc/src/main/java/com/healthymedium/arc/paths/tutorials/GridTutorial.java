@@ -54,10 +54,12 @@ public class GridTutorial extends Tutorial {
     HintPointer gridsHint;
 
     HintPointer partTwoHint;
+    HintHighlighter partTwoHighlight;
 
     HintHighlighter pulsateF;
     HintPointer tapThisFHint;
     HintPointer tapAllFsHint;
+    HintHighlighter tapAllFsHighlight;
 
     HintPointer niceWorkHint;
 
@@ -70,6 +72,7 @@ public class GridTutorial extends Tutorial {
 
     HintPointer remindMeHint;
     HintPointer remindMeTapHint;
+    HintHighlighter remindMeHighlight;
     HintHighlighter remindMeTapHighlight;
 
     Handler remindMeHandler = new Handler();
@@ -87,6 +90,7 @@ public class GridTutorial extends Tutorial {
                 @Override
                 public void onClick(View view) {
                     partTwoHint.dismiss();
+                    partTwoHighlight.dismiss();
 
                     Runnable runnable = new Runnable() {
                         @Override
@@ -101,12 +105,17 @@ public class GridTutorial extends Tutorial {
 
             partTwoHint.addButton(ViewUtil.getString(R.string.button_next), listener);
             partTwoHint.show();
+//            partTwoHighlight.addTarget(partTwoHint);
+            partTwoHighlight.addTarget(progressBar);
+            partTwoHighlight.show();
         }
     };
 
     Runnable remindMeRunnable = new Runnable() {
         @Override
         public void run() {
+            remindMeHighlight.addTarget(progressBar);
+            remindMeHighlight.show();
             remindMeHint.show();
         }
     };
@@ -218,6 +227,8 @@ public class GridTutorial extends Tutorial {
                     remindMeHint.dismiss();
                     remindMeTapHint.dismiss();
                     remindMeTapHighlight.dismiss();
+                    remindMeHighlight.dismiss();
+                    remindMeHighlight.clearTargets();
 
                     hideGridImages();
                     if (selectedCount == 1) {
@@ -298,10 +309,12 @@ public class GridTutorial extends Tutorial {
         gridsHint = new HintPointer(getActivity(), image43, false, true);
 
         partTwoHint = new HintPointer(getActivity(), image43, false, true);
+        partTwoHighlight = new HintHighlighter(getActivity());
 
         pulsateF = new HintHighlighter(getActivity());
         tapThisFHint = new HintPointer(getActivity(), tapThisF, true, false);
         tapAllFsHint = new HintPointer(getActivity(), image43, false, true);
+        tapAllFsHighlight = new HintHighlighter(getActivity());
 
         niceWorkHint = new HintPointer(getActivity(), image43, false, true);
 
@@ -315,11 +328,13 @@ public class GridTutorial extends Tutorial {
         remindMeHint = new HintPointer(getActivity(), image43, false, true);
         remindMeTapHint = new HintPointer(getActivity(), gridLayout, true, true);
         remindMeTapHighlight = new HintHighlighter(getActivity());
+        remindMeHighlight = new HintHighlighter(getActivity());
 
         progressBar.animate()
                 .setStartDelay(800)
                 .setDuration(400)
                 .alpha(1.0f);
+
 
         return view;
     }
@@ -371,10 +386,12 @@ public class GridTutorial extends Tutorial {
                         gridsHint.dismiss();
 
                         partTwoHint.dismiss();
+                        partTwoHighlight.dismiss();
 
                         pulsateF.dismiss();
                         tapThisFHint.dismiss();
                         tapAllFsHint.dismiss();
+                        tapAllFsHighlight.dismiss();
 
                         niceWorkHint.dismiss();
 
@@ -388,6 +405,8 @@ public class GridTutorial extends Tutorial {
                         remindMeHint.dismiss();
                         remindMeTapHint.dismiss();
                         remindMeTapHighlight.dismiss();
+                        remindMeHighlight.dismiss();
+                        remindMeHighlight.clearTargets();
 
                         exit();
                     }
@@ -494,11 +513,14 @@ public class GridTutorial extends Tutorial {
                                         @Override
                                         public void onClick(View view) {
                                             tapAllFsHint.dismiss();
+                                            tapAllFsHighlight.dismiss();
                                             tapLetters();
                                         }
                                     };
 
                                     tapAllFsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), listener);
+                                    tapAllFsHighlight.addTarget(progressBar);
+                                    tapAllFsHighlight.show();
                                     tapAllFsHint.show();
 
                                     return false;
@@ -608,6 +630,9 @@ public class GridTutorial extends Tutorial {
             @Override
             public void onClick(View view) {
                 remindMeHint.dismiss();
+                remindMeHighlight.dismiss();
+                remindMeHighlight.clearTargets();
+
                 final int maxTargets;
                 if (selectedCount == 2) {
                     maxTargets = 1;
