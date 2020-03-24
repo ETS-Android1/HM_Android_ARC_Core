@@ -256,7 +256,10 @@ public class HomeScreen extends BaseFragment {
             Phrase phrase = new Phrase(R.string.home_header5);
             phrase.replaceDate(endDateFmt);
             stringHeader = phrase.toString();
-            stringSubheader = ViewUtil.getString(R.string.home_body5);
+
+            Phrase phrase2 = new Phrase(R.string.home_body5);
+            phrase2.replaceDates(startDateFmt,endDateFmt);
+            stringSubheader = phrase2.toString();
         }
         // After the cycle before the start of the next session
         else if (cycleStartDate.isAfterNow()) {
