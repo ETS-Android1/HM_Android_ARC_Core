@@ -233,6 +233,7 @@ public class GridTutorial extends Tutorial {
                     hideGridImages();
                     if (selectedCount == 1) {
                         gridHighlight.addTarget(gridLayout, 10, 10);
+                        gridHighlight.addTarget(progressBar);
                         otherTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox));
                         otherTwoHint.show();
                         gridHighlight.show();
