@@ -121,9 +121,9 @@ public class EarningsScreen extends BaseFragment {
         String body = new String();
         if(isPractice){
             body += ViewUtil.getString(R.string.earnings_body0);
-            body += ViewUtil.getString(R.string.line_break);
+        }else {
+            body += ViewUtil.getString(R.string.earnings_body1);
         }
-        body += ViewUtil.getString(R.string.earnings_body1);
 
         headerText = view.findViewById(R.id.textViewHeader);
         headerText.setTypeface(Fonts.robotoMedium);
