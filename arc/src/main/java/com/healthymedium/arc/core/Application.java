@@ -119,7 +119,7 @@ public class Application extends android.app.Application implements LifecycleObs
     // list all locale options offered by the app
     public List<Locale> getLocaleOptions() {
         List<Locale> locales = new ArrayList<>();
-        locales.add(new Locale(Locale.LANGUAGE_ENGLISH,Locale.COUNTRY_UNITED_STATES));
+        locales.add(new Locale(true, Locale.LANGUAGE_ENGLISH,Locale.COUNTRY_UNITED_STATES));
         return locales;
     }
 

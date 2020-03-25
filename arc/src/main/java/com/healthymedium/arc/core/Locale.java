@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.utilities.Log;
-
-import java.io.IOException;
 
 public class Locale {
 
@@ -39,13 +36,16 @@ public class Locale {
 
     private String country;
     private String language;
+    private boolean fullySupported;
 
-    public Locale(String language, String country){
+    public Locale(boolean fullySupported, String language, String country){
+        this.fullySupported = fullySupported;
         this.country = country;
         this.language = language;
     }
 
-    public Locale(String language){
+    public Locale(boolean fullySupported, String language){
+        this.fullySupported = fullySupported;
         this.country = "";
         this.language = language;
     }
@@ -69,6 +69,10 @@ public class Locale {
 
     public String getLanguage() {
         return language;
+    }
+
+    public boolean IsfullySupported() {
+        return fullySupported;
     }
 
 }
