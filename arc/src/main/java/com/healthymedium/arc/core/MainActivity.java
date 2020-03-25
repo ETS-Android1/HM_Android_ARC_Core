@@ -124,14 +124,7 @@ public class MainActivity extends AppCompatActivity {
             options.add(locale.getLabel());
         }
 
-        QuestionLanguagePreference fragment = new QuestionLanguagePreference(
-                false,
-                true,
-                "Language:",
-                "",
-                options,
-                locales,
-                "CONFIRM");
+        QuestionLanguagePreference fragment = new QuestionLanguagePreference();
         NavigationManager.getInstance().open(fragment);
     }
 

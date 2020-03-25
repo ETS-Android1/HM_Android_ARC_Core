@@ -1,17 +1,25 @@
 package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SplashScreen;
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
+import com.healthymedium.arc.library.BuildConfig;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +27,10 @@ import java.util.Map;
 @SuppressLint("ValidFragment")
 public class QuestionLanguagePreference extends QuestionRadioButtons {
 
-    public List<Locale> locales;
+    static List<Locale> locales;
 
-    public QuestionLanguagePreference(boolean allowBack, boolean allowHelp, String header, String subheader, List<String> options, List<Locale> locales, String button) {
-        super(allowBack, allowHelp, header, subheader, options, button);
-        this.locales = locales;
+    public QuestionLanguagePreference() {
+        super(false, true, "Language:", "", initOptions(), "CONFIRM");
 
         if(FontFactory.getInstance()==null) {
             FontFactory.initialize(Application.getInstance());
@@ -34,6 +41,21 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
             FontFactory.getInstance().setDefaultFont(Fonts.roboto);
             FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater,container,savedInstanceState);
+
+        // assumes same size and order between locales and options
+        int size = buttons.size();
+        for(int i=0;i<size;i++) {
+            if(!locales.get(i).IsfullySupported()) {
+                buttons.get(i).setAlpha(0.4f);
+            }
+        }
+
+        return view;
     }
 
     @Override
@@ -77,4 +99,28 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         onDataCollection();
         NavigationManager.getInstance().open(new SplashScreen());
     }
+
+    static List<String> initOptions() {
+
+        List<Locale> AllLocales = Application.getInstance().getLocaleOptions();
+        List<String> options = new ArrayList<>();
+        locales = new ArrayList<>();
+
+        boolean isProd = BuildConfig.FLAVOR.equals(Config.FLAVOR_PROD);
+
+        for(Locale locale : AllLocales) {
+            if(isProd) {
+                if(locale.IsfullySupported()){
+                    options.add(locale.getLabel());
+                    locales.add(locale);
+                }
+            } else {
+                options.add(locale.getLabel());
+                locales.add(locale);
+            }
+        }
+
+        return options;
+    }
+
 }
