@@ -432,6 +432,13 @@ public class SetupTemplate extends StandardTemplate {
         textViewError.setText(error);
         if(authenticate){
             textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
+            textViewProblems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ContactScreen contactScreen = new ContactScreen();
+                    NavigationManager.getInstance().open(contactScreen);
+                }
+            });
             textViewProblems.setVisibility(View.VISIBLE);
             updateView(editText.getText());
         }
