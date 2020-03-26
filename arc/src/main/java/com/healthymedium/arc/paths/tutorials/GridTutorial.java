@@ -222,6 +222,8 @@ public class GridTutorial extends Tutorial {
 
                     firstGridReminderHandler.removeCallbacks(firstGridReminderRunnable);
                     remindMeHandler.removeCallbacks(remindMeRunnable);
+                    handler.removeCallbacksAndMessages(null);
+
                     pulsateGridItem.dismiss();
                     recallHint.dismiss();
                     remindMeHint.dismiss();
