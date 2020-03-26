@@ -90,7 +90,9 @@ public class HintPulse extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         if(bitmap!=null && running){
-            canvas.drawBitmap(bitmap, x,y, paint);
+            if (!bitmap.isRecycled()){
+                canvas.drawBitmap(bitmap, x, y, paint);
+            }
         }
     }
 
