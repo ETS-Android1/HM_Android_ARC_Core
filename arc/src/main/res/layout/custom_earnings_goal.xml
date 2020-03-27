@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:lineSpacingExtra="9dp"
+            android:lineSpacingExtra="4.5dp"
             android:textColor="@color/secondaryDark"
             android:textSize="17dp"
             tools:text="Complete all 4 test sessions for the day to earn $1.00." />
