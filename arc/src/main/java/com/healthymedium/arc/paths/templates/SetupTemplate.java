@@ -384,7 +384,7 @@ public class SetupTemplate extends StandardTemplate {
         hideKeyboard();
 
         if(!authenticate) {
-            if(is2FA) {
+            if(is2FA && !Config.REST_BLACKHOLE) {
                 SetupPathData setupPathData = ((SetupPathData)Study.getCurrentSegmentData());
                 loadingDialog = new LoadingDialog();
                 loadingDialog.show(getFragmentManager(),"LoadingDialog");
