@@ -125,6 +125,7 @@ public class ProgressScreen extends BaseFragment {
         weekHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_weekly_header)));
 
         studyHeader = view.findViewById(R.id.textViewStudyHeader);
+        studyHeader.setTypeface(Fonts.robotoMedium);
         studyHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_study_header)));
 
         joinedDate_label = view.findViewById(R.id.joinedDate);

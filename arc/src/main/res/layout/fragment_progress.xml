@@ -233,8 +233,7 @@
                 android:layout_marginRight="32dp"
                 android:text="@string/progress_study_header"
                 android:textColor="@color/white"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textViewStudyDivider"
