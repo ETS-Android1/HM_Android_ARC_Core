@@ -136,6 +136,7 @@ public class ProgressScreen extends BaseFragment {
 
         endDependsDisclaimer = view.findViewById(R.id.endDepends);
         endDependsDisclaimer.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_studydisclaimer)));
+        endDependsDisclaimer.setLineHeight(ViewUtil.dpToPx(20));
 
         // The join date should be the start date of test cycle 0
         DateTime joinedDate = Study.getParticipant().getStartDate();

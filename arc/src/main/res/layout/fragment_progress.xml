@@ -484,8 +484,7 @@
                     android:layout_marginBottom="26dp"
                     android:text="@string/progress_studydisclaimer"
                     android:textColor="@color/white"
-                    android:textSize="17dp"
-                    />
+                    android:textSize="14dp" />
 
             </RelativeLayout>
 
