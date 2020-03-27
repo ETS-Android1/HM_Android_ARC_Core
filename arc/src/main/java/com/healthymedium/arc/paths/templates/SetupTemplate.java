@@ -471,6 +471,8 @@ public class SetupTemplate extends StandardTemplate {
                 return getResources().getString(R.string.login_error3);
             case 401:
                 return getResources().getString(R.string.login_error1);
+            case 406:
+                return getResources().getString(R.string.login_error1);
             case 409:
                 return getResources().getString(R.string.login_error2);
         }
