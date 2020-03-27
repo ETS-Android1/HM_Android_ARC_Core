@@ -311,12 +311,13 @@ public class StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new SetupWelcome());
         fragments.add(new SetupParticipant(firstDigitCount,secondDigitCount));
-        fragments.add(new SetupParticipantConfirm(false,firstDigitCount,secondDigitCount));
 
         if (Config.EXPECTS_2FA_TEXT) {
+            fragments.add(new SetupParticipantConfirm(false,true,firstDigitCount,secondDigitCount));
             fragments.add(new SetupAuthCode(true, true, authDigitCount, ViewUtil.getString(R.string.login_enter_2FA)));
         }
         else {
+            fragments.add(new SetupParticipantConfirm(false,false,firstDigitCount,secondDigitCount));
             fragments.add(new SetupAuthCode(true, false, authDigitCount, ViewUtil.getString(R.string.login_enter_ARCID)));
         }
 

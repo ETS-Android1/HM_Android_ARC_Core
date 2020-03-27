@@ -212,14 +212,6 @@ public class SetupTemplate extends StandardTemplate {
             content.addView(textViewProblems, index);
         }
 
-        if (is2FA) {
-            SetupPathData setupPathData = ((SetupPathData)Study.getCurrentSegmentData());
-            if(!setupPathData.requested2FA) {
-                setupPathData.requested2FA = true;
-                Study.getRestClient().requestVerificationCode(setupPathData.id, verificationCodeListener);
-            }
-        }
-
         return view;
     }
 
@@ -392,7 +384,15 @@ public class SetupTemplate extends StandardTemplate {
         hideKeyboard();
 
         if(!authenticate) {
-            super.onNextRequested();
+            if(is2FA) {
+                SetupPathData setupPathData = ((SetupPathData)Study.getCurrentSegmentData());
+                loadingDialog = new LoadingDialog();
+                loadingDialog.show(getFragmentManager(),"LoadingDialog");
+                Study.getRestClient().requestVerificationCode(setupPathData.id, verificationCodeListener);
+            } else {
+                super.onNextRequested();
+            }
+
             return;
         }
 
@@ -510,7 +510,10 @@ public class SetupTemplate extends StandardTemplate {
         @Override
         public void onSuccess(RestResponse response) {
             String errorString = parseForError(response,false);
-            if(errorString!=null) {
+            loadingDialog.dismiss();
+            if(errorString==null) {
+                Study.openNextFragment();
+            } else {
                 showError(errorString);
             }
         }
@@ -519,6 +522,7 @@ public class SetupTemplate extends StandardTemplate {
         public void onFailure(RestResponse response) {
             String errorString = parseForError(response,true);
             showError(errorString);
+            loadingDialog.dismiss();
         }
     };
 }
