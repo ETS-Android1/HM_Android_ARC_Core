@@ -287,6 +287,7 @@ public class ProgressScreen extends BaseFragment {
         if(isPractice){
             dayOf = new Phrase(R.string.progress_baseline_notice);
             weeklyStatus.setTextSize(TypedValue.COMPLEX_UNIT_DIP,17);
+            weeklyStatus.setLineHeight(ViewUtil.dpToPx(24));
             weekProgressView.setVisibility(View.GONE);
         } else {
             dayOf = new Phrase(R.string.progess_weeklystatus);
