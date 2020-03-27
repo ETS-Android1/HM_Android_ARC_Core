@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.informative.FAQScreen;
 import com.healthymedium.arc.study.ParticipantState;
@@ -116,9 +117,11 @@ public class ProgressScreen extends BaseFragment {
 
 
         sessionHeader = view.findViewById(R.id.textViewSessionsHeader);
+        sessionHeader.setTypeface(Fonts.robotoMedium);
         sessionHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_daily_header)));
 
         weekHeader = view.findViewById(R.id.textViewWeekHeader);
+        weekHeader.setTypeface(Fonts.robotoMedium);
         weekHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_weekly_header)));
 
         studyHeader = view.findViewById(R.id.textViewStudyHeader);

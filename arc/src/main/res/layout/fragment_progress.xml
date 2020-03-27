@@ -31,8 +31,7 @@
                 android:layout_marginRight="32dp"
                 android:text="@string/progress_daily_header"
                 android:textColor="@color/secondaryDark"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textViewSessionDivider"
@@ -133,8 +132,7 @@
                 android:layout_marginRight="32dp"
                 android:text="@string/progress_weekly_header"
                 android:textColor="@color/secondaryDark"
-                android:textSize="26dp"
-                android:textStyle="bold" />
+                android:textSize="26dp" />
 
             <TextView
                 android:id="@+id/textViewWeekDivider"
