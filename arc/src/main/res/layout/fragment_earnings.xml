@@ -53,7 +53,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="32dp"
                     android:layout_marginRight="32dp"
-                    android:lineSpacingExtra="9dp"
+                    android:lineSpacingExtra="4.5dp"
                     android:text="@string/earnings_body1"
                     android:textColor="@color/white"
                     android:textSize="17dp" />

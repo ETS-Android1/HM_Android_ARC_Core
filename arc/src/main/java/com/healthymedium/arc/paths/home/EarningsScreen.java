@@ -130,7 +130,6 @@ public class EarningsScreen extends BaseFragment {
         headerText.setText(ViewUtil.getString(R.string.resources_nav_earnings));
 
         earningsBody1 = view.findViewById(R.id.earningsBody1);
-        earningsBody1.setTypeface(Fonts.robotoMedium);
         earningsBody1.setText(Html.fromHtml(body));
 
         viewDetailsButton = view.findViewById(R.id.viewDetailsButton);
@@ -162,6 +161,7 @@ public class EarningsScreen extends BaseFragment {
 
         goalLayout = view.findViewById(R.id.goalLayout);
         weeklyTotal = view.findViewById(R.id.weeklyTotal);
+        weeklyTotal.setTypeface(Fonts.robotoMedium);
         studyTotal = view.findViewById(R.id.studyTotal);
         studyTotal.setTypeface(Fonts.robotoMedium);
         lastSync = view.findViewById(R.id.textViewLastSync);
