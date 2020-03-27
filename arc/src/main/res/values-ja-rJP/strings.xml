@@ -151,9 +151,9 @@
 	<string name="progress_dailystatus_remaining">残り&lt;b>{#}&lt;/b>個</string>
 	<string name="progress_weekly_header">今週</string>
 	<string name="progess_weeklystatus">&lt;b>{#}&lt;/b>日目（&lt;b>7&lt;/b>日中）</string>
-	<string name="progress_startdate">&lt;b>開始日：&lt;/b></string>
+	<string name="progress_startdate">開始日：</string>
 	<string name="progress_startdate_date">{DATE}</string>
-	<string name="progress_enddate">&lt;b>終了日：&lt;/b></string>
+	<string name="progress_enddate">終了日：</string>
 	<string name="progress_enddate_date">{DATE}</string>
 	<string name="progress_study_header">この調査</string>
 	<string name="progress_studystatus">&lt;b>{#}&lt;/b>週目（&lt;b>10&lt;/b>週中）</string>

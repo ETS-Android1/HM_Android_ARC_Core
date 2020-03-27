@@ -151,9 +151,9 @@
 	<string name="progress_dailystatus_remaining">&lt;b>{#}&lt;/b> restant(s)</string>
 	<string name="progress_weekly_header">Cette semaine</string>
 	<string name="progess_weeklystatus">Jour &lt;b>{#}&lt;/b> de &lt;b>7&lt;/b></string>
-	<string name="progress_startdate">&lt;b>Date de début :&lt;/b></string>
+	<string name="progress_startdate">Date de début :</string>
 	<string name="progress_startdate_date">{DATE}</string>
-	<string name="progress_enddate">&lt;b>Date de fin :&lt;/b></string>
+	<string name="progress_enddate">Date de fin :</string>
 	<string name="progress_enddate_date">{DATE}</string>
 	<string name="progress_study_header">Cette étude</string>
 	<string name="progress_studystatus">Semaine &lt;b>{#}&lt;/b> de &lt;b>10&lt;/b></string>
