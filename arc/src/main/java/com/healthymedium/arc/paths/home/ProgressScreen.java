@@ -1,5 +1,6 @@
 package com.healthymedium.arc.paths.home;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -136,7 +137,9 @@ public class ProgressScreen extends BaseFragment {
 
         endDependsDisclaimer = view.findViewById(R.id.endDepends);
         endDependsDisclaimer.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_studydisclaimer)));
-        endDependsDisclaimer.setLineHeight(ViewUtil.dpToPx(20));
+        if(Build.VERSION.SDK_INT >= 28) {
+            endDependsDisclaimer.setLineHeight(ViewUtil.dpToPx(20));
+        }
 
         // The join date should be the start date of test cycle 0
         DateTime joinedDate = Study.getParticipant().getStartDate();
@@ -288,7 +291,9 @@ public class ProgressScreen extends BaseFragment {
         if(isPractice){
             dayOf = new Phrase(R.string.progress_baseline_notice);
             weeklyStatus.setTextSize(TypedValue.COMPLEX_UNIT_DIP,17);
-            weeklyStatus.setLineHeight(ViewUtil.dpToPx(24));
+            if(Build.VERSION.SDK_INT >= 28) {
+                weeklyStatus.setLineHeight(ViewUtil.dpToPx(24));
+            }
             weekProgressView.setVisibility(View.GONE);
         } else {
             dayOf = new Phrase(R.string.progess_weeklystatus);
