@@ -106,6 +106,15 @@ public class ViewUtil {
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
 
+    public static void setLineHeight(TextView textView, int dp)  {
+        int lineHeight = dpToPx(dp);
+        int fontHeight = textView.getPaint().getFontMetricsInt(null);
+
+        if (lineHeight != fontHeight) {
+            textView.setLineSpacing(lineHeight - fontHeight, 1f);
+        }
+    }
+
     public static int getStatusBarHeight() {
         if(statusBarHeight==-1){
             statusBarHeight = getStatusBarHeight(Application.getInstance());
