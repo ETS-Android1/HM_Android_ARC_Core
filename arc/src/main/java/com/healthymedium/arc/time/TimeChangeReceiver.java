@@ -29,6 +29,7 @@ public class TimeChangeReceiver extends BroadcastReceiver {
         Study.getParticipant().save();
         Proctor.startService(context,true);
 
+        Analytics.logInfo("Time Change Detected","Time Change Detected ("+intent.getAction()+")");
 
         String flavor = BuildConfig.FLAVOR;
         if(flavor.equals(Config.FLAVOR_DEV) || flavor.equals(Config.FLAVOR_QA)) {
