@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="key_native_language">Mexico - Español</string>
+	<string name="key_native_language">Argentina - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza en un mes, el {DATE}. Puede ajustar este horario hasta por 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su siguiente ciclo de pruebas comienza en una semana. Toque para confirmar o reprogramar.</string>
 	<string name="notification_daybefore">Recordatorio: Su siguiente ciclo de pruebas comienza mañana. Toque para confirmar o reprogramar.</string>
