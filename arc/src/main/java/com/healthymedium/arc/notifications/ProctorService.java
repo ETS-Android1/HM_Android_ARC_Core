@@ -24,6 +24,7 @@ public class ProctorService extends Service {
     public static final String ACTION_START_SERVICE = "ACTION_START_SERVICE";
     public static final String ACTION_STOP_SERVICE = "ACTION_STOP_SERVICE";
     public static final String ACTION_REFRESH_DATA = "ACTION_REFRESH_DATA";
+    public static final String EXTRA_TIME_SKIPPED = "EXTRA_TIME_SKIPPED";
 
     private ProctorServiceHandler serviceHandler;
     private Handler handler = new Handler();
@@ -67,11 +68,20 @@ public class ProctorService extends Service {
 
         switch (action) {
             case ACTION_START_SERVICE:
+
+                boolean timeSkipped = intent.getBooleanExtra(EXTRA_TIME_SKIPPED,false);
+
                 if(serviceHandler!=null){
+                    if(timeSkipped){
+                        serviceHandler.stop();
+                        serviceHandler.refreshData(timeSkipped);
+                        serviceHandler.start();
+                    }
                     Log.d(tag, "service handler is not null, exiting");
                     break;
                 }
-                serviceHandler = new ProctorServiceHandler(listener);
+
+                serviceHandler = new ProctorServiceHandler(listener,timeSkipped);
                 serviceHandler.start();
                 ProctorWatchdogJob.start(this);
                 break;
@@ -87,7 +97,7 @@ public class ProctorService extends Service {
 
             case ACTION_REFRESH_DATA:
                 if(serviceHandler==null) {
-                    serviceHandler = new ProctorServiceHandler(listener);
+                    serviceHandler = new ProctorServiceHandler(listener,false);
                 } else {
                     serviceHandler.stop();
                     serviceHandler.refreshData();

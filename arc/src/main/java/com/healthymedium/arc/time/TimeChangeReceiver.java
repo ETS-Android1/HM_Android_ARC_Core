@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.BuildConfig;
 import com.healthymedium.arc.utilities.Log;
@@ -22,11 +23,12 @@ public class TimeChangeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i("TimeChangeReceiver", "onReceive");
 
+        Proctor.stopService(context);
         Study.getStateMachine().decidePath();
         Study.getStateMachine().save(true);
         Study.getParticipant().save();
+        Proctor.startService(context,true);
 
-        Proctor.refreshData(context);
 
         String flavor = BuildConfig.FLAVOR;
         if(flavor.equals(Config.FLAVOR_DEV) || flavor.equals(Config.FLAVOR_QA)) {

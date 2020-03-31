@@ -10,6 +10,14 @@ public class Proctor {
 
     private static final String tag = "Proctor";
 
+    public static void startService(Context context, boolean timeSkipped) {
+        Log.i(tag,"startService");
+        Intent intent = new Intent(context, ProctorService.class);
+        intent.setAction(ProctorService.ACTION_START_SERVICE);
+        intent.putExtra(ProctorService.EXTRA_TIME_SKIPPED, timeSkipped);
+        ContextCompat.startForegroundService(context, intent);
+    }
+
     public static void startService(Context context) {
         Log.i(tag,"startService");
         Intent intent = new Intent(context, ProctorService.class);
