@@ -128,6 +128,12 @@ public class HomeScreen extends BaseFragment {
             tourHint.setVisibility(View.GONE);
             tourHint.dismiss();
         }
+        if(beginTestHint!=null) {
+            beginTestHint.dismiss();
+        }
+        if(beginTestHighlight!=null) {
+            beginTestHighlight.dismiss();
+        }
     }
 
     @Override
