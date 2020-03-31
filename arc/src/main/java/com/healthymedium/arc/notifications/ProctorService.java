@@ -42,6 +42,7 @@ public class ProctorService extends Service {
     public void onCreate() {
         super.onCreate();
         Log.d(tag, "onCreate");
+        startForegroundService();
     }
 
     @Override
@@ -66,7 +67,6 @@ public class ProctorService extends Service {
 
         switch (action) {
             case ACTION_START_SERVICE:
-                startForegroundService();
                 if(serviceHandler!=null){
                     Log.d(tag, "service handler is not null, exiting");
                     break;
@@ -86,7 +86,6 @@ public class ProctorService extends Service {
                 break;
 
             case ACTION_REFRESH_DATA:
-                startForegroundService();
                 if(serviceHandler==null) {
                     serviceHandler = new ProctorServiceHandler(listener);
                 } else {
