@@ -112,7 +112,7 @@ public class PricesTutorialRevised extends Tutorial {
 
         progressView = view.findViewById(R.id.progressView);
         progressView.setProgress(5,false);
-        progressIncrement = 17;
+        progressIncrement = 25;
 
         closeButton = view.findViewById(R.id.closeButton);
 
@@ -344,7 +344,6 @@ public class PricesTutorialRevised extends Tutorial {
                 Runnable runnable = new Runnable() {
                     @Override
                     public void run() {
-                        incrementProgress();
                         setSecondPricesCompare();
                     }
                 };
@@ -364,7 +363,6 @@ public class PricesTutorialRevised extends Tutorial {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                incrementProgress();
                 setThirdPricesCompare();
             }
         };
@@ -380,12 +378,12 @@ public class PricesTutorialRevised extends Tutorial {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                incrementProgress();
                 greatChoiceHint.setText(ViewUtil.getString(R.string.popup_tutorial_part2));
 
                 View.OnClickListener listener = new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        incrementProgress();
 
                         greatChoiceHint.dismiss();
                         highlighter.dismiss();
