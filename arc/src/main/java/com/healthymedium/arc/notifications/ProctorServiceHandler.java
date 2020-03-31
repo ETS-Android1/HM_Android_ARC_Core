@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
+import com.google.gson.JsonObject;
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.utilities.Log;
 
@@ -195,11 +196,21 @@ public class ProctorServiceHandler {
             seconds -= minutes*60;
             minutes -= hours*60;
 
-            String field = (target < now) ? "late":"early";
+            String direction = (target < now) ? "late":"early";
+            String difference = days+" day(s) "+hours+"hr "+minutes+"min "+seconds+"sec";
+
             DateTimeFormatter format = DateTimeFormat.mediumDateTime();
-            String nowString = format.print(now);
-            String targetString = format.print(target);
-            Analytics.logInfo("Proctor Deviation","Timeout was "+type+". Timed out at "+nowString+" ("+now+") when target was "+targetString+" ("+target+"). Timeout was "+days+"day(s) "+hours+"hr "+minutes+"min "+seconds+"sec "+field);
+
+            JsonObject json = new JsonObject();
+            json.addProperty("type",type);
+            json.addProperty("direction",direction);
+            json.addProperty("difference",difference);
+            json.addProperty("actual",format.print(now));
+            json.addProperty("actualTimestamp",now);
+            json.addProperty("target",format.print(target));
+            json.addProperty("targetTimestamp",target);
+
+            Analytics.logInfo("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
         }
     }
 
