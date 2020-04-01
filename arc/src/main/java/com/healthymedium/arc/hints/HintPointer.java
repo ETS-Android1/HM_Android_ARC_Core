@@ -149,20 +149,22 @@ public class HintPointer extends LinearLayout {
         right = dp44;
         bottom = 0;
 
-        int pointerMin = radius+dp16+dp16;
+        int pointerMin = radius+dp16+dp4;
+
         pointerX = x+(target.getWidth()/2);
 
-        if(pointerX < (dp44+radius)){
+        if(pointerX < (dp44+pointerMin)){
             left = 0;
             right = 2*dp44;
             if(pointerX < pointerMin){
                 pointerX = pointerMin;
             }
-        } else if(pointerX > (width+dp44)){
+        } else if(pointerX > (width+dp44-pointerMin)){
             left = 2*dp44;
             right = 0;
-            if(pointerX > (width+dp44-pointerMin)){
-                pointerX = (width+dp44-pointerMin);
+            pointerX -= 2*dp44;
+            if(pointerX > (width-pointerMin)){
+                pointerX = (width-pointerMin);
             }
         } else {
             pointerX -= dp44;
