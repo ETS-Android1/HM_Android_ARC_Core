@@ -42,8 +42,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewBack"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
                 android:textSize="26dp"
                 tools:text="Resend code?"
                 />
@@ -53,21 +53,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewHeader"
+                android:paddingLeft="24dp"
                 android:paddingTop="16dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="102dp"
+                android:paddingRight="24dp"
                 android:textSize="17dp"
                 tools:text="Keep in mind that it might take a few minutes to receive your security code."
                 />
 
             <com.healthymedium.arc.ui.Button
                 android:id="@+id/newCodeButton"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewSubHeader"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="32dp"
                 android:layout_marginTop="43dp"
-                android:text="SEND NEW CODE"/>
+                android:layout_marginRight="32dp"
+                android:text="SEND NEW CODE" />
 
             <LinearLayout
                 android:id="@+id/linearLayoutContent"

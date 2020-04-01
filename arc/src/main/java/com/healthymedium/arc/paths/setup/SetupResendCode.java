@@ -57,6 +57,7 @@ public class SetupResendCode extends BaseFragment {
 
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
         textViewSubHeader.setText(ViewUtil.getString(R.string.login_resend_subheader));
+        ViewUtil.setLineHeight(textViewSubHeader,26);
 
         newCodeButton = view.findViewById(R.id.newCodeButton);
         newCodeButton.setOnClickListener(new View.OnClickListener() {
