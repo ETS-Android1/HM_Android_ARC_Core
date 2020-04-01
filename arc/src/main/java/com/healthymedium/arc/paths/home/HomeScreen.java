@@ -80,10 +80,12 @@ public class HomeScreen extends BaseFragment {
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setTypeface(Fonts.robotoMedium);
+        ViewUtil.setLineHeight(textViewHeader,32);
 
         yellowBar = view.findViewById(R.id.yellowBar);
 
         textViewSubheader = view.findViewById(R.id.textViewSubHeader);
+        ViewUtil.setLineHeight(textViewSubheader,26);
 
         textViewAvailability = new TextView(getContext());
         textViewAvailability.setOnClickListener(new View.OnClickListener() {
