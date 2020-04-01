@@ -55,6 +55,7 @@ public class HintPointer extends LinearLayout {
     private Paint strokePaint;
     private int radius;
 
+    private boolean dismissing = false;
 
     public HintPointer(Activity activity, View view) {
         super(activity);
@@ -77,6 +78,8 @@ public class HintPointer extends LinearLayout {
 
     private void init() {
         setWillNotDraw(false);
+
+        target.addOnAttachStateChangeListener(attachStateChangeListener);
 
         radius = ViewUtil.dpToPx(16); // default to 16dp radius
 
@@ -303,10 +306,20 @@ public class HintPointer extends LinearLayout {
     }
 
     public void dismiss() {
+        if (dismissing) {
+            return;
+        }
+        dismissing = true;
+
+        if(target!=null) {
+            target.removeOnAttachStateChangeListener(attachStateChangeListener);
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 parent.removeView(HintPointer.this);
+                dismissing = false;
             }
         },500);
 
@@ -314,5 +327,19 @@ public class HintPointer extends LinearLayout {
                 .alpha(0.0f)
                 .setDuration(400);
     }
+
+    OnAttachStateChangeListener attachStateChangeListener = new OnAttachStateChangeListener() {
+        @Override
+        public void onViewAttachedToWindow(View v) {
+
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(View v) {
+            if(!dismissing) {
+                dismiss();
+            }
+        }
+    };
 
 }

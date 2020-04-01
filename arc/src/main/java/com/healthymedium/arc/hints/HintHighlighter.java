@@ -22,6 +22,7 @@ public class HintHighlighter extends FrameLayout {
 
     private List<HintHighlightTarget> targets;
     private ViewGroup parent;
+    private boolean dismissing = false;
 
     public HintHighlighter(Activity activity) {
         super(activity);
@@ -40,6 +41,7 @@ public class HintHighlighter extends FrameLayout {
         parent = (ViewGroup) activity.getWindow().getDecorView();
         targets = new ArrayList<>();
         targets.add(new HintHighlightTarget(getContext(),view,targetListener));
+        view.addOnAttachStateChangeListener(attachStateChangeListener);
         init();
     }
 
@@ -49,6 +51,7 @@ public class HintHighlighter extends FrameLayout {
 
         parent = (ViewGroup) activity.getWindow().getDecorView();
         for(View view : views){
+            view.addOnAttachStateChangeListener(attachStateChangeListener);
             targets.add(new HintHighlightTarget(getContext(),view,targetListener));
         }
         init();
@@ -89,12 +92,14 @@ public class HintHighlighter extends FrameLayout {
     }
 
     public void addPulsingTarget(View view) {
+        view.addOnAttachStateChangeListener(attachStateChangeListener);
         HintHighlightTarget target = new HintHighlightTarget(getContext(),view,targetListener);
         target.setPulsing(getContext(),0);
         targets.add(target);
     }
 
     public void addPulsingTarget(View view, int dpRaduis) {
+        view.addOnAttachStateChangeListener(attachStateChangeListener);
         HintHighlightTarget target = new HintHighlightTarget(getContext(),view,targetListener);
         target.setRadius(dpRaduis);
         target.setPulsing(getContext(),0);
@@ -102,16 +107,19 @@ public class HintHighlighter extends FrameLayout {
     }
 
     public void addTarget(View view) {
+        view.addOnAttachStateChangeListener(attachStateChangeListener);
         targets.add(new HintHighlightTarget(getContext(),view,targetListener));
     }
 
     public void addTarget(View view, int dpRaduis) {
+        view.addOnAttachStateChangeListener(attachStateChangeListener);
         HintHighlightTarget target = new HintHighlightTarget(getContext(),view,targetListener);
         target.setRadius(dpRaduis);
         targets.add(target);
     }
 
     public void addTarget(View view, int dpRaduis, int dpPadding) {
+        view.addOnAttachStateChangeListener(attachStateChangeListener);
         HintHighlightTarget target = new HintHighlightTarget(getContext(),view, targetListener);
         target.setRadius(dpRaduis);
         target.setPadding(dpPadding);
@@ -119,6 +127,11 @@ public class HintHighlighter extends FrameLayout {
     }
 
     public void clearTargets() {
+        for(HintHighlightTarget target : targets) {
+            if(target!=null){
+                target.removeOnAttachStateChangeListener(attachStateChangeListener);
+            }
+        }
         targets.clear();
     }
 
@@ -139,6 +152,17 @@ public class HintHighlighter extends FrameLayout {
     }
 
     public void dismiss() {
+        if(dismissing){
+            return;
+        }
+        dismissing = true;
+
+        for(HintHighlightTarget target : targets) {
+            if(target!=null){
+                target.removeOnAttachStateChangeListener(attachStateChangeListener);
+            }
+        }
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -146,6 +170,7 @@ public class HintHighlighter extends FrameLayout {
                 for(HintHighlightTarget target : targets) {
                     target.cleanup();
                 }
+                dismissing = false;
             }
         },500);
 
@@ -170,6 +195,20 @@ public class HintHighlighter extends FrameLayout {
         @Override
         public void onLayout(HintHighlightTarget target) {
             invalidate();
+        }
+    };
+
+    OnAttachStateChangeListener attachStateChangeListener = new OnAttachStateChangeListener() {
+        @Override
+        public void onViewAttachedToWindow(View v) {
+
+        }
+
+        @Override
+        public void onViewDetachedFromWindow(View v) {
+            if(!dismissing) {
+                dismiss();
+            }
         }
     };
 
