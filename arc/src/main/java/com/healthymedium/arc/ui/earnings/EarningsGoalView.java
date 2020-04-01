@@ -47,6 +47,8 @@ public class EarningsGoalView extends RoundedLinearLayout {
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewBody = view.findViewById(R.id.textViewBody);
+        ViewUtil.setLineHeight(textViewBody,26);
+
         textViewDone = view.findViewById(R.id.textViewDone);
         frameLayoutDone = view.findViewById(R.id.frameLayoutDone);
         contentLayout = view.findViewById(R.id.contentLayout);

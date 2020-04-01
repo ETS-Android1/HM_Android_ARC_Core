@@ -189,7 +189,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="32dp"
                     android:layout_marginBottom="24dp"
-                    android:lineSpacingExtra="4.5dp"
                     android:text="@string/earnings_bonus_body"
                     android:textColor="@color/black"
                     android:textSize="17dp" />

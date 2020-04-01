@@ -148,6 +148,7 @@ public class EarningsScreen extends BaseFragment {
 
         bonusBody = view.findViewById(R.id.bonusBody);
         bonusBody.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_body)));
+        ViewUtil.setLineHeight(bonusBody,26);
 
         viewFaqButton = view.findViewById(R.id.viewFaqButton);
         viewFaqButton.setText(ViewUtil.getString(R.string.button_viewfaq));
