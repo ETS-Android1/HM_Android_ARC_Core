@@ -1,6 +1,7 @@
 package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -172,4 +173,11 @@ public class FAQTestingScreen extends BaseFragment {
 
         return view;
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.setPadding(0, ViewUtil.getStatusBarHeight(),0,0);
+    }
+
 }
