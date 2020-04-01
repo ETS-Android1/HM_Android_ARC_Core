@@ -46,6 +46,7 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="88dp"
                 android:layout_marginRight="32dp"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 tools:text="Test 3 of 3" />
