@@ -48,6 +48,7 @@ public class Button extends ChipButton {
         textView = new TextView(context);
         textView.setTypeface(Fonts.robotoBold);
         textView.setTextSize(18);
+        textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
 
         imageView = new ImageView(context);
         imageView.setVisibility(GONE);
