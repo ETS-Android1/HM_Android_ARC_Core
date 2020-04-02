@@ -70,7 +70,7 @@
                         android:layout_marginLeft="30dp"
                         android:drawableLeft="@drawable/ic_alarm_clock_solid_teal"
                         android:drawablePadding="13dp"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="@string/resources_availability"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
@@ -100,7 +100,7 @@
                         android:layout_marginLeft="30dp"
                         android:drawableLeft="@drawable/ic_avatar_solid_teal"
                         android:drawablePadding="13dp"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="@string/resources_contact"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
@@ -130,7 +130,7 @@
                         android:layout_marginLeft="30dp"
                         android:drawableLeft="@drawable/ic_app_solid_teal"
                         android:drawablePadding="13dp"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="@string/resources_about_link"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
@@ -160,7 +160,7 @@
                         android:layout_marginLeft="30dp"
                         android:drawableLeft="@drawable/ic_info_solid_teal"
                         android:drawablePadding="13dp"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="@string/resources_faq_link"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
@@ -190,7 +190,7 @@
                         android:layout_marginLeft="30dp"
                         android:drawableLeft="@drawable/ic_privacy_solid_teal"
                         android:drawablePadding="13dp"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:text="@string/resources_privacy_link"
                         android:textStyle="bold"
                         android:textColor="@color/white" />
