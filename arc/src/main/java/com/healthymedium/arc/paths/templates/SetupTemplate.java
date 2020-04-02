@@ -171,27 +171,7 @@ public class SetupTemplate extends StandardTemplate {
         params0.addRule(RelativeLayout.ABOVE,buttonNext.getId());
         relativeLayout.addView(linearLayout,params0);
 
-        if(authenticate && !is2FA) {
-            textViewProblems = new TextView(getContext());
-            textViewProblems.setTypeface(Fonts.robotoMedium);
-            textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
-            // textViewProblems.setText("Problems logging in?");
-            textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
-            textViewProblems.setVisibility(View.INVISIBLE);
-            textViewProblems.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ContactScreen contactScreen = new ContactScreen();
-                    NavigationManager.getInstance().open(contactScreen);
-                }
-            });
-            ViewUtil.underlineTextView(textViewProblems);
-
-            // add below textViewError
-            int index = content.indexOfChild(textViewError) + 1;
-            content.addView(textViewProblems, index);
-        }
-        else if (authenticate && is2FA) {
+        if(authenticate && is2FA) {
             textViewProblems = new TextView(getContext());
             textViewProblems.setTypeface(Fonts.robotoMedium);
             textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
@@ -203,6 +183,25 @@ public class SetupTemplate extends StandardTemplate {
                 public void onClick(View view) {
                     SetupResendCode setupResendCodeScreen = new SetupResendCode();
                     NavigationManager.getInstance().open(setupResendCodeScreen);
+                }
+            });
+            ViewUtil.underlineTextView(textViewProblems);
+
+            // add below textViewError
+            int index = content.indexOfChild(textViewError) + 1;
+            content.addView(textViewProblems, index);
+        } else {
+            textViewProblems = new TextView(getContext());
+            textViewProblems.setTypeface(Fonts.robotoMedium);
+            textViewProblems.setPadding(0, ViewUtil.dpToPx(24), 0, 0);
+            // textViewProblems.setText("Problems logging in?");
+            textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
+            textViewProblems.setVisibility(View.INVISIBLE);
+            textViewProblems.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContactScreen contactScreen = new ContactScreen();
+                    NavigationManager.getInstance().open(contactScreen);
                 }
             });
             ViewUtil.underlineTextView(textViewProblems);
@@ -430,7 +429,7 @@ public class SetupTemplate extends StandardTemplate {
         buttonNext.setEnabled(false);
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
-        if(authenticate){
+        if(authenticate || is2FA){
             textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
             textViewProblems.setOnClickListener(new View.OnClickListener() {
                 @Override
