@@ -2,11 +2,13 @@ package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.healthymedium.arc.api.models.EarningOverview;
 import com.healthymedium.arc.core.BaseFragment;
@@ -18,6 +20,7 @@ import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.TotalEarningsView;
 import com.healthymedium.arc.ui.earnings.EarningsAchievementView;
 import com.healthymedium.arc.ui.earnings.EarningsGoalView;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class EarningsPostTestScreen extends BaseFragment {
 
@@ -44,6 +47,9 @@ public class EarningsPostTestScreen extends BaseFragment {
 
         goalLayout = view.findViewById(R.id.goalLayout);
         goalLayout.setAlpha(0f);
+
+        TextView textViewHeader3 = view.findViewById(R.id.textViewHeader3);
+        textViewHeader3.setText(Html.fromHtml(ViewUtil.getString(R.string.earnings_bonus_body)));
 
         Earnings earnings = Study.getParticipant().getEarnings();
         overview = earnings.getOverview();

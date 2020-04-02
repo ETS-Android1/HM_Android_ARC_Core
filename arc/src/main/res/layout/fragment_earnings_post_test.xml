@@ -37,7 +37,7 @@
                 android:layout_marginTop="56dp"
                 android:layout_marginRight="32dp"
                 android:gravity="center"
-                android:text="Total Earnings"
+                android:text="@string/progress_earnings_header"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 android:textStyle="bold" />
@@ -127,7 +127,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="32dp"
                 android:gravity="center"
-                android:text="Goals"
+                android:text="@string/earnings_bonus_header"
                 android:textColor="@color/white"
                 android:textSize="26dp"
                 android:textStyle="bold" />
@@ -142,7 +142,7 @@
                 android:layout_marginRight="32dp"
                 android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="Complete the following testing goals to earn bonuses."
+                android:text="@string/earnings_bonus_body"
                 android:textColor="@color/white"
                 android:textSize="17dp" />
 
