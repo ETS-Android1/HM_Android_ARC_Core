@@ -26,26 +26,32 @@
                 android:paddingLeft="@dimen/frame_vertical"
                 android:paddingRight="@dimen/frame_vertical"
                 android:text="state:" />
+
+            <TextView
+                android:id="@+id/textViewSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:padding="16dp"
+                android:text="Share State Info"
+                android:textColor="@color/primary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewLocale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:padding="16dp"
+                android:text="Switch Locale"
+                android:textAlignment="center"
+                android:textColor="@color/primary"
+                android:textStyle="bold" />
+
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/textViewSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:textColor="@color/primary"
-        android:textStyle="bold"
-        android:text="Send"/>
-
-    <com.healthymedium.arc.ui.Button
-        android:id="@+id/buttonDebugDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/button_okay"/>
 
 </LinearLayout>

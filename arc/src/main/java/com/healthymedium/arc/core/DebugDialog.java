@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
+import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
@@ -24,11 +25,12 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class DebugDialog extends DialogFragment {
 
-    Button button;
     TextView textViewSend;
+    TextView textViewLocale;
     TextView textView;
 
     OnDialogDismiss listener;
@@ -48,16 +50,9 @@ public class DebugDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_debug, container, false);
-        button = v.findViewById(R.id.buttonDebugDialog);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
 
         textViewSend = v.findViewById(R.id.textViewSend);
-        textViewSend.setPaintFlags(textViewSend.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        ViewUtil.underlineTextView(textViewSend);
         textViewSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +61,19 @@ public class DebugDialog extends DialogFragment {
                 sendIntent.putExtra(Intent.EXTRA_TEXT, textView.getText());
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, "Where to?"));
+            }
+        });
+
+
+        textViewLocale = v.findViewById(R.id.textViewLocale);
+        ViewUtil.underlineTextView(textViewLocale);
+        textViewLocale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                QuestionLanguagePreference screen = new QuestionLanguagePreference();
+                NavigationManager.getInstance().removeController();
+                NavigationManager.getInstance().open(screen);
             }
         });
 
