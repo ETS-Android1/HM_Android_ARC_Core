@@ -263,7 +263,7 @@
 	<string name="testing_header_3">Test 3 von 3</string>
 	<string name="testing_tutorial_link">Ein Tutorial ansehen</string>
 	<string name="testing_tutorial_complete">&lt;b>Tutorial abgeschlossen&lt;/b></string>
-	<string name="testing_begin">&lt;b>Test beginnt in&lt;/b></string>
+	<string name="testing_begin">Test beginnt in</string>
 	<string name="testing_loading">&lt;i>Nächsten Test laden...&lt;/i></string>
 	<string name="testing_done">&lt;i>Gut gemacht!&lt;/i></string>
 	<string name="testing_interrupted_header">&lt;b>Vielen Dank!&lt;/b></string>
@@ -436,7 +436,7 @@
 	<string name="footnote_symbol">*</string>
 	<string name="earnings_symbol">+</string>
 	<string name="time_format">h:mm a</string>
-	<string name="format_date">MM/TT/JJ</string>
+	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix"></string>
 	<string name="money_suffix">€</string>
 	<string name="prices_test_prefix"></string>

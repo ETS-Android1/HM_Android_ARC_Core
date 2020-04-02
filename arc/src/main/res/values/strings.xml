@@ -78,7 +78,7 @@
 	<string name="home_header6">You\'ve finished the study!</string>
 	<string name="home_body6">There are no more tests to take.</string>
 	<string name="home_header7">Your first testing cycle begins tomorrow.</string>
-	<string name="home_body7">There will be 4 test sessions per day for 7 days.\n&lt;br />&lt;br />\nWe\'ll notify you &lt;b>between {TIME1} and {TIME2}&lt;/b> when it\'s time to take a test.</string>
+	<string name="home_body7">There will be 4 test sessions per day for 7 days.\n&lt;br />&lt;br />We\'ll notify you &lt;b>between {TIME1} and {TIME2}&lt;/b> when it\'s time to take a test.</string>
 	<string name="resources_header">Resources</string>
 	<string name="resources_availability">Change My Availability</string>
 	<string name="resources_contact">Contact Study Coordinator</string>
@@ -266,7 +266,7 @@
 	<string name="testing_header_3">Test 3 of 3</string>
 	<string name="testing_tutorial_link">View a Tutorial</string>
 	<string name="testing_tutorial_complete">&lt;b>Tutorial Complete&lt;/b></string>
-	<string name="testing_begin">&lt;b>Test will begin in&lt;/b></string>
+	<string name="testing_begin">Test will begin in</string>
 	<string name="testing_loading">&lt;i>Loading next test...&lt;/i></string>
 	<string name="testing_done">&lt;i>Well Done!&lt;/i></string>
 	<string name="testing_interrupted_header">&lt;b>Thanks!&lt;/b></string>
@@ -280,7 +280,7 @@
 	<string name="prices_whatwasprice">What was the price?</string>
 	<string name="prices_complete">&lt;b>Prices Test Complete!&lt;/b></string>
 	<string name="symbols_header">Symbols</string>
-	<string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom. &lt;br />&lt;br />\nAs quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
+	<string name="symbols_body">You will see three pairs of symbols at the top of the screen and two pairs at the bottom. &lt;br />&lt;br />As quickly as you can, tap the pair at the bottom of the screen that matches one of the pairs at the top.</string>
 	<string name="symbols_match">Which pair below matches one of the pairs on the top?</string>
 	<string name="symbols_or">OR</string>
 	<string name="symbols_complete">&lt;b>Symbols Test Complete!&lt;/b></string>

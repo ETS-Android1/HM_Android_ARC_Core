@@ -263,7 +263,7 @@
 	<string name="testing_header_3">3つのテストのうち3つ目</string>
 	<string name="testing_tutorial_link">チュートリアルを見る</string>
 	<string name="testing_tutorial_complete">&lt;b>チュートリアル終了&lt;/b></string>
-	<string name="testing_begin">&lt;b>テストが始まります：&lt;/b></string>
+	<string name="testing_begin">テストが始まります：</string>
 	<string name="testing_loading">&lt;i>次のテストを読み込んでいます...&lt;/i></string>
 	<string name="testing_done">&lt;i>完了しました！&lt;/i></string>
 	<string name="testing_interrupted_header">&lt;b>ありがとうございました！&lt;/b></string>

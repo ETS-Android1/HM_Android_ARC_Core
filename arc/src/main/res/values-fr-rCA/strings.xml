@@ -201,7 +201,7 @@
 	<string name="chronotype_body1">Répondez à des questions concernant vos habitudes de sommeil et de réveil pour les jours avec et sans travail.                          &lt;br />&lt;br />\n&lt;i>Veuillez estimer en moyenne vos habitudes de sommeil normales au cours des six dernières semaines lorsque vous avez pu suivre vos routines habituelles.&lt;/i></string>
 	<string name="chronotype_q1">J’ai été un travailleur de quarts ou de nuit au cours des trois derniers mois.</string>
 	<string name="chronotype_q2">Normalement, je travaille ____ jours par semaine.</string>
-	<string name="chronotype_body2">Veuillez répondre à toutes les questions suivantes, même si vous ne travaillez pas, ou ne travaillez pas sept jours par semaine.&lt;br />&lt;br />                                            &lt;i>N’oubliez pas d’indiquer AM ou PM.&lt;/i>             </string>
+	<string name="chronotype_body2">Veuillez répondre à toutes les questions suivantes, même si vous ne travaillez pas, ou ne travaillez pas sept jours par semaine.&lt;br />&lt;br /> &lt;i>N’oubliez pas d’indiquer AM ou PM.&lt;/i>             </string>
 	<string name="chronotype_workdays_sleep">Les  &lt;b>jours de travail&lt;/b>, je &lt;b>m’endors&lt;/b> normalement à :</string>
 	<string name="chronotype_workdays_wake">Les &lt;b>jours de travail&lt;/b>, je &lt;b>me réveille&lt;/b> normalement à :</string>
 	<string name="chronotype_workfree_sleep">Les &lt;b>jours sans travail&lt;/b> lorsque je n’utilise pas de réveille-matin, je &lt;b>m’endors&lt;/b> normalement à :</string>
@@ -263,7 +263,7 @@
 	<string name="testing_header_3">Test 3 de 3</string>
 	<string name="testing_tutorial_link">Voir un tutoriel</string>
 	<string name="testing_tutorial_complete">&lt;b>Tutoriel terminé&lt;/b></string>
-	<string name="testing_begin">&lt;b>Le test commencera dans&lt;/b></string>
+	<string name="testing_begin">Le test commencera dans</string>
 	<string name="testing_loading">&lt;i>Chargement du prochain test...&lt;/i></string>
 	<string name="testing_done">&lt;i>Bon travail!&lt;/i></string>
 	<string name="testing_interrupted_header">&lt;b>Merci!&lt;/b></string>
@@ -436,7 +436,7 @@
 	<string name="footnote_symbol">*</string>
 	<string name="earnings_symbol">+</string>
 	<string name="time_format">h:mm a</string>
-	<string name="format_date">MM/jj/aa</string>
+	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix"></string>
 	<string name="money_suffix">$</string>
 	<string name="prices_test_prefix"></string>
