@@ -129,7 +129,7 @@ public class TestInfoTemplate extends BaseFragment {
         if ((stringType.equals("grids") && !Hints.hasBeenShown(HINT_GRID_TUTORIAL))
                 || (stringType.equals("prices") && !Hints.hasBeenShown(HINT_PRICES_TUTORIAL))
                 || (stringType.equals("symbols") && !Hints.hasBeenShown(HINT_SYMBOL_TUTORIAL))) {
-            tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, false);
+            tutorialHint = new HintPointer(getActivity(), textViewTutorial, true, true);
             tutorialHint.setText(ViewUtil.getString(R.string.popup_tutorial_view));
             tutorialHint.show();
         }
