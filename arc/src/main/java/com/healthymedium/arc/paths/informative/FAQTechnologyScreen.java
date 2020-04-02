@@ -20,13 +20,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class FAQTechnologyScreen extends BaseFragment {
 
     TextView textViewBack;
-
     TextView header, subheader;
-
-    RelativeLayout tech_q1;
-    RelativeLayout tech_q2;
-    RelativeLayout tech_q3;
-    RelativeLayout tech_q4;
 
     public FAQTechnologyScreen() {
         allowBackPress(false);
@@ -54,50 +48,6 @@ public class FAQTechnologyScreen extends BaseFragment {
 
         subheader = view.findViewById(R.id.textViewSubheader);
         subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));
-
-        tech_q1 = view.findViewById(R.id.tech_q1);
-        TextView tech_q1Label = (TextView) tech_q1.getChildAt(0);
-        tech_q1Label.setText(ViewUtil.getString(R.string.faq_tech_q1));
-        tech_q1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q1), ViewUtil.getString(R.string.faq_tech_a1));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        tech_q2 = view.findViewById(R.id.tech_q2);
-        TextView tech_q2Label = (TextView) tech_q2.getChildAt(0);
-        tech_q2Label.setText(ViewUtil.getString(R.string.faq_tech_q2));
-        tech_q2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q2), ViewUtil.getString(R.string.faq_tech_a2));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        tech_q3 = view.findViewById(R.id.tech_q3);
-        TextView tech_q3Label = (TextView) tech_q3.getChildAt(0);
-        tech_q3Label.setText(ViewUtil.getString(R.string.faq_tech_q3));
-        tech_q3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q3), ViewUtil.getString(R.string.faq_tech_a3));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        tech_q4 = view.findViewById(R.id.tech_q4);
-        TextView tech_q4Label = (TextView) tech_q4.getChildAt(0);
-        tech_q4Label.setText(ViewUtil.getString(R.string.faq_tech_q4));
-        tech_q4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q4), ViewUtil.getString(R.string.faq_tech_a4));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
 
         return view;
     }
