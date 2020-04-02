@@ -23,6 +23,9 @@
         <enum name="linearVertical" value="1"/>
     </attr>
 
+    <attr name="enableBorderTop" format="boolean" />
+    <attr name="enableBorderBottom" format="boolean" />
+
     <attr name="buttonTheme" format="enum" >
         <enum name="primary" value="0"/>
         <enum name="light" value="1"/>
@@ -161,5 +164,11 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="FaqListItem">
+        <attr name="question" format="string"/>
+        <attr name="answer" format="string"/>
+        <attr name="enableBorderTop" />
+        <attr name="enableBorderBottom" />
+    </declare-styleable>
 
 </resources>
