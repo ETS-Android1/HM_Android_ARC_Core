@@ -49,6 +49,7 @@
 	<string name="onboarding_notifications_header2">Habilite las notificaciones.</string>
 	<string name="onboarding_notifications_body2_ios">Debe habilitar las notificaciones para que el estudio funcione como es debido. Ingrese a la aplicación Configuración, toque Notificaciones, luego toque EXR y active el interruptor Permitir notificaciones.</string>
 	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para {APP_NAME} estén habilitadas.</string>
+	<string name="button_proceed_without_notifications">Continuar sin notificaciones</string>
 	<string name="availability_header">Disponibilidad</string>
 	<string name="availability_body">Ahora le haremos algunas preguntas que nos ayudarán a determinar cuándo enviarle las notificaciones.\n&lt;br />&lt;br />\n&lt;i>Solo recibirá notificaciones durante las horas en las que esté despierto. Tenga a bien establecer un horario de disponibilidad de 8 horas como mínimo.&lt;/i></string>
 	<string name="availability_start">¿A qué hora deberíamos &lt;b>iniciar&lt;/b> las notificaciones todos los días?</string>
@@ -263,7 +264,7 @@
 	<string name="testing_header_3">Prueba 3 de 3</string>
 	<string name="testing_tutorial_link">Visualizar un tutorial</string>
 	<string name="testing_tutorial_complete">&lt;b>Tutorial completado&lt;/b></string>
-	<string name="testing_begin">&lt;b>La prueba comenzará en&lt;/b></string>
+	<string name="testing_begin">La prueba comenzará en</string>
 	<string name="testing_loading">&lt;i>Cargando la próxima prueba...&lt;/i></string>
 	<string name="testing_done">&lt;i>¡Muy bien!&lt;/i></string>
 	<string name="testing_interrupted_header">&lt;b>¡Gracias!&lt;/b></string>
@@ -436,7 +437,7 @@
 	<string name="footnote_symbol">*</string>
 	<string name="earnings_symbol">+</string>
 	<string name="time_format">h:mm a</string>
-	<string name="format_date">MM/dd/aa</string>
+	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
 	<string name="prices_test_prefix">$</string>
 </resources>

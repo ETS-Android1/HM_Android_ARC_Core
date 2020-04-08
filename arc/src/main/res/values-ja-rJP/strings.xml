@@ -49,6 +49,7 @@
 	<string name="onboarding_notifications_header2">通知を有効にしてください。</string>
 	<string name="onboarding_notifications_body2_ios">調査が適切に機能するために通知を有効にする必要があります。アプリの設定に移動して「通知」をタップし、次に「EXR」をタップして「通知を許可する」スイッチをオンにしてください。</string>
 	<string name="onboarding_notifications_body2_android">調査が適切に機能するために通知を有効にする必要があります。設定に移動して、「{APP_NAME}」の通知が有効になっていることを確認してください。</string>
+	<string name="button_proceed_without_notifications">通知なしで続行</string>
 	<string name="availability_header">\n使用可能状況</string>
 	<string name="availability_body">ここでは、通知を送るタイミングを決定するために必要ないくつかの質問をします。&lt;br />&lt;br />\n&lt;i>通知はあなたが起きている時間帯にのみ送信されます。都合のよい時間帯は、最低でも8時間となるように設定してください。&lt;/i></string>
 	<string name="availability_start">毎日、何時に通知を&lt;b>開始&lt;/b>しますか？</string>

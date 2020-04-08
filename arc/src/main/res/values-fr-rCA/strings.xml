@@ -49,6 +49,7 @@
 	<string name="onboarding_notifications_header2">Veuillez activer les notifications.</string>
 	<string name="onboarding_notifications_body2_ios">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application, appuyer sur Notifications, puis appuyer sur EXR et activer le bouton Autoriser les notifications.</string>
 	<string name="onboarding_notifications_body2_android">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application et assurez-vous que les notifications pour {APP_NAME} sont activées.</string>
+	<string name="button_proceed_without_notifications">Procéder Sans Notifications</string>
 	<string name="availability_header">Disponibilité</string>
 	<string name="availability_body">Maintenant, nous vous poserons quelques questions pour nous aider à déterminer quand vous envoyer ces notifications.            &lt;br />&lt;br />\n&lt;i>Vous ne recevrez des notifications que pendant les heures où  vous êtes éveillé(e). Veuillez établir une période d\'au moins 8 heures de disponibilité.&lt;/i></string>
 	<string name="availability_start">À quelle heure devrions-nous &lt;b>commencer&lt;/b> vos notifications chaque jour?</string>

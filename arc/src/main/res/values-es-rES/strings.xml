@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="key_native_language">Europa - Español</string>
+	<string name="key_native_language">España - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza dentro de un mes, el {DATE}. Puede ajustar esta fecha hasta un máximo de 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su próximo ciclo de pruebas comienza dentro de una semana. Toque para confirmarlo o modique la fecha.</string>
 	<string name="notification_daybefore">Recordatorio: Su próximo ciclo de pruebas comienza mañana. Toque para confirmarlo o modique la fecha.</string>
@@ -49,6 +49,7 @@
 	<string name="onboarding_notifications_header2">Active las notificaciones.</string>
 	<string name="onboarding_notifications_body2_ios">Para que el estudio funcione correctamente, debe activar las notificaciones. Visite la aplicación de configuración, pulse Notificaciones, después EXR y, por último, active el botón Permitir notificaciones.</string>
 	<string name="onboarding_notifications_body2_android">Para que el estudio funcione correctamente, debe activar las notificaciones. Vaya a Configuración y asegúrese de que las notificaciones para {APP_NAME} estén activadas.</string>
+	<string name="button_proceed_without_notifications">Continuar sin notificaciones</string>
 	<string name="availability_header">Disponibilidad</string>
 	<string name="availability_body">A continuación, le haremos algunas preguntas para ayudarnos a determinar cuándo enviarle dichas notificaciones. \n&lt;br /> &lt;br />\n&lt;i>Solo recibirá notificaciones durante las horas de vigilia. Establezca un período mínimo de disponibilidad de 8 horas.&lt;/i></string>
 	<string name="availability_start">¿A qué hora debemos &lt;b>comenzar&lt;/b> a enviarle notificaciones cada día?</string>
