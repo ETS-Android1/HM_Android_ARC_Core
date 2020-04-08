@@ -40,7 +40,7 @@ public class TranslationDoc {
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1OWIiUaUDlGwbYMKfeE1hvw8BeWM7MolmrokIfja8oYs";
-        final String range = "Master Dev Data!A1:J";
+        final String range = "Master Dev Data!A1:M";
         Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
