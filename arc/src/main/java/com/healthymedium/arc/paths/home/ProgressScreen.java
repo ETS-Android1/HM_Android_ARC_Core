@@ -165,7 +165,7 @@ public class ProgressScreen extends BaseFragment {
         timeBetween_units = view.findViewById(R.id.timeBetween_units);
         Phrase units = new Phrase(R.string.progress_timebtwtesting_unit);
         units.replaceNumber(weeksBetween/4);
-        units.replaceUnit("Months");
+        units.replaceUnit(getString(R.string.unit_months));
         timeBetween_units.setText(units.toString());
 
         if(!isInCycle){
