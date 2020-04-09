@@ -52,6 +52,8 @@ public class FaqListItem extends LinearLayout {
         View view = inflate(context,R.layout.custom_faq_listitem,this);
 
         textView = view.findViewById(R.id.textviewQuestion);
+        ViewUtil.setLineHeight(textView,26);
+
         borderTop = view.findViewById(R.id.borderTop);
         borderBottom = view.findViewById(R.id.borderBottom);
 
