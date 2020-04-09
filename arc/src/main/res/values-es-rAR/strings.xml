@@ -440,4 +440,5 @@
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
 	<string name="prices_test_prefix">$</string>
+	<string name="unit_months">meses</string>
 </resources>

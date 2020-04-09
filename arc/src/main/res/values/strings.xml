@@ -444,6 +444,7 @@
 	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">$</string>
 	<string name="prices_test_suffix"></string>
+	<string name="unit_months">months</string>
 
 	<!--    no translation   -->
 
