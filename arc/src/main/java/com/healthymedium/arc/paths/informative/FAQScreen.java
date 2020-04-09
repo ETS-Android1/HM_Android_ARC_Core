@@ -3,11 +3,9 @@ package com.healthymedium.arc.paths.informative;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -15,6 +13,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.ui.FaqListItem;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class FAQScreen extends BaseFragment {
@@ -22,9 +21,9 @@ public class FAQScreen extends BaseFragment {
     TextView textViewBack;
     TextView header;
 
-    RelativeLayout testing;
-    RelativeLayout earnings;
-    RelativeLayout technology;
+    FaqListItem testing;
+    FaqListItem earnings;
+    FaqListItem technology;
 
 
     public FAQScreen() {
@@ -51,8 +50,6 @@ public class FAQScreen extends BaseFragment {
         header.setTypeface(Fonts.robotoMedium);
 
         testing = view.findViewById(R.id.testing);
-        TextView testingLabel = (TextView) testing.getChildAt(0);
-        testingLabel.setText(ViewUtil.getString(R.string.faq_testing));
         testing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,8 +59,6 @@ public class FAQScreen extends BaseFragment {
         });
 
         earnings = view.findViewById(R.id.earnings);
-        TextView earningsLabel = (TextView) earnings.getChildAt(0);
-        earningsLabel.setText(ViewUtil.getString(R.string.faq_earnings));
         earnings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,8 +68,6 @@ public class FAQScreen extends BaseFragment {
         });
 
         technology = view.findViewById(R.id.technology);
-        TextView techLabel = (TextView) technology.getChildAt(0);
-        techLabel.setText(ViewUtil.getString(R.string.faq_technology));
         technology.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

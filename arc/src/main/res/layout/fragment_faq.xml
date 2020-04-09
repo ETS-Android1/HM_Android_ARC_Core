@@ -68,124 +68,27 @@
                 android:background="@color/secondary"
                 android:orientation="vertical">
 
-                <FrameLayout
-                    android:id="@+id/lineFrameLayout1"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#223465">
-
-                </FrameLayout>
-
-                <RelativeLayout
+                <com.healthymedium.arc.ui.FaqListItem
                     android:id="@+id/testing"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp">
+                    android:layout_height="wrap_content"
+                    app:question="@string/faq_testing"
+                    app:enableBorderTop="true"
+                    app:enableBorderBottom="true"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginRight="64dp"
-                        android:text="@string/faq_testing"
-                        android:textColor="@color/white"
-                        android:textSize="17dp" />
-
-                    <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/background_back_button"
-                        android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:paddingRight="5dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white" />
-
-                </RelativeLayout>
-
-                <FrameLayout
-                    android:id="@+id/lineFrameLayout2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#223465">
-
-                </FrameLayout>
-
-                <RelativeLayout
+                <com.healthymedium.arc.ui.FaqListItem
                     android:id="@+id/earnings"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp">
+                    android:layout_height="wrap_content"
+                    app:question="@string/faq_earnings"
+                    app:enableBorderBottom="true"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginRight="64dp"
-                        android:text="@string/faq_earnings"
-                        android:textColor="@color/white"
-                        android:textSize="17dp" />
-
-                    <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/background_back_button"
-                        android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:paddingRight="5dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white" />
-
-                </RelativeLayout>
-
-                <FrameLayout
-                    android:id="@+id/lineFrameLayout3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#223465">
-
-                </FrameLayout>
-
-                <RelativeLayout
+                <com.healthymedium.arc.ui.FaqListItem
                     android:id="@+id/technology"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="32dp"
-                        android:layout_marginRight="64dp"
-                        android:text="@string/faq_technology"
-                        android:textColor="@color/white"
-                        android:textSize="17dp" />
-
-                    <TextView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/background_back_button"
-                        android:drawableEnd="@drawable/ic_arrow_right_white"
-                        android:paddingRight="5dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white" />
-
-                </RelativeLayout>
-
-                <FrameLayout
-                    android:id="@+id/lineFrameLayout4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#223465">
-
-                </FrameLayout>
+                    android:layout_height="wrap_content"
+                    app:question="@string/faq_technology"
+                    app:enableBorderBottom="true"/>
 
             </LinearLayout>
 
