@@ -56,61 +56,6 @@ public class FAQEarningsScreen extends BaseFragment {
         subheader = view.findViewById(R.id.textViewSubheader);
         subheader.setText(Html.fromHtml(ViewUtil.getString(R.string.faq_subpage_subheader)));
 
-        earnings_q1 = view.findViewById(R.id.earnings_q1);
-        TextView earnings_q1Label = (TextView) earnings_q1.getChildAt(0);
-        earnings_q1Label.setText(ViewUtil.getString(R.string.faq_earnings_q1));
-        earnings_q1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_earnings_q1), ViewUtil.getString(R.string.faq_earnings_a1));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        earnings_q2 = view.findViewById(R.id.earnings_q2);
-        TextView earnings_q2Label = (TextView) earnings_q2.getChildAt(0);
-        earnings_q2Label.setText(ViewUtil.getString(R.string.faq_earnings_q2));
-        earnings_q2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_earnings_q2), ViewUtil.getString(R.string.faq_earnings_a2));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        earnings_q3 = view.findViewById(R.id.earnings_q3);
-        TextView earnings_q3Label = (TextView) earnings_q3.getChildAt(0);
-        earnings_q3Label.setText(ViewUtil.getString(R.string.faq_earnings_q3));
-        earnings_q3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_earnings_q3), ViewUtil.getString(R.string.faq_earnings_a3));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        earnings_q4 = view.findViewById(R.id.earnings_q4);
-        TextView earnings_q4Label = (TextView) earnings_q4.getChildAt(0);
-        earnings_q4Label.setText(ViewUtil.getString(R.string.faq_earnings_q4));
-        earnings_q4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_earnings_q4), ViewUtil.getString(R.string.faq_earnings_a4));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
-        earnings_q5 = view.findViewById(R.id.earnings_q5);
-        TextView earnings_q5Label = (TextView) earnings_q5.getChildAt(0);
-        earnings_q5Label.setText(ViewUtil.getString(R.string.faq_earnings_q5));
-        earnings_q5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_earnings_q5), ViewUtil.getString(R.string.faq_earnings_a5));
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
-
         return view;
     }
 
