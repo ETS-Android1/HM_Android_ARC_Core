@@ -22,19 +22,11 @@ public class FaqListItem extends LinearLayout {
     View borderTop;
     View borderBottom;
     TextView textView;
-    OnClickListener listener = null;
 
     public FaqListItem(Context context, @StringRes int question, @StringRes int answer) {
         super(context);
         this.question = ViewUtil.getString(question);
         this.answer = ViewUtil.getString(answer);
-        init(context, null);
-    }
-
-    public FaqListItem(Context context, @StringRes int label, OnClickListener listener) {
-        super(context);
-        this.question = ViewUtil.getString(label);
-        this.listener = listener;
         init(context, null);
     }
 
@@ -81,17 +73,14 @@ public class FaqListItem extends LinearLayout {
             textView.setText(question);
         }
 
-        if(listener==null) {
-            setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    BaseFragment fragment = new FAQAnswerScreen(question, answer);
-                    NavigationManager.getInstance().open(fragment);
-                }
-            });
-        } else {
-            setOnClickListener(listener);
-        }
+        // default behavior
+        setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseFragment fragment = new FAQAnswerScreen(question, answer);
+                NavigationManager.getInstance().open(fragment);
+            }
+        });
     }
 
     void setBorderEnabled(boolean topEnabled, boolean bottomEnabled){
