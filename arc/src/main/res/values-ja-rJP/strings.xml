@@ -223,7 +223,7 @@
 	<string name="wake_excellent">とても良い</string>
 	<string name="context_header">状況調査</string>
 	<string name="context_subheader">5つの質問</string>
-	<string name="context_body">これらの質問はたった今この瞬間にあなたの周りで何が起きているかを手短にお聞きします。</string>
+	<string name="context_body">これらの質問は今現在あなたの周りで何がおきているかを手短にお聞きします</string>
 	<string name="context_q1">今誰と一緒にいますか？</string>
 	<string name="context_q1_a1">誰もいません</string>
 	<string name="context_q1_a2">パートナー／配偶者</string>
@@ -243,7 +243,7 @@
 	<string name="context_q3">今現在の&lt;b>全体的な気分&lt;/b>をどのように評価しますか？</string>
 	<string name="context_bad">悪い</string>
 	<string name="context_good">良い</string>
-	<string name="context_q4">今現在&lt;b>どのように感じているか&lt;/b>をどのように評価しますか？</string>
+	<string name="context_q4">今現在どのように感じていますか？評価してください</string>
 	<string name="context_tired">眠い／疲れた</string>
 	<string name="context_active">元気／活発</string>
 	<string name="context_q5">これまでの5分間、主に何をしていましたか？</string>
@@ -275,7 +275,7 @@
 	<string name="prices_body">表示された値段がその品物に対し、お買い得かどうかを決めてください。 &lt;br />&lt;br />その組み合わせが画面に表示されるのはとても短い間だけですので、しっかりと注意を払って素早く決定してください。</string>
 	<string name="prices_isthisgood">これはお買い得ですか？</string>
 	<string name="prices_overlay">品物が1つと値段が2つ表示されます。前のセクションの品物の値段を選択してください。</string>
-	<string name="prices_whatwasprice">価格はいくらですか？</string>
+	<string name="prices_whatwasprice">値段はいくらでしたか</string>
 	<string name="prices_complete">&lt;b>価格テスト終了！&lt;/b></string>
 	<string name="symbols_header">記号</string>
 	<string name="symbols_body">画面上部に3つの記号ペア、画面下部に2つの記号ペアが表示されます。 &lt;br />&lt;br />画面上部の記号のペアの1つと一致する画面下部の記号のペアをできる限り早くタップしてください。</string>
@@ -294,7 +294,7 @@
 	<string name="progress_schedule_header">今日の進行状況</string>
 	<string name="progress_baseline_notice">今日の練習セッションを終了していただきありがとうございました！&lt;b>本番のテストを行う1週間は明日始まります。&lt;/b></string>
 	<string name="progress_practice_body1">練習セッション終了！</string>
-	<string name="progress_practice_body2">明日以降、セッションを終了するごとに&lt;b>お金をもらえます&lt;/b>！</string>
+	<string name="progress_practice_body2">明日以降、セッションを終了するごとに&lt;b>謝礼金が入ります&lt;/b>！</string>
 	<string name="progress_schedule_body1">&lt;b>1&lt;/b>個のセッション終了！</string>
 	<string name="progress_schedule_body2">&lt;b>{#}&lt;/b>個のセッション終了！</string>
 	<string name="progress_schedule_status1">今日は残りあと&lt;b>{#}&lt;/b>個です。</string>
@@ -326,7 +326,7 @@
 	<string name="button_begin">始める</string>
 	<string name="button_back">戻る</string>
 	<string name="button_sendnewcode">新しいコードを送る</string>
-	<string name="button_submittime">提出時刻</string>
+	<string name="button_submittime">次へ</string>
 	<string name="button_next">次へ</string>
 	<string name="button_call">電話</string>
 	<string name="button_email">Eメール</string>
@@ -363,7 +363,7 @@
 	<string name="prices_tutorial_price1_match">¥6.78</string>
 	<string name="prices_tutorial_price2_match">¥4.01</string>
 	<string name="popup_tutorial_choose1">&lt;b>どう思いますか？&lt;/b>\nあなたが適切だと思われる回答を選択してください。</string>
-	<string name="popup_tutorial_greatchoice1">&lt;b>選択ありがとうございます。&lt;/b>\nもうひとつ試してみましょう。</string>
+	<string name="popup_tutorial_greatchoice1">&lt;b>良い選択です。&lt;/b>もう一つ試してみましょう</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>この選択もありがとうございます。&lt;/b>\nパート2に進みましょう。</string>
 	<string name="popup_tutorial_recall">&lt;b>どう思いますか？&lt;/b>\nできるだけ努力してパート1の価格を思い出してください。</string>
 	<string name="popup_tutorial_choose2">&lt;b>どう思いますか？&lt;/b>\nパート1で見た価格を選択してください。</string>
