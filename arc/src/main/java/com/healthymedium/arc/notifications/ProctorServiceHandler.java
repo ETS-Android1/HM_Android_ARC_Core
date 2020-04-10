@@ -210,7 +210,7 @@ public class ProctorServiceHandler {
             json.addProperty("target",format.print(target));
             json.addProperty("targetTimestamp",target);
 
-            Analytics.logInfo("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
+            Analytics.logWarning("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
         }
     }
 
