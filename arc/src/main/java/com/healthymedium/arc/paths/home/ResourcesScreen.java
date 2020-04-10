@@ -66,6 +66,10 @@ public class ResourcesScreen extends BaseFragment {
             }
         });
 
+        boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
+        if(isTestReady) {
+            frameLayoutAvailability.setVisibility(View.INVISIBLE);
+        }
 
         textViewContact = view.findViewById(R.id.textViewContact);
         textViewContact.setText(Html.fromHtml(ViewUtil.getString(R.string.resources_contact)));
