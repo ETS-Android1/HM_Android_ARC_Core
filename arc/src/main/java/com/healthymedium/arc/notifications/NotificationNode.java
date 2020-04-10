@@ -39,4 +39,8 @@ public class NotificationNode {
             return a.time.compareTo(b.time);
         }
     }
+
+    public static int getNotifyId(int id, int type){
+        return (type * 10000) + id;
+    }
 }

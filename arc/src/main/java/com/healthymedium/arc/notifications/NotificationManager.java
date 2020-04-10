@@ -149,6 +149,11 @@ public class NotificationManager {
         }
     }
 
+    public void removeUserNotification(int notifyId) {
+        android.app.NotificationManager notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(notifyId);
+    }
+
     public NotificationType getNotificationType(int typeId){
         for(NotificationType type : types){
             if(type.getId()==typeId){

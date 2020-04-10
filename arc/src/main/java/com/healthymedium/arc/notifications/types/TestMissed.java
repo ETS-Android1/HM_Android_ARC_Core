@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationNode;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -32,6 +33,9 @@ public class TestMissed extends NotificationType {
     @Override
     public boolean onNotifyPending(NotificationNode node) {
         boolean showUser = false;
+
+        int notifyId = NotificationNode.getNotifyId(node.id,new TestTake().id);
+        NotificationManager.getInstance().removeUserNotification(notifyId);
 
         PreferencesManager preferences = PreferencesManager.getInstance();
         int count = preferences.getInt(TAG_TEST_MISSED_COUNT, 0);
