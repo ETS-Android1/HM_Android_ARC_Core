@@ -125,6 +125,8 @@ public class TestInfoTemplate extends BaseFragment {
             button.setIcon(buttonImage);
         }
 
+        button.setEnabled(false);
+
         // Show a hint if this test type's tutorial has not yet been completed
         if ((stringType.equals("grids") && !Hints.hasBeenShown(HINT_GRID_TUTORIAL))
                 || (stringType.equals("prices") && !Hints.hasBeenShown(HINT_PRICES_TUTORIAL))
@@ -212,6 +214,7 @@ public class TestInfoTemplate extends BaseFragment {
     }
 
     private void enableButton() {
+        button.setEnabled(true);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
