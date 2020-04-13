@@ -5,7 +5,9 @@ import com.healthymedium.arc.utilities.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -102,9 +104,73 @@ public class SchedulerTest {
 
             scheduler.scheduleTests(now,participant);
 
-            // TODO: validate conformance
+            List<TestCycle> cycles = participant.getState().testCycles;
+            for(TestCycle cycle : cycles) {
+                checkConformance(rhythm,cycle);
+            }
         }
 
+    }
+
+    private void checkConformance(CircadianRhythm rhythm, TestCycle cycle) {
+
+        List<TestDay> days = cycle.getTestDays();
+
+        if(cycle.getId()==0) {
+            Assert.assertTrue(days.size()==8);
+        } else {
+            Assert.assertTrue(days.size()==7);
+        }
+
+        for(TestDay day : days){
+
+            if(day.getDayIndex()==0 && cycle.getId()==0) {
+               continue;
+            }
+
+            DateTime start = day.getStartTime();
+            DateTime end = day.getEndTime();
+
+            // make sure start and end reflect the rhythm
+            Assert.assertTrue(start.toLocalTime().isEqual(rhythm.getWakeTime()));
+            Assert.assertTrue(end.toLocalTime().isEqual(rhythm.getBedTime()));
+
+            List<TestSession> sessions = day.getTestSessions();
+            int size = sessions.size();
+            Assert.assertTrue(size==4);
+
+            // Testing schedule within availability window set by user (e.g., 9 a.m. to 9 p.m.)
+            for(TestSession session : sessions){
+                boolean afterStart = session.getScheduledTime().isAfter(start);
+                boolean equalStart = session.getScheduledTime().isEqual(start);
+                boolean beforeEnd = session.getScheduledTime().isBefore(end);
+                boolean equalEnd = session.getScheduledTime().isEqual(end);
+
+                // logic structured to allow easy debugging
+                if(!(afterStart || equalStart)){
+                    Assert.assertTrue(false);
+                }
+
+                if(!(beforeEnd || equalEnd)) {
+                    Assert.assertTrue(false);
+                }
+
+            }
+
+            // 2 hours minimum between tests
+            // Test times are sequential
+            for(int i=1; i<size; i++){
+                DateTime missedTime = sessions.get(i-1).getScheduledTime().plusHours(2);
+                DateTime scheduledTime = sessions.get(i).getScheduledTime();
+
+                boolean before = missedTime.isBefore(scheduledTime);
+                boolean equal = missedTime.isEqual(scheduledTime);
+
+                if(!(before || equal)){
+                    Assert.assertTrue(false);
+                }
+            }
+        }
     }
 
 
@@ -120,7 +186,7 @@ public class SchedulerTest {
             List<TestCycle> cycles = participant.getState().testCycles;
             DateTime midnight = TimeUtil.setMidnight(now);
 
-            TestCycle baseline = initializeBaselineCycle(midnight,4);
+            TestCycle baseline = initializeBaselineCycle(midnight,8);
             cycles.add(baseline);
 
             TestCycle visit1 = initializeCycle(1,4,midnight.plusDays(90),7);
