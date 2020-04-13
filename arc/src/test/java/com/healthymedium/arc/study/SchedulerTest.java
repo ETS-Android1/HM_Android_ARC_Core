@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(JUnit4.class)
@@ -38,27 +39,71 @@ public class SchedulerTest {
         Log.pointToSystemOut();
         Log.v("test","\n--------------------------------------------------\n");
 
-        CircadianClock clock = new CircadianClock();
-        clock.setRhythms("06:00:00","21:00:00");
-
-        Participant participant = Participants.getDefault();
-        participant.getState().circadianClock = clock;
-
         DateTime now = DateTime.parse("2019-07-29 09:30:00", DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss"));
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
 
         TestScheduler scheduler = new TestScheduler();
-        scheduler.scheduleTests(now,participant);
+        CircadianClock clock = new CircadianClock();
 
-        clock.setRhythms("19:00:00","03:00:00");
-//        participant.getState().circadianClock = CircadianClocks.getDefault2();
+        Participant participant = Participants.getDefault();
+        participant.getState().circadianClock = clock;
 
-        scheduler.scheduleTests(now,participant);
+        List<CircadianRhythm> rhythms = new ArrayList<>();
 
-//        DateTime then = DateTime.parse("2019-07-29 09:30:00", DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss"));
-//        DateTimeUtils.setCurrentMillisFixed(then.getMillis());
+        //  2 - span two days to make sure overnight permutations are generated
+        // 24 - hours in  a day
+        //  4 - fifteen minute increments
+        int increments = 2*24*4;
 
+        DateTime start = TimeUtil.setMidnight(DateTime.now());
+        DateTime wake = start.minusMinutes(15);
+        DateTime bed;
 
+        // generate a list of unique
+        for(int i=0; i<increments; i++){
+            wake = wake.plusMinutes(15);
+            bed = start;
+
+            for(int j=0; j<increments; j++){
+                bed = bed.plusMinutes(15);
+
+                if(wake.plusHours(8).isAfter(bed) || bed.minusHours(18).isAfter(wake)) {
+                    // in violoation of the 8 hour min or 18 hour max span
+                    continue;
+                }
+
+                boolean found = false;
+                for(CircadianRhythm oldRhythm : rhythms){
+                    if(oldRhythm.getWakeTime().equals(wake.toLocalTime())){
+                        found= true;
+                        break;
+                    }
+                    if(oldRhythm.getBedTime().equals(bed.toLocalTime())){
+                        found= true;
+                        break;
+                    }
+                }
+
+                if(!found){
+                    CircadianRhythm rhythm = new CircadianRhythm("");
+                    rhythm.setTimes(wake.toLocalTime(),bed.toLocalTime());
+                    rhythms.add(rhythm);
+                }
+            }
+        }
+
+        for(CircadianRhythm rhythm : rhythms){
+            clock.setRhythms(rhythm.getWakeTime(),rhythm.getBedTime());
+
+            if(!clock.isValid()) {
+                Log.e("test", "invalid clock cycle found");
+                continue;
+            }
+
+            scheduler.scheduleTests(now,participant);
+
+            // TODO: validate conformance
+        }
 
     }
 
