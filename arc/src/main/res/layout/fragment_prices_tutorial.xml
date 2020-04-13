@@ -29,17 +29,16 @@
             android:layout_marginLeft="10dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:background="@drawable/background_rounded">
 
             <TextView
                 android:id="@+id/textviewPrice"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textView12"
                 android:layout_centerHorizontal="false"
                 android:ellipsize="end"
-                android:gravity="center"
                 android:lineSpacingExtra="3dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
@@ -49,7 +48,7 @@
 
             <TextView
                 android:id="@+id/textviewFood"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/textviewPrice"
                 android:layout_centerHorizontal="false"

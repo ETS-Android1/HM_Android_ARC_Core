@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/textviewFood"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textviewPrice"
             android:layout_centerHorizontal="true"
@@ -28,16 +28,17 @@
             android:paddingTop="44dp"
             android:paddingRight="32dp"
             android:text="Rolls"
+            android:gravity="center_horizontal"
             android:textAllCaps="false"
             android:textSize="35dp" />
 
         <TextView
             android:id="@+id/textviewPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView12"
             android:ellipsize="end"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
             android:paddingBottom="44dp"
