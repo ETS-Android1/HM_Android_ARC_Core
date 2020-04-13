@@ -102,10 +102,6 @@ public class ProctorService extends Service {
                     serviceHandler.stop();
                     serviceHandler.refreshData();
                 }
-                if(!serviceHandler.isValid()){
-                    return START_NOT_STICKY;
-                }
-
                 serviceHandler.start();
                 break;
         }
