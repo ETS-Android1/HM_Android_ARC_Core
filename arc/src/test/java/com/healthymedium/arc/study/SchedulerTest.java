@@ -78,7 +78,7 @@ public class SchedulerTest {
             TestCycle baseline = initializeBaselineCycle(midnight,4);
             cycles.add(baseline);
 
-            TestCycle visit1 = initializeCycle(1,4,midnight.plusDays(90),3);
+            TestCycle visit1 = initializeCycle(1,4,midnight.plusDays(90),7);
             cycles.add(visit1);
 
             int id = 0;
