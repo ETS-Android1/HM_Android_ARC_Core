@@ -393,7 +393,7 @@
 	<string name="popup_tab_home">&lt;b>Dies ist die Registerkarte „Start“.&lt;/b>\nSehen Sie hier nach, ob es Zeit für einen Test ist.</string>
 	<string name="popup_tab_progress">&lt;b>Dies ist die Registerkarte „Fortschritt“.&lt;/b>\nSehen Sie hier nach, wo in der Testwoche Sie sich befinden.</string>
 	<string name="popup_tab_earnings">&lt;b>Dies ist die Registerkarte „Verdienst“.&lt;/b>\nSehen Sie hier nach, was Sie verdient haben und wie Sie Boni bekommen.</string>
-	<string name="popup_tab_resources">&lt;b>Fragen?&lt;/b>\nDieRegisterkarte „Ressourcen“ bietet Ihnen die Möglichkeit, Ihre Verfügbarkeit zu ändern, Ihren Studienkoordinator zu kontaktieren und vieles mehr.</string>
+	<string name="popup_tab_resources">&lt;b>Fragen?&lt;/b>\nDie Registerkarte „Ressourcen“ bietet Ihnen die Möglichkeit, Ihre Verfügbarkeit zu ändern, Ihren Studienkoordinator zu kontaktieren und vieles mehr.</string>
 	<string name="popup_nicejob">&lt;b>Gut gemacht mit den Tests!&lt;/b>\nSchauen wir uns den Rest der App an.</string>
 	<string name="low_memory_toast">Bitte schließen Sie andere Apps, um die Leistung zu verbessern.</string>
 	<string name="low_memory_restart_dialogue_header">Ups!</string>
