@@ -1,8 +1,8 @@
 package com.healthymedium.arc.core;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
@@ -25,7 +25,6 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 public class DebugDialog extends DialogFragment {
 
@@ -33,7 +32,10 @@ public class DebugDialog extends DialogFragment {
     TextView textViewLocale;
     TextView textView;
 
-    OnDialogDismiss listener;
+    View optionsView;
+    View statusView;
+    Button button;
+    boolean viewingStatus = true;
 
     static public void launch(){
         DebugDialog dialog = new DebugDialog();
@@ -52,7 +54,6 @@ public class DebugDialog extends DialogFragment {
         View v = inflater.inflate(R.layout.dialog_debug, container, false);
 
         textViewSend = v.findViewById(R.id.textViewSend);
-        ViewUtil.underlineTextView(textViewSend);
         textViewSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,9 +65,7 @@ public class DebugDialog extends DialogFragment {
             }
         });
 
-
         textViewLocale = v.findViewById(R.id.textViewLocale);
-        ViewUtil.underlineTextView(textViewLocale);
         textViewLocale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +75,61 @@ public class DebugDialog extends DialogFragment {
                 NavigationManager.getInstance().open(screen);
             }
         });
+
+        textView = v.findViewById(R.id.textviewStatus);
+        textView.setText(getStatus());
+
+        statusView = v.findViewById(R.id.scrollViewStatus);
+        optionsView = v.findViewById(R.id.scrollViewOptions);
+        button = v.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(viewingStatus){
+                    switchToOptions();
+                } else {
+                    switchToStatus();
+                }
+            }
+        });
+
+        return v;
+    }
+
+
+    private void switchToOptions() {
+        viewingStatus = false;
+        button.setEnabled(false);
+        optionsView.setVisibility(View.VISIBLE);
+        statusView.animate().alpha(0.0f).setDuration(200);
+        optionsView.animate().alpha(1.0f).setDuration(300);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                statusView.setVisibility(View.INVISIBLE);
+                button.setText("View Status");
+                button.setEnabled(true);
+            }
+        },300);
+    }
+
+    private void switchToStatus() {
+        viewingStatus = true;
+        button.setEnabled(false);
+        statusView.setVisibility(View.VISIBLE);
+        statusView.animate().alpha(1.0f).setDuration(300);
+        optionsView.animate().alpha(0.0f).setDuration(200);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                optionsView.setVisibility(View.INVISIBLE);
+                button.setText("View Debug Options");
+                button.setEnabled(true);
+            }
+        },300);
+    }
+
+    private String getStatus() {
 
         State studyState = Study.getStateMachine().getState();
         Participant participant = Study.getParticipant();
@@ -128,20 +182,7 @@ public class DebugDialog extends DialogFragment {
         else {
             status += " -- uninitialized -- \n";
         }
-
-
-        textView = v.findViewById(R.id.textviewState);
-        textView.setText(status);
-
-        return v;
-    }
-
-    public void setOnDialogDismissListener(OnDialogDismiss listener){
-        this.listener = listener;
-    }
-
-    public interface OnDialogDismiss{
-        void dismiss(String time);
+        return status;
     }
 
 }
