@@ -35,7 +35,6 @@ public class ProctorServiceHandler {
         if(listener==null){
             throw new UnsupportedOperationException("ProctorServiceHandler.Listener needs to not be null");
         }
-        refreshData(timeSkipped);
     }
 
     public void refreshData(boolean timeSkipped) {

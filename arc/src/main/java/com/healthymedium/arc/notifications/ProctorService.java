@@ -71,19 +71,26 @@ public class ProctorService extends Service {
 
                 boolean timeSkipped = intent.getBooleanExtra(EXTRA_TIME_SKIPPED,false);
 
-                if(serviceHandler!=null){
-                    if(timeSkipped){
-                        serviceHandler.stop();
-                        serviceHandler.refreshData(timeSkipped);
-                        serviceHandler.start();
-                    }
-                    Log.d(tag, "service handler is not null, exiting");
-                    break;
+                if(serviceHandler==null){
+                    serviceHandler = new ProctorServiceHandler(listener,timeSkipped);
+                    Log.d(tag, "service handler was null, starting new instance");
+                    serviceHandler.refreshData(timeSkipped);
                 }
 
-                serviceHandler = new ProctorServiceHandler(listener,timeSkipped);
-                serviceHandler.start();
-                ProctorWatchdogJob.start(this);
+                if(timeSkipped){
+                    Log.d(tag, "refreshing service handler to cope with time skip");
+                    serviceHandler.stop();
+                    serviceHandler.refreshData(timeSkipped);
+                }
+
+                if(!serviceHandler.isRunning()){
+                    serviceHandler.start();
+                    Log.d(tag, "starting service handler");
+                }
+
+                if(!ProctorWatchdogJob.isScheduled(this)) {
+                    ProctorWatchdogJob.start(this);
+                }
                 break;
 
             case ACTION_STOP_SERVICE:
@@ -98,10 +105,9 @@ public class ProctorService extends Service {
             case ACTION_REFRESH_DATA:
                 if(serviceHandler==null) {
                     serviceHandler = new ProctorServiceHandler(listener,false);
-                } else {
-                    serviceHandler.stop();
-                    serviceHandler.refreshData();
                 }
+                serviceHandler.stop();
+                serviceHandler.refreshData();
                 serviceHandler.start();
                 break;
         }
