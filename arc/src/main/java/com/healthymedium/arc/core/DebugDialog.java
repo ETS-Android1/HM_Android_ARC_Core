@@ -1,5 +1,6 @@
 package com.healthymedium.arc.core;
 
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.library.R;
@@ -26,16 +28,16 @@ import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 
+import static android.content.Context.ACTIVITY_SERVICE;
+
 public class DebugDialog extends DialogFragment {
 
-    TextView textViewSend;
-    TextView textViewLocale;
-    TextView textView;
+    TextView textViewStatus;
+    boolean viewingStatus = true;
 
     View optionsView;
     View statusView;
     Button button;
-    boolean viewingStatus = true;
 
     static public void launch(){
         DebugDialog dialog = new DebugDialog();
@@ -53,19 +55,19 @@ public class DebugDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_debug, container, false);
 
-        textViewSend = v.findViewById(R.id.textViewSend);
-        textViewSend.setOnClickListener(new View.OnClickListener() {
+        TextView textViewClearAppData = v.findViewById(R.id.textViewClearAppData);
+        textViewClearAppData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, textView.getText());
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "Where to?"));
+                ActivityManager manager = (ActivityManager)getContext().getSystemService(ACTIVITY_SERVICE);
+                boolean cleared = manager.clearApplicationUserData();
+                if(!cleared) {
+                    Toast.makeText(getContext(),"Failed to clear app data",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        textViewLocale = v.findViewById(R.id.textViewLocale);
+        TextView textViewLocale = v.findViewById(R.id.textViewLocale);
         textViewLocale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,8 +78,20 @@ public class DebugDialog extends DialogFragment {
             }
         });
 
-        textView = v.findViewById(R.id.textviewStatus);
-        textView.setText(getStatus());
+        TextView textViewSend = v.findViewById(R.id.textViewSend);
+        textViewSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, textViewStatus.getText());
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, "Where to?"));
+            }
+        });
+
+        textViewStatus = v.findViewById(R.id.textviewStatus);
+        textViewStatus.setText(getStatus());
 
         statusView = v.findViewById(R.id.scrollViewStatus);
         optionsView = v.findViewById(R.id.scrollViewOptions);
