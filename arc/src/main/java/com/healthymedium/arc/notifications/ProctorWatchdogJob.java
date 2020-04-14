@@ -66,6 +66,18 @@ public class ProctorWatchdogJob extends JobService {
         jobScheduler.schedule(builder.build());
     }
 
+    public static boolean isScheduled(Context context) {
+        JobScheduler jobScheduler = (JobScheduler)context.getSystemService(context.JOB_SCHEDULER_SERVICE);
+        boolean scheduled = false;
+        for (JobInfo jobInfo : jobScheduler.getAllPendingJobs()) {
+            if (jobInfo.getId() == jobId) {
+                scheduled = true;
+                break;
+            }
+        }
+        return scheduled;
+    }
+
     public static void stop(Context context) {
         Log.i(tag,"stop");
         JobScheduler jobScheduler = (JobScheduler)context.getSystemService(context.JOB_SCHEDULER_SERVICE);
