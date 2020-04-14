@@ -116,6 +116,11 @@ public class ProctorServiceHandler {
         }
     }
 
+    public boolean isRunning(){
+        return timer != null;
+    }
+
+
     public boolean isValid(){
         return nodes.size()>0;
     }
