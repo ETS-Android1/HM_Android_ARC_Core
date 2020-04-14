@@ -30,14 +30,14 @@ public class ProctorServiceHandler {
 
     private boolean locked = false;
 
-    ProctorServiceHandler(@NonNull Listener listener, boolean timeSkipped){
+    ProctorServiceHandler(@NonNull Listener listener){
         this.listener = listener;
         if(listener==null){
             throw new UnsupportedOperationException("ProctorServiceHandler.Listener needs to not be null");
         }
     }
 
-    public void refreshData(boolean timeSkipped) {
+    public void refreshData(boolean resumed) {
         Log.i(tag, "refreshData");
         if(locked){
             return;
@@ -62,7 +62,7 @@ public class ProctorServiceHandler {
             if(node.time.isAfterNow()){
                 nodes.add(node);
             } else {
-                if(!timeSkipped) {
+                if(!resumed) {
                     long now = System.currentTimeMillis();
                     analyzeTimeout("posthumous", now, node.time.getMillis());
                 }

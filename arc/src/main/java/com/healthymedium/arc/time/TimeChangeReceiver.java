@@ -23,11 +23,11 @@ public class TimeChangeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.i("TimeChangeReceiver", "onReceive");
 
-        Proctor.stopService(context);
+        Proctor.pauseService(context);
         Study.getStateMachine().decidePath();
         Study.getStateMachine().save(true);
         Study.getParticipant().save();
-        Proctor.startService(context,true);
+        Proctor.resumeService(context);
 
         Analytics.logInfo("Time Change Detected","Time Change Detected ("+intent.getAction()+")");
 
