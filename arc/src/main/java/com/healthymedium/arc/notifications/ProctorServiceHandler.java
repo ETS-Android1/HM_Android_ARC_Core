@@ -196,9 +196,9 @@ public class ProctorServiceHandler {
             int hours = minutes/60;
             int days = hours/24;
 
-            hours -= days*24;
             seconds -= minutes*60;
             minutes -= hours*60;
+            hours -= days*24;
 
             String direction = (target < now) ? "late":"early";
             String difference = days+" day(s) "+hours+"hr "+minutes+"min "+seconds+"sec";
