@@ -185,11 +185,11 @@ public class CacheManager {
         }
     }
 
-    public void putObject(String key, Object object) {
+    public boolean putObject(String key, Object object) {
         Log.i(tag,"putObject("+key+")");
         if(object==null){
             Log.i(tag,"invalid object, failed to store");
-            return;
+            return false;
         }
         Cache cache;
         if(!map.containsKey(key)){
@@ -199,7 +199,7 @@ public class CacheManager {
                     file.createNewFile();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    return;
+                    return false;
                 }
             }
             cache = new Cache();
@@ -216,6 +216,7 @@ public class CacheManager {
             cache.isInMemory = false;
             cache.isPersistent = false;
         }
+        return true;
     }
 
     public <T> T getObject(String key, Class<T> clazz) {
