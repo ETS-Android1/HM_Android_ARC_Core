@@ -213,7 +213,7 @@ public class CacheManager {
         String content = objectGson.toJson(object);
         if(!cache.content.equals(content)){
             cache.content = content;
-            cache.isInMemory = false;
+            cache.isInMemory = true;
             cache.isPersistent = false;
         }
         return true;
