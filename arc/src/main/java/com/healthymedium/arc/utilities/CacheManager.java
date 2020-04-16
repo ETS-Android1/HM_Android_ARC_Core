@@ -161,16 +161,17 @@ public class CacheManager {
         map.clear();
     }
 
-    public void save(String key) {
+    public boolean save(String key) {
         key = sanitizeKey(key);
         if(!map.containsKey(key)) {
-            return;
+            return false;
         }
         Cache cache = map.get(key);
         if(!cache.isPersistent && cache.isObject()) {
             cache.isPersistent =  FileUtil.writeTextFile(cache.file,cache.content);
             Log.i(tag,"key("+key+") save = "+cache.isPersistent);
         }
+        return cache.isPersistent;
     }
 
     public void saveAll() {
