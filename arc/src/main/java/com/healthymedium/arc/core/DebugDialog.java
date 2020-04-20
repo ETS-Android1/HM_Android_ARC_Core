@@ -8,11 +8,14 @@ import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 
 import com.healthymedium.analytics.Analytics;
+import com.healthymedium.analytics.Parcel;
+import com.healthymedium.analytics.ParcelFile;
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
+import com.healthymedium.arc.utilities.CacheManager;
 import com.healthymedium.arc.utilities.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,6 +103,27 @@ public class DebugDialog extends DialogFragment {
                 QuestionLanguagePreference screen = new QuestionLanguagePreference();
                 NavigationManager.getInstance().removeController();
                 NavigationManager.getInstance().open(screen);
+            }
+        });
+
+        TextView textViewSendLogs = v.findViewById(R.id.textViewSendLogs);
+        textViewSendLogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                String logFile = Application.getInstance().getCacheDir()+"/Log";
+                ParcelFile log = new ParcelFile(logFile, ParcelFile.TEXT);
+                Analytics.logFile("Log Upload", log, new Analytics.Listener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(getContext(),"Log Upload Successful",Toast.LENGTH_SHORT);
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(getContext(),"Log Upload Failed",Toast.LENGTH_SHORT);
+                    }
+                });
             }
         });
 
