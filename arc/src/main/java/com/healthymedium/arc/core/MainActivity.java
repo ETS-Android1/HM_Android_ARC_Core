@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.healthymedium.arc.notifications.ProctorDeviation;
+import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationReminder;
 import com.healthymedium.arc.utilities.Log;
 
 import android.view.View;
@@ -21,7 +23,6 @@ import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.PreferencesManager;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     }).show();
+        }
+
+        if(ProctorDeviation.shouldRequestBeMade()){
+            NavigationManager.getInstance().open(new BatteryOptimizationReminder());
+            return;
         }
 
         if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE) {

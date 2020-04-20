@@ -8,6 +8,7 @@ import com.healthymedium.arc.api.tests.CognitiveTest;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
+import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationOverview;
 import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsPostTestLoadingScreen;
 import com.healthymedium.arc.paths.informative.FinishedCycleScreen;
@@ -26,7 +27,6 @@ import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.core.SimplePopupScreen;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
@@ -39,10 +39,8 @@ import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
 import com.healthymedium.arc.path_data.WakePathData;
 import com.healthymedium.arc.paths.availability.AvailabilityWake;
-import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.questions.QuestionAdjustSchedule;
 import com.healthymedium.arc.paths.setup.SetupAuthCode;
-import com.healthymedium.arc.paths.templates.InfoTemplate;
 import com.healthymedium.arc.paths.questions.QuestionCheckBoxes;
 import com.healthymedium.arc.paths.questions.QuestionDuration;
 import com.healthymedium.arc.paths.questions.QuestionInteger;
@@ -68,8 +66,6 @@ import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -408,6 +404,16 @@ public class StateMachine {
 
         fragments.add(new NotificationOverview());
         fragments.add(new NotificationTurnOn());
+
+        PathSegment segment = new PathSegment(fragments);
+        enableTransition(segment,true);
+        cache.segments.add(segment);
+    }
+
+    public void setPathBatteryOptimizationOverview(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new BatteryOptimizationOverview());
 
         PathSegment segment = new PathSegment(fragments);
         enableTransition(segment,true);

@@ -69,6 +69,14 @@ public class Participant {
         state.hasBeenShownNotificationOverview = true;
     }
 
+    public boolean hasBeenShownBatteryOptimizationOverview(){
+        return state.hasBeenShownBatteryOptimizationOverview;
+    }
+
+    public void markShownBatteryOptimizationOverview(){
+        state.hasBeenShownBatteryOptimizationOverview = true;
+    }
+
     public void markPaused(){
         state.lastPauseTime = DateTime.now();
     }

@@ -25,6 +25,8 @@ public class StateMachineAlpha extends StateMachine {
     public static final int PATH_COMMITMENT = 9;
     public static final int PATH_COMMITMENT_REBUKED = 10;
     public static final int PATH_NOTIFICATIONS_OVERVIEW = 11;
+    public static final int PATH_BATTERY_OPTIMIZATION_OVERVIEW = 12;
+
     public static final int PATH_SETUP_AVAILABILITY = 1;        //
 
     public static final int PATH_TEST_FIRST_OF_BASELINE = 2;    // first test of the baseline
@@ -102,6 +104,11 @@ public class StateMachineAlpha extends StateMachine {
 
         if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
+            return;
+        }
+
+        if(!participant.hasBeenShownBatteryOptimizationOverview()){
+            state.currentPath = PATH_BATTERY_OPTIMIZATION_OVERVIEW;
             return;
         }
 

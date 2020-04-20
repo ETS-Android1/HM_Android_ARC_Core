@@ -23,6 +23,7 @@ public class ParticipantState {
     public boolean isStudyRunning;
     public int hasCommittedToStudy;
     public boolean hasBeenShownNotificationOverview;
+    public boolean hasBeenShownBatteryOptimizationOverview;
 
     // These are variables only used during runtime
     public DateTime lastPauseTime;
