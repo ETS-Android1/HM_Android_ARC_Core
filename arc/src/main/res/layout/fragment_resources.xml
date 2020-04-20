@@ -57,25 +57,44 @@
 
                 </FrameLayout>
 
-                <FrameLayout
+                <RelativeLayout
                     android:id="@+id/frameLayoutAvailability"
                     android:layout_width="match_parent"
-                    android:layout_height="75dp">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:minHeight="75dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp">
+
 
                     <TextView
                         android:id="@+id/textViewAvailability"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
                         android:layout_marginLeft="30dp"
+                        android:layout_alignParentLeft="true"
                         android:drawableLeft="@drawable/ic_alarm_clock_solid_teal"
                         android:drawablePadding="13dp"
                         android:gravity="center_vertical"
                         android:text="@string/resources_availability"
-                        android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
-                </FrameLayout>
+                    <TextView
+                        android:id="@+id/textViewChangeDenied"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textViewAvailability"
+                        android:layout_marginLeft="68dp"
+                        android:paddingTop="8dp"
+                        android:text="@string/availability_changedenied_test"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </RelativeLayout>
 
                 <FrameLayout
                     android:id="@+id/lineFrameLayout2"

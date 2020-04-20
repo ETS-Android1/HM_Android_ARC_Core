@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
@@ -25,7 +26,7 @@ public class ResourcesScreen extends BaseFragment {
 
     protected TextView textViewHeader;
 
-    protected FrameLayout frameLayoutAvailability;
+    protected RelativeLayout frameLayoutAvailability;
     protected TextView textViewAvailability;
 
     protected FrameLayout frameLayoutContact;
@@ -58,17 +59,20 @@ public class ResourcesScreen extends BaseFragment {
         ViewUtil.underlineTextView(textViewAvailability);
 
         frameLayoutAvailability = view.findViewById(R.id.frameLayoutAvailability);
-        frameLayoutAvailability.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangeAvailabilityScreen changeAvailabilityScreen = new ChangeAvailabilityScreen();
-                NavigationManager.getInstance().open(changeAvailabilityScreen);
-            }
-        });
 
         boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
         if(isTestReady) {
-            frameLayoutAvailability.setVisibility(View.INVISIBLE);
+            textViewAvailability.setAlpha(0.5f);
+            TextView textViewChangeDenied = view.findViewById(R.id.textViewChangeDenied);
+            textViewChangeDenied.setVisibility(View.VISIBLE);
+        } else {
+            frameLayoutAvailability.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChangeAvailabilityScreen changeAvailabilityScreen = new ChangeAvailabilityScreen();
+                    NavigationManager.getInstance().open(changeAvailabilityScreen);
+                }
+            });
         }
 
         textViewContact = view.findViewById(R.id.textViewContact);
