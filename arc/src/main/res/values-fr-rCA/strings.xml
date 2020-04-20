@@ -90,6 +90,7 @@
 	<string name="resources_nav_earnings">Gains</string>
 	<string name="resources_nav_resources">Ressources</string>
 	<string name="availability_changetime">J’aimerais modifier l’&lt;b>heure du jour&lt;/b> à laquelle je suis disponible pour les tests.</string>
+	<string name="availability_changedenied_test">Revenez après votre test</string>
 	<string name="availability_changedates">J’aimerais modifier les &lt;b>dates&lt;/b> de mon prochain &lt;b>cycle de tests&lt;/b>.</string>
 	<string name="contact_call1">J’aimerais &lt;b>appeler&lt;/b> mon ou ma coordonnateur(trice) de l’étude.</string>
 	<string name="contact_call2">314-273-7112</string>
