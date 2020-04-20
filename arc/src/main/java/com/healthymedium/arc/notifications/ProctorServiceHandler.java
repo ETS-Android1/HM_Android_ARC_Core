@@ -229,6 +229,11 @@ public class ProctorServiceHandler {
                 json.addProperty("isDeviceInteractive", powerManager.isInteractive());
                 json.addProperty("isDeviceIdle",powerManager.isDeviceIdleMode());
 
+                if(!isIgnoringBatteryOptimizations) {
+                    ProctorDeviation deviation = ProctorDeviation.load();
+                    deviation.markIncident();
+                    deviation.save();
+                }
             }
 
             Analytics.logWarning("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
