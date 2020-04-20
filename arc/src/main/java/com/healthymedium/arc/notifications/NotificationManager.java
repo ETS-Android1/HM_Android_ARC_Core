@@ -75,6 +75,9 @@ public class NotificationManager {
         NotificationNode node = nodes.get(type.getId(),sessionId);
         if(node==null){
             node = nodes.add(type.getId(),sessionId, timeStamp);
+        } else {
+            node.time = timeStamp;
+            nodes.save();
         }
 
         if(type.isProctored()){
