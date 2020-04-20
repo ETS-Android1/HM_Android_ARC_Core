@@ -534,6 +534,8 @@ public class StateMachineAlpha extends StateMachine {
                 return "PATH_COMMITMENT_REBUKED";
             case PATH_NOTIFICATIONS_OVERVIEW:
                 return "PATH_NOTIFICATIONS_OVERVIEW";
+            case PATH_BATTERY_OPTIMIZATION_OVERVIEW:
+                return "PATH_BATTERY_OPTIMIZATION_OVERVIEW";
             default:
                 return "INVALID";
         }
