@@ -50,6 +50,8 @@
 	<string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap EXR and turn on the Allow Notifications switch.</string>
 	<string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for {APP_NAME} are turned on.</string>
 	<string name="button_proceed_without_notifications">Proceed Without Notifications</string>
+	<string name="popup_opensettings">We\'ll now open your Settings. Once there, tap Notifications, and turn on the Allow Notifications Switch.</string>
+	<string name="button_notnow">Not now</string>
 	<string name="availability_header">Availability</string>
 	<string name="availability_body">Now, we\'ll ask you a few questions to help us determine when to send you those notifications. \n&lt;br />&lt;br />\n&lt;i>You will only receive notifications during your waking hours. Please set a minimum 8-hour window of availability.&lt;/i></string>
 	<string name="availability_start">What time should we &lt;b>start&lt;/b> your notifications each day?</string>

@@ -50,6 +50,8 @@
 	<string name="onboarding_notifications_body2_ios">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Rufen Sie die Anwendung Einstellungen auf, tippen Sie auf Benachrichtigungen, tippen Sie dann auf EXR, und aktivieren Sie den Schalter Benachrichtigungen zulassen.</string>
 	<string name="onboarding_notifications_body2_android">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Bitte rufen Sie die Einstellungen auf und vergewissern Sie sich, dass die Benachrichtigungen für {APP_NAME} aktiviert sind.</string>
 	<string name="button_proceed_without_notifications">Fahren Sie ohne Benachrichtigungen fort</string>
+	<string name="popup_opensettings">Wir öffnen jetzt Ihre Einstellungen. Tippen Sie dort auf Benachrichtigungen und aktivieren Sie den Schalter Benachrichtigungen zulassen.</string>
+	<string name="button_notnow">Nicht jetzt.</string>
 	<string name="availability_header">Verfügbarkeit</string>
 	<string name="availability_body">Nun stellen wir Ihnen einige Fragen, die uns helfen sollen, zu bestimmen, wann wir Ihnen diese Benachrichtigungen senden sollen.\n&lt;br />&lt;br />\n&lt;i>Benachrichtigungen erhalten Sie nur während Ihrer Wachzeiten. Bitte legen Sie ein Verfügbarkeitsfenster von mindestens 8 Stunden fest.&lt;/i></string>
 	<string name="availability_start">Um wie viel Uhr sollen wir Ihre Benachrichtigungen jeden Tag &lt;b>starten&lt;/b>?</string>
