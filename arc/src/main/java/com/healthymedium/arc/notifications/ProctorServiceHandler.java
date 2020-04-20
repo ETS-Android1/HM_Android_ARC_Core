@@ -1,11 +1,14 @@
 package com.healthymedium.arc.notifications;
 
+import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.support.annotation.NonNull;
 
 import com.google.gson.JsonObject;
 import com.healthymedium.analytics.Analytics;
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.notifications.types.NotificationType;
@@ -213,6 +216,20 @@ public class ProctorServiceHandler {
             json.addProperty("actualTimestamp",now);
             json.addProperty("target",format.print(target));
             json.addProperty("targetTimestamp",target);
+
+            Context context = Application.getInstance();
+
+            if(context != null) {
+                PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+                String packageName = context.getPackageName();
+                boolean isIgnoringBatteryOptimizations = powerManager.isIgnoringBatteryOptimizations(packageName);
+                json.addProperty("isIgnoringBatteryOptimizations",isIgnoringBatteryOptimizations);
+                json.addProperty("isDeviceInPowerSaveMode",powerManager.isPowerSaveMode());
+                json.addProperty("isDeviceInteractive", powerManager.isInteractive());
+                json.addProperty("isDeviceIdle",powerManager.isDeviceIdleMode());
+
+            }
 
             Analytics.logWarning("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
         }
