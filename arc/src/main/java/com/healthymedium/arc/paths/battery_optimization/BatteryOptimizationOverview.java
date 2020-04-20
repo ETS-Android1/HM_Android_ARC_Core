@@ -45,6 +45,7 @@ public class BatteryOptimizationOverview extends BaseFragment {
         // just in case they're already disabled for some reason
         PowerManager powerManager = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
         if(powerManager.isIgnoringBatteryOptimizations(getContext().getPackageName())){
+            Study.getParticipant().markShownBatteryOptimizationOverview();
             Study.openNextFragment();
         }
 
