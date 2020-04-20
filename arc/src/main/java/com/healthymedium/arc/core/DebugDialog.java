@@ -4,8 +4,11 @@ import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 
+import com.healthymedium.analytics.Analytics;
+import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
@@ -55,6 +58,28 @@ public class DebugDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_debug, container, false);
 
+        TextView textViewDateTime = v.findViewById(R.id.textViewDateTime);
+        textViewDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_DATE_SETTINGS);
+                startActivity(intent);
+            }
+        });
+
+        TextView textViewBatteryOptimization = v.findViewById(R.id.textViewBatteryOptimization);
+        textViewBatteryOptimization.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                startActivity(intent);
+                dismiss();
+            }
+        });
+
         TextView textViewClearAppData = v.findViewById(R.id.textViewClearAppData);
         textViewClearAppData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,15 +103,14 @@ public class DebugDialog extends DialogFragment {
             }
         });
 
-        TextView textViewSend = v.findViewById(R.id.textViewSend);
-        textViewSend.setOnClickListener(new View.OnClickListener() {
+        TextView textViewDeviation = v.findViewById(R.id.textViewDeviation);
+        textViewDeviation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, textViewStatus.getText());
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, "Where to?"));
+                ProctorDeviation deviation = ProctorDeviation.load();
+                deviation.markIncident();
+                deviation.save();
+                dismiss();
             }
         });
 

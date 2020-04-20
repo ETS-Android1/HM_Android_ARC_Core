@@ -59,6 +59,32 @@
             android:background="@color/white" >
 
             <com.healthymedium.arc.ui.base.RoundedTextView
+                android:id="@+id/textViewDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:text="Open DateTime Settings"
+                android:textColor="@color/secondaryDark"
+                android:textStyle="bold"
+                android:elevation="2dp"
+                app:fillColor="@color/whiteButtonLight"
+                app:radius="16dp"/>
+
+            <com.healthymedium.arc.ui.base.RoundedTextView
+                android:id="@+id/textViewBatteryOptimization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:text="Open Battery Optimization Settings"
+                android:textColor="@color/secondaryDark"
+                android:textStyle="bold"
+                android:elevation="2dp"
+                app:fillColor="@color/whiteButtonLight"
+                app:radius="16dp" />
+
+            <com.healthymedium.arc.ui.base.RoundedTextView
                 android:id="@+id/textViewClearAppData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,19 +111,6 @@
                 app:radius="16dp"/>
 
             <com.healthymedium.arc.ui.base.RoundedTextView
-                android:id="@+id/textViewSend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:padding="16dp"
-                android:text="Share Status"
-                android:textColor="@color/secondaryDark"
-                android:textStyle="bold"
-                android:elevation="2dp"
-                app:fillColor="@color/whiteButtonLight"
-                app:radius="16dp" />
-
-            <com.healthymedium.arc.ui.base.RoundedTextView
                 android:id="@+id/textViewSendLogs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -122,6 +135,19 @@
                 app:fillColor="@color/whiteButtonLight"
                 app:radius="16dp"
                 android:alpha="0.5"/>
+
+            <com.healthymedium.arc.ui.base.RoundedTextView
+                android:id="@+id/textViewDeviation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:text="Mock Proctor Deviation"
+                android:textColor="@color/secondaryDark"
+                android:textStyle="bold"
+                android:elevation="2dp"
+                app:fillColor="@color/whiteButtonLight"
+                app:radius="16dp" />
 
         </LinearLayout>
 
