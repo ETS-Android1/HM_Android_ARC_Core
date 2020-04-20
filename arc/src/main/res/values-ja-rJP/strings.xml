@@ -357,11 +357,11 @@
 	<string name="popup_tutorial_quit">ここをタップしてチュートリアルを閉じます。</string>
 	<string name="popup_tutorial_price_intro">価格テストには2つのパートがあります。&lt;b>パート1は価格の評価です。&lt;/b></string>
 	<string name="prices_tutorial_item1">バナナ</string>
-	<string name="prices_tutorial_price1">¥3.27</string>
+	<string name="prices_tutorial_price1">¥351.84</string>
 	<string name="prices_tutorial_item2">スープ</string>
-	<string name="prices_tutorial_price2">¥10.82</string>
-	<string name="prices_tutorial_price1_match">¥6.78</string>
-	<string name="prices_tutorial_price2_match">¥4.01</string>
+	<string name="prices_tutorial_price2">¥1,164.20</string>
+	<string name="prices_tutorial_price1_match">¥729.51</string>
+	<string name="prices_tutorial_price2_match">¥431.46</string>
 	<string name="popup_tutorial_choose1">&lt;b>どう思いますか？&lt;/b>\nあなたが適切だと思われる回答を選択してください。</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>良い選択です。&lt;/b>もう一つ試してみましょう</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>この選択もありがとうございます。&lt;/b>\nパート2に進みましょう。</string>

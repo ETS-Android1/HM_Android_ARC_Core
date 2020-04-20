@@ -357,11 +357,11 @@
 	<string name="popup_tutorial_quit">Toque aquí para dejar el tutorial.</string>
 	<string name="popup_tutorial_price_intro">La prueba de precios tiene dos partes. &lt;b>Primero, evaluar el precio.&lt;/b></string>
 	<string name="prices_tutorial_item1">Bananas</string>
-	<string name="prices_tutorial_price1">$3.27</string>
+	<string name="prices_tutorial_price1">$215.35</string>
 	<string name="prices_tutorial_item2">Sopa</string>
-	<string name="prices_tutorial_price2">$10.82</string>
-	<string name="prices_tutorial_price1_match">$6.78</string>
-	<string name="prices_tutorial_price2_match">$4.01</string>
+	<string name="prices_tutorial_price2">$712.55</string>
+	<string name="prices_tutorial_price1_match">$446.50</string>
+	<string name="prices_tutorial_price2_match">$264.08</string>
 	<string name="popup_tutorial_choose1">&lt;b>¿Qué le parece?&lt;/b>\nElija la respuesta que tenga más sentido para usted.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>¡Buena elección!&lt;/b>\nProbemos con otra cosa.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>¡Otra excelente elección!&lt;/b>\nPasemos a la parte dos.</string>
