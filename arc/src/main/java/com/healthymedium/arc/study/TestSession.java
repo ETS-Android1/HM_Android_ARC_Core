@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationNode;
+import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.notifications.types.TestTake;
 import com.healthymedium.arc.utilities.Log;
 
@@ -138,7 +139,7 @@ public class TestSession {
     public void markStarted() {
         this.startTime = DateTime.now();
 
-        int notifyId = NotificationNode.getNotifyId(id,new TestTake().getId());
+        int notifyId = NotificationNode.getNotifyId(id, NotificationTypes.TestTake.getId());
         NotificationManager.getInstance().removeUserNotification(notifyId);
 
         // this null check lets unit tests work properly
