@@ -132,6 +132,10 @@ public class ProctorServiceHandler {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
+                if(!isRunning()) {
+                    listener.onNotify(node);
+                    return;
+                }
                 stop();
                 listener.onNotify(node);
                 start();
