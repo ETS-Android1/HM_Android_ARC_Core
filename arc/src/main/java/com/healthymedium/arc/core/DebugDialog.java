@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
@@ -30,6 +29,9 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -182,7 +184,7 @@ public class DebugDialog extends DialogFragment {
         status += "cycle: "+participant.getState().currentTestCycle +"\n";
         status += "day: "+participant.getState().currentTestDay+"\n";
         status += "test: "+participant.getState().currentTestSession+"\n";
-        status += "\nscheduled tests:\n";
+        status += "\n-- scheduled tests --\n";
         TestCycle cycle = participant.getCurrentTestCycle();
         if(cycle!=null) {
             Log.e("Test Count",String.valueOf(cycle.getNumberOfTests()));
@@ -196,26 +198,39 @@ public class DebugDialog extends DialogFragment {
         }
 
         if(Study.getCurrentTestCycle() != null) {
-            // Get current visit
-            int currVisitId = Study.getCurrentTestCycle().getId();
-
-            // Notification one month before next visit
-            NotificationNode month = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextMonth.getId(), currVisitId);
-            if (month != null) {
-                status += "month notification: " + month.time + "\n";
+            
+            List<NotificationNode> nodes = NotificationManager.getInstance().getNodes().getAll();
+            if(nodes.size()==0){
+                return status;
             }
 
-            // Notification one week before next visit
-            NotificationNode week = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextWeek.getId(), currVisitId);
-            if (week != null) {
-                status += "week notification: " + week.time + "\n";
+            status += "\n-- notifications --\n";
+
+            List<List<NotificationNode>> structuredNodes = new ArrayList<>();
+
+            int lastId = nodes.get(0).id;
+            List<NotificationNode> set = new ArrayList<>();
+            for(NotificationNode node : nodes) {
+                if(node.id!=lastId){
+                    structuredNodes.add(set);
+                    set = new ArrayList<>();
+                }
+                set.add(node);
+                lastId = node.id;
             }
 
-            // Notification one day before next visit
-            NotificationNode day = NotificationManager.getInstance().getNode(NotificationTypes.VisitNextDay.getId(), currVisitId);
-            if (day != null) {
-                status += "day notification: " + day.time + "\n";
+            for(List<NotificationNode> list : structuredNodes) {
+                if(list.size()==0){
+                    continue;
+                }
+                status += "\nid "+list.get(0).id+"\n";
+
+                for(NotificationNode node : list) {
+                    String name = NotificationTypes.getName(node.type);
+                    status += node.time.toString("MM/dd   hh:mm:ss a (") + name + ")\n";
+                }
             }
+
         }
         else {
             status += " -- uninitialized -- \n";
