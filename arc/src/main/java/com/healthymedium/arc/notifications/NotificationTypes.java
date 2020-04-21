@@ -12,13 +12,16 @@ import com.healthymedium.arc.notifications.types.VisitNextWeek;
 public class NotificationTypes {
 
     public static TestProctor TestProctor = new TestProctor();
-    public static TestConfirmed TestConfirmed = new TestConfirmed();
     public static TestMissed TestMissed = new TestMissed();
-    public static TestNext TestNext = new TestNext();
     public static TestTake TestTake = new TestTake();
+
     public static VisitNextDay VisitNextDay = new VisitNextDay();
     public static VisitNextWeek VisitNextWeek = new VisitNextWeek();
     public static VisitNextMonth VisitNextMonth = new VisitNextMonth();
+
+    // deprecated at this point
+    public static TestConfirmed TestConfirmed = new TestConfirmed();
+    public static TestNext TestNext = new TestNext();
 
 
 
