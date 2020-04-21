@@ -122,11 +122,6 @@ public class ProctorServiceHandler {
         return timer != null;
     }
 
-
-    public boolean isValid(){
-        return nodes.size()>0;
-    }
-
     private void onTimeout(){
         final NotificationNode node = currentNode;
         new Handler().post(new Runnable() {
