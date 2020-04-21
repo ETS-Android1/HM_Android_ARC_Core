@@ -39,6 +39,10 @@ public class PriceManager {
         return instance;
     }
 
+    public synchronized void clearCache() {
+        priceSets.clear();
+    }
+
     public List<PriceManager.Item> getPriceSet(){
 
         if(priceSets.size()==0) {
