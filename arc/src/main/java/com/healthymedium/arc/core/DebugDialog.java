@@ -29,6 +29,7 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.PriceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +100,7 @@ public class DebugDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+                PriceManager.getInstance().clearCache();
                 QuestionLanguagePreference screen = new QuestionLanguagePreference();
                 NavigationManager.getInstance().removeController();
                 NavigationManager.getInstance().open(screen);
