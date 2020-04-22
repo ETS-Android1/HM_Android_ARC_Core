@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 
+import com.healthymedium.arc.notifications.NotificationNodes;
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
@@ -30,6 +31,8 @@ import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
+
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -187,6 +190,10 @@ public class DebugDialog extends DialogFragment {
         status += "day: "+participant.getState().currentTestDay+"\n";
         status += "test: "+participant.getState().currentTestSession+"\n";
 
+        if(!deviceHasNotificationParity()){
+            status += "\ndetected a loss of parity between scheduled tests and notifications!\n";
+        }
+
         TestCycle cycle = participant.getCurrentTestCycle();
         if(cycle==null) {
             status += "\n-- uninitialized --\n";
@@ -237,7 +244,35 @@ public class DebugDialog extends DialogFragment {
         return status;
     }
 
+    boolean deviceHasNotificationParity() {
+        TestCycle cycle = Study.getCurrentTestCycle();
+        if(cycle==null) {
+            return true;
+        }
+        NotificationNodes nodes = NotificationManager.getInstance().getNodes();
+        List<TestSession> sessions = cycle.getTestSessions();
 
+        for(TestSession session : sessions){
 
+            DateTime scheduledTime = session.getScheduledTime();
+            if(scheduledTime.isAfterNow()){
+                NotificationNode take = nodes.get(NotificationTypes.TestTake.getId(),session.getId());
+                if(!scheduledTime.equals(take.time)) {
+                    return false;
+                }
+            }
+
+            DateTime expirationTime = session.getExpirationTime();
+            if(expirationTime.isAfterNow()) {
+                NotificationNode missed = nodes.get(NotificationTypes.TestMissed.getId(), session.getId());
+                if (!expirationTime.equals(missed.time)) {
+                    return false;
+                }
+            }
+
+        }
+
+        return true;
+    }
 
 }
