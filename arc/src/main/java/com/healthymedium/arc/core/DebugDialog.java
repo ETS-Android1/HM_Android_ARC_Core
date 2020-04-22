@@ -177,8 +177,8 @@ public class DebugDialog extends DialogFragment {
         Participant participant = Study.getParticipant();
 
         String status = "";
-        status += "localeConfig: " + Application.getInstance().getLocale().getDisplayName() + "\n";
-        status += "localePrefs: " + PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, "null") + "_" +
+        status += "locale config: " + Application.getInstance().getLocale().getDisplayName() + "\n";
+        status += "locale prefs: " + PreferencesManager.getInstance().getString(Locale.TAG_LANGUAGE, "null") + "_" +
                 PreferencesManager.getInstance().getString(Locale.TAG_COUNTRY, "null") + "\n\n";
         status += "lifecycle: "+Study.getStateMachine().getLifecycleName(studyState.lifecycle).toLowerCase()+"\n";
         status += "path: "+Study.getStateMachine().getPathName(studyState.currentPath).toLowerCase()+"\n\n";
@@ -186,58 +186,58 @@ public class DebugDialog extends DialogFragment {
         status += "cycle: "+participant.getState().currentTestCycle +"\n";
         status += "day: "+participant.getState().currentTestDay+"\n";
         status += "test: "+participant.getState().currentTestSession+"\n";
-        status += "\n-- scheduled tests --\n";
+
         TestCycle cycle = participant.getCurrentTestCycle();
-        if(cycle!=null) {
-            Log.e("Test Count",String.valueOf(cycle.getNumberOfTests()));
-            for(TestDay day : cycle.getTestDays()){
-                status += "\nday "+day.getDayIndex()+"\n";
-                for (TestSession session : day.getTestSessions()) {
-                    status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
-                }
-            }
-
+        if(cycle==null) {
+            status += "\n-- uninitialized --\n";
+            return status;
         }
 
-        if(Study.getCurrentTestCycle() != null) {
-            
-            List<NotificationNode> nodes = NotificationManager.getInstance().getNodes().getAll();
-            if(nodes.size()==0){
-                return status;
+        status += "\n-- scheduled tests --\n";
+        Log.e("Test Count",String.valueOf(cycle.getNumberOfTests()));
+        for(TestDay day : cycle.getTestDays()){
+            status += "\nday "+day.getDayIndex()+"\n";
+            for (TestSession session : day.getTestSessions()) {
+                status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
             }
-
-            status += "\n-- notifications --\n";
-
-            List<List<NotificationNode>> structuredNodes = new ArrayList<>();
-
-            int lastId = nodes.get(0).id;
-            List<NotificationNode> set = new ArrayList<>();
-            for(NotificationNode node : nodes) {
-                if(node.id!=lastId){
-                    structuredNodes.add(set);
-                    set = new ArrayList<>();
-                }
-                set.add(node);
-                lastId = node.id;
-            }
-
-            for(List<NotificationNode> list : structuredNodes) {
-                if(list.size()==0){
-                    continue;
-                }
-                status += "\nid "+list.get(0).id+"\n";
-
-                for(NotificationNode node : list) {
-                    String name = NotificationTypes.getName(node.type);
-                    status += node.time.toString("MM/dd   hh:mm:ss a (") + name + ")\n";
-                }
-            }
-
         }
-        else {
-            status += " -- uninitialized -- \n";
+
+        List<NotificationNode> nodes = NotificationManager.getInstance().getNodes().getAll();
+        if(nodes.size()==0){
+            return status;
         }
+
+        status += "\n-- notifications --\n";
+
+        List<List<NotificationNode>> structuredNodes = new ArrayList<>();
+
+        int lastId = nodes.get(0).id;
+        List<NotificationNode> set = new ArrayList<>();
+        for(NotificationNode node : nodes) {
+            if(node.id!=lastId){
+                structuredNodes.add(set);
+                set = new ArrayList<>();
+            }
+            set.add(node);
+            lastId = node.id;
+        }
+
+        for(List<NotificationNode> list : structuredNodes) {
+            if(list.size()==0){
+                continue;
+            }
+            status += "\nid "+list.get(0).id+"\n";
+
+            for(NotificationNode node : list) {
+                String name = NotificationTypes.getName(node.type);
+                status += node.time.toString("MM/dd   hh:mm:ss a (") + name + ")\n";
+            }
+        }
+
         return status;
     }
+
+
+
 
 }
