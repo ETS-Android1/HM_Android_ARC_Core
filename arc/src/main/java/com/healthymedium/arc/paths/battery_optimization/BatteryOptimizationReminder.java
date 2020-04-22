@@ -14,25 +14,30 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.SplashScreen;
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.notifications.ProctorDeviation;
-import com.healthymedium.arc.paths.informative.HelpScreen;
-import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.paths.templates.StateInfoTemplate;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
-public class BatteryOptimizationReminder extends BaseFragment {
+public class BatteryOptimizationReminder extends StateInfoTemplate {
 
     boolean requested = false;
-    Button button;
+    String body = "Your notifications are experiencing a delay. Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please select “<b>allow</b>” so we know your notifications are working correctly.";
 
     public BatteryOptimizationReminder() {
+        super(false,
+                "Battery Optimization",
+                null,
+                "",
+                ViewUtil.getString(R.string.button_next)
+        );
+
         if(FontFactory.getInstance()==null) {
             FontFactory.initialize(Application.getInstance());
         }
@@ -47,7 +52,7 @@ public class BatteryOptimizationReminder extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_battery_optimization, container, false);
+        View view = super.onCreateView(inflater,container,savedInstanceState);
 
         // in case someone experiences a deviation and turns off optimizations before opening the app
         // however unlikely that is
@@ -58,26 +63,16 @@ public class BatteryOptimizationReminder extends BaseFragment {
             deviation.markRequest();
             deviation.save();
 
+            NavigationManager.getInstance().popBackStack();
             NavigationManager.getInstance().open(new SplashScreen());
         }
 
-        TextView textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setTypeface(Fonts.robotoMedium);
-
-        TextView textViewHelp = view.findViewById(R.id.textViewHelp);
-        textViewHelp.setTypeface(Fonts.robotoMedium);
-        textViewHelp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HelpScreen help = new HelpScreen();
-                NavigationManager.getInstance().open(help);
-            }
-        });
-
         TextView textViewBody = view.findViewById(R.id.textViewBody);
-        textViewBody.setText("We've noticed that some notifications aren't showing at the correct time.\n\nTo make sure notifications show up at the correct time, you can turn off the battery optimizations for this app.");
 
-        button = view.findViewById(R.id.button);
+        Phrase phrase = new Phrase(body);
+        phrase.replace(R.string.token_app_name,R.string.app_name);
+        textViewBody.setText(phrase.toHtmlString());
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,16 +90,6 @@ public class BatteryOptimizationReminder extends BaseFragment {
             }
         });
 
-        TextView textViewProceed = view.findViewById(R.id.textViewProceed);
-        ViewUtil.underlineTextView(textViewProceed);
-        ViewUtil.setLineHeight(textViewProceed,24);
-        textViewProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavigationManager.getInstance().open(new SplashScreen());
-            }
-        });
-
         return view;
     }
 
@@ -112,6 +97,7 @@ public class BatteryOptimizationReminder extends BaseFragment {
     public void onResume() {
         super.onResume();
         if(requested) {
+            NavigationManager.getInstance().popBackStack();
             NavigationManager.getInstance().open(new SplashScreen());
         }
     }

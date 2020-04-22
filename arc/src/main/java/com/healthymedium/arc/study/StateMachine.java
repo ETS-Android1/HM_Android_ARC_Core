@@ -9,6 +9,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationOverview;
+import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationPrompt;
 import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsPostTestLoadingScreen;
 import com.healthymedium.arc.paths.informative.FinishedCycleScreen;
@@ -414,6 +415,7 @@ public class StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
 
         fragments.add(new BatteryOptimizationOverview());
+        fragments.add(new BatteryOptimizationPrompt());
 
         PathSegment segment = new PathSegment(fragments);
         enableTransition(segment,true);

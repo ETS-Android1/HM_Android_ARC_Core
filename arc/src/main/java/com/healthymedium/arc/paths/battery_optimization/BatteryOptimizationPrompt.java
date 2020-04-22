@@ -1,13 +1,19 @@
 package com.healthymedium.arc.paths.battery_optimization;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.healthymedium.arc.core.Application;
+import com.healthymedium.arc.font.FontFactory;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.study.Study;
@@ -15,17 +21,28 @@ import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 @SuppressLint("ValidFragment")
-public class BatteryOptimizationOverview extends StateInfoTemplate {
+public class BatteryOptimizationPrompt extends StateInfoTemplate {
 
-    String body = "Your phone has a setting to help preserve your battery life, and it is called a “battery optimization” setting.<br><br>The {APP_NAME} app will have minimal impact on the battery life of your phone. It is recommended that you turn off the battery optimization setting for the {APP_NAME} app. Doing so will help make sure you receive test notifications on time.";
+    boolean requested = false;
+    String body = "Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please select “<b>allow</b>” to help ensure your notifications work correctly.";
 
-    public BatteryOptimizationOverview() {
+    public BatteryOptimizationPrompt() {
         super(false,
                 "Battery Optimization",
                 null,
                 "",
                 ViewUtil.getString(R.string.button_next)
-                );
+        );
+
+        if(FontFactory.getInstance()==null) {
+            FontFactory.initialize(Application.getInstance());
+        }
+
+        if(!Fonts.areLoaded()){
+            Fonts.load();
+            FontFactory.getInstance().setDefaultFont(Fonts.roboto);
+            FontFactory.getInstance().setDefaultBoldFont(Fonts.robotoBold);
+        }
     }
 
     @Nullable
@@ -48,11 +65,26 @@ public class BatteryOptimizationOverview extends StateInfoTemplate {
             @Override
             public void onClick(View view) {
                 button.setEnabled(false);
-                Study.openNextFragment();
+                requested = true;
+
+                Study.getParticipant().markShownBatteryOptimizationOverview();
+
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package:" + getContext().getPackageName()));
+                getContext().startActivity(intent);
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(requested) {
+            Study.openNextFragment();
+        }
     }
 
 }
