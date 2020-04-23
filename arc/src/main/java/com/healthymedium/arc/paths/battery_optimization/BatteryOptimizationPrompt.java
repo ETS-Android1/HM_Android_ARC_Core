@@ -24,11 +24,10 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class BatteryOptimizationPrompt extends StateInfoTemplate {
 
     boolean requested = false;
-    String body = "Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please select “<b>allow</b>” to help ensure your notifications work correctly.";
 
     public BatteryOptimizationPrompt() {
         super(false,
-                "Battery Optimization",
+                ViewUtil.getString(R.string.battery_optimization_header),
                 null,
                 "",
                 ViewUtil.getString(R.string.button_next)
@@ -57,7 +56,7 @@ public class BatteryOptimizationPrompt extends StateInfoTemplate {
 
         TextView textViewBody = view.findViewById(R.id.textViewBody);
 
-        Phrase phrase = new Phrase(body);
+        Phrase phrase = new Phrase(R.string.battery_optimization_prompt);
         phrase.replace(R.string.token_app_name,R.string.app_name);
         textViewBody.setText(phrase.toHtmlString());
 

@@ -17,11 +17,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class BatteryOptimizationOverview extends StateInfoTemplate {
 
-    String body = "Your phone has a setting to help preserve your battery life, and it is called a “battery optimization” setting.<br><br>The {APP_NAME} app will have minimal impact on the battery life of your phone. It is recommended that you turn off the battery optimization setting for the {APP_NAME} app. Doing so will help make sure you receive test notifications on time.";
-
     public BatteryOptimizationOverview() {
         super(false,
-                "Battery Optimization",
+                ViewUtil.getString(R.string.battery_optimization_header),
                 null,
                 "",
                 ViewUtil.getString(R.string.button_next)
@@ -40,7 +38,7 @@ public class BatteryOptimizationOverview extends StateInfoTemplate {
 
         TextView textViewBody = view.findViewById(R.id.textViewBody);
 
-        Phrase phrase = new Phrase(body);
+        Phrase phrase = new Phrase(R.string.battery_optimization_overview);
         phrase.replace(R.string.token_app_name,R.string.app_name);
         textViewBody.setText(phrase.toHtmlString());
 
