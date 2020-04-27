@@ -23,6 +23,7 @@ import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.TestIntro;
 import com.healthymedium.arc.paths.tests.TestProgress;
+import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.utilities.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
@@ -66,12 +67,11 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.PriceManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -485,32 +485,27 @@ public class StateMachine {
                 res.getString(R.string.chronotype_body2),
                 res.getString(R.string.button_next)));
 
-        CircadianClock clock;
+
+        CircadianClock clock = Study.getParticipant().getCircadianClock();
+        CircadianRhythm rhythm;
         String weekday;
-        LocalTime wakeTime = null;
-        LocalTime bedTime = null;
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", java.util.Locale.US);
-        Calendar calendar = Calendar.getInstance();
-        weekday = dayFormat.format(calendar.getTime());
 
-        clock = Study.getParticipant().getCircadianClock();
-
-        // Get previously entered wake time for today
-        if(wakeTime==null && !clock.hasWakeRhythmChanged(weekday)){
-            int index = clock.getRhythmIndex(weekday)-1;
-            wakeTime = clock.getRhythm(index).getWakeTime();
-        } else if(wakeTime==null){
-            wakeTime = clock.getRhythm(weekday).getWakeTime();
+        weekday = TimeUtil.getWeekday();
+        if(!clock.hasWakeRhythmChanged(weekday)){
+            weekday = TimeUtil.getWeekday(DateTime.now().minusDays(1));
         }
+        rhythm = clock.getRhythm(weekday);
+        LocalTime wakeTime = rhythm.getWakeTime();
 
-        // Get previously entered bed time for today
-        if(bedTime==null && !clock.hasBedRhythmChanged(weekday)){
-            int index = clock.getRhythmIndex(weekday)-1;
-            bedTime = clock.getRhythm(index).getBedTime();
-        } else if(bedTime==null){
-            bedTime = clock.getRhythm(weekday).getBedTime();
+
+        weekday = TimeUtil.getWeekday();
+        if(!clock.hasBedRhythmChanged(weekday)){
+            weekday = TimeUtil.getWeekday(DateTime.now().minusDays(1));
         }
+        rhythm = clock.getRhythm(weekday);
+        LocalTime bedTime = rhythm.getBedTime();
+
 
         fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_sleep), res.getString(R.string.chronotype_disclaim1), bedTime));
         fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_wake), res.getString(R.string.chronotype_disclaim2), wakeTime));
@@ -534,32 +529,27 @@ public class StateMachine {
                 res.getString(R.string.wakesurvey_body),
                 res.getString(R.string.button_beginsurvey)));
 
-        CircadianClock clock;
+
+        CircadianClock clock = Study.getParticipant().getCircadianClock();
+        CircadianRhythm rhythm;
         String weekday;
-        LocalTime wakeTime = null;
-        LocalTime bedTime = null;
 
-        SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", java.util.Locale.US);
-        Calendar calendar = Calendar.getInstance();
-        weekday = dayFormat.format(calendar.getTime());
 
-        clock = Study.getParticipant().getCircadianClock();
-
-        // Get previously entered wake time for today
-        if(wakeTime==null && !clock.hasWakeRhythmChanged(weekday)){
-            int index = clock.getRhythmIndex(weekday)-1;
-            wakeTime = clock.getRhythm(index).getWakeTime();
-        } else if(wakeTime==null){
-            wakeTime = clock.getRhythm(weekday).getWakeTime();
+        weekday = TimeUtil.getWeekday();
+        if(!clock.hasWakeRhythmChanged(weekday)){
+            weekday = TimeUtil.getWeekday(DateTime.now().minusDays(1));
         }
+        rhythm = clock.getRhythm(weekday);
+        LocalTime wakeTime = rhythm.getWakeTime();
 
-        // Get previously entered bed time for today
-        if(bedTime==null && !clock.hasBedRhythmChanged(weekday)){
-            int index = clock.getRhythmIndex(weekday)-1;
-            bedTime = clock.getRhythm(index).getBedTime();
-        } else if(bedTime==null){
-            bedTime = clock.getRhythm(weekday).getBedTime();
+
+        weekday = TimeUtil.getWeekday();
+        if(!clock.hasBedRhythmChanged(weekday)){
+            weekday = TimeUtil.getWeekday(DateTime.now().minusDays(1));
         }
+        rhythm = clock.getRhythm(weekday);
+        LocalTime bedTime = rhythm.getWakeTime();
+
 
         fragments.add(new QuestionTime(true, res.getString(R.string.wake_q1),"",bedTime));
         fragments.add(new QuestionDuration(true, res.getString(R.string.wake_q2)," "));
