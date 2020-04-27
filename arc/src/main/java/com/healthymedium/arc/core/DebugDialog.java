@@ -257,6 +257,9 @@ public class DebugDialog extends DialogFragment {
             DateTime scheduledTime = session.getScheduledTime();
             if(scheduledTime.isAfterNow()){
                 NotificationNode take = nodes.get(NotificationTypes.TestTake.getId(),session.getId());
+                if(take!=null){
+                    return false;
+                }
                 if(!scheduledTime.equals(take.time)) {
                     return false;
                 }
@@ -265,6 +268,9 @@ public class DebugDialog extends DialogFragment {
             DateTime expirationTime = session.getExpirationTime();
             if(expirationTime.isAfterNow()) {
                 NotificationNode missed = nodes.get(NotificationTypes.TestMissed.getId(), session.getId());
+                if(missed==null){
+                    return false;
+                }
                 if (!expirationTime.equals(missed.time)) {
                     return false;
                 }
