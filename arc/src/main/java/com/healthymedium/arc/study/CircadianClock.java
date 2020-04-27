@@ -65,6 +65,10 @@ public class CircadianClock {
         return getRhythm(weekday).lastUpdatedWakedOn().isAfter(createdOn);
     }
 
+    public boolean haveRhythmsChanged(String weekday) {
+        return hasWakeRhythmChanged(weekday) && hasBedRhythmChanged(weekday);
+    }
+
     public int getRhythmIndex(String weekday) {
         int size = rhythms.size();
         for(int i=0;i<size;i++){
