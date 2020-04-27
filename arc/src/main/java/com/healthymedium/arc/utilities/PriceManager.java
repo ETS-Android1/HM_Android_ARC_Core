@@ -25,22 +25,29 @@ public class PriceManager {
     private static PriceManager instance;
     private List<List<PriceManager.Item>> priceSets = new ArrayList<>();
 
-    private PriceManager(Context context) {
-        loadJson(context);
+    private PriceManager() {
     }
 
-    public static synchronized void initialize(Context context) {
-        instance = new PriceManager(context);
+    public static synchronized void initialize() {
+        instance = new PriceManager();
     }
 
     public static synchronized PriceManager getInstance() {
         if (instance == null) {
-            initialize(Application.getInstance().getApplicationContext());
+            initialize();
         }
         return instance;
     }
 
+    public synchronized void clearCache() {
+        priceSets.clear();
+    }
+
     public List<PriceManager.Item> getPriceSet(){
+
+        if(priceSets.size()==0) {
+            loadJson(Application.getInstance());
+        }
 
         if(Config.ENABLE_LEGACY_PRICE_SETS)
         {

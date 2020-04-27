@@ -53,7 +53,8 @@
                 android:layout_width="50dp"
                 android:layout_height="2dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="19dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:layout_weight="1"
                 android:background="@color/yellow" />
 
@@ -67,7 +68,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="32dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginRight="32dp"
                     android:text="@string/earnings_studytotal"
                     android:textColor="@color/tealSubheader"

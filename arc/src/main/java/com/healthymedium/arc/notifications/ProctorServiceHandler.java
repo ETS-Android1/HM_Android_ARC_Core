@@ -122,17 +122,17 @@ public class ProctorServiceHandler {
         return timer != null;
     }
 
-
-    public boolean isValid(){
-        return nodes.size()>0;
-    }
-
     private void onTimeout(){
+        final NotificationNode node = currentNode;
         new Handler().post(new Runnable() {
             @Override
             public void run() {
+                if(!isRunning()) {
+                    listener.onNotify(node);
+                    return;
+                }
                 stop();
-                listener.onNotify(currentNode);
+                listener.onNotify(node);
                 start();
             }
         });
@@ -140,7 +140,7 @@ public class ProctorServiceHandler {
 
     public interface Listener {
         void onFinished();
-        void onNotify(NotificationNode node);
+        void onNotify(final NotificationNode node);
     }
 
 

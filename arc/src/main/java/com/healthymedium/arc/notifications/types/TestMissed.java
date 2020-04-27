@@ -6,6 +6,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationNode;
+import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -34,7 +35,7 @@ public class TestMissed extends NotificationType {
     public boolean onNotifyPending(NotificationNode node) {
         boolean showUser = false;
 
-        int notifyId = NotificationNode.getNotifyId(node.id,new TestTake().id);
+        int notifyId = NotificationNode.getNotifyId(node.id, NotificationTypes.TestTake.id);
         NotificationManager.getInstance().removeUserNotification(notifyId);
 
         PreferencesManager preferences = PreferencesManager.getInstance();

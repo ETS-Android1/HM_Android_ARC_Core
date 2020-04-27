@@ -9,11 +9,38 @@ import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
 
 import java.util.Locale;
 
 
 public class TimeUtil {
+
+    public static String getWeekday(){
+        return getWeekday(DateTime.now());
+    }
+
+    public static String getWeekday(DateTime dateTime){
+
+        switch(dateTime.getDayOfWeek()) {
+            case DateTimeConstants.SUNDAY:
+                return "Sunday";
+            case DateTimeConstants.MONDAY:
+                return "Monday";
+            case DateTimeConstants.TUESDAY:
+                return "Tuesday";
+            case DateTimeConstants.WEDNESDAY:
+                return "Wednesday";
+            case DateTimeConstants.THURSDAY:
+                return "Thursday";
+            case DateTimeConstants.FRIDAY:
+                return "Friday";
+            case DateTimeConstants.SATURDAY:
+                return "Saturday";
+            default:
+                return "";
+        }
+    }
 
     public static double toUtcDouble(DateTime dateTime){
         double utc = dateTime.getMillis();

@@ -51,7 +51,7 @@
 	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para {APP_NAME} estén habilitadas.</string>
 	<string name="button_proceed_without_notifications">Continuar sin notificaciones</string>
 	<string name="popup_opensettings">Ahora abriremos su configuración. Una vez allí, toque Notificaciones y active el interruptor Permitir notificaciones.</string>
-	<string name="button_notnow">Ahora no.</string>
+	<string name="button_notnow">Ahora no</string>
 	<string name="availability_header">Disponibilidad</string>
 	<string name="availability_body">Ahora le haremos algunas preguntas que nos ayudarán a determinar cuándo enviarle las notificaciones.\n&lt;br />&lt;br />\n&lt;i>Solo recibirá notificaciones durante las horas en las que esté despierto. Tenga a bien establecer un horario de disponibilidad de 8 horas como mínimo.&lt;/i></string>
 	<string name="availability_start">¿A qué hora deberíamos &lt;b>iniciar&lt;/b> las notificaciones todos los días?</string>

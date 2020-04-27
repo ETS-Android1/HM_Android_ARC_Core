@@ -166,7 +166,7 @@ public class ProctorService extends Service {
 
         @Override
         public void onNotify(final NotificationNode node) {
-            Log.d(tag, "onNotify");
+            Log.d(tag, "onNotify(id="+node.id+", type="+node.type+")");
             handler.post(new Runnable() {
                 @Override
                 public void run() {
