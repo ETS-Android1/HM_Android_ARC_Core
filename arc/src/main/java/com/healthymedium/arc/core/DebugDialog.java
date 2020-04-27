@@ -117,8 +117,8 @@ public class DebugDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                String logFile = Application.getInstance().getCacheDir()+"/Log";
-                ParcelFile log = new ParcelFile(logFile, ParcelFile.TEXT);
+                
+                ParcelFile log = new ParcelFile(Log.filename(), ParcelFile.TEXT);
                 Analytics.logFile("Log Upload", log, new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
