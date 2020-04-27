@@ -29,6 +29,10 @@ public class Log {
         return time+"/"+level+"/"+tag+": "+msg+"\n";
     }
 
+    public static String filename(){
+        return Application.getInstance().getCacheDir()+"/Log";
+    }
+
     private static boolean checkStream(){
         if(stream!=null){
             return true;
@@ -36,7 +40,7 @@ public class Log {
         if(Application.getInstance()==null){
            return false;
         }
-        File logFile = new File(Application.getInstance().getCacheDir()+"/Log");
+        File logFile = new File(filename());
         if(!logFile.exists()){
             try {
                 logFile.createNewFile();
