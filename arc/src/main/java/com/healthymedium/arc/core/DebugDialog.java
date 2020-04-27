@@ -122,12 +122,12 @@ public class DebugDialog extends DialogFragment {
                 Analytics.logFile("Log Upload Requested", log, new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(getContext(),"Log Upload Successful",Toast.LENGTH_SHORT);
+                        Toast.makeText(Application.getInstance(),"Log Upload Successful",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure() {
-                        Toast.makeText(getContext(),"Log Upload Failed",Toast.LENGTH_SHORT);
+                        Toast.makeText(Application.getInstance(),"Log Upload Failed",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
