@@ -60,7 +60,7 @@ public class ResourcesScreen extends BaseFragment {
 
         frameLayoutAvailability = view.findViewById(R.id.frameLayoutAvailability);
 
-        boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
+        boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().minusMinutes(5).isBeforeNow();
         if(isTestReady) {
             textViewAvailability.setAlpha(0.5f);
             TextView textViewChangeDenied = view.findViewById(R.id.textViewChangeDenied);
