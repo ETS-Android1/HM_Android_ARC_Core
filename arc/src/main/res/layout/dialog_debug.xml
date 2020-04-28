@@ -132,9 +132,9 @@
                 android:text="Send State to Analytics"
                 android:textColor="@color/secondaryDark"
                 android:textStyle="bold"
+                android:elevation="2dp"
                 app:fillColor="@color/whiteButtonLight"
-                app:radius="16dp"
-                android:alpha="0.5"/>
+                app:radius="16dp"/>
 
             <com.healthymedium.arc.ui.base.RoundedTextView
                 android:id="@+id/textViewDeviation"

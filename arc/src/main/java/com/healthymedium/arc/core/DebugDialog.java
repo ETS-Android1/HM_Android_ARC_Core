@@ -133,6 +133,40 @@ public class DebugDialog extends DialogFragment {
             }
         });
 
+        TextView textViewSendState = v.findViewById(R.id.textViewSendState);
+        textViewSendState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+
+                String dir = Application.getInstance().getApplicationInfo().dataDir;
+
+                List<ParcelFile> parcels = new ArrayList<>();
+                ParcelFile log = new ParcelFile(Log.filename(), ParcelFile.TEXT);
+                parcels.add(log);
+
+                String stateLocation = dir+"/cache/StudyStateCache";
+                ParcelFile state = new ParcelFile(stateLocation, ParcelFile.JSON);
+                parcels.add(state);
+
+                String prefsLocation = dir+"/shared_prefs/"+getContext().getPackageName()+".prefs.xml";
+                ParcelFile prefs = new ParcelFile(prefsLocation, ParcelFile.XML);
+                parcels.add(prefs);
+
+                Analytics.logFiles("State Upload Requested", parcels, new Analytics.Listener() {
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(Application.getInstance(),"State Upload Successful",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(Application.getInstance(),"State Upload Failed",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
         TextView textViewDeviation = v.findViewById(R.id.textViewDeviation);
         textViewDeviation.setOnClickListener(new View.OnClickListener() {
             @Override
