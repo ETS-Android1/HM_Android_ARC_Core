@@ -240,11 +240,15 @@ public class CacheManager {
         return objectGson.fromJson(cache.content, clazz);
     }
 
-    public File getFile(String key) {
+    public File getFile(String key, boolean create) {
         Log.i(tag,"getFile("+key+")");
         key = sanitizeKey(key);
         if(map.containsKey(key)){
             return map.get(key).file;
+        }
+
+        if(!create){
+            return null;
         }
 
         File file = new File(cacheDir, key);
@@ -257,6 +261,10 @@ public class CacheManager {
             }
         }
         return file;
+    }
+
+    public File getFile(String key) {
+        return getFile(key,true);
     }
 
     public Bitmap getBitmap(String key) {
