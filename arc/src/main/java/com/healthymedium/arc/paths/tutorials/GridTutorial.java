@@ -48,7 +48,8 @@ public class GridTutorial extends Tutorial {
     GridBoxView image43;
 
     TextView tapThisF;
-    TextView textViewInstructions;
+    TextView textViewGridInstructions;
+    TextView textViewLetterInstructions;
 
     HintPointer itemsHint;
     HintPointer gridsHint;
@@ -140,7 +141,7 @@ public class GridTutorial extends Tutorial {
                         public void run() {
                             fadeOutView(fullScreenGray);
                             fadeOutView(gridLayoutLetters);
-                            fadeOutView(textViewInstructions);
+                            fadeOutView(textViewLetterInstructions);
                             setSecondItemLayout();
                         }
                     };
@@ -259,7 +260,7 @@ public class GridTutorial extends Tutorial {
                         incrementProgress();
                         setGridsSelectable(false);
                         fadeOutView(gridLayout);
-                        fadeOutView(textViewInstructions);
+                        fadeOutView(textViewGridInstructions);
                         showComplete();
                         return true;
                     }
@@ -292,7 +293,8 @@ public class GridTutorial extends Tutorial {
         textViewComplete = view.findViewById(R.id.textViewComplete);
         textViewComplete.setText(Html.fromHtml(ViewUtil.getString(R.string.testing_tutorial_complete)));
 
-        textViewInstructions = view.findViewById(R.id.instructions);
+        textViewGridInstructions = view.findViewById(R.id.gridInstructions);
+        textViewLetterInstructions = view.findViewById(R.id.gridLettersInstructions);
 
         tapThisF = view.findViewById(R.id.tapThisF);
 
@@ -474,9 +476,7 @@ public class GridTutorial extends Tutorial {
     private void setInitialLetterLayout() {
         fadeOutView(gridLayout);
         fadeInView(gridLayoutLetters, 1f);
-
-        textViewInstructions.setText(ViewUtil.getString(R.string.grids_subheader_fs));
-        fadeInView(textViewInstructions, 1f);
+        fadeInView(textViewLetterInstructions, 1f);
 
         fadeOutView(fullScreenGray);
 
@@ -614,9 +614,7 @@ public class GridTutorial extends Tutorial {
     private void setGridRecall() {
         setGridsSelectable(true);
         fadeInView(gridLayout, 1f);
-
-        textViewInstructions.setText(ViewUtil.getString(R.string.grids_subheader_boxes));
-        fadeInView(textViewInstructions, 1f);
+        fadeInView(textViewGridInstructions, 1f);
 
         fadeOutView(fullScreenGray);
         gridLayout.setVisibility(View.VISIBLE);

@@ -44,11 +44,12 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/instructions"
+            android:id="@+id/gridInstructions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:layout_above="@id/gridLayout"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
@@ -62,7 +63,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:columnCount="5"
             android:rowCount="5"
@@ -219,6 +219,19 @@
                 android:layout_height="14mm"
                 android:layout_margin="1dp" />
         </GridLayout>
+
+        <TextView
+            android:id="@+id/gridLettersInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_above="@id/gridLettersLayout"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="@string/grids_subheader_fs"
+            android:visibility="gone" />
 
         <GridLayout
             android:id="@+id/gridLettersLayout"
