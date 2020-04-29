@@ -438,7 +438,10 @@ public class RestClient <Api>{
         }
 
         String key = "signature_" + DateTime.now().getMillis();
-        CacheManager.getInstance().putBitmap(key,bitmap,100);
+        boolean saved = CacheManager.getInstance().putBitmap(key,bitmap,80);
+        if(!saved){
+            Log.w("RestClient","failed to save bitmap in cache");
+        }
 
         CachedSignature signature = new CachedSignature();
         signature.filename = key;

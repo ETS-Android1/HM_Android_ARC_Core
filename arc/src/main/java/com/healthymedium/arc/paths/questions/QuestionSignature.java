@@ -87,6 +87,9 @@ public class QuestionSignature extends QuestionTemplate {
     protected void onNextRequested() {
         Bitmap bitmap = getSignature();
         Study.getRestClient().submitSignature(bitmap);
+        if(!bitmap.isRecycled()){
+            bitmap.recycle();
+        }
         Study.getInstance().openNextFragment();
     }
 
