@@ -91,30 +91,7 @@ public class EarningsScreen extends BaseFragment {
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (!Study.getRestClient().isUploadQueueEmpty()){
-                    refreshLayout.setRefreshing(false);
-                    return;
-                }
-
-                Study.getParticipant().getEarnings().refreshOverview(new Earnings.Listener() {
-                    @Override
-                    public void onSuccess() {
-                        if(refreshLayout!=null) {
-                            refreshLayout.setRefreshing(false);
-                            Study.getParticipant().save();
-                            if(getContext()!=null) {
-                                populateViews();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure() {
-                        if(refreshLayout!=null) {
-                            refreshLayout.setRefreshing(false);
-                        }
-                    }
-                });
+                refresh();
             }
         });
 
@@ -173,8 +150,11 @@ public class EarningsScreen extends BaseFragment {
         weeklyTotalLabel.setText(ViewUtil.getString(R.string.earnings_weektotal));
         studyTotalLabel.setText(ViewUtil.getString(R.string.earnings_studytotal));
 
-        populateViews();
-
+        if(Study.getParticipant().getEarnings().hasCurrentOverview()){
+            populateViews();
+        } else {
+            refresh();
+        }
 
         return view;
     }
@@ -185,6 +165,41 @@ public class EarningsScreen extends BaseFragment {
         int top = view.getPaddingTop();
         view.setPadding(0,top,0,0);
         refreshLayout.setProgressViewOffset(true, 0,top+ViewUtil.dpToPx(16));
+    }
+
+    private void refresh() {
+        if (!Study.getRestClient().isUploadQueueEmpty()){
+            refreshLayout.setRefreshing(false);
+            if(getContext()!=null) {
+                populateViews();
+            }
+            return;
+        }
+
+        refreshLayout.setRefreshing(true);
+
+        Study.getParticipant().getEarnings().refreshOverview(new Earnings.Listener() {
+            @Override
+            public void onSuccess() {
+                if(refreshLayout!=null) {
+                    refreshLayout.setRefreshing(false);
+                    Study.getParticipant().save();
+                    if(getContext()!=null) {
+                        populateViews();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure() {
+                if(refreshLayout!=null) {
+                    refreshLayout.setRefreshing(false);
+                    if(getContext()!=null) {
+                        populateViews();
+                    }
+                }
+            }
+        });
     }
 
     private void populateViews() {
