@@ -446,4 +446,8 @@
 	<string name="prices_test_prefix">¥</string>
 	<string name="prices_test_suffix"></string>
 	<string name="unit_months">か月</string>
+	<string name="battery_optimization_header">バッテリーの最適化</string>
+	<string name="battery_optimization_overview">お使いの携帯電話には、バッテリー寿命を維持するのに役立つ設定があり、「バッテリー最適化」設定と呼ばれています。&lt;br>&lt;br>\n{APP_NAME}アプリがスマートフォンの電池寿命に与える影響は最小限です。 {APP_NAME}アプリのバッテリー最適化設定をオフにすることをお勧めします。そうすることで、時間通りにテスト通知を受け取ることができます。</string>
+	<string name="battery_optimization_prompt">次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
+	<string name="battery_optimization_reminder">通知が遅れています。次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
 </resources>

@@ -446,4 +446,8 @@
 	<string name="prices_test_prefix"></string>
 	<string name="prices_test_suffix">$</string>
 	<string name="unit_months">mois</string>
+	<string name="battery_optimization_header">Optimisation de la batterie</string>
+	<string name="battery_optimization_overview">Votre téléphone a un paramètre pour aider à préserver la durée de vie de votre batterie, et il est appelé un paramètre «d\'optimisation de la batterie».&lt;br>&lt;br>L\'application {APP_NAME} aura un impact minimal sur la durée de vie de la batterie de votre téléphone. Il est recommandé de désactiver le paramètre d\'optimisation de la batterie pour l\'application {APP_NAME}. Cela vous aidera à vous assurer de recevoir les notifications de test à temps.</string>
+	<string name="battery_optimization_prompt">Ensuite, une fenêtre vous demandera de désactiver l\'optimisation de la batterie en permettant à l\'application {APP_NAME} de s\'exécuter en arrière-plan. Veuillez &lt;b> autoriser &lt;/b> pour vous assurer que vos notifications fonctionnent correctement. </string>
+	<string name="battery_optimization_reminder">Vos notifications sont retardées. Ensuite, une fenêtre vous demandera de désactiver l\'optimisation de la batterie en permettant à l\'application {APP_NAME} de s\'exécuter en arrière-plan. Veuillez &lt;b> autoriser &lt;/b> pour vous assurer que vos notifications fonctionnent correctement.</string>
 </resources>

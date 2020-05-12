@@ -446,4 +446,8 @@
 	<string name="prices_test_prefix"></string>
 	<string name="prices_test_suffix">€</string>
 	<string name="unit_months">Monate</string>
+	<string name="battery_optimization_header">Batterieoptimierung</string>
+	<string name="battery_optimization_overview">Ihr Telefon verfügt über eine Einstellung, mit der Sie die Akkulaufzeit verlängern können. Diese Einstellung wird als „Akkuoptimierung“ bezeichnet.&lt;br>&lt;br>Die {APP_NAME} App hat nur minimale Auswirkungen auf die Akkulaufzeit Ihres Telefons. Es wird empfohlen, die Batterieoptimierungseinstellung für die App {APP_NAME} zu deaktivieren. Auf diese Weise können Sie sicherstellen, dass Sie rechtzeitig Testbenachrichtigungen erhalten.</string>
+	<string name="battery_optimization_prompt">Als Nächstes wird Ihnen ein Popup-Fenster angezeigt, in dem Sie aufgefordert werden, die Batterieoptimierung zu deaktivieren, indem die App {APP_NAME} im Hintergrund ausgeführt werden darf. Bitte tippen Sie auf &lt;b> erlauben &lt;/ b>, um sicherzustellen, dass Ihre Benachrichtigungen ordnungsgemäß funktionieren.</string>
+	<string name="battery_optimization_reminder">Ihre Benachrichtigungen haben eine Verzögerung. Als Nächstes wird Ihnen ein Popup-Fenster angezeigt, in dem Sie aufgefordert werden, die Batterieoptimierung zu deaktivieren, indem die App {APP_NAME} im Hintergrund ausgeführt werden darf. Bitte tippen Sie auf &lt;b> erlauben &lt;/ b>, um sicherzustellen, dass Ihre Benachrichtigungen ordnungsgemäß funktionieren.</string>
 </resources>
