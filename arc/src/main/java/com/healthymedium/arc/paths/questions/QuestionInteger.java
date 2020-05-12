@@ -62,7 +62,7 @@ public class QuestionInteger extends QuestionTemplate {
                 }
 
                 if(done && input.length()>0){
-                    buttonNext.performClick();
+//                    buttonNext.performClick();
                 }
                 return false;
             }
