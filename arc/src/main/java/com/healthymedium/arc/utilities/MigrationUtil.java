@@ -2,9 +2,11 @@ package com.healthymedium.arc.utilities;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.State;
 import com.healthymedium.arc.study.StateCache;
 import com.healthymedium.arc.study.StateMachine;
+import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.utilities.Log;
 
@@ -73,6 +75,16 @@ public class MigrationUtil {
 
         if(oldVersion < 3000002){
             successful = convertInterruptedBooleanToInteger();
+        }
+
+        // fix in case user is experiencing EXR-936
+        if(oldVersion < 3000402){
+            TestCycle cycle = Study.getCurrentTestCycle();
+            if(cycle!=null){
+                if(cycle.getNumberOfTests()>0){
+                    Study.getScheduler().scheduleNotifications(cycle, true);
+                }
+            }
         }
 
         return successful;
