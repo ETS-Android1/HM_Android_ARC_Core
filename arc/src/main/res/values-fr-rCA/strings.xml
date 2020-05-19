@@ -45,7 +45,7 @@
 	<string name="onboarding_commit_body">Votre participation à cette étude ainsi que toutes les tâches que vous effectuez contribuent à l\'avancement de la recherche sur la maladie d\'Alzheimer.</string>
 	<string name="onboarding_notifications_header1">Remarque sur les notifications</string>
 	<string name="onboarding_notifications_body1">Nous utilisons les notifications pour vous aviser quand il est temps d\'effectuer un test. &lt;b>Les notifications sont essentielles pour que l\'étude fonctionne correctement&lt;/b>. Veuillez autoriser les notifications pour cette application durant toute la durée de l\'étude.</string>
-	<string name="onboarding_notifications_popup">&lt;b>Veuillez appuyer sur "autoriser"&lt;/b> pour que nous puissions vous aviser lorsque les tests sont disponibles.</string>
+	<string name="onboarding_notifications_popup">&lt;b>Veuillez appuyer sur \"autoriser\"&lt;/b> pour que nous puissions vous aviser lorsque les tests sont disponibles.</string>
 	<string name="onboarding_notifications_header2">Veuillez activer les notifications.</string>
 	<string name="onboarding_notifications_body2_ios">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application, appuyer sur Notifications, puis appuyer sur EXR et activer le bouton Autoriser les notifications.</string>
 	<string name="onboarding_notifications_body2_android">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application et assurez-vous que les notifications pour {APP_NAME} sont activées.</string>
