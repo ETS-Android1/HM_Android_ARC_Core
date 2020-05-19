@@ -79,6 +79,7 @@ public class MigrationUtil {
 
         // fix in case user is experiencing EXR-936
         if(oldVersion < 3000402){
+            Study.getParticipant().load();
             TestCycle cycle = Study.getCurrentTestCycle();
             if(cycle!=null){
                 if(cycle.getNumberOfTests()>0){
