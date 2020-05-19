@@ -137,8 +137,10 @@ public class TranslationDoc {
                 String value = entry.getValue();
 
                 // replace less than signs, escape single quotes, replace line breaks with \n (some breaks have odd spaces around them)
-                entry.setValue(value.replace("<", "&lt;")
+                entry.setValue(value
+                        .replace("<", "&lt;")
                         .replace("'", "\\'")
+                        .replace("\"", "\\\"")
                         .replace(" \n ", "\\n")
                         .replace("\n ", "\\n")
                         .replace("\n", "\\n"));
