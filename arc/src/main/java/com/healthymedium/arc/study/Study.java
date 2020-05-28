@@ -210,6 +210,7 @@ public class Study{
         }
         return true;
     }
+
     public boolean registerPrivacyPolicy(Class tClass){
         return registerPrivacyPolicy(tClass,false);
     }
