@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.github.gcacace:signature-pad:1.2.1'
 
 //    testImplementation project(':test_data')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     testImplementation 'joda-time:joda-time:2.9.9'
 
     implementation "android.arch.lifecycle:extensions:1.1.0"
