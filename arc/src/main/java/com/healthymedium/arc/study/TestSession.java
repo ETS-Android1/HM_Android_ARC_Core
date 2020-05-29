@@ -139,11 +139,11 @@ public class TestSession {
     public void markStarted() {
         this.startTime = DateTime.now();
 
-        int notifyId = NotificationNode.getNotifyId(id, NotificationTypes.TestTake.getId());
-        NotificationManager.getInstance().removeUserNotification(notifyId);
-
         // this null check lets unit tests work properly
         if(PreferencesManager.getInstance()!=null) {
+            int notifyId = NotificationNode.getNotifyId(id, NotificationTypes.TestTake.getId());
+            NotificationManager.getInstance().removeUserNotification(notifyId);
+
             PreferencesManager.getInstance().putInt(TAG_TEST_MISSED_COUNT, 0);
         }
         Log.i(tag,"markStarted()");

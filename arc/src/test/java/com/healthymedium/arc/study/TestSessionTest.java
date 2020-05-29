@@ -1,8 +1,11 @@
 package com.healthymedium.arc.study;
 
+import com.healthymedium.arc.utilities.Log;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -10,6 +13,11 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class TestSessionTest {
+
+    @Before
+    public void setup(){
+        Log.pointToSystemOut();
+    }
 
     @Test
     public void getConstructorArguments() {
