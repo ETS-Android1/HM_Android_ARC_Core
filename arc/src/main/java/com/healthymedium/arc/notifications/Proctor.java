@@ -20,14 +20,14 @@ public class Proctor {
     }
 
     public static void pauseService(Context context) {
-        Log.i(tag,"refreshData");
+        Log.i(tag,"pauseService");
         Intent intent = new Intent(context, ProctorService.class);
         intent.setAction(ProctorService.ACTION_PAUSE_SERVICE);
         ContextCompat.startForegroundService(context,intent);
     }
 
     public static void resumeService(Context context) {
-        Log.i(tag,"refreshData");
+        Log.i(tag,"resumeService");
         Intent intent = new Intent(context, ProctorService.class);
         intent.setAction(ProctorService.ACTION_RESUME_SERVICE);
         ContextCompat.startForegroundService(context,intent);
