@@ -120,6 +120,12 @@ public class Earnings {
         return overview;
     }
 
+    public void setOverview(EarningOverview overview){
+        this.overview = overview;
+        overviewRefresh = 1;
+        overviewUpdateTime = DateTime.now();
+    }
+
     @Nullable
     public DateTime getOverviewRefreshTime(){
         return overviewUpdateTime;
@@ -198,6 +204,12 @@ public class Earnings {
 
     public EarningDetails getDetails(){
         return details;
+    }
+
+    public void setDetails(EarningDetails details){
+        this.details = details;
+        detailsRefresh = 1;
+        detailsUpdateTime = DateTime.now();
     }
 
     @Nullable
