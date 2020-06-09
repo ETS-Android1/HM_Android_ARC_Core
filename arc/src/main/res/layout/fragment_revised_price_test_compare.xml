@@ -2,19 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey">
 
-    <LinearLayout
+    <com.healthymedium.arc.ui.base.RoundedLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="200dp"
-        android:background="@drawable/background_rounded_white"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="visible"
+        app:fillColor="@color/white"
+        app:strokeColor="#6C7373"
+        app:strokeWidth="1dp"
+        app:radius="16dp">
 
         <TextView
             android:id="@+id/textviewFood"
@@ -46,6 +50,6 @@
             android:textAllCaps="false"
             android:textSize="35dp" />
 
-    </LinearLayout>
+    </com.healthymedium.arc.ui.base.RoundedLinearLayout>
 
 </RelativeLayout>

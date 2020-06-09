@@ -21,6 +21,7 @@ import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.ui.RadioButton;
+import com.healthymedium.arc.ui.base.RoundedRelativeLayout;
 import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -44,7 +45,7 @@ public class PricesTutorialRevised extends Tutorial {
     List<View> childSet;
 
     RelativeLayout mainContainer;
-    RelativeLayout priceContainer;
+    RoundedRelativeLayout priceContainer;
 
     RadioButton buttonYes;
     RadioButton buttonNo;
@@ -171,14 +172,18 @@ public class PricesTutorialRevised extends Tutorial {
 
         injectMemorizationViews();
 
-        //Rounded rectangle background active during memorization portion
-        priceContainer.setBackgroundResource(R.drawable.background_rounded_white);
+        priceContainer.setRadius(16);
+        priceContainer.setFillColor(R.color.white);
+        priceContainer.setStrokeColor("#6C7373");
+        priceContainer.setStrokeWidth(1);
+
 
         return view;
     }
 
     private void injectMemorizationViews() {
         priceContainer.removeAllViews();
+        priceContainer.setGravity(Gravity.CENTER);
 
         //Resize container
         priceContainer.getLayoutParams().height = ViewUtil.dpToPx(210);

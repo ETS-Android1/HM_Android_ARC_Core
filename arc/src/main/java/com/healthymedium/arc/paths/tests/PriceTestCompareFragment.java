@@ -170,12 +170,12 @@ public class PriceTestCompareFragment extends BaseFragment {
         section.setAltPrice( prefix+item.alt+suffix);
 
         if(random.nextBoolean()){
-            textviewFood.setText(item.item+" ");
-            textviewPrice.setText(price+" ");
+            textviewFood.setText(item.item);
+            textviewPrice.setText(price);
             setFonts(false);
         } else {
-            textviewFood.setText(price+" ");
-            textviewPrice.setText(item.item+" ");
+            textviewFood.setText(price);
+            textviewPrice.setText(item.item);
             setFonts(true);
         }
 

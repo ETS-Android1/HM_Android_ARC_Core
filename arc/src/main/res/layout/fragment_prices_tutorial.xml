@@ -21,7 +21,7 @@
             android:background="@color/transparent"
             android:foreground="@color/transparent"/>
 
-        <RelativeLayout
+        <com.healthymedium.arc.ui.base.RoundedRelativeLayout
             android:id="@+id/priceContainer"
             android:layout_width="match_parent"
             android:layout_height="300dp"
@@ -29,8 +29,7 @@
             android:layout_marginLeft="10dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:gravity="center_horizontal"
-            android:background="@drawable/background_rounded">
+            android:gravity="center_horizontal">
 
             <TextView
                 android:id="@+id/textviewPrice"
@@ -89,7 +88,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView12" />
 
-        </RelativeLayout>
+        </com.healthymedium.arc.ui.base.RoundedRelativeLayout>
 
         <FrameLayout
             android:id="@+id/frameHide"
