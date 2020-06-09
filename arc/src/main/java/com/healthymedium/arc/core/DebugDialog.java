@@ -314,7 +314,7 @@ public class DebugDialog extends DialogFragment {
             DateTime scheduledTime = session.getScheduledTime();
             if(scheduledTime.isAfterNow()){
                 NotificationNode take = nodes.get(NotificationTypes.TestTake.getId(),session.getId());
-                if(take!=null){
+                if(take==null){
                     return false;
                 }
                 if(!scheduledTime.equals(take.time)) {
