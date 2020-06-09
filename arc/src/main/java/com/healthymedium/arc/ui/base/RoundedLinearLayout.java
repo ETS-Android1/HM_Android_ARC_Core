@@ -2,6 +2,7 @@ package com.healthymedium.arc.ui.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
@@ -86,8 +87,16 @@ public class RoundedLinearLayout extends LinearLayout {
         background.setFillColor(ViewUtil.getColor(getContext(),color));
     }
 
+    public void setFillColor(String colorString) {
+        background.setFillColor(Color.parseColor(colorString));
+    }
+
     public void setStrokeColor(@ColorRes int color) {
         background.setStrokeColor(ViewUtil.getColor(getContext(),color));
+    }
+
+    public void setStrokeColor(String colorString) {
+        background.setStrokeColor(Color.parseColor(colorString));
     }
 
     public void setStrokeWidth(int dp) {
