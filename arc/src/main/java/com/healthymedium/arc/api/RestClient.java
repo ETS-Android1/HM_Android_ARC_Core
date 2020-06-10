@@ -757,9 +757,9 @@ public class RestClient <Api>{
         public boolean onResponse(CallbackChain chain, RestResponse response) {
             if(response.successful){
                 DayProgress progress = response.getOptionalAs("day_progress", DayProgress.class);
-                List<TestSession> testSessions = Study.getParticipant().getState().testCycles.get(progress.cycle).getTestDay(progress.day).getTestSessions();
+
                 for(SessionProgress sessionProgress : progress.sessions) {
-                    TestSession session = testSessions.get(sessionProgress.session_index);
+                    TestSession session = Study.getParticipant().getSessionById(sessionProgress.session_index);
                     session.setProgress(sessionProgress.percent_complete);
                     switch (sessionProgress.status) {
                         case "not_yet_taken":
