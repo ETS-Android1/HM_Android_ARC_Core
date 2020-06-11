@@ -14,6 +14,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class FinishedStudyScreen extends BaseFragment {
 
@@ -36,6 +37,10 @@ public class FinishedStudyScreen extends BaseFragment {
 
         TextView header = view.findViewById(R.id.textViewHeader);
         header.setTypeface(Fonts.robotoMedium);
+        ViewUtil.setLineHeight(header,32);
+
+        TextView textView = view.findViewById(R.id.textView);
+        ViewUtil.setLineHeight(textView,26);
 
         // display progress views ------------------------------------------------------------------
 
