@@ -145,7 +145,12 @@ public class HomeScreen extends BaseFragment {
         textViewHeader.setText(Html.fromHtml(stringHeader));
         textViewSubheader.setText(Html.fromHtml(stringSubheader));
 
-        boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().isBeforeNow();
+        TestSession testSession = Study.getCurrentTestSession();
+        if(testSession==null) {
+            return;
+        }
+
+        boolean isTestReady = testSession.getScheduledTime().isBeforeNow();
         if (isTestReady) {
             Button button = new Button(getContext());
             button.setText(Application.getInstance().getResources().getString(R.string.button_begin));
@@ -241,6 +246,12 @@ public class HomeScreen extends BaseFragment {
         }
 
         TestCycle testCycle = participant.getCurrentTestCycle();
+        if(testCycle==null) {
+            stringHeader = ViewUtil.getString(R.string.home_header6);
+            stringSubheader = ViewUtil.getString(R.string.home_body6);
+            return;
+        }
+
         TestDay testDay = participant.getCurrentTestDay();
         TestSession testSession = participant.getCurrentTestSession();
 
