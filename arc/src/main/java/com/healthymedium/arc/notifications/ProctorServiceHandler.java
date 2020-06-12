@@ -67,7 +67,7 @@ public class ProctorServiceHandler {
             } else {
                 if(!resumed) {
                     long now = System.currentTimeMillis();
-                    analyzeTimeout("posthumous", now, node.time.getMillis());
+                    analyzeTimeout("posthumous", now, node.time.getMillis(), node);
                 }
                 listener.onNotify(node);
             }
@@ -165,7 +165,7 @@ public class ProctorServiceHandler {
         public void onFinish() {
             Log.i(tag,"onFinish");
             long now = System.currentTimeMillis();
-            analyzeTimeout("finished",now,time);
+            analyzeTimeout("finished",now,time,currentNode);
             onTimeout();
         }
 
@@ -174,7 +174,7 @@ public class ProctorServiceHandler {
             long now = System.currentTimeMillis();
             if(now>time){
                 Log.i(tag,"onTick - timing out");
-                analyzeTimeout("preemptive",now,time);
+                analyzeTimeout("preemptive",now,time,currentNode);
                 onTimeout();
 //            } else { // uncomment for logging
 //                int seconds = (int) ((millisUntilFinished-tenSeconds)/1000);
@@ -191,7 +191,7 @@ public class ProctorServiceHandler {
 
     private static long five_min = 5*60*1000;
 
-    private static void analyzeTimeout(String type, long now, long target) {
+    private static void analyzeTimeout(String type, long now, long target, NotificationNode node) {
         long delta = Math.abs(target-now);
         if(delta>five_min){
             int seconds = (int) ((delta)/1000);
@@ -216,6 +216,13 @@ public class ProctorServiceHandler {
             json.addProperty("actualTimestamp",now);
             json.addProperty("target",format.print(target));
             json.addProperty("targetTimestamp",target);
+
+            if(node!=null){
+                json.addProperty("nodeId",node.id);
+                json.addProperty("nodeType",node.type);
+                json.addProperty("nodeTypeName",NotificationTypes.getName(node.type));
+                json.addProperty("nodeNotifyId",node.getNotifyId());
+            }
 
             Context context = Application.getInstance();
 
