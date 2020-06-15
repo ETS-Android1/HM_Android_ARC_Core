@@ -263,6 +263,16 @@ public class RestClient <Api>{
         call.enqueue(createCallback(listener));
     }
 
+    public void getStudySummary(final Listener listener){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","getStudySummary()");
+
+        Call<ResponseBody> call = getService().getStudySummary(Device.getId());
+        call.enqueue(createCallback(listener));
+    }
+
     public void getStudyProgress(final Listener listener ){
         if(Config.REST_BLACKHOLE) {
             return;
