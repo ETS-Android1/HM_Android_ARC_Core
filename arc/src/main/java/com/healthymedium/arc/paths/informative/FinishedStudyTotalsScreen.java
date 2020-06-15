@@ -20,6 +20,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 public class FinishedStudyTotalsScreen extends BaseFragment {
 
@@ -48,6 +49,9 @@ public class FinishedStudyTotalsScreen extends BaseFragment {
         TextView header = view.findViewById(R.id.textViewHeader);
         header.setTypeface(Fonts.robotoMedium);
 
+        TextView textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
+        ViewUtil.setLineHeight(textViewSubHeader,26);
+
         progressBar = view.findViewById(R.id.progressBar);
 
         linearLayoutResults = view.findViewById(R.id.linearLayoutResults);
@@ -57,6 +61,8 @@ public class FinishedStudyTotalsScreen extends BaseFragment {
         textViewTotalGoals = view.findViewById(R.id.textViewTotalGoals);
 
         textViewError = view.findViewById(R.id.textViewError);
+        ViewUtil.setLineHeight(textViewError,26);
+
         button = view.findViewById(R.id.button);
 
         // -----------------------------------------------------------------------------------------
