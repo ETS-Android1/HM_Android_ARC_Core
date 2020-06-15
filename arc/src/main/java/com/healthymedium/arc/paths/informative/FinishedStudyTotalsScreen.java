@@ -14,6 +14,7 @@ import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.api.models.StudySummary;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
@@ -74,6 +75,20 @@ public class FinishedStudyTotalsScreen extends BaseFragment {
     protected void onEnterTransitionEnd(boolean popped) {
         super.onEnterTransitionEnd(popped);
         progressBar.animate().alpha(1.0f).setDuration(300);
+
+        if(Config.REST_BLACKHOLE) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    StudySummary summary = new StudySummary();
+                    summary.days_tested = 168;
+                    summary.goals_met = 13;
+                    summary.tests_taken = 302;
+                    summary.total_earnings = "$115.75";
+                    showTotals(summary);
+                }
+            },2000);
+        }
 
         Study.getRestClient().getStudySummary(new RestClient.Listener() {
             @Override
