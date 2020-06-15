@@ -62,4 +62,9 @@ public class FinishedStudyScreen extends BaseFragment {
         confetti.animate().alpha(1.0f).setDuration(1000);
     }
 
+    @Override
+    protected void onExitTransitionStart(boolean popped) {
+        super.onExitTransitionStart(popped);
+        confetti.animate().alpha(0f).setDuration(100);
+    }
 }
