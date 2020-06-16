@@ -70,21 +70,24 @@ public class EarningsScreen extends BaseFragment {
         int dayIndex = state.currentTestDay;
         int cycleIndex = state.currentTestCycle;
 
-        if(testDay.getStartTime().isAfterNow()) {
-            if(sessionIndex<0) {
-                dayIndex--;
-                if (dayIndex < 0) {
-                    cycleIndex--;
-                    testCycle = state.testCycles.get(cycleIndex);
-                    dayIndex = testCycle.getNumberOfTestDays() - 1;
-                }
-                testDay = testCycle.getTestDay(dayIndex);
-                sessionIndex = testDay.getNumberOfTests() - 1;
-                testSession = testDay.getTestSession(sessionIndex);
-            }
-        }
+        boolean isPractice = false;
 
-        boolean isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
+        if(testCycle != null) {
+            if (testDay.getStartTime().isAfterNow()) {
+                if (sessionIndex < 0) {
+                    dayIndex--;
+                    if (dayIndex < 0) {
+                        cycleIndex--;
+                        testCycle = state.testCycles.get(cycleIndex);
+                        dayIndex = testCycle.getNumberOfTestDays() - 1;
+                    }
+                    testDay = testCycle.getTestDay(dayIndex);
+                    sessionIndex = testDay.getNumberOfTests() - 1;
+                    testSession = testDay.getTestSession(sessionIndex);
+                }
+            }
+            isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
+        }
 
         refreshLayout = view.findViewById(R.id.refreshLayout);
         refreshLayout.setEnabled(false);
