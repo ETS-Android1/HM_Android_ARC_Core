@@ -14,6 +14,7 @@ import com.healthymedium.arc.paths.informative.DayProgressScreen;
 import com.healthymedium.arc.paths.informative.EarningsPostTestLoadingScreen;
 import com.healthymedium.arc.paths.informative.FinishedCycleScreen;
 import com.healthymedium.arc.paths.informative.FinishedStudyScreen;
+import com.healthymedium.arc.paths.informative.FinishedStudyTotalsScreen;
 import com.healthymedium.arc.paths.informative.RebukedCommitmentScreen;
 import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
@@ -873,6 +874,7 @@ public class StateMachine {
         List<BaseFragment> fragments = new ArrayList<>();
 
         fragments.add(new FinishedStudyScreen());
+        fragments.add(new FinishedStudyTotalsScreen());
 
         PathSegment segment = new PathSegment(fragments);
         cache.segments.add(segment);

@@ -77,25 +77,32 @@ public class ProgressScreen extends BaseFragment {
         int dayIndex = state.currentTestDay;
         int cycleIndex = state.currentTestCycle;
 
-        if(testDay.getStartTime().isAfterNow()) {
-            if(sessionIndex<0) {
-                dayIndex--;
-                if (dayIndex < 0) {
-                    cycleIndex--;
-                    testCycle = state.testCycles.get(cycleIndex);
-                    dayIndex = testCycle.getNumberOfTestDays() - 1;
+        boolean isInCycle;
+
+        if(testCycle==null) {
+            cycleIndex--;
+            testCycle = state.testCycles.get(cycleIndex);
+            isInCycle = false;
+            sessionIndex = 0;
+        } else {
+            if(testDay.getStartTime().isAfterNow()) {
+                if(sessionIndex<0) {
+                    dayIndex--;
+                    if (dayIndex < 0) {
+                        cycleIndex--;
+                        testCycle = state.testCycles.get(cycleIndex);
+                        dayIndex = testCycle.getNumberOfTestDays() - 1;
+                    }
+                    testDay = testCycle.getTestDay(dayIndex);
+                    sessionIndex = testDay.getNumberOfTests() - 1;
+                    testSession = testDay.getTestSession(sessionIndex);
                 }
-                testDay = testCycle.getTestDay(dayIndex);
-                sessionIndex = testDay.getNumberOfTests() - 1;
-                testSession = testDay.getTestSession(sessionIndex);
             }
+            isInCycle = testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow();
         }
 
         isPractice = (dayIndex==0 && sessionIndex==0 && cycleIndex==0);
         isBaseline = (cycleIndex==0);
-        boolean isInCycle = testCycle.getActualStartDate().isBeforeNow() && testCycle.getActualEndDate().isAfterNow();
-
-
 
         if(isInCycle) {
             setupTodaysSessions(view, testDay);

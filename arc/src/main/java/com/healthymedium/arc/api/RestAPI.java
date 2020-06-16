@@ -47,6 +47,9 @@ public interface RestAPI {
 
     // progress ------------------------------------------------------------------------------------
 
+    @GET("study-summary")
+    Call<ResponseBody> getStudySummary(@Query("device_id") String deviceId);
+
     @GET("study-progress")
     Call<ResponseBody> getStudyProgress(@Query("device_id") String deviceId);
 

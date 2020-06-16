@@ -60,11 +60,19 @@ public class ResourcesScreen extends BaseFragment {
 
         frameLayoutAvailability = view.findViewById(R.id.frameLayoutAvailability);
 
-        boolean isTestReady = Study.getCurrentTestSession().getScheduledTime().minusMinutes(5).isBeforeNow();
-        if(isTestReady) {
+        boolean isStudyOver = (Study.getCurrentTestCycle()==null);
+        boolean isTestReady = false;
+
+        if(!isStudyOver) {
+            isTestReady = Study.getCurrentTestSession().getScheduledTime().minusMinutes(5).isBeforeNow();
+        }
+
+        if (isStudyOver || isTestReady) {
             textViewAvailability.setAlpha(0.5f);
-            TextView textViewChangeDenied = view.findViewById(R.id.textViewChangeDenied);
-            textViewChangeDenied.setVisibility(View.VISIBLE);
+            if(isTestReady) {
+                TextView textViewChangeDenied = view.findViewById(R.id.textViewChangeDenied);
+                textViewChangeDenied.setVisibility(View.VISIBLE);
+            }
         } else {
             frameLayoutAvailability.setOnClickListener(new View.OnClickListener() {
                 @Override
