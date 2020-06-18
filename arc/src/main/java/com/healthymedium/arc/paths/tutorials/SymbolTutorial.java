@@ -186,8 +186,7 @@ public class SymbolTutorial extends Tutorial {
                     @Override
                     public void onClick(View view) {
                         closeButton.setEnabled(false);
-                        handler.removeCallbacks(runnableTileFirst);
-                        handler.removeCallbacks(runnableTileSecond);
+                        handler.removeCallbacksAndMessages(null);
 
                         welcomeHighlight.dismiss();
                         welcomeHint.dismiss();
@@ -365,14 +364,12 @@ public class SymbolTutorial extends Tutorial {
         };
 
         handler.postDelayed(runnableTileFirst,10000);
-        handler.postDelayed(runnableTileSecond, 10000);
 
         View.OnTouchListener onPressListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.removeCallbacks(runnableTileFirst);
-                    handler.removeCallbacks(runnableTileSecond);
+                    handler.removeCallbacksAndMessages(null);
 
                     initialTilesOutline.dismiss();
                     initialPointer.dismiss();
@@ -457,8 +454,7 @@ public class SymbolTutorial extends Tutorial {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.removeCallbacks(runnableTileFirst);
-                    handler.removeCallbacks(runnableTileSecond);
+                    handler.removeCallbacksAndMessages(null);
 
                     secondTilesOutline.dismiss();
                     secondTilesPulsate.dismiss();
@@ -466,6 +462,8 @@ public class SymbolTutorial extends Tutorial {
 
                     buttonBottom1.setOnClickListener(null);
                     buttonBottom2.setOnClickListener(null);
+                    buttonBottom1.setOnTouchListener(null);
+                    buttonBottom2.setOnTouchListener(null);
                     incrementProgress();
 
                     niceHint = new HintPointer(getActivity(), bottomSymbolsButtons, false, true);
@@ -539,8 +537,7 @@ public class SymbolTutorial extends Tutorial {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    handler.removeCallbacks(runnableTileFirst);
-                    handler.removeCallbacks(runnableTileSecond);
+                    handler.removeCallbacksAndMessages(null);
 
                     finalTilesOutline.dismiss();
                     finalTilesPulsate.dismiss();
@@ -552,6 +549,8 @@ public class SymbolTutorial extends Tutorial {
 
                     buttonBottom1.setOnClickListener(null);
                     buttonBottom2.setOnClickListener(null);
+                    buttonBottom1.setOnTouchListener(null);
+                    buttonBottom2.setOnTouchListener(null);
                     incrementProgress();
 
                     showComplete();
