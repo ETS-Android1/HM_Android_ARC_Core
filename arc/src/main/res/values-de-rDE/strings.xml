@@ -23,7 +23,7 @@
 	<string name="bysigning_key">Durch Ihre Anmeldung erklären Sie sich mit unseren &lt;b>Datenschutzbestimmungen&lt;/b> einverstanden.</string>
 	<string name="privacy_linked">Datenschutzbestimmungen</string>
 	<string name="about_linked">Über diese App</string>
-	<string name="login_enter_ARCID">Bitte geben Sie unten Ihre &lt;b>Bewerter-ID&lt;/b> an:</string>
+	<string name="login_enter_ARCID">Bitte geben Sie unten Ihre &lt;b>ARC-ID&lt;/b> an:</string>
 	<string name="login_confirm_ARCID">Geben Sie bitte zur Bestätigung Ihre &lt;b>ARC-ID erneut ein&lt;/b>:</string>
 	<string name="login_problems_linked">&lt;b>Probleme beim Einloggen?&lt;/b></string>
 	<string name="login_enter_2FA">Bitte geben Sie Ihren &lt;b>Login-Verifizierungscode&lt;/b> ein.</string>
