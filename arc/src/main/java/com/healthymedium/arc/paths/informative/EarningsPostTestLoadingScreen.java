@@ -20,6 +20,7 @@ import com.healthymedium.arc.navigation.NavigationManager;
 
 public class EarningsPostTestLoadingScreen extends BaseFragment {
 
+    public static int DELAY_MSEC = 10000;
     ProgressBar progressBar;
     TextView textView;
 
@@ -53,7 +54,7 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
         progressBar = view.findViewById(R.id.progressBar);
         textView = view.findViewById(R.id.textView);
         handler = new Handler();
-        handler.postDelayed(runnable,10000);
+        handler.postDelayed(runnable,DELAY_MSEC);
 
         earnings = Study.getParticipant().getEarnings();
         if(!earnings.hasCurrentOverview()) {
