@@ -129,6 +129,10 @@ public abstract class SimpleDrawable extends Drawable {
         strokePaint.setStrokeWidth(width);
     }
 
+    public float getStrokeWidth() {
+        return strokeWidth;
+    }
+
     public void setStrokeDash(float length, float spacing) {
         strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
     }
