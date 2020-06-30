@@ -194,6 +194,10 @@ public abstract class SimpleDrawable extends Drawable {
         };
     }
 
+    public boolean hasPath() {
+        return path != null;
+    }
+
     protected abstract Path getPath(Rect rect);
 
 }
