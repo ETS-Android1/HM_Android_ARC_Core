@@ -14,6 +14,8 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
+import com.healthymedium.arc.utilities.Log;
+
 
 public abstract class SimpleDrawable extends Drawable {
 
@@ -183,13 +185,11 @@ public abstract class SimpleDrawable extends Drawable {
         return new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                if (path != null) {
-                    if(path.isConvex()) {
-                        outline.setConvexPath(path);
-                        return;
-                    }
+                if (path == null) {
+                    Log.w(getClass().getSimpleName(),"tried to set outline from a null path");
+                    return;
                 }
-                outline.setRect(0, 0, width, height);
+                outline.setConvexPath(path);
             }
         };
     }
