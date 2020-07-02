@@ -19,6 +19,8 @@ import com.healthymedium.arc.utilities.Log;
 
 public abstract class SimpleDrawable extends Drawable {
 
+    String tag = getClass().getSimpleName();
+
     protected boolean drawStroke = false;
     protected boolean drawFill = false;
     protected boolean alphaBlock = false;
