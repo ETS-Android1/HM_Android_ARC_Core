@@ -53,7 +53,7 @@ public class TimeUtil {
     }
 
     public static String format(DateTime dateTime, @StringRes int format){
-        return dateTime.toString(ViewUtil.getString(format));
+        return dateTime.toString(ViewUtil.getString(format), Application.getInstance().getLocale());
     }
 
     public static String format(DateTime dateTime, @StringRes int format, Locale locale){

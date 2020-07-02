@@ -27,6 +27,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class BatteryOptimizationReminder extends StateInfoTemplate {
 
+    public static boolean DEBUG_SHOW_REQUEST = false;
     boolean requested = false;
 
     public BatteryOptimizationReminder() {
@@ -53,17 +54,19 @@ public class BatteryOptimizationReminder extends StateInfoTemplate {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
 
-        // in case someone experiences a deviation and turns off optimizations before opening the app
-        // however unlikely that is
-        PowerManager powerManager = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
-        if(powerManager.isIgnoringBatteryOptimizations(getContext().getPackageName())){
+        if(!DEBUG_SHOW_REQUEST) {
+            // in case someone experiences a deviation and turns off optimizations before opening the app
+            // however unlikely that is
+            PowerManager powerManager = (PowerManager) getContext().getSystemService(Context.POWER_SERVICE);
+            if (powerManager.isIgnoringBatteryOptimizations(getContext().getPackageName())) {
 
-            ProctorDeviation deviation = ProctorDeviation.load();
-            deviation.markRequest();
-            deviation.save();
+                ProctorDeviation deviation = ProctorDeviation.load();
+                deviation.markRequest();
+                deviation.save();
 
-            NavigationManager.getInstance().popBackStack();
-            NavigationManager.getInstance().open(new SplashScreen());
+                NavigationManager.getInstance().popBackStack();
+                NavigationManager.getInstance().open(new SplashScreen());
+            }
         }
 
         TextView textViewBody = view.findViewById(R.id.textViewBody);

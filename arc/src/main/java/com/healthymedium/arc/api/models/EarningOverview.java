@@ -152,4 +152,52 @@ public class EarningOverview {
 
     }
 
+    public static EarningOverview createEarningOverview(
+                int cycle, String cycle_earnings, String total_earnings,
+
+                boolean complete4, String earned4, int progress4,String value4, ArrayList<Integer> components4,
+
+                boolean complete2, String earned2, int progress2, String value2,  ArrayList<Integer> components2,
+
+                boolean complete21, String earned21, int progress21, String value21
+                )
+    {
+        EarningOverview overview = new EarningOverview();
+        overview.cycle = cycle;
+        overview.cycle_earnings = cycle_earnings;
+        overview.total_earnings = total_earnings;
+
+
+        Goal fourOutOfFour = new Goal();
+        fourOutOfFour.name = "4-out-of-4";
+        fourOutOfFour.completed = complete4;
+        fourOutOfFour.amount_earned = earned4;
+        fourOutOfFour.progress = progress4;
+        fourOutOfFour.value = value4;
+        fourOutOfFour.progress_components =  components4;
+        overview.goals.add(fourOutOfFour);
+
+        Goal twoADay = new Goal();
+        twoADay.name = "2-a-day";
+        twoADay.completed = complete2;
+        twoADay.amount_earned = earned2;
+        twoADay.progress = progress2;
+        twoADay.value = value2;
+        twoADay.progress_components = components2;
+        overview.goals.add(twoADay);
+
+        Goal twentyOneSessions = new Goal();
+        twentyOneSessions.name = "21-sessions";
+        twentyOneSessions.completed = complete21;
+        twentyOneSessions.amount_earned = earned21;
+        twentyOneSessions.progress = progress21;
+        twentyOneSessions.value = value21;
+        overview.goals.add(twentyOneSessions);
+
+        Collections.sort(overview.goals,new GoalComparator());
+
+        return overview;
+
+    }
+
 }

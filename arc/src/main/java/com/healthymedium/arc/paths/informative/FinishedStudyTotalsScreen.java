@@ -24,6 +24,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class FinishedStudyTotalsScreen extends BaseFragment {
 
+    public static boolean DEBUG_SHOW_TOTAL = true;
+
     ProgressBar progressBar;
 
     LinearLayout linearLayoutResults;
@@ -83,17 +85,23 @@ public class FinishedStudyTotalsScreen extends BaseFragment {
         progressBar.animate().alpha(1.0f).setDuration(300);
 
         if(Config.REST_BLACKHOLE) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    StudySummary summary = new StudySummary();
-                    summary.days_tested = 168;
-                    summary.goals_met = 13;
-                    summary.tests_taken = 302;
-                    summary.total_earnings = "$115.75";
-                    showTotals(summary);
-                }
-            },2000);
+            if(DEBUG_SHOW_TOTAL){
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        StudySummary summary = new StudySummary();
+                        summary.days_tested = 168;
+                        summary.goals_met = 13;
+                        summary.tests_taken = 302;
+                        summary.total_earnings = "$115.75";
+                        showTotals(summary);
+                    }
+                },2000);
+            }
+            else{
+                showError();
+            }
+
         }
 
         Study.getRestClient().getStudySummary(new RestClient.Listener() {

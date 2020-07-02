@@ -20,6 +20,8 @@ import com.healthymedium.arc.navigation.NavigationManager;
 
 public class EarningsPostTestLoadingScreen extends BaseFragment {
 
+    public static int DELAY_MSEC = 10000;
+    public static boolean DEBUG_OPEN_SUCCESS = true;
     ProgressBar progressBar;
     TextView textView;
 
@@ -53,7 +55,7 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
         progressBar = view.findViewById(R.id.progressBar);
         textView = view.findViewById(R.id.textView);
         handler = new Handler();
-        handler.postDelayed(runnable,10000);
+        handler.postDelayed(runnable,DELAY_MSEC);
 
         earnings = Study.getParticipant().getEarnings();
         if(!earnings.hasCurrentOverview()) {
@@ -142,9 +144,11 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
         @Override
         public void run() {
             if(Config.REST_BLACKHOLE){
-                openSuccess();
-//                openFailure();
-                return;
+                if(DEBUG_OPEN_SUCCESS){
+                    openSuccess();
+                    return;
+                }
+
             }
             openFailure();
         }
