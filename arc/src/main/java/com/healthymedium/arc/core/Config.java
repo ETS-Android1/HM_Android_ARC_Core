@@ -1,5 +1,5 @@
 package com.healthymedium.arc.core;
-import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
+import com.healthymedium.arc.study.TestVariant;
 
 public class Config {
 
@@ -30,6 +30,11 @@ public class Config {
     public static boolean DEBUG_DIALOGS = false; // click the header on most screens a couple times and a debug dialog will appear
     public static boolean ENABLE_LOGGING = false; // save logcat output to cached file 'Log'
 
+    // Test Variants
+    public static TestVariant.Grid TEST_VARIANT_GRID = TestVariant.Grid.V1;
+    public static TestVariant.Price TEST_VARIANT_PRICE = TestVariant.Price.Original;
+    public static TestVariant.Symbol TEST_VARIANT_SYMBOL = TestVariant.Symbol.V1;
+
     // Runtime
     public static final String INTENT_EXTRA_OPENED_FROM_NOTIFICATION = "OPENED_FROM_NOTIFICATION";
     public static boolean OPENED_FROM_NOTIFICATION = false;
@@ -37,8 +42,6 @@ public class Config {
     public static final String INTENT_EXTRA_OPENED_FROM_VISIT_NOTIFICATION = "OPENED_FROM_VISIT_NOTIFICATION";
     public static boolean OPENED_FROM_VISIT_NOTIFICATION = false;
 
-    // Test styles
-    public static String PRICE_TEST_STYLE = PriceTestStyle.ORIGINAL.getStyle();
 
 
 }

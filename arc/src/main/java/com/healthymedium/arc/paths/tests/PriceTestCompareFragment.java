@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
+import com.healthymedium.arc.study.TestVariant;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -68,7 +68,7 @@ public class PriceTestCompareFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        revised = (Config.PRICE_TEST_STYLE == PriceTestStyle.REVISED.getStyle());
+        revised = (Config.TEST_VARIANT_PRICE == TestVariant.Price.Revised);
         if (revised) {
             return createRevisedFragment(inflater, container, savedInstanceState);
         } else {
