@@ -192,10 +192,13 @@ public abstract class SimpleDrawable extends Drawable {
             @Override
             public void getOutline(View view, Outline outline) {
                 if (path == null) {
-                    Log.w(getClass().getSimpleName(),"tried to set outline from a null path");
                     return;
                 }
-                outline.setConvexPath(path);
+                try {
+                    outline.setConvexPath(path);
+                } catch (IllegalArgumentException e) {
+                    Log.w(tag, "device doesn't support complex outline paths");
+                }
             }
         };
     }
