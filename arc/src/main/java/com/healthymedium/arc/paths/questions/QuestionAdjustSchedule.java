@@ -12,22 +12,18 @@ import android.widget.EditText;
 import android.widget.NumberPicker;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.paths.informative.ScheduleCalendar;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
-import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Scheduler;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.utilities.PreferencesManager;
+import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -38,10 +34,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
     boolean allowHelp;
 
-    int index = 0;
+    List<Option> options = new ArrayList<>();
     int shiftDays = 0;
-    int[] shiftAmount = new int[15];
-
+    int index = 0;
 
     public QuestionAdjustSchedule(boolean allowBack, boolean allowHelp, String header, String subheader) {
         super(allowBack,header,subheader, ViewUtil.getString(R.string.button_confirm));
@@ -80,124 +75,54 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             }
         });
 
+        TestCycle cycle = Study.getCurrentTestCycle();
+        DateTime scheduledStart = cycle.getScheduledStartDate();
+        DateTime scheduledEnd = cycle.getScheduledEndDate();
 
-        Participant participant = Study.getParticipant();
-        TestCycle cycle = participant.getCurrentTestCycle();
+        options.clear();
 
-        DateTime visitStart = cycle.getScheduledStartDate();
-        DateTime visitEnd = cycle.getScheduledEndDate();
-        String start;
-        String end;
-
-        List<String> dataList = new ArrayList<String>();
-        int[] tempShiftAmount = new int[15];
-
-        String range;
-
-        java.util.Locale locale = Application.getInstance().getLocale();
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("EEE, MMM d").withLocale(locale);
-
-        int visitAdjustIndex = 0;
-
-
-        String currStart = fmt.print(cycle.getActualStartDate());
-        String currEnd = fmt.print(cycle.getActualEndDate());
-
-        int daysRange = Days.daysBetween(cycle.getActualStartDate().toLocalDate(), cycle.getActualEndDate().toLocalDate()).getDays();
-        if (daysRange == 6) {
-            currEnd = fmt.print(cycle.getActualEndDate().plusDays(1));
+        for(int i=7; i>0; i--) {
+            Option option = new Option(scheduledStart.minusDays(i),scheduledEnd.minusDays(i+1));
+            options.add(option);
         }
 
-        String currRange = currStart + "-" + currEnd;
+        for(int i=0; i<=7; i++) {
+            Option option = new Option(scheduledStart.plusDays(i),scheduledEnd.plusDays(i-1));
+            options.add(option);
+        }
 
+        DateTime actualStart = cycle.getActualStartDate();
+        String[] data = new String[options.size()];
+        index = 0;
 
-        // Build the adjustment ranges
-
-        // Back
-        int daysBack = 7;
-        while (daysBack > 0) {
-            if (!visitStart.minusDays(daysBack).isBeforeNow()) {
-                start = fmt.print(visitStart.minusDays(daysBack));
-                end = fmt.print(visitEnd.minusDays(daysBack));
-                range = start + "-" + end;
-                dataList.add(range);
-                tempShiftAmount[visitAdjustIndex] = 0 - daysBack;
-                visitAdjustIndex++;
+        for(int i=0; i<options.size(); i++) {
+            if(options.get(i).start.equals(actualStart)) {
+                index = i;
             }
-            daysBack--;
-        }
-
-        // Original range
-        if (!visitStart.isBeforeNow()) {
-            start = fmt.print(visitStart);
-            end = fmt.print(visitEnd);
-            range = start + "-" + end;
-            dataList.add(range);
-            tempShiftAmount[visitAdjustIndex] = 0;
-            visitAdjustIndex++;
-        }
-
-        // Forward
-        int daysForward = 7;
-        int count = 1;
-        while (count <= daysForward) {
-            if (!visitStart.plusDays(count).isBeforeNow()) {
-                start = fmt.print(visitStart.plusDays(count));
-                end = fmt.print(visitEnd.plusDays(count));
-                range = start + "-" + end;
-                dataList.add(range);
-                tempShiftAmount[visitAdjustIndex] = count;
-                visitAdjustIndex++;
-            }
-            count++;
-        }
-
-        int curr = dataList.indexOf(currRange);
-        if(curr==-1){
-            curr = 0;
-        }
-
-        String[] data = new String[dataList.size()];
-//        for (int i = 0; i < dataList.size(); i++) {
-//            data[i] = dataList.get(i);
-//        }
-
-        // Start at the currently schedule window
-        data[0] = dataList.get(curr);
-
-        // Need to change all of the shiftAmount values
-        // They're not guaranteed to be in the same order they were created
-        // This is because we don't know at which date we're starting
-        shiftAmount[0] = tempShiftAmount[curr];
-        int dataIndex = 1;
-
-
-        // Get the indices after current
-        for (int i = curr+1; i < dataList.size(); i++) {
-            data[dataIndex] = dataList.get(i);
-            shiftAmount[dataIndex] = tempShiftAmount[i];
-            dataIndex++;
-        }
-
-        // And lastly get those before current
-        for (int j = 0; j < curr; j++) {
-            data[dataIndex] = dataList.get(j);
-            shiftAmount[dataIndex] = tempShiftAmount[j];
-            dataIndex++;
+            data[i] = options.get(i).label;
         }
 
         picker.setMinValue(0);
         picker.setMaxValue(data.length-1);
         picker.setDisplayedValues(data);
+        picker.setValue(index);
 
         return view;
     }
 
     @Override
     public Object onValueCollection(){
+        // if we have any doubts, don't change anything
+        if(index < 0 || index >= options.size()) {
+            return 0;
+        }
 
-        return shiftAmount[index];
+        // calculate the number of days we need to shift the cycle by
+        DateTime start = Study.getCurrentTestCycle().getScheduledStartDate();
+        Option option = options.get(index);
+        int days = Days.daysBetween(start.toLocalDate(),option.start.toLocalDate()).getDays();
 
+        return days;
     }
 
     public void updateDates() {
@@ -210,7 +135,6 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
     }
 
     public void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
-
         try{
             Field selectorWheelPaintField = numberPicker.getClass().getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
@@ -228,7 +152,23 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             }
         }
         numberPicker.invalidate();
+    }
 
+    class Option {
+        DateTime start;
+        DateTime end;
+        String label;
+
+        public Option(DateTime start, DateTime end) {
+            Phrase phrase = new Phrase("{DATE1}-{DATE2}");
+            phrase.replaceDates(
+                    R.string.format_date_schedule,
+                    start,
+                    end);
+            label = phrase.toString();
+            this.start = start;
+            this.end = end;
+        }
     }
 
 }
