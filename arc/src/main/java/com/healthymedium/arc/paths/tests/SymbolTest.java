@@ -24,7 +24,7 @@ import java.util.Random;
 
 public class SymbolTest extends BaseFragment {
 
-    List<Integer> symbolset = new ArrayList<>(Arrays.asList(
+    public static List<Integer> symbolset = new ArrayList<>(Arrays.asList(
             R.drawable.symbol_0,
             R.drawable.symbol_1,
             R.drawable.symbol_2,
@@ -141,25 +141,8 @@ public class SymbolTest extends BaseFragment {
         symbols.clear();
         symbols.addAll(symbolset);
 
-        int[] set =  new int[8];
-        Integer i1;
-        Integer i2;
-        for(int i=0;i<8;i++){
-            i1 = (int)symbols.get(random.nextInt(8));
-            i2 = (int)symbols.get(random.nextInt(8));
-            boolean run = true;
-            while(run){
-                if(run) {
-                    i2 = (int) symbols.get(random.nextInt(8));
-                    if (i1 != i2 && !similar(i1, i2, set)) {
-                        run = false;
-                    }
-                }
-            }
-            set[i] = i1;
-            set[i+1] = i2;
-            i++;
-        }
+        int[] set = generateNextRandomSet(random, symbols);
+
         List<List<String>> options = new ArrayList<>();
         List<String> option1 = new ArrayList<>();
         option1.add(getResources().getResourceEntryName(set[0]).replace("symbol_", ""));
@@ -215,7 +198,31 @@ public class SymbolTest extends BaseFragment {
         symbolsTestSection.markAppearanceTime();
     }
 
-    private boolean similar(int a1,int a2, int[] set){
+    public static int[] generateNextRandomSet(Random random, List symbols){
+        int[] set =  new int[8];
+        Integer i1;
+        Integer i2;
+        for(int i=0;i<8;i++){
+            i1 = (int)symbols.get(random.nextInt(8));
+            i2 = (int)symbols.get(random.nextInt(8));
+            boolean run = true;
+            while(run){
+                if(run) {
+                    i2 = (int) symbols.get(random.nextInt(8));
+                    if (i1 != i2 && !similar(i1, i2, set)) {
+                        run = false;
+                    }
+                }
+            }
+            set[i] = i1;
+            set[i+1] = i2;
+            i++;
+        }
+        return set;
+
+    }
+
+    private static boolean similar(int a1,int a2, int[] set){
         if(a1==a2){
             return true;
         }
