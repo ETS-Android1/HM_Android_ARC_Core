@@ -15,3 +15,6 @@
 .externalNativeBuild
 
 
+test_suite/
+translation_tool/
+analytics/
