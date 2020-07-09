@@ -23,15 +23,15 @@ public class SymbolsUnitTest {
     @Test
     public void test(){
         for(int i = 0; i < MAX; i++){
-            setup();
+            setup(i);
             testNoDuplicateSymbols();
             testNoDuplicateCards();
             testNoInverseMatch();
         }
     }
 
-    public void setup(){
-        random = new Random(System.currentTimeMillis());
+    public void setup(int i){
+        random = new Random(System.currentTimeMillis() + i);
         symbols =new ArrayList<Integer>();
         symbols.addAll(SymbolTest.symbolset);
         set = SymbolTest.generateNextRandomSet(random, symbols);
