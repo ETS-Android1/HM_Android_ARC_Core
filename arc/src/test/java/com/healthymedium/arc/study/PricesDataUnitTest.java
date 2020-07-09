@@ -1,5 +1,6 @@
 package com.healthymedium.arc.study;
 
+import com.healthymedium.arc.utilities.Log;
 import com.healthymedium.arc.utilities.PriceManager;
 
 
@@ -43,16 +44,15 @@ public class PricesDataUnitTest {
 
     @Before
     public void setup(){
+        Log.pointToSystemOut();
         currSession = loadPrices(DEFAULT_PATH + filename + FILE_NAME).get( sessionId);
     }
 
-    @Test
-    public void checkSize(){
-        assertEquals(10, currSession.size());
-    }
+
 
     @Test
-    public void checkItems(){
+    public void test(){
+        assertEquals(10, currSession.size());
         for(int x = 0; x < currSession.size(); x++){
             assertEquals(currSession.get(x).item, items[x]);
             assertEquals(currSession.get(x).price, prices[x]);
