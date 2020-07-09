@@ -45,8 +45,6 @@ public class StateMachineAlpha extends StateMachine {
     public static final int LIFECYCLE_ARC = 4;                  //
     public static final int LIFECYCLE_OVER = 5;                 //
 
-    public static boolean DEBUG_ADD_LANDING_PAGE = true;        //automated-test to disable landing page
-
     @Override
     public void initialize() {
         super.initialize();
@@ -397,9 +395,7 @@ public class StateMachineAlpha extends StateMachine {
             Study.getParticipant().getState().lastPauseTime = DateTime.now();
             Study.getCurrentTestSession().markStarted();
         } else {
-            if(DEBUG_ADD_LANDING_PAGE) {
-                addTestLandingPage();
-            }
+            addTestLandingPage();
         }
     }
 
