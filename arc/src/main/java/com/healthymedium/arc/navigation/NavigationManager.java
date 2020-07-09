@@ -40,6 +40,10 @@ public class NavigationManager {
         getController().setListener(listener);
     }
 
+    public void setDefaultListener(NavigationController.Listener listener) {
+        defaultController.setListener(listener);
+    }
+
     public void open(BaseFragment fragment) {
         getController().open(fragment);
     }
