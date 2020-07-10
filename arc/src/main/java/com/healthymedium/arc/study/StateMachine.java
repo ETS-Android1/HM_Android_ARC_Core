@@ -22,6 +22,9 @@ import com.healthymedium.arc.paths.questions.QuestionNonRemoteStudyCommitment;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
+import com.healthymedium.arc.paths.tests.Grid2Letters;
+import com.healthymedium.arc.paths.tests.Grid2Study;
+import com.healthymedium.arc.paths.tests.Grid2Test;
 import com.healthymedium.arc.paths.tests.TestIntro;
 import com.healthymedium.arc.paths.tests.TestProgress;
 import com.healthymedium.arc.time.TimeUtil;
@@ -712,9 +715,18 @@ public class StateMachine {
     }
 
     public void addGridTest(int index){
-        List<BaseFragment> fragments = new ArrayList<>();
+        switch (Config.TEST_VARIANT_GRID) {
+            case V1:
+                addGrid1Test(index);
+                break;
+            case V2:
+                addGrid2Test(index);
+                break;
+        }
+    }
 
-        Resources res = Application.getInstance().getResources();
+    public void addGrid1Test(int index){
+        List<BaseFragment> fragments = new ArrayList<>();
 
         String testNumber = getTestNumberString(index);
 
@@ -736,6 +748,34 @@ public class StateMachine {
         gridTestFragment.second = true;
         fragments.add(gridTestFragment);
         fragments.add(new TestProgress(ViewUtil.getString(R.string.grids_complete), index));
+        PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
+        enableTransitionGrids(segment,true);
+        cache.segments.add(segment);
+    }
+
+    public void addGrid2Test(int index){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        String testNumber = getTestNumberString(index);
+
+        TestInfoTemplate info0 = new TestInfoTemplate(
+                testNumber,
+                ViewUtil.getHtmlString(R.string.grids_header),
+                ViewUtil.getHtmlString(R.string.grids_body),
+                "grids",
+                ViewUtil.getHtmlString(R.string.button_begintest));
+        fragments.add(info0);
+
+        fragments.add(new TestBegin());
+        fragments.add(new Grid2Study());
+        fragments.add(new Grid2Letters());
+        fragments.add(new Grid2Test());
+        fragments.add(new Grid2Study());
+        fragments.add(new Grid2Letters());
+        fragments.add(new Grid2Test());
+
+        fragments.add(new TestProgress(ViewUtil.getString(R.string.grids_complete), index));
+
         PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
         enableTransitionGrids(segment,true);
         cache.segments.add(segment);
