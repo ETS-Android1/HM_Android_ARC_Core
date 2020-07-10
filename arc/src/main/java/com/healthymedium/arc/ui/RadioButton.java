@@ -91,6 +91,12 @@ public class RadioButton extends FrameLayout {
             radioButton.setText(text);
         }
     }
+    public String getText() {
+        if(this.text != null){
+            return this.text;
+        }
+        return null;
+    }
 
     public void setChecked(final boolean checked){
         radioButton.post(new Runnable() {
@@ -120,5 +126,6 @@ public class RadioButton extends FrameLayout {
     public void setLabelPosition(int position) {
         radioButton.setTextAlignment(position);
     }
+
 
 }
