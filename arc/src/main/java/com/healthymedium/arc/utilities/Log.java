@@ -112,7 +112,7 @@ public class Log {
             writeToSystemOut("I",tag,msg);
             return 0;
         }
-        return android.util.Log.d(tag,msg);
+        return android.util.Log.i(tag,msg);
 
     }
 
@@ -124,7 +124,7 @@ public class Log {
             writeToSystemOut("W",tag,msg);
             return 0;
         }
-        return android.util.Log.d(tag,msg);
+        return android.util.Log.w(tag,msg);
     }
 
     public static int e(String tag, String msg) {
@@ -135,7 +135,7 @@ public class Log {
             writeToSystemOut("E",tag,msg);
             return 0;
         }
-        return android.util.Log.d(tag,msg);
+        return android.util.Log.e(tag,msg);
     }
 
     public static int wtf(String tag, String msg) {

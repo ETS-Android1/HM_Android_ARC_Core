@@ -20,6 +20,7 @@
     <string name="format_date_lo">E, MMMM d</string>
     <string name="format_date_long">EEEE, MMMM d</string>
     <string name="format_date_longer">MMMM d, yyyy</string>
+    <string name="format_date_schedule">EEE, MMM d</string>
 
     <string name="format_time">h:mm a</string>
 

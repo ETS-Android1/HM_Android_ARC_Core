@@ -18,7 +18,6 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.AbandonmentJobService;
 import com.healthymedium.arc.study.Study;
-import com.healthymedium.arc.utilities.HomeWatcher;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.Phrase;
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     int backInStudySkips = 0;
 
     FrameLayout contentView;
-    HomeWatcher homeWatcher;
     KeyboardWatcher keyboardWatcher;
 
 
@@ -134,21 +132,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationManager.getInstance().open(fragment);
     }
 
-    public void setupHomeWatcher(){
-        homeWatcher = new HomeWatcher(this);
-        homeWatcher.setOnHomePressedListener(new HomeWatcher.OnHomePressedListener() {
-            @Override
-            public void onHomePressed() {
-
-            }
-            @Override
-            public void onHomeLongPressed() {
-
-            }
-        });
-        homeWatcher.startWatch();
-    }
-
     public void setupKeyboardWatcher(){
         keyboardWatcher = new KeyboardWatcher(this);
         keyboardWatcher.startWatch();
@@ -191,10 +174,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         Log.i("MainActivity","onDestroy");
-        if(homeWatcher != null){
-            homeWatcher.stopWatch();
-            homeWatcher = null;
-        }
         if(keyboardWatcher != null){
             keyboardWatcher.stopWatch();
             keyboardWatcher = null;
