@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,18 +16,12 @@ public class Grid2ChoiceView extends LinearLayout {
 
     int defaultWidth = ViewUtil.mmToPx(10);
     int defaultHeight = ViewUtil.mmToPx(16);
+    int drawableImageId;
 
     RoundedLinearLayout layout;
     ImageView imageView;
 
     Drawable image;
-
-    boolean selected = false;
-    boolean selectable = true;
-    long timestamp = 0;
-    int index = -1;
-
-    Listener listener;
 
     public Grid2ChoiceView(Context context) {
         super(context);
@@ -52,41 +45,14 @@ public class Grid2ChoiceView extends LinearLayout {
         setElevation(ViewUtil.dpToPx(8));
     }
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
     public void setImage(@DrawableRes int id){
         image = ViewUtil.getDrawable(id);
         imageView.setImageDrawable(image);
+        drawableImageId = id;
     }
 
-    public void removeImage(){
-        image = null;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int action = event.getAction();
-        if(action == MotionEvent.ACTION_DOWN && selectable) {
-            setSelected(!selected);
-            if(listener!=null) {
-                return listener.onSelected(this, selected);
-            }
-        }
-        return super.onTouchEvent(event);
+    public int getDrawableImageId(){
+        return drawableImageId;
     }
 
     @Override
@@ -121,10 +87,6 @@ public class Grid2ChoiceView extends LinearLayout {
         for(int i=0;i<childCount;i++) {
             getChildAt(i).measure(widthMeasureSpec,heightMeasureSpec);
         }
-    }
-
-    public interface Listener {
-        boolean onSelected(Grid2ChoiceView view, boolean selected);
     }
 
 }

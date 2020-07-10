@@ -2,6 +2,7 @@ package com.healthymedium.arc.ui;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -43,6 +44,24 @@ public class Grid2ChoiceDialog extends PointerDialog {
         setElevation(ViewUtil.dpToPx(4));
         setRadius(16);
         setView(view);
+
+        OnTouchListener listener = new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                int action = motionEvent.getAction();
+                if(action == MotionEvent.ACTION_DOWN) {
+
+                    Grid2ChoiceView image = (Grid2ChoiceView) view;
+                    int img = image.getDrawableImageId();
+                    //TODO: return clicked image to GridTest2, set on selected grid coordinate
+                }
+                return view.performClick();
+            }
+        };
+
+        phone.setOnTouchListener(listener);
+        key.setOnTouchListener(listener);
+        pen.setOnTouchListener(listener);
     }
 
 }
