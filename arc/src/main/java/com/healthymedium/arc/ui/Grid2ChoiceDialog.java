@@ -54,6 +54,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
                     Grid2ChoiceView image = (Grid2ChoiceView) view;
                     int img = image.getDrawableImageId();
                     //TODO: return clicked image to GridTest2, set on selected grid coordinate
+                     Grid2ChoiceDialog.super.dismiss();
                 }
                 return view.performClick();
             }
