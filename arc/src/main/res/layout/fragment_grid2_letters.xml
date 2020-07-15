@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -11,760 +9,345 @@
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|center_horizontal"
+        android:layout_gravity="top"
         android:columnCount="6"
-        android:paddingLeft="11dp"
-        android:paddingTop="28dp"
-        android:paddingRight="11dp"
-        android:rowCount="10">
+        android:paddingLeft="12dp"
+        android:paddingTop="18dp"
+        android:paddingRight="12dp"
+        android:rowCount="9">
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
+            android:layout_columnWeight="1" />
 
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
+            android:layout_columnWeight="1" />
 
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+        <com.healthymedium.arc.ui.Grid2LetterView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/textView28"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
-
-        <TextView
-            android:id="@+id/textView50"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill"
-            android:gravity="center"
-            android:text="E"
-            android:textAllCaps="true"
-            android:textColor="@color/grid2Letter"
-            android:textSize="40dp" />
+            android:layout_columnWeight="1" />
 
     </GridLayout>
 
     <TextView
-        android:id="@+id/tapGridText"
+        android:id="@+id/textviewTapFs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:minHeight="160dp"
+        android:layout_height="match_parent"
         android:text="@string/grids_subheader_fs"
-        android:textAlignment="center"
-        android:textColor="@color/text"
-        android:textSize="18dp" />
-
+        android:textSize="18dp"
+        android:gravity="center" />
 
 </LinearLayout>
