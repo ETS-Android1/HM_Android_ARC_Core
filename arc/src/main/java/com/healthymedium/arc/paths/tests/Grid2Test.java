@@ -49,7 +49,7 @@ public class Grid2Test extends BaseFragment {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            nextFragment();
+            openNextFragment();
         }
     };
 
@@ -76,7 +76,7 @@ public class Grid2Test extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nextFragment();
+                openNextFragment();
             }
         });
 
@@ -96,7 +96,6 @@ public class Grid2Test extends BaseFragment {
                                 view.setTag(R.id.tag_time,0);
 
                                 selections.remove(view);
-                                grid2BoxView.removeImage();
                             }
                             selectedCount--;
                         } else if (selectedCount < 3) {
@@ -104,7 +103,6 @@ public class Grid2Test extends BaseFragment {
                             view.setTag(R.id.tag_time, System.currentTimeMillis());
                             view.setTag(R.id.tag_color,R.color.gridSelected);
                             selections.add(view);
-                            hideButton();
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -117,7 +115,6 @@ public class Grid2Test extends BaseFragment {
                             },500);
 
                             //TODO: get item to set
-                            grid2BoxView.setImage(R.drawable.phone);
                         } else {
                             preventTouch = true;
                         }
@@ -126,6 +123,8 @@ public class Grid2Test extends BaseFragment {
                         if(selectedCount >= 3){
                             showButton();
                             handler.postDelayed(runnable,20000);
+                        } else {
+                            hideButton();
                         }
                         break;
                     case MotionEvent.ACTION_UP:
@@ -153,7 +152,7 @@ public class Grid2Test extends BaseFragment {
         return view;
     }
 
-    private void nextFragment() {
+    private void openNextFragment() {
         handler.removeCallbacks(runnable);
         handlerInteraction.removeCallbacks(runnable);
         if (isVisible()) {
@@ -165,17 +164,19 @@ public class Grid2Test extends BaseFragment {
     private void showButton() {
         button.setVisibility(View.VISIBLE);
         tapGridText.setPadding(0, dp16, 0, 0);
-        tapGridText.setHeight(dp60);
 
-        bottomLinearLayout.invalidate();
+        tapGridText.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
     }
 
     private void hideButton() {
         button.setVisibility(View.GONE);
         tapGridText.setPadding(0, 0, 0, 0);
-        tapGridText.setMinHeight(LinearLayout.LayoutParams.MATCH_PARENT);
 
-        bottomLinearLayout.invalidate();
+        tapGridText.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
     private void updateSection(){
