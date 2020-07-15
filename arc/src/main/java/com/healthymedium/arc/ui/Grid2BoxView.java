@@ -31,10 +31,10 @@ public class Grid2BoxView extends LinearLayout {
 
     @ColorRes int colorNormal = R.color.gridNormal;
     @ColorRes int colorSelected = R.color.grid2Selected;
-    int strokeWidthNormal = 1;
-    int strokeWidthSelected = 3;
     @ColorRes int strokeColorNormal = R.color.grid2NormalBorder;
     @ColorRes int strokeColorSelected = R.color.grid2SelectedBorder;
+    int strokeWidthNormal = 1;
+    int strokeWidthSelected = 5;
 
     Listener listener;
 
@@ -57,6 +57,8 @@ public class Grid2BoxView extends LinearLayout {
         View view = inflate(context,R.layout.custom_grid2_view,this);
         roundedLinearLayout = view.findViewById(R.id.linearLayout);
         imageView = view.findViewById(R.id.imageView);
+
+        setBackgroundColor(getResources().getColor(R.color.transparent));
 
         showSelectedState(false);
     }
@@ -105,7 +107,7 @@ public class Grid2BoxView extends LinearLayout {
             roundedLinearLayout.setFillColor(colorSelected);
             roundedLinearLayout.setStrokeWidth(strokeWidthSelected);
             roundedLinearLayout.setStrokeColor(strokeColorSelected);
-            roundedLinearLayout.setElevation(ViewUtil.dpToPx(4));
+            roundedLinearLayout.setElevation(ViewUtil.dpToPx(8));
         } else {
             roundedLinearLayout.setFillColor(colorNormal);
             roundedLinearLayout.setStrokeWidth(strokeWidthNormal);
@@ -119,6 +121,8 @@ public class Grid2BoxView extends LinearLayout {
         } else {
             imageView.setImageDrawable(image);
         }
+
+        roundedLinearLayout.invalidate();
     }
 
     @Override

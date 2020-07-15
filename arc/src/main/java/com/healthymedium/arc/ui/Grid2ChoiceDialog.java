@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.library.R;
@@ -43,6 +44,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
 
         setElevation(ViewUtil.dpToPx(4));
         setRadius(16);
+        setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         setView(view);
 
         OnTouchListener listener = new OnTouchListener() {

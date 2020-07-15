@@ -20,262 +20,238 @@
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image11"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image12"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image13"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image14"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image15"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image21"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image22"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image23"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image24"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image25"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image31"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image32"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image33"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image34"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image35"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image41"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image42"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image43"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image44"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image45"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image51"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image52"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image53"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image54"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
 
         <com.healthymedium.arc.ui.Grid2BoxView
             android:id="@+id/image55"
-            android:layout_width="10mm"
-            android:layout_height="16mm"
+            android:layout_width="0dp"
+            android:layout_height="15mm"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_gravity="fill"
-            android:layout_margin="1dp"
-            app:strokeColor="@color/grid2NormalBorder" />
+            android:layout_margin="2dp" />
     </GridLayout>
 
     <LinearLayout
         android:id="@+id/bottomLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
         android:minHeight="160dp"
+        android:paddingBottom="16dp"
         android:orientation="vertical">
 
         <TextView
@@ -284,8 +260,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:lineHeight="21dp"
-            android:minHeight="60dp"
             android:text="Tap on the location of each item"
             android:textAlignment="center"
             android:textColor="@color/text"
@@ -296,11 +270,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginBottom="28dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:text="@string/button_okay"
             app:allCaps="true" />
     </LinearLayout>
