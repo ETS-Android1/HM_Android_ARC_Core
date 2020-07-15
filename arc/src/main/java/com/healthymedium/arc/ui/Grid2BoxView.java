@@ -2,6 +2,7 @@ package com.healthymedium.arc.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -28,12 +29,12 @@ public class Grid2BoxView extends LinearLayout {
     long timestamp = 0;
     int index = -1;
 
-    int colorNormal = ViewUtil.getColor(getContext(),R.color.gridNormal);
-    int colorSelected = ViewUtil.getColor(getContext(),R.color.grid2Selected);
+    @ColorRes int colorNormal = R.color.gridNormal;
+    @ColorRes int colorSelected = R.color.grid2Selected;
     int strokeWidthNormal = 1;
     int strokeWidthSelected = 3;
-    int strokeColorNormal = ViewUtil.getColor(getContext(),R.color.grid2NormalBorder);
-    int strokeColorSelected = ViewUtil.getColor(getContext(),R.color.grid2SelectedBorder);
+    @ColorRes int strokeColorNormal = R.color.grid2NormalBorder;
+    @ColorRes int strokeColorSelected = R.color.grid2SelectedBorder;
 
     Listener listener;
 
@@ -101,14 +102,17 @@ public class Grid2BoxView extends LinearLayout {
 
     private void showSelectedState(boolean selected) {
         if(selected) {
-            roundedLinearLayout.setBackgroundColor(colorSelected);
+            roundedLinearLayout.setFillColor(colorSelected);
             roundedLinearLayout.setStrokeWidth(strokeWidthSelected);
-            //roundedLinearLayout.setStrokeColor(colorSelected);
+            roundedLinearLayout.setStrokeColor(strokeColorSelected);
+            roundedLinearLayout.setElevation(ViewUtil.dpToPx(4));
         } else {
-            roundedLinearLayout.setBackgroundColor(colorNormal);
+            roundedLinearLayout.setFillColor(colorNormal);
             roundedLinearLayout.setStrokeWidth(strokeWidthNormal);
-            //roundedLinearLayout.setStrokeColor(colorNormal);
+            roundedLinearLayout.setStrokeColor(strokeColorNormal);
+            roundedLinearLayout.setElevation(ViewUtil.dpToPx(0));
         }
+        roundedLinearLayout.setRadius(6);
 
         if(image==null) {
             imageView.setImageDrawable(null);
