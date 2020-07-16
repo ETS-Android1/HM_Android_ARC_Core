@@ -113,14 +113,16 @@ public class Grid2Test extends BaseFragment {
                             view.setTag(R.id.tag_color,R.color.gridSelected);
                             selections.add(view);
 
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    dialog = new Grid2ChoiceDialog(getMainActivity(),view, PointerDrawable.POINTER_ABOVE);
-                                    dialog.setGridBox(grid2BoxView);
-                                    dialog.show();
-                                }
-                            },500);
+                            dialog = new Grid2ChoiceDialog(
+                                    getMainActivity(),
+                                    view,
+                                    PointerDrawable.POINTER_ABOVE,
+                                    !phoneSelected,
+                                    !keySelected,
+                                    !penSelected);
+                            dialog.setGridBox(grid2BoxView);
+                            dialog.setAnimationDuration(50);
+                            dialog.show();
 
                         } else {
                             preventTouch = true;
