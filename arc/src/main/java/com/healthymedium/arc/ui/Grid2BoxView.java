@@ -69,6 +69,10 @@ public class Grid2BoxView extends RoundedLinearLayout {
         return timestamp;
     }
 
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public void setImage(@DrawableRes int id){
         Drawable drawable = ViewUtil.getDrawable(id);
         imageView.setImageDrawable(drawable);
@@ -88,12 +92,15 @@ public class Grid2BoxView extends RoundedLinearLayout {
         this.selectable = selectable;
     }
 
+    public boolean getSelectable() {
+        return selectable;
+    }
+
     public void setSelected(boolean selected) {
         if(this.selected==selected) {
             return;
         }
         this.selected = selected;
-        timestamp = selected ? System.currentTimeMillis() : 0;
         showSelectedState(selected);
     }
 

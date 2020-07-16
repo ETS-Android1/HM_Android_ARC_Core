@@ -91,11 +91,11 @@ public class Grid2Test extends BaseFragment {
                             view.setTag(R.id.tag_color,R.color.gridNormal);
 
                             if(selections.contains(view)){
-                                view.setTag(R.id.tag_time,0);
+                                grid2BoxView.setTimestamp(0);
 
                                 selections.remove(view);
-                                if(grid2BoxView.getTag(R.id.tag_image) != null) {
-                                    removeSelectedImage((int)grid2BoxView.getTag(R.id.tag_image));
+                                if(grid2BoxView.getImage() != 0) {
+                                    removeSelectedImage(grid2BoxView.getImage());
                                     grid2BoxView.removeImage();
                                 }
                             }
@@ -103,7 +103,7 @@ public class Grid2Test extends BaseFragment {
                             selectedCount--;
                         } else if (selectedCount < 3) {
                             selectedCount++;
-                            view.setTag(R.id.tag_time, System.currentTimeMillis());
+                            grid2BoxView.setTimestamp(System.currentTimeMillis());
                             view.setTag(R.id.tag_color,R.color.gridSelected);
                             selections.add(view);
 
@@ -156,29 +156,26 @@ public class Grid2Test extends BaseFragment {
     }
 
     public static void setSelectedImage(int id, Grid2BoxView grid2BoxView){
-        if (id == R.id.phone && phoneSelected == false) {
+        if (id == R.id.phone && !phoneSelected) {
             phoneSelected = true;
             grid2BoxView.setImage(R.drawable.phone);
-            grid2BoxView.setTag(R.id.tag_image,R.id.phone);
-        } else if (id == R.id.key && keySelected == false) {
+        } else if (id == R.id.key && !keySelected) {
             keySelected = true;
             grid2BoxView.setImage(R.drawable.key);
-            grid2BoxView.setTag(R.id.tag_image,R.id.key);
-        } else if (id == R.id.pen && penSelected == false) {
+        } else if (id == R.id.pen && !penSelected) {
             penSelected = true;
             grid2BoxView.setImage(R.drawable.pen);
-            grid2BoxView.setTag(R.id.tag_image,R.id.pen);
         } else {
             grid2BoxView.setSelected(false);
         }
     }
 
-    public void removeSelectedImage(int tag){
-        if(tag == R.id.phone) {
+    public void removeSelectedImage(int id){
+        if(id == R.id.phone) {
             phoneSelected = false;
-        } else if(tag == R.id.key) {
+        } else if(id == R.id.key) {
             keySelected = false;
-        } else if(tag == R.id.pen) {
+        } else if(id == R.id.pen) {
             penSelected = false;
         }
     }
@@ -206,8 +203,8 @@ public class Grid2Test extends BaseFragment {
         List<GridTestPathData.Tap> choices = new ArrayList<>();
         for(int i=0;i<size;i++){
             if(selections.contains(gridLayout.getChildAt(i))){
-                View view = gridLayout.getChildAt(i);
-                choices.add(new GridTestPathData.Tap(i / 5,i % 5,(long)view.getTag(R.id.tag_time)));
+                Grid2BoxView grid2BoxView = (Grid2BoxView) gridLayout.getChildAt(i);
+                choices.add(new GridTestPathData.Tap(i / 5,i % 5,grid2BoxView.getTimestamp()));
             }
         }
         section.setChoices(choices);
