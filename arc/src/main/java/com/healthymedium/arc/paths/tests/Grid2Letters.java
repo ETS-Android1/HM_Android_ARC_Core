@@ -72,7 +72,7 @@ public class Grid2Letters extends BaseFragment {
     }
 
     private Grid2LetterView getView(int row, int col) {
-        return (Grid2LetterView)gridLayout.getChildAt((rowCount*row)+col);
+        return (Grid2LetterView)gridLayout.getChildAt((columnCount*row)+col);
     }
 
     public static List<Integer> setupTest(Random random, int rowCount, int columnCount) {
