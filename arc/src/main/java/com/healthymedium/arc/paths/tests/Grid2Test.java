@@ -43,8 +43,6 @@ public class Grid2Test extends BaseFragment {
     GridTestPathData.Section section;
     List<View> selections;
 
-    LinearLayout bottomLinearLayout;
-    TextView tapGridText;
     Button button;
     Grid2ChoiceDialog dialog;
 
@@ -72,11 +70,7 @@ public class Grid2Test extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_grid2_test, container, false);
 
         gridLayout = view.findViewById(R.id.gridLayout);
-        bottomLinearLayout = view.findViewById(R.id.bottomLinearLayout);
         button = view.findViewById(R.id.buttonContinue);
-        tapGridText = view.findViewById(R.id.tapGridText);
-        hideButton();
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -200,20 +194,10 @@ public class Grid2Test extends BaseFragment {
 
     private void showButton() {
         button.setVisibility(View.VISIBLE);
-        tapGridText.setPadding(0, dp16, 0, 0);
-
-        tapGridText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
     }
 
     private void hideButton() {
         button.setVisibility(View.GONE);
-        tapGridText.setPadding(0, 0, 0, 0);
-
-        tapGridText.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT));
     }
 
     private void updateSection(){
