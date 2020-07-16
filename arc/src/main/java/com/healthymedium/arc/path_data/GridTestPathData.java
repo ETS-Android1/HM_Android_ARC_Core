@@ -5,6 +5,7 @@ import com.healthymedium.arc.api.tests.data.GridTest;
 import com.healthymedium.arc.api.tests.data.GridTestImage;
 import com.healthymedium.arc.api.tests.data.GridTestSection;
 import com.healthymedium.arc.api.tests.data.GridTestTap;
+import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.PathSegmentData;
 import com.healthymedium.arc.time.TimeUtil;
 
@@ -179,18 +180,43 @@ public class GridTestPathData extends PathSegmentData {
 
     public static class Image {
 
+        public static transient final String PHONE = "phone";
+        public static transient final String PEN = "pen";
+        public static transient final String KEY = "key";
+
         private String image;
         private int x;
         private int y;
 
-        public Image(int row,int col,String image){
+        public Image(int row,int col,String name) {
+            image = name;
             x = row;
             y = col;
-            this.image = image;
         }
 
-        public Image(){
+        public String name() {
+            return image;
+        }
 
+        public int row() {
+            return x;
+        }
+
+        public int column() {
+            return y;
+        }
+
+        public int id() {
+            if(image.equals(PHONE)) {
+                return R.drawable.phone;
+            }
+            if(image.equals(PEN)) {
+                return R.drawable.pen;
+            }
+            if(image.equals(KEY)) {
+                return R.drawable.key;
+            }
+            return 0;
         }
 
     }
