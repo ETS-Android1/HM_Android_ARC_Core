@@ -13,6 +13,7 @@ import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.ui.Grid2BoxView;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Grid2Study extends BaseFragment {
@@ -22,6 +23,8 @@ public class Grid2Study extends BaseFragment {
     GridLayout gridLayout;
     GridTestPathData gridTest;
     GridTestPathData.Section section;
+
+    int rowCount;
 
     TimedDialog dialog;
     Handler handler;
@@ -49,6 +52,7 @@ public class Grid2Study extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_grid2_study, container, false);
 
         gridLayout = view.findViewById(R.id.gridLayout);
+        rowCount = gridLayout.getRowCount();
 
         dialog = new TimedDialog(ViewUtil.getHtmlString(R.string.grids_overlay1),2000);
         dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
@@ -65,6 +69,11 @@ public class Grid2Study extends BaseFragment {
 
         return view;
     }
+
+    private Grid2BoxView getView(int row, int col) {
+        return (Grid2BoxView)gridLayout.getChildAt((rowCount*row)+col);
+    }
+
 
     @Override
     public void onStart() {
