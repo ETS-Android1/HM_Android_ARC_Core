@@ -56,7 +56,7 @@ public class Grid2Letters extends BaseFragment {
         columnCount = gridLayout.getColumnCount();
         rowCount = gridLayout.getRowCount();
 
-        List<Integer> indices = calculateIndices(
+        List<Integer> indices = setupTest(
                 new Random(SystemClock.elapsedRealtime()),
                 rowCount,
                 columnCount);
@@ -75,7 +75,7 @@ public class Grid2Letters extends BaseFragment {
         return (Grid2LetterView)gridLayout.getChildAt((rowCount*row)+col);
     }
 
-    public static List<Integer> calculateIndices(Random random, int rowCount, int columnCount) {
+    public static List<Integer> setupTest(Random random, int rowCount, int columnCount) {
 
         // init variables
         List<Integer> items = new ArrayList<>();
