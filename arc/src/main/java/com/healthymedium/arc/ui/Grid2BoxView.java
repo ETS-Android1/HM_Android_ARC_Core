@@ -18,6 +18,7 @@ public class Grid2BoxView extends RoundedLinearLayout {
     int defaultHeight = ViewUtil.dpToPx(80);
 
     ImageView imageView;
+    int imageResource = 0;
 
     boolean selected = false;
     boolean selectable = true;
@@ -71,10 +72,16 @@ public class Grid2BoxView extends RoundedLinearLayout {
     public void setImage(@DrawableRes int id){
         Drawable drawable = ViewUtil.getDrawable(id);
         imageView.setImageDrawable(drawable);
+        imageResource = id;
     }
 
     public void removeImage(){
         imageView.setImageDrawable(null);
+        imageResource = 0;
+    }
+
+    public int getImage(){
+        return imageResource;
     }
 
     public void setSelectable(boolean selectable) {
