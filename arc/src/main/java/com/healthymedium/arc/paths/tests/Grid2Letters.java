@@ -68,6 +68,9 @@ public class Grid2Letters extends BaseFragment {
         gridTest = (GridTestPathData) Study.getCurrentSegmentData();
         section = gridTest.getCurrentSection();
 
+        handler = new Handler();
+        handler.postDelayed(runnable,8000);
+
         return view;
     }
 
