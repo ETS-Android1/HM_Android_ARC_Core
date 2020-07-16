@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.paths.tests.Grid2Test;
 import com.healthymedium.arc.ui.base.PointerDialog;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -17,6 +18,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
     Grid2ChoiceView key;
     Grid2ChoiceView pen;
     TextView textViewGridDialog;
+    Grid2BoxView grid2BoxView;
 
     public Grid2ChoiceDialog(Activity activity, View target, int pointerConfig) {
         super(activity, target, null, pointerConfig);
@@ -53,10 +55,9 @@ public class Grid2ChoiceDialog extends PointerDialog {
                 int action = motionEvent.getAction();
                 if(action == MotionEvent.ACTION_DOWN) {
 
-                    Grid2ChoiceView image = (Grid2ChoiceView) view;
-                    int img = image.getDrawableImageId();
-                    //TODO: return clicked image to GridTest2, set on selected grid coordinate
-                     Grid2ChoiceDialog.super.dismiss();
+                    int id = view.getId();
+                    Grid2Test.setSelectedImage(id, grid2BoxView);
+                    Grid2ChoiceDialog.super.dismiss();
                 }
                 return view.performClick();
             }
@@ -65,6 +66,10 @@ public class Grid2ChoiceDialog extends PointerDialog {
         phone.setOnTouchListener(listener);
         key.setOnTouchListener(listener);
         pen.setOnTouchListener(listener);
+    }
+
+    public void setGridBox(Grid2BoxView gridBox) {
+        grid2BoxView = gridBox;
     }
 
 }

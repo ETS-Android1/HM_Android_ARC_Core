@@ -30,6 +30,10 @@ public class Grid2Test extends BaseFragment {
     int selectedCount = 0;
     public boolean second = false;
 
+    static boolean phoneSelected = false;
+    static boolean keySelected = false;
+    static boolean penSelected = false;
+
     private int dp16 = ViewUtil.dpToPx(16);
     private int dp60 = ViewUtil.dpToPx(60);
     private int dp160 = ViewUtil.dpToPx(160);
@@ -85,7 +89,7 @@ public class Grid2Test extends BaseFragment {
             public boolean onTouch(final View view, MotionEvent event) {
                 int action = event.getAction();
                 boolean preventTouch = false;
-                Grid2BoxView grid2BoxView = (Grid2BoxView) view;
+                final Grid2BoxView grid2BoxView = (Grid2BoxView) view;
 
                 switch(action) {
                     case MotionEvent.ACTION_DOWN:
@@ -96,7 +100,12 @@ public class Grid2Test extends BaseFragment {
                                 view.setTag(R.id.tag_time,0);
 
                                 selections.remove(view);
+                                if(grid2BoxView.getTag(R.id.tag_image) != null) {
+                                    removeSelectedImage((int)grid2BoxView.getTag(R.id.tag_image));
+                                    grid2BoxView.removeImage();
+                                }
                             }
+
                             selectedCount--;
                         } else if (selectedCount < 3) {
                             selectedCount++;
@@ -108,13 +117,11 @@ public class Grid2Test extends BaseFragment {
                                 @Override
                                 public void run() {
                                     dialog = new Grid2ChoiceDialog(getMainActivity(),view, PointerDrawable.POINTER_ABOVE);
+                                    dialog.setGridBox(grid2BoxView);
                                     dialog.show();
-
-                                    //TODO: listener
                                 }
                             },500);
 
-                            //TODO: get item to set
                         } else {
                             preventTouch = true;
                         }
@@ -152,6 +159,34 @@ public class Grid2Test extends BaseFragment {
         return view;
     }
 
+    public static void setSelectedImage(int id, Grid2BoxView grid2BoxView){
+        if (id == R.id.phone && phoneSelected == false) {
+            phoneSelected = true;
+            grid2BoxView.setImage(R.drawable.phone);
+            grid2BoxView.setTag(R.id.tag_image,R.id.phone);
+        } else if (id == R.id.key && keySelected == false) {
+            keySelected = true;
+            grid2BoxView.setImage(R.drawable.key);
+            grid2BoxView.setTag(R.id.tag_image,R.id.key);
+        } else if (id == R.id.pen && penSelected == false) {
+            penSelected = true;
+            grid2BoxView.setImage(R.drawable.pen);
+            grid2BoxView.setTag(R.id.tag_image,R.id.pen);
+        } else {
+            grid2BoxView.setSelected(false);
+        }
+    }
+
+    public void removeSelectedImage(int tag){
+        if(tag == R.id.phone) {
+            phoneSelected = false;
+        } else if(tag == R.id.key) {
+            keySelected = false;
+        } else if(tag == R.id.pen) {
+            penSelected = false;
+        }
+    }
+
     private void openNextFragment() {
         handler.removeCallbacks(runnable);
         handlerInteraction.removeCallbacks(runnable);
@@ -181,6 +216,17 @@ public class Grid2Test extends BaseFragment {
 
     private void updateSection(){
         //TODO
+        int size = gridLayout.getChildCount();
+        List<GridTestPathData.Tap> choices = new ArrayList<>();
+        for(int i=0;i<size;i++){
+            if(selections.contains(gridLayout.getChildAt(i))){
+                View view = gridLayout.getChildAt(i);
+                choices.add(new GridTestPathData.Tap(i / 5,i % 5,(long)view.getTag(R.id.tag_time)));
+            }
+        }
+        section.setChoices(choices);
+        gridTest.updateCurrentSection(section);
+        Study.setCurrentSegmentData(gridTest);
     }
 
     @Override
