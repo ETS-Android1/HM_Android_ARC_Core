@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.tests;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,10 @@ import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Grid2BoxView;
 import com.healthymedium.arc.utilities.ViewUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Grid2Study extends BaseFragment {
 
     boolean paused;
@@ -25,6 +30,7 @@ public class Grid2Study extends BaseFragment {
     GridTestPathData.Section section;
 
     int rowCount;
+    int columnCount;
 
     TimedDialog dialog;
     Handler handler;
@@ -52,13 +58,24 @@ public class Grid2Study extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_grid2_study, container, false);
 
         gridLayout = view.findViewById(R.id.gridLayout);
+        columnCount = gridLayout.getColumnCount();
         rowCount = gridLayout.getRowCount();
+
+        for(int i=0; i<rowCount; i++) {
+            for(int j=0; j<columnCount; j++) {
+                getView(i,j).setSelectable(false);
+            }
+        }
 
         dialog = new TimedDialog(ViewUtil.getHtmlString(R.string.grids_overlay1),2000);
         dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
             @Override
             public void dismiss() {
-                setupTest();
+
+                Random random = new Random(SystemClock.currentThreadTimeMillis());
+                List<GridTestPathData.Image> images = setupTest(random,rowCount,columnCount);
+                displayImages(images);
+
                 handler = new Handler();
                 handler.postDelayed(runnable,3000);
             }
@@ -107,7 +124,46 @@ public class Grid2Study extends BaseFragment {
         paused = true;
     }
 
-    private void setupTest(){
-        //TODO
+    public static List<GridTestPathData.Image> setupTest(Random random, int rowCount, int columnCount){
+        List<GridTestPathData.Image> images = new ArrayList<>();
+
+        int row1 = random.nextInt(rowCount);
+        int row2 = random.nextInt(rowCount);
+        int row3 = random.nextInt(rowCount);
+        while(row1 == row2){
+            row2 = random.nextInt(rowCount);
+        }
+        while(row3 == row1 || row3 == row2){
+            row3 = random.nextInt(rowCount);
+        }
+
+        int col1 = random.nextInt(columnCount);
+        int col2 = random.nextInt(columnCount);
+        int col3 = random.nextInt(columnCount);
+        while(col1 == col2){
+            col2 = random.nextInt(columnCount);
+        }
+        while(col3 == col1 || col3 == col2){
+            col3 = random.nextInt(columnCount);
+        }
+
+        images.add(new GridTestPathData.Image(row1,col1,GridTestPathData.Image.PHONE));
+        images.add(new GridTestPathData.Image(row2,col2,GridTestPathData.Image.PEN));
+        images.add(new GridTestPathData.Image(row3,col3,GridTestPathData.Image.KEY));
+
+        return images;
+    }
+
+    private void displayImages(List<GridTestPathData.Image> images) {
+
+        for(GridTestPathData.Image image : images) {
+            getView(image.row(),image.column()).setImage(image.id());
+        }
+
+        section.markSymbolsDisplayed();
+        section.setImages(images);
+        gridTest.updateCurrentSection(section);
+
+        Study.setCurrentSegmentData(gridTest);
     }
 }
