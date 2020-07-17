@@ -70,7 +70,7 @@ public class Grid2Test extends BaseFragment {
                     dialog = new Grid2ChoiceDialog(
                             getMainActivity(),
                             view,
-                            PointerDrawable.POINTER_ABOVE,
+                            PointerDrawable.POINTER_BELOW,
                             !phoneSelected,
                             !keySelected,
                             !penSelected);
