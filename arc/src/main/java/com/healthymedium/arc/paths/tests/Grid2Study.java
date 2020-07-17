@@ -71,7 +71,6 @@ public class Grid2Study extends BaseFragment {
         dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
             @Override
             public void dismiss() {
-
                 Random random = new Random(SystemClock.currentThreadTimeMillis());
                 List<GridTestPathData.Image> images = setupTest(random,rowCount,columnCount);
                 displayImages(images);
@@ -88,9 +87,8 @@ public class Grid2Study extends BaseFragment {
     }
 
     private Grid2BoxView getView(int row, int col) {
-        return (Grid2BoxView)gridLayout.getChildAt((rowCount*row)+col);
+        return (Grid2BoxView)gridLayout.getChildAt((columnCount*row)+col);
     }
-
 
     @Override
     public void onStart() {
