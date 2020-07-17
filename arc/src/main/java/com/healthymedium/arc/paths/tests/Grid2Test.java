@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
@@ -19,7 +16,6 @@ import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.Grid2BoxView;
 import com.healthymedium.arc.ui.Grid2ChoiceDialog;
 import com.healthymedium.arc.ui.base.PointerDrawable;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,21 +23,14 @@ import java.util.List;
 public class Grid2Test extends BaseFragment {
 
     boolean paused;
-    int selectedCount = 0;
-    public boolean second = false;
 
-    static boolean phoneSelected = false;
-    static boolean keySelected = false;
-    static boolean penSelected = false;
-
-    private int dp16 = ViewUtil.dpToPx(16);
-    private int dp60 = ViewUtil.dpToPx(60);
-    private int dp160 = ViewUtil.dpToPx(160);
+    boolean phoneSelected = false;
+    boolean keySelected = false;
+    boolean penSelected = false;
 
     GridLayout gridLayout;
     GridTestPathData gridTest;
     GridTestPathData.Section section;
-    List<View> selections;
 
     Button button;
     Grid2ChoiceDialog dialog;
@@ -70,6 +59,54 @@ public class Grid2Test extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_grid2_test, container, false);
 
         gridLayout = view.findViewById(R.id.gridLayout);
+
+        Grid2BoxView.Listener listener = new Grid2BoxView.Listener() {
+            @Override
+            public boolean onSelected(final Grid2BoxView view, boolean selected) {
+                handler.removeCallbacks(runnable);
+
+                if(selected){
+                    disableGrids(view);
+                    dialog = new Grid2ChoiceDialog(
+                            getMainActivity(),
+                            view,
+                            PointerDrawable.POINTER_ABOVE,
+                            !phoneSelected,
+                            !keySelected,
+                            !penSelected);
+                    dialog.setAnimationDuration(50);
+                    dialog.setListener(new Grid2ChoiceDialog.Listener() {
+                        @Override
+                        public void onSelected(int image) {
+                            view.setImage(image);
+                            updateSelections();
+                            if(phoneSelected && keySelected && penSelected) {
+                                handler.postDelayed(runnable,2000);
+                                button.setVisibility(View.VISIBLE);
+                                enableGridsFinal();
+                            } else {
+                                button.setVisibility(View.GONE);
+                                enableGrids();
+                            }
+                        }
+                    });
+                    dialog.show();
+                } else {
+                    view.removeImage();
+                    updateSelections();
+                    enableGrids();
+                    dialog.dismiss();
+                }
+                return false;
+            }
+        };
+
+        int size = gridLayout.getChildCount();
+        for(int i=0;i<size;i++){
+            Grid2BoxView grid2BoxView = (Grid2BoxView) gridLayout.getChildAt(i);
+            grid2BoxView.setListener(listener);
+        }
+
         button = view.findViewById(R.id.buttonContinue);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,73 +115,6 @@ public class Grid2Test extends BaseFragment {
             }
         });
 
-        View.OnTouchListener listener = new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(final View view, MotionEvent event) {
-                int action = event.getAction();
-                boolean preventTouch = false;
-                final Grid2BoxView grid2BoxView = (Grid2BoxView) view;
-
-                switch(action) {
-                    case MotionEvent.ACTION_DOWN:
-                        if (view.getTag(R.id.tag_color).equals(R.color.gridSelected)) {
-                            view.setTag(R.id.tag_color,R.color.gridNormal);
-
-                            if(selections.contains(view)){
-                                grid2BoxView.setTimestamp(0);
-
-                                selections.remove(view);
-                                if(grid2BoxView.getImage() != 0) {
-                                    removeSelectedImage(grid2BoxView.getImage());
-                                    grid2BoxView.removeImage();
-                                }
-                            }
-
-                            selectedCount--;
-                        } else if (selectedCount < 3) {
-                            selectedCount++;
-                            grid2BoxView.setTimestamp(System.currentTimeMillis());
-                            view.setTag(R.id.tag_color,R.color.gridSelected);
-                            selections.add(view);
-
-                            dialog = new Grid2ChoiceDialog(
-                                    getMainActivity(),
-                                    view,
-                                    PointerDrawable.POINTER_ABOVE,
-                                    !phoneSelected,
-                                    !keySelected,
-                                    !penSelected);
-                            dialog.setGridBox(grid2BoxView);
-                            dialog.setAnimationDuration(50);
-                            dialog.show();
-
-                        } else {
-                            preventTouch = true;
-                        }
-
-                        handler.removeCallbacks(runnable);
-                        if(selectedCount >= 3){
-                            showButton();
-                            handler.postDelayed(runnable,20000);
-                        } else {
-                            hideButton();
-                        }
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
-                }
-                return preventTouch;
-            }
-        };
-
-        // Init each grid-cell as unselected + add onTouchListener
-        int size = gridLayout.getChildCount();
-        for(int i=0;i<size;i++){
-            gridLayout.getChildAt(i).setTag(R.id.tag_color,R.color.gridNormal);
-            gridLayout.getChildAt(i).setOnTouchListener(listener);
-        }
-
-        selections = new ArrayList<>();
         gridTest = (GridTestPathData) Study.getCurrentSegmentData();
         section = gridTest.getCurrentSection();
 
@@ -153,31 +123,6 @@ public class Grid2Test extends BaseFragment {
         handlerInteraction.postDelayed(runnable,20000);
 
         return view;
-    }
-
-    public static void setSelectedImage(int id, Grid2BoxView grid2BoxView){
-        if (id == R.id.phone && !phoneSelected) {
-            phoneSelected = true;
-            grid2BoxView.setImage(R.drawable.phone);
-        } else if (id == R.id.key && !keySelected) {
-            keySelected = true;
-            grid2BoxView.setImage(R.drawable.key);
-        } else if (id == R.id.pen && !penSelected) {
-            penSelected = true;
-            grid2BoxView.setImage(R.drawable.pen);
-        } else {
-            grid2BoxView.setSelected(false);
-        }
-    }
-
-    public void removeSelectedImage(int id){
-        if(id == R.id.phone) {
-            phoneSelected = false;
-        } else if(id == R.id.key) {
-            keySelected = false;
-        } else if(id == R.id.pen) {
-            penSelected = false;
-        }
     }
 
     private void openNextFragment() {
@@ -189,24 +134,18 @@ public class Grid2Test extends BaseFragment {
         }
     }
 
-    private void showButton() {
-        button.setVisibility(View.VISIBLE);
-    }
-
-    private void hideButton() {
-        button.setVisibility(View.GONE);
-    }
-
     private void updateSection(){
-        //TODO
-        int size = gridLayout.getChildCount();
         List<GridTestPathData.Tap> choices = new ArrayList<>();
+
+        int size = gridLayout.getChildCount();
         for(int i=0;i<size;i++){
-            if(selections.contains(gridLayout.getChildAt(i))){
-                Grid2BoxView grid2BoxView = (Grid2BoxView) gridLayout.getChildAt(i);
-                choices.add(new GridTestPathData.Tap(i / 5,i % 5,grid2BoxView.getTimestamp()));
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            if(view.isSelected()) {
+                // TODO: Make sure we collect the data we need for this test version
+                choices.add(new GridTestPathData.Tap(i / 5, i % 5, view.getTimestampImage()));
             }
         }
+
         section.setChoices(choices);
         gridTest.updateCurrentSection(section);
         Study.setCurrentSegmentData(gridTest);
@@ -233,6 +172,62 @@ public class Grid2Test extends BaseFragment {
         handlerInteraction.removeCallbacks(runnable);
         handler.removeCallbacks(runnable);
         paused = true;
+    }
+
+
+    private void disableGrids(Grid2BoxView exemption){
+        int size = gridLayout.getChildCount();
+        for(int i=0;i<size;i++){
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            view.setSelectable(false);
+        }
+        if(exemption!=null) {
+            exemption.setSelectable(true);
+        }
+    }
+
+    private void enableGridsFinal(){
+        int size = gridLayout.getChildCount();
+        for(int i=0;i<size;i++){
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            if(view.isSelected()) {
+                view.setSelectable(true);
+            } else {
+                view.setSelectable(false);
+            }
+        }
+    }
+
+    private void enableGrids(){
+        int size = gridLayout.getChildCount();
+        for(int i=0;i<size;i++){
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            view.setSelectable(true);
+        }
+    }
+
+    private void updateSelections(){
+        phoneSelected = false;
+        keySelected = false;
+        penSelected = false;
+
+        int size = gridLayout.getChildCount();
+        for(int i=0;i<size;i++){
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            if(!view.isSelected()){
+                continue;
+            }
+            int id = view.getImage();
+            if(id == R.drawable.phone) {
+                phoneSelected = true;
+            }
+            if(id == R.drawable.key) {
+                keySelected = true;
+            }
+            if(id == R.drawable.pen) {
+                penSelected = true;
+            }
+        }
     }
 
 }

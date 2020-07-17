@@ -1,6 +1,7 @@
 package com.healthymedium.arc.ui;
 
 import android.app.Activity;
+import android.support.annotation.DrawableRes;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,7 +25,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
     boolean penEnabled;
 
     TextView textViewGridDialog;
-    Grid2BoxView grid2BoxView;
+    Listener listener;
 
     public Grid2ChoiceDialog(Activity activity, View target, int pointerConfig, boolean phoneEnabled, boolean keyEnabled, boolean penEnabled) {
         super(activity, target, null, pointerConfig);
@@ -37,23 +38,26 @@ public class Grid2ChoiceDialog extends PointerDialog {
     private void init() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_grid2_choice,null);
 
-        OnTouchListener listener = new OnTouchListener() {
+        OnTouchListener touchListener = new OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                int action = motionEvent.getAction();
-                if(action == MotionEvent.ACTION_DOWN) {
-                    int id = view.getId();
-                    Grid2Test.setSelectedImage(id, grid2BoxView);
-                    Grid2ChoiceDialog.super.dismiss();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() != MotionEvent.ACTION_DOWN) {
+                    return false;
                 }
-                return view.performClick();
+                if(listener==null){
+                    return false;
+                }
+                int id = ((Grid2ChoiceView)v).getDrawableImageId();
+                listener.onSelected(id);
+                dismiss();
+                return false;
             }
         };
 
         phone = view.findViewById(R.id.phone);
         phone.setImage(R.drawable.phone);
         if(phoneEnabled) {
-            phone.setOnTouchListener(listener);
+            phone.setOnTouchListener(touchListener);
         } else {
             phone.setAlpha(0.4f);
         }
@@ -61,7 +65,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
         key = view.findViewById(R.id.key);
         key.setImage(R.drawable.key);
         if(keyEnabled) {
-            key.setOnTouchListener(listener);
+            key.setOnTouchListener(touchListener);
         } else {
             key.setAlpha(0.4f);
         }
@@ -69,7 +73,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
         pen = view.findViewById(R.id.pen);
         pen.setImage(R.drawable.pen);
         if(penEnabled) {
-            pen.setOnTouchListener(listener);
+            pen.setOnTouchListener(touchListener);
         } else {
             pen.setAlpha(0.4f);
         }
@@ -84,8 +88,12 @@ public class Grid2ChoiceDialog extends PointerDialog {
 
     }
 
-    public void setGridBox(Grid2BoxView gridBox) {
-        grid2BoxView = gridBox;
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    public interface Listener {
+        void onSelected(@DrawableRes int image);
     }
 
 }
