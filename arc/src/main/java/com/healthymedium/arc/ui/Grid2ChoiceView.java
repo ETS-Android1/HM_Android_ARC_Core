@@ -83,6 +83,9 @@ public class Grid2ChoiceView extends LinearLayout {
 
         setMeasuredDimension(width,height);
 
+        widthMeasureSpec = MeasureSpec.makeMeasureSpec(width,MeasureSpec.EXACTLY);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height,MeasureSpec.EXACTLY);
+
         int childCount = getChildCount();
         for(int i=0;i<childCount;i++) {
             getChildAt(i).measure(widthMeasureSpec,heightMeasureSpec);
