@@ -65,12 +65,13 @@ public class Grid2Test extends BaseFragment {
             public boolean onSelected(final Grid2BoxView view, boolean selected) {
                 handler.removeCallbacks(runnable);
 
+                int pointerPosition = determinePointerPosition(view);
                 if(selected){
                     disableGrids(view);
                     dialog = new Grid2ChoiceDialog(
                             getMainActivity(),
                             view,
-                            PointerDrawable.POINTER_BELOW,
+                            pointerPosition,
                             !phoneSelected,
                             !keySelected,
                             !penSelected);
@@ -131,6 +132,19 @@ public class Grid2Test extends BaseFragment {
         if (isVisible()) {
             updateSection();
             Study.openNextFragment();
+        }
+    }
+
+    private int determinePointerPosition(Grid2BoxView view) {
+        int gridBoxHeight = view.getHeight();
+        int[] gridBoxLocation = new int[2];
+        view.getLocationOnScreen(gridBoxLocation);
+
+        if(gridBoxLocation[1] < (2*gridBoxHeight)) {
+            // if grid box is in the first two rows of the grid, dialog appears below grid box
+            return PointerDrawable.POINTER_BELOW;
+        } else {
+            return PointerDrawable.POINTER_ABOVE;
         }
     }
 
