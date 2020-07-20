@@ -1,12 +1,18 @@
 package com.healthymedium.arc.paths.tests;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
@@ -16,6 +22,7 @@ import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.Grid2BoxView;
 import com.healthymedium.arc.ui.Grid2ChoiceDialog;
 import com.healthymedium.arc.ui.base.PointerDrawable;
+import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +130,8 @@ public class Grid2Test extends BaseFragment {
         handlerInteraction = new Handler();
         handlerInteraction.postDelayed(runnable,20000);
 
+        adjustGridLayout();
+
         return view;
     }
 
@@ -218,6 +227,35 @@ public class Grid2Test extends BaseFragment {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
             view.setSelectable(true);
         }
+    }
+
+
+
+    private void adjustGridLayout(){
+        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        int auxHeight = ViewUtil.dpToPx(124);
+        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-auxHeight;
+
+        float aspectRatio = ((float)displayWidth)/((float)viewHeight);
+        if(aspectRatio < 0.75f) {
+            return;
+        }
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                (int) (0.75f * viewHeight),
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.topMargin = ViewUtil.dpToPx(26);
+        layoutParams.bottomMargin = ViewUtil.dpToPx(2);
+        layoutParams.gravity = Gravity.CENTER;
+        gridLayout.setLayoutParams(layoutParams);
     }
 
     private void updateSelections(){

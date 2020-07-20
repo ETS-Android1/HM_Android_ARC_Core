@@ -1,13 +1,19 @@
 package com.healthymedium.arc.paths.tests;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
@@ -83,6 +89,8 @@ public class Grid2Study extends BaseFragment {
 
         gridTest = (GridTestPathData) Study.getCurrentSegmentData();
 
+        adjustGridLayout();
+
         return view;
     }
 
@@ -120,6 +128,33 @@ public class Grid2Study extends BaseFragment {
             handler.removeCallbacks(runnable);
         }
         paused = true;
+    }
+
+    private void adjustGridLayout(){
+        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        int auxHeight = ViewUtil.dpToPx(124);
+        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-auxHeight;
+
+        float aspectRatio = ((float)displayWidth)/((float)viewHeight);
+        if(aspectRatio < 0.75f) {
+            return;
+        }
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                (int) (0.75f * viewHeight),
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.topMargin = ViewUtil.dpToPx(26);
+        layoutParams.bottomMargin = ViewUtil.dpToPx(2);
+        layoutParams.gravity = Gravity.CENTER;
+        gridLayout.setLayoutParams(layoutParams);
     }
 
     public static List<GridTestPathData.Image> setupTest(Random random, int rowCount, int columnCount){
