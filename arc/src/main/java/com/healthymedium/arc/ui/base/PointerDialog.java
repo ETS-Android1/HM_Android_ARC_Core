@@ -36,6 +36,8 @@ public class PointerDialog extends LinearLayout {
         super(activity);
 
         parent = (ViewGroup) activity.getWindow().getDecorView();
+        parent.setClipChildren(false);
+
         this.target = target;
         this.view = view;
 
@@ -49,6 +51,8 @@ public class PointerDialog extends LinearLayout {
         super(activity);
 
         parent = (ViewGroup) activity.getWindow().getDecorView();
+        parent.setClipChildren(false);
+
         this.target = target;
         this.view = view;
 
@@ -161,11 +165,6 @@ public class PointerDialog extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         setOutlineProvider(background.getOutlineProvider());
-    }
-
-    @Override
-    public ViewOutlineProvider getOutlineProvider() {
-        return background.getOutlineProvider();
     }
 
     @Override

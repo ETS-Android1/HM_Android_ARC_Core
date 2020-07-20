@@ -9,9 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.paths.tests.Grid2Test;
 import com.healthymedium.arc.ui.base.PointerDialog;
-import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Grid2ChoiceDialog extends PointerDialog {
 
@@ -82,7 +80,6 @@ public class Grid2ChoiceDialog extends PointerDialog {
         textViewGridDialog.setText("Select the item that was here");
 
         setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        setElevation(ViewUtil.dpToPx(4));
         setRadius(16);
         setView(view);
 

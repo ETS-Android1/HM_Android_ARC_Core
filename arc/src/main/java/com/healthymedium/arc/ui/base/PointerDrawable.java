@@ -1,5 +1,8 @@
 package com.healthymedium.arc.ui.base;
 
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -17,6 +20,8 @@ public class PointerDrawable extends SimpleDrawable {
     private int pointerX = 0;
     private int radius = 0;
 
+    private Paint shadowPaint;
+
     public PointerDrawable(int pointerConfig, int pointerSize){
         super();
         this.pointerConfig = pointerConfig;
@@ -26,10 +31,16 @@ public class PointerDrawable extends SimpleDrawable {
     public PointerDrawable(int pointerConfig){
         super();
         this.pointerConfig = pointerConfig;
+        shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        shadowPaint.setMaskFilter(new BlurMaskFilter(3, BlurMaskFilter.Blur.OUTER));
     }
 
     public PointerDrawable(){
         super();
+        shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        shadowPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        shadowPaint.setMaskFilter(new BlurMaskFilter(3, BlurMaskFilter.Blur.OUTER));
     }
 
     public void setPointerConfig(int config){
@@ -54,6 +65,15 @@ public class PointerDrawable extends SimpleDrawable {
 
     public int getPointerX(){
         return pointerX;
+    }
+
+    @Override
+    public void draw(Canvas canvas) {
+        if(path==null){
+            return;
+        }
+        canvas.drawPath(path,shadowPaint);
+        super.draw(canvas);
     }
 
     @Override
