@@ -97,6 +97,11 @@ public class Grid2Test extends BaseFragment {
                                 enableGrids();
                             }
                         }
+
+                        @Override
+                        public void onRemove() {
+                            //TODO
+                        }
                     });
                     dialog.show();
                 } else {
