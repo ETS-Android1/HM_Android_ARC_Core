@@ -91,11 +91,17 @@ public class Grid2LetterView extends CircleFrameLayout {
         int action = event.getAction();
         if(action == MotionEvent.ACTION_DOWN) {
             selected = !selected;
-            int color = selected ? R.color.accent : R.color.white;
-            setFillColor(color);
+            setFillColor(R.color.primaryButtonDark);
+            paint.setColor(ViewUtil.getColor(getContext(), R.color.white));
             invalidate();
         }
-        return super.onTouchEvent(event);
+        if(action == MotionEvent.ACTION_UP) {
+            int color = selected ? R.color.accent : R.color.white;
+            setFillColor(color);
+            paint.setColor(ViewUtil.getColor(getContext(), R.color.primaryButtonDark));
+            invalidate();
+        }
+        return true;
     }
 
     @Override
