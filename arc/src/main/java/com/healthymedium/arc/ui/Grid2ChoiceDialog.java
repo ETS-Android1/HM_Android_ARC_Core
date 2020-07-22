@@ -16,40 +16,25 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.ui.base.PointerDialog;
+import com.healthymedium.arc.utilities.ViewUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Grid2ChoiceDialog extends PointerDialog {
 
     Grid2ChoiceView phone;
-    boolean phoneEnabled;
-
     Grid2ChoiceView key;
-    boolean keyEnabled;
-
     Grid2ChoiceView pen;
-    boolean penEnabled;
 
     TextView textViewGridDialog;
     Listener listener;
 
     TextView textViewRemoveItem;
     View divider;
-    boolean remove = false;
 
-    public Grid2ChoiceDialog(Activity activity, View target, int pointerConfig, boolean phoneEnabled, boolean keyEnabled, boolean penEnabled) {
+    public Grid2ChoiceDialog(Activity activity, View target, int pointerConfig) {
         super(activity, target, null, pointerConfig);
-        this.phoneEnabled = phoneEnabled;
-        this.keyEnabled = keyEnabled;
-        this.penEnabled = penEnabled;
-        init();
-    }
-
-    public Grid2ChoiceDialog(Activity activity, View target, int pointerConfig, boolean phoneEnabled,
-                             boolean keyEnabled, boolean penEnabled, boolean remove) {
-        super(activity, target, null, pointerConfig);
-        this.phoneEnabled = phoneEnabled;
-        this.keyEnabled = keyEnabled;
-        this.penEnabled = penEnabled;
-        this.remove = remove;
         init();
     }
 
@@ -74,27 +59,15 @@ public class Grid2ChoiceDialog extends PointerDialog {
 
         phone = view.findViewById(R.id.phone);
         phone.setImage(R.drawable.phone);
-        if(phoneEnabled) {
-            phone.setOnTouchListener(touchListener);
-        } else {
-            phone.setAlpha(0.4f);
-        }
+        phone.setOnTouchListener(touchListener);
 
         key = view.findViewById(R.id.key);
         key.setImage(R.drawable.key);
-        if(keyEnabled) {
-            key.setOnTouchListener(touchListener);
-        } else {
-            key.setAlpha(0.4f);
-        }
+        key.setOnTouchListener(touchListener);
 
         pen = view.findViewById(R.id.pen);
         pen.setImage(R.drawable.pen);
-        if(penEnabled) {
-            pen.setOnTouchListener(touchListener);
-        } else {
-            pen.setAlpha(0.4f);
-        }
+        pen.setOnTouchListener(touchListener);
 
         textViewGridDialog = view.findViewById(R.id.textViewGridDialog);
         textViewGridDialog.setText("Select the item that was here");
@@ -104,37 +77,50 @@ public class Grid2ChoiceDialog extends PointerDialog {
         textViewRemoveItem = view.findViewById(R.id.textViewRemoveItem);
         textViewRemoveItem.setVisibility(View.GONE);
 
-        if(remove) {
-            SpannableString styledRemoveItemString =
-                    new SpannableString(Html.fromHtml(Application.getInstance().getResources().getString(R.string.testing_tutorial_link)));
-            styledRemoveItemString.setSpan(new UnderlineSpan(), 0, styledRemoveItemString.length(), 0);
-            styledRemoveItemString.setSpan(new StyleSpan(Typeface.BOLD), 0, styledRemoveItemString.length(), 0);
-
-            divider.setVisibility(View.VISIBLE);
-            textViewRemoveItem.setText(styledRemoveItemString);
-            textViewRemoveItem.setVisibility(View.VISIBLE);
-
-            OnTouchListener removeImageTouchListener = new OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if(event.getAction() != MotionEvent.ACTION_DOWN) {
-                        return false;
-                    }
-                    if(listener==null){
-                        return false;
-                    }
-                    listener.onRemove();
-                    dismiss();
-                    return false;
-                }
-            };
-            textViewRemoveItem.setOnTouchListener(removeImageTouchListener);
-        }
-
         setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         setRadius(16);
         setView(view);
+    }
 
+    public void disableChoice(@DrawableRes int image) {
+        Grid2ChoiceView choice = null;
+
+        if(image==R.drawable.phone) {
+            choice = phone;
+        }
+        if(image==R.drawable.key) {
+            choice = key;
+        }
+        if(image==R.drawable.pen) {
+            choice = pen;
+        }
+
+        if(choice==null){
+            return;
+        }
+
+        choice.setOnTouchListener(null);
+        choice.setAlpha(0.4f);
+
+        divider.setVisibility(View.VISIBLE);
+        ViewUtil.underlineTextView(textViewRemoveItem);
+        textViewRemoveItem.setVisibility(View.VISIBLE);
+
+        OnTouchListener removeImageTouchListener = new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() != MotionEvent.ACTION_DOWN) {
+                    return false;
+                }
+                if(listener==null){
+                    return false;
+                }
+                listener.onRemove();
+                dismiss();
+                return false;
+            }
+        };
+        textViewRemoveItem.setOnTouchListener(removeImageTouchListener);
     }
 
     public void setListener(Listener listener) {

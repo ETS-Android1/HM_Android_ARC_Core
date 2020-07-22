@@ -135,9 +135,8 @@ public class Grid2BoxView extends RoundedLinearLayout {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         if(action == MotionEvent.ACTION_DOWN && selectable) {
-            setSelected(!selected);
             if(listener!=null) {
-                return listener.onSelected(this, selected);
+                listener.onSelected(this);
             }
         }
         return super.onTouchEvent(event);
@@ -172,7 +171,7 @@ public class Grid2BoxView extends RoundedLinearLayout {
     }
 
     public interface Listener {
-        boolean onSelected(Grid2BoxView view, boolean selected);
+        void onSelected(Grid2BoxView view);
     }
 
 }

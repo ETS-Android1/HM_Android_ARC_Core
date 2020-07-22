@@ -231,13 +231,12 @@ public class PointerDialog extends LinearLayout {
             setLayoutParams(params);
 
             int stroke = (int)background.getStrokeWidth();
-            int border = ((background.getRadius()/2)+stroke);
             switch (background.getPointerConfig()) {
                 case PointerDrawable.POINTER_ABOVE:
-                    setPadding(border,stroke,border,stroke+background.getPointerSize());
+                    setPadding(stroke,stroke,stroke,stroke+background.getPointerSize());
                     break;
                 case PointerDrawable.POINTER_BELOW:
-                    setPadding(border,stroke+background.getPointerSize(),border,stroke);
+                    setPadding(stroke,stroke+background.getPointerSize(),stroke,stroke);
                     break;
 
                 default:
