@@ -112,7 +112,13 @@ public class LocaleResource {
             );
 
             writer.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
-            writer.write("<resources>\n");
+
+            if(countryKey.equals("US") && languageKey.equals("en")) {
+                writer.write("<resources xmlns:tools=\"http://schemas.android.com/tools\" tools:ignore=\"MissingTranslation\">\n");
+            } else {
+                writer.write("<resources>\n");
+            }
+
 
             for(Map.Entry<String, String> entry : map.entrySet()) {
                 String key = entry.getKey();
