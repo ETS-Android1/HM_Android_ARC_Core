@@ -1,12 +1,6 @@
 package com.healthymedium.translations;
 
 import com.healthymedium.translations.common.CopyDoc;
-import com.healthymedium.translations.common.LocaleResource;
-import com.healthymedium.translations.common.GoogleDoc;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.List;
 
 public class UpdateHASD {
 

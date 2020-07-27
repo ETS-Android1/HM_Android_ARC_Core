@@ -2,17 +2,13 @@ package com.healthymedium.translations.common;
 
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.util.Key;
-import com.google.api.client.util.store.FileDataStoreFactory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Setup {
 

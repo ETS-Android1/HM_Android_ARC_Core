@@ -1,8 +1,6 @@
 package com.healthymedium.translations;
 
 import com.healthymedium.translations.common.CopyDoc;
-import com.healthymedium.translations.common.LocaleResource;
-import com.healthymedium.translations.common.GoogleDoc;
 
 public class UpdateCore {
 

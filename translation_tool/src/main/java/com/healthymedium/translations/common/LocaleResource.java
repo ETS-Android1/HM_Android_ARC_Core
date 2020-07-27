@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LocaleResource {
@@ -26,17 +24,16 @@ public class LocaleResource {
 
         if(map.containsKey(LANGUAGE_KEY)) {
             languageKey = map.get(LANGUAGE_KEY);
-            map.remove(languageKey);
+            map.remove(LANGUAGE_KEY);
         }
 
         if(map.containsKey(COUNTRY_KEY)) {
             countryKey = map.get(COUNTRY_KEY);
-            map.remove(countryKey);
+            map.remove(COUNTRY_KEY);
         }
 
         if(map.containsKey(APP_NAME)) {
-            String appName = map.get(APP_NAME);
-            map.remove(appName);
+            map.remove(APP_NAME);
         }
 
         if(languageKey==null || countryKey==null) {
