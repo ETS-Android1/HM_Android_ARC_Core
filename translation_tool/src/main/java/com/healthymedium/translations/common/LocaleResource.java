@@ -14,6 +14,7 @@ public class LocaleResource {
     private static final String LANGUAGE_KEY = "language_key";
     private static final String COUNTRY_KEY = "country_key";
     private static final String FILE_NAME = "strings.xml";
+    private static final String APP_NAME = "app_name";
 
     public Map<String,String> map;
     public String languageKey;
@@ -25,10 +26,17 @@ public class LocaleResource {
 
         if(map.containsKey(LANGUAGE_KEY)) {
             languageKey = map.get(LANGUAGE_KEY);
+            map.remove(languageKey);
         }
 
         if(map.containsKey(COUNTRY_KEY)) {
             countryKey = map.get(COUNTRY_KEY);
+            map.remove(countryKey);
+        }
+
+        if(map.containsKey(APP_NAME)) {
+            String appName = map.get(APP_NAME);
+            map.remove(appName);
         }
 
         if(languageKey==null || countryKey==null) {
