@@ -10,7 +10,6 @@
 	<string name="notification1_lastday">今週のテストの最終日になりました。今日最初のテストは{TIME}まで使用可能です。</string>
 	<string name="notifications2_default">今日2つ目のテストの時間になりました。このテストは{TIME}まで使用可能です。</string>
 	<string name="notification3_default">今日3つ目のテストが使用可能になりました。{TIME}までにこのテストを完了してください。</string>
-	<string name="notification3_variation">お金をもらって科学に貢献できる機会です。{TIME}までにテスト#3を完了してください。</string>
 	<string name="notification4_default">今日最後のテストの時間になりました。ラストスパートです。{TIME}までにこのテストを完了しましょう。</string>
 	<string name="notification4_lastday">今週最後のテストの時間になりました。{TIME}までに完了してください。あなたがここで獲得した収入についてはコーディネーターから追って連絡します。</string>
 	<string name="notification_missedtests">\nテストが未記入です。今週中にテストを終了できない場合、治験コーディネーターに連絡を取ってください。</string>
@@ -335,7 +334,7 @@
 	<string name="button_email">Eメール</string>
 	<string name="button_done">完了</string>
 	<string name="button_change">変更</string>
-	<string name="button_submitdates">\n\n日付を提出</string>
+	<string name="button_submitdates">日付を提出</string>
 	<string name="button_signin">サインイン</string>
 	<string name="button_beginsurvey">調査を開始</string>
 	<string name="button_begintest">テストを開始</string>
@@ -356,14 +355,13 @@
 	<string name="popup_next">次へ</string>
 	<string name="popup_done">完了</string>
 	<string name="popup_tutorial_view">ここをタップしてチュートリアルを表示します。</string>
-	<string name="popup_tutorial_welcome">&lt;b>チュートリアルへようこそ！&lt;/b>\nこの進行状況バーには、チュートリアルをどこまで終了したかが表示されます。</string>
 	<string name="popup_tutorial_quit">ここをタップしてチュートリアルを閉じます。</string>
 	<string name="popup_tutorial_price_intro">価格テストには2つのパートがあります。&lt;b>パート1は価格の評価です。&lt;/b></string>
 	<string name="prices_tutorial_item1">バナナ</string>
 	<string name="prices_tutorial_price1">¥351.84</string>
-	<string name="prices_tutorial_item2">スープ</string>
-	<string name="prices_tutorial_price2">¥1,164.20</string>
-	<string name="prices_tutorial_price1_match">¥729.51</string>
+	<string name="prices_tutorial_price1_match">スープ</string>
+	<string name="prices_tutorial_item2">¥1,164.20</string>
+	<string name="prices_tutorial_price2">¥729.51</string>
 	<string name="prices_tutorial_price2_match">¥431.46</string>
 	<string name="popup_tutorial_choose1">&lt;b>どう思いますか？&lt;/b>\nあなたが適切だと思われる回答を選択してください。</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>良い選択です。&lt;/b>もう一つ試してみましょう</string>
@@ -442,12 +440,6 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">¥</string>
-	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">¥</string>
-	<string name="prices_test_suffix"></string>
 	<string name="unit_months">か月</string>
-	<string name="battery_optimization_header">バッテリーの最適化</string>
-	<string name="battery_optimization_overview">お使いの携帯電話には、バッテリー寿命を維持するのに役立つ設定があり、「バッテリー最適化」設定と呼ばれています。&lt;br>&lt;br>\n{APP_NAME}アプリがスマートフォンの電池寿命に与える影響は最小限です。 {APP_NAME}アプリのバッテリー最適化設定をオフにすることをお勧めします。そうすることで、時間通りにテスト通知を受け取ることができます。</string>
-	<string name="battery_optimization_prompt">次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
-	<string name="battery_optimization_reminder">通知が遅れています。次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
 </resources>

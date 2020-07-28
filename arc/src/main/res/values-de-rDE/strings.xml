@@ -10,7 +10,6 @@
 	<string name="notification1_lastday">Dies ist Ihr letzter Testtag dieser Woche! Ihr erster Test des Tages wird bis zum {TIME} verfügbar sein.</string>
 	<string name="notifications2_default">Es ist Zeit für den zweiten Test des heutigen Tages! Dieser Test wird bis {TIME} verfügbar sein.</string>
 	<string name="notification3_default">Ihr dritter Test des Tages ist jetzt verfügbar. Bitte schließen Sie diesen Test bis {TIME} ab.</string>
-	<string name="notification3_variation">Hier ist eine weitere Chance, Geld zu verdienen und der Wissenschaft zu helfen. Bitte schließen Sie Test 3 bis {TIME} ab.</string>
 	<string name="notification4_default">Der letzte Test des Tages ist da! Legen Sie einen Endspurt hin und schließen Sie diesen Test bis {TIME} ab.</string>
 	<string name="notification4_lastday">Es ist Zeit für den letzten Test der Woche! Bitte schließen Sie ihn bis {TIME} ab. Ihr Koordinator wird sich in Kürze mit Ihnen bezüglich Ihres Verdienstes in Verbindung setzen.</string>
 	<string name="notification_missedtests">Sie haben Ihre Tests verpasst. Wenn Sie die Tests in dieser Woche nicht abschließen können, setzen Sie sich bitte mit Ihrem Studienkoordinator in Verbindung.</string>
@@ -356,14 +355,13 @@
 	<string name="popup_next">Weiter</string>
 	<string name="popup_done">Fertig</string>
 	<string name="popup_tutorial_view">Tippen Sie hier, um ein Tutorial anzusehen</string>
-	<string name="popup_tutorial_welcome">&lt;b>Willkommen zum Tutorial!&lt;/b>\nDieser Fortschrittsbalken zeigt an, wie viel des Tutorials Sie bereits abgeschlossen haben.</string>
 	<string name="popup_tutorial_quit">Tippen Sie hier, um das Tutorial zu beenden.</string>
 	<string name="popup_tutorial_price_intro">Der Preistest besteht aus zwei Teilen. &lt;b>Erstens: Bewerten Sie den Preis.&lt;/b></string>
 	<string name="prices_tutorial_item1">Bananen</string>
 	<string name="prices_tutorial_price1">3,27 €</string>
-	<string name="prices_tutorial_item2">Suppe</string>
-	<string name="prices_tutorial_price2">10,82 €</string>
-	<string name="prices_tutorial_price1_match">6,78 €</string>
+	<string name="prices_tutorial_price1_match">Suppe</string>
+	<string name="prices_tutorial_item2">10,82 €</string>
+	<string name="prices_tutorial_price2">6,78 €</string>
 	<string name="prices_tutorial_price2_match">4,01 €</string>
 	<string name="popup_tutorial_choose1">&lt;b>Was denken Sie?&lt;/b>\nWählen Sie die Antwort, die Ihnen sinnvoll erscheint.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Gute Wahl!&lt;/b>\nUnd jetzt noch ein Versuch.</string>
@@ -446,8 +444,4 @@
 	<string name="prices_test_prefix"></string>
 	<string name="prices_test_suffix">€</string>
 	<string name="unit_months">Monate</string>
-	<string name="battery_optimization_header">Batterieoptimierung</string>
-	<string name="battery_optimization_overview">Ihr Telefon verfügt über eine Einstellung, mit der Sie die Akkulaufzeit verlängern können. Diese Einstellung wird als „Akkuoptimierung“ bezeichnet.&lt;br>&lt;br>Die {APP_NAME} App hat nur minimale Auswirkungen auf die Akkulaufzeit Ihres Telefons. Es wird empfohlen, die Batterieoptimierungseinstellung für die App {APP_NAME} zu deaktivieren. Auf diese Weise können Sie sicherstellen, dass Sie rechtzeitig Testbenachrichtigungen erhalten.</string>
-	<string name="battery_optimization_prompt">Als Nächstes wird Ihnen ein Popup-Fenster angezeigt, in dem Sie aufgefordert werden, die Batterieoptimierung zu deaktivieren, indem die App {APP_NAME} im Hintergrund ausgeführt werden darf. Bitte tippen Sie auf &lt;b> erlauben &lt;/ b>, um sicherzustellen, dass Ihre Benachrichtigungen ordnungsgemäß funktionieren.</string>
-	<string name="battery_optimization_reminder">Ihre Benachrichtigungen haben eine Verzögerung. Als Nächstes wird Ihnen ein Popup-Fenster angezeigt, in dem Sie aufgefordert werden, die Batterieoptimierung zu deaktivieren, indem die App {APP_NAME} im Hintergrund ausgeführt werden darf. Bitte tippen Sie auf &lt;b> erlauben &lt;/ b>, um sicherzustellen, dass Ihre Benachrichtigungen ordnungsgemäß funktionieren.</string>
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="key_native_language">Mexico - Español</string>
+	<string name="key_native_language">America Latina - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza en un mes, el {DATE}. Puede ajustar este horario hasta por 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su siguiente ciclo de pruebas comienza en una semana. Toque para confirmar o reprogramar.</string>
 	<string name="notification_daybefore">Recordatorio: Su siguiente ciclo de pruebas comienza mañana. Toque para confirmar o reprogramar.</string>
@@ -10,7 +10,6 @@
 	<string name="notification1_lastday">¡Ya llegó al último día de pruebas de esta semana! Su primera prueba del día estará disponible hasta la/s {TIME}.</string>
 	<string name="notifications2_default">Ha llegado la hora de hacer la segunda prueba de hoy. Esta prueba estará disponible hasta la/s {TIME}.</string>
 	<string name="notification3_default">Ya está disponible la tercera prueba del día. Complete esta prueba antes de la/s {TIME}.</string>
-	<string name="notification3_variation">Aquí tiene otra oportunidad de ganar dinero y ayudar a la ciencia. Complete la prueba n.º 3 antes de la/s {TIME}.</string>
 	<string name="notification4_default">Ya ha llegado la última prueba del día. Termine en buen estado y complete esta prueba antes de la/s {TIME}.</string>
 	<string name="notification4_lastday">Ha llegado la hora de hacer la última prueba de la semana. Termine por favor antes de la/s {TIME}. Su coordinador se comunicará con usted a la brevedad acerca de sus ganancias.</string>
 	<string name="notification_missedtests">No pudo completar sus pruebas. Si no puede terminar esta semana, por favor póngase en contacto con el coordinador del estudio.</string>
@@ -148,7 +147,7 @@
 	<string name="faq_earnings_a1">Puede ganar hasta $32 por ciclo de pruebas de 7 días mientras siga participando en el estudio.  Gana $0.50 por cada prueba que completa (hasta un máximo de $14 por ciclo). También puede trabajar para alcanzar estas tres metas y recibir bonificaciones: $1 por día por completar las 4 pruebas de un día (hasta $7 por ciclo); $6 por ciclo por completar dos o más pruebas cada día; y $5 por ciclo por completar 21 pruebas o más.</string>
 	<string name="faq_earnings_a2">Su pago se procesará de inmediato una vez que complete un ciclo de pruebas. Puede que su pago tarde varios días laborales en procesarse. Comuníquese con el coordinador del estudio ante cualquier pregunta acerca de cuándo recibirá el pago.</string>
 	<string name="faq_earnings_a3">Se le pagará mediante una tarjeta de regalo electrónica de Amazon.</string>
-	<string name="faq_earnings_a4">\"Esta semana\" se refiere a la cantidad de dinero que haya ganado durante el ciclo de pruebas vigente en ese momento. \"Total del estudio\" se refiere a la cantidad de dinero acumulativa que haya ganado en todos los ciclos de pruebas, incluido el vigente.</string>
+	<string name="faq_earnings_a4">Esta semana se refiere a la cantidad de dinero que haya ganado durante el ciclo de pruebas vigente en ese momento. \"Total del estudio\" se refiere a la cantidad de dinero acumulativa que haya ganado en todos los ciclos de pruebas, incluido el vigente.</string>
 	<string name="faq_earnings_a5">Las metas para bonificaciones representan dinero que se puede ganar más allá de los $0.50 que se ganan por prueba completada. Durante cada ciclo de pruebas, usted puede trabajar para intentar alcanzar esas tres metas y recibir bonificaciones: $1 por día por completar las 4 pruebas de un día (hasta $7 por ciclo); $6 por ciclo por completar dos o más pruebas cada día; y $5 por ciclo por completar 21 pruebas o más. Puede ganar dinero de cada una de las tres metas.</string>
 	<string name="progress_daily_header">Sesiones de hoy</string>
 	<string name="progress_dailystatus_complete">&lt;b>{#}&lt;/b> completadas</string>
@@ -275,7 +274,7 @@
 	<string name="testing_id_header">Firme con sus iniciales en la línea a continuación.</string>
 	<string name="testing_id_body">Al firmar con mis iniciales en la línea a continuación, doy fe de que he completado estas evaluaciones.</string>
 	<string name="prices_header">Precios</string>
-	<string name="prices_body">Por favor decida si el precio exhibido es bueno para ese artículo.  &lt;br />&lt;br />La pareja solo estará en la pantalla durante un tiempo corto, por lo tanto tome su decisión rápidamente y preste mucha atención.                 </string>
+	<string name="prices_body">Por favor decida si el precio exhibido es bueno para ese artículo.  &lt;br />&lt;br />La pareja solo estará en la pantalla durante un tiempo corto, por lo tanto tome su decisión rápidamente y preste mucha atención.</string>
 	<string name="prices_isthisgood">¿Es este un buen precio?</string>
 	<string name="prices_overlay">Ahora verá un artículo y dos precios. Seleccione el precio que concuerde con el artículo de la sección anterior.</string>
 	<string name="prices_whatwasprice">¿Cuál es el precio?</string>
@@ -322,7 +321,7 @@
 	<string name="progress_studytotals_goals">Metas logradas</string>
 	<string name="progress_endoftest_syncing">Un momento, por favor, mientras actualizamos sus ganancias...</string>
 	<string name="progress_endoftest_nosync">La sincronización está tardando más de lo normal. Consulte la pestaña Ganancias para ver sus totales actualizados.</string>
-	<string name="login_error1">Credenciales incorrectas de inicio de sesión </string>
+	<string name="login_error1">Credenciales incorrectas de inicio de sesión</string>
 	<string name="login_error2">Esta ID de ARC ya está inscrita en otro dispositivo.</string>
 	<string name="login_error3">Disculpe, nuestra aplicación está presentando problemas en estos momentos. Por favor intente de nuevo más tarde.</string>
 	<string name="button_help">AYUDA</string>
@@ -356,15 +355,14 @@
 	<string name="popup_next">Siguiente</string>
 	<string name="popup_done">Listo</string>
 	<string name="popup_tutorial_view">Toque aquí para ver un tutorial</string>
-	<string name="popup_tutorial_welcome">&lt;b>¡Bienvenido al tutorial!&lt;/b>\nEsta barra de progreso le muestra qué porcentaje del tutorial ha completado.</string>
 	<string name="popup_tutorial_quit">Toque aquí para dejar el tutorial.</string>
 	<string name="popup_tutorial_price_intro">La prueba de precios tiene dos partes. &lt;b>Primero, evaluar el precio.&lt;/b></string>
 	<string name="prices_tutorial_item1">Bananas</string>
-	<string name="prices_tutorial_price1">$78.11</string>
-	<string name="prices_tutorial_item2">Sopa</string>
-	<string name="prices_tutorial_price2">$258.45</string>
-	<string name="prices_tutorial_price1_match">$161.95</string>
-	<string name="prices_tutorial_price2_match">$95.79</string>
+	<string name="prices_tutorial_price1">$3.27</string>
+	<string name="prices_tutorial_price1_match">Sopa</string>
+	<string name="prices_tutorial_item2">$10.82</string>
+	<string name="prices_tutorial_price2">$6.78</string>
+	<string name="prices_tutorial_price2_match">$4.01</string>
 	<string name="popup_tutorial_choose1">&lt;b>¿Qué le parece?&lt;/b>\nElija la respuesta que tenga más sentido para usted.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>¡Buena elección!&lt;/b>\nProbemos con otra cosa.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>¡Otra excelente elección!&lt;/b>\nPasemos a la parte dos.</string>
@@ -442,10 +440,8 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
+	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">$</string>
+	<string name="prices_test_suffix"></string>
 	<string name="unit_months">meses</string>
-	<string name="battery_optimization_header">Optimización de batería</string>
-	<string name="battery_optimization_overview">Su teléfono tiene una configuración para ayudar a preservar la duración de la batería, y se denomina configuración de \"optimización de la batería\".&lt;br>&lt;br>La aplicación {APP_NAME} tendrá un impacto mínimo en la duración de la batería de su teléfono. Se recomienda que desactive la configuración de optimización de la batería para la aplicación {APP_NAME}. Hacer esto le ayudará a recibir las notificaciones de las pruebas a tiempo.</string>
-	<string name="battery_optimization_prompt">A continuación, aparecerá una ventana emergente que le pedirá desactivar  la optimización de la batería permitiendo que la aplicación {APP_NAME} se ejecute en segundo plano. Por favor, &lt;b> permita &lt;/b> para facilitar que sus notificaciones funcionen correctamente.</string>
-	<string name="battery_optimization_reminder">Sus notificaciones están experimentando un retraso. A continuación, aparecerá una ventana emergente que le pedirá desactivar la optimización de la batería, permitiendo que la aplicación {APP_NAME} se ejecute en segundo plano. Por favor, &lt;b> permita &lt;/b> para facilitar que sus notificaciones funcionen correctamente.</string>
 </resources>

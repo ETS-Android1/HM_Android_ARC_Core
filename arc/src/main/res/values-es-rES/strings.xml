@@ -10,7 +10,6 @@
 	<string name="notification1_lastday">¡Hoy es el último día de pruebas de esta semana! La primera prueba del día estará disponible hasta la(s) {TIME}.</string>
 	<string name="notifications2_default">¡Es hora de realizar la segunda prueba de hoy! Esta prueba estará disponible hasta la(s) {TIME}.</string>
 	<string name="notification3_default">La tercera prueba del día ya está disponible. Complete esta prueba antes de la(s) {TIME}.</string>
-	<string name="notification3_variation">Aquí tiene otra oportunidad de ganar dinero y colaborar con la ciencia. Complete la prueba n.° 3 antes de la(s) {TIME}.</string>
 	<string name="notification4_default">¡Ya esta aquí la última prueba del día! Termine a tope completando esta prueba antes de la(s) {TIME}.</string>
 	<string name="notification4_lastday">¡Es hora de realizar la última prueba de la semana! Complétela antes de la(s) {TIME}. Su coordinador se pondrá en contacto con usted en breve para hablar de sus ganancias.</string>
 	<string name="notification_missedtests">Se ha saltado las pruebas.\nSi no puede terminar esta semana, contacte con el coordinador de su estudio.</string>
@@ -356,14 +355,13 @@
 	<string name="popup_next">Siguiente</string>
 	<string name="popup_done">Hecho</string>
 	<string name="popup_tutorial_view">Para ver un tutorial, toque aquí.</string>
-	<string name="popup_tutorial_welcome">&lt;b>¡Bienvenido/a al tutorial!&lt;/b> \nEsta barra de progreso muestra qué porcentaje del tutorial ha completado.</string>
 	<string name="popup_tutorial_quit">Para salir del tutorial, toque aquí.</string>
 	<string name="popup_tutorial_price_intro">La prueba de precios tiene dos partes. &lt;b>En primer lugar, debe evaluar el precio.&lt;/b></string>
 	<string name="prices_tutorial_item1">Plátanos</string>
 	<string name="prices_tutorial_price1">3,27 €</string>
-	<string name="prices_tutorial_item2">Sopa</string>
-	<string name="prices_tutorial_price2">10,82 €</string>
-	<string name="prices_tutorial_price1_match">6,78 €</string>
+	<string name="prices_tutorial_price1_match">Sopa</string>
+	<string name="prices_tutorial_item2">10,82 €</string>
+	<string name="prices_tutorial_price2">6,78 €</string>
 	<string name="prices_tutorial_price2_match">4,01 €</string>
 	<string name="popup_tutorial_choose1">&lt;b>¿Qué opina?&lt;/b>\nElija la respuesta que tenga sentido para usted.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>¡Gran elección!&lt;/b>\nProbemos con otro.</string>
@@ -446,8 +444,4 @@
 	<string name="prices_test_prefix"></string>
 	<string name="prices_test_suffix">€</string>
 	<string name="unit_months">meses</string>
-	<string name="battery_optimization_header">Optimización de batería</string>
-	<string name="battery_optimization_overview">Su teléfono tiene una configuración para ayudar a preservar la duración de la batería, y se denomina configuración de \"optimización de la batería\".&lt;br>&lt;br>La aplicación {APP_NAME} tendrá un impacto mínimo en la duración de la batería de su teléfono. Se recomienda que desactive la configuración de optimización de la batería para la aplicación {APP_NAME}. Hacer esto le ayudará a recibir las notificaciones de las pruebas a tiempo.</string>
-	<string name="battery_optimization_prompt">A continuación, aparecerá una ventana emergente que le pedirá desactivar  la optimización de la batería permitiendo que la aplicación {APP_NAME} se ejecute en segundo plano. Por favor, &lt;b> permita &lt;/b> para facilitar que sus notificaciones funcionen correctamente.</string>
-	<string name="battery_optimization_reminder">Sus notificaciones están experimentando un retraso. A continuación, aparecerá una ventana emergente que le pedirá desactivar la optimización de la batería, permitiendo que la aplicación {APP_NAME} se ejecute en segundo plano. Por favor, &lt;b> permita &lt;/b> para facilitar que sus notificaciones funcionen correctamente.</string>
 </resources>

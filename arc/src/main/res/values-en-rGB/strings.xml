@@ -10,7 +10,6 @@
 	<string name="notification1_lastday">You\'re on the last day of testing this week! Your first test of the day will be available until {TIME}.</string>
 	<string name="notifications2_default">It\'s time for today\'s second test! This test will be available until {TIME}.</string>
 	<string name="notification3_default">Your third test of the day is now available. Please complete this test by {TIME}.</string>
-	<string name="notification3_variation">Here\'s another chance to earn money and help science Please complete test #3 by {TIME}.</string>
 	<string name="notification4_default">The last test of the day is here! Finish strong by completing this test by {TIME}.</string>
 	<string name="notification4_lastday">It\'s time to take your last test of the week! Please finish it by {TIME}. Your coordinator will contact you about your earnings shortly.</string>
 	<string name="notification_missedtests">You\'ve missed your tests. If you\'re unable \nto finish this week, please contact your study coordinator.</string>
@@ -90,7 +89,7 @@
 	<string name="resources_nav_earnings">Earnings</string>
 	<string name="resources_nav_resources">Resources</string>
 	<string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
-	<string name="availability_changedenied_test">Check back after your test</string>
+	<string name="availability_changedenied_test">Check back after your test.</string>
 	<string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
 	<string name="contact_call1">I would like to &lt;b>call&lt;/b> my study coordinator.</string>
 	<string name="contact_call2">314-273-7112</string>
@@ -148,7 +147,7 @@
 	<string name="faq_earnings_a1">You can earn up to $32 per 7-day testing cycle for as long as you are in the study. You earn $0.50 for each test you complete (up to $14 per cycle). You also can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests.</string>
 	<string name="faq_earnings_a2">Your payment will be processed immediately upon completion of a testing cycle. It may take several business days for your payment to be processed. Please contact your study coordinator if you have any questions about when you will receive your payment.</string>
 	<string name="faq_earnings_a3">You will be paid via an electronic Amazon gift card.</string>
-	<string name="faq_earnings_a4">\"This week\" refers to the amount of money you have earned during the current testing cycle. \"Study total\" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
+	<string name="faq_earnings_a4">This week refers to the amount of money you have earned during the current testing cycle. \"Study total\" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
 	<string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
 	<string name="progress_daily_header">Today\'s Sessions</string>
 	<string name="progress_dailystatus_complete">&lt;b>{#}&lt;/b> Complete</string>
@@ -356,14 +355,13 @@
 	<string name="popup_next">Next</string>
 	<string name="popup_done">Done</string>
 	<string name="popup_tutorial_view">Tap here to view a tutorial</string>
-	<string name="popup_tutorial_welcome">&lt;b>Welcome to the tutorial!&lt;/b> \nThis progress bar shows how much of the tutorial you\'ve completed.</string>
 	<string name="popup_tutorial_quit">Tap here to quit the tutorial.</string>
 	<string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
 	<string name="prices_tutorial_item1">Bananas</string>
 	<string name="prices_tutorial_price1">£3.27</string>
-	<string name="prices_tutorial_item2">Soup</string>
-	<string name="prices_tutorial_price2">£10.82</string>
-	<string name="prices_tutorial_price1_match">£6.78</string>
+	<string name="prices_tutorial_price1_match">Soup</string>
+	<string name="prices_tutorial_item2">£10.82</string>
+	<string name="prices_tutorial_price2">£6.78</string>
 	<string name="prices_tutorial_price2_match">£4.01</string>
 	<string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b>\nChoose the answer that makes sense to you.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> \nLet\'s try another.</string>
@@ -442,10 +440,8 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">£</string>
+	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">£</string>
+	<string name="prices_test_suffix"></string>
 	<string name="unit_months">months</string>
-	<string name="battery_optimization_header">Battery Optimization</string>
-	<string name="battery_optimization_overview">Your phone has a setting to help preserve your battery life, and it is called a “battery optimization” setting.&lt;br>&lt;br>The {APP_NAME} app will have minimal impact on the battery life of your phone. It is recommended that you turn off the battery optimization setting for the {APP_NAME} app. Doing so will help make sure you receive test notifications on time.</string>
-	<string name="battery_optimization_prompt">Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please &lt;b>allow&lt;/b> to help ensure your notifications work correctly.</string>
-	<string name="battery_optimization_reminder">Your notifications are experiencing a delay. Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please &lt;b>allow&lt;/b> to help ensure your notifications work correctly.</string>
 </resources>
