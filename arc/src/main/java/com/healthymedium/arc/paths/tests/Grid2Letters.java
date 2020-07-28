@@ -1,13 +1,19 @@
 package com.healthymedium.arc.paths.tests;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
@@ -71,6 +77,8 @@ public class Grid2Letters extends BaseFragment {
         handler = new Handler();
         handler.postDelayed(runnable,8000);
 
+        adjustGridLayout();
+
         return view;
     }
 
@@ -114,6 +122,31 @@ public class Grid2Letters extends BaseFragment {
 
         // exit, stage left
         return items;
+    }
+
+    private void adjustGridLayout(){
+        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        int auxHeight = ViewUtil.dpToPx(124);
+        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-auxHeight;
+
+        float aspectRatio = ((float)displayWidth)/((float)viewHeight);
+        if(aspectRatio < 0.75f) {
+            return;
+        }
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                (int) (0.75f * viewHeight),
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.gravity = Gravity.CENTER;
+        gridLayout.setLayoutParams(layoutParams);
     }
 
     private void calculateCounts() {
