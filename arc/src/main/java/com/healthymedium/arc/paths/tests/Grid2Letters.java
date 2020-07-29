@@ -133,10 +133,16 @@ public class Grid2Letters extends BaseFragment {
 
         int displayHeight = displayMetrics.heightPixels;
         int displayWidth = displayMetrics.widthPixels;
+        float displayAspectRatio = ((float)displayWidth)/((float)displayHeight);
 
-        int auxHeight = ViewUtil.dpToPx(124);
-        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-auxHeight;
+        int auxHeightDp = 124;
+        if(displayAspectRatio >= 0.6f && displayAspectRatio < 0.64f) {
+            auxHeightDp = 144;
+        } else if(displayAspectRatio >= 0.5f && displayAspectRatio < 0.6f) {
+            auxHeightDp = 184;
+        }
 
+        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-ViewUtil.dpToPx(auxHeightDp);
         float aspectRatio = ((float)displayWidth)/((float)viewHeight);
         if(aspectRatio < 0.75f) {
             return;
