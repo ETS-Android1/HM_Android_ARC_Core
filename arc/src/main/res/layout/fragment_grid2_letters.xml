@@ -9,11 +9,12 @@
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_gravity="center"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="4dp"
         android:columnCount="6"
-        android:paddingLeft="12dp"
-        android:paddingTop="18dp"
-        android:paddingRight="12dp"
         android:rowCount="9">
 
         <com.healthymedium.arc.ui.Grid2LetterView

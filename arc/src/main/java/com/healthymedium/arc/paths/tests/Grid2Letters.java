@@ -133,24 +133,25 @@ public class Grid2Letters extends BaseFragment {
 
         int displayHeight = displayMetrics.heightPixels;
         int displayWidth = displayMetrics.widthPixels;
-        float displayAspectRatio = ((float)displayWidth)/((float)displayHeight);
 
-        int auxHeightDp = 124;
-        if(displayAspectRatio >= 0.6f && displayAspectRatio < 0.64f) {
-            auxHeightDp = 144;
-        } else if(displayAspectRatio >= 0.5f && displayAspectRatio < 0.6f) {
-            auxHeightDp = 184;
-        }
+        int auxHeight = ViewUtil.dpToPx(124);
+        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-auxHeight;
 
-        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-ViewUtil.dpToPx(auxHeightDp);
         float aspectRatio = ((float)displayWidth)/((float)viewHeight);
         if(aspectRatio < 0.75f) {
-            return;
+            viewHeight = (int) (displayWidth / 0.75f);
         }
 
+        viewHeight -= ViewUtil.dpToPx(16);
+
+        float letterRatio = ((float)columnCount)/((float)rowCount);
+        int width = (int) (letterRatio*(viewHeight));
+
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                (int) (0.75f * viewHeight),
+                width,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.topMargin = ViewUtil.dpToPx(28);
+        layoutParams.bottomMargin = ViewUtil.dpToPx(4);
         layoutParams.gravity = Gravity.CENTER;
         gridLayout.setLayoutParams(layoutParams);
     }
