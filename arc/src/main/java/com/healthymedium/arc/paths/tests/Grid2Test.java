@@ -106,12 +106,6 @@ public class Grid2Test extends BaseFragment {
                         removeSelection(image);
                         view.setImage(image);
                         updateSelections();
-
-                        if(phoneSelected && keySelected && penSelected) {
-                            button.setVisibility(View.VISIBLE);
-                        } else {
-                            button.setVisibility(View.GONE);
-                        }
                         enableGrids();
                     }
 
@@ -314,6 +308,15 @@ public class Grid2Test extends BaseFragment {
             if(id == R.drawable.pen) {
                 penSelected = true;
             }
+        }
+        updateButtonVisibility();
+    }
+
+    private void updateButtonVisibility(){
+        if(phoneSelected && keySelected && penSelected) {
+            button.setVisibility(View.VISIBLE);
+        } else {
+            button.setVisibility(View.GONE);
         }
     }
 
