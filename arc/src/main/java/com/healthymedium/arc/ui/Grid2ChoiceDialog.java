@@ -23,6 +23,8 @@ import java.util.List;
 
 public class Grid2ChoiceDialog extends PointerDialog {
 
+    boolean selectable = true;
+
     Grid2ChoiceView phone;
     Grid2ChoiceView key;
     Grid2ChoiceView pen;
@@ -50,8 +52,11 @@ public class Grid2ChoiceDialog extends PointerDialog {
                 if(listener==null){
                     return false;
                 }
-                int id = ((Grid2ChoiceView)v).getDrawableImageId();
-                listener.onSelected(id);
+                if(selectable) {
+                    int id = ((Grid2ChoiceView)v).getDrawableImageId();
+                    listener.onSelected(id);
+                }
+                selectable = false;
                 dismiss();
                 return false;
             }
