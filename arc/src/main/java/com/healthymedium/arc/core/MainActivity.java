@@ -162,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Log.behavior.i("activity","back pressed");
         if(backAllowed){
             if(Study.isValid() && backInStudy){
                 Study.openPreviousFragment(backInStudySkips);
