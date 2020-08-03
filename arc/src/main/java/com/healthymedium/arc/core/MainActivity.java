@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i("MainActivity","onResume");
+        Log.behavior.i("activity","resume");
         if(Study.isValid()){
             AbandonmentJobService.unscheduleSelf(getApplicationContext());
             //if we were paused, then we need to call the resume handler.
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.i("MainActivity","onPause");
+        Log.behavior.i("activity","pause");
         paused = true;
         if(Study.isValid()){
             Study.getParticipant().markPaused();
