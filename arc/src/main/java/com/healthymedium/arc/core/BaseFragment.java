@@ -62,6 +62,7 @@ public class BaseFragment extends Fragment {
     // convenience methods for manipulating the keyboard -------------------------------------------
 
     public void hideKeyboard() {
+        Log.behavior.i("keyboard","close requested");
         Activity activity = getMainActivity();
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
@@ -74,6 +75,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void showKeyboard(View view){
+        Log.behavior.i("keyboard","show requested");
         InputMethodManager imm = (InputMethodManager) getMainActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
