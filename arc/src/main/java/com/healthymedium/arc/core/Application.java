@@ -142,6 +142,7 @@ public class Application extends android.app.Application implements LifecycleObs
     }
 
     public void restart() {
+        Log.behavior.i("application","forcing app restart");
         Context context = instance;
         PackageManager packageManager = context.getPackageManager();
         String packageName = context.getPackageName();
@@ -159,11 +160,13 @@ public class Application extends android.app.Application implements LifecycleObs
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStartForeground() {
+        Log.behavior.i("application","start foreground");
         visible = true;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStopForeground() {
+        Log.behavior.i("application","stop foreground");
         visible = false;
     }
 
