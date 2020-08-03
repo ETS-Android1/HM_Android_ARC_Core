@@ -40,6 +40,8 @@ public class Application extends android.app.Application implements LifecycleObs
         super.onCreate();
         instance = this;
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
+        Log.init();
         Analytics.initialize(this);
 
         JodaTimeAndroid.init(this);

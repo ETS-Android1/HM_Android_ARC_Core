@@ -90,6 +90,11 @@ public class CacheManager {
 
         for(int i=0;i<count;i++) {
             File file = files[i];
+
+            if(file.isDirectory()) {
+                continue;
+            }
+
             Cache cache = new Cache();
             cache.file = file;
             cache.type = MimeTypeMap.getFileExtensionFromUrl(file.toString());
