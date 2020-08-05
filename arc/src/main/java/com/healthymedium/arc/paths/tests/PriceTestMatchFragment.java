@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -33,7 +34,7 @@ public class PriceTestMatchFragment extends BaseFragment {
     int compareIndex = 0;
     String prefix;
     String suffix;
-    Random random = new Random(System.currentTimeMillis());
+    Random random;
     RadioButton radioButtonTop;
     RadioButton radioButtonBottom;
     TextView textviewFood;
@@ -42,6 +43,12 @@ public class PriceTestMatchFragment extends BaseFragment {
     boolean paused;
 
     public PriceTestMatchFragment() {
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1){
+            random = new Random(System.currentTimeMillis());
+        }
+        else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
 
     }
 
