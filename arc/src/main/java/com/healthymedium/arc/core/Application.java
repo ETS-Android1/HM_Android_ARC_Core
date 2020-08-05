@@ -138,6 +138,7 @@ public class Application extends android.app.Application implements LifecycleObs
     @Override
     public void onLowMemory() {
         Log.w(tag,"onLowMemory");
+        Log.system.i("application","low memory");
         super.onLowMemory();
     }
 
