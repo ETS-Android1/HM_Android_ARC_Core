@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.ui.SymbolButton;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SymbolsTestPathData;
@@ -39,7 +40,7 @@ public class SymbolTest extends BaseFragment {
     SymbolView buttonTop3;
     SymbolButton buttonBottom1;
     SymbolButton buttonBottom2;
-    Random random = new Random(System.currentTimeMillis());
+    Random random;
     List symbols = new ArrayList();
     int iteration = 0;
     boolean paused;
@@ -65,6 +66,12 @@ public class SymbolTest extends BaseFragment {
     SymbolsTestPathData.Section symbolsTestSection;
 
     public SymbolTest() {
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1){
+            random= new Random(System.currentTimeMillis());
+        }
+        else {
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
 
     }
 
