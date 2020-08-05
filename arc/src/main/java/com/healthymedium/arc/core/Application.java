@@ -142,6 +142,14 @@ public class Application extends android.app.Application implements LifecycleObs
         super.onLowMemory();
     }
 
+    @Override
+    public void onTrimMemory(int level) {
+        if(level < TRIM_MEMORY_UI_HIDDEN) {
+            Log.system.i("application","trim memory, level = "+level);
+        }
+        super.onTrimMemory(level);
+    }
+
     public void restart() {
         Log.behavior.i("application","forcing app restart");
         Context context = instance;
