@@ -1,5 +1,6 @@
 package com.healthymedium.arc.notifications.types;
 
+import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationNode;
@@ -83,8 +84,10 @@ public class TestTake extends NotificationType {
             body = ViewUtil.getString(R.string.notification4_default);
         }
 
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("hh:mm a");
+        String pattern = DateTimeFormat.patternForStyle("-S", Application.getInstance().getLocale());
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(pattern);
         String time = fmt.print(expirationTime);
+
         return body.replace("{TIME}", time);
     }
 
