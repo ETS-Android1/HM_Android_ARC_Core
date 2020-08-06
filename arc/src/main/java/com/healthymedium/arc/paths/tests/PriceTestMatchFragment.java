@@ -70,7 +70,7 @@ public class PriceTestMatchFragment extends BaseFragment {
 
         priceTest = (PriceTestPathData) Study.getCurrentSegmentData();
         priceSet = priceTest.getPriceSet();
-        Collections.shuffle(priceSet);
+        Collections.shuffle(priceSet, random);
 
         prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);
