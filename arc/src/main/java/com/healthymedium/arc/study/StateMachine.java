@@ -28,7 +28,7 @@ import com.healthymedium.arc.paths.tests.Grid2Test;
 import com.healthymedium.arc.paths.tests.TestIntro;
 import com.healthymedium.arc.paths.tests.TestProgress;
 import com.healthymedium.arc.time.TimeUtil;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.Application;

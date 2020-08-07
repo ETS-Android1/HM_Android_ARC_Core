@@ -17,6 +17,7 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.PathSegmentTypeAdapter;

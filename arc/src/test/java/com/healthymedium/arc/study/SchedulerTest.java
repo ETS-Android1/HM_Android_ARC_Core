@@ -1,11 +1,10 @@
 package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.time.TimeUtil;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
-import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.Assert;
 import org.junit.Test;

@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationReminder;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import android.view.View;
 import android.widget.FrameLayout;

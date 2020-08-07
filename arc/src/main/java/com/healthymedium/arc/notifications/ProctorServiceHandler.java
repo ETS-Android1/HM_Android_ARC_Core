@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.JsonObject;
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.notifications.types.NotificationType;
 

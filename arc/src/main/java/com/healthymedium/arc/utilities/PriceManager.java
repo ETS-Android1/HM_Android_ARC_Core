@@ -1,7 +1,7 @@
 package com.healthymedium.arc.utilities;
 
 import android.content.Context;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

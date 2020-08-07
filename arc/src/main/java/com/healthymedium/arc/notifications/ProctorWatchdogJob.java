@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.Build;
 
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.study.Study;
 

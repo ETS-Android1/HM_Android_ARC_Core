@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 public class BootReceiver extends BroadcastReceiver {
 

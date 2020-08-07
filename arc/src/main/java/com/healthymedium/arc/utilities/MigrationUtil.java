@@ -2,13 +2,12 @@ package com.healthymedium.arc.utilities;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.State;
 import com.healthymedium.arc.study.StateCache;
 import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.google.gson.JsonObject;
 import com.healthymedium.arc.study.Participant;

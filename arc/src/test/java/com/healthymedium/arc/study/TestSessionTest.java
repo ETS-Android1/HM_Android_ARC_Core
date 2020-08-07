@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;

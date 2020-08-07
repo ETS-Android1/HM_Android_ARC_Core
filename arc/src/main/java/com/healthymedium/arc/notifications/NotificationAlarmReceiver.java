@@ -5,7 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import static com.healthymedium.arc.notifications.NotificationManager.NOTIFICATION_ID;
 import static com.healthymedium.arc.notifications.NotificationManager.NOTIFICATION_TYPE;

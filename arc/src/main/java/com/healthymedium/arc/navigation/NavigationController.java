@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 public class NavigationController {
 

@@ -15,7 +15,7 @@ import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

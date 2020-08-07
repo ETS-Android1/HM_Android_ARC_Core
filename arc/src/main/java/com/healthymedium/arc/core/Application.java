@@ -12,7 +12,7 @@ import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import com.healthymedium.analytics.Analytics;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.notifications.types.NotificationType;
@@ -41,7 +41,7 @@ public class Application extends android.app.Application implements LifecycleObs
         instance = this;
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
-        Log.init();
+        Log.initialize(this);
         Analytics.initialize(this);
 
         JodaTimeAndroid.init(this);

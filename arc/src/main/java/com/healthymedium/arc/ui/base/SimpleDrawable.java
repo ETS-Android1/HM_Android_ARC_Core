@@ -14,7 +14,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 
 public abstract class SimpleDrawable extends Drawable {
