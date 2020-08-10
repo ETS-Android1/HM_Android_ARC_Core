@@ -119,7 +119,7 @@ public class DebugDialog extends DialogFragment {
                 dismiss();
                 
                 ParcelFile log = new ParcelFile(Log.filename(), ParcelFile.TEXT);
-                Analytics.logFile("Log Upload Requested", log, new Analytics.Listener() {
+                Analytics.uploadFile("Log Upload Requested", log, new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(Application.getInstance(),"Log Upload Successful",Toast.LENGTH_SHORT).show();
@@ -153,7 +153,7 @@ public class DebugDialog extends DialogFragment {
                 ParcelFile prefs = new ParcelFile(prefsLocation, ParcelFile.XML);
                 parcels.add(prefs);
 
-                Analytics.logFiles("State Upload Requested", parcels, new Analytics.Listener() {
+                Analytics.uploadFiles("State Upload Requested", parcels, new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(Application.getInstance(),"State Upload Successful",Toast.LENGTH_SHORT).show();
