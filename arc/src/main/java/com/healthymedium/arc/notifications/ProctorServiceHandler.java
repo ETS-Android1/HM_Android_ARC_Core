@@ -190,6 +190,7 @@ public class ProctorServiceHandler {
     }
 
     private static long five_min = 5*60*1000;
+    private static long two_hr = 2*60*60*1000;
 
     private static void analyzeTimeout(String type, long now, long target, NotificationNode node) {
         long delta = Math.abs(target-now);
@@ -244,6 +245,11 @@ public class ProctorServiceHandler {
             }
 
             Analytics.logWarning("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
+
+            if(delta>two_hr) {
+                Analytics.uploadLogs("Proctor Deviation");
+            }
+
         }
     }
 
