@@ -16,7 +16,7 @@ public class TestSessionTest {
 
     @Before
     public void setup(){
-        Log.pointToSystemOut();
+        Log.initialize();
     }
 
     @Test
