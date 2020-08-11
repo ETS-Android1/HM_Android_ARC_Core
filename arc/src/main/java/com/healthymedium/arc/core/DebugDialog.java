@@ -117,9 +117,7 @@ public class DebugDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                
-                ParcelFile log = new ParcelFile(Log.filename(), ParcelFile.TEXT);
-                Analytics.uploadFile("Log Upload Requested", log, new Analytics.Listener() {
+                Analytics.uploadLogs("Log Upload Requested", new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(Application.getInstance(),"Log Upload Successful",Toast.LENGTH_SHORT).show();
