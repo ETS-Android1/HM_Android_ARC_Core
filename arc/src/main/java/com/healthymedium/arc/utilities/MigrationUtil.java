@@ -41,7 +41,7 @@ public class MigrationUtil {
         Log.i("MigrationUtil", "old app version="+oldAppVersion);
         Log.i("MigrationUtil", "new app version="+newAppVersion);
 
-        if(newLibVersion > oldLibVersion) {
+        if(newAppVersion > oldAppVersion) {
             Log.i("MigrationUtil", "migrating app data from "+oldAppVersion+" to "+newAppVersion);
             if(migrateAppData(oldAppVersion,newAppVersion)) {
                 PreferencesManager.getInstance().putLong(TAG_VERSION_APP, newAppVersion);
