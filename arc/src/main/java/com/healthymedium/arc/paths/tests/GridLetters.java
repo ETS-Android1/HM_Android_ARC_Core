@@ -19,6 +19,7 @@ import com.healthymedium.arc.core.TimedDialogMultipart;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -134,7 +135,13 @@ public class GridLetters extends BaseFragment {
             gridLayout.getChildAt(i).setOnTouchListener(listener);
             ((TextView)gridLayout.getChildAt(i)).setTypeface(font);
         }
-        Random random = new Random(SystemClock.elapsedRealtime());
+        Random random;
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1) {
+            random = new Random(SystemClock.elapsedRealtime());
+        }
+        else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
         List<Integer> items = new ArrayList<>();
         items.add(-1);
         items.add(60);

@@ -61,6 +61,8 @@ public class SymbolButton extends RoundedLinearLayout {
 
     public void setImages(int topId, int bottomId) {
         topImage.setImageResource(topId);
+        topImage.setTag(topId);
         bottomImage.setImageResource(bottomId);
+        bottomImage.setTag(bottomId);
     }
 }
