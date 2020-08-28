@@ -28,7 +28,6 @@ public class Config {
     public static boolean USE_HELP_SCREEN = true; // if true, uses the actual HelpScreen for the help buttons instead of the contact screen
     //Debug
     public static boolean DEBUG_DIALOGS = false; // click the header on most screens a couple times and a debug dialog will appear
-    public static boolean ENABLE_LOGGING = false; // save logcat output to cached file 'Log'
 
     // Test Variants
     public static TestVariant.Grid TEST_VARIANT_GRID = TestVariant.Grid.V1;
