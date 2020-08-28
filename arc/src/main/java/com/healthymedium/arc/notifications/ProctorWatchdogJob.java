@@ -46,7 +46,7 @@ public class ProctorWatchdogJob extends JobService {
     }
 
     public static void start(Context context) {
-        Log.i(tag,"start");
+        Log.system.i(tag,"start");
 
         long fifteenMinutes = 15*60*1000;
         ComponentName serviceComponent = new ComponentName(context, ProctorWatchdogJob.class);
@@ -79,7 +79,7 @@ public class ProctorWatchdogJob extends JobService {
     }
 
     public static void stop(Context context) {
-        Log.i(tag,"stop");
+        Log.system.i(tag,"stop");
         JobScheduler jobScheduler = (JobScheduler)context.getSystemService(context.JOB_SCHEDULER_SERVICE);
         jobScheduler.cancel(jobId);
     }
