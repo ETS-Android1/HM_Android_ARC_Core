@@ -78,12 +78,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class StateMachine {
 
     public static final String TAG_STUDY_STATE_CACHE = "StudyStateCache";
     public static final String TAG_STUDY_STATE = "StudyState";
     public static final String TAG_TEST_COMPLETE = "TestCompleteFlag";
+    public static int AUTOMATED_TESTS_RANDOM_SEED = -1;
 
     protected String tag = getClass().getSimpleName();
 
@@ -640,7 +642,12 @@ public class StateMachine {
 
         Integer[] orderArray = new Integer[]{1,2,3};
         List<Integer> order = Arrays.asList(orderArray);
-        Collections.shuffle(order);
+        if(AUTOMATED_TESTS_RANDOM_SEED == -1){
+            Collections.shuffle(order);
+        }else{
+            Collections.shuffle(order, new Random(AUTOMATED_TESTS_RANDOM_SEED));
+        }
+
         for(int i =0;i<3;i++){
             switch(order.get(i)){
                 case 1:

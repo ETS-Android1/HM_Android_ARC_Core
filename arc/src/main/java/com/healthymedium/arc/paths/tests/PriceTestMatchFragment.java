@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.study.TestVariant;
+import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -33,7 +34,7 @@ public class PriceTestMatchFragment extends BaseFragment {
     int compareIndex = 0;
     String prefix;
     String suffix;
-    Random random = new Random(System.currentTimeMillis());
+    Random random;
     RadioButton radioButtonTop;
     RadioButton radioButtonBottom;
     TextView textviewFood;
@@ -42,6 +43,12 @@ public class PriceTestMatchFragment extends BaseFragment {
     boolean paused;
 
     public PriceTestMatchFragment() {
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1){
+            random = new Random(System.currentTimeMillis());
+        }
+        else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
 
     }
 
@@ -54,7 +61,7 @@ public class PriceTestMatchFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int layout;
-        if (Config.TEST_VARIANT_PRICE == TestVariant.Price.Revised) {
+        if (Config.PRICE_TEST_STYLE == PriceTestStyle.REVISED.getStyle()) {
             layout = R.layout.fragment_revised_price_test_match;
         } else {
             layout = R.layout.fragment_price_test_match;
@@ -63,7 +70,7 @@ public class PriceTestMatchFragment extends BaseFragment {
 
         priceTest = (PriceTestPathData) Study.getCurrentSegmentData();
         priceSet = priceTest.getPriceSet();
-        Collections.shuffle(priceSet);
+        Collections.shuffle(priceSet, random);
 
         prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);

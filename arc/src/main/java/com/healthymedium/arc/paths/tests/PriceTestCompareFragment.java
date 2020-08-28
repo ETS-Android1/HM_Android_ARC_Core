@@ -12,7 +12,8 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
-import com.healthymedium.arc.study.TestVariant;
+import com.healthymedium.arc.core.TestEnumerations.PriceTestStyle;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -68,7 +69,7 @@ public class PriceTestCompareFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        revised = (Config.TEST_VARIANT_PRICE == TestVariant.Price.Revised);
+        revised = (Config.PRICE_TEST_STYLE == PriceTestStyle.REVISED.getStyle());
         if (revised) {
             return createRevisedFragment(inflater, container, savedInstanceState);
         } else {
@@ -78,7 +79,12 @@ public class PriceTestCompareFragment extends BaseFragment {
 
     private View createRevisedFragment(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_revised_price_test_compare, container, false);
-        random = new Random(System.currentTimeMillis());
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1){
+            random = new Random(System.currentTimeMillis());
+        }else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
+
         prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);
 
@@ -103,7 +109,11 @@ public class PriceTestCompareFragment extends BaseFragment {
 
     private View createFullFragment(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_price_test_compare, container, false);
-        random = new Random(System.currentTimeMillis());
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1){
+            random = new Random(System.currentTimeMillis());
+        }else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
         prefix = ViewUtil.getString(R.string.money_prefix);
         suffix = getString(R.string.money_suffix);
 
