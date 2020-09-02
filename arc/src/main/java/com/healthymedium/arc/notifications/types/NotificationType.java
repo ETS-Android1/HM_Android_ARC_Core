@@ -70,4 +70,7 @@ public abstract class NotificationType {
     // the return value dictates whether or not the notification is shown to the user
     public abstract boolean onNotifyPending(NotificationNode node);
 
+    // callback for when the notification is shown to the user
+    public abstract void onNotify(NotificationNode node);
+
 }

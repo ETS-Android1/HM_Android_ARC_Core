@@ -96,4 +96,9 @@ public class TestTake extends NotificationType {
         return true;
     }
 
+    @Override
+    public void onNotify(NotificationNode node) {
+
+    }
+
 }

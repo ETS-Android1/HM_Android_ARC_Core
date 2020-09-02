@@ -144,6 +144,8 @@ public class NotificationManager {
 
         if(type.onNotifyPending(node)){
             Log.i(tag,"pending notification allowed");
+            type.onNotify(node);
+
             android.app.NotificationManager notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = NotificationUtil.buildNotification(context,node,type);
             notificationManager.notify(node.getNotifyId(), notification);
