@@ -223,6 +223,11 @@ public class ProctorServiceHandler {
                 json.addProperty("nodeType",node.type);
                 json.addProperty("nodeTypeName",NotificationTypes.getName(node.type));
                 json.addProperty("nodeNotifyId",node.getNotifyId());
+
+                NotificationType notificationType = NotificationTypes.fromId(node.type);
+                if(notificationType!=null){
+                    json.addProperty("nodeShown",notificationType.onNotifyPending(node));
+                }
             }
 
             Context context = Application.getInstance();

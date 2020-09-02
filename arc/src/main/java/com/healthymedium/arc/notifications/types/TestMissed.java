@@ -47,14 +47,7 @@ public class TestMissed extends NotificationType {
         NotificationManager.getInstance().removeUserNotification(notifyId);
 
         PreferencesManager preferences = PreferencesManager.getInstance();
-        int count = preferences.getInt(TAG_TEST_MISSED_COUNT, 0);
-        count++;
-
-        if (count == 4) {
-            count = 0;
-        }
-
-        preferences.putInt(TAG_TEST_MISSED_COUNT, count);
+        preferences.putInt(TAG_TEST_MISSED_COUNT, 0);
     }
 
 }
