@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.paths.tutorials.Grid2Tutorial;
 import com.healthymedium.arc.study.TestVariant;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.HintHighlighter;
@@ -176,7 +177,16 @@ public class TestInfoTemplate extends BaseFragment {
 
                 if (stringType.equals("grids")) {
                     Hints.markShown(HINT_GRID_TUTORIAL);
-                    GridTutorial gridTutorial = new GridTutorial();
+
+                    BaseFragment gridTutorial = null;
+                    switch (Config.TEST_VARIANT_GRID) {
+                        case V1:
+                            gridTutorial = new GridTutorial();
+                            break;
+                        case V2:
+                            gridTutorial = new Grid2Tutorial();
+                            break;
+                    }
                     NavigationManager.getInstance().open(gridTutorial);
                 }
                 else if (stringType.equals("symbols")) {
