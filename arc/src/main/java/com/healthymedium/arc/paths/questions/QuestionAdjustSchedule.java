@@ -84,7 +84,7 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
         Visit visit = participant.getCurrentVisit();
 
         DateTime visitStart = visit.getScheduledStartDate();
-        DateTime visitEnd = visit.getScheduledEndDate();
+        DateTime visitEnd = visit.getScheduledEndDate().minusDays(1);
         String start;
         String end;
 
@@ -102,12 +102,8 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
 
 
         String currStart = fmt.print(visit.getActualStartDate());
-        String currEnd = fmt.print(visit.getActualEndDate());
+        String currEnd = fmt.print(visit.getActualEndDate().minusDays(1));
 
-        int daysRange = Days.daysBetween(visit.getActualStartDate().toLocalDate(), visit.getActualEndDate().toLocalDate()).getDays();
-        if (daysRange == 6) {
-            currEnd = fmt.print(visit.getActualEndDate().plusDays(1));
-        }
 
         String currRange = currStart + "-" + currEnd;
 
