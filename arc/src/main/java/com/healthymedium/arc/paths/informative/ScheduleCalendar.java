@@ -80,7 +80,7 @@ public class ScheduleCalendar extends BaseFragment {
         textViewBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavigationManager.getInstance().popBackStack();
+                Study.getInstance().openPreviousFragment();
             }
         });
 
@@ -273,7 +273,7 @@ public class ScheduleCalendar extends BaseFragment {
 
             tuesday2.setBackgroundResource(R.color.light);
             tuesday2.setTextColor(getResources().getColor(R.color.black));
-        } else if (startDay.equals("Thur")) {
+        } else if (startDay.equals("Thu")) {
             // start
             thursday1.setText(fmt.print(startTime));
             thursday1_left.setVisibility(View.VISIBLE);
