@@ -33,22 +33,21 @@ public class TestMissed extends NotificationType {
 
     @Override
     public boolean onNotifyPending(NotificationNode node) {
-        boolean showUser = false;
-
-        int notifyId = NotificationNode.getNotifyId(node.id, NotificationTypes.TestTake.id);
-        NotificationManager.getInstance().removeUserNotification(notifyId);
-
         PreferencesManager preferences = PreferencesManager.getInstance();
         int count = preferences.getInt(TAG_TEST_MISSED_COUNT, 0);
         count++;
 
-        if (count == 4) {
-            showUser = true;
-            count = 0;
-        }
-
-        preferences.putInt(TAG_TEST_MISSED_COUNT, count);
-
+        boolean showUser = (count == 4);
         return showUser;
     }
+
+    @Override
+    public void onNotify(NotificationNode node) {
+        int notifyId = NotificationNode.getNotifyId(node.id, NotificationTypes.TestTake.id);
+        NotificationManager.getInstance().removeUserNotification(notifyId);
+
+        PreferencesManager preferences = PreferencesManager.getInstance();
+        preferences.putInt(TAG_TEST_MISSED_COUNT, 0);
+    }
+
 }

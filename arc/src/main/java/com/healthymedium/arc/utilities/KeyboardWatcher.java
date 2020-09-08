@@ -1,7 +1,7 @@
 package com.healthymedium.arc.utilities;
 
 import android.app.Activity;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
@@ -52,6 +52,7 @@ public class KeyboardWatcher {
                     if (!hasSentInitialAction || !isKeyboardShown) {
                         isKeyboardShown = true;
                         Log.i("KeyboardWatcher","keyboard shown");
+                        Log.behavior.i("keyboard","open detected");
                         if (listener != null) {
                             listener.onKeyboardShown(initialValue - rootView.getHeight());
                         }
@@ -60,6 +61,7 @@ public class KeyboardWatcher {
                     if (!hasSentInitialAction || isKeyboardShown) {
                         isKeyboardShown = false;
                         Log.i("KeyboardWatcher","keyboard closed");
+                        Log.behavior.i("keyboard","close detected");
                         rootView.post(new Runnable() {
                             @Override
                             public void run() {

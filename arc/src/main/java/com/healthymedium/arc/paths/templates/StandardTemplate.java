@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.text.Html;
 
 import com.healthymedium.arc.paths.informative.ContactScreen;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;

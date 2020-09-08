@@ -3,6 +3,8 @@ package com.healthymedium.arc.utilities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.healthymedium.analytics.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

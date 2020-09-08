@@ -14,6 +14,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -110,8 +111,15 @@ public class GridStudy extends BaseFragment {
 
     private void setupTest(){
         List<GridTestPathData.Image> images = new ArrayList<>();
+        Random random;
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1){
+             random = new Random(SystemClock.currentThreadTimeMillis());
+        }
+        else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
 
-        Random random = new Random(SystemClock.currentThreadTimeMillis());
+       
         int row1 = random.nextInt(5);
         int row2 = random.nextInt(5);
         int row3 = random.nextInt(5);

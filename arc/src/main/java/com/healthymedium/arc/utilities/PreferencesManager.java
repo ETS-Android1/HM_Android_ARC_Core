@@ -3,7 +3,7 @@ package com.healthymedium.arc.utilities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

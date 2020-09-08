@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -16,7 +16,7 @@ public class TestSessionTest {
 
     @Before
     public void setup(){
-        Log.pointToSystemOut();
+        Log.initialize();
     }
 
     @Test

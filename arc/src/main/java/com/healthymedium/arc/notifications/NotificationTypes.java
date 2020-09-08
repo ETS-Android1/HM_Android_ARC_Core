@@ -1,5 +1,6 @@
 package com.healthymedium.arc.notifications;
 
+import com.healthymedium.arc.notifications.types.NotificationType;
 import com.healthymedium.arc.notifications.types.TestProctor;
 import com.healthymedium.arc.notifications.types.TestConfirmed;
 import com.healthymedium.arc.notifications.types.TestMissed;
@@ -23,10 +24,37 @@ public class NotificationTypes {
     public static TestConfirmed TestConfirmed = new TestConfirmed();
     public static TestNext TestNext = new TestNext();
 
+    public static NotificationType fromId(int id) {
 
+        if(id==TestProctor.getId()){
+            return TestProctor;
+        }
+        if(id==TestMissed.getId()){
+            return TestMissed;
+        }
+        if(id==TestTake.getId()){
+            return TestTake;
+        }
+        if(id==VisitNextDay.getId()){
+            return VisitNextDay;
+        }
+        if(id==VisitNextWeek.getId()){
+            return VisitNextWeek;
+        }
+        if(id==VisitNextMonth.getId()){
+            return VisitNextMonth;
+        }
+        if(id==TestConfirmed.getId()){ // dep
+            return TestConfirmed;
+        }
+        if(id==TestNext.getId()){ // dep
+            return TestNext;
+        }
+
+        return null;
+    }
 
     public static String getName(int id) {
-
         if(id==TestProctor.getId()){
             return "proctor";
         }

@@ -8,7 +8,7 @@ import android.widget.Toast;
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.BuildConfig;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;

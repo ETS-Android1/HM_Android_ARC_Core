@@ -7,7 +7,7 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 public class AbandonmentJobService extends JobService {
 
