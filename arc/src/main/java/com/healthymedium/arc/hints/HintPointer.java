@@ -57,9 +57,24 @@ public class HintPointer extends LinearLayout {
 
     private boolean dismissing = false;
 
+    private HintHighlighter shadow;
+
     public HintPointer(Activity activity, View view) {
         super(activity);
         parent = (ViewGroup) activity.getWindow().getDecorView();
+
+        this.showArrow = false;
+        this.target = view;
+        init();
+    }
+
+    public HintPointer(Activity activity, View view, boolean showShadow) {
+        super(activity);
+        parent = (ViewGroup) activity.getWindow().getDecorView();
+
+        if(showShadow) {
+            shadow = new HintHighlighter(activity);
+        }
 
         this.showArrow = false;
         this.target = view;
@@ -76,6 +91,18 @@ public class HintPointer extends LinearLayout {
         init();
     }
 
+    public HintPointer(Activity activity, View view, boolean showArrow, boolean showAbove, boolean showShadow) {
+        super(activity);
+        parent = (ViewGroup) activity.getWindow().getDecorView();
+
+        if(showShadow) {
+            shadow = new HintHighlighter(activity);
+        }
+        this.showArrow = showArrow;
+        this.showAbove = showAbove;
+        this.target = view;
+        init();
+    }
     private void init() {
         setWillNotDraw(false);
 
@@ -287,6 +314,10 @@ public class HintPointer extends LinearLayout {
         radius = ViewUtil.dpToPx(dp);
     }
 
+    public HintHighlighter getShadow() {
+        return shadow;
+    }
+
     public void show() {
         if(getParent()!=null) {
            return; // single use only
@@ -302,7 +333,9 @@ public class HintPointer extends LinearLayout {
                         .setDuration(400);
             }
         },100);
-
+        if(shadow!=null) {
+            shadow.show();
+        }
     }
 
     public void dismiss() {
@@ -326,6 +359,10 @@ public class HintPointer extends LinearLayout {
         HintPointer.this.animate()
                 .alpha(0.0f)
                 .setDuration(400);
+
+        if(shadow!=null) {
+            shadow.dismiss();
+        }
     }
 
     OnAttachStateChangeListener attachStateChangeListener = new OnAttachStateChangeListener() {
