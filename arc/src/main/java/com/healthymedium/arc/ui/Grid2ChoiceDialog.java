@@ -137,4 +137,20 @@ public class Grid2ChoiceDialog extends PointerDialog {
         void onRemove();
     }
 
+    public Grid2ChoiceView getPhoneView() {
+        return phone;
+    }
+
+    public Grid2ChoiceView getPenView() {
+        return pen;
+    }
+
+    public Grid2ChoiceView getKeyView() {
+        return key;
+    }
+
+    public TextView getRemoveItemView() {
+        return textViewRemoveItem;
+    }
+
 }
