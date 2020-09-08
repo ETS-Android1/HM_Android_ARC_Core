@@ -135,7 +135,6 @@ public class Grid2Tutorial extends TutorialTemplate {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.removeCallbacks(remindMeRunnable);
                 incrementProgress();
                 fadeOutView(grids);
                 showComplete();
@@ -641,9 +640,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     Grid2BoxView.Listener defaultListener = new Grid2BoxView.Listener() {
         @Override
         public void onSelected(final Grid2BoxView view) {
-            if(view.getImage()!=0){
-                handler.removeCallbacks(remindMeRunnable);
-            }
+            handler.removeCallbacks(remindMeRunnable);
 
             if(dialog!=null) {
                 if (dialog.isAttachedToWindow()) {
@@ -651,6 +648,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                     if(view.getImage()==0){
                         view.setSelected(false);
                     }
+                    handler.postDelayed(remindMeRunnable,5000);
                     enableGrids();
                     return;
                 }
@@ -682,7 +680,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         dialogListener.onSelected(image);
                         dialogListener = null;
                     }
-                    if(othersReady) {
+                    if(othersReady && !(phoneSelected && penSelected && keySelected)) {
                         handler.postDelayed(remindMeRunnable,5000);
                     }
                     enableGrids();
@@ -698,7 +696,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         dialogListener.onRemove();
                         dialogListener = null;
                     }
-                    if(othersReady) {
+                    if(othersReady && !(phoneSelected && penSelected && keySelected)) {
                         handler.postDelayed(remindMeRunnable,5000);
                     }
                     enableGrids();
