@@ -347,6 +347,8 @@
         android:id="@+id/textviewTapFs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:text="@string/grids_subheader_fs"
         android:textSize="18dp"
         android:gravity="center" />

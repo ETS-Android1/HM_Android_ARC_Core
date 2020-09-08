@@ -198,6 +198,8 @@
         android:id="@+id/tapGridText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginBottom="2dp"
         android:layout_weight="1"
         android:gravity="center"

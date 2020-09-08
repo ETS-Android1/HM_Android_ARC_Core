@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.hints.Hints;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.GridBoxView;
@@ -53,6 +55,13 @@ public abstract class TutorialTemplate extends BaseFragment {
 
     protected Handler handler = new Handler();
 
+
+
+
+    public TutorialTemplate() {
+        setTransitionSet(TransitionSet.getFadingDefault(true));
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +73,7 @@ public abstract class TutorialTemplate extends BaseFragment {
     @Override
     public final View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tutorial, container, false);
-        this.container = container;
+        this.container = view.findViewById(R.id.containerLayout);
 
 //        fullScreenGray = view.findViewById(R.id.fullScreenGray);
 //        fullScreenGray.setOnTouchListener(new View.OnTouchListener() {
@@ -154,9 +163,6 @@ public abstract class TutorialTemplate extends BaseFragment {
         },1200);
     }
 
-    public TutorialTemplate() {
-    }
-
     // Display the hints for the progress bar and quit button
     protected void showProgressTutorial(final String tag, final Runnable nextSection) {
         welcomeHighlight.addTarget(progressView, 10, 2);
@@ -201,12 +207,18 @@ public abstract class TutorialTemplate extends BaseFragment {
     }
 
 
-    protected void fadeInView(View view, Float opacity) {
+    protected void fadeInView(View view) {
         view.setAlpha(0f);
         view.setVisibility(View.VISIBLE);
 
+        ViewGroup parent = (ViewGroup) view.getParent();
+        if(parent!=null){
+            parent.removeView(view);
+        }
+
+        container.addView(view);
         view.animate()
-                .alpha(opacity)
+                .alpha(1.0f)
                 .setDuration(200)
                 .setListener(null);
     }
@@ -219,6 +231,7 @@ public abstract class TutorialTemplate extends BaseFragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         view.setVisibility(View.GONE);
+                        container.removeView(view);
                     }
                 });
     }
@@ -228,10 +241,26 @@ public abstract class TutorialTemplate extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                fadeInView(checkmark, 1f);
-                fadeInView(textViewComplete, 1f);
-                fadeInView(endButton, 1f);
+                checkmark.setAlpha(0f);
+                checkmark.setVisibility(View.VISIBLE);
+                checkmark.animate()
+                        .alpha(1.0f)
+                        .setDuration(200)
+                        .setListener(null);
 
+                textViewComplete.setAlpha(0f);
+                textViewComplete.setVisibility(View.VISIBLE);
+                textViewComplete.animate()
+                        .alpha(1.0f)
+                        .setDuration(200)
+                        .setListener(null);
+
+                endButton.setAlpha(0f);
+                endButton.setVisibility(View.VISIBLE);
+                endButton.animate()
+                        .alpha(1.0f)
+                        .setDuration(200)
+                        .setListener(null);
                 endButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

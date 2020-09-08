@@ -14,13 +14,6 @@
         android:background="@color/white"
         android:layout_marginTop="45dp">
 
-        <FrameLayout
-            android:id="@+id/fullScreenGray"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/shadow"
-            android:visibility="gone" />
-
         <ImageView
             android:id="@+id/checkmark"
             android:layout_width="100dp"
