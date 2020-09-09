@@ -545,7 +545,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         int[] gridBoxLocation = new int[2];
         view.getLocationOnScreen(gridBoxLocation);
 
-        if(gridBoxLocation[1] < (2*gridBoxHeight)) {
+        if(gridBoxLocation[1] < ((2*gridBoxHeight)+progressBar.getHeight())) {
             // if grid box is in the first two rows of the grid, dialog appears below grid box
             return PointerDrawable.POINTER_BELOW;
         } else {
