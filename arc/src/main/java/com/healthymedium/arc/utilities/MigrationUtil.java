@@ -2,6 +2,8 @@ package com.healthymedium.arc.utilities;
 
 import android.util.Log;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
@@ -65,6 +67,10 @@ public class MigrationUtil {
             successful = migratePreferencesToCache();
         }
 
+        if(oldVersion < 2010103) {
+            successful = convertInterrupted();
+        }
+
         if(oldVersion < 2010001){
             successful = removeExistingTestData();
         }
@@ -115,6 +121,29 @@ public class MigrationUtil {
         }
 
         participant.save();
+        return true;
+    }
+
+    private boolean convertInterrupted() {
+        JsonObject json = PreferencesManager.getInstance().getObject("ParticipantState", JsonObject.class);
+        PreferencesManager.getInstance().remove("ParticipantState");
+
+        JsonArray visits = json.get("visits").getAsJsonArray();
+
+        for(JsonElement visitElement : visits) {
+            JsonObject visit = visitElement.getAsJsonObject();
+            JsonArray testSessions = visit.get("testSessions").getAsJsonArray();
+
+            for(JsonElement testElement : testSessions) {
+                JsonObject testSession = testElement.getAsJsonObject();
+
+                boolean interrupted = testSession.get("interrupted").getAsBoolean();
+                testSession.addProperty("interrupted",(interrupted?1:0));
+            }
+        }
+
+        PreferencesManager.getInstance().putObject("ParticipantState",json);
+
         return true;
     }
 
