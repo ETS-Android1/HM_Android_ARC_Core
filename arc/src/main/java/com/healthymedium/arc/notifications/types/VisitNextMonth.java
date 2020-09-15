@@ -38,4 +38,10 @@ public class VisitNextMonth extends NotificationType {
     public boolean onNotifyPending(NotificationNode node) {
         return true;
     }
+
+    @Override
+    public void onNotify(NotificationNode node) {
+
+    }
+
 }

@@ -14,8 +14,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
+import com.healthymedium.analytics.Log;
+
 
 public abstract class SimpleDrawable extends Drawable {
+
+    String tag = getClass().getSimpleName();
 
     protected boolean drawStroke = false;
     protected boolean drawFill = false;
@@ -127,6 +131,10 @@ public abstract class SimpleDrawable extends Drawable {
         strokePaint.setStrokeWidth(width);
     }
 
+    public float getStrokeWidth() {
+        return strokeWidth;
+    }
+
     public void setStrokeDash(float length, float spacing) {
         strokePaint.setPathEffect(new DashPathEffect(new float[]{length,spacing}, 0));
     }
@@ -183,15 +191,20 @@ public abstract class SimpleDrawable extends Drawable {
         return new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                if (path != null) {
-                    if(path.isConvex()) {
-                        outline.setConvexPath(path);
-                        return;
-                    }
+                if (path == null) {
+                    return;
                 }
-                outline.setRect(0, 0, width, height);
+                try {
+                    outline.setConvexPath(path);
+                } catch (IllegalArgumentException e) {
+                    Log.w(tag, "device doesn't support complex outline paths");
+                }
             }
         };
+    }
+
+    public boolean hasPath() {
+        return path != null;
     }
 
     protected abstract Path getPath(Rect rect);

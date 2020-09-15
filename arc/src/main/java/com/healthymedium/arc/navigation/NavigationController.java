@@ -1,13 +1,12 @@
 package com.healthymedium.arc.navigation;
 
-import android.os.SystemClock;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.misc.TransitionSet;
+import com.healthymedium.analytics.Log;
 
 public class NavigationController {
 
@@ -42,9 +41,9 @@ public class NavigationController {
 
     public void open(BaseFragment fragment) {
         if (fragmentManager != null) {
-
             TransitionSet transitions = fragment.getTransitionSet();
             String tag = fragment.getSimpleTag();
+            Log.behavior.i("navigation","open '"+tag+"'");
             fragmentManager.beginTransaction()
                     .setCustomAnimations(
                             transitions.enter,
@@ -64,6 +63,7 @@ public class NavigationController {
     public void open(BaseFragment fragment, TransitionSet transitions) {
         if (fragmentManager != null) {
             String tag = fragment.getSimpleTag();
+            Log.behavior.i("navigation","open '"+tag+"'");
             fragmentManager.beginTransaction()
                     .setCustomAnimations(
                             transitions.enter,
@@ -82,6 +82,7 @@ public class NavigationController {
 
     public void popBackStack() {
         if (fragmentManager != null) {
+            Log.behavior.i("navigation","pop backstack");
             fragmentManager.popBackStack();
             if(listener!=null){
                 listener.onPopBack();

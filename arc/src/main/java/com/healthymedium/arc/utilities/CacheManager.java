@@ -17,6 +17,7 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.PathSegmentTypeAdapter;
@@ -90,6 +91,11 @@ public class CacheManager {
 
         for(int i=0;i<count;i++) {
             File file = files[i];
+
+            if(file.isDirectory()) {
+                continue;
+            }
+
             Cache cache = new Cache();
             cache.file = file;
             cache.type = MimeTypeMap.getFileExtensionFromUrl(file.toString());

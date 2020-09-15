@@ -7,7 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
 import android.os.PersistableBundle;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 // This is only used for notifications that are not proctored.
 

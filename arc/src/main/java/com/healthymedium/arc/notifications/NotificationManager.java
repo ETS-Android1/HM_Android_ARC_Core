@@ -5,7 +5,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.notifications.types.NotificationType;
@@ -144,6 +144,8 @@ public class NotificationManager {
 
         if(type.onNotifyPending(node)){
             Log.i(tag,"pending notification allowed");
+            type.onNotify(node);
+
             android.app.NotificationManager notificationManager = (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = NotificationUtil.buildNotification(context,node,type);
             notificationManager.notify(node.getNotifyId(), notification);

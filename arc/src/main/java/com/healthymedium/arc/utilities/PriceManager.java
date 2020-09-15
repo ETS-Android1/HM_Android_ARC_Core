@@ -1,7 +1,7 @@
 package com.healthymedium.arc.utilities;
 
 import android.content.Context;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,7 +46,7 @@ public class PriceManager {
     public List<PriceManager.Item> getPriceSet(){
 
         if(priceSets.size()==0) {
-            loadJson(Application.getInstance());
+            priceSets = loadJson(Application.getInstance().getResources().openRawResource(R.raw.price_sets));
         }
 
         if(Config.ENABLE_LEGACY_PRICE_SETS)
@@ -84,11 +84,11 @@ public class PriceManager {
     }
 
 
-    private void loadJson(Context context){
+    public static List<List<PriceManager.Item>> loadJson(InputStream stream){
         long before = System.currentTimeMillis();
-
+        List<List<PriceManager.Item>> priceSets = new ArrayList<>();
         try {
-            InputStream stream = context.getResources().openRawResource(R.raw.price_sets);
+
             JsonReader reader = new JsonReader(new InputStreamReader(stream));
             Gson gson = new GsonBuilder().create();
 
@@ -108,6 +108,8 @@ public class PriceManager {
 
         long after = System.currentTimeMillis();
         Log.i("PriceManager", "loadJson took "+(after-before)+"ms");
+
+        return priceSets;
     }
 
     public class Item {

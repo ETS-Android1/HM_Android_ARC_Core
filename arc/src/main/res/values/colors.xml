@@ -24,6 +24,14 @@
 
     <color name="gridNormal">#40066187</color>
     <color name="gridSelected">#066187</color>
+
+    <color name="grid2NormalBorder">#858D91</color>
+    <color name="grid2Selected">#FFFFFF</color>
+    <color name="grid2SelectedBorder">#005781</color>
+    <color name="grid2Letter">#005F85</color>
+
+    <color name="gridOptionBackground">#f3f3f3</color>
+    <color name="gridOptionBorder">#c8c8C9</color>
     <color name="infoBackButtonBackground">#2e406e</color>
     <color name="btnBorderUnselected">#bfd4df</color>
     <color name="tealSubheader">#66c8c7</color>

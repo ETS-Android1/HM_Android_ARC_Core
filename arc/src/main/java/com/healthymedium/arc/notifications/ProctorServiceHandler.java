@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import com.google.gson.JsonObject;
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.notifications.types.NotificationType;
 
@@ -190,6 +190,7 @@ public class ProctorServiceHandler {
     }
 
     private static long five_min = 5*60*1000;
+    private static long two_hr = 2*60*60*1000;
 
     private static void analyzeTimeout(String type, long now, long target, NotificationNode node) {
         long delta = Math.abs(target-now);
@@ -222,6 +223,11 @@ public class ProctorServiceHandler {
                 json.addProperty("nodeType",node.type);
                 json.addProperty("nodeTypeName",NotificationTypes.getName(node.type));
                 json.addProperty("nodeNotifyId",node.getNotifyId());
+
+                NotificationType notificationType = NotificationTypes.fromId(node.type);
+                if(notificationType!=null){
+                    json.addProperty("nodeShown",notificationType.onNotifyPending(node));
+                }
             }
 
             Context context = Application.getInstance();
@@ -244,6 +250,11 @@ public class ProctorServiceHandler {
             }
 
             Analytics.logWarning("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
+
+            if(delta>two_hr) {
+                Analytics.uploadLogs("Proctor Deviation");
+            }
+
         }
     }
 

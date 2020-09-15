@@ -15,7 +15,7 @@ import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,9 +117,7 @@ public class DebugDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                
-                ParcelFile log = new ParcelFile(Log.filename(), ParcelFile.TEXT);
-                Analytics.logFile("Log Upload Requested", log, new Analytics.Listener() {
+                Analytics.uploadLogs("Log Upload Requested", new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(Application.getInstance(),"Log Upload Successful",Toast.LENGTH_SHORT).show();
@@ -153,7 +151,7 @@ public class DebugDialog extends DialogFragment {
                 ParcelFile prefs = new ParcelFile(prefsLocation, ParcelFile.XML);
                 parcels.add(prefs);
 
-                Analytics.logFiles("State Upload Requested", parcels, new Analytics.Listener() {
+                Analytics.uploadFiles("State Upload Requested", parcels, new Analytics.Listener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(Application.getInstance(),"State Upload Successful",Toast.LENGTH_SHORT).show();

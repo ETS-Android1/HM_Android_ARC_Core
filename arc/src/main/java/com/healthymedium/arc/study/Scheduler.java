@@ -6,7 +6,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.time.TimeUtil;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;

@@ -11,9 +11,8 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
-import com.healthymedium.arc.utilities.Log;
+import com.healthymedium.analytics.Log;
 
-import com.healthymedium.arc.core.MainActivity;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -43,15 +42,15 @@ public class ProctorService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(tag, "onCreate");
+        Log.system.d(tag, "onCreate");
         startForegroundService();
     }
 
     @Override
     public void onDestroy() {
-        Log.d(tag, "onDestroy");
+        Log.system.d(tag,"onDestroy");
         if(!intentionalDestruction){
-            Log.w(tag, "attempting to resuscitate");
+            Log.system.w(tag, "attempting to resuscitate");
             Proctor.startService(this);
         }
         super.onDestroy();
@@ -72,13 +71,13 @@ public class ProctorService extends Service {
 
                 if(serviceHandler==null){
                     serviceHandler = new ProctorServiceHandler(listener);
-                    Log.d(tag, "service handler was null, starting new instance");
+                    Log.system.d(tag, "service handler was null, starting new instance");
                     serviceHandler.refreshData();
                 }
 
                 if(!serviceHandler.isRunning()){
                     serviceHandler.start();
-                    Log.d(tag, "starting service handler");
+                    Log.system.d(tag, "starting service handler");
                 }
 
                 if(!ProctorWatchdogJob.isScheduled(this)) {
