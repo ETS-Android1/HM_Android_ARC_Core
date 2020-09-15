@@ -6,6 +6,8 @@ import com.healthymedium.arc.utilities.PreferencesManager;
 
 import org.joda.time.DateTime;
 
+import java.util.List;
+
 public class Participant {
 
     public static final String TAG_PARTICIPANT_STATE = "ParticipantState";
@@ -76,23 +78,31 @@ public class Participant {
     public boolean checkForTestAbandonment(){
         return state.lastPauseTime.plusMinutes(5).isBeforeNow();
     }
+
     public boolean isCurrentlyInTestSession(){
         if(state.visits.size()==0){
             return false;
         }
-
-        return getCurrentTestSession().isOngoing();
+        TestSession testSession =  getCurrentTestSession();
+        if(testSession==null){
+            return false;
+        }
+        return testSession.isOngoing();
     }
 
     public boolean shouldCurrentlyBeInTestSession(){
         if(state.visits.size()==0){
             return false;
         }
-        return getCurrentTestSession().getScheduledTime().isBeforeNow();
+        TestSession session = getCurrentTestSession();
+        if(session==null) {
+            return false;
+        }
+        return session.getScheduledTime().isBeforeNow();
     }
 
     public Visit getCurrentVisit(){
-        if(state.visits.size()>0) {
+        if(state.visits.size() > state.currentVisit) {
             return state.visits.get(state.currentVisit);
         }
         return null;
@@ -114,7 +124,15 @@ public class Participant {
     }
 
     public TestSession getCurrentTestSession(){
-        return getCurrentVisit().getTestSessions().get(state.currentTestSession);
+        Visit visit = getCurrentVisit();
+        if(visit==null){
+            return null;
+        }
+        List<TestSession> sessions = visit.getTestSessions();
+        if(sessions.size() > state.currentTestSession) {
+            return sessions.get(state.currentTestSession);
+        }
+        return null;
     }
 
     public void setCircadianClock(CircadianClock clock){
