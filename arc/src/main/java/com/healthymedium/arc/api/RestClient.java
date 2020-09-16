@@ -387,6 +387,9 @@ public class RestClient <Api>{
             schedule.wakeSleepData.add(data);
         }
 
+        schedule.timezone_name = TimeUtil.getTimezoneName();
+        schedule.timezone_offset = TimeUtil.getTimezoneOffset();
+
         if(uploading){
             uploadQueue.add(schedule);
             saveUploadQueue();
@@ -429,6 +432,9 @@ public class RestClient <Api>{
                 }
             }
         }
+
+        schedule.timezone_name = TimeUtil.getTimezoneName();
+        schedule.timezone_offset = TimeUtil.getTimezoneOffset();
 
         if(uploading) {
             uploadQueue.add(schedule);
@@ -522,6 +528,9 @@ public class RestClient <Api>{
         test.finished_session = session.wasFinished() ? 1 : 0;
         test.interrupted = session.wasInterrupted();
         test.tests = session.getCopyOfTestData();
+
+        test.timezone_name = TimeUtil.getTimezoneName();
+        test.timezone_offset = TimeUtil.getTimezoneOffset();
 
         return test;
     }

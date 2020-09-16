@@ -24,4 +24,7 @@ public class TestSubmission {
 
     public List tests;                  // test data objects
 
+    public String timezone_name;       // name of timezone ie "Central Standard Time"
+    public String timezone_offset;     // offset from utc ie "UTC-05:00"
+
 }
