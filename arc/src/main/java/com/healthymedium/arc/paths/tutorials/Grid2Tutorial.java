@@ -660,7 +660,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                             register(choiceSelectedHint);
 
                             choiceSelectedHint.getShadow().addTarget(progressBar);
-                            choiceSelectedHint.setText("Great! If you can change your mind, you can move the item. Let's try it.");
+                            choiceSelectedHint.setText("Great! If you change your mind, you can move the item. Let's try it.");
                             choiceSelectedHint.addButton(ViewUtil.getString(R.string.button_okay), new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
