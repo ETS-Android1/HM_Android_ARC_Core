@@ -212,7 +212,7 @@ public class HintPointer extends LinearLayout {
                 top = y-height;
                 break;
             case SHOW_CENTER:
-                top = y+(height/2);
+                top = y+((target.getHeight()-height)/2);
                 break;
             case SHOW_BELOW:
                 top = y+target.getHeight();
