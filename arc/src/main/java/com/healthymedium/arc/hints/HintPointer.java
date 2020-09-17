@@ -22,6 +22,10 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class HintPointer extends LinearLayout {
 
+    private static final int SHOW_ABOVE = 1;
+    private static final int SHOW_CENTER = 0;
+    private static final int SHOW_BELOW = -1;
+
     int dp4 = ViewUtil.dpToPx(4);
     int dp8 = ViewUtil.dpToPx(8);
     int dp12 = ViewUtil.dpToPx(12);
@@ -41,7 +45,7 @@ public class HintPointer extends LinearLayout {
     private int width;
 
     private boolean showArrow;
-    private boolean showAbove;
+    private int showOrientation;
 
     private View border;
     private View spacer;
@@ -62,7 +66,7 @@ public class HintPointer extends LinearLayout {
     public HintPointer(Activity activity, View view) {
         super(activity);
         parent = (ViewGroup) activity.getWindow().getDecorView();
-
+        this.showOrientation = SHOW_CENTER;
         this.showArrow = false;
         this.target = view;
         init();
@@ -76,6 +80,7 @@ public class HintPointer extends LinearLayout {
             shadow = new HintHighlighter(activity);
         }
 
+        this.showOrientation = SHOW_CENTER;
         this.showArrow = false;
         this.target = view;
         init();
@@ -85,8 +90,8 @@ public class HintPointer extends LinearLayout {
         super(activity);
         parent = (ViewGroup) activity.getWindow().getDecorView();
 
+        this.showOrientation = showAbove?SHOW_ABOVE:SHOW_BELOW;
         this.showArrow = showArrow;
-        this.showAbove = showAbove;
         this.target = view;
         init();
     }
@@ -98,8 +103,9 @@ public class HintPointer extends LinearLayout {
         if(showShadow) {
             shadow = new HintHighlighter(activity);
         }
+
+        this.showOrientation = showAbove?SHOW_ABOVE:SHOW_BELOW;
         this.showArrow = showArrow;
-        this.showAbove = showAbove;
         this.target = view;
         init();
     }
@@ -145,7 +151,7 @@ public class HintPointer extends LinearLayout {
         // don't add yet
 
         if(showArrow){
-            if(showAbove){
+            if(showOrientation==SHOW_ABOVE){
                 addView(spacer);
             } else {
                 addView(spacer,0);
@@ -201,10 +207,16 @@ public class HintPointer extends LinearLayout {
         }
 
         // adjust top margin for canvas size
-        if(showAbove){
-            top = y-height;
-        } else {
-            top = y+target.getHeight();
+        switch (showOrientation){
+            case SHOW_ABOVE:
+                top = y-height;
+                break;
+            case SHOW_CENTER:
+                top = y+(height/2);
+                break;
+            case SHOW_BELOW:
+                top = y+target.getHeight();
+                break;
         }
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) getLayoutParams();
@@ -214,23 +226,27 @@ public class HintPointer extends LinearLayout {
         // create a rect that's small enough that the stroke isn't cut off
         Rect rect = new Rect(dp4,dp4,width-dp4,height-dp4);
 
-        Path path = getPath(pointerX,rect,radius,showArrow,showAbove);
+        Path path = getPath(pointerX,rect,radius,showArrow,showOrientation);
 
         canvas.drawPath(path,fillPaint);
         canvas.drawPath(path,strokePaint);
     }
 
-    private Path getPath(int pointerX, Rect rect, int radius, boolean showArrow, boolean showAbove) {
+    private Path getPath(int pointerX, Rect rect, int radius, boolean showArrow, int showOrientation) {
         int pointerSize = ViewUtil.dpToPx(16);
 
         int top = rect.top;
         int bottom = rect.bottom;
 
-        if(showArrow && !showAbove){
-            top = rect.top+pointerSize;
-        }
-        if(showArrow && showAbove){
-            bottom = rect.bottom-pointerSize;
+        if(showArrow){
+            switch (showOrientation){
+                case SHOW_ABOVE:
+                    bottom = rect.bottom-pointerSize;
+                    break;
+                case SHOW_BELOW:
+                    top = rect.top+pointerSize;
+                    break;
+            }
         }
 
         Path path = new Path();
@@ -238,7 +254,7 @@ public class HintPointer extends LinearLayout {
         path.moveTo(rect.left + radius, top);
 
         // top pointer
-        if(showArrow && !showAbove) {
+        if(showArrow && (showOrientation==SHOW_BELOW)) {
             path.lineTo(pointerX - pointerSize, top);
             path.lineTo(pointerX, rect.top);
             path.lineTo(pointerX + pointerSize, top);
@@ -259,7 +275,7 @@ public class HintPointer extends LinearLayout {
         path.arcTo(bottomRightRect, 0F, 90F, false);
 
         // bottom pointer
-        if(showArrow && showAbove) {
+        if(showArrow && (showOrientation==SHOW_ABOVE)) {
             path.lineTo(pointerX + pointerSize, bottom);
             path.lineTo(pointerX, rect.bottom);
             path.lineTo(pointerX - pointerSize, bottom);
