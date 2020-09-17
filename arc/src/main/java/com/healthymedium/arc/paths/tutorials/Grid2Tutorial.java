@@ -52,6 +52,7 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     HintPointer remindMeHint;
     HintHighlighter remindMeHighlight;
+    HintPointer otherItemsHint;
 
     Grid2ChoiceDialog dialog;
     Grid2BoxView.Listener boxViewListener;
@@ -74,7 +75,6 @@ public class Grid2Tutorial extends TutorialTemplate {
 
         items = inflater.inflate(R.layout.fragment_grid2_tutorial_items, container, false);
         itemsLayout = items.findViewById(R.id.itemsLayout);
-
 
         grids = inflater.inflate(R.layout.fragment_grid2_test, container, false);
         gridLayout = grids.findViewById(R.id.gridLayout);
@@ -491,6 +491,9 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     private void updateButtonVisibility(){
         if(phoneSelected && keySelected && penSelected) {
+            if(otherItemsHint!=null) {
+                otherItemsHint.dismiss();
+            }
             continueButton.setVisibility(View.VISIBLE);
             gridHintTextView.setVisibility(View.INVISIBLE);
         } else {
@@ -544,7 +547,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                     if(view.getImage()==0){
                         view.setSelected(false);
                     }
-                    handler.postDelayed(remindMeRunnable,5000);
+                    handler.postDelayed(remindMeRunnable,20000);
                     enableGrids();
                     return;
                 }
@@ -577,7 +580,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         dialogListener = null;
                     }
                     if(othersReady && !(phoneSelected && penSelected && keySelected)) {
-                        handler.postDelayed(remindMeRunnable,5000);
+                        handler.postDelayed(remindMeRunnable,20000);
                     }
                     enableGrids();
 
@@ -593,7 +596,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         dialogListener = null;
                     }
                     if(othersReady && !(phoneSelected && penSelected && keySelected)) {
-                        handler.postDelayed(remindMeRunnable,5000);
+                        handler.postDelayed(remindMeRunnable,20000);
                     }
                     enableGrids();
                 }
@@ -611,6 +614,9 @@ public class Grid2Tutorial extends TutorialTemplate {
     Runnable remindMeRunnable = new Runnable() {
         @Override
         public void run() {
+            if(otherItemsHint!=null) {
+                otherItemsHint.dismiss();
+            }
             remindMeHighlight.addTarget(progressBar);
             remindMeHighlight.show();
             remindMeHint.show();
@@ -820,9 +826,6 @@ public class Grid2Tutorial extends TutorialTemplate {
                     final HintHighlighter choiceAgainHighlight = new HintHighlighter(getActivity());
                     register(choiceAgainHighlight);
 
-                    final HintPointer otherItemsHint = new HintPointer(getActivity(),gridTextView,false,true);
-                    register(otherItemsHint);
-
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -840,18 +843,16 @@ public class Grid2Tutorial extends TutorialTemplate {
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
-                                            disableGrids(null);
+                                            enableGrids();
+
+                                            otherItemsHint = new HintPointer(getActivity(),gridTextView);
+                                            register(otherItemsHint);
+
                                             otherItemsHint.setText("Now, place the other two items on the grid.");
-                                            otherItemsHint.addButton(ViewUtil.getString(R.string.button_okay), new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    otherItemsHint.dismiss();
-                                                    enableGrids();
-                                                    othersReady = true;
-                                                    handler.postDelayed(remindMeRunnable,5000);
-                                                }
-                                            });
                                             otherItemsHint.show();
+                                            othersReady = true;
+                                            handler.postDelayed(remindMeRunnable,20000);
+
                                         }
                                     },300);
                                 }
