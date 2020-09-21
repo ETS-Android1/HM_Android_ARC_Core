@@ -149,7 +149,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         getGridView(2,3).setImage(R.drawable.key);
         fadeInView(grids);
 
-        final HintPointer gridsHint = new HintPointer(getActivity(), getGridView(4,3), false, true, true);
+        final HintPointer gridsHint = new HintPointer(getActivity(), gridLayout, true);
         register(gridsHint);
 
         gridsHint.setText(ViewUtil.getString(R.string.popup_tutorial_rememberbox));
@@ -166,18 +166,15 @@ public class Grid2Tutorial extends TutorialTemplate {
 
                         incrementProgress();
 
-                        final HintPointer partTwoHint = new HintPointer(getActivity(), getGridView(4,3), false, true);
+                        final HintPointer partTwoHint = new HintPointer(getActivity(), gridLayout,true);
+                        partTwoHint.getShadow().addTarget(progressBar);
                         register(partTwoHint);
-
-                        final HintHighlighter partTwoHighlight = new HintHighlighter(getActivity());
-                        register(partTwoHighlight);
 
                         partTwoHint.setText(ViewUtil.getString(R.string.popup_tutorial_part2));
                         View.OnClickListener listener = new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 partTwoHint.dismiss();
-                                partTwoHighlight.dismiss();
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -189,8 +186,6 @@ public class Grid2Tutorial extends TutorialTemplate {
                         partTwoHint.addButton(ViewUtil.getString(R.string.button_next), listener);
                         partTwoHint.show();
 
-                        partTwoHighlight.addTarget(progressBar);
-                        partTwoHighlight.show();
                     }
                 },3000);
             }
@@ -291,23 +286,18 @@ public class Grid2Tutorial extends TutorialTemplate {
                                 tapThisFHint.dismiss();
                                 incrementProgress();
 
-                                final HintPointer tapAllFsHint = new HintPointer(getActivity(), getLetterView(6,3), false, true);
+                                final HintPointer tapAllFsHint = new HintPointer(getActivity(), letterLayout, true);
                                 register(tapAllFsHint);
-
-                                final HintHighlighter tapAllFsHighlight = new HintHighlighter(getActivity());
-                                register(tapAllFsHighlight);
 
                                 tapAllFsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf2));
                                 tapAllFsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         tapAllFsHint.dismiss();
-                                        tapAllFsHighlight.dismiss();
                                         tapLetters();
                                     }
                                 });
-                                tapAllFsHighlight.addTarget(progressBar);
-                                tapAllFsHighlight.show();
+                                tapAllFsHint.getShadow().addTarget(progressBar);
                                 tapAllFsHint.show();
                         }
                         return false;
@@ -329,7 +319,7 @@ public class Grid2Tutorial extends TutorialTemplate {
 
                 incrementProgress();
 
-                final HintPointer niceWorkHint = new HintPointer(getActivity(), getLetterView(6,3), false, true, true);
+                final HintPointer niceWorkHint = new HintPointer(getActivity(), letterLayout, true);
                 register(niceWorkHint);
 
                 niceWorkHint.getShadow().addTarget(progressBar);
