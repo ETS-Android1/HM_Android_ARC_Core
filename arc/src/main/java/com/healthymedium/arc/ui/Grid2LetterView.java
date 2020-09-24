@@ -88,6 +88,9 @@ public class Grid2LetterView extends CircleFrameLayout {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!isEnabled()){
+           return true;
+        }
         int action = event.getAction();
         if(action == MotionEvent.ACTION_DOWN) {
             selected = !selected;
