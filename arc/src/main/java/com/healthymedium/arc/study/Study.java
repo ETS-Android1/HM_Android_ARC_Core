@@ -6,6 +6,7 @@ import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.Device;
 import com.healthymedium.arc.heartbeat.HeartbeatManager;
 import com.healthymedium.arc.utilities.MigrationUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
@@ -287,6 +288,10 @@ public class Study{
 
         if(Config.ENABLE_EARNINGS){
             participant.getEarnings().linkAgainstRestClient();
+        }
+
+        if(Config.REPORT_STUDY_INFO){
+           Analytics.setStudyInfo(participant.getId(),Device.getId());
         }
 
         valid = true;

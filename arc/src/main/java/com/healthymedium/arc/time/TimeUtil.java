@@ -11,7 +11,9 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class TimeUtil {
@@ -97,6 +99,21 @@ public class TimeUtil {
         boolean autoTimeEnabled = Settings.Global.getInt(resolver, Settings.Global.AUTO_TIME, 0)==1;
         boolean autoTimeZoneEnabled = Settings.Global.getInt(resolver, Settings.Global.AUTO_TIME_ZONE, 0)==1;
         return autoTimeEnabled && autoTimeZoneEnabled;
+    }
+
+    public static String getTimezoneName(){
+        TimeZone tz = TimeZone.getDefault();
+        return tz.getDisplayName();
+    }
+
+    public static String getTimezoneOffset(){
+        TimeZone timeZone = TimeZone.getDefault();
+        Calendar calendar = Calendar.getInstance(timeZone);
+        int millis = timeZone.getOffset(calendar.getTimeInMillis());
+
+        String offset = String.format("%02d:%02d", Math.abs(millis / 3600000), Math.abs((millis / 60000) % 60));
+        offset = "UTC"+(millis >= 0 ? "+" : "-") + offset;
+        return offset;
     }
 
 }

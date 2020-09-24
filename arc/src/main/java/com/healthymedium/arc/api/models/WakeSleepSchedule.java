@@ -11,4 +11,8 @@ public class WakeSleepSchedule {
 
     public List<WakeSleepData> wakeSleepData;
     public String model_version = "0";
+
+    public String timezone_name;       // name of timezone ie "Central Standard Time"
+    public String timezone_offset;     // offset from utc ie "UTC-05:00"
+
 }
