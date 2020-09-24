@@ -57,6 +57,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
                     listener.onSelected(id);
                 }
                 selectable = false;
+                listener = null;
                 dismiss();
                 return false;
             }
@@ -121,6 +122,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
                     return false;
                 }
                 listener.onRemove();
+                listener = null;
                 dismiss();
                 return false;
             }
