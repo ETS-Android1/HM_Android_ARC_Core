@@ -318,6 +318,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                 // Displays a popup and advances to setSecondItemLayout()
 
                 incrementProgress();
+                disableLetters();
 
                 final HintPointer niceWorkHint = new HintPointer(getActivity(), letterLayout, true);
                 register(niceWorkHint);
@@ -421,6 +422,14 @@ public class Grid2Tutorial extends TutorialTemplate {
         for(int i=0;i<size;i++){
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
             view.setSelectable(true);
+        }
+    }
+
+    private void disableLetters(){
+        int size = letterLayout.getChildCount();
+        for(int i=0;i<size;i++){
+            Grid2LetterView view = (Grid2LetterView) letterLayout.getChildAt(i);
+            view.setEnabled(false);
         }
     }
 
