@@ -44,6 +44,7 @@ public class PricesDataUnitTest {
 
     @Before
     public void setup(){
+        Log.initialize();
         Log.pointToSystemOut();
         currSession = loadPrices(DEFAULT_PATH + filename + FILE_NAME).get( sessionId);
     }

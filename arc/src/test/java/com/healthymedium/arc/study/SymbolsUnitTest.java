@@ -15,7 +15,7 @@ import java.util.Random;
 @RunWith(JUnit4.class)
 public class SymbolsUnitTest {
 
-    int MAX = 100000000;
+    int MAX = 1000;
     Random random;
     List<Integer> symbols;
     int[] set;
