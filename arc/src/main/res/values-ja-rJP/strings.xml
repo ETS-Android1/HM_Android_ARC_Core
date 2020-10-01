@@ -10,6 +10,7 @@
 	<string name="notification1_lastday">今週のテストの最終日になりました。今日最初のテストは{TIME}まで使用可能です。</string>
 	<string name="notifications2_default">今日2つ目のテストの時間になりました。このテストは{TIME}まで使用可能です。</string>
 	<string name="notification3_default">今日3つ目のテストが使用可能になりました。{TIME}までにこのテストを完了してください。</string>
+	<string name="notification3_variation"></string>
 	<string name="notification4_default">今日最後のテストの時間になりました。ラストスパートです。{TIME}までにこのテストを完了しましょう。</string>
 	<string name="notification4_lastday">今週最後のテストの時間になりました。{TIME}までに完了してください。あなたがここで獲得した収入についてはコーディネーターから追って連絡します。</string>
 	<string name="notification_missedtests">\nテストが未記入です。今週中にテストを終了できない場合、治験コーディネーターに連絡を取ってください。</string>
@@ -22,6 +23,7 @@
 	<string name="bysigning_key">サインインすることにより、あなたは私たちの&lt;b>個人情報保護方針&lt;/b>に同意したことになります。</string>
 	<string name="privacy_linked">個人情報保護方針</string>
 	<string name="about_linked">このアプリについて</string>
+	<string name="login_enter_raterID"></string>
 	<string name="login_enter_ARCID">では、あなたの&lt;b>ARC ID&lt;/b>を下に入力してください。</string>
 	<string name="login_confirm_ARCID">確認のために、あなたの&lt;b>ARC IDを再度入力&lt;/b>してください。</string>
 	<string name="login_problems_linked">&lt;b>ログインできない場合&lt;/b></string>
@@ -34,6 +36,7 @@
 	<string name="login_2FA_morehelp_linked">さらにヘルプが必要な場合</string>
 	<string name="onboarding_header">テストへの継続的協力</string>
 	<string name="onboarding_body">6か月ごとに&lt;b>1週間&lt;/b>の認知テストを行うよう求められます。1週間のうちに、アプリでテストを行うよう知らせる通知が&lt;b>1日4回&lt;/b>送られます。調査は&lt;b>5年間&lt;/b>にわたります（テストは10週）。</string>
+	<string name="radio_understand"></string>
 	<string name="radio_commit">私は調査期間の間、参加できることを確約します。</string>
 	<string name="radio_nocommit">私はこの調査への参加を確約することができません。</string>
 	<string name="onboarding_nocommit_header">&lt;b>ご回答いただきありがとうございます。&lt;/b></string>
@@ -48,6 +51,7 @@
 	<string name="onboarding_notifications_header2">通知を有効にしてください。</string>
 	<string name="onboarding_notifications_body2_ios">調査が適切に機能するために通知を有効にする必要があります。アプリの設定に移動して「通知」をタップし、次に「EXR」をタップして「通知を許可する」スイッチをオンにしてください。</string>
 	<string name="onboarding_notifications_body2_android">調査が適切に機能するために通知を有効にする必要があります。設定に移動して、「{APP_NAME}」の通知が有効になっていることを確認してください。</string>
+	<string name="button_home_notifications"></string>
 	<string name="button_proceed_without_notifications">通知なしで続行</string>
 	<string name="popup_opensettings">ここで設定を開きます。 そこに到着したら、[通知]をタップし、[通知を許可]スイッチをオンにします。</string>
 	<string name="button_notnow">後でする</string>
@@ -275,6 +279,7 @@
 	<string name="testing_id_body">私は、下の線上に署名をし、これらのテストを完了したことを証明します。</string>
 	<string name="prices_header">値段</string>
 	<string name="prices_body">表示された値段がその品物に対し、お買い得かどうかを決めてください。 &lt;br />&lt;br />その組み合わせが画面に表示されるのはとても短い間だけですので、しっかりと注意を払って素早く決定してください。</string>
+	<string name="prices_body2"></string>
 	<string name="prices_isthisgood">これはお買い得ですか？</string>
 	<string name="prices_overlay">品物が1つと値段が2つ表示されます。前のセクションの品物の値段を選択してください。</string>
 	<string name="prices_whatwasprice">値段はいくらでしたか</string>
@@ -324,6 +329,7 @@
 	<string name="login_error1">ログイン認証情報が正しくありません</string>
 	<string name="login_error2">このARC IDはすでに他の機器に登録されています。</string>
 	<string name="login_error3">申し訳ありません、このアプリには現在問題が発生しています。後ほどもう一度試してみてください。</string>
+	<string name="login_error4"></string>
 	<string name="button_help">ヘルプ</string>
 	<string name="button_begin">始める</string>
 	<string name="button_back">戻る</string>
@@ -334,6 +340,7 @@
 	<string name="button_email">Eメール</string>
 	<string name="button_done">完了</string>
 	<string name="button_change">変更</string>
+	<string name="button_submit"></string>
 	<string name="button_submitdates">日付を提出</string>
 	<string name="button_signin">サインイン</string>
 	<string name="button_beginsurvey">調査を開始</string>
@@ -355,14 +362,19 @@
 	<string name="popup_next">次へ</string>
 	<string name="popup_done">完了</string>
 	<string name="popup_tutorial_view">ここをタップしてチュートリアルを表示します。</string>
+	<string name="popup_tutorial_welcome"></string>
 	<string name="popup_tutorial_quit">ここをタップしてチュートリアルを閉じます。</string>
 	<string name="popup_tutorial_price_intro">価格テストには2つのパートがあります。&lt;b>パート1は価格の評価です。&lt;/b></string>
+	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">バナナ</string>
 	<string name="prices_tutorial_price1">¥351.84</string>
 	<string name="prices_tutorial_price1_match">スープ</string>
 	<string name="prices_tutorial_item2">¥1,164.20</string>
 	<string name="prices_tutorial_price2">¥729.51</string>
 	<string name="prices_tutorial_price2_match">¥431.46</string>
+	<string name="prices_tutorial_item3"></string>
+	<string name="prices_tutorial_price3"></string>
+	<string name="prices_tutorial_price3_match"></string>
 	<string name="popup_tutorial_choose1">&lt;b>どう思いますか？&lt;/b>\nあなたが適切だと思われる回答を選択してください。</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>良い選択です。&lt;/b>もう一つ試してみましょう</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>この選択もありがとうございます。&lt;/b>\nパート2に進みましょう。</string>
@@ -374,6 +386,7 @@
 	<string name="popup_tutorial_tilesbottom">...下部には&lt;b>2つのタイル&lt;/b>が表示されます。</string>
 	<string name="popup_tutorial_middle_instructions">上のタイルと&lt;b>一致する下のタイル&lt;/b>をタップします。</string>
 	<string name="popup_tutorial_tiletap">この一致するタイルをタップします。</string>
+	<string name="popup_tutorial_pricetap"></string>
 	<string name="popup_tutorial_greatjob">&lt;b>大変良くできました！&lt;/b>\nもう少し練習してみましょう。</string>
 	<string name="popup_tutorial_nice">&lt;b>良くできました！&lt;/b> \nもうひとつ練習してみましょう...</string>
 	<string name="popup_tutorial_grid_recall">3つのパートからなるこのテストでは、3つの品物の&lt;b>場所を記憶&lt;/b>してもらいます。</string>
@@ -440,6 +453,12 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">¥</string>
+	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">¥</string>
+	<string name="prices_test_suffix"></string>
 	<string name="unit_months">か月</string>
+	<string name="battery_optimization_header">バッテリーの最適化</string>
+	<string name="battery_optimization_overview">お使いの携帯電話には、バッテリー寿命を維持するのに役立つ設定があり、「バッテリー最適化」設定と呼ばれています。&lt;br>&lt;br>\n{APP_NAME}アプリがスマートフォンの電池寿命に与える影響は最小限です。 {APP_NAME}アプリのバッテリー最適化設定をオフにすることをお勧めします。そうすることで、時間通りにテスト通知を受け取ることができます。</string>
+	<string name="battery_optimization_prompt">次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
+	<string name="battery_optimization_reminder">通知が遅れています。次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
 </resources>

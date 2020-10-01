@@ -123,15 +123,18 @@ public class CopyDoc {
 
     private LocaleResource parseForLocale(List<List<String>> data, int index) {
         Map<String,String> map = new LinkedHashMap<>();
-        int size = data.size();
         for(List<String> row : data){
-            if(row.isEmpty() || row.size() <= index) {
+            if(row.isEmpty()) {
                 continue;
             }
 
             String key = row.get(0);
             if(!key.isEmpty()){
-                map.put(key,row.get(index));
+                if(row.size() <= index){
+                    map.put(key,"");
+                } else {
+                    map.put(key,row.get(index));
+                }
             }
         }
         LocaleResource locale = new LocaleResource(map);

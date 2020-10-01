@@ -10,6 +10,7 @@
 	<string name="notification1_lastday">Vous êtes à la dernière journée de tests cette semaine! Votre premier premier test de la journée sera disponible jusqu\'à {TIME}.</string>
 	<string name="notifications2_default">C\'est le temps du deuxième test de la journée! Ce test sera disponible jusqu\'à {TIME}.</string>
 	<string name="notification3_default">Votre troisième test de la journée est maintenant disponible. Veuillez effectuer ce test d\'ici {TIME}.</string>
+	<string name="notification3_variation"></string>
 	<string name="notification4_default">Le dernier test de la journée est là! Terminez en force en effectuant ce test d\'ici {TIME}.</string>
 	<string name="notification4_lastday">C\'est le temps d\'effectuer votre dernier test de la semaine! Veuillez le terminer d\'ici {TIME}. Votre coordonnateur(trice) vous contactera au sujet de votre indemnité financière sous peu.</string>
 	<string name="notification_missedtests">Vous avez manqué vos tests. Si vous n’êtes pas en mesure de terminer les tests de cette semaine, veuillez communiquer avec votre coordonnateur de l’étude.</string>
@@ -22,6 +23,7 @@
 	<string name="bysigning_key">En vous connectant, vous acceptez notre &lt;b>politique de confidentialité&lt;/b>.</string>
 	<string name="privacy_linked">Politique de confidentialité</string>
 	<string name="about_linked">À propos de cette application</string>
+	<string name="login_enter_raterID"></string>
 	<string name="login_enter_ARCID">Veuillez saisir votre &lt;b>numéro d’identité de l’ARC&lt;/b> ci-dessous :</string>
 	<string name="login_confirm_ARCID">Pour confirmer, veuillez &lt;b>saisir à nouveau votre numéro d’identité de l’ARC :&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>Des difficultés à vous connecter?&lt;/b></string>
@@ -34,6 +36,7 @@
 	<string name="login_2FA_morehelp_linked">J\'ai besoin de plus d\'aide</string>
 	<string name="onboarding_header">Engagement relatif aux tests</string>
 	<string name="onboarding_body">Tous les 6 mois, on vous demandera d\'effectuer &lt;b>une semaine&lt;/b> de tests cognitifs. Durant la semaine, on vous rappellera &lt;b>4 fois par jour&lt;/b> d\'effectuer les tests dans l\'application. Vous pouvez participer à l\'étude pour aussi longtemps que &lt;b>5 ans&lt;/b> (10 semaines de tests).</string>
+	<string name="radio_understand"></string>
 	<string name="radio_commit">Je m\'engage à participer pour toute la durée de l\'étude</string>
 	<string name="radio_nocommit">Je ne peux PAS m\'engager dans cette étude</string>
 	<string name="onboarding_nocommit_header">&lt;b>Merci de votre temps.&lt;/b></string>
@@ -48,6 +51,7 @@
 	<string name="onboarding_notifications_header2">Veuillez activer les notifications.</string>
 	<string name="onboarding_notifications_body2_ios">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application, appuyer sur Notifications, puis appuyer sur EXR et activer le bouton Autoriser les notifications.</string>
 	<string name="onboarding_notifications_body2_android">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application et assurez-vous que les notifications pour {APP_NAME} sont activées.</string>
+	<string name="button_home_notifications"></string>
 	<string name="button_proceed_without_notifications">Procéder Sans Notifications</string>
 	<string name="popup_opensettings">Nous allons maintenant ouvrir vos paramètres. Une fois sur place, appuyez sur Notifications et activez le bouton Autoriser les notifications.</string>
 	<string name="button_notnow">Pas maintenant</string>
@@ -275,6 +279,7 @@
 	<string name="testing_id_body">En apposant mes initiales sur la ligne ci-dessous, j’atteste que j’ai effectué ces tests. </string>
 	<string name="prices_header">Prix</string>
 	<string name="prices_body">Nous vous demandons de déterminer si le prix affiché représente une bonne affaire pour cet article.  &lt;br />&lt;br />La paire ne restera pas longtemps à l’écran, prenez donc une décision rapidement et prêtez une attention particulière.</string>
+	<string name="prices_body2"></string>
 	<string name="prices_isthisgood">Est-ce un coût avantageux?</string>
 	<string name="prices_overlay">Vous verrez maintenant un article et deux prix. Veuillez sélectionner le prix qui correspond à l\'article de la section précédente.</string>
 	<string name="prices_whatwasprice">Quel était le prix?</string>
@@ -324,6 +329,7 @@
 	<string name="login_error1">Identifiants de connexion incorrects</string>
 	<string name="login_error2">Ce numéro d’identité de l’ARC est déjà inscrit sur un autre appareil.</string>
 	<string name="login_error3">Désolé, notre application éprouve actuellement des difficultés. Veuillez réessayer plus tard.</string>
+	<string name="login_error4"></string>
 	<string name="button_help">AIDE</string>
 	<string name="button_begin">COMMENCER</string>
 	<string name="button_back">PRÉCÉDENT</string>
@@ -334,6 +340,7 @@
 	<string name="button_email">ENVOYER UN COURRIEL</string>
 	<string name="button_done">TERMINÉ</string>
 	<string name="button_change">MODIFIER</string>
+	<string name="button_submit"></string>
 	<string name="button_submitdates">SOUMETTRE LES DATES</string>
 	<string name="button_signin">SE CONNECTER</string>
 	<string name="button_beginsurvey">COMMENCER LE QUESTIONNAIRE</string>
@@ -355,14 +362,19 @@
 	<string name="popup_next">Suivant</string>
 	<string name="popup_done">Terminé</string>
 	<string name="popup_tutorial_view">Appuyez ici pour voir un tutoriel</string>
+	<string name="popup_tutorial_welcome"></string>
 	<string name="popup_tutorial_quit">Appuyez ici pour quitter le tutoriel.</string>
 	<string name="popup_tutorial_price_intro">Le test des prix comporte deux parties. &lt;b>D\'abord, évaluez le prix.&lt;/b></string>
+	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananes</string>
 	<string name="prices_tutorial_price1">3,27 $</string>
 	<string name="prices_tutorial_price1_match">Soupe</string>
 	<string name="prices_tutorial_item2">10,82 $</string>
 	<string name="prices_tutorial_price2">6,78 $</string>
 	<string name="prices_tutorial_price2_match">4,01 $</string>
+	<string name="prices_tutorial_item3"></string>
+	<string name="prices_tutorial_price3"></string>
+	<string name="prices_tutorial_price3_match"></string>
 	<string name="popup_tutorial_choose1">&lt;b>Qu\'en pensez-vous?&lt;/b>\nChoisissez la réponse qui fait du sens pour vous.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Excellent choix!&lt;/b> \nEssayons-en un autre.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>Un autre excellent choix!&lt;/b> \nPassons à la partie deux.</string>
@@ -374,6 +386,7 @@
 	<string name="popup_tutorial_tilesbottom">…et &lt;b>deux tuiles&lt;/b> en bas.</string>
 	<string name="popup_tutorial_middle_instructions">Appuyez sur &lt;b>la tuile du bas qui correspond&lt;/b> à la tuile du haut.</string>
 	<string name="popup_tutorial_tiletap">Appuyez sur cette tuile correspondante.</string>
+	<string name="popup_tutorial_pricetap"></string>
 	<string name="popup_tutorial_greatjob">&lt;b>Excellent travail!&lt;/b> \nEssayons-en encore quelques-uns pour s\'exercer.</string>
 	<string name="popup_tutorial_nice">&lt;b>Bien!&lt;/b> \nEncore un...</string>
 	<string name="popup_tutorial_grid_recall">Dans ce test en trois parties, il vous sera demandé de &lt;b>vous rappeler l\'emplacement&lt;/b> de ces articles.</string>
@@ -444,4 +457,8 @@
 	<string name="prices_test_prefix"></string>
 	<string name="prices_test_suffix">$</string>
 	<string name="unit_months">mois</string>
+	<string name="battery_optimization_header">Optimisation de la batterie</string>
+	<string name="battery_optimization_overview">Votre téléphone a un paramètre pour aider à préserver la durée de vie de votre batterie, et il est appelé un paramètre «d\'optimisation de la batterie».&lt;br>&lt;br>L\'application {APP_NAME} aura un impact minimal sur la durée de vie de la batterie de votre téléphone. Il est recommandé de désactiver le paramètre d\'optimisation de la batterie pour l\'application {APP_NAME}. Cela vous aidera à vous assurer de recevoir les notifications de test à temps.</string>
+	<string name="battery_optimization_prompt">Ensuite, une fenêtre vous demandera de désactiver l\'optimisation de la batterie en permettant à l\'application {APP_NAME} de s\'exécuter en arrière-plan. Veuillez &lt;b> autoriser &lt;/b> pour vous assurer que vos notifications fonctionnent correctement. </string>
+	<string name="battery_optimization_reminder">Vos notifications sont retardées. Ensuite, une fenêtre vous demandera de désactiver l\'optimisation de la batterie en permettant à l\'application {APP_NAME} de s\'exécuter en arrière-plan. Veuillez &lt;b> autoriser &lt;/b> pour vous assurer que vos notifications fonctionnent correctement.</string>
 </resources>
