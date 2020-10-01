@@ -52,9 +52,9 @@ public class Setup {
             System.out.println("default setup file written");
             System.out.println("here's a sample of what it might look like: ");
             System.out.println("{\n" +
-                    "  \"coreResourcePath\": \"D:\\\\healthyMedium\\\\core\\\\arc\\\\src\\\\main\\\\res\\\",\n" +
-                    "  \"exrResourcePath\": \"D:\\\\healthyMedium\\\\exr\\\\app\\\\src\\\\main\\\\res\\\",\n" +
-                    "  \"hasdResourcePath\": \"D:\\\\healthyMedium\\\\hasd\\\\app\\\\src\\\\main\\\\res\\\"\n" +
+                    "  \"coreResourcePath\": \"D:\\\\healthyMedium\\\\core\\\\arc\\\\src\\\\main\\\\res\\\\\",\n" +
+                    "  \"exrResourcePath\": \"D:\\\\healthyMedium\\\\exr\\\\app\\\\src\\\\main\\\\res\\\\\",\n" +
+                    "  \"hasdResourcePath\": \"D:\\\\healthyMedium\\\\hasd\\\\app\\\\src\\\\main\\\\res\\\\\"\n" +
                     "}");
 
         } catch (IOException e) {

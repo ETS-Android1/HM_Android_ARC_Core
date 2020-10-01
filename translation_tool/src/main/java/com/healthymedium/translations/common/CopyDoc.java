@@ -35,18 +35,29 @@ public class CopyDoc {
         }
 
         // load setup json
+        JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+        InputStream inputStream = null;
+
         try {
-            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-            InputStream inputStream = new FileInputStream(path + SETUP_FILE);
-            if (inputStream == null) {
-                System.out.println("setup file not found");
-                Setup.createDefault(jsonFactory,path+SETUP_FILE);
-                return false;
-            }
-            setup = Setup.load(jsonFactory, new InputStreamReader(inputStream));
+            inputStream = new FileInputStream(path + SETUP_FILE);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("setup file not found");
+            Setup.createDefault(jsonFactory,path+SETUP_FILE);
+            try {
+                inputStream = new FileInputStream(path + SETUP_FILE);
+            } catch (FileNotFoundException fileException) {
+                System.out.println("failed to create file");
+            }
             return false;
+        }
+
+        if (inputStream == null) {
+            System.out.println("invalid input stream");
+            return false;
+        }
+
+        try {
+            setup = Setup.load(jsonFactory, new InputStreamReader(inputStream));
         } catch (IOException e) {
             e.printStackTrace();
             return false;
