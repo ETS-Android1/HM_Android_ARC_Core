@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="key_native_language">America Latina - Español</string>
+	<string name="key_native_language">Mexico - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza en un mes, el {DATE}. Puede ajustar este horario hasta por 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su siguiente ciclo de pruebas comienza en una semana. Toque para confirmar o reprogramar.</string>
 	<string name="notification_daybefore">Recordatorio: Su siguiente ciclo de pruebas comienza mañana. Toque para confirmar o reprogramar.</string>
@@ -367,11 +367,11 @@
 	<string name="popup_tutorial_price_intro">La prueba de precios tiene dos partes. &lt;b>Primero, evaluar el precio.&lt;/b></string>
 	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananas</string>
-	<string name="prices_tutorial_price1">$3.27</string>
+	<string name="prices_tutorial_price1">$78.11</string>
 	<string name="prices_tutorial_price1_match">Sopa</string>
-	<string name="prices_tutorial_item2">$10.82</string>
-	<string name="prices_tutorial_price2">$6.78</string>
-	<string name="prices_tutorial_price2_match">$4.01</string>
+	<string name="prices_tutorial_item2">$258.45</string>
+	<string name="prices_tutorial_price2">$161.95</string>
+	<string name="prices_tutorial_price2_match">$95.79</string>
 	<string name="prices_tutorial_item3"></string>
 	<string name="prices_tutorial_price3"></string>
 	<string name="prices_tutorial_price3_match"></string>
