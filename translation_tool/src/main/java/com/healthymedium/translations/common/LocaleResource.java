@@ -50,7 +50,14 @@ public class LocaleResource {
     }
 
     public boolean isValid() {
-        return resource!=null;
+        if(resource==null) {
+            return false;
+        }
+        // android does not support region 419 as a locale resource.
+        if(countryKey.equals("419")) {
+            return false;
+        }
+        return true;
     }
 
     private void sanitize() {
@@ -103,7 +110,7 @@ public class LocaleResource {
             return false;
         }
 
-        System.out.println("writing xml file...");
+        System.out.println("["+resource+"] writing xml file...");
 
         try {
             OutputStreamWriter writer = new OutputStreamWriter(
@@ -129,8 +136,9 @@ public class LocaleResource {
             writer.write("</resources>");
             writer.close();
 
-            System.out.println("file written");
+            System.out.println("["+resource+"] file written");
         } catch (IOException e) {
+            System.out.println("["+resource+"] failed");
             e.printStackTrace();
             return false;
         }

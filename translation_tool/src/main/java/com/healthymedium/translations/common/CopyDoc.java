@@ -97,7 +97,10 @@ public class CopyDoc {
         List<LocaleResource> localeResources = new ArrayList<>();
         int size = data.get(0).size();
         for(int i=1; i<size; i++) {
-            localeResources.add(parseForLocale(data,i));
+            LocaleResource resource = parseForLocale(data,i);
+            if(resource.isValid()){
+                localeResources.add(resource);
+            }
         }
 
         if(localeResources.isEmpty()) {
