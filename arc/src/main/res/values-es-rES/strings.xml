@@ -96,9 +96,9 @@
 	<string name="availability_changedenied_test">Vuelve a consultar después de tu prueba</string>
 	<string name="availability_changedates">Me gustaría modificar las &lt;b>fechas&lt;/b> de mi próximo &lt;b>ciclo de pruebas&lt;/b>.</string>
 	<string name="contact_call1">Me gustaría &lt;b>llamar&lt;/b> al coordinador de mi estudio.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">Me gustaría enviarle un &lt;b>email&lt;/b> al coordinador de mi estudio.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">Sobre esta aplicación</string>
 	<string name="about_body">La aplicación para la Investigación ambulatoria sobre la función cognitiva (ARC, por sus siglas en inglés) fue diseñada por el Cognitive Technology Research Laboratory, CTRLab, (Laboratorio de investigación en tecnología cognitiva) del Departamento de Neurología de la Washington University in St. Louis para los participantes en los estudios de la red de Alzheimer dominantemente heredado (DIAN). La aplicación ARC evalúa la función cognitiva mediante pruebas cognitivas breves, aunque administradas con frecuencia. La aplicación está destinada a que la utilicen únicamente los participantes de los estudios de DIAN.</string>
 	<string name="faq_header">Temas de las preguntas frecuentes</string>

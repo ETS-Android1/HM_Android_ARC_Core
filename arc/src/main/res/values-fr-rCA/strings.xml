@@ -96,9 +96,9 @@
 	<string name="availability_changedenied_test">Revenez après votre test</string>
 	<string name="availability_changedates">J’aimerais modifier les &lt;b>dates&lt;/b> de mon prochain &lt;b>cycle de tests&lt;/b>.</string>
 	<string name="contact_call1">J’aimerais &lt;b>appeler&lt;/b> mon ou ma coordonnateur(trice) de l’étude.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">J’aimerais  &lt;b>envoyer un courriel&lt;/b> à mon ou ma coordonnateur(trice) de l’étude.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">À propos de cette application</string>
 	<string name="about_body">L’application Recherche ambulatoire sur la cognition (Ambulatory Research in Cognition, ARC) a été conçue par le Cognitive Technology Research Laboratory (CTRLab) du service de neurologie de l’Université Washington de Saint-Louis pour les participants inscrits aux études du Réseau de la maladie d’Alzheimer à transmission autosomique dominante (Dominantly Inherited Alzheimer Network, DIAN). L’application ARC évalue la cognition à l’aide de tests cognitifs brefs, que l’on fait passer fréquemment. Cette application est réservée à l’usage des participants inscrits aux études DIAN.</string>
 	<string name="faq_header">Sujets de la Foire aux questions</string>

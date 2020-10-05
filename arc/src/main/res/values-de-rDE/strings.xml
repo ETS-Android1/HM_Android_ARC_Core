@@ -96,9 +96,9 @@
 	<string name="availability_changedenied_test">Versuchen Sie es nach Ihrem Test erneut</string>
 	<string name="availability_changedates">Ich möchte die &lt;b>Daten&lt;/b> für meinen nächsten Testzyklus ändern.</string>
 	<string name="contact_call1">Ich möchte meinen Studienkoordinator &lt;b>anrufen&lt;/b>.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">Ich möchte meinem Studienkoordinator eine &lt;b>E-Mail&lt;/b> schicken.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">Über diese App</string>
 	<string name="about_body">Die App Ambulatory Research in Cognition (ARC) wurde vom Cognitive Technology Research Laboratory (CTRLab/Forschungslabor für kognitive Technologie) im Department of Neurology der Washington University (Abteilung für Neurologie der Washington-Universität) in St. Louis für Teilnehmer, die in die Studien des Netzwerks für die dominant vererbte Alzheimer-Krankheit (DIAN) aufgenommen wurden, entwickelt. Die ARC-App bewertet die Kognition mithilfe von häufig durchgeführten, jedoch kurzen, kognitiven Tests. Diese App soll ausschließlich von Teilnehmern der DIAN-Studien verwendet werden.</string>
 	<string name="faq_header">Häufig gestellte themenspezifische Fragen</string>

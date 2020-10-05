@@ -96,9 +96,9 @@
 	<string name="availability_changedenied_test">テスト後にもう一度確認してください</string>
 	<string name="availability_changedates">次の&lt;b>テストサイクル&lt;/b>の&lt;b>日付&lt;/b>を変更したい。</string>
 	<string name="contact_call1">治験コーディネーターに&lt;b>電話&lt;/b>したい。</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">治験コーディネーターに&lt;b>Eメール&lt;/b>を送りたい。</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">このアプリについて</string>
 	<string name="about_body">「自由行動下認知機能調査(ARC)」アプリは、優性遺伝性アルツハイマー病ネットワーク(DIAN)の研究に登録した参加者のために、セントルイスのワシントン大学神経学学部にある「認知技術調査研究所(CTRLab：Cognitive Technology Research Laboratory)」によって考案されました。ACRアプリは短時間ながら頻回に実施される認知テストを用いて認知を評価します。このアプリはDIAN研究に登録した参加者による使用だけを想定しています。</string>
 	<string name="faq_header">FAQ（よくある質問）のトピック</string>
