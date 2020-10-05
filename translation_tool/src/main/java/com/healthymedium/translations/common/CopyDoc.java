@@ -73,18 +73,18 @@ public class CopyDoc {
     }
 
     public boolean updateCore() {
-        return update("Core!A2:Y999",setup.coreResourcePath);
+        return update("Core!A2:Y999",setup.coreResourcePath,true);
     }
 
     public boolean updateEXR() {
-        return update("EXR!A2:Y999",setup.exrResourcePath);
+        return update("EXR!A2:Y999",setup.exrResourcePath,false);
     }
 
     public boolean updateHASD() {
-        return update("HASD!A2:Y999",setup.hasdResourcePath);
+        return update("HASD!A2:Y999",setup.hasdResourcePath,false);
     }
 
-    public boolean update(String range, String resourcePath) {
+    public boolean update(String range, String resourcePath, boolean includeEmptyFields) {
         if(!googleDoc.valid){
             return false;
         }
@@ -94,10 +94,17 @@ public class CopyDoc {
             return false;
         }
 
+        int max = 0;
+        for(List<String> row : data) {
+            int size = row.size();
+            if(size > max){
+                max = size;
+            }
+        }
+
         List<LocaleResource> localeResources = new ArrayList<>();
-        int size = data.get(0).size();
-        for(int i=1; i<size; i++) {
-            LocaleResource resource = parseForLocale(data,i);
+        for(int i=1; i<max; i++) {
+            LocaleResource resource = parseForLocale(data,i,includeEmptyFields);
             if(resource.isValid()){
                 localeResources.add(resource);
             }
@@ -121,14 +128,20 @@ public class CopyDoc {
         return true;
     }
 
-    private LocaleResource parseForLocale(List<List<String>> data, int index) {
+    private LocaleResource parseForLocale(List<List<String>> data, int index, boolean includeEmptyFields) {
         Map<String,String> map = new LinkedHashMap<>();
         for(List<String> row : data){
+            int size = row.size();
             if(row.isEmpty()) {
                 continue;
             }
 
+            if((size <= index) && !includeEmptyFields){
+                continue;
+            }
+
             String key = row.get(0);
+
             if(!key.isEmpty()){
                 if(row.size() <= index){
                     map.put(key,"");
