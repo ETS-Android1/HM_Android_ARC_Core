@@ -368,9 +368,9 @@
 	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananes</string>
 	<string name="prices_tutorial_price1">3,27 $</string>
-	<string name="prices_tutorial_price1_match">Soupe</string>
-	<string name="prices_tutorial_item2">10,82 $</string>
-	<string name="prices_tutorial_price2">6,78 $</string>
+	<string name="prices_tutorial_price1_match">6,78 $</string>
+	<string name="prices_tutorial_item2">Soupe</string>
+	<string name="prices_tutorial_price2">10,82 $</string>
 	<string name="prices_tutorial_price2_match">4,01 $</string>
 	<string name="prices_tutorial_item3"></string>
 	<string name="prices_tutorial_price3"></string>

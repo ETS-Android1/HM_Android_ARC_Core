@@ -368,9 +368,9 @@
 	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">バナナ</string>
 	<string name="prices_tutorial_price1">¥351.84</string>
-	<string name="prices_tutorial_price1_match">スープ</string>
-	<string name="prices_tutorial_item2">¥1,164.20</string>
-	<string name="prices_tutorial_price2">¥729.51</string>
+	<string name="prices_tutorial_price1_match">¥729.51</string>
+	<string name="prices_tutorial_item2">スープ</string>
+	<string name="prices_tutorial_price2">¥1,164.20</string>
 	<string name="prices_tutorial_price2_match">¥431.46</string>
 	<string name="prices_tutorial_item3"></string>
 	<string name="prices_tutorial_price3"></string>
