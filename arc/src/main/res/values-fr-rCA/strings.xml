@@ -10,10 +10,10 @@
 	<string name="notification1_lastday">Vous êtes à la dernière journée de tests cette semaine! Votre premier premier test de la journée sera disponible jusqu\'à {TIME}.</string>
 	<string name="notifications2_default">C\'est le temps du deuxième test de la journée! Ce test sera disponible jusqu\'à {TIME}.</string>
 	<string name="notification3_default">Votre troisième test de la journée est maintenant disponible. Veuillez effectuer ce test d\'ici {TIME}.</string>
-	<string name="notification3_variation">Voici une autre chance de gagner de l\'argent et d\'aider la science Veuillez effectuer le test no 3 d\'ici {TIME}.</string>
+	<string name="notification3_variation"></string>
 	<string name="notification4_default">Le dernier test de la journée est là! Terminez en force en effectuant ce test d\'ici {TIME}.</string>
 	<string name="notification4_lastday">C\'est le temps d\'effectuer votre dernier test de la semaine! Veuillez le terminer d\'ici {TIME}. Votre coordonnateur(trice) vous contactera au sujet de votre indemnité financière sous peu.</string>
-	<string name="notification_missedtests">Vous avez manqué vos tests. Si vous n’êtes pas en mesure de terminer les tests de cette semaine, veuillez communiquer avec votre coordonnateur de l’étude.        </string>
+	<string name="notification_missedtests">Vous avez manqué vos tests. Si vous n’êtes pas en mesure de terminer les tests de cette semaine, veuillez communiquer avec votre coordonnateur de l’étude.</string>
 	<string name="notification_testproctor_header">Service de planificateur de tests activé</string>
 	<string name="notification_testproctor_body">Cela permet d\'assurer que vous êtes avisé(e) de la disponibilité des tests au bon moment.</string>
 	<string name="dateshift_picker">Quelle semaine êtes-vous en mesure d’effectuer les tests?</string>
@@ -23,6 +23,7 @@
 	<string name="bysigning_key">En vous connectant, vous acceptez notre &lt;b>politique de confidentialité&lt;/b>.</string>
 	<string name="privacy_linked">Politique de confidentialité</string>
 	<string name="about_linked">À propos de cette application</string>
+	<string name="login_enter_raterID"></string>
 	<string name="login_enter_ARCID">Veuillez saisir votre &lt;b>numéro d’identité de l’ARC&lt;/b> ci-dessous :</string>
 	<string name="login_confirm_ARCID">Pour confirmer, veuillez &lt;b>saisir à nouveau votre numéro d’identité de l’ARC :&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>Des difficultés à vous connecter?&lt;/b></string>
@@ -35,6 +36,7 @@
 	<string name="login_2FA_morehelp_linked">J\'ai besoin de plus d\'aide</string>
 	<string name="onboarding_header">Engagement relatif aux tests</string>
 	<string name="onboarding_body">Tous les 6 mois, on vous demandera d\'effectuer &lt;b>une semaine&lt;/b> de tests cognitifs. Durant la semaine, on vous rappellera &lt;b>4 fois par jour&lt;/b> d\'effectuer les tests dans l\'application. Vous pouvez participer à l\'étude pour aussi longtemps que &lt;b>5 ans&lt;/b> (10 semaines de tests).</string>
+	<string name="radio_understand"></string>
 	<string name="radio_commit">Je m\'engage à participer pour toute la durée de l\'étude</string>
 	<string name="radio_nocommit">Je ne peux PAS m\'engager dans cette étude</string>
 	<string name="onboarding_nocommit_header">&lt;b>Merci de votre temps.&lt;/b></string>
@@ -49,6 +51,7 @@
 	<string name="onboarding_notifications_header2">Veuillez activer les notifications.</string>
 	<string name="onboarding_notifications_body2_ios">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application, appuyer sur Notifications, puis appuyer sur EXR et activer le bouton Autoriser les notifications.</string>
 	<string name="onboarding_notifications_body2_android">Vous devez activer les notifications pour que l\'étude fonctionne correctement. Veuillez vous rendre dans Paramètres de l\'application et assurez-vous que les notifications pour {APP_NAME} sont activées.</string>
+	<string name="button_home_notifications"></string>
 	<string name="button_proceed_without_notifications">Procéder Sans Notifications</string>
 	<string name="popup_opensettings">Nous allons maintenant ouvrir vos paramètres. Une fois sur place, appuyez sur Notifications et activez le bouton Autoriser les notifications.</string>
 	<string name="button_notnow">Pas maintenant</string>
@@ -93,9 +96,9 @@
 	<string name="availability_changedenied_test">Revenez après votre test</string>
 	<string name="availability_changedates">J’aimerais modifier les &lt;b>dates&lt;/b> de mon prochain &lt;b>cycle de tests&lt;/b>.</string>
 	<string name="contact_call1">J’aimerais &lt;b>appeler&lt;/b> mon ou ma coordonnateur(trice) de l’étude.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">J’aimerais  &lt;b>envoyer un courriel&lt;/b> à mon ou ma coordonnateur(trice) de l’étude.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">À propos de cette application</string>
 	<string name="about_body">L’application Recherche ambulatoire sur la cognition (Ambulatory Research in Cognition, ARC) a été conçue par le Cognitive Technology Research Laboratory (CTRLab) du service de neurologie de l’Université Washington de Saint-Louis pour les participants inscrits aux études du Réseau de la maladie d’Alzheimer à transmission autosomique dominante (Dominantly Inherited Alzheimer Network, DIAN). L’application ARC évalue la cognition à l’aide de tests cognitifs brefs, que l’on fait passer fréquemment. Cette application est réservée à l’usage des participants inscrits aux études DIAN.</string>
 	<string name="faq_header">Sujets de la Foire aux questions</string>
@@ -118,7 +121,7 @@
 	<string name="faq_testing_a2">Vous aurez jusqu\'à deux heures à partir du moment où vous recevez la notification pour effectuer le test. Après deux heures, vous ne pourrez plus effectuer cette session de test.</string>
 	<string name="faq_testing_a3">Bien que nous aimerions que vous effectuiez le plus de tests possible, nous sommes conscients que vous pouvez avoir une vie très occupée! Ce n\'est pas grave de manquer quelques tests, mais veuillez essayer d\'en effectuer le plus possible - ils ne prennent que 3 à 5 minutes chacun. De plus, lorsque vous recevez une notification, vous avez deux heures pour effectuer le test; vous n\'avez pas besoin de laisser tout tomber pour effectuer le test immédiatement.</string>
 	<string name="faq_testing_a4">À la fin des tests, il vous sera demandé de répondre si oui ou non vous avez été interrompu(e) durant n\'importe lequel des tests. Une fois que vous avez répondu à cette question, vous signerez avec vos initiales et appuierez sur « Envoyer ». Cela marquera la fin du test.</string>
-	<string name="faq_testing_a5">Si vous n\'êtes pas actuellement dans un cycle de tests, la page d\'accueil de l\'application indiquera les dates de votre prochaine semaine de tests. De plus, vous recevrez des notifications de rappel un mois, une semaine et un jour par chaque cycle de tests. Vous aurez l\'option de modifier les dates de votre cycle de tests d\'une semaine. </string>
+	<string name="faq_testing_a5">Si vous n\'êtes pas actuellement dans un cycle de tests, la page d\'accueil de l\'application indiquera les dates de votre prochaine semaine de tests. De plus, vous recevrez des notifications de rappel un mois, une semaine et un jour par chaque cycle de tests. Vous aurez l\'option de modifier les dates de votre cycle de tests d\'une semaine.</string>
 	<string name="faq_testing_a6">Si vous ouvrez l\'application et voyez « Il n\'y a aucun test à effectuer pour le moment », il est possible que vous ayez manqué la période de 2 heures de votre session de test. Vous recevrez une notification lorsqu\'il sera temps d\'effectuer votre prochain test. Le test sera disponible pendant 2 heures après la notification.                                                Si vous voyez le message « Il n\'y a aucun test à effectuer pour le moment » et que vous pensez qu\'il s\'agit d\'une erreur, veuillez contacter votre coordonnateur(trice) de l\'étude.</string>
 	<string name="faq_testing_a7">Vous pouvez changer le moment de la journée où vous êtes disponible pour effectuer le test à tout moment. Pour changer le moment de la journée où vous êtes disponible pour les tests, sélectionnez « Ressources » à partir de la barre de navigation au bas de l\'écran de l\'application, puis « Changer ma disponibilité », et enfin « J\'aimerais changer le &lt;b>moment de la journée&lt;/b> où  je suis disponible pour effectuer les tests. » De plus, vous pouvez changer les dates du cycle de tests à venir lorsque vous avez terminé votre cycle de tests actuel. Pour changer votre prochain cycle de tests, sélectionnez « Ressources » à partir de la barre de navigation au bas de l\'écran de l\'application, puis « Changer ma disponibilité », et enfin « J\'aimerais changer les &lt;b>dates&lt;/b> de mon prochain &lt;b>cycle de tests&lt;/b> ».</string>
 	<string name="faq_testing_a8">Vous ne pourrez pas voir les résultats des tests. Les données recueillies durant les tests sont à des fins de recherche uniquement et ne sont pas destinées à établir un diagnostic ou à traiter une affection. Veuillez contacter votre coordonnateur(trice) de l\'étude pour toute préoccupation.</string>
@@ -205,7 +208,7 @@
 	<string name="chronotype_body1">Répondez à des questions concernant vos habitudes de sommeil et de réveil pour les jours avec et sans travail.                          &lt;br />&lt;br />\n&lt;i>Veuillez estimer en moyenne vos habitudes de sommeil normales au cours des six dernières semaines lorsque vous avez pu suivre vos routines habituelles.&lt;/i></string>
 	<string name="chronotype_q1">J’ai été un travailleur de quarts ou de nuit au cours des trois derniers mois.</string>
 	<string name="chronotype_q2">Normalement, je travaille ____ jours par semaine.</string>
-	<string name="chronotype_body2">Veuillez répondre à toutes les questions suivantes, même si vous ne travaillez pas, ou ne travaillez pas sept jours par semaine.&lt;br />&lt;br /> &lt;i>N’oubliez pas d’indiquer AM ou PM.&lt;/i>             </string>
+	<string name="chronotype_body2">Veuillez répondre à toutes les questions suivantes, même si vous ne travaillez pas, ou ne travaillez pas sept jours par semaine.&lt;br />&lt;br /> &lt;i>N’oubliez pas d’indiquer AM ou PM.&lt;/i></string>
 	<string name="chronotype_workdays_sleep">Les  &lt;b>jours de travail&lt;/b>, je &lt;b>m’endors&lt;/b> normalement à :</string>
 	<string name="chronotype_workdays_wake">Les &lt;b>jours de travail&lt;/b>, je &lt;b>me réveille&lt;/b> normalement à :</string>
 	<string name="chronotype_workfree_sleep">Les &lt;b>jours sans travail&lt;/b> lorsque je n’utilise pas de réveille-matin, je &lt;b>m’endors&lt;/b> normalement à :</string>
@@ -276,6 +279,7 @@
 	<string name="testing_id_body">En apposant mes initiales sur la ligne ci-dessous, j’atteste que j’ai effectué ces tests. </string>
 	<string name="prices_header">Prix</string>
 	<string name="prices_body">Nous vous demandons de déterminer si le prix affiché représente une bonne affaire pour cet article.  &lt;br />&lt;br />La paire ne restera pas longtemps à l’écran, prenez donc une décision rapidement et prêtez une attention particulière.</string>
+	<string name="prices_body2"></string>
 	<string name="prices_isthisgood">Est-ce un coût avantageux?</string>
 	<string name="prices_overlay">Vous verrez maintenant un article et deux prix. Veuillez sélectionner le prix qui correspond à l\'article de la section précédente.</string>
 	<string name="prices_whatwasprice">Quel était le prix?</string>
@@ -325,6 +329,7 @@
 	<string name="login_error1">Identifiants de connexion incorrects</string>
 	<string name="login_error2">Ce numéro d’identité de l’ARC est déjà inscrit sur un autre appareil.</string>
 	<string name="login_error3">Désolé, notre application éprouve actuellement des difficultés. Veuillez réessayer plus tard.</string>
+	<string name="login_error4"></string>
 	<string name="button_help">AIDE</string>
 	<string name="button_begin">COMMENCER</string>
 	<string name="button_back">PRÉCÉDENT</string>
@@ -335,6 +340,7 @@
 	<string name="button_email">ENVOYER UN COURRIEL</string>
 	<string name="button_done">TERMINÉ</string>
 	<string name="button_change">MODIFIER</string>
+	<string name="button_submit"></string>
 	<string name="button_submitdates">SOUMETTRE LES DATES</string>
 	<string name="button_signin">SE CONNECTER</string>
 	<string name="button_beginsurvey">COMMENCER LE QUESTIONNAIRE</string>
@@ -356,15 +362,19 @@
 	<string name="popup_next">Suivant</string>
 	<string name="popup_done">Terminé</string>
 	<string name="popup_tutorial_view">Appuyez ici pour voir un tutoriel</string>
-	<string name="popup_tutorial_welcome">&lt;b>Bienvenue dans le tutoriel!&lt;/b> Cette barre de progrès montre quelle proportion du tutoriel vous avez effectuée. </string>
+	<string name="popup_tutorial_welcome"></string>
 	<string name="popup_tutorial_quit">Appuyez ici pour quitter le tutoriel.</string>
 	<string name="popup_tutorial_price_intro">Le test des prix comporte deux parties. &lt;b>D\'abord, évaluez le prix.&lt;/b></string>
+	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananes</string>
 	<string name="prices_tutorial_price1">3,27 $</string>
+	<string name="prices_tutorial_price1_match">6,78 $</string>
 	<string name="prices_tutorial_item2">Soupe</string>
 	<string name="prices_tutorial_price2">10,82 $</string>
-	<string name="prices_tutorial_price1_match">6,78 $</string>
 	<string name="prices_tutorial_price2_match">4,01 $</string>
+	<string name="prices_tutorial_item3"></string>
+	<string name="prices_tutorial_price3"></string>
+	<string name="prices_tutorial_price3_match"></string>
 	<string name="popup_tutorial_choose1">&lt;b>Qu\'en pensez-vous?&lt;/b>\nChoisissez la réponse qui fait du sens pour vous.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Excellent choix!&lt;/b> \nEssayons-en un autre.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>Un autre excellent choix!&lt;/b> \nPassons à la partie deux.</string>
@@ -376,6 +386,7 @@
 	<string name="popup_tutorial_tilesbottom">…et &lt;b>deux tuiles&lt;/b> en bas.</string>
 	<string name="popup_tutorial_middle_instructions">Appuyez sur &lt;b>la tuile du bas qui correspond&lt;/b> à la tuile du haut.</string>
 	<string name="popup_tutorial_tiletap">Appuyez sur cette tuile correspondante.</string>
+	<string name="popup_tutorial_pricetap"></string>
 	<string name="popup_tutorial_greatjob">&lt;b>Excellent travail!&lt;/b> \nEssayons-en encore quelques-uns pour s\'exercer.</string>
 	<string name="popup_tutorial_nice">&lt;b>Bien!&lt;/b> \nEncore un...</string>
 	<string name="popup_tutorial_grid_recall">Dans ce test en trois parties, il vous sera demandé de &lt;b>vous rappeler l\'emplacement&lt;/b> de ces articles.</string>

@@ -10,7 +10,7 @@
 	<string name="notification1_lastday">Dies ist Ihr letzter Testtag dieser Woche! Ihr erster Test des Tages wird bis zum {TIME} verfügbar sein.</string>
 	<string name="notifications2_default">Es ist Zeit für den zweiten Test des heutigen Tages! Dieser Test wird bis {TIME} verfügbar sein.</string>
 	<string name="notification3_default">Ihr dritter Test des Tages ist jetzt verfügbar. Bitte schließen Sie diesen Test bis {TIME} ab.</string>
-	<string name="notification3_variation">Hier ist eine weitere Chance, Geld zu verdienen und der Wissenschaft zu helfen. Bitte schließen Sie Test 3 bis {TIME} ab.</string>
+	<string name="notification3_variation"></string>
 	<string name="notification4_default">Der letzte Test des Tages ist da! Legen Sie einen Endspurt hin und schließen Sie diesen Test bis {TIME} ab.</string>
 	<string name="notification4_lastday">Es ist Zeit für den letzten Test der Woche! Bitte schließen Sie ihn bis {TIME} ab. Ihr Koordinator wird sich in Kürze mit Ihnen bezüglich Ihres Verdienstes in Verbindung setzen.</string>
 	<string name="notification_missedtests">Sie haben Ihre Tests verpasst. Wenn Sie die Tests in dieser Woche nicht abschließen können, setzen Sie sich bitte mit Ihrem Studienkoordinator in Verbindung.</string>
@@ -23,6 +23,7 @@
 	<string name="bysigning_key">Durch Ihre Anmeldung erklären Sie sich mit unseren &lt;b>Datenschutzbestimmungen&lt;/b> einverstanden.</string>
 	<string name="privacy_linked">Datenschutzbestimmungen</string>
 	<string name="about_linked">Über diese App</string>
+	<string name="login_enter_raterID"></string>
 	<string name="login_enter_ARCID">Bitte geben Sie unten Ihre &lt;b>ARC-ID&lt;/b> an:</string>
 	<string name="login_confirm_ARCID">Geben Sie bitte zur Bestätigung Ihre &lt;b>ARC-ID erneut ein&lt;/b>:</string>
 	<string name="login_problems_linked">&lt;b>Probleme beim Einloggen?&lt;/b></string>
@@ -35,6 +36,7 @@
 	<string name="login_2FA_morehelp_linked">Ich brauche mehr Hilfe</string>
 	<string name="onboarding_header">Testverpflichtung</string>
 	<string name="onboarding_body">Alle 6 Monate werden Sie gebeten, &lt;b>eine Woche&lt;/b> lang kognitive Tests durchzuführen. Während der Woche werden Sie &lt;b>4 Mal am Tag&lt;/b> daran erinnert, Tests innerhalb der App abzuschließen. Sie können &lt;b>5 Jahre&lt;/b> (10 Testwochen) in der Studie sein.</string>
+	<string name="radio_understand"></string>
 	<string name="radio_commit">Ich verpflichte mich, für die Dauer der Studie teilzunehmen</string>
 	<string name="radio_nocommit">Ich bin NICHT in der Lage, mich zur Teilnahme an dieser Studie zu verpflichten</string>
 	<string name="onboarding_nocommit_header">&lt;b>Vielen Dank für Ihre Zeit.&lt;/b></string>
@@ -49,6 +51,7 @@
 	<string name="onboarding_notifications_header2">Bitte aktivieren Sie die Benachrichtigungen.</string>
 	<string name="onboarding_notifications_body2_ios">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Rufen Sie die Anwendung Einstellungen auf, tippen Sie auf Benachrichtigungen, tippen Sie dann auf EXR, und aktivieren Sie den Schalter Benachrichtigungen zulassen.</string>
 	<string name="onboarding_notifications_body2_android">Sie müssen die Benachrichtigungen aktivieren, damit die Studie ordnungsgemäß funktioniert. Bitte rufen Sie die Einstellungen auf und vergewissern Sie sich, dass die Benachrichtigungen für {APP_NAME} aktiviert sind.</string>
+	<string name="button_home_notifications"></string>
 	<string name="button_proceed_without_notifications">Fahren Sie ohne Benachrichtigungen fort</string>
 	<string name="popup_opensettings">Wir öffnen jetzt Ihre Einstellungen. Tippen Sie dort auf Benachrichtigungen und aktivieren Sie den Schalter Benachrichtigungen zulassen.</string>
 	<string name="button_notnow">Nicht jetzt</string>
@@ -93,9 +96,9 @@
 	<string name="availability_changedenied_test">Versuchen Sie es nach Ihrem Test erneut</string>
 	<string name="availability_changedates">Ich möchte die &lt;b>Daten&lt;/b> für meinen nächsten Testzyklus ändern.</string>
 	<string name="contact_call1">Ich möchte meinen Studienkoordinator &lt;b>anrufen&lt;/b>.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">Ich möchte meinem Studienkoordinator eine &lt;b>E-Mail&lt;/b> schicken.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">Über diese App</string>
 	<string name="about_body">Die App Ambulatory Research in Cognition (ARC) wurde vom Cognitive Technology Research Laboratory (CTRLab/Forschungslabor für kognitive Technologie) im Department of Neurology der Washington University (Abteilung für Neurologie der Washington-Universität) in St. Louis für Teilnehmer, die in die Studien des Netzwerks für die dominant vererbte Alzheimer-Krankheit (DIAN) aufgenommen wurden, entwickelt. Die ARC-App bewertet die Kognition mithilfe von häufig durchgeführten, jedoch kurzen, kognitiven Tests. Diese App soll ausschließlich von Teilnehmern der DIAN-Studien verwendet werden.</string>
 	<string name="faq_header">Häufig gestellte themenspezifische Fragen</string>
@@ -276,6 +279,7 @@
 	<string name="testing_id_body">Indem ich auf der Linie unten mit meinen Initialen unterschreibe, bestätige ich, dass ich diese Tests durchgeführt habe.</string>
 	<string name="prices_header">Preise</string>
 	<string name="prices_body">Bitte entscheiden Sie, ob der angezeigte Preis ein Schnäppchen für den jeweiligen Artikel ist.  &lt;br />&lt;br />Jedes Paar aus Artikel und Preis wird nur kurzzeitig auf dem Bildschirm erscheinen. Entscheiden Sie sich daher schnell und schauen Sie genau hin.</string>
+	<string name="prices_body2"></string>
 	<string name="prices_isthisgood">Ist dies ein guter Preis?</string>
 	<string name="prices_overlay">Sie sehen nun einen Artikel und zwei Preise. Bitte wählen Sie den zu dem Artikel passenden Preis aus dem vorherigen Abschnitt aus.</string>
 	<string name="prices_whatwasprice">Wie hoch war der Preis?</string>
@@ -325,6 +329,7 @@
 	<string name="login_error1">Falsche Anmeldedaten</string>
 	<string name="login_error2">Diese ARC-ID ist bereits als Teilnehmer auf einem anderen Gerät angemeldet.</string>
 	<string name="login_error3">Unsere APP hat leider momentan Probleme. Bitte versuchen Sie es später noch einmal.</string>
+	<string name="login_error4"></string>
 	<string name="button_help">HILFE</string>
 	<string name="button_begin">BEGINNEN</string>
 	<string name="button_back">ZURÜCK</string>
@@ -335,6 +340,7 @@
 	<string name="button_email">E-MAIL SCHICKEN</string>
 	<string name="button_done">FERTIG</string>
 	<string name="button_change">ÄNDERN</string>
+	<string name="button_submit"></string>
 	<string name="button_submitdates">DATEN ABSENDEN</string>
 	<string name="button_signin">ANMELDEN</string>
 	<string name="button_beginsurvey">BEFRAGUNG BEGINNEN</string>
@@ -356,15 +362,19 @@
 	<string name="popup_next">Weiter</string>
 	<string name="popup_done">Fertig</string>
 	<string name="popup_tutorial_view">Tippen Sie hier, um ein Tutorial anzusehen</string>
-	<string name="popup_tutorial_welcome">&lt;b>Willkommen zum Tutorial!&lt;/b>\nDieser Fortschrittsbalken zeigt an, wie viel des Tutorials Sie bereits abgeschlossen haben.</string>
+	<string name="popup_tutorial_welcome"></string>
 	<string name="popup_tutorial_quit">Tippen Sie hier, um das Tutorial zu beenden.</string>
 	<string name="popup_tutorial_price_intro">Der Preistest besteht aus zwei Teilen. &lt;b>Erstens: Bewerten Sie den Preis.&lt;/b></string>
+	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananen</string>
 	<string name="prices_tutorial_price1">3,27 €</string>
+	<string name="prices_tutorial_price1_match">6,78 €</string>
 	<string name="prices_tutorial_item2">Suppe</string>
 	<string name="prices_tutorial_price2">10,82 €</string>
-	<string name="prices_tutorial_price1_match">6,78 €</string>
 	<string name="prices_tutorial_price2_match">4,01 €</string>
+	<string name="prices_tutorial_item3"></string>
+	<string name="prices_tutorial_price3"></string>
+	<string name="prices_tutorial_price3_match"></string>
 	<string name="popup_tutorial_choose1">&lt;b>Was denken Sie?&lt;/b>\nWählen Sie die Antwort, die Ihnen sinnvoll erscheint.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Gute Wahl!&lt;/b>\nUnd jetzt noch ein Versuch.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>Eine weitere gute Wahl!&lt;/b>\nFahren wir mit Teil 2 fort.</string>
@@ -376,6 +386,7 @@
 	<string name="popup_tutorial_tilesbottom">...und &lt;b>zwei Kacheln&lt;/b> am unteren Bildschirmrand.</string>
 	<string name="popup_tutorial_middle_instructions">Tippen Sie auf die &lt;b>Kachel unten&lt;/b>, die mit einer Kachel oben &lt;b>übereinstimmt&lt;/b>.</string>
 	<string name="popup_tutorial_tiletap">Tippen Sie auf diese passende Kachel.</string>
+	<string name="popup_tutorial_pricetap"></string>
 	<string name="popup_tutorial_greatjob">&lt;b>Gut gemacht!&lt;/b>\nVersuchen wir noch ein paar Tests zum Üben.</string>
 	<string name="popup_tutorial_nice">&lt;b>Gut gemacht!&lt;/b>\nNoch einer...</string>
 	<string name="popup_tutorial_grid_recall">In diesem dreiteiligen Test werden Sie aufgefordert, sich an &lt;b>die Stelle zu erinnern&lt;/b>, an der sich diese Dinge befinden.</string>
