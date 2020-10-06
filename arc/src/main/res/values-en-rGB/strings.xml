@@ -10,7 +10,7 @@
 	<string name="notification1_lastday">You\'re on the last day of testing this week! Your first test of the day will be available until {TIME}.</string>
 	<string name="notifications2_default">It\'s time for today\'s second test! This test will be available until {TIME}.</string>
 	<string name="notification3_default">Your third test of the day is now available. Please complete this test by {TIME}.</string>
-	<string name="notification3_variation">Here\'s another chance to earn money and help science Please complete test #3 by {TIME}.</string>
+	<string name="notification3_variation"></string>
 	<string name="notification4_default">The last test of the day is here! Finish strong by completing this test by {TIME}.</string>
 	<string name="notification4_lastday">It\'s time to take your last test of the week! Please finish it by {TIME}. Your coordinator will contact you about your earnings shortly.</string>
 	<string name="notification_missedtests">You\'ve missed your tests. If you\'re unable \nto finish this week, please contact your study coordinator.</string>
@@ -23,6 +23,7 @@
 	<string name="bysigning_key">By signing in you agree to our</string>
 	<string name="privacy_linked">Privacy Policy</string>
 	<string name="about_linked">About This App</string>
+	<string name="login_enter_raterID"></string>
 	<string name="login_enter_ARCID">Please enter your &lt;b>ARC ID&lt;/b> below:</string>
 	<string name="login_confirm_ARCID">To confirm, please &lt;b>re-enter your ARC ID:&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>Problems logging in?&lt;/b></string>
@@ -35,6 +36,7 @@
 	<string name="login_2FA_morehelp_linked">I need more help</string>
 	<string name="onboarding_header">Testing Commitment</string>
 	<string name="onboarding_body">Every six months, you will be asked to complete &lt;b>one week&lt;/b> of cognitive tests. During the week, you will be reminded &lt;b>4 times a day&lt;/b> to complete tests within the app. You may be in the study for as long as &lt;b>5 years&lt;/b> (10 weeks of testing).</string>
+	<string name="radio_understand"></string>
 	<string name="radio_commit">I commit to participate for the length of the study</string>
 	<string name="radio_nocommit">I\'m NOT able to commit to this study</string>
 	<string name="onboarding_nocommit_header">&lt;b>Thank you for your time.&lt;/b></string>
@@ -49,6 +51,7 @@
 	<string name="onboarding_notifications_header2">Please turn on notifications.</string>
 	<string name="onboarding_notifications_body2_ios">You must turn on notifications for the study to function properly. Please visit the Settings App, tap Notifications, then tap EXR and turn on the Allow Notifications switch.</string>
 	<string name="onboarding_notifications_body2_android">You must turn on notifications for the study to function properly. Please go to Settings and make sure notifications for {APP_NAME} are turned on.</string>
+	<string name="button_home_notifications"></string>
 	<string name="button_proceed_without_notifications">Proceed Without Notifications</string>
 	<string name="popup_opensettings">We\'ll now open your Settings. Once there, tap Notifications, and turn on the Allow Notifications Switch.</string>
 	<string name="button_notnow">Not now</string>
@@ -90,12 +93,12 @@
 	<string name="resources_nav_earnings">Earnings</string>
 	<string name="resources_nav_resources">Resources</string>
 	<string name="availability_changetime">I would like to change the &lt;b>time of day&lt;/b> I am available for testing.</string>
-	<string name="availability_changedenied_test">Check back after your test</string>
+	<string name="availability_changedenied_test">Check back after your test.</string>
 	<string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
 	<string name="contact_call1">I would like to &lt;b>call&lt;/b> my study coordinator.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">About this App</string>
 	<string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
 	<string name="faq_header">Frequently Asked Questions Topics</string>
@@ -148,7 +151,7 @@
 	<string name="faq_earnings_a1">You can earn up to $32 per 7-day testing cycle for as long as you are in the study. You earn $0.50 for each test you complete (up to $14 per cycle). You also can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests.</string>
 	<string name="faq_earnings_a2">Your payment will be processed immediately upon completion of a testing cycle. It may take several business days for your payment to be processed. Please contact your study coordinator if you have any questions about when you will receive your payment.</string>
 	<string name="faq_earnings_a3">You will be paid via an electronic Amazon gift card.</string>
-	<string name="faq_earnings_a4">\"This week\" refers to the amount of money you have earned during the current testing cycle. \"Study total\" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
+	<string name="faq_earnings_a4">This week refers to the amount of money you have earned during the current testing cycle. \"Study total\" refers to the cumulative amount of money you have earned from all testing cycles, including the current one.</string>
 	<string name="faq_earnings_a5">Bonus goals are money that can be earned above and beyond the $0.50 earned per completed test session. During each testing cycle, you can work toward three bonus goals: $1 per day for completing all four tests in one day (up to $7 per cycle); $6 per cycle for completing two or more tests each day; and $5 per cycle for completing 21 or more tests. You are able to earn money for all three bonus goals.</string>
 	<string name="progress_daily_header">Today\'s Sessions</string>
 	<string name="progress_dailystatus_complete">&lt;b>{#}&lt;/b> Complete</string>
@@ -276,6 +279,7 @@
 	<string name="testing_id_body">By signing my initials on the line below, I attest that I completed these tests.</string>
 	<string name="prices_header">Prices</string>
 	<string name="prices_body">Please decide if the displayed price is a good bargain for that item. &lt;br />&lt;br />The pair will only remain on the screen for a short time, so please make your decision quickly and pay close attention.</string>
+	<string name="prices_body2"></string>
 	<string name="prices_isthisgood">Is this a good price?</string>
 	<string name="prices_overlay">You will now see an item and two prices. Please select the price that matches the item from the previous section.</string>
 	<string name="prices_whatwasprice">What was the price?</string>
@@ -325,6 +329,7 @@
 	<string name="login_error1">Incorrect log-in credentials</string>
 	<string name="login_error2">This ARC ID is already enrolled on another device.</string>
 	<string name="login_error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
+	<string name="login_error4"></string>
 	<string name="button_help">HELP</string>
 	<string name="button_begin">BEGIN</string>
 	<string name="button_back">BACK</string>
@@ -335,6 +340,7 @@
 	<string name="button_email">EMAIL</string>
 	<string name="button_done">DONE</string>
 	<string name="button_change">CHANGE</string>
+	<string name="button_submit"></string>
 	<string name="button_submitdates">SUBMIT DATES</string>
 	<string name="button_signin">SIGN IN</string>
 	<string name="button_beginsurvey">BEGIN SURVEY</string>
@@ -356,15 +362,19 @@
 	<string name="popup_next">Next</string>
 	<string name="popup_done">Done</string>
 	<string name="popup_tutorial_view">Tap here to view a tutorial</string>
-	<string name="popup_tutorial_welcome">&lt;b>Welcome to the tutorial!&lt;/b> \nThis progress bar shows how much of the tutorial you\'ve completed.</string>
+	<string name="popup_tutorial_welcome"></string>
 	<string name="popup_tutorial_quit">Tap here to quit the tutorial.</string>
 	<string name="popup_tutorial_price_intro">The Prices test has two parts. &lt;b>First, evaluate the price.&lt;/b></string>
+	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananas</string>
 	<string name="prices_tutorial_price1">£3.27</string>
+	<string name="prices_tutorial_price1_match">£6.78</string>
 	<string name="prices_tutorial_item2">Soup</string>
 	<string name="prices_tutorial_price2">£10.82</string>
-	<string name="prices_tutorial_price1_match">£6.78</string>
 	<string name="prices_tutorial_price2_match">£4.01</string>
+	<string name="prices_tutorial_item3"></string>
+	<string name="prices_tutorial_price3"></string>
+	<string name="prices_tutorial_price3_match"></string>
 	<string name="popup_tutorial_choose1">&lt;b>What do you think?&lt;/b>\nChoose the answer that makes sense to you.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>Great choice!&lt;/b> \nLet\'s try another.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>Another great choice!&lt;/b> \nLet\'s proceed to part two.</string>
@@ -376,6 +386,7 @@
 	<string name="popup_tutorial_tilesbottom">...and &lt;b>two tiles&lt;/b> on the bottom.</string>
 	<string name="popup_tutorial_middle_instructions">Tap the &lt;b>bottom tile that matches&lt;/b> a tile on the top.</string>
 	<string name="popup_tutorial_tiletap">Tap this matching tile.</string>
+	<string name="popup_tutorial_pricetap"></string>
 	<string name="popup_tutorial_greatjob">&lt;b>Great job!&lt;/b> \nLet\'s try a couple more for practice.</string>
 	<string name="popup_tutorial_nice">&lt;b>Nice!&lt;/b> \nOne more...</string>
 	<string name="popup_tutorial_grid_recall">In this three part test, you\'ll be asked to &lt;b>recall the location&lt;/b> of these items.</string>
@@ -442,7 +453,9 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">£</string>
+	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">£</string>
+	<string name="prices_test_suffix"></string>
 	<string name="unit_months">months</string>
 	<string name="battery_optimization_header">Battery Optimization</string>
 	<string name="battery_optimization_overview">Your phone has a setting to help preserve your battery life, and it is called a “battery optimization” setting.&lt;br>&lt;br>The {APP_NAME} app will have minimal impact on the battery life of your phone. It is recommended that you turn off the battery optimization setting for the {APP_NAME} app. Doing so will help make sure you receive test notifications on time.</string>

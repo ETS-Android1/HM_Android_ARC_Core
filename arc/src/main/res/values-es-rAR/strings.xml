@@ -10,7 +10,7 @@
 	<string name="notification1_lastday">¡Ya llegó al último día de pruebas de esta semana! Su primera prueba del día estará disponible hasta la/s {TIME}.</string>
 	<string name="notifications2_default">Ha llegado la hora de hacer la segunda prueba de hoy. Esta prueba estará disponible hasta la/s {TIME}.</string>
 	<string name="notification3_default">Ya está disponible la tercera prueba del día. Complete esta prueba antes de la/s {TIME}.</string>
-	<string name="notification3_variation">Aquí tiene otra oportunidad de ganar dinero y ayudar a la ciencia. Complete la prueba n.º 3 antes de la/s {TIME}.</string>
+	<string name="notification3_variation"></string>
 	<string name="notification4_default">Ya ha llegado la última prueba del día. Termine en buen estado y complete esta prueba antes de la/s {TIME}.</string>
 	<string name="notification4_lastday">Ha llegado la hora de hacer la última prueba de la semana. Termine por favor antes de la/s {TIME}. Su coordinador se comunicará con usted a la brevedad acerca de sus ganancias.</string>
 	<string name="notification_missedtests">No pudo completar sus pruebas. Si no puede terminar esta semana, por favor póngase en contacto con el coordinador del estudio.</string>
@@ -23,6 +23,7 @@
 	<string name="bysigning_key">Al ingresar usted acepta nuestra &lt;b>Política de privacidad&lt;/b>.</string>
 	<string name="privacy_linked">Política de privacidad</string>
 	<string name="about_linked">Sobre esta aplicación</string>
+	<string name="login_enter_raterID"></string>
 	<string name="login_enter_ARCID">Ingrese abajo su &lt;b>ID de ARC&lt;/b>:</string>
 	<string name="login_confirm_ARCID">Para confirmar, por favor &lt;b>ingrese nuevamente su ID de ARC:&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>¿Problemas para iniciar sesión?&lt;/b></string>
@@ -35,6 +36,7 @@
 	<string name="login_2FA_morehelp_linked">Necesito más ayuda</string>
 	<string name="onboarding_header">Compromiso a participar en las pruebas</string>
 	<string name="onboarding_body">Cada 6 meses, se le pedirá que complete &lt;b>una semana&lt;/b> de pruebas cognitivas. Durante la semana, se le recordará &lt;b>4 veces al día&lt;/b> que complete pruebas en la aplicación. Podrá estar en el estudio por hasta &lt;b>5 años&lt;/b> (10 semanas de pruebas).</string>
+	<string name="radio_understand"></string>
 	<string name="radio_commit">Me comprometo a participar por la duración del estudio</string>
 	<string name="radio_nocommit">NO puedo comprometerme a participar en este estudio</string>
 	<string name="onboarding_nocommit_header">&lt;b>Gracias por su tiempo.&lt;/b></string>
@@ -49,6 +51,7 @@
 	<string name="onboarding_notifications_header2">Habilite las notificaciones.</string>
 	<string name="onboarding_notifications_body2_ios">Debe habilitar las notificaciones para que el estudio funcione como es debido. Ingrese a la aplicación Configuración, toque Notificaciones, luego toque EXR y active el interruptor Permitir notificaciones.</string>
 	<string name="onboarding_notifications_body2_android">Debe habilitar las notificaciones para que el estudio funcione como es debido. Vaya a Configuración y asegúrese de que las notificaciones para {APP_NAME} estén habilitadas.</string>
+	<string name="button_home_notifications"></string>
 	<string name="button_proceed_without_notifications">Continuar sin notificaciones</string>
 	<string name="popup_opensettings">Ahora abriremos su configuración. Una vez allí, toque Notificaciones y active el interruptor Permitir notificaciones.</string>
 	<string name="button_notnow">Ahora no</string>
@@ -93,9 +96,9 @@
 	<string name="availability_changedenied_test">Vuelve a consultar después de tu prueba</string>
 	<string name="availability_changedates">Me gustaría cambiar las &lt;b>fechas&lt;/b> de mi próximo &lt;b>ciclo de prueba&lt;/b>.</string>
 	<string name="contact_call1">Me gustaría &lt;b>llamar&lt;/b> a mi coordinador del estudio.</string>
-	<string name="contact_call2">314-273-7112</string>
+	<string name="contact_call2"></string>
 	<string name="contact_email1">Me gustaría enviar un &lt;b>correo electrónico&lt;/b> a mi coordinador del estudio.</string>
-	<string name="contact_email2">neuro-dianarc@email.wustl.edu</string>
+	<string name="contact_email2"></string>
 	<string name="about_header">Sobre esta aplicación</string>
 	<string name="about_body">La aplicación de Investigación Ambulatoría sobre la Cognición (ARC por su sigla en inglés) fue diseñada por el Laboratorio de Investigación de Tecnologías de la Cognición (CTRLab por su sigla en inglés) en el Departamento de Neurología de la Universidad de Washington en St. Louis para los participantes inscritos en los estudios la Red de Alzheimer Heredado en forma Dominante (DIAN por su sigla en inglés). La aplicación de ARC valora la cognición utilizando pruebas de cognición frecuentes pero cortas. Esta aplicación está destinada solo para el uso de los participantes inscritos en los estudios DIAN.</string>
 	<string name="faq_header">Temas de las preguntas frecuentes</string>
@@ -148,7 +151,7 @@
 	<string name="faq_earnings_a1">Puede ganar hasta $32 por ciclo de pruebas de 7 días mientras siga participando en el estudio.  Gana $0.50 por cada prueba que completa (hasta un máximo de $14 por ciclo). También puede trabajar para alcanzar estas tres metas y recibir bonificaciones: $1 por día por completar las 4 pruebas de un día (hasta $7 por ciclo); $6 por ciclo por completar dos o más pruebas cada día; y $5 por ciclo por completar 21 pruebas o más.</string>
 	<string name="faq_earnings_a2">Su pago se procesará de inmediato una vez que complete un ciclo de pruebas. Puede que su pago tarde varios días laborales en procesarse. Comuníquese con el coordinador del estudio ante cualquier pregunta acerca de cuándo recibirá el pago.</string>
 	<string name="faq_earnings_a3">Se le pagará mediante una tarjeta de regalo electrónica de Amazon.</string>
-	<string name="faq_earnings_a4">\"Esta semana\" se refiere a la cantidad de dinero que haya ganado durante el ciclo de pruebas vigente en ese momento. \"Total del estudio\" se refiere a la cantidad de dinero acumulativa que haya ganado en todos los ciclos de pruebas, incluido el vigente.</string>
+	<string name="faq_earnings_a4">Esta semana se refiere a la cantidad de dinero que haya ganado durante el ciclo de pruebas vigente en ese momento. \"Total del estudio\" se refiere a la cantidad de dinero acumulativa que haya ganado en todos los ciclos de pruebas, incluido el vigente.</string>
 	<string name="faq_earnings_a5">Las metas para bonificaciones representan dinero que se puede ganar más allá de los $0.50 que se ganan por prueba completada. Durante cada ciclo de pruebas, usted puede trabajar para intentar alcanzar esas tres metas y recibir bonificaciones: $1 por día por completar las 4 pruebas de un día (hasta $7 por ciclo); $6 por ciclo por completar dos o más pruebas cada día; y $5 por ciclo por completar 21 pruebas o más. Puede ganar dinero de cada una de las tres metas.</string>
 	<string name="progress_daily_header">Sesiones de hoy</string>
 	<string name="progress_dailystatus_complete">&lt;b>{#}&lt;/b> completadas</string>
@@ -275,7 +278,8 @@
 	<string name="testing_id_header">Firme con sus iniciales en la línea a continuación.</string>
 	<string name="testing_id_body">Al firmar con mis iniciales en la línea a continuación, doy fe de que he completado estas evaluaciones.</string>
 	<string name="prices_header">Precios</string>
-	<string name="prices_body">Por favor decida si el precio exhibido es bueno para ese artículo.  &lt;br />&lt;br />La pareja solo estará en la pantalla durante un tiempo corto, por lo tanto tome su decisión rápidamente y preste mucha atención.                 </string>
+	<string name="prices_body">Por favor decida si el precio exhibido es bueno para ese artículo.  &lt;br />&lt;br />La pareja solo estará en la pantalla durante un tiempo corto, por lo tanto tome su decisión rápidamente y preste mucha atención.</string>
+	<string name="prices_body2"></string>
 	<string name="prices_isthisgood">¿Es este un buen precio?</string>
 	<string name="prices_overlay">Ahora verá un artículo y dos precios. Seleccione el precio que concuerde con el artículo de la sección anterior.</string>
 	<string name="prices_whatwasprice">¿Cuál es el precio?</string>
@@ -322,9 +326,10 @@
 	<string name="progress_studytotals_goals">Metas logradas</string>
 	<string name="progress_endoftest_syncing">Un momento, por favor, mientras actualizamos sus ganancias...</string>
 	<string name="progress_endoftest_nosync">La sincronización está tardando más de lo normal. Consulte la pestaña Ganancias para ver sus totales actualizados.</string>
-	<string name="login_error1">Credenciales incorrectas de inicio de sesión </string>
+	<string name="login_error1">Credenciales incorrectas de inicio de sesión</string>
 	<string name="login_error2">Esta ID de ARC ya está inscrita en otro dispositivo.</string>
 	<string name="login_error3">Disculpe, nuestra aplicación está presentando problemas en estos momentos. Por favor intente de nuevo más tarde.</string>
+	<string name="login_error4"></string>
 	<string name="button_help">AYUDA</string>
 	<string name="button_begin">COMENZAR</string>
 	<string name="button_back">REGRESAR</string>
@@ -335,6 +340,7 @@
 	<string name="button_email">CORREO ELECTRÓNICO</string>
 	<string name="button_done">LISTO</string>
 	<string name="button_change">CAMBIAR</string>
+	<string name="button_submit"></string>
 	<string name="button_submitdates">ENVIAR LAS FECHAS</string>
 	<string name="button_signin">INICIAR SESIÓN</string>
 	<string name="button_beginsurvey">COMENZAR LA ENCUESTA</string>
@@ -356,15 +362,19 @@
 	<string name="popup_next">Siguiente</string>
 	<string name="popup_done">Listo</string>
 	<string name="popup_tutorial_view">Toque aquí para ver un tutorial</string>
-	<string name="popup_tutorial_welcome">&lt;b>¡Bienvenido al tutorial!&lt;/b>\nEsta barra de progreso le muestra qué porcentaje del tutorial ha completado.</string>
+	<string name="popup_tutorial_welcome"></string>
 	<string name="popup_tutorial_quit">Toque aquí para dejar el tutorial.</string>
 	<string name="popup_tutorial_price_intro">La prueba de precios tiene dos partes. &lt;b>Primero, evaluar el precio.&lt;/b></string>
+	<string name="popup_tutorial_price_memorize"></string>
 	<string name="prices_tutorial_item1">Bananas</string>
 	<string name="prices_tutorial_price1">$215.35</string>
+	<string name="prices_tutorial_price1_match">$446.50</string>
 	<string name="prices_tutorial_item2">Sopa</string>
 	<string name="prices_tutorial_price2">$712.55</string>
-	<string name="prices_tutorial_price1_match">$446.50</string>
 	<string name="prices_tutorial_price2_match">$264.08</string>
+	<string name="prices_tutorial_item3"></string>
+	<string name="prices_tutorial_price3"></string>
+	<string name="prices_tutorial_price3_match"></string>
 	<string name="popup_tutorial_choose1">&lt;b>¿Qué le parece?&lt;/b>\nElija la respuesta que tenga más sentido para usted.</string>
 	<string name="popup_tutorial_greatchoice1">&lt;b>¡Buena elección!&lt;/b>\nProbemos con otra cosa.</string>
 	<string name="popup_tutorial_greatchoice2">&lt;b>¡Otra excelente elección!&lt;/b>\nPasemos a la parte dos.</string>
@@ -376,6 +386,7 @@
 	<string name="popup_tutorial_tilesbottom">... y &lt;b>dos fichas&lt;/b> en la parte inferior.</string>
 	<string name="popup_tutorial_middle_instructions">Toque la &lt;b>ficha inferior que coincida&lt;/b> con una de las fichas superiores.</string>
 	<string name="popup_tutorial_tiletap">Toque esta ficha que coincide.</string>
+	<string name="popup_tutorial_pricetap"></string>
 	<string name="popup_tutorial_greatjob">&lt;b>¡Muy bien!&lt;/b> \nProbemos con un par más para practicar.</string>
 	<string name="popup_tutorial_nice">&lt;b>¡Bien!&lt;/b> Uno más...</string>
 	<string name="popup_tutorial_grid_recall">En esta prueba de tres partes, se le pedirá que &lt;b>recuerde la ubicación&lt;/b> de estos artículos.</string>
@@ -442,7 +453,9 @@
 	<string name="time_format">h:mm a</string>
 	<string name="format_date">MM/dd/yy</string>
 	<string name="money_prefix">$</string>
+	<string name="money_suffix"></string>
 	<string name="prices_test_prefix">$</string>
+	<string name="prices_test_suffix"></string>
 	<string name="unit_months">meses</string>
 	<string name="battery_optimization_header">Optimización de batería</string>
 	<string name="battery_optimization_overview">Su teléfono tiene una configuración para ayudar a preservar la duración de la batería, y se denomina configuración de \"optimización de la batería\".&lt;br>&lt;br>La aplicación {APP_NAME} tendrá un impacto mínimo en la duración de la batería de su teléfono. Se recomienda que desactive la configuración de optimización de la batería para la aplicación {APP_NAME}. Hacer esto le ayudará a recibir las notificaciones de las pruebas a tiempo.</string>
