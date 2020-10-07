@@ -75,4 +75,8 @@ public class Locale {
         return fullySupported;
     }
 
+    public java.util.Locale getNativeObj() {
+        return new java.util.Locale(language,country);
+    }
+
 }
