@@ -1,13 +1,12 @@
 package com.healthymedium.arc.utilities;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import android.text.Html;
 import android.text.Spanned;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 
 import org.joda.time.DateTime;

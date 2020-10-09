@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.gson.JsonObject;
 import com.healthymedium.analytics.Analytics;

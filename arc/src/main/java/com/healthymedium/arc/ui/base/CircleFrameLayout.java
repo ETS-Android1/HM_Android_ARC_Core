@@ -3,7 +3,7 @@ package com.healthymedium.arc.ui.base;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;

@@ -3,7 +3,7 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;

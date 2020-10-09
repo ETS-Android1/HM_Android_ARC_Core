@@ -2,11 +2,9 @@ package com.healthymedium.arc.core;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,6 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.arc.utilities.PreferencesManager;
 
 @SuppressLint("ValidFragment")
 public class SplashScreen extends BaseFragment {

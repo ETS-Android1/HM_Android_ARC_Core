@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;

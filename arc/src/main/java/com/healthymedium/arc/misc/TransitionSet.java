@@ -1,6 +1,6 @@
 package com.healthymedium.arc.misc;
 
-import android.support.annotation.AnimRes;
+import androidx.annotation.AnimRes;
 
 import com.healthymedium.arc.library.R;
 

@@ -11,7 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;

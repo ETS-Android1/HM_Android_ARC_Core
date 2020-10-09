@@ -1,25 +1,18 @@
 package com.healthymedium.arc.ui;
 
 import android.app.Activity;
-import android.graphics.Typeface;
-import android.support.annotation.DrawableRes;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.style.StyleSpan;
-import android.text.style.UnderlineSpan;
+
+import androidx.annotation.DrawableRes;
+
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.ui.base.PointerDialog;
 import com.healthymedium.arc.utilities.ViewUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Grid2ChoiceDialog extends PointerDialog {
 

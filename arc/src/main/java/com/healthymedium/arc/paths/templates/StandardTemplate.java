@@ -3,7 +3,7 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Html;
 
 import com.healthymedium.arc.paths.informative.ContactScreen;

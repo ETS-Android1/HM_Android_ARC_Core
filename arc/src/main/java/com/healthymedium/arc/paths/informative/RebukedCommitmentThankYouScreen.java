@@ -2,11 +2,10 @@ package com.healthymedium.arc.paths.informative;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;

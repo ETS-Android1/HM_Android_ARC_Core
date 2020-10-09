@@ -2,16 +2,14 @@ package com.healthymedium.arc.ui.base;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.ColorRes;
+import androidx.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.view.ViewOutlineProvider;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class RoundedTextView extends android.support.v7.widget.AppCompatTextView {
+public class RoundedTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     RoundedDrawable background;
 

@@ -1,7 +1,6 @@
 package com.healthymedium.arc.notifications.types;
 
-import android.content.Context;
-import android.support.annotation.RawRes;
+import androidx.annotation.RawRes;
 
 import com.healthymedium.arc.notifications.NotificationNode;
 

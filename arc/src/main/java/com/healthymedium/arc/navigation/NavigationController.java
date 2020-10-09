@@ -1,7 +1,7 @@
 package com.healthymedium.arc.navigation;
 
-import android.support.annotation.IdRes;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.IdRes;
+import androidx.fragment.app.FragmentManager;
 
 import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.BaseFragment;

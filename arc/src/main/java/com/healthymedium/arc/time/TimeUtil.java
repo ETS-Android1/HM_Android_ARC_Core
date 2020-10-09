@@ -3,7 +3,7 @@ package com.healthymedium.arc.time;
 
 import android.content.ContentResolver;
 import android.provider.Settings;
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.utilities.ViewUtil;
