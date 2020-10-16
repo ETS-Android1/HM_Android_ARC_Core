@@ -282,6 +282,46 @@ public class RestClient <Api>{
         }
     }
 
+    public void submitTestSchedule(Participant participant){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","submitTestSchedule()");
+
+        ParticipantState state = participant.getState();
+
+        TestSchedule schedule = new TestSchedule();
+        schedule.app_version = VersionUtil.getAppVersionName();
+        schedule.device_id = Device.getId();
+        schedule.device_info = Device.getInfo();
+        schedule.participant_id = participant.getId();
+        schedule.sessions = new ArrayList<>();
+
+        for(Visit visit : state.visits){
+            for(TestSession session : visit.getTestSessions()){
+                TestScheduleSession scheduleSession = new TestScheduleSession();
+                scheduleSession.session = session.getIndex()%visit.getNumberOfTests(session.getDayIndex());
+                scheduleSession.session_id = String.valueOf(session.getId());
+                scheduleSession.session_date = JodaUtil.toUtcDouble(session.getScheduledTime());
+                scheduleSession.week = Weeks.weeksBetween(state.visits.get(0).getScheduledStartDate(),visit.getScheduledStartDate()).getWeeks();
+                scheduleSession.day = session.getDayIndex();
+                scheduleSession.types = new ArrayList<>();
+                scheduleSession.types.add("cognitive");
+                schedule.sessions.add(scheduleSession);
+            }
+        }
+
+        if(uploading){
+            uploadQueue.add(schedule);
+            saveUploadQueue();
+        } else {
+            markUploadStarted();
+            JsonObject json = serialize(schedule);
+            Call<ResponseBody> call = getService().submitTestSchedule(Device.getId(), json);
+            call.enqueue(createDataCallback(schedule));
+        }
+    }
+
     public void submitSignature(Bitmap bitmap) {
         Log.i("RestClient","submitSignature");
         if(Config.REST_BLACKHOLE) {
