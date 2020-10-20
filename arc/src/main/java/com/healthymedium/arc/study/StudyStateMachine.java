@@ -126,7 +126,15 @@ public class StudyStateMachine {
             return;
         }
         state = PreferencesManager.getInstance().getObject(TAG_STUDY_STATE,StudyState.class);
+        if(state==null){
+            state = new StudyState();
+        }
+
         cache = CacheManager.getInstance().getObject(TAG_STUDY_STATE_CACHE,StudyStateCache.class);
+        if(cache==null){
+            cache = new StudyStateCache();
+        }
+
     }
 
     public void save(){
