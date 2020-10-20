@@ -80,6 +80,10 @@ public class DebugDialog extends DialogFragment {
                 status += session.getScheduledTime().toString("MM/dd/yyyy   hh:mm:ss a\n");
             }
         }
+        
+        if(!participantState.isStudyRunning){
+            return v;
+        }
 
         // Get current visit
         int currVisitId = participantState.visits.get(participantState.currentVisit).getId();
