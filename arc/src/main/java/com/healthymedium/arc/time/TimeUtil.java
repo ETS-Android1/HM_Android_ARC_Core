@@ -103,7 +103,7 @@ public class TimeUtil {
 
     public static String getTimezoneName(){
         TimeZone tz = TimeZone.getDefault();
-        return tz.getDisplayName();
+        return tz.getDisplayName(Locale.US);
     }
 
     public static String getTimezoneOffset(){

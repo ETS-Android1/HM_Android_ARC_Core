@@ -14,6 +14,7 @@ import org.joda.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class CircadianClock {
 
@@ -205,9 +206,25 @@ public class CircadianClock {
 
         DateTimeFormatter formatter = new DateTimeFormatterBuilder()
                 .appendPattern("h:mm a")
-                .toFormatter();
+                .toFormatter()
+                .withLocale(Locale.US);
 
         for(WakeSleepData data : dataList){
+
+            // handle any odd period formats the server may send our way
+            data.wake = data.wake
+                    .replace("a.m.","AM")
+                    .replace("p.m.","PM");
+            data.bed = data.bed
+                    .replace("a.m.","AM")
+                    .replace("p.m.","PM");
+            data.wake = data.wake
+                    .replace("午前","AM")
+                    .replace("午後","PM");
+            data.bed = data.bed
+                    .replace("午前","AM")
+                    .replace("午後","PM");
+
             LocalTime wake = LocalTime.parse(data.wake,formatter);
             LocalTime bed = LocalTime.parse(data.bed,formatter);
             clock.getRhythm(data.weekday).setTimes(wake,bed);

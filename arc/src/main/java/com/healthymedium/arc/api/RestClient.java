@@ -49,6 +49,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.HttpUrl;
@@ -381,8 +382,8 @@ public class RestClient <Api>{
 
         for(CircadianRhythm rhythm : clock.getRhythms()) {
             WakeSleepData data = new WakeSleepData();
-            data.bed = rhythm.getBedTime().toString("h:mm a");
-            data.wake = rhythm.getWakeTime().toString("h:mm a");
+            data.bed = rhythm.getBedTime().toString("h:mm a", Locale.US);
+            data.wake = rhythm.getWakeTime().toString("h:mm a", Locale.US);
             data.weekday = rhythm.getWeekday();
             schedule.wakeSleepData.add(data);
         }
