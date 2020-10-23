@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
@@ -36,6 +37,10 @@ public class Grid2Tutorial extends TutorialTemplate {
     boolean keySelected = false;
     boolean penSelected = false;
     boolean othersReady = false;
+
+    boolean userMovedOrRemoved = false;
+    boolean mechanicsHintShown = false;
+    HintPointer mechanicsHint;
 
     View items;
     RelativeLayout itemsLayout;
@@ -82,6 +87,11 @@ public class Grid2Tutorial extends TutorialTemplate {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!userMovedOrRemoved) {
+                    launchMechanicsTutorial();
+                    return;
+                }
+
                 incrementProgress();
                 fadeOutView(grids);
                 showComplete();
@@ -92,20 +102,19 @@ public class Grid2Tutorial extends TutorialTemplate {
         gridHintTextView.setVisibility(View.INVISIBLE);
 
         gridTextView = grids.findViewById(R.id.tapGridText);
-        gridTextView.setText("Tap the boxes where the items were located in part one");
+        gridTextView.setText(Html.fromHtml("Place each item in its location<br>from part one."));
 
         letters = inflater.inflate(R.layout.fragment_grid2_letters, container, false);
         letterLayout = letters.findViewById(R.id.gridLayout);
 
         adjustLayouts();
 
-        remindMeHint = new HintPointer(getActivity(), getGridView(4,3), false, true);
+        remindMeHint = new HintPointer(getActivity(), getGridView(4, 3), false, true);
         register(remindMeHint);
 
         remindMeHighlight = new HintHighlighter(getActivity());
         register(remindMeHighlight);
 
-        container.addView(items);
     }
 
     @Override
@@ -118,41 +127,70 @@ public class Grid2Tutorial extends TutorialTemplate {
         return 25;
     }
 
-    // Displays the items that will appear in the grid and the relevant hints
-    protected void setupInitialLayout() {
-        final HintPointer itemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
-        register(itemsHint);
-
-        itemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_grid_recall));
-        itemsHint.addButton(ViewUtil.getString(R.string.popup_gotit), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemsHint.dismiss();
-
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        fadeOutView(items);
-                        setupInitialGridLayout();
-                    }
-                };
-                handler.postDelayed(runnable,600);
-            }
-        });
-        itemsHint.show();
+    private Grid2BoxView getGridView(int row, int col) {
+        return (Grid2BoxView) gridLayout.getChildAt((gridLayout.getColumnCount() * row) + col);
     }
 
-    protected void setupInitialGridLayout() {
+    private Grid2LetterView getLetterView(int row, int col) {
+        return (Grid2LetterView) letterLayout.getChildAt((letterLayout.getColumnCount() * row) + col);
+    }
 
-        getGridView(3,0).setImage(R.drawable.pen);
-        getGridView(1,1).setImage(R.drawable.phone);
-        getGridView(2,3).setImage(R.drawable.key);
+    private void adjustLayouts() {
+        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        display.getMetrics(displayMetrics);
+
+        int displayHeight = displayMetrics.heightPixels;
+        int displayWidth = displayMetrics.widthPixels;
+
+        int auxHeight = ViewUtil.dpToPx(124);
+        int viewHeight = displayHeight - ViewUtil.getStatusBarHeight() - ViewUtil.getNavBarHeight() - auxHeight;
+
+        float aspectRatio = ((float) displayWidth) / ((float) viewHeight);
+
+        int lettersHeight = viewHeight;
+        int gridsHeight = viewHeight;
+
+        if (aspectRatio < 0.75f) {
+            lettersHeight = (int) (displayWidth / 0.75f);
+        } else {
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) (0.75f * gridsHeight), LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.topMargin = ViewUtil.dpToPx(26);
+            layoutParams.bottomMargin = ViewUtil.dpToPx(2);
+            layoutParams.gravity = Gravity.CENTER;
+            gridLayout.setLayoutParams(layoutParams);
+        }
+
+        lettersHeight -= -ViewUtil.dpToPx(16);
+
+        float letterRatio = ((float) letterLayout.getColumnCount()) / ((float) letterLayout.getRowCount());
+        int lettersWidth = (int) (letterRatio * (lettersHeight));
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(lettersWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.topMargin = ViewUtil.dpToPx(28);
+        layoutParams.bottomMargin = ViewUtil.dpToPx(4);
+        layoutParams.gravity = Gravity.CENTER;
+        letterLayout.setLayoutParams(layoutParams);
+    }
+
+
+    @Override
+    protected void setupInitialLayout() {
+        setupStudySection();
+    }
+
+    private void setupStudySection() {
+        getGridView(3, 0).setImage(R.drawable.pen);
+        getGridView(1, 1).setImage(R.drawable.phone);
+        getGridView(2, 3).setImage(R.drawable.key);
         fadeInView(grids);
 
         final HintPointer gridsHint = new HintPointer(getActivity(), gridLayout, true);
         register(gridsHint);
 
-        gridsHint.setText(ViewUtil.getString(R.string.popup_tutorial_rememberbox));
+        gridsHint.setText("This test has three parts. In the first part, you'll be asked to <b>remember the location</b> of three items. The items will be placed in a grid of boxes. <b>Remember which box each item is in.</b> You will have 3 seconds to study the locations.");
         gridsHint.getShadow().addTarget(progressBar);
         gridsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
             @Override
@@ -166,7 +204,7 @@ public class Grid2Tutorial extends TutorialTemplate {
 
                         incrementProgress();
 
-                        final HintPointer partTwoHint = new HintPointer(getActivity(), gridLayout,true);
+                        final HintPointer partTwoHint = new HintPointer(getActivity(), gridLayout, true);
                         partTwoHint.getShadow().addTarget(progressBar);
                         register(partTwoHint);
 
@@ -178,7 +216,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        setInitialLetterLayout();
+                                        setupLetterLayout();
                                     }
                                 }, 600);
                             }
@@ -187,75 +225,28 @@ public class Grid2Tutorial extends TutorialTemplate {
                         partTwoHint.show();
 
                     }
-                },3000);
+                }, 3000);
             }
         });
         gridsHint.show();
     }
 
-    private void adjustLayouts(){
-        WindowManager windowManager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        display.getMetrics(displayMetrics);
-
-        int displayHeight = displayMetrics.heightPixels;
-        int displayWidth = displayMetrics.widthPixels;
-
-        int auxHeight = ViewUtil.dpToPx(124);
-        int viewHeight = displayHeight-ViewUtil.getStatusBarHeight()-ViewUtil.getNavBarHeight()-auxHeight;
-
-        float aspectRatio = ((float)displayWidth)/((float)viewHeight);
-
-        int lettersHeight = viewHeight;
-        int gridsHeight = viewHeight;
-
-        if(aspectRatio < 0.75f) {
-            lettersHeight = (int) (displayWidth / 0.75f);
-        } else {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) (0.75f * gridsHeight), LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.topMargin = ViewUtil.dpToPx(26);
-            layoutParams.bottomMargin = ViewUtil.dpToPx(2);
-            layoutParams.gravity = Gravity.CENTER;
-            gridLayout.setLayoutParams(layoutParams);
-        }
-
-        lettersHeight -= -ViewUtil.dpToPx(16);
-
-        float letterRatio = ((float)letterLayout.getColumnCount())/((float)letterLayout.getRowCount());
-        int lettersWidth = (int) (letterRatio*(lettersHeight));
-
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(lettersWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.topMargin = ViewUtil.dpToPx(28);
-        layoutParams.bottomMargin = ViewUtil.dpToPx(4);
-        layoutParams.gravity = Gravity.CENTER;
-        letterLayout.setLayoutParams(layoutParams);
-    }
-
-    private Grid2BoxView getGridView(int row, int col) {
-        return (Grid2BoxView)gridLayout.getChildAt((gridLayout.getColumnCount()*row)+col);
-    }
-
-    private Grid2LetterView getLetterView(int row, int col) {
-        return (Grid2LetterView)letterLayout.getChildAt((letterLayout.getColumnCount()*row)+col);
-    }
 
     // Displays the letters layout and prompts the user to tap a specific letter F
-    private void setInitialLetterLayout() {
+    private void setupLetterLayout() {
 
-        getLetterView(0,0).setF();
-        getLetterView(0,3).setF();
-        getLetterView(1,4).setF();
-        getLetterView(3,1).setF();
-        getLetterView(3,3).setF();
-        getLetterView(3,5).setF();
-        getLetterView(5,0).setF();
-        getLetterView(5,3).setF();
-        getLetterView(6,4).setF();
-        getLetterView(8,1).setF();
-        getLetterView(8,3).setF();
-        getLetterView(8,5).setF();
+        getLetterView(0, 0).setF();
+        getLetterView(0, 3).setF();
+        getLetterView(1, 4).setF();
+        getLetterView(3, 1).setF();
+        getLetterView(3, 3).setF();
+        getLetterView(3, 5).setF();
+        getLetterView(5, 0).setF();
+        getLetterView(5, 3).setF();
+        getLetterView(6, 4).setF();
+        getLetterView(8, 1).setF();
+        getLetterView(8, 3).setF();
+        getLetterView(8, 5).setF();
 
         fadeOutView(grids);
         fadeInView(letters);
@@ -266,11 +257,11 @@ public class Grid2Tutorial extends TutorialTemplate {
                 final HintHighlighter pulsateF = new HintHighlighter(getActivity());
                 register(pulsateF);
 
-                pulsateF.addPulsingTarget(getLetterView(3,1),getLetterView(3,1).getWidth()/2);
+                pulsateF.addPulsingTarget(getLetterView(3, 1), getLetterView(3, 1).getWidth() / 2);
                 pulsateF.addTarget(progressBar);
                 pulsateF.show();
 
-                final HintPointer tapThisFHint = new HintPointer(getActivity(), getLetterView(3,1), true, false);
+                final HintPointer tapThisFHint = new HintPointer(getActivity(), getLetterView(3, 1), true, false);
                 register(tapThisFHint);
 
                 tapThisFHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapf1));
@@ -294,7 +285,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                                     @Override
                                     public void onClick(View view) {
                                         tapAllFsHint.dismiss();
-                                        tapLetters();
+                                        setupLetterStop();
                                     }
                                 });
                                 tapAllFsHint.getShadow().addTarget(progressBar);
@@ -303,14 +294,14 @@ public class Grid2Tutorial extends TutorialTemplate {
                         return false;
                     }
                 };
-                getLetterView(3,1).setOnTouchListener(listener);
+                getLetterView(3, 1).setOnTouchListener(listener);
 
             }
-        },500);
+        }, 500);
     }
 
     // Responds to letter that are tapped, changes their color
-    private void tapLetters() {
+    private void setupLetterStop() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -333,27 +324,29 @@ public class Grid2Tutorial extends TutorialTemplate {
                             @Override
                             public void run() {
                                 fadeOutView(letters);
-                                setSecondItemLayout();
+                                setSecondGridLayout();
                             }
-                        },600);
+                        }, 600);
                     }
                 });
                 niceWorkHint.show();
             }
-        },8000);
+        }, 8000);
     }
 
 
+    private void setSecondGridLayout() {
+        gridTextView.setVisibility(View.VISIBLE);
+        getGridView(3, 0).removeImage();
+        getGridView(1, 1).removeImage();
+        getGridView(2, 3).removeImage();
+        fadeInView(grids);
 
-    // Displays the same items as setInitialItemLayout()
-    // Displays a new hint
-    private void setSecondItemLayout() {
-        fadeInView(items);
-
-        final HintPointer secondItemsHint = new HintPointer(getActivity(), itemsLayout, true, false);
+        final HintPointer secondItemsHint = new HintPointer(getActivity(), gridLayout, true);
         register(secondItemsHint);
 
-        secondItemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_selectbox));
+        secondItemsHint.setText("In part three, place each item in its location from part one.");
+        secondItemsHint.getShadow().addTarget(progressBar);
         secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -361,7 +354,33 @@ public class Grid2Tutorial extends TutorialTemplate {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        fadeOutView(items);
+                        setGridRecall();
+                    }
+                }, 600);
+            }
+        });
+        secondItemsHint.show();
+    }
+
+
+    // Displays the same items as setInitialItemLayout()
+    // Displays a new hint
+    private void setSecondItemLayout() {
+        gridTextView.setVisibility(View.VISIBLE);
+        fadeInView(grids);
+
+        final HintPointer secondItemsHint = new HintPointer(getActivity(), gridLayout, true);
+        register(secondItemsHint);
+
+        secondItemsHint.setText("In part three, place each item in its location from part one.");
+        secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                secondItemsHint.dismiss();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                        fadeOutView(grids);
                         setGridRecall();
                     }
                 }, 600);
@@ -372,20 +391,13 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     // Displays the grid recall test and associated hints/prompts
     private void setGridRecall() {
-        gridHintTextView.setVisibility(View.VISIBLE);
-
-        getGridView(3,0).removeImage();
-        getGridView(1,1).removeImage();
-        getGridView(2,3).removeImage();
 
         int size = gridLayout.getChildCount();
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
             view.setSelectable(true);
             view.setListener(defaultListener);
         }
-
-        fadeInView(grids);
 
         remindMeHint.setText(ViewUtil.getString(R.string.popup_tutorial_needhelp));
         remindMeHint.addButton(ViewUtil.getString(R.string.popup_tutorial_remindme), new View.OnClickListener() {
@@ -406,28 +418,28 @@ public class Grid2Tutorial extends TutorialTemplate {
         handler.post(firstRecallStepRunnable);
     }
 
-    private void disableGrids(Grid2BoxView exemption){
+    private void disableGrids(Grid2BoxView exemption) {
         int size = gridLayout.getChildCount();
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
             view.setSelectable(false);
         }
-        if(exemption!=null) {
+        if (exemption != null) {
             exemption.setSelectable(true);
         }
     }
 
-    private void enableGrids(){
+    private void enableGrids() {
         int size = gridLayout.getChildCount();
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
             view.setSelectable(true);
         }
     }
 
-    private void disableLetters(){
+    private void disableLetters() {
         int size = letterLayout.getChildCount();
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             Grid2LetterView view = (Grid2LetterView) letterLayout.getChildAt(i);
             view.setEnabled(false);
         }
@@ -438,7 +450,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         int[] gridBoxLocation = new int[2];
         view.getLocationOnScreen(gridBoxLocation);
 
-        if(gridBoxLocation[1] < ((2*gridBoxHeight)+progressBar.getHeight())) {
+        if (gridBoxLocation[1] < ((2 * gridBoxHeight) + progressBar.getHeight())) {
             // if grid box is in the first two rows of the grid, dialog appears below grid box
             return PointerDrawable.POINTER_BELOW;
         } else {
@@ -447,15 +459,15 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
 
-    private void removeSelection(@DrawableRes int id){
+    private void removeSelection(@DrawableRes int id) {
         int size = gridLayout.getChildCount();
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
-            if(!view.isSelected()){
+            if (!view.isSelected()) {
                 continue;
             }
             int image = view.getImage();
-            if(image == id) {
+            if (image == id) {
                 view.removeImage();
                 view.setSelected(false);
                 return;
@@ -463,34 +475,35 @@ public class Grid2Tutorial extends TutorialTemplate {
         }
     }
 
-    private void updateSelections(){
+    private void updateSelections() {
         phoneSelected = false;
         keySelected = false;
         penSelected = false;
 
         int size = gridLayout.getChildCount();
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
-            if(!view.isSelected()){
+            if (!view.isSelected()) {
                 continue;
             }
             int id = view.getImage();
-            if(id == R.drawable.phone) {
+            if (id == R.drawable.phone) {
                 phoneSelected = true;
             }
-            if(id == R.drawable.key) {
+            if (id == R.drawable.key) {
                 keySelected = true;
             }
-            if(id == R.drawable.pen) {
+            if (id == R.drawable.pen) {
                 penSelected = true;
             }
         }
         updateButtonVisibility();
     }
 
-    private void updateButtonVisibility(){
-        if(phoneSelected && keySelected && penSelected) {
-            if(otherItemsHint!=null) {
+    private void updateButtonVisibility() {
+        if (phoneSelected && keySelected && penSelected) {
+            if (otherItemsHint != null) {
+                otherItemsHint.setVisibility(View.INVISIBLE);
                 otherItemsHint.dismiss();
             }
             continueButton.setVisibility(View.VISIBLE);
@@ -511,20 +524,20 @@ public class Grid2Tutorial extends TutorialTemplate {
 
         if (!phoneSelected) {
             targetCount++;
-            Grid2BoxView phone = getGridView(1,1);
+            Grid2BoxView phone = getGridView(1, 1);
             remindMeTapHighlight.addPulsingTarget(phone, 8);
         }
         if (!penSelected) {
             targetCount++;
-            Grid2BoxView pen = getGridView(3,0);
+            Grid2BoxView pen = getGridView(3, 0);
             remindMeTapHighlight.addPulsingTarget(pen, 8);
         }
         if (!keySelected) {
             targetCount++;
-            Grid2BoxView key = getGridView(2,3);
+            Grid2BoxView key = getGridView(2, 3);
             remindMeTapHighlight.addPulsingTarget(key, 8);
         }
-        if(targetCount > 0) {
+        if (targetCount > 0) {
             boxViewListener = new Grid2BoxView.Listener() {
                 @Override
                 public void onSelected(Grid2BoxView view) {
@@ -539,14 +552,26 @@ public class Grid2Tutorial extends TutorialTemplate {
         @Override
         public void onSelected(final Grid2BoxView view) {
             handler.removeCallbacks(remindMeRunnable);
+            if (mechanicsHint != null) {
+                mechanicsHint.dismiss();
+            }
 
-            if(dialog!=null) {
+            boolean deselecting =
+                    (view.getImage() == R.drawable.phone && phoneSelected) ||
+                            (view.getImage() == R.drawable.key && keySelected) ||
+                            (view.getImage() == R.drawable.pen && penSelected);
+
+            if (!deselecting && phoneSelected && keySelected && penSelected) {
+                userMovedOrRemoved = true;
+            }
+
+            if (dialog != null) {
                 if (dialog.isAttachedToWindow()) {
                     dialog.dismiss();
-                    if(view.getImage()==0){
+                    if (view.getImage() == 0) {
                         view.setSelected(false);
                     }
-                    handler.postDelayed(remindMeRunnable,20000);
+                    handler.postDelayed(remindMeRunnable, 20000);
                     enableGrids();
                     return;
                 }
@@ -558,13 +583,13 @@ public class Grid2Tutorial extends TutorialTemplate {
             view.setSelected(true);
 
             dialog = new Grid2ChoiceDialog(
-                    getMainActivity(),
+                    getActivity(),
                     view,
                     pointerPosition);
 
             dialog.setAnimationDuration(50);
 
-            if(view.getImage()!=0) {
+            if (view.getImage() != 0) {
                 dialog.disableChoice(view.getImage());
             }
 
@@ -574,12 +599,12 @@ public class Grid2Tutorial extends TutorialTemplate {
                     removeSelection(image);
                     view.setImage(image);
                     updateSelections();
-                    if(dialogListener!=null){
+                    if (dialogListener != null) {
                         dialogListener.onSelected(image);
                         dialogListener = null;
                     }
-                    if(othersReady && !(phoneSelected && penSelected && keySelected)) {
-                        handler.postDelayed(remindMeRunnable,20000);
+                    if (othersReady && !(phoneSelected && penSelected && keySelected)) {
+                        handler.postDelayed(remindMeRunnable, 20000);
                     }
                     enableGrids();
 
@@ -587,15 +612,17 @@ public class Grid2Tutorial extends TutorialTemplate {
 
                 @Override
                 public void onRemove() {
+                    userMovedOrRemoved = true;
+
                     view.removeImage();
                     view.setSelected(false);
                     updateSelections();
-                    if(dialogListener!=null){
+                    if (dialogListener != null) {
                         dialogListener.onRemove();
                         dialogListener = null;
                     }
-                    if(othersReady && !(phoneSelected && penSelected && keySelected)) {
-                        handler.postDelayed(remindMeRunnable,20000);
+                    if (othersReady && !(phoneSelected && penSelected && keySelected)) {
+                        handler.postDelayed(remindMeRunnable, 20000);
                     }
                     enableGrids();
                 }
@@ -603,7 +630,11 @@ public class Grid2Tutorial extends TutorialTemplate {
 
             dialog.show();
 
-            if(boxViewListener!=null){
+            if (deselecting) {
+                checkForMechanicsHint();
+            }
+
+            if (boxViewListener != null) {
                 boxViewListener.onSelected(view);
                 boxViewListener = null;
             }
@@ -613,7 +644,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     Runnable remindMeRunnable = new Runnable() {
         @Override
         public void run() {
-            if(otherItemsHint!=null) {
+            if (otherItemsHint != null) {
                 otherItemsHint.dismiss();
             }
             remindMeHighlight.addTarget(progressBar);
@@ -625,12 +656,12 @@ public class Grid2Tutorial extends TutorialTemplate {
     Runnable firstRecallStepRunnable = new Runnable() {
         @Override
         public void run() {
-            final Grid2BoxView boxView = getGridView(1,1);
+            final Grid2BoxView boxView = getGridView(1, 1);
 
-            final HintPointer recallHint = new HintPointer(getActivity(), getGridView(1,1), true, false);
+            final HintPointer recallHint = new HintPointer(getActivity(), getGridView(1, 1), true, false);
             register(recallHint);
 
-            final HintPointer choiceSelectHint = new HintPointer(getActivity(),gridTextView,false,true);
+            final HintPointer choiceSelectHint = new HintPointer(getActivity(), gridTextView);
             register(choiceSelectHint);
 
             final HintHighlighter pulsateGridItem = new HintHighlighter(getActivity());
@@ -643,10 +674,10 @@ public class Grid2Tutorial extends TutorialTemplate {
                 @Override
                 public void onSelected(Grid2BoxView view) {
                     view.setSelectable(false);
-                    if(pulsateGridItem!=null){
+                    if (pulsateGridItem != null) {
                         pulsateGridItem.dismiss();
                     }
-                    if(recallHint!=null){
+                    if (recallHint != null) {
                         recallHint.dismiss();
                     }
                     dialogListener = new Grid2ChoiceDialog.Listener() {
@@ -655,143 +686,55 @@ public class Grid2Tutorial extends TutorialTemplate {
                             choiceSelectHint.dismiss();
                             pulsatePhone.dismiss();
 
-                            final HintPointer choiceSelectedHint = new HintPointer(getActivity(),gridTextView,false,true, true);
-                            register(choiceSelectedHint);
-
-                            choiceSelectedHint.getShadow().addTarget(progressBar);
-                            choiceSelectedHint.setText("Great! If you change your mind, you can move the item. Let's try it.");
-                            choiceSelectedHint.addButton(ViewUtil.getString(R.string.button_okay), new View.OnClickListener() {
+                            handler.postDelayed(new Runnable() {
                                 @Override
-                                public void onClick(View v) {
-                                    choiceSelectedHint.dismiss();
-                                    handler.postDelayed(choiceAlterRunnable,300);
+                                public void run() {
+                                    enableGrids();
+
+                                    otherItemsHint = new HintPointer(getActivity(), gridTextView);
+                                    register(otherItemsHint);
+
+                                    otherItemsHint.setText("Great! Now, place the other two items on the grid.");
+                                    otherItemsHint.show();
+                                    othersReady = true;
+                                    handler.postDelayed(remindMeRunnable, 20000);
+
                                 }
-                            });
-                            choiceSelectedHint.show();
+                            }, 300);
+
                         }
 
                         @Override
                         public void onRemove() {
-
+                            userMovedOrRemoved = true;
                         }
                     };
+
+
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             dialog.getPenView().setOnTouchListener(null);
                             dialog.getKeyView().setOnTouchListener(null);
                             pulsatePhone.addTarget(progressBar);
-                            pulsatePhone.addTarget(dialog,8,16);
-                            pulsatePhone.addTarget(boxView,8,16);
-                            pulsatePhone.addPulsingTarget(dialog.getPhoneView(),8);
+                            pulsatePhone.addTarget(dialog, 8, 16);
+                            pulsatePhone.addTarget(boxView, 8, 16);
+                            pulsatePhone.addPulsingTarget(dialog.getPhoneView(), 8);
                             pulsatePhone.show();
 
                             choiceSelectHint.setText("Now, tap the cell phone to place it in the selected box.");
                             choiceSelectHint.show();
 
                         }
-                    },500);
+                    }, 500);
 
                 }
             };
             recallHint.setText("<b>Hint:</b> The cell phone was located here. Tap this box.");
-            pulsateGridItem.addPulsingTarget(boxView,8);
+            pulsateGridItem.addPulsingTarget(boxView, 8);
             pulsateGridItem.addTarget(progressBar);
             pulsateGridItem.show();
             recallHint.show();
-        }
-    };
-
-    Runnable choiceAlterRunnable = new Runnable() {
-        @Override
-        public void run() {
-
-            final HintHighlighter choiceAlterHighlight = new HintHighlighter(getActivity());
-            register(choiceAlterHighlight);
-
-            final HintPointer choiceAlterHint = new HintPointer(getActivity(),getGridView(1,3),true,false);
-            register(choiceAlterHint);
-
-            final HintHighlighter choiceMoveHighlight = new HintHighlighter(getActivity());
-            register(choiceMoveHighlight);
-
-            final HintPointer choiceMoveHint = new HintPointer(getActivity(),gridTextView,false,true);
-            register(choiceMoveHint);
-
-            boxViewListener = new Grid2BoxView.Listener() {
-                @Override
-                public void onSelected(final Grid2BoxView view) {
-                    choiceAlterHighlight.dismiss();
-                    choiceAlterHint.dismiss();
-                    view.setSelectable(false);
-
-
-                    dialogListener = new Grid2ChoiceDialog.Listener() {
-                        @Override
-                        public void onSelected(int image) {
-                            choiceMoveHighlight.dismiss();
-                            choiceMoveHint.dismiss();
-                            view.setSelectable(true);
-
-                            final HintPointer choiceMovedHint = new HintPointer(getActivity(),getGridView(1,3),true,false);
-                            register(choiceMovedHint);
-
-                            final HintHighlighter choiceMovedHighlight = new HintHighlighter(getActivity());
-                            register(choiceMovedHighlight);
-
-                            boxViewListener = new Grid2BoxView.Listener() {
-                                @Override
-                                public void onSelected(Grid2BoxView view) {
-                                    choiceMovedHighlight.dismiss();
-                                    choiceMovedHint.dismiss();
-                                    handler.postDelayed(choiceRemoveRunnable,500);
-                                }
-                            };
-
-                            choiceMovedHighlight.addPulsingTarget(getGridView(1,3),8);
-                            choiceMovedHighlight.show();
-
-                            choiceMovedHint.setText("Great! If you would like to clear a box with an item, tap the box and select the <b>Remove Item</b> button.");
-                            choiceMovedHint.show();
-                        }
-                        @Override
-                        public void onRemove() {
-
-                        }
-                    };
-
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            dialog.getPenView().setOnTouchListener(null);
-                            dialog.getKeyView().setOnTouchListener(null);
-                            choiceMoveHighlight.addTarget(progressBar);
-                            choiceMoveHighlight.addTarget(dialog,8,16);
-                            choiceMoveHighlight.addTarget(getGridView(1,3),8,16);
-                            choiceMoveHighlight.addPulsingTarget(dialog.getPhoneView(),8);
-                            choiceMoveHighlight.show();
-
-                            choiceMoveHint.setText("Then, tap the cell phone to place it in the new box.");
-                            choiceMoveHint.show();
-
-                        }
-                    },500);
-                }
-            };
-
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    choiceAlterHint.setText("First, tap a different box.");
-                    choiceAlterHint.show();
-
-                    choiceAlterHighlight.addPulsingTarget(getGridView(1,3),8);
-                    choiceAlterHighlight.addTarget(progressBar);
-                    choiceAlterHighlight.show();
-                }
-            },300);
-
         }
     };
 
@@ -802,7 +745,7 @@ public class Grid2Tutorial extends TutorialTemplate {
             dialog.getPenView().setOnTouchListener(null);
             dialog.getKeyView().setOnTouchListener(null);
 
-            final HintPointer choiceRemoveHint = new HintPointer(getActivity(),gridTextView,false,true);
+            final HintPointer choiceRemoveHint = new HintPointer(getActivity(), gridTextView, false, true);
             register(choiceRemoveHint);
 
             final HintHighlighter choiceRemoveHighlight = new HintHighlighter(getActivity());
@@ -819,7 +762,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                     choiceRemoveHighlight.dismiss();
                     choiceRemoveHint.dismiss();
 
-                    final HintPointer choiceAgainHint = new HintPointer(getActivity(),gridTextView,false,true);
+                    final HintPointer choiceAgainHint = new HintPointer(getActivity(), gridTextView, false, true);
                     register(choiceAgainHint);
 
                     final HintHighlighter choiceAgainHighlight = new HintHighlighter(getActivity());
@@ -828,14 +771,14 @@ public class Grid2Tutorial extends TutorialTemplate {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            defaultListener.onSelected(getGridView(1,1));
-                            getGridView(1,1).setSelected(true);
-                            getGridView(1,1).setSelectable(false);
+                            defaultListener.onSelected(getGridView(1, 1));
+                            getGridView(1, 1).setSelected(true);
+                            getGridView(1, 1).setSelectable(false);
 
                             dialogListener = new Grid2ChoiceDialog.Listener() {
                                 @Override
                                 public void onSelected(int image) {
-                                    getGridView(1,1).setSelectable(true);
+                                    getGridView(1, 1).setSelectable(true);
                                     choiceAgainHighlight.dismiss();
                                     choiceAgainHint.dismiss();
 
@@ -844,21 +787,21 @@ public class Grid2Tutorial extends TutorialTemplate {
                                         public void run() {
                                             enableGrids();
 
-                                            otherItemsHint = new HintPointer(getActivity(),gridTextView);
+                                            otherItemsHint = new HintPointer(getActivity(), gridTextView);
                                             register(otherItemsHint);
 
                                             otherItemsHint.setText("Now, place the other two items on the grid.");
                                             otherItemsHint.show();
                                             othersReady = true;
-                                            handler.postDelayed(remindMeRunnable,20000);
+                                            handler.postDelayed(remindMeRunnable, 20000);
 
                                         }
-                                    },300);
+                                    }, 300);
                                 }
 
                                 @Override
                                 public void onRemove() {
-
+                                    userMovedOrRemoved = true;
                                 }
                             };
                             handler.postDelayed(new Runnable() {
@@ -869,21 +812,21 @@ public class Grid2Tutorial extends TutorialTemplate {
                                     dialog.getKeyView().setOnTouchListener(null);
 
                                     choiceAgainHighlight.addTarget(progressBar);
-                                    choiceAgainHighlight.addTarget(dialog,8,16);
-                                    choiceAgainHighlight.addTarget(getGridView(1,1),8,16);
-                                    choiceAgainHighlight.addPulsingTarget(dialog.getPhoneView(),8);
+                                    choiceAgainHighlight.addTarget(dialog, 8, 16);
+                                    choiceAgainHighlight.addTarget(getGridView(1, 1), 8, 16);
+                                    choiceAgainHighlight.addPulsingTarget(dialog.getPhoneView(), 8);
                                     choiceAgainHighlight.show();
 
                                     choiceAgainHint.setText("Great! Let's place the cell phone back in the first box");
                                     choiceAgainHint.show();
                                 }
-                            },500);
+                            }, 500);
                         }
-                    },300);
+                    }, 300);
                 }
             };
 
-            choiceRemoveHighlight.addTarget(dialog.getRemoveItemView(),8,8);
+            choiceRemoveHighlight.addTarget(dialog.getRemoveItemView(), 8, 8);
             choiceRemoveHighlight.show();
 
             choiceRemoveHint.setText("Tap Remove Item button");
@@ -891,5 +834,235 @@ public class Grid2Tutorial extends TutorialTemplate {
         }
     };
 
+    private void checkForMechanicsHint() {
+        if (!mechanicsHintShown) {
+            mechanicsHintShown = true;
+
+            if (otherItemsHint != null) {
+                otherItemsHint.dismiss();
+            }
+
+            mechanicsHint = new HintPointer(getActivity(), gridTextView);
+            mechanicsHint.setText("Change your mind? Select a different item to replace, or tap <b>Remove Item</b> to clear.");
+            mechanicsHint.addButton(ViewUtil.getString(R.string.popup_gotit), new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mechanicsHint.dismiss();
+                }
+            });
+            register(mechanicsHint);
+            mechanicsHint.show();
+        }
+    }
+
+    private void launchMechanicsTutorial() {
+        handler.removeCallbacks(remindMeRunnable);
+        gridHintTextView.setVisibility(View.VISIBLE);
+        continueButton.setVisibility(View.GONE);
+
+        int size = gridLayout.getChildCount();
+        for (int i = 0; i < size; i++) {
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            view.removeImage();
+            view.setSelected(false);
+        }
+
+        getGridView(1, 1).setSelected(true);
+        getGridView(1, 1).setImage(R.drawable.phone);
+
+        final HintPointer hint = new HintPointer(getActivity(), gridLayout, true);
+        hint.setText("<b>Nice work!</b><br>It looks like you didn’t need any help with placement, but we want to make sure we still teach you how to swap and remove items before you move onto the actual test.");
+        hint.addButton("Show Me", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hint.dismiss();
+                mechanicsTutorial1();
+            }
+        });
+        register(hint);
+        hint.show();
+
+    }
+
+    private void mechanicsTutorial1() {
+        disableGrids(null);
+        final HintPointer hint = new HintPointer(getActivity(), getGridView(4, 2), true);
+        hint.setText("If you change your mind after placing an item, you can move it. Let’s try it.");
+        hint.addButton(ViewUtil.getString(R.string.button_okay), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hint.dismiss();
+                mechanicsTutorial2();
+            }
+        });
+        int padding = ViewUtil.pxToDp((int) (1.75 * getGridView(2, 2).getWidth()));
+        hint.getShadow().addTarget(getGridView(2, 2), 8, padding);
+        hint.getShadow().addTarget(progressBar);
+        register(hint);
+        hint.show();
+    }
+
+    private void mechanicsTutorial2() {
+        final Grid2BoxView boxView = getGridView(1, 3);
+        final HintPointer hint = new HintPointer(getActivity(), boxView, true, false, true);
+        hint.setText("First, tap a different box.");
+        hint.getShadow().addPulsingTarget(boxView, 8);
+        hint.getShadow().addTarget(progressBar);
+        register(hint);
+
+        boxView.setListener(new Grid2BoxView.Listener() {
+            @Override
+            public void onSelected(Grid2BoxView view) {
+                hint.dismiss();
+                view.setSelected(true);
+                view.setSelectable(false);
+
+                int pointerPosition = determinePointerPosition(view);
+
+                dialog = new Grid2ChoiceDialog(
+                        getActivity(),
+                        view,
+                        pointerPosition);
+                dialog.setAnimationDuration(50);
+                dialog.getPenView().setOnTouchListener(null);
+                dialog.getKeyView().setOnTouchListener(null);
+
+                dialog.setListener(new Grid2ChoiceDialog.Listener() {
+                    @Override
+                    public void onSelected(int image) {
+                        removeSelection(image);
+                        boxView.setImage(image);
+                        if(mechanicsHint!=null){
+                            mechanicsHint.dismiss();
+                        }
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mechanicsTutorial3();
+                            }
+                        },300);
+                    }
+
+                    @Override
+                    public void onRemove() {
+
+                    }
+                });
+                dialog.show();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mechanicsHint = new HintPointer(getActivity(), gridTextView, true);
+                        mechanicsHint.setText("Then, tap the cell phone button to place it in the new box.");
+
+                        mechanicsHint.getShadow().addTarget(dialog, 8, 8);
+                        mechanicsHint.getShadow().addTarget(progressBar);
+                        mechanicsHint.getShadow().addTarget(getGridView(1, 3),8,8);
+                        mechanicsHint.getShadow().addPulsingTarget(dialog.getPhoneView(), 8);
+
+                        register(mechanicsHint);
+                        mechanicsHint.show();
+                    }
+                }, 300);
+
+            }
+        });
+        hint.show();
+
+        boxView.setSelectable(true);
+    }
+
+    private void mechanicsTutorial3() {
+        final Grid2BoxView boxView = getGridView(1, 3);
+        boxView.setSelectable(true);
+
+        final HintPointer hintGreat = new HintPointer(getActivity(), boxView, true, false, true);
+        hintGreat.setText("Great! If you would like to an item from a box, first tap that box...");
+        hintGreat.getShadow().addPulsingTarget(boxView, 8);
+        hintGreat.getShadow().addTarget(progressBar);
+        register(hintGreat);
+
+        boxView.setListener(new Grid2BoxView.Listener() {
+            @Override
+            public void onSelected(Grid2BoxView view) {
+                hintGreat.dismiss();
+                view.setSelected(true);
+                view.setSelectable(false);
+
+                int pointerPosition = determinePointerPosition(view);
+
+                dialog = new Grid2ChoiceDialog(
+                        getActivity(),
+                        view,
+                        pointerPosition);
+                dialog.setAnimationDuration(50);
+                dialog.disableChoice(R.drawable.phone);
+                dialog.getPenView().setOnTouchListener(null);
+                dialog.getKeyView().setOnTouchListener(null);
+
+                dialog.show();
+
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        TextView textView = dialog.getRemoveItemView();
+
+                        final HintPointer hint = new HintPointer(getActivity(), textView, true,false,true);
+                        hint.setText("...then tap <b>Remove Item</b>.");
+
+                        hint.getShadow().addTarget(textView, 8, 8);
+                        hint.getShadow().addTarget(progressBar);
+
+                        dialog.setListener(new Grid2ChoiceDialog.Listener() {
+                            @Override
+                            public void onSelected(int image) {
+
+                            }
+
+                            @Override
+                            public void onRemove() {
+                                hint.setVisibility(View.INVISIBLE);
+                                hint.dismiss();
+                                mechanicsTutorial4();
+                            }
+                        });
+
+                        register(hint);
+                        hint.show();
+                    }
+                }, 500);
+
+            }
+        });
+        hintGreat.show();
+    }
+
+    private void mechanicsTutorial4() {
+        final Grid2BoxView boxView = getGridView(1, 3);
+        boxView.setSelected(false);
+        boxView.removeImage();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final HintPointer hint = new HintPointer(getActivity(),gridTextView);
+                hint.setText("Perfect! You've got it.");
+                hint.addButton("Finish Tutorial", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hint.setVisibility(View.INVISIBLE);
+                        hint.dismiss();
+                        incrementProgress();
+                        fadeOutView(grids);
+                        showComplete();
+                    }
+                });
+                register(hint);
+                hint.show();
+            }
+        },500);
+    }
 
 }
