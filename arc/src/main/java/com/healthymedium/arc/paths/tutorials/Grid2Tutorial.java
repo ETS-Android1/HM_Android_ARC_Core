@@ -273,6 +273,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         int action = event.getAction();
                         switch (action) {
                             case MotionEvent.ACTION_DOWN:
+                                getLetterView(3, 1).setOnTouchListener(null);
                                 pulsateF.dismiss();
                                 tapThisFHint.dismiss();
                                 incrementProgress();
