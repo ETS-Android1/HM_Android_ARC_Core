@@ -17,6 +17,8 @@ android {
         targetSdkVersion 29
         versionCode versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionBuild
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        buildConfigField "int", "ARC_VERSION_CODE", versionCode+""
+        buildConfigField "String", "ARC_VERSION_NAME", "\""+versionName+"\""
         testInstrumentationRunner "android.support.session.runner.AndroidJUnitRunner"
     }
 
