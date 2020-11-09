@@ -5,19 +5,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import com.healthymedium.analytics.Log;
 
-import com.healthymedium.arc.library.BuildConfig;
-
 public class VersionUtil {
 
     private static final String tag = "VersionUtil";
 
-    private static long library_code;
-    private static String library_name;
     private static long app_code;
     private static String app_name;
 
     private VersionUtil(){
-        library_name = new String();
         app_name = new String();
     }
 
@@ -29,11 +24,10 @@ public class VersionUtil {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        library_name = BuildConfig.VERSION_NAME;
-        library_code = BuildConfig.VERSION_CODE;
 
-        Log.i(tag,"library | code="+library_code+", name="+library_name);
-        Log.i(tag,"app     | code="+app_code+", name="+app_name);
+        Log.i(tag,"app       | code="+app_code+", name="+app_name);
+        Log.i(tag,"core      | code="+getCoreVersionCode()+", name="+getCoreVersionName());
+        Log.i(tag,"analytics | code="+getAnalyticsVersionCode()+", name="+getAnalyticsVersionName());
 
     }
 
@@ -45,13 +39,22 @@ public class VersionUtil {
         return app_name;
     }
 
-    public static long getLibraryVersionCode(){
-        return library_code;
+    public static long getCoreVersionCode(){
+        return com.healthymedium.arc.library.BuildConfig.ARC_VERSION_CODE;
     }
 
-    public static String getLibraryVersionName(){
-        return library_name;
+    public static String getCoreVersionName(){
+        return com.healthymedium.arc.library.BuildConfig.ARC_VERSION_NAME;
     }
+
+    public static long getAnalyticsVersionCode(){
+        return com.healthymedium.analytics.BuildConfig.ANALYTICS_VERSION_CODE;
+    }
+
+    public static String getAnalyticsVersionName(){
+        return com.healthymedium.analytics.BuildConfig.ANALYTICS_VERSION_NAME;
+    }
+
 
     public static long getVersionCode(int major,int minor, int patch, int build){
         return major * 1000000 + minor * 10000 + patch * 100 + build;
