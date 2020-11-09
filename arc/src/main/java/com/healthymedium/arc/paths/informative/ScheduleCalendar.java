@@ -1,7 +1,7 @@
 package com.healthymedium.arc.paths.informative;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +11,12 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.navigation.NavigationManager;
-import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 import com.healthymedium.arc.ui.Button;
 

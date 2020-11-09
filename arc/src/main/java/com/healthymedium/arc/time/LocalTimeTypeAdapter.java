@@ -36,6 +36,13 @@ public class LocalTimeTypeAdapter implements JsonSerializer<LocalTime>, JsonDese
     public LocalTime deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException {
         String string = json.getAsString();
         LocalTime time = null;
+
+        // handle deserializing from default format
+        if(string.contains(".000")){
+            time = new LocalTime(string);
+            return time;
+        }
+
         try {
             time = LocalTime.parse(string,formatter);
         } catch (IllegalArgumentException e) {

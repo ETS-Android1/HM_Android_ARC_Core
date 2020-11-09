@@ -1,13 +1,11 @@
 package com.healthymedium.arc.ui;
 
 import android.content.Context;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.support.annotation.DrawableRes;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.ui.base.RoundedLinearLayout;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class GridBoxView extends LinearLayout {

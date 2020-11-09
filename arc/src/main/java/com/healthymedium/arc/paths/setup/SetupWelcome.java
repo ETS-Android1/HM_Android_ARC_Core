@@ -2,7 +2,7 @@ package com.healthymedium.arc.paths.setup;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.Locale;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;

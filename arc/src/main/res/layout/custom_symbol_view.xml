@@ -12,7 +12,7 @@
     app:strokeWidth="1dp"
     app:strokeColor="@color/headerGrey" >
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/symbolTop"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -26,7 +26,7 @@
         android:tint="@color/text"
         tools:srcCompat="@drawable/ic_audiotrack_dark" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/symbolBottom"
         android:layout_width="60dp"
         android:layout_height="60dp"

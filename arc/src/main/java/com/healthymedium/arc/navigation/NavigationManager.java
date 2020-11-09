@@ -1,6 +1,6 @@
 package com.healthymedium.arc.navigation;
 
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentManager;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;

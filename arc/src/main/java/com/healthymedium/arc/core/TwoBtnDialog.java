@@ -9,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.study.Study;
 
 @SuppressLint("ValidFragment")
-public class TwoBtnDialog extends android.support.v4.app.DialogFragment {
+public class TwoBtnDialog extends DialogFragment {
     public String headerText;
     public String bodyText;
     public String buttonText;

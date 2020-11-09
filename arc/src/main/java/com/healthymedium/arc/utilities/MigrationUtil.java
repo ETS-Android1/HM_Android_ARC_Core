@@ -23,7 +23,7 @@ public class MigrationUtil {
 
         // library migration
 
-        long newLibVersion = VersionUtil.getLibraryVersionCode();
+        long newLibVersion = VersionUtil.getCoreVersionCode();
         long oldLibVersion = PreferencesManager.getInstance().getLong(TAG_VERSION_LIB, newLibVersion);
 
         Log.i("MigrationUtil", "old library version="+oldLibVersion);
