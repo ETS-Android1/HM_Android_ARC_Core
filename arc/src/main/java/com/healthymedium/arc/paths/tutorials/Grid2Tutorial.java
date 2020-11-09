@@ -978,7 +978,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         boxView.setSelectable(true);
 
         final HintPointer hintGreat = new HintPointer(getActivity(), boxView, true, false, true);
-        hintGreat.setText("Great! If you would like to an item from a box, first tap that box...");
+        hintGreat.setText("Great! If you would like to remove an item from a box, first tap that box...");
         hintGreat.getShadow().addPulsingTarget(boxView, 8);
         hintGreat.getShadow().addTarget(progressBar);
         register(hintGreat);
