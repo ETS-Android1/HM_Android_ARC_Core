@@ -70,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        Log.i("MainActivity","onNewIntent");
+        super.onNewIntent(intent);
+        Log.i("MainActivity", "onNewIntent");
         parseIntent(intent);
         hasNewIntent = true;
-
     }
 
     private void parseIntent(Intent intent){

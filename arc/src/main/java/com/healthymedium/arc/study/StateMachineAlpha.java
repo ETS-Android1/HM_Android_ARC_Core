@@ -389,14 +389,9 @@ public class StateMachineAlpha extends StateMachine {
     public void checkForLandingPage(){
         if(Config.OPENED_FROM_NOTIFICATION) {
             Config.OPENED_FROM_NOTIFICATION = false;
-
-            // In a visit
-            // Try to start a test
-            Study.getParticipant().getState().lastPauseTime = DateTime.now();
-            Study.getCurrentTestSession().markStarted();
-        } else {
-            addTestLandingPage();
         }
+
+        addTestLandingPage();
     }
 
     public void addTestLandingPage(){
