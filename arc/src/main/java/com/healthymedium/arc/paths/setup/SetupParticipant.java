@@ -3,8 +3,7 @@ package com.healthymedium.arc.paths.setup;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -20,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Space;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.custom.DigitView;

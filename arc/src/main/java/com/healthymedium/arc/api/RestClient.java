@@ -5,8 +5,9 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -3,11 +3,12 @@ package com.healthymedium.arc.utilities;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
 
 import com.healthymedium.arc.core.Application;
 

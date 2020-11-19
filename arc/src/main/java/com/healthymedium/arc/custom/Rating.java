@@ -3,19 +3,18 @@ package com.healthymedium.arc.custom;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.healthymedium.arc.font.Fonts;
+import androidx.appcompat.widget.LinearLayoutCompat;
+
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-public class Rating extends LinearLayoutCompat{
+public class Rating extends LinearLayoutCompat {
 
 
     TextView text;

@@ -1,7 +1,7 @@
 package com.healthymedium.arc.custom;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;

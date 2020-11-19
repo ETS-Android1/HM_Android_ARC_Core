@@ -1,11 +1,12 @@
 package com.healthymedium.arc.custom;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
 
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;

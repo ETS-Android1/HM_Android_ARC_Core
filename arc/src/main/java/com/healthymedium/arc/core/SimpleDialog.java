@@ -3,7 +3,7 @@ package com.healthymedium.arc.core;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.DialogFragment;
+import androidx.fragment.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

@@ -3,22 +3,21 @@ package com.healthymedium.arc.core;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+
 import com.healthymedium.arc.custom.Button;
-import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.StudyState;
 import com.healthymedium.arc.study.TestSession;
-import com.healthymedium.arc.study.Visit;
 import com.healthymedium.arc.utilities.NavigationManager;
 
 public class DebugDialog extends DialogFragment {

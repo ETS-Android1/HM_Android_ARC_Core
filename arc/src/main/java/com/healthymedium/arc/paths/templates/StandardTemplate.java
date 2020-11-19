@@ -3,7 +3,6 @@ package com.healthymedium.arc.paths.templates;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.custom.Button;

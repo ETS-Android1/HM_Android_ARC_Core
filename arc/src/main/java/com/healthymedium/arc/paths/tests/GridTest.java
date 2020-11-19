@@ -2,8 +2,7 @@ package com.healthymedium.arc.paths.tests;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
+
 import com.healthymedium.arc.core.BaseFragment;
-import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.GridTestPathData;
-import com.healthymedium.arc.path_data.GridTestPathData.Section;
 import com.healthymedium.arc.study.Study;
 
 import java.util.ArrayList;

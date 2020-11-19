@@ -1,8 +1,8 @@
 package com.healthymedium.arc.utilities;
 
 import android.os.SystemClock;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;

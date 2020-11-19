@@ -3,13 +3,14 @@ package com.healthymedium.arc.paths.questions;
 import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+
+import androidx.core.content.ContextCompat;
 
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Locale;

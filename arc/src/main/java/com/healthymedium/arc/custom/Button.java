@@ -3,15 +3,14 @@ package com.healthymedium.arc.custom;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.healthymedium.arc.font.Fonts;
+import androidx.annotation.DrawableRes;
+
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 

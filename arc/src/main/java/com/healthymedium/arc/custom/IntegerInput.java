@@ -2,8 +2,7 @@ package com.healthymedium.arc.custom;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.Nullable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.AttributeSet;
@@ -11,13 +10,16 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.core.content.ContextCompat;
+
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-public class IntegerInput extends android.support.v7.widget.AppCompatEditText {
+public class IntegerInput extends AppCompatEditText {
 
     Listener listener;
 

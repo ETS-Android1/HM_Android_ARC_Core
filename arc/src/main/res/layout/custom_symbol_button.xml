@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.AppCompatImageView
+    <AppCompatImageView
         android:id="@+id/symbolTop"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -22,7 +22,7 @@
         android:scaleY="0.6"
         app:srcCompat="@drawable/symbol_1" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <AppCompatImageView
         android:id="@+id/symbolBottom"
         android:layout_width="100dp"
         android:layout_height="100dp"

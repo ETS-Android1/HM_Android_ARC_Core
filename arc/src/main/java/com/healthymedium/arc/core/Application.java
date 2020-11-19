@@ -3,7 +3,7 @@ package com.healthymedium.arc.core;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 

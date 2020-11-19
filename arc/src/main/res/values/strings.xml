@@ -269,4 +269,6 @@
     <string name="contact_body"></string>
 
     <string name="max_time_error"></string>
+    <string name="radio_yes">yes</string>
+    <string name="radio_no">no</string>
 </resources>

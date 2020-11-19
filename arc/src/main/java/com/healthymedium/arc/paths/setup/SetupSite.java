@@ -1,8 +1,7 @@
 package com.healthymedium.arc.paths.setup;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -17,6 +16,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;

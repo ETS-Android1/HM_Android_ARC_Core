@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="68dp">
 
-        <android.support.v7.widget.AppCompatImageView
+        <AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="match_parent"
             android:layout_height="48dp"

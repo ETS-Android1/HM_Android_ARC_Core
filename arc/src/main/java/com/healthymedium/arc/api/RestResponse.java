@@ -1,6 +1,6 @@
 package com.healthymedium.arc.api;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
