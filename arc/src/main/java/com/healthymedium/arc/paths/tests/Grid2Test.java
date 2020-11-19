@@ -141,7 +141,7 @@ public class Grid2Test extends BaseFragment {
 
         handler = new Handler();
         handlerInteraction = new Handler();
-        handlerInteraction.postDelayed(runnable,20000);
+        handlerInteraction.postDelayed(runnable,30000);
 
         adjustGridLayout();
 
