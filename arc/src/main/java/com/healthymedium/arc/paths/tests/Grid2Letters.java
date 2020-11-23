@@ -19,7 +19,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.core.TimedDialogMultipart;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.path_data.GridTestPathData;
+import com.healthymedium.arc.path_data.Grid2TestPathData;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Grid2LetterView;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -31,8 +31,8 @@ import java.util.Random;
 
 public class Grid2Letters extends BaseFragment {
 
-    GridTestPathData gridTest;
-    GridTestPathData.Section section;
+    Grid2TestPathData gridTest;
+    Grid2TestPathData.Section section;
 
     GridLayout gridLayout;
     int columnCount;
@@ -71,7 +71,7 @@ public class Grid2Letters extends BaseFragment {
             getView(index / rowCount,index % rowCount).setF();
         }
 
-        gridTest = (GridTestPathData) Study.getCurrentSegmentData();
+        gridTest = (Grid2TestPathData) Study.getCurrentSegmentData();
         section = gridTest.getCurrentSection();
 
         handler = new Handler();

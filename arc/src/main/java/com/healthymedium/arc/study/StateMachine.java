@@ -6,6 +6,7 @@ import android.text.Html;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.tests.CognitiveTest;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.path_data.Grid2TestPathData;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
 import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationOverview;
@@ -783,7 +784,7 @@ public class StateMachine {
 
         fragments.add(new TestProgress(ViewUtil.getString(R.string.grids_complete), index));
 
-        PathSegment segment = new PathSegment(fragments,GridTestPathData.class);
+        PathSegment segment = new PathSegment(fragments, Grid2TestPathData.class);
         enableTransitionGrids(segment,true);
         cache.segments.add(segment);
     }

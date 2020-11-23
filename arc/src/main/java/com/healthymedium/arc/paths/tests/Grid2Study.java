@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.path_data.Grid2TestPathData;
 import com.healthymedium.arc.path_data.GridTestPathData;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Grid2BoxView;
@@ -32,8 +33,8 @@ public class Grid2Study extends BaseFragment {
     boolean paused;
 
     GridLayout gridLayout;
-    GridTestPathData gridTest;
-    GridTestPathData.Section section;
+    Grid2TestPathData gridTest;
+    Grid2TestPathData.Section section;
 
     int rowCount;
     int columnCount;
@@ -78,7 +79,7 @@ public class Grid2Study extends BaseFragment {
             @Override
             public void dismiss() {
                 Random random = new Random(SystemClock.currentThreadTimeMillis());
-                List<GridTestPathData.Image> images = setupTest(random,rowCount,columnCount);
+                List<Grid2TestPathData.Image> images = setupTest(random,rowCount,columnCount);
                 displayImages(images);
 
                 handler = new Handler();
@@ -87,7 +88,7 @@ public class Grid2Study extends BaseFragment {
         });
         dialog.show(getFragmentManager(), TimedDialog.class.getSimpleName());
 
-        gridTest = (GridTestPathData) Study.getCurrentSegmentData();
+        gridTest = (Grid2TestPathData) Study.getCurrentSegmentData();
 
         adjustGridLayout();
 
@@ -157,8 +158,8 @@ public class Grid2Study extends BaseFragment {
         gridLayout.setLayoutParams(layoutParams);
     }
 
-    public static List<GridTestPathData.Image> setupTest(Random random, int rowCount, int columnCount){
-        List<GridTestPathData.Image> images = new ArrayList<>();
+    public static List<Grid2TestPathData.Image> setupTest(Random random, int rowCount, int columnCount){
+        List<Grid2TestPathData.Image> images = new ArrayList<>();
 
         int row1 = random.nextInt(rowCount);
         int row2 = random.nextInt(rowCount);
@@ -180,16 +181,16 @@ public class Grid2Study extends BaseFragment {
             col3 = random.nextInt(columnCount);
         }
 
-        images.add(new GridTestPathData.Image(row1,col1,GridTestPathData.Image.PHONE));
-        images.add(new GridTestPathData.Image(row2,col2,GridTestPathData.Image.PEN));
-        images.add(new GridTestPathData.Image(row3,col3,GridTestPathData.Image.KEY));
+        images.add(new Grid2TestPathData.Image(row1,col1,GridTestPathData.Image.PHONE));
+        images.add(new Grid2TestPathData.Image(row2,col2,GridTestPathData.Image.PEN));
+        images.add(new Grid2TestPathData.Image(row3,col3,GridTestPathData.Image.KEY));
 
         return images;
     }
 
-    private void displayImages(List<GridTestPathData.Image> images) {
+    private void displayImages(List<Grid2TestPathData.Image> images) {
 
-        for(GridTestPathData.Image image : images) {
+        for(Grid2TestPathData.Image image : images) {
             getView(image.row(),image.column()).setImage(image.id());
         }
 

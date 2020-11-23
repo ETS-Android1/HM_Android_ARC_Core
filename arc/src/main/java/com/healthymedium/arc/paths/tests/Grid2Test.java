@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.path_data.GridTestPathData;
+import com.healthymedium.arc.path_data.Grid2TestPathData;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.Grid2BoxView;
@@ -37,8 +37,8 @@ public class Grid2Test extends BaseFragment {
     boolean penSelected = false;
 
     GridLayout gridLayout;
-    GridTestPathData gridTest;
-    GridTestPathData.Section section;
+    Grid2TestPathData gridTest;
+    Grid2TestPathData.Section section;
 
     Button button;
     Grid2ChoiceDialog dialog;
@@ -136,7 +136,7 @@ public class Grid2Test extends BaseFragment {
             }
         });
 
-        gridTest = (GridTestPathData) Study.getCurrentSegmentData();
+        gridTest = (Grid2TestPathData) Study.getCurrentSegmentData();
         section = gridTest.getCurrentSection();
 
         handler = new Handler();
@@ -171,14 +171,18 @@ public class Grid2Test extends BaseFragment {
     }
 
     private void updateSection(){
-        List<GridTestPathData.Tap> choices = new ArrayList<>();
+        List<Grid2TestPathData.Tap> choices = new ArrayList<>();
 
         int size = gridLayout.getChildCount();
         for(int i=0;i<size;i++){
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
             if(view.isSelected()) {
-                // TODO: Make sure we collect the data we need for this test version
-                choices.add(new GridTestPathData.Tap(i / 5, i % 5, view.getTimestampImage()));
+                int x = i / 5;
+                int y = i % 5;
+                int image = view.getImage();
+                long timestampSelect = view.getTimestampSelect();
+                long timestampImage = view.getTimestampImage();
+                choices.add(new Grid2TestPathData.Tap(x,y,image,timestampSelect,timestampImage));
             }
         }
 
