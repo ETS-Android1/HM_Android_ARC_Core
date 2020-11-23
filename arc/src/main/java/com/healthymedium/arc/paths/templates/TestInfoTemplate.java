@@ -218,6 +218,9 @@ public class TestInfoTemplate extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(getMainActivity()==null){
+                    return;
+                }
                 getMainActivity().getWindow().setBackgroundDrawableResource(R.drawable.core_background);
             }
             }, 1000);
