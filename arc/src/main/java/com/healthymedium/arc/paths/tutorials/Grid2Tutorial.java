@@ -668,7 +668,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                                 public void run() {
                                     enableGrids();
 
-                                    otherItemsHint = new HintPointer(getActivity(), gridTextView);
+                                    otherItemsHint = new HintPointer(getActivity(), bottomAnchor,false,true);
                                     register(otherItemsHint);
 
                                     otherItemsHint.setText("Great! Now, place the other two items on the grid.");
@@ -834,7 +834,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mechanicsHint = new HintPointer(getActivity(), gridTextView, true);
+                        mechanicsHint = new HintPointer(getActivity(), bottomAnchor, false,true,true);
                         mechanicsHint.setText("Then, tap the cell phone button to place it in the new box.");
 
                         mechanicsHint.getShadow().addTarget(dialog, 8, 8);
