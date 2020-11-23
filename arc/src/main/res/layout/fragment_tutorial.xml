@@ -51,6 +51,13 @@
             android:visibility="gone"
             android:text="@string/button_close" />
 
+        <View
+            android:id="@+id/bottomAnchor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
     </RelativeLayout>
 
     <View

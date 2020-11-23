@@ -54,6 +54,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     Button continueButton;
     TextView gridTextView;
     TextView gridHintTextView;
+    View bottomAnchor;
 
     HintPointer remindMeHint;
     HintHighlighter remindMeHighlight;
@@ -77,6 +78,8 @@ public class Grid2Tutorial extends TutorialTemplate {
         super.onViewCreated(view, savedInstanceState);
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
+
+        bottomAnchor = view.findViewById(R.id.bottomAnchor);
 
         items = inflater.inflate(R.layout.fragment_grid2_tutorial_items, container, false);
         itemsLayout = items.findViewById(R.id.itemsLayout);
@@ -355,33 +358,6 @@ public class Grid2Tutorial extends TutorialTemplate {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        setGridRecall();
-                    }
-                }, 600);
-            }
-        });
-        secondItemsHint.show();
-    }
-
-
-    // Displays the same items as setInitialItemLayout()
-    // Displays a new hint
-    private void setSecondItemLayout() {
-        gridTextView.setVisibility(View.VISIBLE);
-        fadeInView(grids);
-
-        final HintPointer secondItemsHint = new HintPointer(getActivity(), gridLayout, true);
-        register(secondItemsHint);
-
-        secondItemsHint.setText("In part three, place each item in its location from part one.");
-        secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                secondItemsHint.dismiss();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-//                        fadeOutView(grids);
                         setGridRecall();
                     }
                 }, 600);
@@ -739,102 +715,6 @@ public class Grid2Tutorial extends TutorialTemplate {
         }
     };
 
-    Runnable choiceRemoveRunnable = new Runnable() {
-        @Override
-        public void run() {
-            dialog.getPhoneView().setOnTouchListener(null);
-            dialog.getPenView().setOnTouchListener(null);
-            dialog.getKeyView().setOnTouchListener(null);
-
-            final HintPointer choiceRemoveHint = new HintPointer(getActivity(), gridTextView, false, true);
-            register(choiceRemoveHint);
-
-            final HintHighlighter choiceRemoveHighlight = new HintHighlighter(getActivity());
-            register(choiceRemoveHighlight);
-
-            dialogListener = new Grid2ChoiceDialog.Listener() {
-                @Override
-                public void onSelected(int image) {
-
-                }
-
-                @Override
-                public void onRemove() {
-                    choiceRemoveHighlight.dismiss();
-                    choiceRemoveHint.dismiss();
-
-                    final HintPointer choiceAgainHint = new HintPointer(getActivity(), gridTextView, false, true);
-                    register(choiceAgainHint);
-
-                    final HintHighlighter choiceAgainHighlight = new HintHighlighter(getActivity());
-                    register(choiceAgainHighlight);
-
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            defaultListener.onSelected(getGridView(1, 1));
-                            getGridView(1, 1).setSelected(true);
-                            getGridView(1, 1).setSelectable(false);
-
-                            dialogListener = new Grid2ChoiceDialog.Listener() {
-                                @Override
-                                public void onSelected(int image) {
-                                    getGridView(1, 1).setSelectable(true);
-                                    choiceAgainHighlight.dismiss();
-                                    choiceAgainHint.dismiss();
-
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            enableGrids();
-
-                                            otherItemsHint = new HintPointer(getActivity(), gridTextView);
-                                            register(otherItemsHint);
-
-                                            otherItemsHint.setText("Now, place the other two items on the grid.");
-                                            otherItemsHint.show();
-                                            othersReady = true;
-                                            handler.postDelayed(remindMeRunnable, 20000);
-
-                                        }
-                                    }, 300);
-                                }
-
-                                @Override
-                                public void onRemove() {
-                                    userMovedOrRemoved = true;
-                                }
-                            };
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    dialog.getPenView().setOnTouchListener(null);
-                                    dialog.getKeyView().setOnTouchListener(null);
-
-                                    choiceAgainHighlight.addTarget(progressBar);
-                                    choiceAgainHighlight.addTarget(dialog, 8, 16);
-                                    choiceAgainHighlight.addTarget(getGridView(1, 1), 8, 16);
-                                    choiceAgainHighlight.addPulsingTarget(dialog.getPhoneView(), 8);
-                                    choiceAgainHighlight.show();
-
-                                    choiceAgainHint.setText("Great! Let's place the cell phone back in the first box");
-                                    choiceAgainHint.show();
-                                }
-                            }, 500);
-                        }
-                    }, 300);
-                }
-            };
-
-            choiceRemoveHighlight.addTarget(dialog.getRemoveItemView(), 8, 8);
-            choiceRemoveHighlight.show();
-
-            choiceRemoveHint.setText("Tap Remove Item button");
-            choiceRemoveHint.show();
-        }
-    };
-
     private void checkForMechanicsHint() {
         if (!mechanicsHintShown) {
             mechanicsHintShown = true;
@@ -843,7 +723,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                 otherItemsHint.dismiss();
             }
 
-            mechanicsHint = new HintPointer(getActivity(), gridTextView);
+            mechanicsHint = new HintPointer(getActivity(), bottomAnchor,false,true);
             mechanicsHint.setText("Change your mind? Select a different item to replace, or tap <b>Remove Item</b> to clear.");
             mechanicsHint.addButton(ViewUtil.getString(R.string.popup_gotit), new View.OnClickListener() {
                 @Override
@@ -1048,7 +928,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                final HintPointer hint = new HintPointer(getActivity(),gridTextView);
+                final HintPointer hint = new HintPointer(getActivity(),bottomAnchor,false,true);
                 hint.setText("Perfect! You've got it.");
                 hint.addButton("Finish Tutorial", new View.OnClickListener() {
                     @Override
