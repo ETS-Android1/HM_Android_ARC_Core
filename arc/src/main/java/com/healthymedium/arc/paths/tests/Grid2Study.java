@@ -20,6 +20,7 @@ import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.Grid2TestPathData;
 import com.healthymedium.arc.path_data.GridTestPathData;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Grid2BoxView;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -78,7 +79,13 @@ public class Grid2Study extends BaseFragment {
         dialog.setOnDialogDismissListener(new TimedDialog.OnDialogDismiss() {
             @Override
             public void dismiss() {
-                Random random = new Random(SystemClock.currentThreadTimeMillis());
+                Random random;
+                if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1) {
+                    random = new Random(SystemClock.currentThreadTimeMillis());
+                }
+                else{
+                    random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+                }
                 List<Grid2TestPathData.Image> images = setupTest(random,rowCount,columnCount);
                 displayImages(images);
 

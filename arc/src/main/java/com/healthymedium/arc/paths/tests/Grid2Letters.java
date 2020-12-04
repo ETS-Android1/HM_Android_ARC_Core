@@ -20,6 +20,7 @@ import com.healthymedium.arc.core.TimedDialog;
 import com.healthymedium.arc.core.TimedDialogMultipart;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.Grid2TestPathData;
+import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Grid2LetterView;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -62,8 +63,16 @@ public class Grid2Letters extends BaseFragment {
         columnCount = gridLayout.getColumnCount();
         rowCount = gridLayout.getRowCount();
 
+        Random random;
+        if(StateMachine.AUTOMATED_TESTS_RANDOM_SEED == -1) {
+            random = new Random(SystemClock.elapsedRealtime());
+        }
+        else{
+            random = new Random(StateMachine.AUTOMATED_TESTS_RANDOM_SEED);
+        }
+
         List<Integer> indices = setupTest(
-                new Random(SystemClock.elapsedRealtime()),
+                random,
                 rowCount,
                 columnCount);
 
