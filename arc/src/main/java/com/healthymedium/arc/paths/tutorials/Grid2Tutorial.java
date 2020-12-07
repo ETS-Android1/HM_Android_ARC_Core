@@ -38,6 +38,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     boolean penSelected = false;
     boolean othersReady = false;
 
+    boolean firstGridSelected = false;
+
     boolean userMovedOrRemoved = false;
     boolean mechanicsHintShown = false;
     HintPointer mechanicsHint;
@@ -349,33 +351,6 @@ public class Grid2Tutorial extends TutorialTemplate {
         final HintPointer secondItemsHint = new HintPointer(getActivity(), gridLayout, true);
         register(secondItemsHint);
 
-        secondItemsHint.setText("In part three, place each item in its location from part one.");
-        secondItemsHint.getShadow().addTarget(progressBar);
-        secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                secondItemsHint.dismiss();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        setGridRecall();
-                    }
-                }, 600);
-            }
-        });
-        secondItemsHint.show();
-    }
-
-    // Displays the grid recall test and associated hints/prompts
-    private void setGridRecall() {
-
-        int size = gridLayout.getChildCount();
-        for (int i = 0; i < size; i++) {
-            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
-            view.setSelectable(true);
-            view.setListener(defaultListener);
-        }
-
         remindMeHint.setText(ViewUtil.getString(R.string.popup_tutorial_needhelp));
         remindMeHint.addButton(ViewUtil.getString(R.string.popup_tutorial_remindme), new View.OnClickListener() {
             @Override
@@ -392,7 +367,36 @@ public class Grid2Tutorial extends TutorialTemplate {
             }
         });
 
-        handler.post(firstRecallStepRunnable);
+        otherItemsHint = new HintPointer(getActivity(), bottomAnchor,false,true);
+        otherItemsHint.setText("Great! Now, place the other two items on the grid.");
+        register(otherItemsHint);
+
+        secondItemsHint.setText("In part three, place each item in its location from part one.");
+        secondItemsHint.getShadow().addTarget(progressBar);
+        secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                secondItemsHint.dismiss();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setGridRecall();
+                    }
+                }, 600);
+                handler.postDelayed(firstRecallStepRunnable,5000);
+            }
+        });
+        secondItemsHint.show();
+    }
+
+    // Displays the grid recall test and associated hints/prompts
+    private void setGridRecall() {
+        int size = gridLayout.getChildCount();
+        for (int i = 0; i < size; i++) {
+            Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
+            view.setSelectable(true);
+            view.setListener(defaultListener);
+        }
     }
 
     private void disableGrids(Grid2BoxView exemption) {
@@ -529,6 +533,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         @Override
         public void onSelected(final Grid2BoxView view) {
             handler.removeCallbacks(remindMeRunnable);
+            handler.removeCallbacks(firstRecallStepRunnable);
             if (mechanicsHint != null) {
                 mechanicsHint.dismiss();
             }
@@ -573,6 +578,14 @@ public class Grid2Tutorial extends TutorialTemplate {
             dialog.setListener(new Grid2ChoiceDialog.Listener() {
                 @Override
                 public void onSelected(int image) {
+
+                    if (!firstGridSelected) {
+                        firstGridSelected = true;
+                        otherItemsHint.show();
+                        othersReady = true;
+                        handler.postDelayed(remindMeRunnable, 20000);
+                    }
+
                     removeSelection(image);
                     view.setImage(image);
                     updateSelections();
@@ -650,6 +663,8 @@ public class Grid2Tutorial extends TutorialTemplate {
             boxViewListener = new Grid2BoxView.Listener() {
                 @Override
                 public void onSelected(Grid2BoxView view) {
+                    handler.removeCallbacks(remindMeRunnable);
+
                     view.setSelectable(false);
                     if (pulsateGridItem != null) {
                         pulsateGridItem.dismiss();
@@ -668,10 +683,8 @@ public class Grid2Tutorial extends TutorialTemplate {
                                 public void run() {
                                     enableGrids();
 
-                                    otherItemsHint = new HintPointer(getActivity(), bottomAnchor,false,true);
-                                    register(otherItemsHint);
+                                    firstGridSelected = true;
 
-                                    otherItemsHint.setText("Great! Now, place the other two items on the grid.");
                                     otherItemsHint.show();
                                     othersReady = true;
                                     handler.postDelayed(remindMeRunnable, 20000);
