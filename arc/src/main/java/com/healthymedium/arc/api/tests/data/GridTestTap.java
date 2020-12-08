@@ -14,7 +14,7 @@ public class GridTestTap {
     // only used in grid v2
     @SerializedName("grid_selection_time")
     public Double gridSelectionTime;
-    @SerializedName("image_selection_time")
+    @SerializedName("item_selection_time")
     public Double imageSelectionTime;
     public String image;
 
