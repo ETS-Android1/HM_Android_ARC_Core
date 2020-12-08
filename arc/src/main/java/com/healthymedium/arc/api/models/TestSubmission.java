@@ -1,5 +1,8 @@
 package com.healthymedium.arc.api.models;
 
+import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.study.TestVariant;
+
 import java.util.List;
 
 public class TestSubmission {
@@ -26,5 +29,12 @@ public class TestSubmission {
 
     public String timezone_name;       // name of timezone ie "Central Standard Time"
     public String timezone_offset;     // offset from utc ie "UTC-05:00"
+
+    public TestSubmission() {
+        // put all of your complaints here
+        if(Config.TEST_VARIANT_GRID.equals(TestVariant.Grid.V2)){
+            model_version = "3";
+        }
+    }
 
 }
