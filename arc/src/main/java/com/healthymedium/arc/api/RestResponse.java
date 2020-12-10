@@ -29,6 +29,14 @@ public class RestResponse {
         return gson.fromJson(optional.get(key), tClass);
     }
 
+    public <T> T getOptionalAs(Class<T> tClass){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapterFactory(new ItemTypeAdapterFactory())
+                .setLenient()
+                .create();
+        return gson.fromJson(optional, tClass);
+    }
+
     public static RestResponse fromRetrofitResponse(retrofit2.Response<ResponseBody> retrofitResponse){
         RestResponse response = new RestResponse();
 
