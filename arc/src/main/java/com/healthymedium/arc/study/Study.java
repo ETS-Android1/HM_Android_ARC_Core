@@ -357,6 +357,16 @@ public class Study{
         }
     }
 
+    public static PathSegment getCurrentSegment() {
+        try {
+            return stateMachine.cache.segments.get(0);
+        } catch (IndexOutOfBoundsException e) {
+            Analytics.logException(Analytics.ERROR,"Study::getCurrentSegment",e);
+            Application.getInstance().restart();
+            return new PathSegment();
+        }
+    }
+
     // operations ----------------------------------------------------------------------------------
 
     // try to open next fragment in segment
