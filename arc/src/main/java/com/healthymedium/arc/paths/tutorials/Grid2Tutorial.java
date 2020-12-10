@@ -637,8 +637,10 @@ public class Grid2Tutorial extends TutorialTemplate {
             if (otherItemsHint != null) {
                 otherItemsHint.dismiss();
             }
-            remindMeHighlight.addTarget(progressBar);
-            remindMeHighlight.show();
+            if(!remindMeHighlight.isShown()){
+                remindMeHighlight.addTarget(progressBar);
+                remindMeHighlight.show();
+            }
             remindMeHint.show();
         }
     };

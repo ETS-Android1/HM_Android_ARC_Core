@@ -343,6 +343,9 @@ public class HintPointer extends LinearLayout {
             @Override
             public void run() {
                 setAlpha(0.0f);
+                if(HintPointer.this.getParent()!=null){
+                    ((ViewGroup)HintPointer.this.getParent()).removeView(HintPointer.this);
+                }
                 parent.addView(HintPointer.this);
                 HintPointer.this.animate()
                         .alpha(1.0f)
