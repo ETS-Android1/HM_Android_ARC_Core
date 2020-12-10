@@ -332,7 +332,7 @@ public class PricesTutorialRevised extends Tutorial {
 
     private void setFirstPricesCompare() {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item1));
-        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price1_match));
 
         initialViewHint.setText(ViewUtil.getString(R.string.popup_tutorial_price_intro));
         highlighter.addTarget(progressBar);
@@ -363,7 +363,7 @@ public class PricesTutorialRevised extends Tutorial {
 
     private void setSecondPricesCompare() {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item2));
-        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price2_match));
 
         Runnable runnable = new Runnable() {
             @Override
@@ -378,7 +378,7 @@ public class PricesTutorialRevised extends Tutorial {
 
     private void setThirdPricesCompare() {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item3));
-        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price3));
+        textviewPrice.setText(ViewUtil.getString(R.string.prices_tutorial_price3_match));
 
         handler.postDelayed(new Runnable() {
             @Override
