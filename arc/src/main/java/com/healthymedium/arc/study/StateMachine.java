@@ -21,6 +21,9 @@ import com.healthymedium.arc.paths.notification.NotificationOverview;
 import com.healthymedium.arc.paths.notification.NotificationTurnOn;
 import com.healthymedium.arc.paths.questions.QuestionNonRemoteStudyCommitment;
 import com.healthymedium.arc.paths.questions.QuestionRemoteStudyCommitment;
+import com.healthymedium.arc.paths.setup_v2.Setup2Participant;
+import com.healthymedium.arc.paths.setup_v2.Setup2ParticipantConfirm;
+import com.healthymedium.arc.paths.setup_v2.Setup2Welcome;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
 import com.healthymedium.arc.paths.templates.TestInfoTemplate;
 import com.healthymedium.arc.paths.tests.Grid2Letters;
@@ -311,7 +314,7 @@ public class StateMachine {
 
     // ---------------------------------------------------------------------------------------------
 
-    public void setPathSetupParticipant(int firstDigitCount, int secondDigitCount, int authDigitCount){
+    public void setPathSetupParticipantV1(int firstDigitCount, int secondDigitCount, int authDigitCount){
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new SetupWelcome());
         fragments.add(new SetupParticipant(firstDigitCount,secondDigitCount));
@@ -330,9 +333,23 @@ public class StateMachine {
         cache.segments.add(segment);
     }
 
-    // default
-    public void setPathSetupParticipant(){
-        setPathSetupParticipant(5,3,5);
+    public void setPathSetupParticipantV2(int firstDigitCount, int secondDigitCount){
+        List<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new Setup2Welcome());
+        fragments.add(new Setup2Participant(firstDigitCount,secondDigitCount));
+        fragments.add(new Setup2ParticipantConfirm(firstDigitCount,secondDigitCount));
+
+        PathSegment segment = new PathSegment(fragments,SetupPathData.class);
+        enableTransition(segment,false);
+        cache.segments.add(segment);
+    }
+
+    public void setPathSetupParticipant(int firstDigitCount, int secondDigitCount, int authDigitCount){
+        if(Config.LOGIN_USE_AUTH_DETAILS){
+            setPathSetupParticipantV2(firstDigitCount,secondDigitCount);
+        } else {
+            setPathSetupParticipantV1(firstDigitCount,secondDigitCount,authDigitCount);
+        }
     }
 
     // ---------------------------------------------------------------------------------------------
