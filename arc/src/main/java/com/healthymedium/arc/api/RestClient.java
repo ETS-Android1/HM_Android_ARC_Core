@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import com.healthymedium.arc.api.models.AuthDetailsRequest;
 import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DayProgress;
 import com.healthymedium.arc.api.models.DeviceRegistration;
@@ -235,6 +236,20 @@ public class RestClient <Api>{
         JsonObject json = serialize(request);
 
         Call<ResponseBody> call = getService().requestVerificationCode(json);
+        call.enqueue(createCallback(listener));
+    }
+
+    public void requestAuthDetails(String participantId, Listener listener){
+        if(Config.REST_BLACKHOLE) {
+            return;
+        }
+        Log.i("RestClient","requestAuthDetails");
+
+        AuthDetailsRequest request = new AuthDetailsRequest();
+        request.setArcId(participantId);
+        JsonObject json = serialize(request);
+
+        Call<ResponseBody> call = getService().requestAuthDetails(json);
         call.enqueue(createCallback(listener));
     }
 
