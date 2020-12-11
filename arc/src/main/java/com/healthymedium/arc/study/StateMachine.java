@@ -786,7 +786,7 @@ public class StateMachine {
         TestInfoTemplate info0 = new TestInfoTemplate(
                 testNumber,
                 ViewUtil.getHtmlString(R.string.grids_header),
-                ViewUtil.getHtmlString(R.string.grids_body),
+                ViewUtil.getHtmlString(R.string.grids_vb_body),
                 "grids",
                 ViewUtil.getHtmlString(R.string.button_begintest));
         fragments.add(info0);

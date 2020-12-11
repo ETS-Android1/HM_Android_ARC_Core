@@ -195,7 +195,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         final HintPointer gridsHint = new HintPointer(getActivity(), gridLayout, true);
         register(gridsHint);
 
-        gridsHint.setText("This test has three parts. In the first part, you'll be asked to <b>remember the location</b> of three items. The items will be placed in a grid of boxes. <b>Remember which box each item is in.</b> You will have 3 seconds to study the locations.");
+        gridsHint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_step1));
         gridsHint.getShadow().addTarget(progressBar);
         gridsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
             @Override
