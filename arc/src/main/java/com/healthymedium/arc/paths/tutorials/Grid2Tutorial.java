@@ -32,7 +32,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 public class Grid2Tutorial extends TutorialTemplate {
 
     public static final String HINT_PREVENT_TUTORIAL_CLOSE_GRIDS = "HINT_PREVENT_TUTORIAL_CLOSE_GRIDS";
-
+    private final int REMIND_ME_HINT_DELAY = 5000;
+    
     boolean phoneSelected = false;
     boolean keySelected = false;
     boolean penSelected = false;
@@ -553,7 +554,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                     if (view.getImage() == 0) {
                         view.setSelected(false);
                     }
-                    handler.postDelayed(remindMeRunnable, 20000);
+                    handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     enableGrids();
                     return;
                 }
@@ -583,7 +584,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         firstGridSelected = true;
                         otherItemsHint.show();
                         othersReady = true;
-                        handler.postDelayed(remindMeRunnable, 20000);
+                        handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     }
 
                     removeSelection(image);
@@ -594,7 +595,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         dialogListener = null;
                     }
                     if (othersReady && !(phoneSelected && penSelected && keySelected)) {
-                        handler.postDelayed(remindMeRunnable, 20000);
+                        handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     }
                     enableGrids();
 
@@ -612,7 +613,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         dialogListener = null;
                     }
                     if (othersReady && !(phoneSelected && penSelected && keySelected)) {
-                        handler.postDelayed(remindMeRunnable, 20000);
+                        handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     }
                     enableGrids();
                 }
@@ -689,7 +690,7 @@ public class Grid2Tutorial extends TutorialTemplate {
 
                                     otherItemsHint.show();
                                     othersReady = true;
-                                    handler.postDelayed(remindMeRunnable, 20000);
+                                    handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
 
                                 }
                             }, 300);
