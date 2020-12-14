@@ -33,7 +33,8 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     public static final String HINT_PREVENT_TUTORIAL_CLOSE_GRIDS = "HINT_PREVENT_TUTORIAL_CLOSE_GRIDS";
     private final int REMIND_ME_HINT_DELAY = 5000;
-    
+
+    int selectedCount = 0;
     boolean phoneSelected = false;
     boolean keySelected = false;
     boolean penSelected = false;
@@ -60,7 +61,6 @@ public class Grid2Tutorial extends TutorialTemplate {
     View bottomAnchor;
 
     HintPointer remindMeHint;
-    HintHighlighter remindMeHighlight;
     HintPointer otherItemsHint;
 
     Grid2ChoiceDialog dialog;
@@ -115,11 +115,8 @@ public class Grid2Tutorial extends TutorialTemplate {
 
         adjustLayouts();
 
-        remindMeHint = new HintPointer(getActivity(), getGridView(4, 3), false, true);
+        remindMeHint = new HintPointer(getActivity(), bottomAnchor, false, true,false);
         register(remindMeHint);
-
-        remindMeHighlight = new HintHighlighter(getActivity());
-        register(remindMeHighlight);
 
     }
 
@@ -357,8 +354,6 @@ public class Grid2Tutorial extends TutorialTemplate {
             @Override
             public void onClick(View view) {
                 remindMeHint.dismiss();
-                remindMeHighlight.dismiss();
-                remindMeHighlight.clearTargets();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -461,6 +456,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         phoneSelected = false;
         keySelected = false;
         penSelected = false;
+        selectedCount = 0;
 
         int size = gridLayout.getChildCount();
         for (int i = 0; i < size; i++) {
@@ -471,23 +467,30 @@ public class Grid2Tutorial extends TutorialTemplate {
             int id = view.getImage();
             if (id == R.drawable.phone) {
                 phoneSelected = true;
+                selectedCount++;
             }
             if (id == R.drawable.key) {
                 keySelected = true;
+                selectedCount++;
             }
             if (id == R.drawable.pen) {
                 penSelected = true;
+                selectedCount++;
             }
         }
         updateButtonVisibility();
     }
 
     private void updateButtonVisibility() {
+        if(remindMeHint != null){
+            remindMeHint.dismiss();
+        }
+        if(selectedCount >= 2 && otherItemsHint != null){
+            otherItemsHint.setVisibility(View.INVISIBLE);
+            otherItemsHint.dismiss();
+        }
+
         if (phoneSelected && keySelected && penSelected) {
-            if (otherItemsHint != null) {
-                otherItemsHint.setVisibility(View.INVISIBLE);
-                otherItemsHint.dismiss();
-            }
             continueButton.setVisibility(View.VISIBLE);
             gridHintTextView.setVisibility(View.INVISIBLE);
         } else {
@@ -580,6 +583,15 @@ public class Grid2Tutorial extends TutorialTemplate {
                 @Override
                 public void onSelected(int image) {
 
+                    removeSelection(image);
+                    view.setImage(image);
+                    updateSelections();
+
+                    if (dialogListener != null) {
+                        dialogListener.onSelected(image);
+                        dialogListener = null;
+                    }
+
                     if (!firstGridSelected) {
                         firstGridSelected = true;
                         otherItemsHint.show();
@@ -587,13 +599,6 @@ public class Grid2Tutorial extends TutorialTemplate {
                         handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     }
 
-                    removeSelection(image);
-                    view.setImage(image);
-                    updateSelections();
-                    if (dialogListener != null) {
-                        dialogListener.onSelected(image);
-                        dialogListener = null;
-                    }
                     if (othersReady && !(phoneSelected && penSelected && keySelected)) {
                         handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     }
@@ -637,10 +642,6 @@ public class Grid2Tutorial extends TutorialTemplate {
         public void run() {
             if (otherItemsHint != null) {
                 otherItemsHint.dismiss();
-            }
-            if(!remindMeHighlight.isShown()){
-                remindMeHighlight.addTarget(progressBar);
-                remindMeHighlight.show();
             }
             remindMeHint.show();
         }
