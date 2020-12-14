@@ -438,8 +438,8 @@ public class PricesTutorialRevised extends Tutorial {
         textView12.setText(ViewUtil.getString(R.string.prices_whatwasprice));
         textView12.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price1_match));
-        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
+        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price1));
+        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price1_match));
 
         buttonYes.showButton(false);
         buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
@@ -551,8 +551,8 @@ public class PricesTutorialRevised extends Tutorial {
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item2));
         textviewPrice.setVisibility(View.GONE);
 
-        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
-        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price2_match));
+        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price2_match));
+        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price2));
 
         buttonYes.showButton(false);
         buttonYes.setLabelPosition(View.TEXT_ALIGNMENT_CENTER);
@@ -651,8 +651,8 @@ public class PricesTutorialRevised extends Tutorial {
 
         textviewFood.setText(ViewUtil.getString(R.string.prices_tutorial_item3));
 
-        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price3));
-        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price3_match));
+        buttonYes.setText(ViewUtil.getString(R.string.prices_tutorial_price3_match));
+        buttonNo.setText(ViewUtil.getString(R.string.prices_tutorial_price3));
 
         buttonYes.setChecked(false);
         buttonNo.setChecked(false);
