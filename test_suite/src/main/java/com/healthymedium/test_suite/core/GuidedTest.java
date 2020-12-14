@@ -1,0 +1,74 @@
+package com.healthymedium.test_suite.core;
+
+import androidx.annotation.MainThread;
+import androidx.test.filters.LargeTest;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import com.healthymedium.arc.study.Study;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+@MainThread
+@LargeTest
+@RunWith(AndroidJUnit4.class)
+public class GuidedTest extends BaseTest {
+
+    public static final BlockingQueue<Runnable> queue = new LinkedBlockingQueue<>();
+    private static boolean running = false;
+
+    // override this
+    public void setup(){
+
+    }
+
+    public void checkSetup(){
+
+        if(TestBehavior.classes.stateMachine !=null){
+            Study.getInstance().registerStateMachine(TestBehavior.classes.stateMachine,true);
+            Study.getStateMachine().load();
+        }
+        if(TestBehavior.classes.participant!=null){
+            Study.getInstance().registerParticipantType(TestBehavior.classes.participant,true);
+            Study.getParticipant().load();
+        }
+        if(TestBehavior.classes.scheduler!=null){
+            Study.getInstance().registerScheduler(TestBehavior.classes.scheduler,true);
+        }
+        if(TestBehavior.classes.restClient!=null){
+            Study.getInstance().registerRestApi(TestBehavior.classes.restClient, TestBehavior.classes.restApi,true);
+        }
+
+        Study.getStateMachine().getState().currentPath = TestBehavior.state.path;
+        Study.getStateMachine().getState().lifecycle = TestBehavior.state.lifecycle;
+
+    }
+
+    @Before
+    @Override
+    public void before() throws Exception {
+        super.before();
+        setup();
+        checkSetup();
+    }
+
+    @Test
+    public void test(){
+
+        launchActivity();
+
+        running = true;
+        while (running) {
+            try {
+                queue.take().run();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}
