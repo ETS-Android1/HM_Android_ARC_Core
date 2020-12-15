@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.BaseFragment;

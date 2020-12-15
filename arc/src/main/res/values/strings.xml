@@ -480,4 +480,5 @@
 	<string name="battery_optimization_overview">Your phone has a setting to help preserve your battery life, and it is called a “battery optimization” setting.&lt;br>&lt;br>The {APP_NAME} app will have minimal impact on the battery life of your phone. It is recommended that you turn off the battery optimization setting for the {APP_NAME} app. Doing so will help make sure you receive test notifications on time.</string>
 	<string name="battery_optimization_prompt">Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please &lt;b>allow&lt;/b> to help ensure your notifications work correctly.</string>
 	<string name="battery_optimization_reminder">Your notifications are experiencing a delay. Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please &lt;b>allow&lt;/b> to help ensure your notifications work correctly.</string>
+    <string name="app_name" />
 </resources>

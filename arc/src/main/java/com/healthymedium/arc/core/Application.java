@@ -11,8 +11,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import androidx.annotation.Nullable;
 
-import com.healthymedium.analytics.Analytics;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.notifications.NotificationTypes;
 import com.healthymedium.arc.notifications.types.NotificationType;
@@ -42,7 +41,6 @@ public class Application extends android.app.Application implements LifecycleObs
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
         JodaTimeAndroid.init(this);
-        Analytics.initialize(this);
         VersionUtil.initialize(this);
         PreferencesManager.initialize(this);
         CacheManager.initialize(this);
@@ -136,20 +134,17 @@ public class Application extends android.app.Application implements LifecycleObs
     @Override
     public void onLowMemory() {
         Log.w(tag,"onLowMemory");
-        Log.system.i("application","low memory");
         super.onLowMemory();
     }
 
     @Override
     public void onTrimMemory(int level) {
         if(level < TRIM_MEMORY_UI_HIDDEN) {
-            Log.system.i("application","trim memory, level = "+level);
         }
         super.onTrimMemory(level);
     }
 
     public void restart() {
-        Log.behavior.i("application","forcing app restart");
         Context context = instance;
         PackageManager packageManager = context.getPackageManager();
         String packageName = context.getPackageName();
@@ -167,13 +162,11 @@ public class Application extends android.app.Application implements LifecycleObs
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     public void onStartForeground() {
-        Log.behavior.i("application","start foreground");
         visible = true;
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     public void onStopForeground() {
-        Log.behavior.i("application","stop foreground");
         visible = false;
     }
 

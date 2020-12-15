@@ -4,7 +4,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Config;

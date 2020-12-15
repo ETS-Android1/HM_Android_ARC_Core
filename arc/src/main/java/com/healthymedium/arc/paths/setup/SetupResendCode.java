@@ -18,7 +18,7 @@ import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.informative.FAQAnswerScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 

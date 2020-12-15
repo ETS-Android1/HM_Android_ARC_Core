@@ -2,7 +2,7 @@ package com.healthymedium.arc.path_data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.api.DoubleTypeAdapter;
 import com.healthymedium.arc.api.ItemTypeAdapterFactory;
 import com.healthymedium.arc.api.tests.data.BaseData;

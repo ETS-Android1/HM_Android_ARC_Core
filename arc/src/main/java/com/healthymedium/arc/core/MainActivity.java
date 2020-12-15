@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.battery_optimization.BatteryOptimizationReminder;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import android.view.View;
 import android.widget.FrameLayout;
@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.behavior.i("activity","back pressed");
         if(backAllowed){
             if(Study.isValid() && backInStudy){
                 Study.openPreviousFragment(backInStudySkips);
@@ -186,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i("MainActivity","onResume");
-        Log.behavior.i("activity","resume");
         if(Study.isValid()){
             AbandonmentJobService.unscheduleSelf(getApplicationContext());
             //if we were paused, then we need to call the resume handler.
@@ -201,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.i("MainActivity","onPause");
-        Log.behavior.i("activity","pause");
         paused = true;
         if(Study.isValid()){
             Study.getParticipant().markPaused();

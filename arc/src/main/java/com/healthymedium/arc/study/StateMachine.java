@@ -2,6 +2,7 @@ package com.healthymedium.arc.study;
 
 import android.content.res.Resources;
 import android.text.Html;
+import android.util.Log;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.tests.CognitiveTest;
@@ -32,7 +33,6 @@ import com.healthymedium.arc.paths.tests.Grid2Test;
 import com.healthymedium.arc.paths.tests.TestIntro;
 import com.healthymedium.arc.paths.tests.TestProgress;
 import com.healthymedium.arc.time.TimeUtil;
-import com.healthymedium.analytics.Log;
 
 import com.healthymedium.arc.api.tests.data.BaseData;
 import com.healthymedium.arc.core.Application;

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.BaseFragment;

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -62,7 +62,6 @@ public class BaseFragment extends Fragment {
     // convenience methods for manipulating the keyboard -------------------------------------------
 
     public void hideKeyboard() {
-        Log.behavior.i("keyboard","close requested");
         Activity activity = getMainActivity();
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
@@ -75,7 +74,6 @@ public class BaseFragment extends Fragment {
     }
 
     public void showKeyboard(View view){
-        Log.behavior.i("keyboard","show requested");
         InputMethodManager imm = (InputMethodManager) getMainActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }

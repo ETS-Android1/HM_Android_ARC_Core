@@ -7,7 +7,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormatter;
@@ -46,7 +46,6 @@ public class LocalTimeTypeAdapter implements JsonSerializer<LocalTime>, JsonDese
         try {
             time = LocalTime.parse(string,formatter);
         } catch (IllegalArgumentException e) {
-            Log.system.w("LocalTimeTypeAdapter","failed to deserialize '"+string+"', attempting fallback");
             string = string
                     .replace("a.m.","AM")
                     .replace("p.m.","PM")

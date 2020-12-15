@@ -1,6 +1,6 @@
 package com.healthymedium.arc.api;
 
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.google.gson.Gson;
 

@@ -3,7 +3,7 @@ package com.healthymedium.arc.study;
 import com.healthymedium.arc.notifications.NotificationManager;
 import com.healthymedium.arc.notifications.NotificationNode;
 import com.healthymedium.arc.notifications.NotificationTypes;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.api.tests.BaseTest;
 import com.healthymedium.arc.utilities.PreferencesManager;

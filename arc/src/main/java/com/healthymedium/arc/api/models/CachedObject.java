@@ -1,6 +1,5 @@
 package com.healthymedium.arc.api.models;
 
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.utilities.CacheManager;
 
 import java.io.File;
@@ -22,7 +21,6 @@ public class CachedObject {
 
         File object = CacheManager.getInstance().getFile(filename,false);
         if(object==null){
-            Analytics.logWarning("CachedObject",filename+" not found, unable to add to request body");
         } else {
             RequestBody uploadFile = RequestBody.create(MediaType.parse(mediaType), object);
             builder.addFormDataPart("file", filename, uploadFile);

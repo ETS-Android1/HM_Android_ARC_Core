@@ -15,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.healthymedium.arc.notifications.types.NotificationImportance;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.notifications.types.NotificationType;

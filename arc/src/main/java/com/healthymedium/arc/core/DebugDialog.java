@@ -7,15 +7,13 @@ import android.os.Handler;
 import android.provider.Settings;
 import androidx.fragment.app.DialogFragment;
 
-import com.healthymedium.analytics.Analytics;
-import com.healthymedium.analytics.ParcelFile;
 import com.healthymedium.arc.notifications.NotificationNodes;
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.questions.QuestionLanguagePreference;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.TestCycle;
 import com.healthymedium.arc.study.TestDay;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,17 +115,6 @@ public class DebugDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                Analytics.uploadLogs("Log Upload Requested", new Analytics.Listener() {
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(Application.getInstance(),"Log Upload Successful",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure() {
-                        Toast.makeText(Application.getInstance(),"Log Upload Failed",Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
 
@@ -136,32 +123,6 @@ public class DebugDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-
-                String dir = Application.getInstance().getApplicationInfo().dataDir;
-
-                List<ParcelFile> parcels = new ArrayList<>();
-                ParcelFile log = new ParcelFile(Log.filename(), ParcelFile.TEXT);
-                parcels.add(log);
-
-                String stateLocation = dir+"/cache/StudyStateCache";
-                ParcelFile state = new ParcelFile(stateLocation, ParcelFile.JSON);
-                parcels.add(state);
-
-                String prefsLocation = dir+"/shared_prefs/"+getContext().getPackageName()+".prefs.xml";
-                ParcelFile prefs = new ParcelFile(prefsLocation, ParcelFile.XML);
-                parcels.add(prefs);
-
-                Analytics.uploadFiles("State Upload Requested", parcels, new Analytics.Listener() {
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(Application.getInstance(),"State Upload Successful",Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onFailure() {
-                        Toast.makeText(Application.getInstance(),"State Upload Failed",Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
 

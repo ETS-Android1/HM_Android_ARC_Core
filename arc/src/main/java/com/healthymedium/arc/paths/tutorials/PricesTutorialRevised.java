@@ -22,7 +22,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.ui.RadioButton;
 import com.healthymedium.arc.ui.base.RoundedRelativeLayout;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import java.util.ArrayList;

@@ -36,7 +36,7 @@ import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
 import com.healthymedium.arc.time.TimeUtil;
 import com.healthymedium.arc.utilities.CacheManager;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;

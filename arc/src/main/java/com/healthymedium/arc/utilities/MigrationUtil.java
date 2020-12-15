@@ -7,7 +7,7 @@ import com.healthymedium.arc.study.StateCache;
 import com.healthymedium.arc.study.StateMachine;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.google.gson.JsonObject;
 import com.healthymedium.arc.study.Participant;

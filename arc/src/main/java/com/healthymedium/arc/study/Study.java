@@ -2,7 +2,6 @@ package com.healthymedium.arc.study;
 
 import android.content.Context;
 
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.core.Application;
 import com.healthymedium.arc.core.Config;
@@ -291,7 +290,6 @@ public class Study{
         }
 
         if(Config.REPORT_STUDY_INFO){
-           Analytics.setStudyInfo(participant.getId(),Device.getId());
         }
 
         valid = true;
@@ -342,7 +340,6 @@ public class Study{
         try {
             return stateMachine.cache.segments.get(0).dataObject;
         } catch (IndexOutOfBoundsException e) {
-            Analytics.logException(Analytics.ERROR,"Study::getCurrentSegmentData",e);
             Application.getInstance().restart();
             return new PathSegmentData();
         }
@@ -352,7 +349,6 @@ public class Study{
         try {
             stateMachine.cache.segments.get(0).dataObject = (PathSegmentData) object;
         } catch (IndexOutOfBoundsException e) {
-            Analytics.logException(Analytics.ERROR,"Study::setCurrentSegmentData",e);
             Application.getInstance().restart();
         }
     }
@@ -361,7 +357,6 @@ public class Study{
         try {
             return stateMachine.cache.segments.get(0);
         } catch (IndexOutOfBoundsException e) {
-            Analytics.logException(Analytics.ERROR,"Study::getCurrentSegment",e);
             Application.getInstance().restart();
             return new PathSegment();
         }

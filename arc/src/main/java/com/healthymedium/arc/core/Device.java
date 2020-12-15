@@ -6,7 +6,7 @@ import android.os.Build;
 import androidx.annotation.Dimension;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.utilities.PreferencesManager;
 

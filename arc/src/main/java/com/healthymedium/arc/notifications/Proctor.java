@@ -2,9 +2,9 @@ package com.healthymedium.arc.notifications;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.core.content.ContextCompat;
+import android.util.Log;
 
-import com.healthymedium.analytics.Log;
+import androidx.core.content.ContextCompat;
 
 public class Proctor {
 

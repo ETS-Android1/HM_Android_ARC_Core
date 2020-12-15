@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.library.BuildConfig;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.notifications.Proctor;
 import com.healthymedium.arc.study.Study;
@@ -24,7 +23,6 @@ public class TimeChangeReceiver extends BroadcastReceiver {
         Log.i("TimeChangeReceiver", "onReceive");
 
         if(Study.getStateMachine().isCurrentlyInTestPath()) {
-            Analytics.logInfo("Time Change Detected","Time Change Detected ("+intent.getAction()+") While In Test Path");
             return;
         }
 
@@ -33,8 +31,6 @@ public class TimeChangeReceiver extends BroadcastReceiver {
         Study.getStateMachine().save(true);
         Study.getParticipant().save();
         Proctor.resumeService(context);
-
-        Analytics.logInfo("Time Change Detected","Time Change Detected ("+intent.getAction()+")");
 
         String flavor = BuildConfig.FLAVOR;
         if(flavor.equals(Config.FLAVOR_DEV) || flavor.equals(Config.FLAVOR_QA)) {

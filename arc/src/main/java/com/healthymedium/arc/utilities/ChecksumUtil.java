@@ -1,7 +1,7 @@
 package com.healthymedium.arc.utilities;
 
 import android.text.TextUtils;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;

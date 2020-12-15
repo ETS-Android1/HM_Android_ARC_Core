@@ -9,7 +9,7 @@ import android.content.Context;
 import android.os.Build;
 
 import com.healthymedium.arc.study.TestCycle;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.study.Study;
 
@@ -46,7 +46,6 @@ public class ProctorWatchdogJob extends JobService {
     }
 
     public static void start(Context context) {
-        Log.system.i(tag,"start");
 
         long fifteenMinutes = 15*60*1000;
         ComponentName serviceComponent = new ComponentName(context, ProctorWatchdogJob.class);
@@ -79,7 +78,6 @@ public class ProctorWatchdogJob extends JobService {
     }
 
     public static void stop(Context context) {
-        Log.system.i(tag,"stop");
         JobScheduler jobScheduler = (JobScheduler)context.getSystemService(context.JOB_SCHEDULER_SERVICE);
         jobScheduler.cancel(jobId);
     }

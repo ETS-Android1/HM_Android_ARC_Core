@@ -3,10 +3,9 @@ package com.healthymedium.arc.navigation;
 import androidx.annotation.IdRes;
 import androidx.fragment.app.FragmentManager;
 
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.misc.TransitionSet;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 public class NavigationController {
 
@@ -43,7 +42,6 @@ public class NavigationController {
         if (fragmentManager != null) {
             TransitionSet transitions = fragment.getTransitionSet();
             String tag = fragment.getSimpleTag();
-            Log.behavior.i("navigation","open '"+tag+"'");
             fragmentManager.beginTransaction()
                     .setCustomAnimations(
                             transitions.enter,
@@ -63,7 +61,6 @@ public class NavigationController {
     public void open(BaseFragment fragment, TransitionSet transitions) {
         if (fragmentManager != null) {
             String tag = fragment.getSimpleTag();
-            Log.behavior.i("navigation","open '"+tag+"'");
             fragmentManager.beginTransaction()
                     .setCustomAnimations(
                             transitions.enter,
@@ -82,7 +79,6 @@ public class NavigationController {
 
     public void popBackStack() {
         if (fragmentManager != null) {
-            Log.behavior.i("navigation","pop backstack");
             fragmentManager.popBackStack();
             if(listener!=null){
                 listener.onPopBack();
@@ -102,7 +98,6 @@ public class NavigationController {
                 fragmentManager.popBackStack(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
             }
         } catch (IllegalStateException e) {
-            Analytics.logException(Analytics.WARNING,tag,e);
         }
     }
 

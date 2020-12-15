@@ -3,7 +3,7 @@ package com.healthymedium.arc.utilities;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 public class VersionUtil {
 
@@ -27,8 +27,6 @@ public class VersionUtil {
 
         Log.i(tag,"app       | code="+app_code+", name="+app_name);
         Log.i(tag,"core      | code="+getCoreVersionCode()+", name="+getCoreVersionName());
-        Log.i(tag,"analytics | code="+getAnalyticsVersionCode()+", name="+getAnalyticsVersionName());
-
     }
 
     public static long getAppVersionCode(){
@@ -46,15 +44,6 @@ public class VersionUtil {
     public static String getCoreVersionName(){
         return com.healthymedium.arc.library.BuildConfig.ARC_VERSION_NAME;
     }
-
-    public static long getAnalyticsVersionCode(){
-        return com.healthymedium.analytics.BuildConfig.ANALYTICS_VERSION_CODE;
-    }
-
-    public static String getAnalyticsVersionName(){
-        return com.healthymedium.analytics.BuildConfig.ANALYTICS_VERSION_NAME;
-    }
-
 
     public static long getVersionCode(int major,int minor, int patch, int build){
         return major * 1000000 + minor * 10000 + patch * 100 + build;

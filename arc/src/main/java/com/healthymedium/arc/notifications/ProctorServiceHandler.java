@@ -7,9 +7,8 @@ import android.os.PowerManager;
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonObject;
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import com.healthymedium.arc.notifications.types.NotificationType;
 
@@ -249,10 +248,8 @@ public class ProctorServiceHandler {
                 }
             }
 
-            Analytics.logWarning("Proctor Deviation","Timeout ("+type+") was "+difference+" "+direction,json);
 
             if(delta>two_hr) {
-                Analytics.uploadLogs("Proctor Deviation");
             }
 
         }

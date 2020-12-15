@@ -1,7 +1,7 @@
 package com.healthymedium.arc.study;
 
 import com.healthymedium.arc.time.TimeUtil;
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
