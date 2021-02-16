@@ -48,3 +48,14 @@ Thumbs.db
 *.mov
 *.wmv
 
+*.iml
+.idea
+.gradle
+.DS_Store
+.externalNativeBuild
+
+/build
+/captures
+/local.properties
+
+translation_tool/src/main/resources/setup.json
