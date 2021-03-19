@@ -81,6 +81,7 @@ public class Application implements LifecycleObserver {
             return;
         }
         instance = new Application(appContext, provider);
+        Study.getInstance().load();
     }
 
     protected Application(Context appContext, StudyComponentProvider provider) {
@@ -96,6 +97,7 @@ public class Application implements LifecycleObserver {
         CacheManager.initialize(appContext);
         Device.initialize(appContext);
         initializeStudy(provider);
+        updateLocale(appContext);
     }
 
     public void initializeStudy(StudyComponentProvider provider) {
@@ -104,7 +106,6 @@ public class Application implements LifecycleObserver {
         }
         // Assign study-specific components
         provider.registerStudyComponents();
-        Study.getInstance().load();
     }
 
     // list all notification types offered by the app
@@ -130,7 +131,7 @@ public class Application implements LifecycleObserver {
         updateLocale(context);
     }
 
-    protected void attachBaseContext(Context context) {
+    public void attachBaseContext(Context context) {
         if (!checkContext()) {
             return;
         }
