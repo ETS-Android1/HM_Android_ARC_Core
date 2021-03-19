@@ -75,6 +75,8 @@ public class ProctorService extends Service {
                     serviceHandler.start();
                 }
 
+                // TODO: mdephillips 3/18/21 Job scheduler shouldn't be used and should be replaced
+                // TODO with WorkManager which has better support for all Android OS'
                 if(!ProctorWatchdogJob.isScheduled(this)) {
                     ProctorWatchdogJob.start(this);
                 }

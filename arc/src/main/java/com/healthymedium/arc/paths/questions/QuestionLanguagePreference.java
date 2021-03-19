@@ -33,7 +33,7 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         super(false, true, "Language:", "", initOptions(), "CONFIRM");
 
         if(FontFactory.getInstance()==null) {
-            FontFactory.initialize(Application.getInstance());
+            FontFactory.initialize(Application.getInstance().getAppContext());
         }
 
         if(!Fonts.areLoaded()){

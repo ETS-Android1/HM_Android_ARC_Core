@@ -59,7 +59,7 @@ public class ViewUtil {
     }
 
     public static int getColor(@ColorRes int id){
-        return ContextCompat.getColor(Application.getInstance(),id);
+        return ContextCompat.getColor(Application.getInstance().getAppContext(),id);
     }
 
     public static Drawable getDrawable(Context context, @DrawableRes int id){
@@ -67,7 +67,7 @@ public class ViewUtil {
     }
 
     public static Drawable getDrawable(@DrawableRes int id){
-        return ContextCompat.getDrawable(Application.getInstance(),id);
+        return ContextCompat.getDrawable(Application.getInstance().getAppContext(),id);
     }
 
     public static String getString(Context context, @StringRes int id){
@@ -75,17 +75,17 @@ public class ViewUtil {
     }
 
     public static String getHtmlString(@StringRes int id) {
-        return Html.fromHtml(Application.getInstance().getString(id)).toString();
+        return Html.fromHtml(Application.getInstance().getAppContext().getString(id)).toString();
     }
 
     public static String getString(@StringRes int id){
-        return Application.getInstance().getString(id);
+        return Application.getInstance().getAppContext().getString(id);
     }
 
     public static String getStringConcat(@StringRes int ... ids){
         String string = new String();
         for(int i=0;i<ids.length;i++){
-            string += Application.getInstance().getString(ids[i]);
+            string += Application.getInstance().getAppContext().getString(ids[i]);
         }
         return string;
     }
@@ -116,7 +116,7 @@ public class ViewUtil {
 
     public static int getStatusBarHeight() {
         if(statusBarHeight==-1){
-            statusBarHeight = getStatusBarHeight(Application.getInstance());
+            statusBarHeight = getStatusBarHeight(Application.getInstance().getAppContext());
         }
         return statusBarHeight;
     }
@@ -132,7 +132,7 @@ public class ViewUtil {
 
     public static int getNavBarHeight() {
         if(navBarHeight==-1){
-            navBarHeight = getNavBarHeight(Application.getInstance());
+            navBarHeight = getNavBarHeight(Application.getInstance().getAppContext());
         }
         return navBarHeight;
     }

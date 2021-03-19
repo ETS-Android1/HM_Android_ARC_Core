@@ -102,7 +102,7 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }
@@ -134,7 +134,7 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathBaseline(){
         Participant participant = Study.getInstance().getParticipant();
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             Log.i("StateMachine", "notifications are not enabled");
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
@@ -203,7 +203,7 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathArc(){
         Participant participant = Study.getInstance().getParticipant();
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             Log.i("StateMachine", "notifications are not enabled");
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
@@ -279,7 +279,7 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathIdle() {
         TestCycle cycle = Study.getCurrentTestCycle();
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }

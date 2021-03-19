@@ -72,7 +72,7 @@ public class SplashScreen extends BaseFragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            Context context = getApplication();
+            Context context = getContext();
             getMainActivity().setupKeyboardWatcher();
 
             Application.getInstance().updateLocale(getContext());

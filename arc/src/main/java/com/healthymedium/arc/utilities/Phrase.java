@@ -26,7 +26,8 @@ public class Phrase {
     }
 
     public Phrase(@StringRes int id){
-        this.context = Application.getInstance();
+        // TODO: mdephillips 3/18/21 storing a strong ref to app context within a model object like the Phrase class is dangerous design.  We have to re-factor the context out of the Phrase class.
+        this.context = Application.getInstance().getAppContext();
         phrase = getString(id);
     }
 
@@ -36,7 +37,8 @@ public class Phrase {
     }
 
     public Phrase(String string){
-        this.context = Application.getInstance();
+        // TODO: mdephillips 3/18/21 storing a strong ref to app context within a model object like the Phrase class is dangerous design.  We have to re-factor the context out of the Phrase class.
+        this.context = Application.getInstance().getAppContext();
         phrase = string;
     }
     

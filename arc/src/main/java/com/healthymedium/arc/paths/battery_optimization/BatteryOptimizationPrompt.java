@@ -34,7 +34,7 @@ public class BatteryOptimizationPrompt extends StateInfoTemplate {
         );
 
         if(FontFactory.getInstance()==null) {
-            FontFactory.initialize(Application.getInstance());
+            FontFactory.initialize(Application.getInstance().getAppContext());
         }
 
         if(!Fonts.areLoaded()){

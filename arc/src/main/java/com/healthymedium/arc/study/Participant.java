@@ -179,7 +179,7 @@ public class Participant {
         }
 
         if(getCurrentTestCycle().isOver()){
-            Proctor.stopService(Application.getInstance());
+            Proctor.stopService(Application.getInstance().getAppContext());
             state.currentTestSession = 0;
             state.currentTestDay = 0;
             state.currentTestCycle++;

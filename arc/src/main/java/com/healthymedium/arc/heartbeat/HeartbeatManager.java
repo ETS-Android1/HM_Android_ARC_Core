@@ -36,7 +36,7 @@ public class HeartbeatManager {
 
     public static synchronized HeartbeatManager getInstance() {
         if(instance==null){
-            instance = new HeartbeatManager(Application.getInstance());
+            instance = new HeartbeatManager(Application.getInstance().getAppContext());
         }
         return instance;
     }

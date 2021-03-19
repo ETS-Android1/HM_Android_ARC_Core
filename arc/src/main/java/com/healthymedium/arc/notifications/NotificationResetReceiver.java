@@ -33,7 +33,7 @@ public class NotificationResetReceiver extends BroadcastReceiver {
         }
         if(cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow()){
             Log.i(tag,"starting proctor service");
-            Proctor.startService(Application.getInstance());
+            Proctor.startService(Application.getInstance().getAppContext());
         }
     }
 }

@@ -229,7 +229,9 @@ public class ProctorServiceHandler {
                 }
             }
 
-            Context context = Application.getInstance();
+            // TODO: mdephillips 3/18/21 why would you ever use the app context when this class is
+            // TODO: used by a Service!?  The Service IS the context so pass that in instead.
+            Context context = Application.getInstance().getAppContext();
 
             if(context != null) {
                 PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);

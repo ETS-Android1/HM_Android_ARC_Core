@@ -60,9 +60,9 @@ public class QuestionAdjustSchedule extends QuestionTemplate {
             }
         });
 
-        NumberPicker picker = new NumberPicker(Application.getInstance());
+        NumberPicker picker = new NumberPicker(getContext());
         picker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        setNumberPickerTextColor(picker, ContextCompat.getColor(Application.getInstance(), R.color.text));
+        setNumberPickerTextColor(picker, ContextCompat.getColor(getContext(), R.color.text));
         content.addView(picker);
 
         picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
