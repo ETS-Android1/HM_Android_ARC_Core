@@ -13,6 +13,8 @@ import com.healthymedium.arc.utilities.VersionUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
+import androidx.annotation.VisibleForTesting;
+
 public class Study{
 
     public static final String TAG_INITIALIZED = "initialized";
@@ -35,6 +37,16 @@ public class Study{
         if(instance==null) {
             instance = new Study();
         }
+        instance.context = context;
+    }
+
+    /**
+     * Only to be used with the validation app, always overwrites the study
+     * @param context must be app context
+     */
+    @VisibleForTesting
+    public static synchronized void initializeValidationAppOnly(Context context) {
+        instance = new Study();
         instance.context = context;
     }
 

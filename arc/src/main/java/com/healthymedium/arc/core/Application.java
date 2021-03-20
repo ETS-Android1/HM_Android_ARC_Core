@@ -1,10 +1,13 @@
 package com.healthymedium.arc.core;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +77,7 @@ public class Application implements LifecycleObserver {
 
     /**
      * @param appContext MUST BE APPLICATION CONTEXT
+     * @param provider provider of study components
      */
     public static void initialize(Context appContext, StudyComponentProvider provider) {
         if (instance != null) {
@@ -81,7 +85,34 @@ public class Application implements LifecycleObserver {
             return;
         }
         instance = new Application(appContext, provider);
+        instance.initializeStudy(appContext, provider);
         Study.getInstance().load();
+    }
+
+    /**
+     * Only to be used with the validation app, always overwrites the study
+     * @param appContext MUST BE APPLICATION CONTEXT
+     */
+    @VisibleForTesting
+    public static synchronized void initializeValidationAppOnly(
+            Context appContext, StudyComponentProvider provider) {
+
+        instance = new Application(appContext, provider);
+        instance.initializeStudyValidationAppOnly(appContext, provider);
+        Study.getInstance().load();
+    }
+
+    /**
+     * Only to be used with the validation app, always overwrites the study
+     * @param appContext MUST BE APPLICATION CONTEXT
+     */
+    @VisibleForTesting
+    private void initializeStudyValidationAppOnly(
+            @NonNull Context appContext, StudyComponentProvider provider) {
+
+        // Initialize study and assign study-specific components
+        Study.initializeValidationAppOnly(context);
+        provider.registerStudyComponents();
     }
 
     protected Application(Context appContext, StudyComponentProvider provider) {
@@ -96,15 +127,12 @@ public class Application implements LifecycleObserver {
         PreferencesManager.initialize(appContext);
         CacheManager.initialize(appContext);
         Device.initialize(appContext);
-        initializeStudy(provider);
         updateLocale(appContext);
     }
 
-    public void initializeStudy(StudyComponentProvider provider) {
-        if (context != null) {
-            Study.initialize(context);
-        }
-        // Assign study-specific components
+    public void initializeStudy(@NonNull Context appContext, StudyComponentProvider provider) {
+        // Initialize study and assign study-specific components
+        Study.initialize(context);
         provider.registerStudyComponents();
     }
 
