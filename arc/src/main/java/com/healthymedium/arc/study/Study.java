@@ -117,6 +117,23 @@ public class Study{
         return true;
     }
 
+    /**
+     * Set a custom rest client directly without using reflection
+     * Use in case of custom constructor vs a no-arg constructor
+     * @param client to be used for the study
+     * @return true if the client was overwritten, false otherwise
+     */
+    public static boolean setRestClient(RestClient client, boolean overwrite){
+        if(restClient!=null && !overwrite){
+            return false;
+        }
+        if(client == null){
+            return false;
+        }
+        restClient = client;
+        return true;
+    }
+
     public boolean registerRestApi(Class clientClass, Class apiClass){
         return registerRestApi(clientClass, apiClass,false);
     }

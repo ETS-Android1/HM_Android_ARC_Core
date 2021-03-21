@@ -384,7 +384,20 @@ public class RestClient <Api>{
             return;
         }
         Log.i("RestClient","submitWakeSleepSchedule()");
+        WakeSleepSchedule schedule = createWakeSleepSchedule();
 
+        if(uploading){
+            uploadQueue.add(schedule);
+            saveUploadQueue();
+        } else {
+            markUploadStarted();
+            JsonObject json = serialize(schedule);
+            Call<ResponseBody> call = getService().submitWakeSleepSchedule(Device.getId(), json);
+            call.enqueue(createDataCallback(schedule));
+        }
+    }
+
+    protected WakeSleepSchedule createWakeSleepSchedule() {
         Participant participant = Study.getParticipant();
         CircadianClock clock = participant.getCircadianClock();
 
@@ -405,16 +418,7 @@ public class RestClient <Api>{
 
         schedule.timezone_name = TimeUtil.getTimezoneName();
         schedule.timezone_offset = TimeUtil.getTimezoneOffset();
-
-        if(uploading){
-            uploadQueue.add(schedule);
-            saveUploadQueue();
-        } else {
-            markUploadStarted();
-            JsonObject json = serialize(schedule);
-            Call<ResponseBody> call = getService().submitWakeSleepSchedule(Device.getId(), json);
-            call.enqueue(createDataCallback(schedule));
-        }
+        return schedule;
     }
 
     public void submitTestSchedule(){
@@ -422,7 +426,20 @@ public class RestClient <Api>{
             return;
         }
         Log.i("RestClient","submitTestSchedule()");
+        TestSchedule schedule = createTestSchedule();
 
+        if(uploading) {
+            uploadQueue.add(schedule);
+            saveUploadQueue();
+        } else {
+            markUploadStarted();
+            JsonObject json = serialize(schedule);
+            Call<ResponseBody> call = getService().submitTestSchedule(Device.getId(), json);
+            call.enqueue(createDataCallback(schedule));
+        }
+    }
+
+    protected TestSchedule createTestSchedule() {
         Participant participant = Study.getParticipant();
         ParticipantState state = participant.getState();
 
@@ -451,16 +468,7 @@ public class RestClient <Api>{
 
         schedule.timezone_name = TimeUtil.getTimezoneName();
         schedule.timezone_offset = TimeUtil.getTimezoneOffset();
-
-        if(uploading) {
-            uploadQueue.add(schedule);
-            saveUploadQueue();
-        } else {
-            markUploadStarted();
-            JsonObject json = serialize(schedule);
-            Call<ResponseBody> call = getService().submitTestSchedule(Device.getId(), json);
-            call.enqueue(createDataCallback(schedule));
-        }
+        return schedule;
     }
 
     public void submitSignature(Bitmap bitmap) {
