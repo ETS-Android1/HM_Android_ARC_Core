@@ -62,7 +62,10 @@ public class Application implements LifecycleObserver {
 
     static Application instance;
 
-    private Context context;  // is the app context
+    private Context context;  // is the app context\
+
+    private List<NotificationType> notificationTypes;
+    private List<Locale> localeOptions;
 
     private boolean checkContext() {
         if (context == null) {
@@ -85,6 +88,10 @@ public class Application implements LifecycleObserver {
             return;
         }
         instance = new Application(appContext, provider);
+
+        instance.setLocaleOptions(createDefaultLocaleOptions());
+        instance.setNotificationTypes(createDefaultNotificationTypes());
+
         instance.initializeStudy(appContext, provider);
         Study.getInstance().load();
     }
@@ -136,8 +143,16 @@ public class Application implements LifecycleObserver {
         provider.registerStudyComponents();
     }
 
+    public void setNotificationTypes(List<NotificationType> types) {
+        notificationTypes = types;
+    }
+
     // list all notification types offered by the app
     public List<NotificationType> getNotificationTypes() {
+        return notificationTypes;
+    }
+
+    public static List<NotificationType> createDefaultNotificationTypes() {
         List<NotificationType> types = new ArrayList<>();
         types.add(NotificationTypes.TestConfirmed);
         types.add(NotificationTypes.TestMissed);
@@ -195,6 +210,14 @@ public class Application implements LifecycleObserver {
 
     // list all locale options offered by the app
     public List<Locale> getLocaleOptions() {
+        return localeOptions;
+    }
+
+    public void setLocaleOptions(List<Locale> locales) {
+        localeOptions = locales;
+    }
+
+    public static List<Locale> createDefaultLocaleOptions() {
         List<Locale> locales = new ArrayList<>();
         locales.add(new Locale(true, Locale.LANGUAGE_ENGLISH,Locale.COUNTRY_UNITED_STATES));
         return locales;
