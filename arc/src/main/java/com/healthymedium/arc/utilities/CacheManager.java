@@ -36,6 +36,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.Nullable;
+
 public class CacheManager {
 
     private static final String TYPE_OBJECT = "";
@@ -308,6 +310,19 @@ public class CacheManager {
             cache = map.get(key);
         }
         return FileUtil.writeBitmap(cache.file, bitmap, quality);
+    }
+
+    /**
+     * @param key so save the bitmap file as
+     * @param bitmap file to be saved
+     * @param quality of the saved file
+     * @return
+     */
+    public @Nullable File putBitmapReturnFile(String key, Bitmap bitmap, int quality) {
+        if (!putBitmap(key, bitmap, quality)) {
+            return null;
+        }
+        return new File(cacheDir, sanitizeKey(key)+"."+TYPE_BITMAP);
     }
 
     private String sanitizeKey(String key) {

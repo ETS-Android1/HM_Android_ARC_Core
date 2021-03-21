@@ -26,6 +26,12 @@ public class NotificationResetReceiver extends BroadcastReceiver {
             return;
         }
 
+        if (Application.getInstance() == null ||
+            Application.getInstance().getAppContext() == null) {
+            Log.e(tag, "Trying to re-schedule notifications without app context");
+            return;
+        }
+
         NotificationManager.getInstance().scheduleAllNotifications();
         TestCycle cycle = Study.getCurrentTestCycle();
         if(cycle ==null){
@@ -33,7 +39,7 @@ public class NotificationResetReceiver extends BroadcastReceiver {
         }
         if(cycle.getActualStartDate().isBeforeNow() && cycle.getActualEndDate().isAfterNow()){
             Log.i(tag,"starting proctor service");
-            Proctor.startService(Application.getInstance());
+            Proctor.startService(Application.getInstance().getAppContext());
         }
     }
 }

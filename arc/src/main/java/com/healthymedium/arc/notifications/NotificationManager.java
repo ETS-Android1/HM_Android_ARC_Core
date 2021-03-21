@@ -46,7 +46,7 @@ public class NotificationManager {
     public static synchronized NotificationManager getInstance() {
         if(instance==null){
             Application application = Application.getInstance();
-            initialize(application,application.getNotificationTypes());
+            initialize(application.getAppContext(), application.getNotificationTypes());
         }
         return instance;
     }

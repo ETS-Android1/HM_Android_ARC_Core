@@ -13,6 +13,8 @@ import com.healthymedium.arc.utilities.VersionUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
+import androidx.annotation.VisibleForTesting;
+
 public class Study{
 
     public static final String TAG_INITIALIZED = "initialized";
@@ -35,6 +37,16 @@ public class Study{
         if(instance==null) {
             instance = new Study();
         }
+        instance.context = context;
+    }
+
+    /**
+     * Only to be used with the validation app, always overwrites the study
+     * @param context must be app context
+     */
+    @VisibleForTesting
+    public static synchronized void initializeValidationAppOnly(Context context) {
+        instance = new Study();
         instance.context = context;
     }
 
@@ -102,6 +114,23 @@ public class Study{
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        return true;
+    }
+
+    /**
+     * Set a custom rest client directly without using reflection
+     * Use in case of custom constructor vs a no-arg constructor
+     * @param client to be used for the study
+     * @return true if the client was overwritten, false otherwise
+     */
+    public static boolean setRestClient(RestClient client, boolean overwrite){
+        if(restClient!=null && !overwrite){
+            return false;
+        }
+        if(client == null){
+            return false;
+        }
+        restClient = client;
         return true;
     }
 

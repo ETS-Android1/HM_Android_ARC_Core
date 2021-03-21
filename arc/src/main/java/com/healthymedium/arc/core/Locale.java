@@ -51,7 +51,7 @@ public class Locale {
     }
 
     public String getLabel() {
-        Context context = Application.getInstance();
+        Context context = Application.getInstance().getAppContext();
         Configuration appConfig = context.getResources().getConfiguration();
 
         Configuration localeConfig = new Configuration(appConfig);

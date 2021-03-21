@@ -14,8 +14,6 @@ import com.healthymedium.arc.paths.questions.QuestionSignature;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.utilities.ViewUtil;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,7 +100,7 @@ public class StateMachineAlpha extends StateMachine {
             return;
         }
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }
@@ -134,7 +132,7 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathBaseline(){
         Participant participant = Study.getInstance().getParticipant();
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             Log.i("StateMachine", "notifications are not enabled");
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
@@ -155,42 +153,20 @@ public class StateMachineAlpha extends StateMachine {
 
         cache.segments.clear();
 
-        if(participant.getCurrentTestCycle().getActualStartDate().isAfterNow()){
-            Log.i("StateMachine", "indexed visit hasn't started, setting lifecycle to idle");
-            state.lifecycle = LIFECYCLE_IDLE;
-            decidePath();
-            return;
-        }
-
-        if (participant.getCurrentTestSession().getScheduledTime().minusMinutes(5).isAfterNow()) {
-            Log.i("StateMachine", "indexed test hasn't started, do nothing");
-            state.currentPath = PATH_TEST_NONE;
-            return;
-        }
-
-        if (participant.getCurrentTestSession().getExpirationTime().isBeforeNow()) {
-            Log.i("StateMachine", "indexed test has expired, marking it as such");
-            participant.getCurrentTestSession().markMissed();
-            loadTestDataFromCache();
-            cache.data.clear();
-
-            RestClient client = Study.getRestClient();
-            client.submitTest(participant.getCurrentTestSession());
-            participant.moveOnToNextTestSession(true);
-            save();
-            decidePath();
+        TestCycle cycle = participant.getCurrentTestCycle();
+        if (shouldRestrictTestBasedOnCurrentTime(cycle, participant, true)) {
             return;
         }
 
         currentlyInTestPath = true;
 
-        if (!participant.getCurrentTestCycle().hasThereBeenAFinishedTest()){
+        if (!hasThereBeenAFinishedTestInCycle(participant.getCurrentTestCycle())) {
             Log.i("StateMachine", "setting path for first of baseline");
             state.currentPath = PATH_TEST_FIRST_OF_BASELINE;
             return;
         }
 
-        if (!participant.getCurrentTestDay().hasThereBeenAFinishedTest()) {
+        if (!hasThereBeenAFinishedTestOnDay(participant.getCurrentTestDay())) {
             Log.i("StateMachine", "setting path for first of day");
             state.currentPath = PATH_TEST_FIRST_OF_DAY;
             return;
@@ -203,7 +179,7 @@ public class StateMachineAlpha extends StateMachine {
     private void decidePathArc(){
         Participant participant = Study.getInstance().getParticipant();
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             Log.i("StateMachine", "notifications are not enabled");
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
@@ -233,40 +209,19 @@ public class StateMachineAlpha extends StateMachine {
 
         cache.segments.clear();
 
-        if(cycle.getActualStartDate().isAfterNow()){
-            Log.i("StateMachine", "indexed cycle hasn't started, setting lifecycle to idle");
-            state.lifecycle = LIFECYCLE_IDLE;
-            decidePath();
-            return;
-        }
-
-        if (participant.getCurrentTestSession().getScheduledTime().minusMinutes(5).isAfterNow()) {
-            Log.i("StateMachine", "indexed test hasn't started, do nothing");
-            state.currentPath = PATH_TEST_NONE;
-            return;
-        }
-
-        if (participant.getCurrentTestSession().getExpirationTime().isBeforeNow()) {
-            Log.i("StateMachine", "indexed test has expired, marking it as such");
-            participant.getCurrentTestSession().markMissed();
-
-            RestClient client = Study.getRestClient();
-            client.submitTest(participant.getCurrentTestSession());
-            participant.moveOnToNextTestSession(true);
-            participant.save();
-            decidePath();
+        if (shouldRestrictTestBasedOnCurrentTime(cycle, participant, false)) {
             return;
         }
 
         currentlyInTestPath = true;
 
-        if (!cycle.hasThereBeenAFinishedTest()){
+        if (!hasThereBeenAFinishedTestInCycle(cycle)) {
             Log.i("StateMachine", "setting path for first of cycle");
             state.currentPath = PATH_TEST_FIRST_OF_VISIT;
             return;
         }
 
-        if (!day.hasThereBeenAFinishedTest()) {
+        if (!hasThereBeenAFinishedTestOnDay(day)) {
             Log.i("StateMachine", "setting path for first of day");
             state.currentPath = PATH_TEST_FIRST_OF_DAY;
             return;
@@ -276,10 +231,60 @@ public class StateMachineAlpha extends StateMachine {
         state.currentPath = PATH_TEST_OTHER;
     }
 
+    protected boolean hasThereBeenAFinishedTestInCycle(TestCycle cycle) {
+        return cycle.hasThereBeenAFinishedTest();
+    }
+
+    protected boolean hasThereBeenAFinishedTestOnDay(TestDay day) {
+        return day.hasThereBeenAFinishedTest();
+    }
+
+    protected boolean shouldRestrictTestBasedOnCurrentTime(
+            TestCycle cycle, Participant participant, boolean loadTestDataFromCache) {
+
+        if(cycle.getActualStartDate().isAfterNow()){
+            Log.i("StateMachine", "indexed cycle hasn't started, setting lifecycle to idle");
+            state.lifecycle = LIFECYCLE_IDLE;
+            decidePath();
+            return true;
+        }
+
+        if (participant.getCurrentTestSession().getScheduledTime().minusMinutes(5).isAfterNow()) {
+            Log.i("StateMachine", "indexed test hasn't started, do nothing");
+            state.currentPath = PATH_TEST_NONE;
+            return true;
+        }
+
+        if (participant.getCurrentTestSession().getExpirationTime().isBeforeNow()) {
+            Log.i("StateMachine", "indexed test has expired, marking it as such");
+            participant.getCurrentTestSession().markMissed();
+
+            if (loadTestDataFromCache) {
+                loadTestDataFromCache();
+                cache.data.clear();
+            }
+
+            RestClient client = Study.getRestClient();
+            client.submitTest(participant.getCurrentTestSession());
+            participant.moveOnToNextTestSession(true);
+
+            if (loadTestDataFromCache) {
+                save();
+            } else {
+                participant.save();
+            }
+
+            decidePath();
+            return true;
+        }
+
+        return false;
+    }
+
     private void decidePathIdle() {
         TestCycle cycle = Study.getCurrentTestCycle();
 
-        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance())){
+        if(!NotificationUtil.areNotificationsEnabled(Application.getInstance().getAppContext())){
             state.currentPath = PATH_NOTIFICATIONS_OVERVIEW;
             return;
         }
@@ -340,10 +345,11 @@ public class StateMachineAlpha extends StateMachine {
 
                         RestClient client = Study.getRestClient();
                         client.submitTest(Study.getCurrentTestSession());
-                        Study.getParticipant().moveOnToNextTestSession(true);
                         save();
 
                         dialog.dismiss();
+
+                        moveOnToNextSessionAfterTestCompleted();
 
                         break;
                 }
@@ -354,6 +360,10 @@ public class StateMachineAlpha extends StateMachine {
                 break;
         }
         currentlyInTestPath = false;
+    }
+
+    protected void moveOnToNextSessionAfterTestCompleted() {
+        Study.getParticipant().moveOnToNextTestSession(true);
     }
 
     // state machine helpers ---------------------------------------------------------------------

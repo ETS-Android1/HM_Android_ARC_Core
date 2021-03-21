@@ -55,10 +55,6 @@ public class BaseFragment extends Fragment {
         return (MainActivity)getActivity();
     }
 
-    public Application getApplication(){
-        return (Application)getMainActivity().getApplication();
-    }
-
     // convenience methods for manipulating the keyboard -------------------------------------------
 
     public void hideKeyboard() {
