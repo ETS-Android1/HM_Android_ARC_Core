@@ -29,6 +29,9 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
 
     static List<Locale> locales;
 
+    // Switch to false during QA to see all locales
+    static Boolean hideUnsupportedLocales = true;
+
     public QuestionLanguagePreference() {
         super(false, true, "Language:", "", initOptions(), "CONFIRM");
 
@@ -106,10 +109,8 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         List<String> options = new ArrayList<>();
         locales = new ArrayList<>();
 
-        boolean isProd = BuildConfig.FLAVOR.equals(Config.FLAVOR_PROD);
-
         for(Locale locale : AllLocales) {
-            if(isProd) {
+            if(hideUnsupportedLocales) {
                 if(locale.IsfullySupported()){
                     options.add(locale.getLabel());
                     locales.add(locale);

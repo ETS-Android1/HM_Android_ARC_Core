@@ -31,12 +31,6 @@ public class TimeChangeReceiver extends BroadcastReceiver {
         Study.getStateMachine().save(true);
         Study.getParticipant().save();
         Proctor.resumeService(context);
-
-        String flavor = BuildConfig.FLAVOR;
-        if(flavor.equals(Config.FLAVOR_DEV) || flavor.equals(Config.FLAVOR_QA)) {
-            Toast.makeText(context,"Time Change Acknowledged",Toast.LENGTH_LONG).show();
-        }
-
     }
 
 }
