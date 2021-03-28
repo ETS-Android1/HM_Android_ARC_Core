@@ -105,7 +105,12 @@ public class Application implements LifecycleObserver {
             Context appContext, StudyComponentProvider provider) {
 
         instance = new Application(appContext, provider);
+
+        instance.setLocaleOptions(createDefaultLocaleOptions());
+        instance.setNotificationTypes(createDefaultNotificationTypes());
+
         instance.initializeStudyValidationAppOnly(appContext, provider);
+
         Study.getInstance().load();
     }
 
