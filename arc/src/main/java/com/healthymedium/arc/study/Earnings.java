@@ -56,26 +56,8 @@ public class Earnings {
     }
 
     public void refreshOverview(Listener listener) {
-
         overviewListener = listener;
-
-        RestClient client = Study.getRestClient();
-        boolean isUploading = client.isUploading();
-        boolean isQueueEmpty = client.isUploadQueueEmpty();
-
-        if(isUploading) {
-            return;
-        }
-
-        if(isQueueEmpty) {
-            internalRefreshOverview();
-        } else {
-            overviewRefresh = 0;
-            if(overviewListener!=null) {
-                overviewListener.onFailure();
-                overviewListener = null;
-            }
-        }
+        internalRefreshOverview();
     }
 
     private void internalRefreshOverview() {
@@ -113,7 +95,8 @@ public class Earnings {
     }
 
     public boolean hasCurrentOverview(){
-        return overviewRefresh==1;
+        // Return false to always refresh locally
+        return false;
     }
 
     public EarningOverview getOverview(){
@@ -140,26 +123,8 @@ public class Earnings {
     }
 
     public void refreshDetails(Listener listener){
-
         detailsListener = listener;
-
-        RestClient client = Study.getRestClient();
-        boolean isUploading = client.isUploading();
-        boolean isQueueEmpty = client.isUploadQueueEmpty();
-
-        if(isUploading) {
-            return;
-        }
-
-        if(isQueueEmpty) {
-            internalRefreshDetails();
-        } else {
-            detailsRefresh = 0;
-            if(detailsListener!=null) {
-                detailsListener.onFailure();
-                detailsListener = null;
-            }
-        }
+        internalRefreshDetails();
     }
 
     private void internalRefreshDetails(){
@@ -199,7 +164,8 @@ public class Earnings {
     }
 
     public boolean hasCurrentDetails(){
-        return detailsRefresh==1;
+        // return false to always refresh locally
+        return false;
     }
 
     public EarningDetails getDetails(){

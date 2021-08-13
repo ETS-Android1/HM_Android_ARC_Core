@@ -115,11 +115,7 @@ public class EarningsPostTestLoadingScreen extends BaseFragment {
             return;
         }
         handler.removeCallbacks(runnable);
-        if(earnings.hasCurrentOverview() && earnings.hasCurrentDetails()) {
-            openSuccess();
-        } else {
-            openFailure();
-        }
+        openSuccess();
     }
 
     private void openSuccess(){

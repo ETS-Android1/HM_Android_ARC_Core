@@ -103,7 +103,11 @@ public class EarningsGoalView extends RoundedLinearLayout {
         body = ViewUtil.replaceToken(body,R.string.token_amount,goal.value);
         textViewBody.setText(Html.fromHtml(body));
         EarningsTwentyOneSessionsView view = new EarningsTwentyOneSessionsView(getContext());
-        view.setProgress(goal.progress);
+        if (!goal.progress_components.isEmpty()) {
+            view.setProgress(goal.progress_components.get(0));
+        } else {
+            view.setProgress(goal.progress);
+        }
         contentLayout.addView(view);
     }
 

@@ -213,26 +213,15 @@ public class EarningsScreen extends BaseFragment {
 
         weeklyTotal.setText(overview.cycle_earnings);
         studyTotal.setText(overview.total_earnings);
-
-        String syncString = getString(R.string.earnings_sync) + " ";
-        DateTime lastSyncTime = Study.getParticipant().getEarnings().getOverviewRefreshTime();
-        if(lastSyncTime != null) {
-            if(lastSyncTime.plusMinutes(1).isBeforeNow()) {
-
-                Phrase phrase = new Phrase(R.string.earnings_sync_datetime);
-                phrase.replaceDate(R.string.format_date, lastSyncTime);
-                phrase.replaceTime(R.string.format_time, lastSyncTime);
-
-                syncString += phrase.toString();
-            } else {
-                syncString += getString(R.string.earnings_sync_justnow);
-            }
-        }
-        lastSync.setText(syncString);
+        lastSync.setVisibility(View.GONE);
 
         goalLayout.removeAllViews();
-        for(EarningOverview.Goal goal : overview.goals){
-            goalLayout.addView(new EarningsGoalView(getContext(),goal, overview.cycle,false));
+        for(EarningOverview.Goal goal : overview.goals) {
+            // Hide the earnings for every test session, as they aren't true goals
+            if (!goal.name.equals(Earnings.TEST_SESSION)) {
+                goalLayout.addView(new EarningsGoalView(getContext(),
+                        goal, overview.cycle, false));
+            }
         }
     }
 
