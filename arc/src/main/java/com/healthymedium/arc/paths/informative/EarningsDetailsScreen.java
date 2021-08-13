@@ -139,22 +139,7 @@ public class EarningsDetailsScreen extends BaseFragment {
         }
 
         studyTotal.setText(details.total_earnings);
-
-        String syncString = getString(R.string.earnings_sync) + " ";
-        DateTime lastSyncTime = earnings.getDetailsRefreshTime();
-        if(lastSyncTime != null) {
-            if(lastSyncTime.plusMinutes(1).isBeforeNow()) {
-
-                Phrase phrase = new Phrase(R.string.earnings_sync_datetime);
-                phrase.replaceDate(R.string.format_date, lastSyncTime);
-                phrase.replaceTime(R.string.format_time, lastSyncTime);
-
-                syncString += phrase.toString();
-            } else {
-                syncString += getString(R.string.earnings_sync_justnow);
-            }
-        }
-        lastSync.setText(syncString);
+        lastSync.setVisibility(View.GONE);
 
         cycleLayout.removeAllViews();
         for(EarningDetails.Cycle cycle : details.cycles){

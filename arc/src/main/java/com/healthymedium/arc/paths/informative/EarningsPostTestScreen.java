@@ -69,8 +69,11 @@ public class EarningsPostTestScreen extends BaseFragment {
         }
 
         for(EarningOverview.Goal goal : overview.goals) {
-            boolean showCompletionCollapsed = (goal.completed && !overview.hasAchievementFor(goal));
-            goalLayout.addView(new EarningsGoalView(getContext(), goal, overview.cycle, showCompletionCollapsed));
+            // Hide the earnings for every test session, as they aren't true goals
+            if (!goal.name.equals(Earnings.TEST_SESSION)) {
+                boolean showCompletionCollapsed = (goal.completed && !overview.hasAchievementFor(goal));
+                goalLayout.addView(new EarningsGoalView(getContext(), goal, overview.cycle, showCompletionCollapsed));
+            }
         }
 
         Button button = view.findViewById(R.id.buttonNext);
