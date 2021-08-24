@@ -209,6 +209,11 @@ public class CircadianClock {
                 .toFormatter()
                 .withLocale(Locale.US);
 
+        DateTimeFormatter twentyFourHourFormatter = new DateTimeFormatterBuilder()
+                .appendPattern("H:mm")
+                .toFormatter()
+                .withLocale(Locale.US);
+
         for(WakeSleepData data : dataList){
 
             // handle any odd period formats the server may send our way
@@ -225,8 +230,22 @@ public class CircadianClock {
                     .replace("午前","AM")
                     .replace("午後","PM");
 
-            LocalTime wake = LocalTime.parse(data.wake,formatter);
-            LocalTime bed = LocalTime.parse(data.bed,formatter);
+            LocalTime wake;
+            if (data.wake.toUpperCase().contains("AM") ||
+                data.wake.toUpperCase().contains("PM")) {
+                wake = LocalTime.parse(data.wake,formatter);
+            } else {
+                wake = LocalTime.parse(data.wake, twentyFourHourFormatter);
+            }
+
+            LocalTime bed;
+            if (data.wake.toUpperCase().contains("AM") ||
+                    data.wake.toUpperCase().contains("PM")) {
+                bed = LocalTime.parse(data.bed,formatter);
+            } else {
+                bed = LocalTime.parse(data.bed, twentyFourHourFormatter);
+            }
+
             clock.getRhythm(data.weekday).setTimes(wake,bed);
         }
 
