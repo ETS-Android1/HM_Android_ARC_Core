@@ -21,9 +21,7 @@ public class SchedulerTest {
     @Test
     public void testDefault() {
 
-        Log.initialize();
-        Log.v("testDefault","\n--------------------------------------------------\n"+
-                "one schedule");
+//        Log.v("testDefault","\n--------------------------------------------------\n"+ "one schedule");
 
         Participant participant = Participants.getDefault();
 
@@ -37,8 +35,7 @@ public class SchedulerTest {
     @Test
     public void test() {
 
-        Log.initialize();
-        Log.v("test","\n--------------------------------------------------\n");
+//        Log.v("test","\n--------------------------------------------------\n");
 
         DateTime now = DateTime.parse("2019-07-29 09:30:00", DateTimeFormat.forPattern("yyyy-MM-dd hh:mm:ss"));
         DateTimeUtils.setCurrentMillisFixed(now.getMillis());
