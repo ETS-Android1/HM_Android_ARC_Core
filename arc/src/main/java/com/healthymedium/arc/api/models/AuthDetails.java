@@ -4,15 +4,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class AuthDetails {
 
-    public static final transient String TYPE_RATER = "rater";                  // The auth code is a Rater id (like HASD)
-    public static final transient String TYPE_CONFIRM_CODE = "confirm_code";    // The auth code is a 2fa code. This action will also send the participant their 2fa code (like EXR)
-    public static final transient String TYPE_MANUAL = "manual";                // The auth code is a password that was set by the researchers and given to the participant (like Hershey)
+    public static final transient String TYPE_RATER = "rater";                    // The auth code is a Rater id (like HASD)
+    public static final transient String TYPE_CONFIRM_CODE = "confirm_code";      // The auth code is a 2fa code. This action will also send the participant their 2fa code (like EXR)
+    public static final transient String TYPE_MANUAL = "manual";                  // The auth code is a password that was set by the researchers and given to the participant (like Hershey)
 
     @SerializedName("study_name")
     private String studyName;
 
     @SerializedName("auth_type")
     private String authType;
+
+    @SerializedName("country_code")
+    private String countryCode;
 
     @SerializedName("auth_code_length")
     private Integer authCodeLength;
@@ -41,4 +44,7 @@ public class AuthDetails {
         return authCodeLength;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
 }
