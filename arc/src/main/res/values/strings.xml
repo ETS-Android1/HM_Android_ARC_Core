@@ -23,7 +23,7 @@
 	<string name="bysigning_key">By signing in you agree to our</string>
 	<string name="privacy_linked">Privacy Policy</string>
 	<string name="about_linked">About This App</string>
-	<string name="login_enter_raterID"></string>
+	<string name="login_enter_raterID">Please enter your\n &lt;b>Rater ID&lt;/b> below.</string>
 	<string name="login_enter_ARCID">Please enter your &lt;b>ARC ID&lt;/b> below:</string>
 	<string name="login_confirm_ARCID">To confirm, please &lt;b>re-enter your ARC ID:&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>Problems logging in?&lt;/b></string>
@@ -33,6 +33,7 @@
 	<string name="login_resend_header">Resend code?</string>
 	<string name="login_resend_subheader">Keep in mind that it might take a few minutes to receive your security code.</string>
 	<string name="login_2FA_text">Your ARC security code is {######}.</string>
+	<string name="login_2FA_phone_text">Please enter the phone number associated with your account.</string>
 	<string name="login_2FA_morehelp_linked">I need more help</string>
 	<string name="onboarding_header">Testing Commitment</string>
 	<string name="onboarding_body">Every six months, you will be asked to complete &lt;b>one week&lt;/b> of cognitive tests. During the week, you will be reminded &lt;b>4 times a day&lt;/b> to complete tests within the app. You may be in the study for as long as &lt;b>5 years&lt;/b> (10 weeks of testing).</string>

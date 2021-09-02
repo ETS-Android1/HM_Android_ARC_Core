@@ -23,7 +23,7 @@
 	<string name="bysigning_key">En vous connectant, vous acceptez notre &lt;b>politique de confidentialité&lt;/b>.</string>
 	<string name="privacy_linked">Politique de confidentialité</string>
 	<string name="about_linked">À propos de cette application</string>
-	<string name="login_enter_raterID"></string>
+	<string name="login_enter_raterID">Veuillez saisir votre &lt;b>numéro d’identité de l’évaluateur&lt;/b> ci-dessous :</string>
 	<string name="login_enter_ARCID">Veuillez saisir votre &lt;b>numéro d’identité de l’ARC&lt;/b> ci-dessous :</string>
 	<string name="login_confirm_ARCID">Pour confirmer, veuillez &lt;b>saisir à nouveau votre numéro d’identité de l’ARC :&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>Des difficultés à vous connecter?&lt;/b></string>
