@@ -1,18 +1,18 @@
 package com.healthymedium.arc.paths.setup_v2;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.api.models.AuthDetails;
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.paths.templates.SetupTemplate;
+import com.healthymedium.arc.paths.questions.Setup2Phone;
+import com.healthymedium.arc.paths.setup.SetupAuthCode;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -73,42 +73,45 @@ public class Setup2ParticipantConfirm extends Setup2Template {
     RestClient.Listener authDetailsListener = new RestClient.Listener() {
         @Override
         public void onSuccess(RestResponse response) {
+
+            loadingDialog.dismiss();
+
             String errorString = parseForError(response,false);
+
             if(errorString!=null) {
                 showError(errorString);
-                loadingDialog.dismiss();
                 return;
             }
 
-            SetupPathData setupPathData = ((SetupPathData)Study.getCurrentSegmentData());
             AuthDetails authDetails = response.getOptionalAs(AuthDetails.class);
             PathSegment path = Study.getCurrentSegment();
 
             String authType = authDetails.getType();
             int authLength = authDetails.getCodeLength();
+            String regionCode = authDetails.getCountryCode();
 
             if(authType.equals(AuthDetails.TYPE_RATER)){
-                if(!fragmentExists(path,Setup2AuthRater.class)){
-                    path.fragments.add(new Setup2AuthRater(authLength));
+                if(!fragmentExists(path, Setup2AuthRater.class)){
+                    path.fragments.add(new Setup2AuthRater(6));
                 }
-                loadingDialog.dismiss();
-                Study.openNextFragment();
-
             } else if(authType.equals(AuthDetails.TYPE_CONFIRM_CODE)) {
-                if(!fragmentExists(path,Setup2AuthConfirm.class)){
+                if (!fragmentExists(path, Setup2Phone.class)) {
+                    Resources res = getResources();
+                    String header = res.getString(R.string.login_2FA_phone_text);
+                    Setup2Phone setup2Phone = new Setup2Phone(true,
+                            header, "", 20, regionCode);
+                    path.fragments.add(setup2Phone);
+                }
+                if (!fragmentExists(path, Setup2AuthConfirm.class)) {
                     path.fragments.add(new Setup2AuthConfirm(authLength));
                 }
-                Study.getRestClient().requestVerificationCode(setupPathData.id, verificationCodeListener);
-
             } else if(authType.equals(AuthDetails.TYPE_MANUAL)) {
                 if(!fragmentExists(path,Setup2AuthManual.class)){
                     path.fragments.add(new Setup2AuthManual(authLength));
                 }
                 loadingDialog.dismiss();
-                Study.openNextFragment();
-
             }
-
+            Study.openNextFragment();
         }
 
         @Override
