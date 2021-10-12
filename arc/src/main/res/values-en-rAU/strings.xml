@@ -23,7 +23,7 @@
 	<string name="bysigning_key">By signing in you agree to our</string>
 	<string name="privacy_linked">Privacy Policy</string>
 	<string name="about_linked">About This App</string>
-	<string name="login_enter_raterID"></string>
+	<string name="login_enter_raterID">Please enter your\n &lt;b>Rater ID&lt;/b> below.</string>
 	<string name="login_enter_ARCID">Please enter your &lt;b>ARC ID&lt;/b> below:</string>
 	<string name="login_confirm_ARCID">To confirm, please &lt;b>re-enter your ARC ID:&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>Problems logging in?&lt;/b></string>
@@ -368,6 +368,7 @@
 	<string name="button_showme">Show Me</string>
 	<string name="button_finishtutorial">Finish Tutorial</string>
 	<string name="button_returntohome">RETURN TO HOME</string>
+	<string name="button_choosetime">CHOOSE TIME</string>
 	<string name="popup_scroll">Scroll to select</string>
 	<string name="popup_showmore">SHOW MORE</string>
 	<string name="popup_begin">Let\'s begin the first test.</string>
