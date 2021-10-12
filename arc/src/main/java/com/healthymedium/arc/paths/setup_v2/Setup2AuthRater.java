@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.informative.ContactScreen;
@@ -21,6 +22,7 @@ public class Setup2AuthRater extends Setup2Template {
 
     public Setup2AuthRater(int digitCount) {
         super(digitCount,0, ViewUtil.getString(R.string.login_enter_raterID));
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Override
