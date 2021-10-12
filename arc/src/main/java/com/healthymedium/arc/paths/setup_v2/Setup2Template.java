@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -25,6 +26,8 @@ import androidx.core.content.ContextCompat;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.Device;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -185,6 +188,12 @@ public abstract class Setup2Template extends StandardTemplate {
         content.addView(textViewProblems, index);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
     }
 
     void addSpacer(int widthDp){
@@ -365,16 +374,39 @@ public abstract class Setup2Template extends StandardTemplate {
     public void hideError(){
         textViewError.setVisibility(View.INVISIBLE);
         textViewError.setText("");
+        textViewProblems.setVisibility(View.INVISIBLE);
     }
 
     public boolean isErrorShowing(){
         return textViewError.getVisibility()==View.VISIBLE;
     }
 
+    public void showError(SetupError error){
+        showError(error.string);
+//        if(error.link != null) {
+//            if (error.link.length() > 0) {
+//
+//            }
+//        }
+    }
+
     public void showError(String error){
         buttonNext.setEnabled(false);
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
+
+        // add this for all errors
+        textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
+        textViewProblems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactScreen contactScreen = new ContactScreen();
+                NavigationManager.getInstance().open(contactScreen);
+            }
+        });
+        textViewProblems.setVisibility(View.VISIBLE);
+        updateView(editText.getText());
+
         onErrorShown();
     }
 
@@ -402,7 +434,16 @@ public abstract class Setup2Template extends StandardTemplate {
         }
     };
 
-    protected String parseForError(RestResponse response, boolean failed){
+    protected SetupError parseForError(RestResponse response, boolean failed){
+        SetupError error = new SetupError();
+        error.string = parseForErrorString(response,failed);
+        //if(response.code==401 || response.code==406){
+            //error.link = getResources().getString(R.string.login_error1_link);
+        //}
+        return error;
+    }
+
+    protected String parseForErrorString(RestResponse response, boolean failed){
         int code = response.code;
         switch (code){
             case 400:
@@ -424,26 +465,34 @@ public abstract class Setup2Template extends StandardTemplate {
         return null;
     }
 
+
     protected RestClient.Listener registrationListener = new RestClient.Listener() {
         @Override
         public void onSuccess(RestResponse response) {
-            String errorString = parseForError(response,false);
+            SetupError error = parseForError(response,false);
             loadingDialog.dismiss();
-            if(errorString==null) {
+            if(error.string==null) {
                 String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
                 Study.getParticipant().getState().id = id;
+                if(Config.REPORT_STUDY_INFO){
+                }
                 Study.openNextFragment();
             } else {
-                showError(errorString);
+                showError(error);
             }
         }
 
         @Override
         public void onFailure(RestResponse response) {
-            String errorString = parseForError(response,true);
-            showError(errorString);
+            SetupError error = parseForError(response,true);
+            showError(error);
             loadingDialog.dismiss();
         }
     };
+
+    class SetupError {
+        String string;
+        String link;
+    }
 
 }

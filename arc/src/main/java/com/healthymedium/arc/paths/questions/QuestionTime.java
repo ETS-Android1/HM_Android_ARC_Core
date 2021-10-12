@@ -32,13 +32,22 @@ public class QuestionTime extends QuestionTemplate {
     protected HintPointer pointer;
     protected TimeInput timeInput;
     protected LocalTime time;
-    boolean enabled;
+    boolean enabled = false;
     boolean showHint;
     boolean didDismissPointer = false;
     boolean didPause = false;
+    String disabledTxt;
+
+    public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime, String buttonText) {
+        super(allowBack,header,subheader, buttonText);
+        disabledTxt = buttonText;
+        time = defaultTime;
+        type = "time";
+    }
 
     public QuestionTime(boolean allowBack, String header, String subheader,@Nullable LocalTime defaultTime) {
         super(allowBack,header,subheader, ViewUtil.getString(R.string.button_submittime));
+        disabledTxt = ViewUtil.getString(R.string.button_submittime);
         time = defaultTime;
         type = "time";
     }
@@ -50,11 +59,14 @@ public class QuestionTime extends QuestionTemplate {
 
 
         timeInput = new TimeInput(getContext());
+        timeInput.setValidity(false);
         timeInput.setListener(new TimeInput.Listener() {
             public void onValidityChanged(boolean valid) {
                 dismissPointer();
                 if(buttonNext.isEnabled() != valid){
                     enabled = valid;
+                    String string = enabled?ViewUtil.getString(R.string.button_next):disabledTxt;
+                    buttonNext.setText(string);
                     buttonNext.setEnabled(enabled);
                 }
             }
@@ -63,10 +75,11 @@ public class QuestionTime extends QuestionTemplate {
             public void onTimeChanged() {
                 response_time = System.currentTimeMillis();
                 dismissPointer();
-                Hints.markShown(HINT_QUESTION_TIME);
             }
         });
 
+
+        buttonNext.setEnabled(false);
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,9 +144,10 @@ public class QuestionTime extends QuestionTemplate {
         super.onResume();
         didPause = false;
         if(time !=null) {
-            timeInput.setTime(time);
+            timeInput.setTime(time,true);
         }
-        enabled = timeInput.isTimeValid();
+        String string = enabled?ViewUtil.getString(R.string.button_next):disabledTxt;
+        buttonNext.setText(string);
         buttonNext.setEnabled(enabled);
     }
 
@@ -153,6 +167,9 @@ public class QuestionTime extends QuestionTemplate {
         if(pointer!=null){
             pointer.dismiss();
             pointer = null;
+        }
+        if(!Hints.hasBeenShown(HINT_QUESTION_TIME)){
+            Hints.markShown(HINT_QUESTION_TIME);
         }
     }
 }

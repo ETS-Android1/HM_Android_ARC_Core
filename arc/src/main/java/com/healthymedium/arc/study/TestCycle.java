@@ -165,4 +165,26 @@ public class TestCycle {
         setActualEndDate(sessions.get(last).getScheduledTime().plusDays(1));
     }
 
+   /**
+    * 1 schedule was found in Production to have an invalid schedule a.k.a "corrupted".
+    * The "corruption" was that the first test scheduled for each day had a start_date for the day before. 
+    * The participant reported an issue with tests not starting despite getting notifications. 
+    * Our study admin checked their test schedule and noticed that the test dates didn't line up right.
+    *
+    * To fix the issue, we first check if a schedule is in this invalid format.
+    * Then, we re-create the user's schedule and upload it to the server.
+    * 
+    * This fix was validated by testing different paths with the "corrupted" schedule. 
+    * Reinstall to mock user with bad data on two versions. One with the fix the other without. 
+    * One corrected itself immediately, the other corrected itself after updating to the new version.
+    */
+    public boolean isScheduleCorrupted() {
+        for(TestDay day : days) {
+            if(day.isScheduleCorrupted()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

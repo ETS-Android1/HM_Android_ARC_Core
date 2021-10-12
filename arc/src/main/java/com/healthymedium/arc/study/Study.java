@@ -10,7 +10,7 @@ import com.healthymedium.arc.heartbeat.HeartbeatManager;
 import com.healthymedium.arc.utilities.MigrationUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
-
+import android.util.Log;
 import java.lang.reflect.InvocationTargetException;
 
 import androidx.annotation.VisibleForTesting;
@@ -312,6 +312,21 @@ public class Study{
 
             participant.load();
             stateMachine.load();
+
+            if(participant.isScheduleCorrupted()) {
+                boolean fixed = getScheduler().fixCorruptedSchedule(participant);
+                if(fixed) {
+                    participant.save();
+                    if(!getCurrentTestCycle().hasStarted()) {
+                        getScheduler().unscheduleNotifications(getCurrentTestCycle());
+                        getScheduler().scheduleNotifications(getCurrentTestCycle(), false);
+                    }
+                    getRestClient().submitTestSchedule();
+                    Log.w("Schedule Corruption","Found schedule corruption, was able to fix it");
+                } else {
+                    Log.w("Schedule Corruption","Found schedule corruption, was not able to fix it");
+                }
+            }
         }
 
         if(Config.ENABLE_EARNINGS){

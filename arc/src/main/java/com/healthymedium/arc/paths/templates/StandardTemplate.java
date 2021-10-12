@@ -246,8 +246,8 @@ public class StandardTemplate extends BaseFragment {
     boolean scrollViewIsAtBottom(){
         View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
         int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
-        //Log.i("scroll", "view.getBottom()="+view.getBottom()+" scrollView.getHeight()="+scrollView.getHeight()+" scrollView.getScrollY()=" + scrollView.getScrollY());
-        return (diff < 50);
+        Log.d(getSimpleTag(),"scroll - view.getBottom()="+view.getBottom()+" scrollView.getHeight()="+scrollView.getHeight()+" scrollView.getScrollY()=" + scrollView.getScrollY());
+        return (diff <= 0);
     }
 
     protected void disableScrollBehavior(){
@@ -280,7 +280,7 @@ public class StandardTemplate extends BaseFragment {
     }
 
     protected void onBackRequested() {
-        Log.i("StandardTemplate","onBackRequested");
+        Log.i(getSimpleTag(),"onBackRequested");
         Study.getInstance().openPreviousFragment();
     }
 

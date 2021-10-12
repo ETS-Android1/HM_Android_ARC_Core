@@ -14,15 +14,17 @@
         android:layout_marginTop="72dp"
         app:srcCompat="@drawable/welcome" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
-        android:text="@string/gen_welcome_key"
+        android:layout_marginRight="32dp"
         android:gravity="center"
+        android:text="@string/gen_welcome_key"
         android:textSize="26dp" />
 
     <TextView
@@ -43,10 +45,11 @@
         android:layout_above="@id/button"
         android:orientation="horizontal">
 
-        <TextView
+        <com.healthymedium.arc.ui.SizeAwareTextView
             android:id="@+id/textViewAboutApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
             android:layout_weight="1"
             android:gravity="right"
             android:paddingTop="32dp"
@@ -56,10 +59,11 @@
             android:textColor="@color/primary"
             android:textSize="16dp" />
 
-        <TextView
+        <com.healthymedium.arc.ui.SizeAwareTextView
             android:id="@+id/textViewPrivacyPolicy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
             android:layout_weight="1"
             android:gravity="left"
             android:paddingLeft="14dp"

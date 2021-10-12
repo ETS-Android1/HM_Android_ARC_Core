@@ -285,4 +285,18 @@ public class Participant {
         return null;
     }
 
+    public boolean isScheduleCorrupted() {
+        if(state.testCycles==null) {
+            return false;
+        }
+        for (TestCycle cycle : state.testCycles) {
+            if(!cycle.hasStarted()) {
+                if(cycle.isScheduleCorrupted()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.healthymedium.arc.study;
 
+import android.util.Log;
 import org.joda.time.DateTime;
-
 import java.util.List;
 
 public class TestDay {
@@ -110,5 +110,28 @@ public class TestDay {
         return end;
     }
 
+    public boolean isScheduleCorrupted() {
+        DateTime start = getStartTime();
+        DateTime end = getEndTime();
+
+        DateTime before = null;
+        for (TestSession session : sessions) {
+            DateTime date = session.getScheduledTime();
+            if(before!=null) {
+                if(date.isBefore(before)) {
+                    Log.e("TestDay","corruption found: sessions are out of order");
+                    return true;
+                }
+            }
+            before = date;
+
+            if (date.isBefore(start) || date.isAfter(end)) {
+                Log.e("TestDay","corruption found: sessions are out of testing window");
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 }

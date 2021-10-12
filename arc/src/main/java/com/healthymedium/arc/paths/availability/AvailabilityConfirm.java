@@ -323,7 +323,7 @@ public class AvailabilityConfirm extends BaseFragment {
     }
 
     protected void onBackRequested() {
-        Log.i("StandardTemplate","onBackRequested");
+        Log.i(getSimpleTag(),"onBackRequested");
         Study.getInstance().openPreviousFragment();
     }
 

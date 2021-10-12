@@ -49,6 +49,8 @@ public class LocalTimeTypeAdapter implements JsonSerializer<LocalTime>, JsonDese
             string = string
                     .replace("a.m.","AM")
                     .replace("p.m.","PM")
+                    .replace("a. m.","AM")
+                    .replace("p. m.","PM")
                     .replace("午前","AM")
                     .replace("午後","PM");
             time = LocalTime.parse(string,formatter);
