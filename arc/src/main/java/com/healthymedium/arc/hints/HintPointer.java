@@ -128,6 +128,7 @@ public class HintPointer extends LinearLayout {
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(dp44,0,dp44,0);
         setLayoutParams(layoutParams);
+        setBaselineAligned(false);
 
         textView = new AppCompatTextView(getContext());
         textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1));

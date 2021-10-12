@@ -16,6 +16,7 @@ import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.informative.FAQAnswerScreen;
@@ -37,6 +38,7 @@ public class Setup2AuthConfirmResend extends BaseFragment {
     LinearLayout content;
 
     public Setup2AuthConfirmResend() {
+        setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
     @Override

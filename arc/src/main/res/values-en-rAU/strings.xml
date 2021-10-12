@@ -368,6 +368,7 @@
 	<string name="button_showme">Show Me</string>
 	<string name="button_finishtutorial">Finish Tutorial</string>
 	<string name="button_returntohome">RETURN TO HOME</string>
+	<string name="button_choosetime">CHOOSE TIME</string>
 	<string name="popup_scroll">Scroll to select</string>
 	<string name="popup_showmore">SHOW MORE</string>
 	<string name="popup_begin">Let\'s begin the first test.</string>
