@@ -339,7 +339,6 @@
 	<string name="progress_endoftest_syncing">Just a moment while we update your earnings...</string>
 	<string name="progress_endoftest_nosync">It\'s taking longer than usual to sync. Check the Earnings tab later to see your updated totals.</string>
 	<string name="login_error1">Incorrect log-in credentials</string>
-	<string name="login_error1_link"></string>
 	<string name="login_error2">This ARC ID is already enrolled on another device.</string>
 	<string name="login_error3">Sorry, our app is currently experiencing issues. Please try again later.</string>
 	<string name="login_error4">Non-matching ARC ID</string>

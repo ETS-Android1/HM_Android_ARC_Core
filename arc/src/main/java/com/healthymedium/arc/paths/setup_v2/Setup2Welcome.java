@@ -27,7 +27,7 @@ public class Setup2Welcome extends BaseFragment {
 
     Button button;
     AppCompatTextView textViewHeader;
-    AppCompatTextView textViewAboutApp;
+    SizeAwareTextView textViewAboutApp;
     SizeAwareTextView textViewPrivacyPolicy;
     // TextView textViewAppName;
     TextView textViewVersion;
@@ -57,6 +57,13 @@ public class Setup2Welcome extends BaseFragment {
                 NavigationManager.getInstance().open(aboutScreen);
             }
         });
+        textViewAboutApp.setOnTextSizeChangedListener(new SizeAwareTextView.OnTextSizeChangedListener() {
+            @Override
+            public void onTextSizeChanged(SizeAwareTextView view, float px) {
+                textViewAboutApp.setTextSize(TypedValue.COMPLEX_UNIT_PX,px);
+            }
+        });
+        ViewUtil.autosizeTextView(textViewAboutApp,8,16);
 
         textViewPrivacyPolicy = view.findViewById(R.id.textViewPrivacyPolicy);
         textViewPrivacyPolicy.setMaxLines(1);

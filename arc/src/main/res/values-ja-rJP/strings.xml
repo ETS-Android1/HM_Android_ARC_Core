@@ -338,8 +338,7 @@
 	<string name="progress_studytotals_goals">達成したゴール</string>
 	<string name="progress_endoftest_syncing">獲得収入を更新する間しばらくお待ちください...</string>
 	<string name="progress_endoftest_nosync">同期の時間が通常よりも長くかかっています。更新された総額を見るには、後ほど「獲得収入」タブを確認してください。</string>
-	<string name="login_error1">被験者IDが一致しません</string>
-	<string name="login_error1_link">&lt;b>ログインできない場合&lt;/b></string>
+	<string name="login_error1">「ログイン情報が正しくありません」</string>
 	<string name="login_error2">このARC IDはすでに他の機器に登録されています。</string>
 	<string name="login_error3">申し訳ありません、このアプリには現在問題が発生しています。後ほどもう一度試してみてください。</string>
 	<string name="login_error4">ARC ID不一致</string>

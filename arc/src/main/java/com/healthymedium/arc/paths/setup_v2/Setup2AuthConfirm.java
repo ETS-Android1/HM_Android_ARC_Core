@@ -28,7 +28,6 @@ public class Setup2AuthConfirm extends Setup2Template {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
         textViewProblems.setText(ViewUtil.getString(R.string.login_problems_2FA));
         textViewProblems.setVisibility(View.VISIBLE);
         textViewProblems.setOnClickListener(new View.OnClickListener() {
@@ -61,21 +60,22 @@ public class Setup2AuthConfirm extends Setup2Template {
 
     @Override
     public void onErrorShown(){
-        textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
-        textViewProblems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ContactScreen contactScreen = new ContactScreen();
-                NavigationManager.getInstance().open(contactScreen);
-            }
-        });
-        textViewProblems.setVisibility(View.VISIBLE);
-        updateView(editText.getText());
+        super.onErrorShown();
+//        textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
+//        textViewProblems.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ContactScreen contactScreen = new ContactScreen();
+//                NavigationManager.getInstance().open(contactScreen);
+//            }
+//        });
+//        textViewProblems.setVisibility(View.VISIBLE);
+//        updateView(editText.getText());
     }
 
     public void hideError(){
         super.hideError();
-        textViewProblems.setVisibility(View.INVISIBLE);
+//        textViewProblems.setVisibility(View.INVISIBLE);
     }
 
     @Override

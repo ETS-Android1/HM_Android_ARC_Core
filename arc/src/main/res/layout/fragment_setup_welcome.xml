@@ -45,7 +45,7 @@
         android:layout_above="@id/button"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.healthymedium.arc.ui.SizeAwareTextView
             android:id="@+id/textViewAboutApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

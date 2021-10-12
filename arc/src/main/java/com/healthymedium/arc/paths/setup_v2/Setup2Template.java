@@ -65,7 +65,6 @@ public abstract class Setup2Template extends StandardTemplate {
     protected TextView textViewPolicyLink;
     protected TextView textViewPolicy;
     protected TextView textViewError;
-    protected TextView textViewErrorLink;
 
     public Setup2Template(int firstDigitCount, int secondDigitCount, String header) {
         super(true,header,"");
@@ -103,25 +102,7 @@ public abstract class Setup2Template extends StandardTemplate {
         textViewError.setTextSize(16);
         textViewError.setTextColor(ViewUtil.getColor(R.color.red));
         textViewError.setVisibility(View.INVISIBLE);
-
-        textViewErrorLink = new TextView(getContext());
-        textViewErrorLink.setTextSize(16);
-        textViewErrorLink.setTextColor(ViewUtil.getColor(R.color.red));
-        textViewErrorLink.setVisibility(View.INVISIBLE);
-        ViewUtil.underlineTextView(textViewErrorLink);
-        textViewErrorLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavigationManager.getInstance().open(new ContactScreen());
-            }
-        });
-
-        LinearLayout errorLayout = new LinearLayout(getContext());
-        errorLayout.setOrientation(LinearLayout.VERTICAL);
-        errorLayout.addView(textViewError);
-        errorLayout.addView(textViewErrorLink);
-
-        content.addView(errorLayout);
+        content.addView(textViewError);
 
         setupEditText();
         content.addView(editText);
@@ -208,6 +189,12 @@ public abstract class Setup2Template extends StandardTemplate {
         content.addView(textViewProblems, index);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
     }
 
     void addSpacer(int widthDp){
@@ -388,8 +375,7 @@ public abstract class Setup2Template extends StandardTemplate {
     public void hideError(){
         textViewError.setVisibility(View.INVISIBLE);
         textViewError.setText("");
-        textViewErrorLink.setVisibility(View.INVISIBLE);
-        textViewErrorLink.setText("");
+        textViewProblems.setVisibility(View.INVISIBLE);
     }
 
     public boolean isErrorShowing(){
@@ -397,22 +383,31 @@ public abstract class Setup2Template extends StandardTemplate {
     }
 
     public void showError(SetupError error){
-        buttonNext.setEnabled(false);
-        textViewError.setVisibility(View.VISIBLE);
-        textViewError.setText(error.string);
-        if(error.link != null) {
-            if (error.link.length() > 0) {
-                textViewErrorLink.setVisibility(View.VISIBLE);
-                textViewErrorLink.setText(Html.fromHtml(error.link));
-            }
-        }
-        onErrorShown();
+        showError(error.string);
+//        if(error.link != null) {
+//            if (error.link.length() > 0) {
+//
+//            }
+//        }
     }
 
     public void showError(String error){
         buttonNext.setEnabled(false);
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
+
+        // add this for all errors
+        textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
+        textViewProblems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactScreen contactScreen = new ContactScreen();
+                NavigationManager.getInstance().open(contactScreen);
+            }
+        });
+        textViewProblems.setVisibility(View.VISIBLE);
+        updateView(editText.getText());
+
         onErrorShown();
     }
 
@@ -443,9 +438,9 @@ public abstract class Setup2Template extends StandardTemplate {
     protected SetupError parseForError(RestResponse response, boolean failed){
         SetupError error = new SetupError();
         error.string = parseForErrorString(response,failed);
-        if(response.code==401 || response.code==406){
-            error.link = getResources().getString(R.string.login_error1_link);
-        }
+        //if(response.code==401 || response.code==406){
+            //error.link = getResources().getString(R.string.login_error1_link);
+        //}
         return error;
     }
 

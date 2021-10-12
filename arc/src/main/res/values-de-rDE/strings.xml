@@ -20,8 +20,8 @@
 	<string name="dateshift_confirmation">Großartig! Ihr nächster Testzyklus dauert vom &lt;b>{DATE1}&lt;/b> bis &lt;b>{DATE2}&lt;/b>.</string>
 	<string name="language_prefer">Bitte wählen Sie Ihre &lt;b>bevorzugte Sprache&lt;/b>.</string>
 	<string name="gen_welcome_key">Willkommen bei der &lt;b>ARC App&lt;/b></string>
-	<string name="bysigning_key">Durch Ihre Anmeldung erklären Sie sich mit unseren &lt;b>Datenschutzbestimmungen&lt;/b> einverstanden.</string>
-	<string name="privacy_linked">Datenschutzbestimmungen</string>
+	<string name="bysigning_key">Durch Ihre Anmeldung erklären Sie sich mit unseren &lt;b>Datenschutz- bestimmungen&lt;/b> einverstanden.</string>
+	<string name="privacy_linked">Datenschutz- bestimmungen</string>
 	<string name="about_linked">Über diese App</string>
 	<string name="login_enter_raterID">Bitte geben Sie unten Ihre &lt;b>Bewerter-ID&lt;/b> an:</string>
 	<string name="login_enter_ARCID">Bitte geben Sie unten Ihre &lt;b>ARC-ID&lt;/b> an:</string>
@@ -87,7 +87,7 @@
 	<string name="resources_contact">Kontakt zum Studienkoordinator</string>
 	<string name="resources_about_link">Über diese App</string>
 	<string name="resources_faq_link">Häufig gestellte Fragen</string>
-	<string name="resources_privacy_link">Datenschutzbestimmungen</string>
+	<string name="resources_privacy_link">Datenschutz- bestimmungen</string>
 	<string name="resources_nav_home">Zu Hause</string>
 	<string name="resources_nav_progress">Fortschritt</string>
 	<string name="resources_nav_earnings">Verdienst</string>
@@ -290,7 +290,7 @@
 	<string name="symbols_or">Oder</string>
 	<string name="symbols_complete">&lt;b>Symboltest abgeschlossen!&lt;/b></string>
 	<string name="grids_header">Raster</string>
-	<string name="grids_body">Schauen Sie sich das Raster eine Weile an und merken Sie sich, wo sich die Gegenstände befinden.</string>
+	<string name="grids_body">Schauen Sie sich das Raster eine Weile an und merken Sie sich, wo sich die drei Gegenstände befinden.</string>
 	<string name="grids_overlay1">Versuchen Sie, sich zu merken, wo die Gegenstände liegen.</string>
 	<string name="grids_overlay2">Weiter: Tippen Sie die „F“s an.</string>
 	<string name="grids_subheader_fs">Tippen Sie die „F“s an.</string>
@@ -300,7 +300,7 @@
 	<string name="grids_complete">&lt;b>Rastertest abgeschlossen!&lt;/b></string>
 	<string name="grids_vb_body">Bei dieser Aufgabe betrachten Sie 3 Gegenstände, die auf einem Raster angeordnet sind. Dann werden Sie aufgefordert, sich jeden Gegenstand und seine Position auf dem Raster zu merken.</string>
 	<string name="grids_tutorial_vb_step1">Dieser Test besteht aus drei Teilen.&lt;br>&lt;br>Im ersten Teil sehen Sie 3 Gegenstände, die auf einem Raster aus Kästchen angeordnet sind. Sie werden aufgefordert, sich &lt;b>jeden Gegenstand und seine Position auf dem Raster zu merken&lt;/b>. Ziel ist es, sich daran zu erinnern, wo jeder Gegenstand auf dem Raster platziert ist. Sie haben 3 Sekunden Zeit, um das Raster zu betrachten.</string>
-	<string name="grids_tutorial_vb_place">Platzieren Sie jeden Gegenstand in seine Position&lt;br>aus Teil eins.</string>
+	<string name="grids_tutorial_vb_place">Platzieren Sie jeden Gegenstand in seine Position aus Teil eins.</string>
 	<string name="grids_tutorial_vb_place_other">Sehr gut! Platzieren Sie nun die beiden anderen Gegenstände auf dem Raster.</string>
 	<string name="grids_tutorial_vb_change_mind">Haben Sie Ihre Meinung geändert? Wählen Sie einen anderen Gegenstand aus, den Sie ersetzen möchten, oder tippen Sie auf &lt;b>Gegenstand entfernen&lt;/b>, um ihn zu löschen.</string>
 	<string name="grids_tutorial_vb_mech1">&lt;b>Gut gemacht!&lt;/b>&lt;br>Es sieht so aus, als hätten Sie keine Hilfe bei der Platzierung benötigt, aber wir möchten sichergehen, dass wir Ihnen noch zeigen, wie man Gegenstände austauscht und entfernt, bevor Sie mit dem eigentlichen Test beginnen.</string>
@@ -339,7 +339,6 @@
 	<string name="progress_endoftest_syncing">Einen Moment, wir aktualisieren Ihren Verdienst...</string>
 	<string name="progress_endoftest_nosync">Die Synchronisierung dauert länger als gewöhnlich. Schauen Sie später auf die Registerkarte Verdienst, um Ihren aktualisierten Gesamtbetrag zu sehen.</string>
 	<string name="login_error1">Falsche Anmeldedaten</string>
-	<string name="login_error1_link"></string>
 	<string name="login_error2">Diese ARC-ID ist bereits als Teilnehmer auf einem anderen Gerät angemeldet.</string>
 	<string name="login_error3">Unsere APP hat leider momentan Probleme. Bitte versuchen Sie es später noch einmal.</string>
 	<string name="login_error4">Nicht übereinstimmende ARC-ID</string>

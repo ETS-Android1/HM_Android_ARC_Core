@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.api.models.AuthDetailsRequest;
 import com.healthymedium.arc.api.models.CachedObject;
 import com.healthymedium.arc.api.models.DayProgress;
@@ -748,6 +749,18 @@ public class RestClient <Api>{
 
                 ParticipantState state = Study.getScheduler().getExistingParticipantState(existingData);
                 Study.getParticipant().setState(state);
+                if(Study.getParticipant().isScheduleCorrupted()){
+                    boolean fixed = Study.getScheduler().fixCorruptedSchedule(Study.getParticipant());
+                    if(fixed) {
+                        Study.getParticipant().save();
+                        Study.getRestClient().submitTestSchedule();
+                        Analytics.logWarning("Schedule Corruption","Found schedule corruption, was able to fix it");
+                    } else {
+                        Analytics.logWarning("Schedule Corruption","Found schedule corruption, was not able to fix it");
+                    }
+                    Analytics.uploadLogs("Schedule Corruption");
+                }
+
                 Study.getScheduler().scheduleNotifications(Study.getCurrentTestCycle(), false);
 
                 if(Config.CHECK_PROGRESS_INFO) {

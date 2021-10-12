@@ -165,4 +165,13 @@ public class TestCycle {
         setActualEndDate(sessions.get(last).getScheduledTime().plusDays(1));
     }
 
+    public boolean isScheduleCorrupted() {
+        for(TestDay day : days) {
+            if(day.isScheduleCorrupted()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

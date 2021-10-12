@@ -338,8 +338,7 @@
 	<string name="progress_studytotals_goals">Objectifs atteints</string>
 	<string name="progress_endoftest_syncing">Juste un instant pendant que nous mettons à jour vos gains…</string>
 	<string name="progress_endoftest_nosync">La synchronisation prend plus de temps que d\'habitude. Consultez l\'onglet Gains plus tard pour voir vos totaux à jour.</string>
-	<string name="login_error1">L’identifiant du sujet ne correspond pas</string>
-	<string name="login_error1_link">&lt;b>Des difficultés à vous connecter?&lt;/b></string>
+	<string name="login_error1">Identifiants de connexion incorrects</string>
 	<string name="login_error2">Ce numéro d’identité de l’ARC est déjà inscrit sur un autre appareil.</string>
 	<string name="login_error3">Désolé, notre application éprouve actuellement des difficultés. Veuillez réessayer plus tard.</string>
 	<string name="login_error4">L’ID d’ARC ne correspond pas</string>

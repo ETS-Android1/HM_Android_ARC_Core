@@ -283,6 +283,22 @@ public class Study{
 
             participant.load();
             stateMachine.load();
+
+            if(participant.isScheduleCorrupted()) {
+                boolean fixed = getScheduler().fixCorruptedSchedule(participant);
+                if(fixed) {
+                    participant.save();
+                    if(!getCurrentTestCycle().hasStarted()) {
+                        getScheduler().unscheduleNotifications(getCurrentTestCycle());
+                        getScheduler().scheduleNotifications(getCurrentTestCycle(), false);
+                    }
+                    getRestClient().submitTestSchedule();
+                    Analytics.logWarning("Schedule Corruption","Found schedule corruption, was able to fix it");
+                } else {
+                    Analytics.logWarning("Schedule Corruption","Found schedule corruption, was not able to fix it");
+                }
+                Analytics.uploadLogs("Schedule Corruption");
+            }
         }
 
         if(Config.ENABLE_EARNINGS){
