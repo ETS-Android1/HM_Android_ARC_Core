@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.ui.Button;

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.ui.base.PointerDialog;
 import com.healthymedium.arc.utilities.ViewUtil;

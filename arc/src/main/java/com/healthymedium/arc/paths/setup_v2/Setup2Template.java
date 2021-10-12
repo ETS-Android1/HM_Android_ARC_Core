@@ -23,7 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.healthymedium.analytics.Analytics;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.BaseFragment;
@@ -476,7 +475,6 @@ public abstract class Setup2Template extends StandardTemplate {
                 String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
                 Study.getParticipant().getState().id = id;
                 if(Config.REPORT_STUDY_INFO){
-                    Analytics.setStudyInfo(id, Device.getId());
                 }
                 Study.openNextFragment();
             } else {

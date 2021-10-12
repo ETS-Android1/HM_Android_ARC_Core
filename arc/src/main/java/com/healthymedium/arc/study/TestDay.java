@@ -1,6 +1,6 @@
 package com.healthymedium.arc.study;
 
-import com.healthymedium.analytics.Log;
+import android.util.Log;
 import org.joda.time.DateTime;
 import java.util.List;
 

@@ -10,7 +10,7 @@ import com.healthymedium.arc.heartbeat.HeartbeatManager;
 import com.healthymedium.arc.utilities.MigrationUtil;
 import com.healthymedium.arc.utilities.PreferencesManager;
 import com.healthymedium.arc.utilities.VersionUtil;
-
+import android.util.Log;
 import java.lang.reflect.InvocationTargetException;
 
 public class Study{
@@ -293,11 +293,10 @@ public class Study{
                         getScheduler().scheduleNotifications(getCurrentTestCycle(), false);
                     }
                     getRestClient().submitTestSchedule();
-                    Analytics.logWarning("Schedule Corruption","Found schedule corruption, was able to fix it");
+                    Log.w("Schedule Corruption","Found schedule corruption, was able to fix it");
                 } else {
-                    Analytics.logWarning("Schedule Corruption","Found schedule corruption, was not able to fix it");
+                    Log.w("Schedule Corruption","Found schedule corruption, was not able to fix it");
                 }
-                Analytics.uploadLogs("Schedule Corruption");
             }
         }
 
