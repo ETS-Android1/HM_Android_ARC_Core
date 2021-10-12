@@ -77,6 +77,7 @@ import com.healthymedium.test_suite.behaviors.tests.PriceTestMatchBehavior;
 import com.healthymedium.test_suite.behaviors.tests.SymbolTestBehavior;
 import com.healthymedium.test_suite.behaviors.tests.TestBeginBehavior;
 import com.healthymedium.test_suite.behaviors.tests.TestInfoBehavior;
+import com.healthymedium.test_suite.behaviors.tutorials.Grid2TutorialFullHintBehavior;
 import com.healthymedium.test_suite.behaviors.tutorials.GridTutorialBehavior;
 import com.healthymedium.test_suite.behaviors.tutorials.PricesTutorialBehavior;
 import com.healthymedium.test_suite.behaviors.tutorials.SymbolTutorialBehavior;
@@ -224,6 +225,7 @@ public class Behaviors {
 
         behaviors.put(PricesTutorial.class,new PricesTutorialBehavior());
         behaviors.put(GridTutorial.class,new GridTutorialBehavior());
+        behaviors.put(Grid2Tutorial.class,new Grid2TutorialFullHintBehavior());
         behaviors.put(SymbolTutorial.class,new SymbolTutorialBehavior());
         return behaviors;
     }
@@ -232,7 +234,7 @@ public class Behaviors {
         Map<Class, Behavior> behaviors = new HashMap<>();
         behaviors.put(HomeScreen.class, new ClickTheStringBehavior(R.string.resources_nav_resources, 5000, "opened"));
         behaviors.put(ResourcesScreen.class, new ClickTheThingBehavior(R.id.textViewAbout, 500, "opened"));
-        behaviors.put(AboutScreen.class, new IdleBehavior(500, "opened"));
+        behaviors.put(AboutScreen.class, new IdleBehavior(2500, "opened"));
         return behaviors;
     }
 

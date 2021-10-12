@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -64,6 +65,7 @@ public abstract class Setup2Template extends StandardTemplate {
     protected TextView textViewPolicyLink;
     protected TextView textViewPolicy;
     protected TextView textViewError;
+    protected TextView textViewErrorLink;
 
     public Setup2Template(int firstDigitCount, int secondDigitCount, String header) {
         super(true,header,"");
@@ -101,7 +103,25 @@ public abstract class Setup2Template extends StandardTemplate {
         textViewError.setTextSize(16);
         textViewError.setTextColor(ViewUtil.getColor(R.color.red));
         textViewError.setVisibility(View.INVISIBLE);
-        content.addView(textViewError);
+
+        textViewErrorLink = new TextView(getContext());
+        textViewErrorLink.setTextSize(16);
+        textViewErrorLink.setTextColor(ViewUtil.getColor(R.color.red));
+        textViewErrorLink.setVisibility(View.INVISIBLE);
+        ViewUtil.underlineTextView(textViewErrorLink);
+        textViewErrorLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavigationManager.getInstance().open(new ContactScreen());
+            }
+        });
+
+        LinearLayout errorLayout = new LinearLayout(getContext());
+        errorLayout.setOrientation(LinearLayout.VERTICAL);
+        errorLayout.addView(textViewError);
+        errorLayout.addView(textViewErrorLink);
+
+        content.addView(errorLayout);
 
         setupEditText();
         content.addView(editText);
@@ -368,10 +388,25 @@ public abstract class Setup2Template extends StandardTemplate {
     public void hideError(){
         textViewError.setVisibility(View.INVISIBLE);
         textViewError.setText("");
+        textViewErrorLink.setVisibility(View.INVISIBLE);
+        textViewErrorLink.setText("");
     }
 
     public boolean isErrorShowing(){
         return textViewError.getVisibility()==View.VISIBLE;
+    }
+
+    public void showError(SetupError error){
+        buttonNext.setEnabled(false);
+        textViewError.setVisibility(View.VISIBLE);
+        textViewError.setText(error.string);
+        if(error.link != null) {
+            if (error.link.length() > 0) {
+                textViewErrorLink.setVisibility(View.VISIBLE);
+                textViewErrorLink.setText(Html.fromHtml(error.link));
+            }
+        }
+        onErrorShown();
     }
 
     public void showError(String error){
@@ -405,7 +440,16 @@ public abstract class Setup2Template extends StandardTemplate {
         }
     };
 
-    protected String parseForError(RestResponse response, boolean failed){
+    protected SetupError parseForError(RestResponse response, boolean failed){
+        SetupError error = new SetupError();
+        error.string = parseForErrorString(response,failed);
+        if(response.code==401 || response.code==406){
+            error.link = getResources().getString(R.string.login_error1_link);
+        }
+        return error;
+    }
+
+    protected String parseForErrorString(RestResponse response, boolean failed){
         int code = response.code;
         switch (code){
             case 400:
@@ -427,12 +471,13 @@ public abstract class Setup2Template extends StandardTemplate {
         return null;
     }
 
+
     protected RestClient.Listener registrationListener = new RestClient.Listener() {
         @Override
         public void onSuccess(RestResponse response) {
-            String errorString = parseForError(response,false);
+            SetupError error = parseForError(response,false);
             loadingDialog.dismiss();
-            if(errorString==null) {
+            if(error.string==null) {
                 String id = ((SetupPathData)Study.getCurrentSegmentData()).id;
                 Study.getParticipant().getState().id = id;
                 if(Config.REPORT_STUDY_INFO){
@@ -440,16 +485,21 @@ public abstract class Setup2Template extends StandardTemplate {
                 }
                 Study.openNextFragment();
             } else {
-                showError(errorString);
+                showError(error);
             }
         }
 
         @Override
         public void onFailure(RestResponse response) {
-            String errorString = parseForError(response,true);
-            showError(errorString);
+            SetupError error = parseForError(response,true);
+            showError(error);
             loadingDialog.dismiss();
         }
     };
+
+    class SetupError {
+        String string;
+        String link;
+    }
 
 }

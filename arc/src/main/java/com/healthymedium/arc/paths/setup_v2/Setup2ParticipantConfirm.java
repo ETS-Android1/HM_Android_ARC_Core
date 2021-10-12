@@ -6,13 +6,10 @@ import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.api.models.AuthDetails;
 import com.healthymedium.arc.core.Application;
-import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
-import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.paths.templates.SetupTemplate;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -88,9 +85,9 @@ public class Setup2ParticipantConfirm extends Setup2Template {
     RestClient.Listener authDetailsListener = new RestClient.Listener() {
         @Override
         public void onSuccess(RestResponse response) {
-            String errorString = parseForError(response,false);
-            if(errorString!=null) {
-                showError(errorString);
+            SetupError error = parseForError(response,false);
+            if(error.string!=null) {
+                showError(error);
                 loadingDialog.dismiss();
                 return;
             }
@@ -128,8 +125,8 @@ public class Setup2ParticipantConfirm extends Setup2Template {
 
         @Override
         public void onFailure(RestResponse response) {
-            String errorString = parseForError(response,true);
-            showError(errorString);
+            SetupError error = parseForError(response,true);
+            showError(error);
             loadingDialog.dismiss();
         }
     };
@@ -137,19 +134,19 @@ public class Setup2ParticipantConfirm extends Setup2Template {
     RestClient.Listener verificationCodeListener = new RestClient.Listener() {
         @Override
         public void onSuccess(RestResponse response) {
-            String errorString = parseForError(response,false);
+            SetupError error = parseForError(response,false);
             loadingDialog.dismiss();
-            if(errorString==null) {
+            if(error.string==null) {
                 Study.openNextFragment();
             } else {
-                showError(errorString);
+                showError(error);
             }
         }
 
         @Override
         public void onFailure(RestResponse response) {
-            String errorString = parseForError(response,true);
-            showError(errorString);
+            SetupError error = parseForError(response,true);
+            showError(error);
             loadingDialog.dismiss();
         }
     };

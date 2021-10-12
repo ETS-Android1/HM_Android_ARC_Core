@@ -59,8 +59,8 @@
 	<string name="availability_body">Ahora le haremos algunas preguntas que nos ayudarán a determinar cuándo enviarle las notificaciones.\n&lt;br />&lt;br />\n&lt;i>Solo recibirá notificaciones durante las horas en las que esté despierto. Tenga a bien establecer un horario de disponibilidad de 8 horas como mínimo.&lt;/i></string>
 	<string name="availability_start">¿A qué hora deberíamos &lt;b>iniciar&lt;/b> las notificaciones todos los días?</string>
 	<string name="availability_stop">¿A qué hora deberíamos &lt;b>suspender&lt;/b> las notificaciones todos los días?</string>
-	<string name="availability_minimum_error">Tenga a bien establecer un horario de disponibilidad de {HOURS} horas como mínimo.&lt;/i></string>
-	<string name="availability_maximum_error">Tenga a bien establecer un horario de disponibilidad de {HOURS} horas como máximo.&lt;/i></string>
+	<string name="availability_minimum_error">Tenga a bien establecer un horario de disponibilidad de {HOURS} horas como mínimo.</string>
+	<string name="availability_maximum_error">Tenga a bien establecer un horario de disponibilidad de {HOURS} horas como máximo.</string>
 	<string name="availability_confirm">¡Excelente! Solo le enviaremos notificaciones entre la/s &lt;b>{TIME1}&lt;/b> y la/s &lt;b>{TIME2}&lt;/b>.</string>
 	<string name="availability_change_linked">Cambiar horas</string>
 	<string name="availability_change_confirm">¡Excelente! A partir de mañana, solo le enviaremos notificaciones entre la/s &lt;b>{TIME1}&lt;/b> y la/s &lt;b>{TIME2}&lt;/b>.</string>
@@ -339,6 +339,7 @@
 	<string name="progress_endoftest_syncing">Un momento, por favor, mientras actualizamos sus ganancias...</string>
 	<string name="progress_endoftest_nosync">La sincronización está tardando más de lo normal. Consulte la pestaña Ganancias para ver sus totales actualizados.</string>
 	<string name="login_error1">Credenciales incorrectas de inicio de sesión</string>
+	<string name="login_error1_link"></string>
 	<string name="login_error2">Esta ID de ARC ya está inscrita en otro dispositivo.</string>
 	<string name="login_error3">Disculpe, nuestra aplicación está presentando problemas en estos momentos. Por favor intente de nuevo más tarde.</string>
 	<string name="login_error4">Identificación de ARC no concordante</string>

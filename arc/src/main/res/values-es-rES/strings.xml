@@ -339,6 +339,7 @@
 	<string name="progress_endoftest_syncing">Espere un momento mientras actualizamos sus ganancias...</string>
 	<string name="progress_endoftest_nosync">La sincronización tarda más de lo habitual. Consulte la pestaña Ingresos más adelante para ver sus totales actualizados.</string>
 	<string name="login_error1">Credenciales de inicio de sesión incorrectas</string>
+	<string name="login_error1_link"></string>
 	<string name="login_error2">Este ID de ARC ya se está utilizando en otro dispositivo.</string>
 	<string name="login_error3">Lo siento, estamos teniendo problemas con la aplicación en estos momentos. Por favor, vuelva a intentarlo más tarde.</string>
 	<string name="login_error4">Los ID de ARC no coinciden</string>

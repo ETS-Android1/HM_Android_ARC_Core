@@ -58,7 +58,7 @@ public class Grid2TutorialSkipMechanicBehavior extends Behavior {
         Capture.takeScreenshot(fragment, getClass().getSimpleName(), "test_opened");
 
 
-        UI.sleep(4000);
+        UI.sleep(10000);
         Capture.takeScreenshot(fragment, getClass().getSimpleName(), "tap_phone_box");
         UI.sleep(1000);
         onView(nthChildOf(withId(R.id.gridLayout), 6)).perform(ViewActions.click());
