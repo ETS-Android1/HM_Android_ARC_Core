@@ -309,6 +309,7 @@
 	<string name="grids_tutorial_vb_mech4">... dann tippen Sie auf &lt;b>Gegenstand entfernen&lt;/b>.</string>
 	<string name="grids_tutorial_vb_remove">Gegenstand entfernen</string>
 	<string name="grids_tutorial_vb_select">Wählen Sie den Gegenstand aus, der sich hier befand.</string>
+	<string name="grids_tutorial_vb_tap_locations">Tippen Sie auf die Stellen, an denen sich die Dinge befanden</string>
 	<string name="progress_schedule_header">Heutiger Fortschritte</string>
 	<string name="progress_baseline_notice">Vielen Dank, dass Sie heute die Übungssitzung abgeschlossen haben! &lt;b>Ihre Testwoche beginnt offiziell morgen.&lt;/b></string>
 	<string name="progress_practice_body1">Übungssitzung abgeschlossen!</string>

@@ -19,12 +19,15 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.widget.TextViewCompat;
 
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 
 public class HintPointer extends LinearLayout {
+
+    private String tag;
 
     private static final int SHOW_ABOVE = 1;
     private static final int SHOW_CENTER = 0;
@@ -116,6 +119,7 @@ public class HintPointer extends LinearLayout {
     private void init() {
         setWillNotDraw(false);
 
+        tag =  getClass().getSimpleName();
         target.addOnAttachStateChangeListener(attachStateChangeListener);
 
         radius = ViewUtil.dpToPx(16); // default to 16dp radius
@@ -314,6 +318,7 @@ public class HintPointer extends LinearLayout {
             @Override
             public void onClick(View v) {
                 v.setEnabled(false);
+                Log.d(getTag(),"onClick");
                 if(listener!=null) {
                     listener.onClick(v);
                 }
@@ -321,10 +326,17 @@ public class HintPointer extends LinearLayout {
         });
         border.setVisibility(VISIBLE);
         textViewButton.setVisibility(VISIBLE);
+
+        if(!hasLogDescription()){
+            String desc = textViewButton.getText().toString();
+            setLogDescription(desc);
+        }
     }
 
     public void setText(String text) {
         textView.setText(Html.fromHtml(text));
+        String desc = textView.getText().toString();
+        setLogDescription(desc);
     }
 
     public void hideText() {
@@ -342,6 +354,8 @@ public class HintPointer extends LinearLayout {
     }
 
     public void show() {
+        Log.d(getTag(),"onShow");
+
         if(getParent()!=null) {
            return; // single use only
         }
@@ -365,6 +379,8 @@ public class HintPointer extends LinearLayout {
     }
 
     public void dismiss() {
+        Log.d(getTag(),"onDismiss");
+
         if (dismissing) {
             return;
         }
@@ -391,14 +407,30 @@ public class HintPointer extends LinearLayout {
         }
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    private void setLogDescription(String desc) {
+        if(desc.length() > 10){
+            desc = desc.substring(0,10) + "...";
+        }
+        tag =  getClass().getSimpleName() + "(" + desc + ")";
+    }
+
+    private boolean hasLogDescription() {
+        return tag.contains("(");
+    }
+
     OnAttachStateChangeListener attachStateChangeListener = new OnAttachStateChangeListener() {
         @Override
         public void onViewAttachedToWindow(View v) {
-
+            Log.d(getTag(),"onViewAttachedToWindow");
         }
 
         @Override
         public void onViewDetachedFromWindow(View v) {
+            Log.d(getTag(),"onViewDetachedFromWindow");
             if(!dismissing) {
                 dismiss();
             }

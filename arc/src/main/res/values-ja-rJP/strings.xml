@@ -309,6 +309,7 @@
 	<string name="grids_tutorial_vb_mech4">...次に&lt;b>品物を削除&lt;/b>をタップします。</string>
 	<string name="grids_tutorial_vb_remove">品物を削除</string>
 	<string name="grids_tutorial_vb_select">ここにあった品物を選択してください。</string>
+	<string name="grids_tutorial_vb_tap_locations">品物の場所をタップしてください。</string>
 	<string name="progress_schedule_header">今日の進行状況</string>
 	<string name="progress_baseline_notice">今日の練習セッションを終了していただきありがとうございました！&lt;b>本番のテストを行う1週間は明日始まります。&lt;/b></string>
 	<string name="progress_practice_body1">練習セッション終了！</string>

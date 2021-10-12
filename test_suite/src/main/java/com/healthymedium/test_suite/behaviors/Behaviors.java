@@ -77,7 +77,6 @@ import com.healthymedium.test_suite.behaviors.tests.PriceTestMatchBehavior;
 import com.healthymedium.test_suite.behaviors.tests.SymbolTestBehavior;
 import com.healthymedium.test_suite.behaviors.tests.TestBeginBehavior;
 import com.healthymedium.test_suite.behaviors.tests.TestInfoBehavior;
-import com.healthymedium.test_suite.behaviors.tutorials.Grid2TutorialBehavior;
 import com.healthymedium.test_suite.behaviors.tutorials.GridTutorialBehavior;
 import com.healthymedium.test_suite.behaviors.tutorials.PricesTutorialBehavior;
 import com.healthymedium.test_suite.behaviors.tutorials.SymbolTutorialBehavior;
@@ -225,7 +224,6 @@ public class Behaviors {
 
         behaviors.put(PricesTutorial.class,new PricesTutorialBehavior());
         behaviors.put(GridTutorial.class,new GridTutorialBehavior());
-        behaviors.put(Grid2Tutorial.class, new Grid2TutorialBehavior());
         behaviors.put(SymbolTutorial.class,new SymbolTutorialBehavior());
         return behaviors;
     }

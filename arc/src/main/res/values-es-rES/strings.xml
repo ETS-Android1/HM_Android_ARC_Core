@@ -309,6 +309,7 @@
 	<string name="grids_tutorial_vb_mech4">...y luego toque &lt;b>Eliminar objeto&lt;/b>.</string>
 	<string name="grids_tutorial_vb_remove">Eliminar objeto</string>
 	<string name="grids_tutorial_vb_select">Seleccione el objeto que estaba aquí.</string>
+	<string name="grids_tutorial_vb_tap_locations">Toque en la ubicación de los artículos.</string>
 	<string name="progress_schedule_header">Progreso de hoy</string>
 	<string name="progress_baseline_notice">¡Gracias por completar la sesión de práctica hoy! &lt;b>Su semana de pruebas comienza oficialmente mañana.&lt;/b></string>
 	<string name="progress_practice_body1">¡Sesión de práctica completada!</string>

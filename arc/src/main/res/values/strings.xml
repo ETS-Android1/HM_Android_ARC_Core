@@ -309,6 +309,7 @@
 	<string name="grids_tutorial_vb_mech4">...then tap &lt;b>Remove Item&lt;/b>.</string>
 	<string name="grids_tutorial_vb_remove">Remove Item</string>
 	<string name="grids_tutorial_vb_select">Select the item that was here.</string>
+	<string name="grids_tutorial_vb_tap_locations">Tap on the locations of the items.</string>
 	<string name="progress_schedule_header">Today\'s Progress</string>
 	<string name="progress_baseline_notice">Thanks for completing the practice session today! &lt;b>Your testing week officially begins tomorrow.&lt;/b></string>
 	<string name="progress_practice_body1">Practice Session Complete!</string>

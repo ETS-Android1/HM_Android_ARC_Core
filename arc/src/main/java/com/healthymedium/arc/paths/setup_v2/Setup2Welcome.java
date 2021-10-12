@@ -3,12 +3,14 @@ package com.healthymedium.arc.paths.setup_v2;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.font.Fonts;
@@ -17,15 +19,16 @@ import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.paths.informative.AboutScreen;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
+import com.healthymedium.arc.ui.SizeAwareTextView;
 import com.healthymedium.arc.utilities.VersionUtil;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 public class Setup2Welcome extends BaseFragment {
 
     Button button;
-    TextView textViewHeader;
-    TextView textViewAboutApp;
-    TextView textViewPrivacyPolicy;
+    AppCompatTextView textViewHeader;
+    AppCompatTextView textViewAboutApp;
+    SizeAwareTextView textViewPrivacyPolicy;
     // TextView textViewAppName;
     TextView textViewVersion;
 
@@ -38,11 +41,13 @@ public class Setup2Welcome extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_setup_welcome, container, false);
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(Html.fromHtml(ViewUtil.getString(R.string.gen_welcome_key)));
+        ViewUtil.autosizeTextView(textViewHeader,10,26);
 
         // textViewAppName = view.findViewById(R.id.textViewAppName);
         // textViewAppName.setText(ViewUtil.getString(R.string.app_name)+" app");
 
         textViewAboutApp = view.findViewById(R.id.textViewAboutApp);
+        textViewAboutApp.setMaxLines(1);
         textViewAboutApp.setTypeface(Fonts.robotoBold);
         textViewAboutApp.setPaintFlags(textViewAboutApp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewAboutApp.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +59,7 @@ public class Setup2Welcome extends BaseFragment {
         });
 
         textViewPrivacyPolicy = view.findViewById(R.id.textViewPrivacyPolicy);
+        textViewPrivacyPolicy.setMaxLines(1);
         textViewPrivacyPolicy.setTypeface(Fonts.robotoBold);
         textViewPrivacyPolicy.setPaintFlags(textViewPrivacyPolicy.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +68,14 @@ public class Setup2Welcome extends BaseFragment {
                 Study.getPrivacyPolicy().show(getContext());
             }
         });
+        textViewPrivacyPolicy.setOnTextSizeChangedListener(new SizeAwareTextView.OnTextSizeChangedListener() {
+            @Override
+            public void onTextSizeChanged(SizeAwareTextView view, float px) {
+                textViewAboutApp.setTextSize(TypedValue.COMPLEX_UNIT_PX,px);
+            }
+        });
+        ViewUtil.autosizeTextView(textViewPrivacyPolicy,8,16);
+
 
         textViewVersion = view.findViewById(R.id.textViewVersion);
         String ver = "v"+VersionUtil.getAppVersionName();

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.ui.base.PointerDialog;
 import com.healthymedium.arc.utilities.ViewUtil;
@@ -47,6 +48,15 @@ public class Grid2ChoiceDialog extends PointerDialog {
                 }
                 if(selectable) {
                     int id = ((Grid2ChoiceView)v).getDrawableImageId();
+                    if(id==R.drawable.phone) {
+                        Log.d(getTag(),"onSelected(phone)");
+                    }
+                    if(id==R.drawable.key) {
+                        Log.d(getTag(),"onSelected(key)");
+                    }
+                    if(id==R.drawable.pen) {
+                        Log.d(getTag(),"onSelected(pen)");
+                    }
                     listener.onSelected(id);
                 }
                 selectable = false;
@@ -86,12 +96,15 @@ public class Grid2ChoiceDialog extends PointerDialog {
 
         if(image==R.drawable.phone) {
             choice = phone;
+            Log.d(getTag(),"disableChoice(phone)");
         }
         if(image==R.drawable.key) {
             choice = key;
+            Log.d(getTag(),"disableChoice(key)");
         }
         if(image==R.drawable.pen) {
             choice = pen;
+            Log.d(getTag(),"disableChoice(pen)");
         }
 
         if(choice==null){
@@ -108,6 +121,8 @@ public class Grid2ChoiceDialog extends PointerDialog {
         OnTouchListener removeImageTouchListener = new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                Log.d(getTag(),"removeItem");
+
                 if(event.getAction() != MotionEvent.ACTION_DOWN) {
                     return false;
                 }

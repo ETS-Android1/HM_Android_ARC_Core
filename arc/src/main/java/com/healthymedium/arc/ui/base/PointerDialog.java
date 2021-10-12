@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -112,6 +113,8 @@ public class PointerDialog extends LinearLayout {
     }
 
     public void show() {
+        Log.d(getTag(),"show");
+
         if(getParent()!=null) {
            return; // single use only
         }
@@ -128,6 +131,8 @@ public class PointerDialog extends LinearLayout {
     }
 
     public void dismiss() {
+        Log.d(getTag(),"dismiss");
+
         if (dismissing) {
             return;
         }
@@ -171,6 +176,10 @@ public class PointerDialog extends LinearLayout {
         drawingVariables.refresh(canvas.getHeight(), canvas.getWidth());
         background.draw(canvas);
         super.draw(canvas);
+    }
+
+    public String getTag() {
+        return getClass().getSimpleName();
     }
 
     private class DrawingVariables {
@@ -249,11 +258,12 @@ public class PointerDialog extends LinearLayout {
     OnAttachStateChangeListener attachStateChangeListener = new OnAttachStateChangeListener() {
         @Override
         public void onViewAttachedToWindow(View v) {
-
+            Log.d(getTag(),"onViewAttachedToWindow");
         }
 
         @Override
         public void onViewDetachedFromWindow(View v) {
+            Log.d(getTag().toString(),"onViewDetachedFromWindow");
             if(!dismissing) {
                 dismiss();
             }

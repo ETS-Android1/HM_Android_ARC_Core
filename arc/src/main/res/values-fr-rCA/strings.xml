@@ -309,6 +309,7 @@
 	<string name="grids_tutorial_vb_mech4">...puis touchez &lt;b>Retirer l’item&lt;/b>.</string>
 	<string name="grids_tutorial_vb_remove">Retirer l’item</string>
 	<string name="grids_tutorial_vb_select">Sélectionnez l’item qui était ici.</string>
+	<string name="grids_tutorial_vb_tap_locations">Appuyez sur l’emplacement des articles</string>
 	<string name="progress_schedule_header">Progès du jour</string>
 	<string name="progress_baseline_notice">Merci d\'avoir effectué la session d\'exercice aujourd\'hui! &lt;b>Votre semaine de tests commencera officiellement demain.&lt;/b></string>
 	<string name="progress_practice_body1">Session d\'exercices terminée!</string>

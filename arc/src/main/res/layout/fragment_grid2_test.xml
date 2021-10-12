@@ -203,7 +203,7 @@
         android:layout_marginBottom="2dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Tap on the location of each item"
+        android:text="@string/grids_tutorial_vb_tap_locations"
         android:textColor="@color/text"
         android:textSize="18dp" />
 

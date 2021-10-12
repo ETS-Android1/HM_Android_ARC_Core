@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
 import android.text.Html;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.ui.Button;
@@ -241,8 +241,8 @@ public class AltStandardTemplate extends BaseFragment {
     boolean scrollViewIsAtBottom(){
         View view = scrollView.getChildAt(scrollView.getChildCount() - 1);
         int diff = (view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY()));
-        //Log.i("scroll", "view.getBottom()="+view.getBottom()+" scrollView.getHeight()="+scrollView.getHeight()+" scrollView.getScrollY()=" + scrollView.getScrollY());
-        return (diff < 50);
+        Log.d(getSimpleTag(),"scroll - view.getBottom()="+view.getBottom()+" scrollView.getHeight()="+scrollView.getHeight()+" scrollView.getScrollY()=" + scrollView.getScrollY());
+        return (diff <= 0);
     }
 
     protected void disableScrollBehavior(){

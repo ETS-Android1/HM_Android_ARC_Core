@@ -7,7 +7,10 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.TextViewCompat;
+
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -104,6 +107,11 @@ public class ViewUtil {
     public static void underlineTextView(TextView textView){
         textView.setPaintFlags(textView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
+
+    public static void autosizeTextView(AppCompatTextView textView, int dpMin, int dpMax){
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(textView,ViewUtil.dpToPx(dpMin),ViewUtil.dpToPx(dpMax),1, TypedValue.COMPLEX_UNIT_PX);
+    }
+
 
     public static void setLineHeight(TextView textView, int dp)  {
         int lineHeight = dpToPx(dp);

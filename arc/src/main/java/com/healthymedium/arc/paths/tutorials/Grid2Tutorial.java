@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.healthymedium.analytics.Log;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
 import com.healthymedium.arc.library.R;
@@ -185,6 +186,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void setupStudySection() {
+        Log.d(getTag(),"setupStudySection");
         getGridView(3, 0).setImage(R.drawable.pen);
         getGridView(1, 1).setImage(R.drawable.phone);
         getGridView(2, 3).setImage(R.drawable.key);
@@ -237,7 +239,7 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     // Displays the letters layout and prompts the user to tap a specific letter F
     private void setupLetterLayout() {
-
+        Log.d(getTag(),"setupLetterLayout");
         getLetterView(0, 0).setF();
         getLetterView(0, 3).setF();
         getLetterView(1, 4).setF();
@@ -276,6 +278,8 @@ public class Grid2Tutorial extends TutorialTemplate {
                         int action = event.getAction();
                         switch (action) {
                             case MotionEvent.ACTION_DOWN:
+                                Log.d(getTag(),"first f tapped");
+
                                 getLetterView(3, 1).setOnTouchListener(null);
                                 pulsateF.dismiss();
                                 tapThisFHint.dismiss();
@@ -306,6 +310,8 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     // Responds to letter that are tapped, changes their color
     private void setupLetterStop() {
+        Log.d(getTag(),"setupLetterStop");
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -340,6 +346,8 @@ public class Grid2Tutorial extends TutorialTemplate {
 
 
     private void setSecondGridLayout() {
+        Log.d(getTag(),"setSecondGridLayout");
+
         gridTextView.setVisibility(View.VISIBLE);
         getGridView(3, 0).removeImage();
         getGridView(1, 1).removeImage();
@@ -387,6 +395,8 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     // Displays the grid recall test and associated hints/prompts
     private void setGridRecall() {
+        Log.d(getTag(),"setGridRecall");
+
         int size = gridLayout.getChildCount();
         for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
@@ -396,6 +406,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void disableGrids(Grid2BoxView exemption) {
+        Log.d(getTag(),"disableGrids");
+
         int size = gridLayout.getChildCount();
         for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
@@ -407,6 +419,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void enableGrids() {
+        Log.d(getTag(),"enableGrids");
+
         int size = gridLayout.getChildCount();
         for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
@@ -415,6 +429,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void disableLetters() {
+        Log.d(getTag(),"disableLetters");
+
         int size = letterLayout.getChildCount();
         for (int i = 0; i < size; i++) {
             Grid2LetterView view = (Grid2LetterView) letterLayout.getChildAt(i);
@@ -436,7 +452,9 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
 
-    private void removeSelection(@DrawableRes int id) {
+    private boolean removeSelection(@DrawableRes int id) {
+        Log.d(getTag(),"removeSelection");
+
         int size = gridLayout.getChildCount();
         for (int i = 0; i < size; i++) {
             Grid2BoxView view = (Grid2BoxView) gridLayout.getChildAt(i);
@@ -447,9 +465,10 @@ public class Grid2Tutorial extends TutorialTemplate {
             if (image == id) {
                 view.removeImage();
                 view.setSelected(false);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     private void updateSelections() {
@@ -501,28 +520,66 @@ public class Grid2Tutorial extends TutorialTemplate {
 
     // Determines which items to highlight for the remind me hints in the grid recall
     private void remindMeHighlights() {
+        Log.d(getTag(),"remindMeHighlights");
+
         int targetCount = 0;
         final HintHighlighter remindMeTapHighlight = new HintHighlighter(getActivity());
         register(remindMeTapHighlight);
 
         remindMeTapHighlight.addTarget(progressBar);
 
+        Grid2BoxView phone = getGridView(1, 1);
+        boolean phoneTargeted = false;
+        Grid2BoxView pen = getGridView(3, 0);
+        boolean penTargeted = false;
+        Grid2BoxView key = getGridView(2, 3);
+        boolean keyTargeted = false;
+
         if (!phoneSelected) {
-            targetCount++;
-            Grid2BoxView phone = getGridView(1, 1);
-            remindMeTapHighlight.addPulsingTarget(phone, 8);
+            if(phone.getImage()==0) {
+                remindMeTapHighlight.addPulsingTarget(phone, 8);
+                phoneTargeted = true;
+            } else if(!penTargeted && pen.getImage()==0){
+                remindMeTapHighlight.addPulsingTarget(pen, 8);
+                penTargeted = true;
+            } else if(!keyTargeted && key.getImage()==0) {
+                remindMeTapHighlight.addPulsingTarget(key, 8);
+                keyTargeted = true;
+            }
         }
+
         if (!penSelected) {
-            targetCount++;
-            Grid2BoxView pen = getGridView(3, 0);
-            remindMeTapHighlight.addPulsingTarget(pen, 8);
+            if(pen.getImage()==0) {
+                remindMeTapHighlight.addPulsingTarget(pen, 8);
+                penTargeted = true;
+            } else if(!keyTargeted && key.getImage()==0){
+                remindMeTapHighlight.addPulsingTarget(key, 8);
+                keyTargeted = true;
+            } else if(!phoneTargeted && phone.getImage()==0) {
+                remindMeTapHighlight.addPulsingTarget(phone, 8);
+                phoneTargeted = true;
+            }
         }
+
         if (!keySelected) {
-            targetCount++;
-            Grid2BoxView key = getGridView(2, 3);
-            remindMeTapHighlight.addPulsingTarget(key, 8);
+            if(key.getImage()==0) {
+                remindMeTapHighlight.addPulsingTarget(key, 8);
+                keyTargeted = true;
+            } else if(!penTargeted && pen.getImage()==0){
+                remindMeTapHighlight.addPulsingTarget(pen, 8);
+                penTargeted = true;
+            } else if(!phoneTargeted && phone.getImage()==0) {
+                remindMeTapHighlight.addPulsingTarget(phone, 8);
+                phoneTargeted = true;
+            }
+
         }
-        if (targetCount > 0) {
+
+        Log.d(getTag(),"phoneTargeted = "+phoneTargeted);
+        Log.d(getTag(),"penTargeted = "+penTargeted);
+        Log.d(getTag(),"keyTargeted = "+keyTargeted);
+
+        if (phoneTargeted || penTargeted || keyTargeted) {
             boxViewListener = new Grid2BoxView.Listener() {
                 @Override
                 public void onSelected(Grid2BoxView view) {
@@ -542,13 +599,14 @@ public class Grid2Tutorial extends TutorialTemplate {
                 mechanicsHint.dismiss();
             }
 
-            boolean deselecting =
+            final boolean deselecting =
                     (view.getImage() == R.drawable.phone && phoneSelected) ||
                             (view.getImage() == R.drawable.key && keySelected) ||
                             (view.getImage() == R.drawable.pen && penSelected);
 
             if (!deselecting && phoneSelected && keySelected && penSelected) {
                 userMovedOrRemoved = true;
+                Log.d(getTag(),"userMovedOrRemoved = true");
             }
 
             if (dialog != null) {
@@ -582,8 +640,11 @@ public class Grid2Tutorial extends TutorialTemplate {
             dialog.setListener(new Grid2ChoiceDialog.Listener() {
                 @Override
                 public void onSelected(int image) {
-
-                    removeSelection(image);
+                    boolean removed = removeSelection(image);
+                    if(deselecting || removed){
+                        userMovedOrRemoved = true;
+                        Log.d(getTag(),"userMovedOrRemoved = true");
+                    }
                     view.setImage(image);
                     updateSelections();
 
@@ -593,9 +654,12 @@ public class Grid2Tutorial extends TutorialTemplate {
                     }
 
                     if (!firstGridSelected) {
+                        Log.d(getTag(),"firstGridSelected = true");
                         firstGridSelected = true;
                         otherItemsHint.show();
                         othersReady = true;
+                        Log.d(getTag(),"othersReady = true");
+
                         handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
                     }
 
@@ -609,6 +673,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                 @Override
                 public void onRemove() {
                     userMovedOrRemoved = true;
+                    Log.d(getTag(),"userMovedOrRemoved = true");
 
                     view.removeImage();
                     view.setSelected(false);
@@ -640,6 +705,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     Runnable remindMeRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(getTag(),"remindMeRunnable");
             if (otherItemsHint != null) {
                 otherItemsHint.dismiss();
             }
@@ -650,6 +716,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     Runnable firstRecallStepRunnable = new Runnable() {
         @Override
         public void run() {
+            Log.d(getTag(),"firstRecallStepRunnable");
+
             final Grid2BoxView boxView = getGridView(1, 1);
 
             final HintPointer recallHint = new HintPointer(getActivity(), getGridView(1, 1), true, false);
@@ -688,9 +756,11 @@ public class Grid2Tutorial extends TutorialTemplate {
                                     enableGrids();
 
                                     firstGridSelected = true;
+                                    Log.d(getTag(),"firstGridSelected = true");
 
                                     otherItemsHint.show();
                                     othersReady = true;
+                                    Log.d(getTag(),"othersReady = true");
                                     handler.postDelayed(remindMeRunnable, REMIND_ME_HINT_DELAY);
 
                                 }
@@ -733,8 +803,15 @@ public class Grid2Tutorial extends TutorialTemplate {
     };
 
     private void checkForMechanicsHint() {
+        Log.d(getTag(),"checkForMechanicsHint");
+
         if (!mechanicsHintShown) {
             mechanicsHintShown = true;
+            userMovedOrRemoved = true;
+
+            if (remindMeHint != null) {
+                remindMeHint.dismiss();
+            }
 
             if (otherItemsHint != null) {
                 otherItemsHint.dismiss();
@@ -754,6 +831,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void launchMechanicsTutorial() {
+        Log.d(getTag(),"launchMechanicsTutorial");
+
         handler.removeCallbacks(remindMeRunnable);
         gridHintTextView.setVisibility(View.VISIBLE);
         continueButton.setVisibility(View.GONE);
@@ -783,6 +862,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void mechanicsTutorial1() {
+        Log.d(getTag(),"mechanicsTutorial1");
+
         disableGrids(null);
         final HintPointer hint = new HintPointer(getActivity(), getGridView(4, 2), true);
         hint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_mech2));
@@ -801,6 +882,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void mechanicsTutorial2() {
+        Log.d(getTag(),"mechanicsTutorial2");
+
         final Grid2BoxView boxView = getGridView(1, 3);
         final HintPointer hint = new HintPointer(getActivity(), boxView, true, false, true);
         hint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox4));
@@ -828,7 +911,9 @@ public class Grid2Tutorial extends TutorialTemplate {
                 dialog.setListener(new Grid2ChoiceDialog.Listener() {
                     @Override
                     public void onSelected(int image) {
-                        removeSelection(image);
+                        if(removeSelection(image)){
+                            userMovedOrRemoved = true;
+                        }
                         boxView.setImage(image);
                         if(mechanicsHint!=null){
                             mechanicsHint.dismiss();
@@ -871,6 +956,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void mechanicsTutorial3() {
+        Log.d(getTag(),"mechanicsTutorial3");
+
         final Grid2BoxView boxView = getGridView(1, 3);
         boxView.setSelectable(true);
 
@@ -937,6 +1024,8 @@ public class Grid2Tutorial extends TutorialTemplate {
     }
 
     private void mechanicsTutorial4() {
+        Log.d(getTag(),"mechanicsTutorial4");
+
         final Grid2BoxView boxView = getGridView(1, 3);
         boxView.setSelected(false);
         boxView.removeImage();
