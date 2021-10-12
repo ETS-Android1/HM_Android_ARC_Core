@@ -8,12 +8,16 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.widget.TextViewCompat;
 
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -49,7 +53,7 @@ public class HintPointer extends LinearLayout {
 
     private View border;
     private View spacer;
-    private TextView textView;
+    private AppCompatTextView textView;
     private TextView textViewButton;
 
     private ViewGroup parent;
@@ -121,7 +125,10 @@ public class HintPointer extends LinearLayout {
         layoutParams.setMargins(dp44,0,dp44,0);
         setLayoutParams(layoutParams);
 
-        textView = new TextView(getContext());
+        textView = new AppCompatTextView(getContext());
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1));
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(textView,ViewUtil.dpToPx(10),ViewUtil.dpToPx(18),1, TypedValue.COMPLEX_UNIT_PX);
+
         textView.setPadding(dp16,dp16,dp16,dp16);
         textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textView.setTypeface(Fonts.roboto);
@@ -138,7 +145,7 @@ public class HintPointer extends LinearLayout {
 
         textViewButton = new TextView(getContext());
         textViewButton.setPadding(dp16,dp8,dp16,dp16);
-
+        textViewButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         textViewButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textViewButton.setTypeface(Fonts.robotoBold);
         ViewUtil.underlineTextView(textViewButton);

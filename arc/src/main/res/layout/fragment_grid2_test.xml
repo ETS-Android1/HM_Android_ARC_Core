@@ -214,7 +214,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="28dp"
-        android:text="CONTINUE"
+        android:text="@string/button_next"
         android:visibility="gone"
         tools:visibility="visible"/>
 

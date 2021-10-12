@@ -108,7 +108,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         gridHintTextView.setVisibility(View.INVISIBLE);
 
         gridTextView = grids.findViewById(R.id.tapGridText);
-        gridTextView.setText(Html.fromHtml("Place each item in its location<br>from part one."));
+        gridTextView.setText(Html.fromHtml(ViewUtil.getString(R.string.grids_tutorial_vb_place)));
 
         letters = inflater.inflate(R.layout.fragment_grid2_letters, container, false);
         letterLayout = letters.findViewById(R.id.gridLayout);
@@ -364,10 +364,10 @@ public class Grid2Tutorial extends TutorialTemplate {
         });
 
         otherItemsHint = new HintPointer(getActivity(), bottomAnchor,false,true);
-        otherItemsHint.setText("Great! Now, place the other two items on the grid.");
+        otherItemsHint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_place_other));
         register(otherItemsHint);
 
-        secondItemsHint.setText("In part three, place each item in its location from part one.");
+        secondItemsHint.setText(ViewUtil.getString(R.string.popup_tutorial_selectboxV2));
         secondItemsHint.getShadow().addTarget(progressBar);
         secondItemsHint.addButton(ViewUtil.getString(R.string.popup_tutorial_ready), new View.OnClickListener() {
             @Override
@@ -716,7 +716,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                             pulsatePhone.addPulsingTarget(dialog.getPhoneView(), 8);
                             pulsatePhone.show();
 
-                            choiceSelectHint.setText("Now, tap the cell phone to place it in the selected box.");
+                            choiceSelectHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapsymbol));
                             choiceSelectHint.show();
 
                         }
@@ -724,7 +724,7 @@ public class Grid2Tutorial extends TutorialTemplate {
 
                 }
             };
-            recallHint.setText("<b>Hint:</b> The cell phone was located here. Tap this box.");
+            recallHint.setText(ViewUtil.getString(R.string.popup_tutorial_cellbox));
             pulsateGridItem.addPulsingTarget(boxView, 8);
             pulsateGridItem.addTarget(progressBar);
             pulsateGridItem.show();
@@ -741,7 +741,7 @@ public class Grid2Tutorial extends TutorialTemplate {
             }
 
             mechanicsHint = new HintPointer(getActivity(), bottomAnchor,false,true);
-            mechanicsHint.setText("Change your mind? Select a different item to replace, or tap <b>Remove Item</b> to clear.");
+            mechanicsHint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_change_mind));
             mechanicsHint.addButton(ViewUtil.getString(R.string.popup_gotit), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -769,8 +769,8 @@ public class Grid2Tutorial extends TutorialTemplate {
         getGridView(1, 1).setImage(R.drawable.phone);
 
         final HintPointer hint = new HintPointer(getActivity(), gridLayout, true);
-        hint.setText("<b>Nice work!</b><br>It looks like you didn’t need any help with placement, but we want to make sure we still teach you how to swap and remove items before you move onto the actual test.");
-        hint.addButton("Show Me", new View.OnClickListener() {
+        hint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_mech1));
+        hint.addButton(ViewUtil.getString(R.string.button_showme), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hint.dismiss();
@@ -785,7 +785,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     private void mechanicsTutorial1() {
         disableGrids(null);
         final HintPointer hint = new HintPointer(getActivity(), getGridView(4, 2), true);
-        hint.setText("If you change your mind after placing an item, you can move it. Let’s try it.");
+        hint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_mech2));
         hint.addButton(ViewUtil.getString(R.string.button_okay), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -803,7 +803,7 @@ public class Grid2Tutorial extends TutorialTemplate {
     private void mechanicsTutorial2() {
         final Grid2BoxView boxView = getGridView(1, 3);
         final HintPointer hint = new HintPointer(getActivity(), boxView, true, false, true);
-        hint.setText("First, tap a different box.");
+        hint.setText(ViewUtil.getString(R.string.popup_tutorial_tapbox4));
         hint.getShadow().addPulsingTarget(boxView, 8);
         hint.getShadow().addTarget(progressBar);
         register(hint);
@@ -852,8 +852,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                     @Override
                     public void run() {
                         mechanicsHint = new HintPointer(getActivity(), bottomAnchor, false,true,true);
-                        mechanicsHint.setText("Then, tap the cell phone button to place it in the new box.");
-
+                        mechanicsHint.setText(ViewUtil.getString(R.string.popup_tutorial_tapsymbol2));
                         mechanicsHint.getShadow().addTarget(dialog, 8, 8);
                         mechanicsHint.getShadow().addTarget(progressBar);
                         mechanicsHint.getShadow().addTarget(getGridView(1, 3),8,8);
@@ -876,7 +875,7 @@ public class Grid2Tutorial extends TutorialTemplate {
         boxView.setSelectable(true);
 
         final HintPointer hintGreat = new HintPointer(getActivity(), boxView, true, false, true);
-        hintGreat.setText("Great! If you would like to remove an item from a box, first tap that box...");
+        hintGreat.setText(ViewUtil.getString(R.string.grids_tutorial_vb_mech3));
         hintGreat.getShadow().addPulsingTarget(boxView, 8);
         hintGreat.getShadow().addTarget(progressBar);
         register(hintGreat);
@@ -908,7 +907,7 @@ public class Grid2Tutorial extends TutorialTemplate {
                         TextView textView = dialog.getRemoveItemView();
 
                         final HintPointer hint = new HintPointer(getActivity(), textView, true,false,true);
-                        hint.setText("...then tap <b>Remove Item</b>.");
+                        hint.setText(ViewUtil.getString(R.string.grids_tutorial_vb_mech4));
 
                         hint.getShadow().addTarget(textView, 8, 8);
                         hint.getShadow().addTarget(progressBar);
@@ -946,8 +945,8 @@ public class Grid2Tutorial extends TutorialTemplate {
             @Override
             public void run() {
                 final HintPointer hint = new HintPointer(getActivity(),bottomAnchor,false,true);
-                hint.setText("Perfect! You've got it.");
-                hint.addButton("Finish Tutorial", new View.OnClickListener() {
+                hint.setText(ViewUtil.getString(R.string.popup_tutorial_perfect));
+                hint.addButton(ViewUtil.getString(R.string.button_finishtutorial), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         hint.setVisibility(View.INVISIBLE);

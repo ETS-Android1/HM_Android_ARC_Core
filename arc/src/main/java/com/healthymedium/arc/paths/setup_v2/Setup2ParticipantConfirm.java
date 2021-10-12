@@ -20,6 +20,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class Setup2ParticipantConfirm extends Setup2Template {
 
+    public static boolean DEBUG_USE_SETUP_RATER = false;
+
     CharSequence previousCharacterSequence = "";
 
     public Setup2ParticipantConfirm(int firstDigitCount, int secondDigitCount) {
@@ -53,6 +55,19 @@ public class Setup2ParticipantConfirm extends Setup2Template {
         super.onNextRequested();
 
         if(Config.REST_BLACKHOLE) {
+            PathSegment path = Study.getCurrentSegment();
+
+            if(DEBUG_USE_SETUP_RATER){
+                if(!fragmentExists(path,Setup2AuthRater.class)){
+                    path.fragments.add(new Setup2AuthRater(6));
+                }
+            }else{
+                if(!fragmentExists(path,Setup2AuthConfirm.class)){
+                    path.fragments.add(new Setup2AuthConfirm(6));
+                }
+            }
+
+
             Study.getInstance().openNextFragment();
             return;
         }

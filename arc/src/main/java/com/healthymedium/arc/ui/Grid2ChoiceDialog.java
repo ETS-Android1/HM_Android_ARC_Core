@@ -69,7 +69,7 @@ public class Grid2ChoiceDialog extends PointerDialog {
         pen.setOnTouchListener(touchListener);
 
         textViewGridDialog = view.findViewById(R.id.textViewGridDialog);
-        textViewGridDialog.setText("Select the item that was here");
+        textViewGridDialog.setText(ViewUtil.getString(R.string.grids_tutorial_vb_select));
 
         divider = view.findViewById(R.id.divider);
         divider.setVisibility(View.GONE);
