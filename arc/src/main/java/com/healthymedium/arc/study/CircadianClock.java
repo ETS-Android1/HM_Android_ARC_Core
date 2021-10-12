@@ -219,6 +219,12 @@ public class CircadianClock {
                     .replace("a.m.","AM")
                     .replace("p.m.","PM");
             data.wake = data.wake
+                    .replace("a. m.","AM")
+                    .replace("p. m.","PM");
+            data.bed = data.bed
+                    .replace("a. m.","AM")
+                    .replace("p. m.","PM");
+            data.wake = data.wake
                     .replace("午前","AM")
                     .replace("午後","PM");
             data.bed = data.bed

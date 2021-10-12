@@ -23,7 +23,7 @@
 	<string name="bysigning_key">Al iniciar sesión, expresa su acuerdo con nuestra &lt;b>política de confidencialidad&lt;/b>.</string>
 	<string name="privacy_linked">Política de confidencialidad</string>
 	<string name="about_linked">Sobre esta aplicación</string>
-	<string name="login_enter_raterID"></string>
+	<string name="login_enter_raterID">Por favor, introduzca aquí debajo su &lt;b>ID de evaluador:&lt;/b></string>
 	<string name="login_enter_ARCID">Ahora, introduzca aquí debajo su &lt;b>ID de ARC&lt;/b>:</string>
 	<string name="login_confirm_ARCID">Para confirmarlo, &lt;b>vuelva a introducir su ID de ARC:&lt;/b></string>
 	<string name="login_problems_linked">&lt;b>¿Problemas para iniciar sesión?&lt;/b></string>
@@ -359,6 +359,7 @@
 	<string name="button_showme"></string>
 	<string name="button_finishtutorial"></string>
 	<string name="button_returntohome">VOLVER A PANTALLA DE INICIO</string>
+	<string name="button_choosetime">Seleccionar hora</string>
 	<string name="popup_scroll">Desplácese para seleccionar</string>
 	<string name="popup_showmore">MOSTRAR MÁS</string>
 	<string name="popup_begin">Empecemos la primera prueba.</string>

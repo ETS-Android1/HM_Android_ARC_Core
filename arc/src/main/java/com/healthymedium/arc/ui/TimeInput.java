@@ -22,6 +22,7 @@ public class TimeInput extends FrameLayout {
 
     boolean restrictTime = false;
     boolean valid = true;
+    boolean blockListener = false;
 
     List<Window> validWindows;
     LocalTime blockoutBegin;
@@ -79,6 +80,9 @@ public class TimeInput extends FrameLayout {
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                if (blockListener) {
+                    return;
+                }
                 if(listener!=null){
                     listener.onTimeChanged();
                 }
@@ -113,7 +117,7 @@ public class TimeInput extends FrameLayout {
 
     }
 
-    private void setValidity(boolean valid){
+    public void setValidity(boolean valid){
         if(this.valid!=valid){
             this.valid = valid;
 
@@ -126,10 +130,17 @@ public class TimeInput extends FrameLayout {
         }
     }
 
-    public void setTime(LocalTime localTime) {
+    public void setTime(LocalTime localTime, boolean blockListener) {
         this.time = localTime;
+        this.blockListener = blockListener;
         timePicker.setHour(localTime.getHourOfDay());
         timePicker.setMinute(localTime.getMinuteOfHour()/15);
+        this.blockListener = false;
+
+    }
+
+    public void setTime(LocalTime localTime) {
+        setTime(localTime,false);
     }
 
     public LocalTime getTime(){

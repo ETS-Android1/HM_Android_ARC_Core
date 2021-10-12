@@ -23,7 +23,7 @@
 	<string name="bysigning_key">サインインすることにより、あなたは私たちの&lt;b>個人情報保護方針&lt;/b>に同意したことになります。</string>
 	<string name="privacy_linked">個人情報保護方針</string>
 	<string name="about_linked">このアプリについて</string>
-	<string name="login_enter_raterID"></string>
+	<string name="login_enter_raterID">あなたの &lt;b>評価者ID&lt;/b> を下に入力してください。</string>
 	<string name="login_enter_ARCID">では、あなたの&lt;b>ARC ID&lt;/b>を下に入力してください。</string>
 	<string name="login_confirm_ARCID">確認のために、あなたの&lt;b>ARC IDを再度入力&lt;/b>してください。</string>
 	<string name="login_problems_linked">&lt;b>ログインできない場合&lt;/b></string>
@@ -359,6 +359,7 @@
 	<string name="button_showme"></string>
 	<string name="button_finishtutorial"></string>
 	<string name="button_returntohome">ホームに戻る</string>
+	<string name="button_choosetime">時間を選択してください</string>
 	<string name="popup_scroll">スクロールして選択してください</string>
 	<string name="popup_showmore">さらに表示</string>
 	<string name="popup_begin">最初のテストを開始しましょう。</string>
