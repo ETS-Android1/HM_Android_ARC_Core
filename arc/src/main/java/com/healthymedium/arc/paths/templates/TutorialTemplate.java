@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.util.Log;
 import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.hints.HintHighlighter;
 import com.healthymedium.arc.hints.HintPointer;
@@ -143,6 +144,7 @@ public abstract class TutorialTemplate extends BaseFragment {
                 closeButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Log.d(getTag(),"closeButton pressed");
                         closeButton.setEnabled(false);
                         for(Handler handler : handlers) {
                             handler.removeCallbacksAndMessages(null);
@@ -162,6 +164,7 @@ public abstract class TutorialTemplate extends BaseFragment {
 
     // Display the hints for the progress bar and quit button
     protected void showProgressTutorial(final String tag, final Runnable nextSection) {
+        Log.d(getTag(),"showProgressTutorial");
         welcomeHighlight.addTarget(progressView, 10, 2);
         welcomeHint.setText(ViewUtil.getString(R.string.popup_tutorial_welcome));
 
@@ -183,6 +186,8 @@ public abstract class TutorialTemplate extends BaseFragment {
     }
 
     protected void showCloseTutorial(final String tag, final Runnable nextSection) {
+        Log.d(getTag(),"showCloseTutorial");
+
         quitHighlight.addTarget(closeButton, 50, 10);
         quitHint.setText(ViewUtil.getString(R.string.popup_tutorial_quit));
 
@@ -235,6 +240,8 @@ public abstract class TutorialTemplate extends BaseFragment {
 
     // Displays the tutorial complete screen
     protected void showComplete() {
+        Log.d(getTag(),"showComplete");
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -270,6 +277,8 @@ public abstract class TutorialTemplate extends BaseFragment {
     }
 
     protected void exit(){
+        Log.d(getTag(),"exit");
+
         loadingView.animate()
                 .setDuration(400)
                 .translationY(0);
@@ -285,6 +294,8 @@ public abstract class TutorialTemplate extends BaseFragment {
     }
 
     protected void incrementProgress(){
+        Log.d(getTag(),"incrementProgress");
+
         progress += getProgressIncrement();
         progressView.setProgress(progress,true);
     }

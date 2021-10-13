@@ -57,6 +57,9 @@ public class LocaleResource {
         if(countryKey.equals("419")) {
             return false;
         }
+        if(countryKey.isEmpty() || languageKey.isEmpty()) {
+            return false;
+        }
         if(map.isEmpty()){
             return false;
         }

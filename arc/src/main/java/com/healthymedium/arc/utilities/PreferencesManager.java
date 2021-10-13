@@ -1,5 +1,6 @@
 package com.healthymedium.arc.utilities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -136,6 +137,16 @@ public class PreferencesManager {
 
     public void putLong(String key, long value) {
         sharedPreferences.edit().putLong(key, value).apply();
+    }
+
+    // Immediately commit preferences ONLY in instances where it is time-sensitive.
+    @SuppressLint("ApplySharedPref")
+    public void putStringImmediately(String key, String value) {
+        if(value==null){
+            Log.i(tag,"invalid string, failed to save");
+            throw new RuntimeException("tried to save a null string");
+        }
+        sharedPreferences.edit().putString(key, value).commit();
     }
 
     public void putString(String key, String value) {

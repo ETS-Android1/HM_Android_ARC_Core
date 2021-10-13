@@ -1,6 +1,10 @@
 package com.healthymedium.arc.paths.questions;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -84,8 +88,8 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
             }
         }
 
-        PreferencesManager.getInstance().putString(Locale.TAG_LANGUAGE, language);
-        PreferencesManager.getInstance().putString(Locale.TAG_COUNTRY, country);
+        PreferencesManager.getInstance().putStringImmediately(Locale.TAG_LANGUAGE, language);
+        PreferencesManager.getInstance().putStringImmediately(Locale.TAG_COUNTRY, country);
 
         return response;
     }
@@ -100,7 +104,22 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
     @Override
     protected void onNextRequested() {
         onDataCollection();
-        NavigationManager.getInstance().open(new SplashScreen());
+        triggerAppRestart();
+    }
+
+    /**
+     * An app restart is necessary for forced localization to take effect.
+     * See this blog post:
+     * https://proandroiddev.com/change-language-programmatically-at-runtime-on-android-5e6bc15c758
+     */
+    public void triggerAppRestart() {
+        Context context = getContext();
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+        ComponentName componentName = intent.getComponent();
+        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+        context.startActivity(mainIntent);
+        Runtime.getRuntime().exit(0);
     }
 
     static List<String> initOptions() {

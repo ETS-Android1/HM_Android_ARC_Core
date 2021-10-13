@@ -319,6 +319,24 @@ public class Scheduler {
         return state;
     }
 
+    public boolean fixCorruptedSchedule(Participant participant) {
+        if(participant.state.testCycles==null) {
+            return true;
+        }
+        for (TestCycle cycle : participant.state.testCycles) {
+            if(!cycle.hasStarted()) {
+                for(TestDay day : cycle.getTestDays()) {
+                    for (TestSession session : day.getTestSessions()) {
+                        session.setScheduledDate(null);
+                        session.setPrescribedTime(null);
+                    }
+                }
+            }
+        }
+        scheduleTests(DateTime.now(),participant);
+        return !participant.isScheduleCorrupted();
+    }
+
     void logCycle(TestCycle cycle) {
         String string = "printing cycle\n";
         string += "--------------------\n";

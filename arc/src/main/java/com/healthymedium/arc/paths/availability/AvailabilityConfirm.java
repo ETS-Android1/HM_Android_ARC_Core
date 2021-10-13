@@ -76,7 +76,7 @@ public class AvailabilityConfirm extends BaseFragment {
 
     public AvailabilityConfirm(int minWakeTime, int maxWakeTime, boolean reschedule, boolean allowBack) {
         this.allowBack = allowBack;
-        stringButton = ViewUtil.getString(R.string.button_next);
+        stringButton = ViewUtil.getString(R.string.button_okay);
 
         this.minWakeTime = minWakeTime;
         this.maxWakeTime = maxWakeTime;
@@ -323,7 +323,7 @@ public class AvailabilityConfirm extends BaseFragment {
     }
 
     protected void onBackRequested() {
-        Log.i("StandardTemplate","onBackRequested");
+        Log.i(getSimpleTag(),"onBackRequested");
         Study.getInstance().openPreviousFragment();
     }
 

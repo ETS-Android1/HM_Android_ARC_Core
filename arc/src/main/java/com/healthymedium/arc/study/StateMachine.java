@@ -530,11 +530,11 @@ public class StateMachine {
         rhythm = clock.getRhythm(weekday);
         LocalTime bedTime = rhythm.getBedTime();
 
-
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_sleep), res.getString(R.string.chronotype_disclaim1), bedTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_wake), res.getString(R.string.chronotype_disclaim2), wakeTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_sleep), res.getString(R.string.chronotype_disclaim1), bedTime));
-        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_wake), res.getString(R.string.chronotype_disclaim2), wakeTime));
+        String buttonText = ViewUtil.getString(R.string.button_choosetime);
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_sleep), res.getString(R.string.chronotype_disclaim1), bedTime,buttonText));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workdays_wake), res.getString(R.string.chronotype_disclaim2), wakeTime,buttonText));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_sleep), res.getString(R.string.chronotype_disclaim1), bedTime,buttonText));
+        fragments.add(new QuestionTime(true, res.getString(R.string.chronotype_workfree_wake), res.getString(R.string.chronotype_disclaim2), wakeTime,buttonText));
 
         PathSegment segment = new PathSegment(fragments,ChronotypePathData.class);
         enableTransition(segment,true);

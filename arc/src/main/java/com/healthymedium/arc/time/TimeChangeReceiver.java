@@ -20,7 +20,7 @@ public class TimeChangeReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i("TimeChangeReceiver", "onReceive");
+        Log.i("TimeChangeReceiver", "onReceive("+intent.getAction()+")");
 
         if(Study.getStateMachine().isCurrentlyInTestPath()) {
             return;

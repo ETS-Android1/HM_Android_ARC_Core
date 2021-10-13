@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.text.Html;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -15,12 +16,18 @@ import android.widget.LinearLayout;
 
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.widget.TextViewCompat;
+
+import android.util.Log;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 
 public class HintPointer extends LinearLayout {
+
+    private String tag;
 
     private static final int SHOW_ABOVE = 1;
     private static final int SHOW_CENTER = 0;
@@ -49,7 +56,7 @@ public class HintPointer extends LinearLayout {
 
     private View border;
     private View spacer;
-    private TextView textView;
+    private AppCompatTextView textView;
     private TextView textViewButton;
 
     private ViewGroup parent;
@@ -112,6 +119,7 @@ public class HintPointer extends LinearLayout {
     private void init() {
         setWillNotDraw(false);
 
+        tag =  getClass().getSimpleName();
         target.addOnAttachStateChangeListener(attachStateChangeListener);
 
         radius = ViewUtil.dpToPx(16); // default to 16dp radius
@@ -120,8 +128,12 @@ public class HintPointer extends LinearLayout {
         LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(dp44,0,dp44,0);
         setLayoutParams(layoutParams);
+        setBaselineAligned(false);
 
-        textView = new TextView(getContext());
+        textView = new AppCompatTextView(getContext());
+        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,1));
+        TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(textView,ViewUtil.dpToPx(10),ViewUtil.dpToPx(18),1, TypedValue.COMPLEX_UNIT_PX);
+
         textView.setPadding(dp16,dp16,dp16,dp16);
         textView.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textView.setTypeface(Fonts.roboto);
@@ -138,7 +150,7 @@ public class HintPointer extends LinearLayout {
 
         textViewButton = new TextView(getContext());
         textViewButton.setPadding(dp16,dp8,dp16,dp16);
-
+        textViewButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         textViewButton.setTextAlignment(TEXT_ALIGNMENT_CENTER);
         textViewButton.setTypeface(Fonts.robotoBold);
         ViewUtil.underlineTextView(textViewButton);
@@ -307,6 +319,7 @@ public class HintPointer extends LinearLayout {
             @Override
             public void onClick(View v) {
                 v.setEnabled(false);
+                Log.d(getTag(),"onClick");
                 if(listener!=null) {
                     listener.onClick(v);
                 }
@@ -314,10 +327,17 @@ public class HintPointer extends LinearLayout {
         });
         border.setVisibility(VISIBLE);
         textViewButton.setVisibility(VISIBLE);
+
+        if(!hasLogDescription()){
+            String desc = textViewButton.getText().toString();
+            setLogDescription(desc);
+        }
     }
 
     public void setText(String text) {
         textView.setText(Html.fromHtml(text));
+        String desc = textView.getText().toString();
+        setLogDescription(desc);
     }
 
     public void hideText() {
@@ -335,6 +355,8 @@ public class HintPointer extends LinearLayout {
     }
 
     public void show() {
+        Log.d(getTag(),"onShow");
+
         if(getParent()!=null) {
            return; // single use only
         }
@@ -358,6 +380,8 @@ public class HintPointer extends LinearLayout {
     }
 
     public void dismiss() {
+        Log.d(getTag(),"onDismiss");
+
         if (dismissing) {
             return;
         }
@@ -384,14 +408,30 @@ public class HintPointer extends LinearLayout {
         }
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    private void setLogDescription(String desc) {
+        if(desc.length() > 10){
+            desc = desc.substring(0,10) + "...";
+        }
+        tag =  getClass().getSimpleName() + "(" + desc + ")";
+    }
+
+    private boolean hasLogDescription() {
+        return tag.contains("(");
+    }
+
     OnAttachStateChangeListener attachStateChangeListener = new OnAttachStateChangeListener() {
         @Override
         public void onViewAttachedToWindow(View v) {
-
+            Log.d(getTag(),"onViewAttachedToWindow");
         }
 
         @Override
         public void onViewDetachedFromWindow(View v) {
+            Log.d(getTag(),"onViewDetachedFromWindow");
             if(!dismissing) {
                 dismiss();
             }
