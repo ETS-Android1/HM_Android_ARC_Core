@@ -62,7 +62,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
         const val JSON_UPLOAD_FILE_NAME = "$DATA_FILE_NAME.json"
         const val PNG_UPLOAD_FILE_NAME = "$DATA_FILE_NAME.png"
 
-        public const val MigratedIdentifier = "Migrated"
         public const val AvailabilityIdentifier = "Availability"
         public const val TestScheduleIdentifier = "TestSchedule"
         public const val CompletedTestsIdentifier = "CompletedTests"
@@ -133,10 +132,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 listener?.onFailure(createFailureRestResponse(Throwable(it)))
                 return@loadHistoryFromBridge
             }
-            // TODO: mdephillips 9/20/21 after we validate ALL users have migrated to bridge,
-            // TODO: mdephillips 9/20/21 we are safe to remove this call in an app update
-            val json = gson.toJson(MigratedStatus(true))
-            uploadReport(MigratedIdentifier, json, listener)
+            listener?.onSuccess(createSuccessRestResponse())
         }
     }
 

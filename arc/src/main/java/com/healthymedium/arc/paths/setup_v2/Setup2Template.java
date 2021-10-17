@@ -490,7 +490,7 @@ public abstract class Setup2Template extends StandardTemplate {
         }
     };
 
-    class SetupError {
+    public static class SetupError {
         String string;
         String link;
     }
