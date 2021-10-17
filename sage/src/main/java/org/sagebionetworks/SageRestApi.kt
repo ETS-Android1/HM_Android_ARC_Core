@@ -326,11 +326,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
         // No-op, this is handled by submitTest
     }
 
-    private fun createAppTypeResult(): AnswerResultBase<String>? {
-        return AnswerResultBase("app",
-                Instant.now(), Instant.now(), "HASD", AnswerResultType.STRING)
-    }
-
     private fun uploadJson(taskId: String, json: String, startTime: Instant,
                            optionalResults: List<AnswerResultBase<Any>>? = null) {
 
@@ -350,9 +345,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 mutableListOf(), mutableListOf())
 
         taskResultBase = taskResultBase.addStepHistory(jsonFileResult)
-        createAppTypeResult()?.let {
-            taskResultBase = taskResultBase.addStepHistory(it)
-        }
         optionalResults?.forEach {
             taskResultBase = taskResultBase.addStepHistory(it)
         }
@@ -381,9 +373,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 mutableListOf(), mutableListOf())
 
         taskResultBase = taskResultBase.addStepHistory(fileResult)
-        createAppTypeResult()?.let {
-            taskResultBase = taskResultBase.addStepHistory(it)
-        }
         optionalResults?.forEach {
             taskResultBase = taskResultBase.addStepHistory(it)
         }
