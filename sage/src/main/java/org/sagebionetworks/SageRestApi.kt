@@ -40,10 +40,11 @@ import rx.subscriptions.CompositeSubscription
 import java.io.File
 import java.util.*
 
-class SageRestApi(val reportManager: ParticipantRecordManager,
+open class SageRestApi(val reportManager: ParticipantRecordManager,
                   val authManager: AuthenticationManager,
                   val taskResultUploader: TaskResultUploader,
-                  val uploadManager: UploadManager):
+                  val uploadManager: UploadManager,
+                  val earningsController: SageEarningsController):
         RestClient<Api>(null), ReportUploadListener {
 
     companion object {
@@ -78,7 +79,6 @@ class SageRestApi(val reportManager: ParticipantRecordManager,
     private val compositeDisposable = CompositeDisposable()
     private val compositeSubscription = CompositeSubscription()
 
-    private val earningsController = SageEarningsController()
     private val completedTestManager = CompletedTestsSingletonReport(this)
 
     fun createFailureRestResponse(error: Throwable): RestResponse {
