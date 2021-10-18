@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(PreferencesManager.getInstance().contains(Locale.TAG_LANGUAGE) || !Config.CHOOSE_LOCALE) {
-            NavigationManager.getInstance().open(new SplashScreen());
+            Study.getStateMachine().showSplashScreen();
             return;
         }
 

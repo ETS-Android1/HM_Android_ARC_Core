@@ -7,6 +7,7 @@ import android.util.Log;
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.tests.CognitiveTest;
 import com.healthymedium.arc.core.Config;
+import com.healthymedium.arc.core.SplashScreen;
 import com.healthymedium.arc.path_data.Grid2TestPathData;
 import com.healthymedium.arc.paths.availability.AvailabilityBed;
 import com.healthymedium.arc.paths.availability.AvailabilityConfirm;
@@ -99,6 +100,10 @@ public class StateMachine {
 
     public StateMachine() {
 
+    }
+
+    public void showSplashScreen() {
+        NavigationManager.getInstance().open(new SplashScreen());
     }
 
     protected void enableTransition(PathSegment segment, boolean animateEntry){

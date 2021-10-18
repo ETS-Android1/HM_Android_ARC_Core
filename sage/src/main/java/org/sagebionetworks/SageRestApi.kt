@@ -1,7 +1,41 @@
+/*
+ * BSD 3-Clause License
+ *
+ * Copyright 2021  Sage Bionetworks. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,
+ * are permitted provided that the following conditions are met:
+ *
+ * 1.  Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ *
+ * 2.  Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation and/or
+ * other materials provided with the distribution.
+ *
+ * 3.  Neither the name of the copyright holder(s) nor the names of any contributors
+ * may be used to endorse or promote products derived from this software without
+ * specific prior written permission. No license is granted to the trademarks of
+ * the copyright holders even if such marks are included in this software.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 package org.sagebionetworks.research.sagearc
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -9,9 +43,12 @@ import com.healthymedium.arc.api.RestClient
 import com.healthymedium.arc.api.RestResponse
 import com.healthymedium.arc.api.models.*
 import com.healthymedium.arc.core.Application
+import com.healthymedium.arc.core.Device
+import com.healthymedium.arc.study.Participant
 import com.healthymedium.arc.study.Study
 import com.healthymedium.arc.study.TestSession
 import com.healthymedium.arc.utilities.CacheManager
+import com.healthymedium.arc.utilities.PreferencesManager
 import hu.akarnokd.rxjava.interop.RxJavaInterop
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
@@ -19,41 +56,47 @@ import io.reactivex.schedulers.Schedulers
 import io.swagger.annotations.Api
 import org.joda.time.DateTimeZone
 import org.sagebionetworks.bridge.android.manager.AuthenticationManager
+import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider
 import org.sagebionetworks.bridge.android.manager.ParticipantRecordManager
 import org.sagebionetworks.bridge.android.manager.UploadManager
-import org.sagebionetworks.bridge.rest.model.Message
-import org.sagebionetworks.bridge.rest.model.ReportData
-import org.sagebionetworks.bridge.rest.model.ReportDataList
-import org.sagebionetworks.bridge.rest.model.UserSessionInfo
+import org.sagebionetworks.bridge.rest.model.*
+import org.sagebionetworks.migration.SecureTokenGenerator
 import org.sagebionetworks.research.domain.Schema
 import org.sagebionetworks.research.domain.result.AnswerResultType
 import org.sagebionetworks.research.domain.result.implementations.AnswerResultBase
 import org.sagebionetworks.research.domain.result.implementations.FileResultBase
 import org.sagebionetworks.research.domain.result.implementations.TaskResultBase
+import org.sagebionetworks.research.sagearc.SageRestApi.HmToSageMigration.Companion.migrationDataKey
 import org.sagebionetworks.research.sageresearch.extensions.toJodaLocalDate
 import org.sagebionetworks.research.sageresearch.extensions.toThreeTenInstant
 import org.sagebionetworks.research.sageresearch.extensions.toThreeTenLocalDate
 import org.sagebionetworks.research.sageresearch_app_sdk.TaskResultUploader
 import org.threeten.bp.Instant
+import rx.Single
 import rx.android.schedulers.AndroidSchedulers
+import rx.exceptions.CompositeException
 import rx.subscriptions.CompositeSubscription
 import java.io.File
 import java.util.*
 
 open class SageRestApi(val reportManager: ParticipantRecordManager,
-                  val authManager: AuthenticationManager,
-                  val taskResultUploader: TaskResultUploader,
-                  val uploadManager: UploadManager,
-                  val earningsController: SageEarningsController):
+                       val authManager: AuthenticationManager,
+                       val taskResultUploader: TaskResultUploader,
+                       val uploadManager: UploadManager,
+                       val earningsController: SageEarningsController):
         RestClient<Api>(null), ReportUploadListener {
 
     companion object {
         var LOG_TAG = SageRestApi::class.java.simpleName
 
-        val SIGNATURE_TASK_IDENTIFIER = "Signature"
-        val TEST_SESSION_TASK_IDENTIFIER = "TestSession"
-        val STUDY_PERIOD_SCHEDULE_TASK_IDENTIFIER = "StudyPeriodSchedule"
-        val WAKE_SLEEP_TASK_IDENTIFIER = "WakeSleep"
+        const val SIGNATURE_TASK_IDENTIFIER = "Signature"
+        const val TEST_SESSION_TASK_IDENTIFIER = "TestSession"
+        const val STUDY_PERIOD_SCHEDULE_TASK_IDENTIFIER = "StudyPeriodSchedule"
+        const val WAKE_SLEEP_TASK_IDENTIFIER = "WakeSleep"
+
+        const val ATTRIBUTE_SIGN_IN_TOKEN = "SIGN_IN_TOKEN"
+        const val ATTRIBUTE_IS_MIGRATED = "IS_MIGRATED"
+        const val ATTRIBUTE_VALUE_TRUE = "true"
 
         const val JSON_MIME_CONTENT_TYPE = "application/json"
         const val PNG_MIME_CONTENT_TYPE = "image/png"
@@ -492,7 +535,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
         uploadReport(reportId, json, null)
     }
 
-    private fun getSingletonReport(reportId: String, listener: (json: String?, error: String?) -> Unit) {
+    protected fun getSingletonReport(reportId: String, listener: (json: String?, error: String?) -> Unit) {
         val start = reportSingletonLocalDate.toJodaLocalDate().minusDays(2)
         val end = reportSingletonLocalDate.toJodaLocalDate().plusDays(2)
         compositeSubscription.add(
@@ -507,9 +550,371 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                             listener.invoke(null, t.localizedMessage)
                         })
     }
-}
 
-/**
- * Used to mark the user as migrated (a.k.a signed into bridge and off HM server)
- */
-data class MigratedStatus(var status: Boolean = false)
+    /**
+     * @return true if the user needs to migrate from HM to Sage bridge server, false otherwise
+     */
+    public fun userNeedsToMigrate(): Boolean {
+        val dataMigration = loadMigrationState()
+        // We were in the middle of a migration, when something went wrong, continue
+        if (dataMigration != null) {
+            return true
+        }
+        return HmToSageMigration.userNeedsToMigrate(Study.getParticipant(),
+                BridgeManagerProvider.getInstance().accountDao.externalId)
+    }
+
+    public fun migrateUserToSageBridge(completionListener: MigrationCompletedListener) {
+        val dataMigration = loadMigrationState() ?:
+            MigrationData.initial(Study.getParticipant().state.id, Device.getId())
+        migrateUser(completionListener, dataMigration)
+    }
+
+    /**
+     * Migrating existing users
+     * A user is existing if they have an Arc ID, a site location, and a Device ID.
+     *
+     * When the HM user opens the app after updating to Sage's app,
+     * they will not have their account created yet with their Arc ID as their External ID.
+     * Instead, the migration code will have created an External ID that is their Device ID
+     * and the password for this account will also be their Device ID.
+     *
+     * The migration code marks this user with the test_user data group,
+     * has their user attribute IS_MIGRATED set to false,
+     * and has populated the account with that user’s data.
+     */
+    class HmToSageMigration {
+        companion object {
+            val migrationDataKey = "migrationDataKey"
+            val migrationSteps = 10
+
+            public fun userNeedsToMigrate(participant: Participant?, externalId: String?): Boolean {
+                if (participant == null ||
+                        participant.state == null ||
+                        participant.state.id == null) {
+                    return false
+                }
+                val arcId = participant.state.id
+                // A user needs to migrate, if they have previously been assigned an Arc ID,
+                // But they are not signed into Bridge with their External ID equal to their Arc ID.
+                return arcId != externalId
+            }
+        }
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public fun saveMigrationStateImmediately(data: MigrationData) {
+        PreferencesManager.getInstance().putStringImmediately(migrationDataKey, gson.toJson(data))
+    }
+
+    public fun loadMigrationState(): MigrationData? {
+        val dataJson = PreferencesManager.getInstance().getString(migrationDataKey, null)
+        dataJson?.let {
+            return gson.fromJson(dataJson, MigrationData::class.java)
+        }
+        return null
+    }
+
+    private fun saveAndContinueMigration(completionListener: MigrationCompletedListener,
+                                         newMigration: MigrationData) {
+        Handler(Looper.getMainLooper()).postDelayed({
+            saveMigrationStateImmediately(newMigration)
+            migrateUser(completionListener, newMigration)
+        }, 100) // Wait a 100 milliseconds for Bridge SDK to finish its moves
+    }
+
+    private fun migrationError(completionListener: MigrationCompletedListener, errorStr: String) {
+        Log.e(LOG_TAG, errorStr)
+        completionListener.failure(errorStr)
+    }
+
+    public fun migrateUser(completionListener: MigrationCompletedListener,
+                           migration: MigrationData) {
+
+        var progressCtr = 0
+
+        // First step of migration, sign-in to using device-id and save user attributes
+        progressCtr += 1
+        if (migration.studyId == null || migration.attributes == null) {
+            completionListener.progressUpdate(progressCtr)
+            val what = "signing in with device-id "
+            Log.i(LOG_TAG, what)
+            compositeSubscription.add(
+                    authManager.signInWithExternalId(migration.deviceId, migration.deviceId)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ userSessionInfo: UserSessionInfo? ->
+                                saveAndContinueMigration(completionListener, migration.copy(
+                                        studyId = userSessionInfo?.externalIds?.keys?.firstOrNull(),
+                                        attributes = userSessionInfo?.attributes ?: mapOf()))
+                            }) { t: Throwable ->
+                                migrationError(completionListener,
+                                        "Error $what ${t.localizedMessage}")
+                            })
+            return
+        }
+
+        // Next step of migration, load the Completed Tests user report
+        progressCtr += 1
+        if (migration.completedTestJson == null) {
+            completionListener.progressUpdate(progressCtr)
+            val what = "getting CompletedTestsIdentifier report "
+            Log.i(LOG_TAG, what)
+            getSingletonReport(CompletedTestsIdentifier) { json, error ->
+                error?.let {
+                    completionListener.failure("Error $what $it")
+                    return@getSingletonReport
+                }
+                saveAndContinueMigration(completionListener, migration.copy(
+                        completedTestJson = json ?: ""))
+            }
+            return
+        }
+
+        // Next step of migration, load the test sessions schedules user report
+        progressCtr += 1
+        if (migration.sessionScheduleJson == null) {
+            completionListener.progressUpdate(progressCtr)
+            val what = "getting TestScheduleIdentifier report "
+            Log.i(LOG_TAG, what)
+            getSingletonReport(TestScheduleIdentifier) { json, error ->
+                error?.let {
+                    completionListener.failure("Error $what $it")
+                    return@getSingletonReport
+                }
+                saveAndContinueMigration(completionListener, migration.copy(
+                        sessionScheduleJson = json ?: ""))
+            }
+            return
+        }
+
+        // Next step of migration, load the wake sleep schedule user report
+        progressCtr += 1
+        if (migration.wakeSleepScheduleJson == null) {
+            completionListener.progressUpdate(progressCtr)
+            val what = "getting AvailabilityIdentifier report "
+            Log.i(LOG_TAG, what)
+            getSingletonReport(AvailabilityIdentifier) { json, error ->
+                error?.let {
+                    completionListener.failure("Error $what $it")
+                    return@getSingletonReport
+                }
+                saveAndContinueMigration(completionListener, migration.copy(
+                        wakeSleepScheduleJson = json ?: ""))
+            }
+            return
+        }
+
+        // Next step is to mark the device-id user as migrated
+        progressCtr += 1
+        if (migration.isMigrated == null) {
+            completionListener.progressUpdate(progressCtr)
+            val bridgeUser = StudyParticipant()
+            val attributes = migration.attributes.toMutableMap()
+            attributes[ATTRIBUTE_IS_MIGRATED] = ATTRIBUTE_VALUE_TRUE
+            bridgeUser.attributes = attributes
+
+            val what = "marking Device ID user as migrated "
+            Log.i(LOG_TAG, what)
+            compositeSubscription.add(
+                    reportManager.updateParticipantRecord(bridgeUser)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ userSessionInfo: UserSessionInfo? ->
+                                saveAndContinueMigration(completionListener, migration.copy(
+                                        isMigrated = true))
+                            }) { t: Throwable ->
+                                migrationError(completionListener ,
+                                        "Error $what ${t.localizedMessage}")
+                            })
+            return
+        }
+
+        // Next step is to sign out of Bridge
+        progressCtr += 1
+        if (migration.isSignedOutOfDeviceId == null) {
+            completionListener.progressUpdate(progressCtr)
+            val what = "signing out of Device ID user "
+            Log.i(LOG_TAG, what)
+            compositeSubscription.add(
+                    authManager.signOut()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                saveAndContinueMigration(completionListener, migration.copy(
+                                        isSignedOutOfDeviceId = true))
+                            }) { t: Throwable ->
+                                // If we aren't signed in anyways, we can consider this step complete
+                                if (t.localizedMessage == "Not signed in") {
+                                    saveAndContinueMigration(completionListener, migration.copy(
+                                            isSignedOutOfDeviceId = true))
+                                    return@subscribe
+                                }
+                                migrationError(completionListener ,
+                                        "Error $what ${t.localizedMessage}")
+                            })
+            return
+        }
+
+        // Next step is to create a new user on Bridge with Arc ID, and a secure random password
+        progressCtr += 1
+        if (migration.newUserPassword == null) {
+            completionListener.progressUpdate(progressCtr)
+            val signUp = SignUp()
+            val password = SecureTokenGenerator.BRIDGE_PASSWORD.nextBridgePassword()
+            signUp.password = password
+            signUp.sharingScope = SharingScope.ALL_QUALIFIED_RESEARCHERS
+
+            val attributes = migration.attributes.toMutableMap()
+            attributes[ATTRIBUTE_SIGN_IN_TOKEN] = password
+            attributes[ATTRIBUTE_IS_MIGRATED] = "" // remove migration status
+            signUp.attributes = attributes
+
+            val arcId = migration.arcId
+            signUp.externalIds = mapOf(Pair(migration.studyId, arcId))
+
+            val what = "signing up Arc ID user "
+            Log.i(LOG_TAG, what)
+            compositeSubscription.add(
+                    authManager.signUp(signUp)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({
+                                saveAndContinueMigration(completionListener, migration.copy(
+                                        newUserPassword = password))
+                            }) { t: Throwable ->
+                                migrationError(completionListener ,
+                                        "Error $what ${t.localizedMessage}")
+                            })
+            return
+        }
+
+        // First step of migration, sign-in to using device-id and save user attributes
+        progressCtr += 1
+        if (migration.isNewUserAuthenticated == null) {
+            val arcId = migration.arcId
+            val password = migration.newUserPassword
+            completionListener.progressUpdate(progressCtr)
+            val what = "signing in with Arc ID "
+            Log.i(LOG_TAG, what)
+            compositeSubscription.add(
+                    authManager.signInWithExternalId(arcId, password)
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe({ userSessionInfo: UserSessionInfo? ->
+                                saveAndContinueMigration(completionListener, migration.copy(
+                                        isNewUserAuthenticated = true))
+                            }) { t: Throwable ->
+                                migrationError(completionListener,
+                                        "Error $what ${t.localizedMessage}")
+                            })
+            return
+        }
+
+        // Next step is to upload the completed test user report
+        progressCtr += 1
+        if (migration.completedTestUploaded == null) {
+            completionListener.progressUpdate(progressCtr)
+
+            val what = "uploading CompletedTestsIdentifier report "
+            Log.i(LOG_TAG, what)
+            uploadReport(CompletedTestsIdentifier, migration.completedTestJson, object: Listener {
+                override fun onSuccess(response: RestResponse?) {
+                    // If there is data we should parse it and send it to the earnings controller
+                    if (migration.completedTestJson.isNotEmpty()) {
+                        val newList = gson.fromJson(migration.completedTestJson,
+                                CompletedTestList::class.java)
+                        // This automatically syncs the completed tests to bridge and saves it locally
+                        completedTestManager.setCurrentList(newList)
+                    }
+                    saveAndContinueMigration(completionListener, migration.copy(
+                            completedTestUploaded = true
+                    ))
+                }
+
+                override fun onFailure(response: RestResponse?) {
+                    migrationError(completionListener ,
+                            "Error $what ${response?.errors.toString()}")
+                }
+            })
+            return
+        }
+
+        // Next step is to upload the test session schedule report
+        progressCtr += 1
+        if (migration.sessionScheduleUploaded == null) {
+            completionListener.progressUpdate(progressCtr)
+
+            val what = "uploading TestScheduleIdentifier report "
+            Log.i(LOG_TAG, what)
+            uploadReport(TestScheduleIdentifier, migration.sessionScheduleJson, object: Listener {
+                override fun onSuccess(response: RestResponse?) {
+                    saveAndContinueMigration(completionListener, migration.copy(
+                            sessionScheduleUploaded = true
+                    ))
+                }
+
+                override fun onFailure(response: RestResponse?) {
+                    migrationError(completionListener ,
+                            "Error $what ${response?.errors.toString()}")
+                }
+            })
+            return
+        }
+
+        // Last step is to upload the test session schedule report
+        progressCtr += 1
+        if (migration.wakeSleepScheduleUploaded == null) {
+            completionListener.progressUpdate(progressCtr)
+
+            val what = "uploading AvailabilityIdentifier report "
+            Log.i(LOG_TAG, what)
+            uploadReport(AvailabilityIdentifier, migration.wakeSleepScheduleJson, object: Listener {
+                override fun onSuccess(response: RestResponse?) {
+                    saveAndContinueMigration(completionListener, migration.copy(
+                            wakeSleepScheduleUploaded = true
+                    ))
+                }
+
+                override fun onFailure(response: RestResponse?) {
+                    migrationError(completionListener ,
+                            "Error $what in ${response?.errors.toString()}")
+                }
+            })
+            return
+        }
+
+        // Remove traces of successful migration
+        PreferencesManager.getInstance().removeImmediately(migrationDataKey)
+        // We are done with migration!
+        completionListener.success()
+    }
+
+    public interface MigrationCompletedListener {
+        public fun progressUpdate(progress: Int)
+        public fun success()
+        public fun failure(errorString: String)
+    }
+
+    public data class MigrationData(
+            val arcId: String,
+            val deviceId: String,
+            val studyId: String?,
+            val attributes: Map<String, String>?,
+            val completedTestJson: String?,
+            val sessionScheduleJson: String?,
+            val wakeSleepScheduleJson: String?,
+            val isMigrated: Boolean?,
+            val isSignedOutOfDeviceId: Boolean?,
+            val newUserPassword: String?,
+            val isNewUserAuthenticated: Boolean?,
+            val completedTestUploaded: Boolean?,
+            val sessionScheduleUploaded: Boolean?,
+            val wakeSleepScheduleUploaded: Boolean?) {
+
+        companion object {
+            fun initial(arcId: String, deviceId: String): MigrationData {
+                return MigrationData(arcId, deviceId,
+                        null, null, null,
+                        null, null, null,
+                        null, null, null,
+                        null, null, null)
+            }
+        }
+    }
+}
