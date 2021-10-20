@@ -649,8 +649,10 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     }
 
     private fun migrationError(completionListener: MigrationCompletedListener, errorStr: String) {
+        val arcID = fixParticipantId(Study.getParticipant().state.id)
+        val deviceId = Device.getId()
         Log.e(LOG_TAG, errorStr)
-        completionListener.failure(errorStr)
+        completionListener.failure("$errorStr\n$arcID\n$deviceId")
     }
 
     public fun migrateUser(completionListener: MigrationCompletedListener,
