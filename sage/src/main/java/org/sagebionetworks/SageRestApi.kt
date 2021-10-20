@@ -37,8 +37,10 @@ import android.graphics.Bitmap
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.google.common.base.Strings.repeat
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.google.gson.internal.LinkedTreeMap
 import com.healthymedium.arc.api.RestClient
 import com.healthymedium.arc.api.RestResponse
 import com.healthymedium.arc.api.models.*
@@ -54,6 +56,7 @@ import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.swagger.annotations.Api
+import org.apache.commons.codec.binary.StringUtils
 import org.joda.time.DateTimeZone
 import org.sagebionetworks.bridge.android.manager.AuthenticationManager
 import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider
@@ -66,15 +69,14 @@ import org.sagebionetworks.research.domain.result.AnswerResultType
 import org.sagebionetworks.research.domain.result.implementations.AnswerResultBase
 import org.sagebionetworks.research.domain.result.implementations.FileResultBase
 import org.sagebionetworks.research.domain.result.implementations.TaskResultBase
+import org.sagebionetworks.research.sagearc.SageRestApi.HmToSageMigration.Companion.fixParticipantId
 import org.sagebionetworks.research.sagearc.SageRestApi.HmToSageMigration.Companion.migrationDataKey
 import org.sagebionetworks.research.sageresearch.extensions.toJodaLocalDate
 import org.sagebionetworks.research.sageresearch.extensions.toThreeTenInstant
 import org.sagebionetworks.research.sageresearch.extensions.toThreeTenLocalDate
 import org.sagebionetworks.research.sageresearch_app_sdk.TaskResultUploader
 import org.threeten.bp.Instant
-import rx.Single
 import rx.android.schedulers.AndroidSchedulers
-import rx.exceptions.CompositeException
 import rx.subscriptions.CompositeSubscription
 import java.io.File
 import java.util.*
@@ -88,6 +90,9 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
 
     companion object {
         var LOG_TAG = SageRestApi::class.java.simpleName
+
+        // The length of all Arc IDs
+        const val PARTICIPANT_ID_LENGTH = 6
 
         const val SIGNATURE_TASK_IDENTIFIER = "Signature"
         const val TEST_SESSION_TASK_IDENTIFIER = "TestSession"
@@ -498,7 +503,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     private fun parseCompletedTests(json: String, data: ExistingData) {
         val completed = gson.fromJson(json, CompletedTestList::class.java)
                 ?: CompletedTestList(listOf())
-        completedTestManager.mergeInList(completed)
+        completedTestManager.setCurrentList(completed)
         earningsController.completedTests = completedTestManager.current.completed
     }
 
@@ -543,7 +548,12 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ reports: ReportDataList? ->
                             Log.i(LOG_TAG, "Successful GET for $reportId on thread ${Thread.currentThread()}")
-                            val json = (reports?.items?.firstOrNull()?.data as? String)
+                            // This is how the JSON is stored when uploaded by the iOS/Android app
+                            var json = (reports?.items?.firstOrNull()?.data as? String)
+                            // This is how the JSON will show up if edited through Bridge
+                            (reports?.items?.firstOrNull()?.data as? LinkedTreeMap<*, *>)?.let {
+                                json = gson.toJson(it)
+                            }
                             listener.invoke(json, null)
                         }) { t: Throwable ->
                             Log.e(LOG_TAG, "Failed to GET $reportId from bridge ${t.localizedMessage}")
@@ -565,8 +575,9 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     }
 
     public fun migrateUserToSageBridge(completionListener: MigrationCompletedListener) {
+        val arcId = fixParticipantId(Study.getParticipant().state.id)
         val dataMigration = loadMigrationState() ?:
-            MigrationData.initial(Study.getParticipant().state.id, Device.getId())
+            MigrationData.initial(arcId, Device.getId())
         migrateUser(completionListener, dataMigration)
     }
 
@@ -594,10 +605,24 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                         participant.state.id == null) {
                     return false
                 }
-                val arcId = participant.state.id
+                val arcId = fixParticipantId(participant.state.id)
                 // A user needs to migrate, if they have previously been assigned an Arc ID,
                 // But they are not signed into Bridge with their External ID equal to their Arc ID.
                 return arcId != externalId
+            }
+
+            /**
+             * @param participantId raw participant ID from HM data model file
+             * this may be any length 0 to 6
+             * @return the participant ID with a length of 6, with leading "0"s added
+             */
+            public fun fixParticipantId(participantId: String): String {
+                if (participantId.length >= PARTICIPANT_ID_LENGTH) {
+                    return participantId.substring(0, PARTICIPANT_ID_LENGTH)
+                }
+                val zerosToAdd: Int = PARTICIPANT_ID_LENGTH - participantId.length
+                val zerosPrefix: String = repeat("0", zerosToAdd)
+                return zerosPrefix + participantId
             }
         }
     }
@@ -722,7 +747,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                                 saveAndContinueMigration(completionListener, migration.copy(
                                         isMigrated = true))
                             }) { t: Throwable ->
-                                migrationError(completionListener ,
+                                migrationError(completionListener,
                                         "Error $what ${t.localizedMessage}")
                             })
             return
@@ -747,7 +772,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                                             isSignedOutOfDeviceId = true))
                                     return@subscribe
                                 }
-                                migrationError(completionListener ,
+                                migrationError(completionListener,
                                         "Error $what ${t.localizedMessage}")
                             })
             return
@@ -779,7 +804,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                                 saveAndContinueMigration(completionListener, migration.copy(
                                         newUserPassword = password))
                             }) { t: Throwable ->
-                                migrationError(completionListener ,
+                                migrationError(completionListener,
                                         "Error $what ${t.localizedMessage}")
                             })
             return
@@ -813,7 +838,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
 
             val what = "uploading CompletedTestsIdentifier report "
             Log.i(LOG_TAG, what)
-            uploadReport(CompletedTestsIdentifier, migration.completedTestJson, object: Listener {
+            uploadReport(CompletedTestsIdentifier, migration.completedTestJson, object : Listener {
                 override fun onSuccess(response: RestResponse?) {
                     // If there is data we should parse it and send it to the earnings controller
                     if (migration.completedTestJson.isNotEmpty()) {
@@ -821,6 +846,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                                 CompletedTestList::class.java)
                         // This automatically syncs the completed tests to bridge and saves it locally
                         completedTestManager.setCurrentList(newList)
+                        earningsController.completedTests = completedTestManager.current.completed
                     }
                     saveAndContinueMigration(completionListener, migration.copy(
                             completedTestUploaded = true
@@ -828,7 +854,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 }
 
                 override fun onFailure(response: RestResponse?) {
-                    migrationError(completionListener ,
+                    migrationError(completionListener,
                             "Error $what ${response?.errors.toString()}")
                 }
             })
@@ -842,7 +868,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
 
             val what = "uploading TestScheduleIdentifier report "
             Log.i(LOG_TAG, what)
-            uploadReport(TestScheduleIdentifier, migration.sessionScheduleJson, object: Listener {
+            uploadReport(TestScheduleIdentifier, migration.sessionScheduleJson, object : Listener {
                 override fun onSuccess(response: RestResponse?) {
                     saveAndContinueMigration(completionListener, migration.copy(
                             sessionScheduleUploaded = true
@@ -850,7 +876,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 }
 
                 override fun onFailure(response: RestResponse?) {
-                    migrationError(completionListener ,
+                    migrationError(completionListener,
                             "Error $what ${response?.errors.toString()}")
                 }
             })
@@ -864,7 +890,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
 
             val what = "uploading AvailabilityIdentifier report "
             Log.i(LOG_TAG, what)
-            uploadReport(AvailabilityIdentifier, migration.wakeSleepScheduleJson, object: Listener {
+            uploadReport(AvailabilityIdentifier, migration.wakeSleepScheduleJson, object : Listener {
                 override fun onSuccess(response: RestResponse?) {
                     saveAndContinueMigration(completionListener, migration.copy(
                             wakeSleepScheduleUploaded = true
@@ -872,7 +898,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 }
 
                 override fun onFailure(response: RestResponse?) {
-                    migrationError(completionListener ,
+                    migrationError(completionListener,
                             "Error $what in ${response?.errors.toString()}")
                 }
             })
