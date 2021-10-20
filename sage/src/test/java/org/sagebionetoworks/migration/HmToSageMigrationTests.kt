@@ -40,7 +40,7 @@ class HmToSageMigrationTests {
         for (i in 0..9999) {
             val password = SecureTokenGenerator.BRIDGE_PASSWORD.nextBridgePassword()
             Assert.assertNotNull(password)
-            Assert.assertEquals(20, password.length.toLong())
+            Assert.assertEquals(9, password.length.toLong())
             assertTrue(SecureTokenGenerator.BRIDGE_PASSWORD.isValidBridgePassword(password))
         }
     }
