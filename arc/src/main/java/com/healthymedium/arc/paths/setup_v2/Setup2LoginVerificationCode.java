@@ -15,6 +15,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.Study;
+import com.healthymedium.arc.ui.DigitView;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import androidx.annotation.Nullable;
@@ -28,8 +29,21 @@ public class Setup2LoginVerificationCode extends Setup2Template {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+
         // We need uppercase, lowercase, number, and special characters
         editText.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        // Make the digit views smaller, as we need to fit 9 in
+        for (int i = 0; i < inputLayout.getChildCount(); i++) {
+            View child = inputLayout.getChildAt(i);
+            if (child instanceof DigitView) {
+                DigitView digitView = (DigitView)child;
+                ViewGroup.LayoutParams params = digitView.getLayoutParams();
+                params.width = ViewUtil.dpToPx(26);
+                digitView.setLayoutParams(params);
+            }
+        }
+
         return view;
     }
 
