@@ -99,7 +99,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
         const val STUDY_PERIOD_SCHEDULE_TASK_IDENTIFIER = "StudyPeriodSchedule"
         const val WAKE_SLEEP_TASK_IDENTIFIER = "WakeSleep"
 
-        const val ATTRIBUTE_SIGN_IN_TOKEN = "SIGN_IN_TOKEN"
+        const val ATTRIBUTE_VERIFICATION_CODE = "VERIFICATION_CODE"
         const val ATTRIBUTE_IS_MIGRATED = "IS_MIGRATED"
         const val ATTRIBUTE_VALUE_TRUE = "true"
 
@@ -649,8 +649,10 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     }
 
     private fun migrationError(completionListener: MigrationCompletedListener, errorStr: String) {
+        val arcID = fixParticipantId(Study.getParticipant().state.id)
+        val deviceId = Device.getId()
         Log.e(LOG_TAG, errorStr)
-        completionListener.failure(errorStr)
+        completionListener.failure("$errorStr\n$arcID\n$deviceId")
     }
 
     public fun migrateUser(completionListener: MigrationCompletedListener,
@@ -788,7 +790,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
             signUp.sharingScope = SharingScope.ALL_QUALIFIED_RESEARCHERS
 
             val attributes = migration.attributes.toMutableMap()
-            attributes[ATTRIBUTE_SIGN_IN_TOKEN] = password
+            attributes[ATTRIBUTE_VERIFICATION_CODE] = password
             attributes[ATTRIBUTE_IS_MIGRATED] = "" // remove migration status
             signUp.attributes = attributes
 
