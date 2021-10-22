@@ -11,12 +11,10 @@ import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
-import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
-import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.SignInTokenInput;
 import com.healthymedium.arc.utilities.KeyboardWatcher;
@@ -25,7 +23,7 @@ import com.healthymedium.arc.utilities.ViewUtil;
 import androidx.annotation.Nullable;
 
 @SuppressLint("ValidFragment")
-public class Setup2AuthSignInToken extends QuestionTemplate {
+public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
 
     String value;
     SignInTokenInput input;
@@ -33,13 +31,13 @@ public class Setup2AuthSignInToken extends QuestionTemplate {
     protected LoadingDialog loadingDialog;
     protected TextView textViewError;
 
-    public Setup2AuthSignInToken() {
-        this(true, ViewUtil.getString(R.string.login_enter_raterID),
-                null, 20, null);
+    public Setup2LoginVerificationCodeAsian() {
+        this(true, ViewUtil.getString(R.string.login_enter_2FA),
+                null, 9, null);
     }
 
-    public Setup2AuthSignInToken(boolean allowBack, String header, String subheader,
-                       int maxLength, String initialValue) {
+    public Setup2LoginVerificationCodeAsian(boolean allowBack, String header, String subheader,
+                                            int maxLength, String initialValue) {
         super(allowBack,header,subheader);
         this.maxLength = maxLength;
         type = "multilineText";
