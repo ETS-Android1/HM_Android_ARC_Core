@@ -21,6 +21,7 @@ import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.notifications.ProctorDeviation;
 import com.healthymedium.arc.paths.templates.StateInfoTemplate;
+import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.utilities.Phrase;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -65,7 +66,7 @@ public class BatteryOptimizationReminder extends StateInfoTemplate {
                 deviation.save();
 
                 NavigationManager.getInstance().popBackStack();
-                NavigationManager.getInstance().open(new SplashScreen());
+                Study.getStateMachine().showSplashScreen();
             }
         }
 
@@ -100,7 +101,7 @@ public class BatteryOptimizationReminder extends StateInfoTemplate {
         super.onResume();
         if(requested) {
             NavigationManager.getInstance().popBackStack();
-            NavigationManager.getInstance().open(new SplashScreen());
+            Study.getStateMachine().showSplashScreen();
         }
     }
 

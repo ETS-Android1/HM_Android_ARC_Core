@@ -3,12 +3,15 @@ package com.healthymedium.arc.core;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.font.FontFactory;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.hints.Hints;
@@ -23,7 +26,7 @@ public class SplashScreen extends BaseFragment {
     boolean paused = false;
     boolean ready = false;
     boolean skipSegment = false;
-    boolean visible = true;
+    protected boolean visible = true;
 
     public SplashScreen() {
     }
@@ -35,12 +38,16 @@ public class SplashScreen extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.core_fragment_splash, container, false);
+        View view = inflater.inflate(viewLayout(), container, false);
         if(!visible) {
             view.setVisibility(View.INVISIBLE);
         }
 
         return view;
+    }
+
+    public @LayoutRes int viewLayout() {
+        return R.layout.core_fragment_splash;
     }
 
     @Override
@@ -115,7 +122,7 @@ public class SplashScreen extends BaseFragment {
         paused = true;
     }
 
-    private void exit(){
+    public void exit(){
         if(getFragmentManager() != null) {
             getFragmentManager().popBackStack();
             if(skipSegment) {

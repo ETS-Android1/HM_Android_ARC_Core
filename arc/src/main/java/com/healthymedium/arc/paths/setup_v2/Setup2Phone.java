@@ -1,4 +1,4 @@
-package com.healthymedium.arc.paths.questions;
+package com.healthymedium.arc.paths.setup_v2;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;

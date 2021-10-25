@@ -1,7 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+    ext.kotlin_version = '1.4.31'
+    ext.dagger_version = '2.21'
+
     repositories {
         google()
         jcenter()
@@ -10,7 +12,19 @@ buildscript {
         }
     }
     dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+
         classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+
+        // Kotlin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+
+        // SageResearch
+        classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.18"
+        classpath "com.jakewharton:butterknife-gradle-plugin:10.2.0"
+
         classpath 'com.google.gms:google-services:4.0.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,6 +38,11 @@ allprojects {
         maven {
             url 'https://maven.google.com/'
         }
+        maven { url "https://dl.bintray.com/touchlab/Squeaky" }
+        maven { url "https://jitpack.io" }
+        maven { url 'http://repo-maven.sagebridge.org/' }
+        maven { url "https://sagebionetworks.jfrog.io/artifactory/mobile-sdks/" }
+        mavenLocal()
     }
 }
 

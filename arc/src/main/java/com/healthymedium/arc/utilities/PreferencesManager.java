@@ -84,6 +84,12 @@ public class PreferencesManager {
         return sharedPreferences.contains(key);
     }
 
+
+    @SuppressLint("ApplySharedPref")
+    public void removeImmediately(String key) {
+        sharedPreferences.edit().remove(key).commit();
+    }
+
     public void remove(String key) {
         sharedPreferences.edit().remove(key).apply();
     }

@@ -11,7 +11,7 @@ import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.path_data.SetupPathData;
-import com.healthymedium.arc.paths.questions.Setup2Phone;
+import com.healthymedium.arc.paths.setup_v2.Setup2Phone;
 import com.healthymedium.arc.paths.setup.SetupAuthCode;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.Study;
