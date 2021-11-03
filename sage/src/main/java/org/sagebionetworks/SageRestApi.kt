@@ -40,6 +40,7 @@ import android.util.Log
 import com.google.common.base.Strings.repeat
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.google.gson.JsonSyntaxException
 import com.google.gson.internal.LinkedTreeMap
 import com.healthymedium.arc.api.RestClient
 import com.healthymedium.arc.api.RestResponse
@@ -455,10 +456,20 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
                 }
 
                 val jsonUnwrapped = json ?: ""
+                var errorStr: String? = null;
                 when (reportId) {
-                    AvailabilityIdentifier -> parseWakeSleepSchedule(jsonUnwrapped, data)
-                    TestScheduleIdentifier -> parseTestSchedule(jsonUnwrapped, data)
-                    CompletedTestsIdentifier -> parseCompletedTests(jsonUnwrapped, data)
+                    AvailabilityIdentifier -> errorStr = parseWakeSleepSchedule(jsonUnwrapped, data)
+                    TestScheduleIdentifier -> errorStr = parseTestSchedule(jsonUnwrapped, data)
+                    CompletedTestsIdentifier -> errorStr = parseCompletedTests(jsonUnwrapped, data)
+                }
+
+                errorStr?.let {
+                    if (hasThrownError) {
+                        return@getSingletonReport
+                    }
+                    hasThrownError = true
+                    listener.invoke(data, it)
+                    return@getSingletonReport
                 }
 
                 successCtr -= 1
@@ -478,33 +489,68 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
         }
     }
 
-    private fun parseWakeSleepSchedule(json: String, data: ExistingData) {
-        val wakeSleep = gson.fromJson(json, WakeSleepSchedule::class.java)
-        data.wake_sleep_schedule = wakeSleep
-    }
-
-    private fun parseTestSchedule(json: String, data: ExistingData) {
-        val schedule = gson.fromJson(json, TestSchedule::class.java) ?: run {
-            return
+    private fun parseWakeSleepSchedule(json: String?, data: ExistingData): String? {
+        try {
+            val wakeSleep = gson.fromJson(json, WakeSleepSchedule::class.java)
+            // Data validation check, if we had a JSON string, but could not parse into a model
+            // object, then we know that the JSON is in an invalid format, and we should notify the user.
+            if (wakeSleep == null && (json?.isNotEmpty() == true)) {
+                return "WakeSleep invalid data format"
+            }
+            data.wake_sleep_schedule = wakeSleep
+        } catch (e: JsonSyntaxException) {
+            return "WakeSleep invalid data format"
         }
-
-        data.test_schedule = schedule
-
-        val twoHoursInMs = 60L * 60L * 2L
-        val now = (System.currentTimeMillis() / 1000L) // time in seconds
-        val schedules = schedule.sessions
-                .sortedBy { it.session_date }
-                .filter { (it.session_date + twoHoursInMs) < now }
-
-        data.first_test = convertToSessionInfo(schedules.firstOrNull())
-        data.latest_test = convertToSessionInfo(schedules.lastOrNull())
+        return null
     }
 
-    private fun parseCompletedTests(json: String, data: ExistingData) {
-        val completed = gson.fromJson(json, CompletedTestList::class.java)
-                ?: CompletedTestList(listOf())
-        completedTestManager.setCurrentList(completed)
-        earningsController.completedTests = completedTestManager.current.completed
+    private fun parseTestSchedule(json: String?, data: ExistingData): String? {
+        try {
+            val schedule = gson.fromJson(json, TestSchedule::class.java)
+
+            // Data validation check, if we had a JSON string, but could not parse into a model
+            // object, then we know that the JSON is in an invalid format, and we should notify the user.
+            if (schedule == null && (json?.isNotEmpty() == true)) {
+                return "TestSchedule invalid data format"
+            }
+
+            data.test_schedule = schedule
+
+            // Exit early if we don't have any first tests to find
+            if (schedule == null) {
+                return null;
+            }
+
+            val twoHoursInMs = 60L * 60L * 2L
+            val now = (System.currentTimeMillis() / 1000L) // time in seconds
+            val schedules = schedule.sessions
+                    .sortedBy { it.session_date }
+                    .filter { (it.session_date + twoHoursInMs) < now }
+
+            data.first_test = convertToSessionInfo(schedules.firstOrNull())
+            data.latest_test = convertToSessionInfo(schedules.lastOrNull())
+        } catch (e: JsonSyntaxException) {
+            return "TestSchedule invalid data format"
+        }
+        return null;
+    }
+
+    private fun parseCompletedTests(json: String?, data: ExistingData): String? {
+        try {
+            val completed = gson.fromJson(json, CompletedTestList::class.java)
+
+            // Data validation check, if we had a JSON string, but could not parse into a model
+            // object, then we know that the JSON is in an invalid format, and we should notify the user.
+            if (completed == null && (json?.isNotEmpty() == true)) {
+                return "CompletedTestList invalid data format"
+            }
+
+            completedTestManager.setCurrentList(completed ?: CompletedTestList(listOf()))
+            earningsController.completedTests = completedTestManager.current.completed
+        } catch (e: JsonSyntaxException) {
+            return "CompletedTestList invalid data format"
+        }
+        return null
     }
 
     private fun convertToSessionInfo(testSession: TestScheduleSession?): SessionInfo? {

@@ -12,7 +12,9 @@ import com.healthymedium.arc.api.RestResponse;
 import com.healthymedium.arc.core.Config;
 import com.healthymedium.arc.core.LoadingDialog;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.path_data.SetupPathData;
+import com.healthymedium.arc.paths.informative.ContactScreen;
 import com.healthymedium.arc.study.PathSegment;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.DigitView;
@@ -95,6 +97,13 @@ public class Setup2LoginVerificationCode extends Setup2Template {
     protected Setup2Template.SetupError parseForError(RestResponse response, boolean failed){
         Setup2Template.SetupError error = new Setup2Template.SetupError();
         error.string = parseForErrorString(response,failed);
+        if (error.string != null && response != null && response.errors != null) {
+            if (response.errors.get("errors") != null) {
+                error.string += "\n" + response.errors.get("errors");
+            } else if (response.errors.get("error") != null) {
+                error.string += "\n" + response.errors.get("error");
+            }
+        }
         return error;
     }
 
@@ -123,6 +132,17 @@ public class Setup2LoginVerificationCode extends Setup2Template {
     public void showError(String error) {
         textViewError.setVisibility(View.VISIBLE);
         textViewError.setText(error);
+
+        // add this for all errors
+        textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
+        textViewProblems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactScreen contactScreen = new ContactScreen();
+                NavigationManager.getInstance().open(contactScreen);
+            }
+        });
+        textViewProblems.setVisibility(View.VISIBLE);
     }
 
     public void hideError(){
