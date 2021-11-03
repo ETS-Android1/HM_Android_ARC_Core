@@ -492,11 +492,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     private fun parseWakeSleepSchedule(json: String?, data: ExistingData): String? {
         try {
             val wakeSleep = gson.fromJson(json, WakeSleepSchedule::class.java)
-            // Data validation check, if we had a JSON string, but could not parse into a model
-            // object, then we know that the JSON is in an invalid format, and we should notify the user.
-            if (wakeSleep == null && (json?.isNotEmpty() == true)) {
-                return "WakeSleep invalid data format"
-            }
             data.wake_sleep_schedule = wakeSleep
         } catch (e: JsonSyntaxException) {
             return "WakeSleep invalid data format"
@@ -507,12 +502,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     private fun parseTestSchedule(json: String?, data: ExistingData): String? {
         try {
             val schedule = gson.fromJson(json, TestSchedule::class.java)
-
-            // Data validation check, if we had a JSON string, but could not parse into a model
-            // object, then we know that the JSON is in an invalid format, and we should notify the user.
-            if (schedule == null && (json?.isNotEmpty() == true)) {
-                return "TestSchedule invalid data format"
-            }
 
             data.test_schedule = schedule
 
@@ -538,13 +527,6 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
     private fun parseCompletedTests(json: String?, data: ExistingData): String? {
         try {
             val completed = gson.fromJson(json, CompletedTestList::class.java)
-
-            // Data validation check, if we had a JSON string, but could not parse into a model
-            // object, then we know that the JSON is in an invalid format, and we should notify the user.
-            if (completed == null && (json?.isNotEmpty() == true)) {
-                return "CompletedTestList invalid data format"
-            }
-
             completedTestManager.setCurrentList(completed ?: CompletedTestList(listOf()))
             earningsController.completedTests = completedTestManager.current.completed
         } catch (e: JsonSyntaxException) {
