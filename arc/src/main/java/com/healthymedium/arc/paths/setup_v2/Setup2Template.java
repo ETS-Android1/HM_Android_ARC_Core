@@ -387,7 +387,8 @@ public abstract class Setup2Template extends StandardTemplate {
     public void showError(String error){
         buttonNext.setEnabled(false);
         textViewError.setVisibility(View.VISIBLE);
-        textViewError.setText(error);
+        textViewError.setText(Html.fromHtml(error));
+
 
         // add this for all errors
         textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));

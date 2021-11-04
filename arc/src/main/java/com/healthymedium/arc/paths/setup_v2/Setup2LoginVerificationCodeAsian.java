@@ -1,19 +1,28 @@
 package com.healthymedium.arc.paths.setup_v2;
 import android.annotation.SuppressLint;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.Html;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
+import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.core.LoadingDialog;
+import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
+import com.healthymedium.arc.navigation.NavigationManager;
 import com.healthymedium.arc.path_data.SetupPathData;
+import com.healthymedium.arc.paths.informative.ContactScreen;
+import com.healthymedium.arc.paths.informative.HelpScreen;
 import com.healthymedium.arc.paths.templates.QuestionTemplate;
 import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.SignInTokenInput;
@@ -21,6 +30,9 @@ import com.healthymedium.arc.utilities.KeyboardWatcher;
 import com.healthymedium.arc.utilities.ViewUtil;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static com.healthymedium.arc.core.Config.USE_HELP_SCREEN;
 
 @SuppressLint("ValidFragment")
 public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
@@ -30,6 +42,10 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
     int maxLength;
     protected LoadingDialog loadingDialog;
     protected TextView textViewError;
+
+    protected TextView textViewProblems;
+    protected TextView textViewPolicyLink;
+    protected TextView textViewPolicy;
 
     public Setup2LoginVerificationCodeAsian() {
         this(true, ViewUtil.getString(R.string.login_enter_2FA),
@@ -48,6 +64,20 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater,container,savedInstanceState);
         setHelpVisible(false);
+
+        textViewHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BaseFragment helpScreen;
+                if (USE_HELP_SCREEN) {
+                    helpScreen = new HelpScreen();
+                } else {
+                    helpScreen = new ContactScreen();
+                }
+
+                NavigationManager.getInstance().open(helpScreen);
+            }
+        });
 
         input = new SignInTokenInput(getContext());
         input.setMaxLength(maxLength);
@@ -98,11 +128,67 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
         textViewError.setTextSize(16);
         textViewError.setTextColor(ViewUtil.getColor(R.color.red));
         textViewError.setVisibility(View.INVISIBLE);
+        textViewError.setPadding(
+                textViewError.getPaddingLeft(),
+                ViewUtil.dpToPx(24),
+                textViewError.getPaddingRight(),
+                textViewError.getPaddingBottom());
         content.addView(textViewError);
 
         if (value != null) {
             input.setText(value);
         }
+
+        RelativeLayout relativeLayout = (RelativeLayout) view;
+        LinearLayout linearLayout = new LinearLayout(getContext());
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        textViewPolicy = new TextView(getContext());
+        textViewPolicy.setText(ViewUtil.getHtmlString(R.string.bysigning_key));
+        textViewPolicy.setGravity(Gravity.CENTER_HORIZONTAL);
+        textViewPolicy.setTextSize(15);
+        linearLayout.addView(textViewPolicy);
+
+        textViewPolicyLink = new TextView(getContext());
+        textViewPolicyLink.setTypeface(Fonts.robotoMedium);
+        textViewPolicyLink.setPaintFlags(textViewPolicyLink.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textViewPolicyLink.setTextColor(ContextCompat.getColor(getContext(),R.color.primary));
+        textViewPolicyLink.setGravity(Gravity.CENTER_HORIZONTAL);
+        textViewPolicyLink.setText(getResources().getString(R.string.privacy_linked));
+        textViewPolicyLink.setTextSize(15);
+        textViewPolicyLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Study.getPrivacyPolicy().show(getContext());
+            }
+        });
+        linearLayout.addView(textViewPolicyLink);
+
+        RelativeLayout.LayoutParams params0 = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        params0.bottomMargin = ViewUtil.dpToPx(24);
+        params0.addRule(RelativeLayout.CENTER_HORIZONTAL,RelativeLayout.TRUE);
+        params0.addRule(RelativeLayout.ABOVE,buttonNext.getId());
+        relativeLayout.addView(linearLayout,params0);
+
+        textViewProblems = new TextView(getContext());
+        textViewProblems.setTypeface(Fonts.robotoMedium);
+
+        textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
+        textViewProblems.setTextColor(ViewUtil.getColor(R.color.primary));
+        textViewProblems.setVisibility(View.INVISIBLE);
+        textViewProblems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ContactScreen contactScreen = new ContactScreen();
+                NavigationManager.getInstance().open(contactScreen);
+            }
+        });
+        ViewUtil.underlineTextView(textViewProblems);
+
+        // add below textViewError
+        int index = content.indexOfChild(textViewError) + 1;
+        content.addView(textViewProblems, index);
 
         return view;
     }
@@ -178,6 +264,13 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
     protected Setup2Template.SetupError parseForError(RestResponse response, boolean failed){
         Setup2Template.SetupError error = new Setup2Template.SetupError();
         error.string = parseForErrorString(response,failed);
+        if (error.string != null && response != null && response.errors != null) {
+            if (response.errors.get("errors") != null) {
+                error.string += "<br>" + response.errors.get("errors").getAsString();
+            } else if (response.errors.get("error") != null) {
+                error.string += "<br>" + response.errors.get("error").getAsString();
+            }
+        }
         return error;
     }
 
@@ -205,7 +298,20 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
 
     public void showError(String error) {
         textViewError.setVisibility(View.VISIBLE);
-        textViewError.setText(error);
+        // Remove the account not found error, as that will be in the base localized error message
+        String errorStr = error.replace("<br>Account not found.", "");
+        textViewError.setText(Html.fromHtml(errorStr));
+
+        // add this for all errors
+        textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));
+        textViewProblems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactScreen contactScreen = new ContactScreen();
+                NavigationManager.getInstance().open(contactScreen);
+            }
+        });
+        textViewProblems.setVisibility(View.VISIBLE);
     }
 
     public void hideError(){

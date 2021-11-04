@@ -2,6 +2,7 @@ package com.healthymedium.arc.paths.setup_v2;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,9 +118,9 @@ public class Setup2LoginVerificationCode extends Setup2Template {
         error.string = parseForErrorString(response,failed);
         if (error.string != null && response != null && response.errors != null) {
             if (response.errors.get("errors") != null) {
-                error.string += "\n" + response.errors.get("errors");
+                error.string += "<br>" + response.errors.get("errors").getAsString();
             } else if (response.errors.get("error") != null) {
-                error.string += "\n" + response.errors.get("error");
+                error.string += "<br>" + response.errors.get("error").getAsString();
             }
         }
         return error;
@@ -149,7 +150,9 @@ public class Setup2LoginVerificationCode extends Setup2Template {
 
     public void showError(String error) {
         textViewError.setVisibility(View.VISIBLE);
-        textViewError.setText(error);
+        // Remove the account not found error, as that will be in the base localized error message
+        String errorStr = error.replace("<br>Account not found.", "");
+        textViewError.setText(Html.fromHtml(errorStr));
 
         // add this for all errors
         textViewProblems.setText(ViewUtil.getHtmlString(R.string.login_problems_linked));

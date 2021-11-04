@@ -113,7 +113,7 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
      * https://proandroiddev.com/change-language-programmatically-at-runtime-on-android-5e6bc15c758
      */
     public void triggerAppRestart() {
-        Context context = getContext();
+        Context context = getActivity().getApplicationContext();
         PackageManager packageManager = context.getPackageManager();
         Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
         ComponentName componentName = intent.getComponent();
