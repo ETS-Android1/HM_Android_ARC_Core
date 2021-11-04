@@ -8,6 +8,7 @@ import android.text.Html;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -196,7 +197,7 @@ public abstract class Setup2Template extends StandardTemplate {
         textViewProblems.setPadding(0, ViewUtil.dpToPx(8), 0, 0);
     }
 
-    void addSpacer(int widthDp){
+    public void addSpacer(int widthDp) {
         int width = ViewUtil.dpToPx(widthDp);
         Space space = new Space(getContext());
         space.setLayoutParams(new ViewGroup.LayoutParams(width,width));
@@ -224,22 +225,6 @@ public abstract class Setup2Template extends StandardTemplate {
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 //Log.i("textChanged","start="+start+" before="+before+" count="+count);
                 characterSequence = charSequence;
-                if(before>count){
-                    if(start >= 0){
-                        if(start < maxDigits-1){
-                            digits.get(start+1).setFocused(false);
-                        }
-
-                        digits.get(start).setFocused(true);
-                        focusedIndex = start;
-                    }
-                } else {
-                    if(start < maxDigits-1){
-                        digits.get(start).setFocused(false);
-                        digits.get(start+1).setFocused(true);
-                        focusedIndex = start+1;
-                    }
-                }
 
                 // updateView(charSequence);
                 if(charSequence.length()==maxDigits){
@@ -254,7 +239,16 @@ public abstract class Setup2Template extends StandardTemplate {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                int length = 0;
+                if (editable != null && editable.toString() != null) {
+                    length = editable.toString().length();
+                }
 
+                focusedIndex = Math.min(length, maxDigits - 1);
+                for (int i = 0; i < digits.size(); i++) {
+                    DigitView digitView = digits.get(i);
+                    digitView.setFocused(i == length);
+                }
             }
         });
 

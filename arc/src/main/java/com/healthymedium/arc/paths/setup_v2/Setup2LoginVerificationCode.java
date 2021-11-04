@@ -6,6 +6,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.healthymedium.arc.api.RestClient;
 import com.healthymedium.arc.api.RestResponse;
@@ -25,8 +26,10 @@ import androidx.annotation.Nullable;
 @SuppressLint("ValidFragment")
 public class Setup2LoginVerificationCode extends Setup2Template {
 
+    public static final int DIGIT_COUNT = 9;
+
     public Setup2LoginVerificationCode() {
-        super(9, 0, ViewUtil.getString(R.string.login_enter_2FA));
+        super(DIGIT_COUNT, 0, ViewUtil.getString(R.string.login_enter_2FA));
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,18 +38,33 @@ public class Setup2LoginVerificationCode extends Setup2Template {
         // We need uppercase, lowercase, number, and special characters
         editText.setInputType(InputType.TYPE_CLASS_TEXT);
 
-        // Make the digit views smaller, as we need to fit 9 in
+        // Make input layout full width, with a weighted sum
+        ViewGroup.LayoutParams inputLayoutParams = inputLayout.getLayoutParams();
+        inputLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        inputLayout.setWeightSum(DIGIT_COUNT);
+        inputLayout.setLayoutParams(inputLayoutParams);
+        inputLayout.setPadding(ViewUtil.dpToPx(16), inputLayout.getPaddingTop(),
+                ViewUtil.dpToPx(16), inputLayout.getPaddingBottom());
+
+        // Make the digit views smaller, as we need to fit [DIGIT_COUNT] in
         for (int i = 0; i < inputLayout.getChildCount(); i++) {
             View child = inputLayout.getChildAt(i);
             if (child instanceof DigitView) {
                 DigitView digitView = (DigitView)child;
-                ViewGroup.LayoutParams params = digitView.getLayoutParams();
-                params.width = ViewUtil.dpToPx(26);
+                LinearLayout.LayoutParams params =
+                        (LinearLayout.LayoutParams)digitView.getLayoutParams();
+                params.weight = 1;
+                params.width = 0;  // width will be set by weight
                 digitView.setLayoutParams(params);
             }
         }
 
         return view;
+    }
+
+    @Override
+    public void addSpacer(int widthDp) {
+        // Do nothing, spacers will be added through weight sum gravity
     }
 
     @Override
