@@ -29,41 +29,44 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package org.sagebionetoworks.migration
+package org.sagebionetoworks.migration;
 
-import com.healthymedium.arc.study.Participant
-import com.healthymedium.arc.study.ParticipantState
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
-import org.sagebionetworks.research.sagearc.SageRestApi
+import org.junit.Test;
+import org.sagebionetworks.migration.PasswordGenerator;
 
-@RunWith(JUnit4::class)
-class HmToSageMigrationTests {
+import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+public class PasswordGeneratorTests {
     @Test
-    fun testUserNeedsToMigrate() {
-        // User has not signed in yet, no migration needed
-        assertFalse(SageRestApi.HmToSageMigration.userNeedsToMigrate(null, null))
-        val participant = MockParticipant()
-        assertFalse(SageRestApi.HmToSageMigration.userNeedsToMigrate(participant, null))
-        participant.state = ParticipantState()
-        assertFalse(SageRestApi.HmToSageMigration.userNeedsToMigrate(participant, null))
-
-        // User needs to migrate when they have an Arc ID (participant ID)
-        // But their external ID is null, or incorrect
-        participant.state.id = "000000"
-        assertTrue(SageRestApi.HmToSageMigration.userNeedsToMigrate(participant, null))
-        assertTrue(SageRestApi.HmToSageMigration.userNeedsToMigrate(participant, "000001"))
-        // User has already migrated
-        assertFalse(SageRestApi.HmToSageMigration.userNeedsToMigrate(participant, "000000"))
+    public void test_createBridgePassword() throws IOException {
+        // Test 10000 bridge passwords for validity
+        for (int i = 0; i < 10000; i++) {
+            String password = PasswordGenerator.INSTANCE.nextPassword();
+            assertNotNull(password);
+            assertEquals(9, password.length());
+            assertTrue(isValidBridgePassword(password));
+        }
     }
-}
 
-open class MockParticipant: Participant() {
-    override fun save() {
-        // no-op, as the base class calls preferences manager which will be null in unit tests
+    public boolean isValidBridgePassword(String password) {
+        boolean containsUppercase = false;
+        boolean containsLowercase = false;
+        boolean containsNumeric = false;
+        boolean containsSpecial = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            String character = Character.toString(password.charAt(i));
+            containsUppercase = containsUppercase || PasswordGenerator.UPPERCASE.contains(character);
+            containsLowercase = containsLowercase || PasswordGenerator.LOWERCASE.contains(character);
+            containsNumeric = containsNumeric || PasswordGenerator.NUMERIC.contains(character);
+            containsSpecial = containsSpecial || PasswordGenerator.SYMBOLIC.contains(character);
+        }
+
+        return containsUppercase && containsLowercase && containsNumeric && containsSpecial;
     }
+
 }
