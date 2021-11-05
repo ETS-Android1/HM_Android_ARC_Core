@@ -52,7 +52,7 @@ public class ContactScreen extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
-        textViewHeader.setText(ViewUtil.getHtmlString(R.string.contact_call1));
+        textViewHeader.setText(ViewUtil.getHtmlString(R.string.resources_contact));
 
         textViewPhoneNumber = view.findViewById(R.id.textViewSubHeader);
         textViewPhoneNumber.setText(stringPhoneNumber);

@@ -49,83 +49,92 @@
                 android:textSize="26dp"
                 tools:text="I would like to contact study site." />
 
-            <TextView
-                android:id="@+id/textViewSubHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:drawableLeft="@drawable/ic_phone_handset"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                tools:text="555-555-5555" />
-
-            <com.healthymedium.arc.ui.Button
-                android:id="@+id/button"
+            <!-- DIAN-150 - Hide the rest of the views for now, until we decide on proper contacts -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_gravity="left"
-                android:layout_marginBottom="24dp"
-                android:text="CALL"
-                app:buttonTheme="light"/>
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <FrameLayout
-                android:id="@+id/lineFrameLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#223465">
+                <TextView
+                    android:id="@+id/textViewSubHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:drawableLeft="@drawable/ic_phone_handset"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    tools:text="555-555-5555" />
 
-            </FrameLayout>
+                <com.healthymedium.arc.ui.Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="24dp"
+                    android:text="CALL"
+                    app:buttonTheme="light"/>
 
-            <TextView
-                android:id="@+id/textViewEmailHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginRight="32dp"
-                android:textColor="@color/white"
-                android:textSize="26dp"
-                tools:text="I would like to email my study coordinator." />
+                <FrameLayout
+                    android:id="@+id/lineFrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#223465">
 
-            <TextView
-                android:id="@+id/textViewEmailSubHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:drawableLeft="@drawable/ic_email"
-                android:drawablePadding="8dp"
-                android:gravity="center_vertical"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                tools:text="sample@email.com" />
+                </FrameLayout>
 
-            <com.healthymedium.arc.ui.Button
-                android:id="@+id/emailButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_gravity="left"
-                android:layout_marginBottom="24dp"
-                android:text="EMAIL"
-                app:buttonTheme="light"/>
+                <TextView
+                    android:id="@+id/textViewEmailHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginRight="32dp"
+                    android:textColor="@color/white"
+                    android:textSize="26dp"
+                    tools:text="I would like to email my study coordinator." />
+
+                <TextView
+                    android:id="@+id/textViewEmailSubHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:drawableLeft="@drawable/ic_email"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    tools:text="sample@email.com" />
+
+                <com.healthymedium.arc.ui.Button
+                    android:id="@+id/emailButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:layout_centerHorizontal="false"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="24dp"
+                    android:text="EMAIL"
+                    app:buttonTheme="light"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
