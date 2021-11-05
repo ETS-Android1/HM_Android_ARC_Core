@@ -57,14 +57,13 @@ import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.swagger.annotations.Api
-import org.apache.commons.codec.binary.StringUtils
 import org.joda.time.DateTimeZone
 import org.sagebionetworks.bridge.android.manager.AuthenticationManager
 import org.sagebionetworks.bridge.android.manager.BridgeManagerProvider
 import org.sagebionetworks.bridge.android.manager.ParticipantRecordManager
 import org.sagebionetworks.bridge.android.manager.UploadManager
 import org.sagebionetworks.bridge.rest.model.*
-import org.sagebionetworks.migration.SecureTokenGenerator
+import org.sagebionetworks.migration.PasswordGenerator
 import org.sagebionetworks.research.domain.Schema
 import org.sagebionetworks.research.domain.result.AnswerResultType
 import org.sagebionetworks.research.domain.result.implementations.AnswerResultBase
@@ -813,7 +812,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
         if (migration.newUserPassword == null) {
             completionListener.progressUpdate(progressCtr)
             val signUp = SignUp()
-            val password = SecureTokenGenerator.BRIDGE_PASSWORD.nextBridgePassword()
+            val password = PasswordGenerator.INSTANCE.nextPassword();
             signUp.password = password
             signUp.sharingScope = SharingScope.ALL_QUALIFIED_RESEARCHERS
 
