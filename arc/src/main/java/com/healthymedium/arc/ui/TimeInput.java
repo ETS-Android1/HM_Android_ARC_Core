@@ -1,6 +1,7 @@
 package com.healthymedium.arc.ui;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -62,9 +63,11 @@ public class TimeInput extends FrameLayout {
         time = new LocalTime(12,0);
 
         try{
-            Class<?> classForid = Class.forName("com.android.internal.R$id");
-            Field minute = classForid.getField("minute");
-            NumberPicker minuteSpinner = timePicker.findViewById(minute.getInt(null));
+            NumberPicker minuteSpinner = timePicker.findViewById(Resources.getSystem().getIdentifier(
+                    "minute",
+                    "id",
+                    "android"
+            ));
             minuteSpinner.setMinValue(0);
             minuteSpinner.setMaxValue((60 / 15) - 1);
             List<String> displayedValues = new ArrayList<>();
