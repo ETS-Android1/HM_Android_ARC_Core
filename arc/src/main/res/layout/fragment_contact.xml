@@ -51,6 +51,7 @@
 
             <!-- DIAN-150 - Hide the rest of the views for now, until we decide on proper contacts -->
             <LinearLayout
+                android:id="@+id/contact_details_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -70,7 +71,8 @@
                     android:paddingBottom="24dp"
                     android:textColor="@color/white"
                     android:textSize="18dp"
-                    tools:text="555-555-5555" />
+                    tools:text="555-555-5555"
+                    android:textIsSelectable="true"/>
 
                 <com.healthymedium.arc.ui.Button
                     android:id="@+id/button"
@@ -119,7 +121,8 @@
                     android:paddingBottom="24dp"
                     android:textColor="@color/white"
                     android:textSize="18dp"
-                    tools:text="sample@email.com" />
+                    tools:text="sample@email.com"
+                    android:textIsSelectable="true"/>
 
                 <com.healthymedium.arc.ui.Button
                     android:id="@+id/emailButton"

@@ -13,6 +13,7 @@ import static android.content.Intent.ACTION_DIAL;
 import static android.content.Intent.ACTION_SENDTO;
 
 import com.healthymedium.arc.core.BaseFragment;
+import com.healthymedium.arc.study.Study;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
@@ -50,6 +51,13 @@ public class ContactScreen extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
+
+        View contactDetailsContainer = view.findViewById(R.id.contact_details_container);
+        if (Study.getStateMachine().shouldShowDetailedContactScreen()) {
+            contactDetailsContainer.setVisibility(View.VISIBLE);
+        } else {
+            contactDetailsContainer.setVisibility(View.GONE);
+        }
 
         textViewHeader = view.findViewById(R.id.textViewHeader);
         textViewHeader.setText(ViewUtil.getHtmlString(R.string.resources_contact));

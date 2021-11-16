@@ -982,4 +982,11 @@ public class StateMachine {
         Study.getInstance().getCurrentTestSession().addTestData(cognitiveTest);
     }
 
+    /**
+     * @return true if we want phone number and email to show up on the contact screen
+     *         false for DIAN-150 - to hide the rest of the phone and emails
+     */
+    public boolean shouldShowDetailedContactScreen() {
+        return true;
+    }
 }
