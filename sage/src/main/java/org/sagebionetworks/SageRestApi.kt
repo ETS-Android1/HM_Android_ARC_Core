@@ -694,7 +694,7 @@ open class SageRestApi(val reportManager: ParticipantRecordManager,
             val what = "signing in with device-id "
             Log.i(LOG_TAG, what)
             compositeSubscription.add(
-                    authManager.signInWithExternalId(migration.deviceId, migration.deviceId)
+                    authManager.signInWithExternalId(migration.deviceId, "${migration.deviceId}Arc#")
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe({ userSessionInfo: UserSessionInfo? ->
                                 saveAndContinueMigration(completionListener, migration.copy(
