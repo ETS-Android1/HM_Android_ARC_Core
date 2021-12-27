@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name">ARC 2.0</string>
 	<string name="key_native_language">UK - English</string>
 	<string name="notification_monthbefore">Your next week of testing begins in one month on {DATE}. You may adjust this schedule up to 7 days.</string>
 	<string name="notification_weekbefore">Reminder: Your next testing cycle starts in one week. Tap to confirm or reschedule.</string>
@@ -96,9 +97,9 @@
 	<string name="availability_changedenied_test">Check back after your test.</string>
 	<string name="availability_changedates">I would like to change the &lt;b>dates&lt;/b> of my next &lt;b>testing cycle&lt;/b>.</string>
 	<string name="contact_call1">I would like to &lt;b>call&lt;/b> my study coordinator.</string>
-	<string name="contact_call2"></string>
+	<string name="contact_call2">+1-314-273-7112     </string>
 	<string name="contact_email1">I would like to &lt;b>email&lt;/b> my study coordinator.</string>
-	<string name="contact_email2"></string>
+	<string name="contact_email2">neuro-dianarc@email.wustl.edu     </string>
 	<string name="about_header">About this App</string>
 	<string name="about_body">The Ambulatory Research in Cognition (ARC) app was designed by the Cognitive Technology Research Laboratory (CTRLab) in the Department of Neurology at Washington University in St. Louis for participants enrolled in the Dominantly Inherited Alzheimer Network (DIAN) studies. The ARC app assesses cognition using frequently administered but brief cognitive tests. This app is intended for use only by participants enrolled in DIAN studies.</string>
 	<string name="faq_header">Frequently Asked Questions Topics</string>
@@ -448,7 +449,7 @@
 	<string name="status_nonedone">None! You\'re all done!</string>
 	<string name="radio_yes">Yes</string>
 	<string name="radio_no">No</string>
-	<string name="radio_0">0</string>
+	<string name="radio_0"></string>
 	<string name="radio_1">1</string>
 	<string name="radio_2">2</string>
 	<string name="radio_3">3</string>
@@ -483,4 +484,11 @@
 	<string name="battery_optimization_overview">Your phone has a setting to help preserve your battery life, and it is called a “battery optimization” setting.&lt;br>&lt;br>The {APP_NAME} app will have minimal impact on the battery life of your phone. It is recommended that you turn off the battery optimization setting for the {APP_NAME} app. Doing so will help make sure you receive test notifications on time.</string>
 	<string name="battery_optimization_prompt">Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please &lt;b>allow&lt;/b> to help ensure your notifications work correctly.</string>
 	<string name="battery_optimization_reminder">Your notifications are experiencing a delay. Next, there will be a pop-up asking you to turn off battery optimization by allowing the {APP_NAME} app to run in the background. Please &lt;b>allow&lt;/b> to help ensure your notifications work correctly.</string>
+	<string name="button_install_update"></string>
+	<string name="legacy_migration_header"></string>
+	<string name="legacy_migration_body"></string>
+	<string name="legacy_migration_body2"></string>
+	<string name="legacy_migration_progress"></string>
+	<string name="legacy_migration_error"></string>
+	<string name="legacy_migration_contact"></string>
 </resources>

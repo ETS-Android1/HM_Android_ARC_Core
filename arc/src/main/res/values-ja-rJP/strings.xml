@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name">ARC 2.0</string>
 	<string name="key_native_language">日本 - 日本語</string>
 	<string name="notification_monthbefore">次のテストの週は1ヵ月以内の{DATE}に始まります。このスケジュールを7日以内に調整することができます。</string>
 	<string name="notification_weekbefore">注意：あなたの次のテストサイクルは1週間以内に始まります。タップして確認するか、スケジュールを調整してください。</string>
@@ -96,9 +97,9 @@
 	<string name="availability_changedenied_test">テスト後にもう一度確認してください</string>
 	<string name="availability_changedates">次の&lt;b>テストサイクル&lt;/b>の&lt;b>日付&lt;/b>を変更したい。</string>
 	<string name="contact_call1">治験コーディネーターに&lt;b>電話&lt;/b>したい。</string>
-	<string name="contact_call2"></string>
+	<string name="contact_call2">+1-314-273-7112     </string>
 	<string name="contact_email1">治験コーディネーターに&lt;b>Eメール&lt;/b>を送りたい。</string>
-	<string name="contact_email2"></string>
+	<string name="contact_email2">neuro-dianarc@email.wustl.edu     </string>
 	<string name="about_header">このアプリについて</string>
 	<string name="about_body">「自由行動下認知機能調査(ARC)」アプリは、優性遺伝性アルツハイマー病ネットワーク(DIAN)の研究に登録した参加者のために、セントルイスのワシントン大学神経学学部にある「認知技術調査研究所(CTRLab：Cognitive Technology Research Laboratory)」によって考案されました。ACRアプリは短時間ながら頻回に実施される認知テストを用いて認知を評価します。このアプリはDIAN研究に登録した参加者による使用だけを想定しています。</string>
 	<string name="faq_header">FAQ（よくある質問）のトピック</string>
@@ -338,10 +339,10 @@
 	<string name="progress_studytotals_goals">達成したゴール</string>
 	<string name="progress_endoftest_syncing">獲得収入を更新する間しばらくお待ちください...</string>
 	<string name="progress_endoftest_nosync">同期の時間が通常よりも長くかかっています。更新された総額を見るには、後ほど「獲得収入」タブを確認してください。</string>
-	<string name="login_error1">&lt;i>「ログイン情報が正しくありません」&lt;/i></string>
-	<string name="login_error2">&lt;i>このARC IDはすでに他の機器に登録されています。&lt;/i></string>
-	<string name="login_error3">&lt;i>申し訳ありません、このアプリには現在問題が発生しています。後ほどもう一度試してみてください。&lt;/i></string>
-	<string name="login_error4">&lt;i>ARC ID不一致&lt;/i></string>
+	<string name="login_error1">「ログイン情報が正しくありません」</string>
+	<string name="login_error2">このARC IDはすでに他の機器に登録されています。</string>
+	<string name="login_error3">申し訳ありません、このアプリには現在問題が発生しています。後ほどもう一度試してみてください。</string>
+	<string name="login_error4">ARC ID不一致</string>
 	<string name="button_help">ヘルプ</string>
 	<string name="button_begin">始める</string>
 	<string name="button_back">戻る</string>
@@ -448,7 +449,7 @@
 	<string name="status_nonedone">何もありません。すべて完了しています！</string>
 	<string name="radio_yes">はい</string>
 	<string name="radio_no">いいえ</string>
-	<string name="radio_0">0</string>
+	<string name="radio_0"></string>
 	<string name="radio_1">1</string>
 	<string name="radio_2">2</string>
 	<string name="radio_3">3</string>
@@ -483,4 +484,11 @@
 	<string name="battery_optimization_overview">お使いの携帯電話には、バッテリー寿命を維持するのに役立つ設定があり、「バッテリー最適化」設定と呼ばれています。&lt;br>&lt;br>\n{APP_NAME}アプリがスマートフォンの電池寿命に与える影響は最小限です。 {APP_NAME}アプリのバッテリー最適化設定をオフにすることをお勧めします。そうすることで、時間通りにテスト通知を受け取ることができます。</string>
 	<string name="battery_optimization_prompt">次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
 	<string name="battery_optimization_reminder">通知が遅れています。次に、{APP_NAME}アプリをバックグラウンドで実行できるようにして、バッテリーの最適化をオフにするように求めるポップアップが表示されます。通知が正しく機能するように、&lt;b>許可&lt;/ b>してください。</string>
+	<string name="button_install_update"></string>
+	<string name="legacy_migration_header"></string>
+	<string name="legacy_migration_body"></string>
+	<string name="legacy_migration_body2"></string>
+	<string name="legacy_migration_progress"></string>
+	<string name="legacy_migration_error"></string>
+	<string name="legacy_migration_contact"></string>
 </resources>
