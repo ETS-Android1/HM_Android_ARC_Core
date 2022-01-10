@@ -18,6 +18,7 @@ import com.healthymedium.arc.paths.informative.FAQScreen;
 import com.healthymedium.arc.study.ParticipantState;
 import com.healthymedium.arc.study.TestDay;
 import com.healthymedium.arc.study.TestSession;
+import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.StudyProgressView;
@@ -292,12 +293,17 @@ public class ProgressScreen extends BaseFragment {
             dayIndex--;
         }
 
+        boolean hideDayOf = false;
+
         if(isPractice){
             int sessionsFinished = testDay.getNumberOfTestsFinished();
             if(sessionsFinished>0) {
                 dayOf = new Phrase(R.string.progress_baseline_notice);
             } else {
                 dayOf = new Phrase(R.string.progress_practice_body2);
+                if (!BottomNavigationView.shouldShowEarnings) {
+                    hideDayOf = true;
+                }
             }
             weeklyStatus.setTextSize(TypedValue.COMPLEX_UNIT_DIP,17);
             ViewUtil.setLineHeight(weeklyStatus,24);
@@ -313,7 +319,11 @@ public class ProgressScreen extends BaseFragment {
             weekProgressView.setupView(startDate,dayIndex);
         }
 
-        weeklyStatus.setText(dayOf.toHtmlString());
+        if (!hideDayOf) {
+            weeklyStatus.setText(dayOf.toHtmlString());
+        } else {
+            weeklyStatus.setText(null);
+        }
 
         TextView startDate = view.findViewById(R.id.startDate);
         startDate.setText(new Phrase(R.string.progress_startdate).toHtmlString());

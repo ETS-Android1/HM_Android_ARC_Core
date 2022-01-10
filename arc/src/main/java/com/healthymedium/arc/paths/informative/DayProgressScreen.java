@@ -14,6 +14,7 @@ import com.healthymedium.arc.core.BaseFragment;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.study.Participant;
 import com.healthymedium.arc.study.ParticipantState;
+import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.ui.Button;
 import com.healthymedium.arc.ui.CircleProgressView;
 import com.healthymedium.arc.ui.base.RoundedFrameLayout;
@@ -109,6 +110,9 @@ public class DayProgressScreen extends BaseFragment {
         if(cycleIndex==0 && dayIndex==0) {
             textView.setVisibility(View.VISIBLE);
             textView.setText(Html.fromHtml(ViewUtil.getString(R.string.progress_practice_body2)));
+            if (!BottomNavigationView.shouldShowEarnings) {
+                textView.setText(null);
+            }
             textViewTestsComplete.setText(ViewUtil.getString(R.string.progress_practice_body1));
         } else {
             int id = (sessionsFinished == 1 ? R.string.progress_schedule_body1 : R.string.progress_schedule_body2);
