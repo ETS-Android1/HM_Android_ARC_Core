@@ -23,6 +23,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class BottomNavigationView extends RoundedLinearLayout {
 
+    public static boolean shouldShowEarnings = false;
+
     public static final int TAG_HOME = 0;
     public static final int TAG_PROGRESS = 1;
     public static final int TAG_EARNINGS = 2;
@@ -96,7 +98,9 @@ public class BottomNavigationView extends RoundedLinearLayout {
 
         addView(home);
         addView(progress);
-        addView(earnings);
+        if (shouldShowEarnings) {
+            addView(earnings);
+        }
         addView(resources);
 
         setPadding(0,0,0, ViewUtil.getNavBarHeight());
@@ -188,6 +192,9 @@ public class BottomNavigationView extends RoundedLinearLayout {
     }
 
     public void openEarnings() {
+        if (!shouldShowEarnings) {
+            return;
+        }
         earnings.callOnClick();
     }
 
@@ -259,6 +266,11 @@ public class BottomNavigationView extends RoundedLinearLayout {
     }
 
     public void showEarningsHint(final Activity activity) {
+        if (!shouldShowEarnings) {
+            showResourcesHint(activity);
+            return;
+        }
+
         final HintPointer earningsHint = new HintPointer(activity, earnings, true, true);
         earningsHint.setText(ViewUtil.getString(R.string.popup_tab_earnings));
 

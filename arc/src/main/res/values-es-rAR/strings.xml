@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name">ARC 2.0</string>
 	<string name="key_native_language">Argentina - Español</string>
 	<string name="notification_monthbefore">Su próxima semana de pruebas comienza en un mes, el {DATE}. Puede ajustar este horario hasta por 7 días.</string>
 	<string name="notification_weekbefore">Recordatorio: Su siguiente ciclo de pruebas comienza en una semana. Toque para confirmar o reprogramar.</string>
@@ -96,9 +97,9 @@
 	<string name="availability_changedenied_test">Vuelve a consultar después de tu prueba</string>
 	<string name="availability_changedates">Me gustaría cambiar las &lt;b>fechas&lt;/b> de mi próximo &lt;b>ciclo de prueba&lt;/b>.</string>
 	<string name="contact_call1">Me gustaría &lt;b>llamar&lt;/b> a mi coordinador del estudio.</string>
-	<string name="contact_call2"></string>
+	<string name="contact_call2">+1-314-273-7112     </string>
 	<string name="contact_email1">Me gustaría enviar un &lt;b>correo electrónico&lt;/b> a mi coordinador del estudio.</string>
-	<string name="contact_email2"></string>
+	<string name="contact_email2">neuro-dianarc@email.wustl.edu     </string>
 	<string name="about_header">Sobre esta aplicación</string>
 	<string name="about_body">La aplicación de Investigación Ambulatoría sobre la Cognición (ARC por su sigla en inglés) fue diseñada por el Laboratorio de Investigación de Tecnologías de la Cognición (CTRLab por su sigla en inglés) en el Departamento de Neurología de la Universidad de Washington en St. Louis para los participantes inscritos en los estudios la Red de Alzheimer Heredado en forma Dominante (DIAN por su sigla en inglés). La aplicación de ARC valora la cognición utilizando pruebas de cognición frecuentes pero cortas. Esta aplicación está destinada solo para el uso de los participantes inscritos en los estudios DIAN.</string>
 	<string name="faq_header">Temas de las preguntas frecuentes</string>
@@ -448,7 +449,7 @@
 	<string name="status_nonedone">¡Ninguna! ¡Ya terminó todo!</string>
 	<string name="radio_yes">Sí</string>
 	<string name="radio_no">No</string>
-	<string name="radio_0">0</string>
+	<string name="radio_0"></string>
 	<string name="radio_1">1</string>
 	<string name="radio_2">2</string>
 	<string name="radio_3">3</string>
@@ -483,4 +484,11 @@
 	<string name="battery_optimization_overview">Su teléfono tiene una configuración para ayudar a preservar la duración de la batería, y se denomina configuración de \"optimización de la batería\".&lt;br>&lt;br>La aplicación {APP_NAME} tendrá un impacto mínimo en la duración de la batería de su teléfono. Se recomienda que desactive la configuración de optimización de la batería para la aplicación {APP_NAME}. Hacer esto le ayudará a recibir las notificaciones de las pruebas a tiempo.</string>
 	<string name="battery_optimization_prompt">A continuación, aparecerá una ventana emergente que le pedirá desactivar  la optimización de la batería permitiendo que la aplicación {APP_NAME} se ejecute en segundo plano. Por favor, &lt;b> permita &lt;/b> para facilitar que sus notificaciones funcionen correctamente.</string>
 	<string name="battery_optimization_reminder">Sus notificaciones están experimentando un retraso. A continuación, aparecerá una ventana emergente que le pedirá desactivar la optimización de la batería, permitiendo que la aplicación {APP_NAME} se ejecute en segundo plano. Por favor, &lt;b> permita &lt;/b> para facilitar que sus notificaciones funcionen correctamente.</string>
+	<string name="button_install_update"></string>
+	<string name="legacy_migration_header"></string>
+	<string name="legacy_migration_body"></string>
+	<string name="legacy_migration_body2"></string>
+	<string name="legacy_migration_progress"></string>
+	<string name="legacy_migration_error"></string>
+	<string name="legacy_migration_contact"></string>
 </resources>

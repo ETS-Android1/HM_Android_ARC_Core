@@ -1,4 +1,4 @@
-package com.healthymedium.translations.common;
+package com.healthymedium.translation.common;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class LocaleResource {
 
-    private static final String LANGUAGE_KEY = "language_key";
-    private static final String COUNTRY_KEY = "country_key";
-    private static final String FILE_NAME = "strings.xml";
-    private static final String APP_NAME = "app_name";
+    public static final String LANGUAGE_KEY = "language_key";
+    public static final String COUNTRY_KEY = "country_key";
+    public static final String FILE_NAME = "strings.xml";
+    public static final String APP_NAME = "app_name";
 
     public Map<String,String> map;
     public String languageKey;
@@ -30,10 +30,6 @@ public class LocaleResource {
         if(map.containsKey(COUNTRY_KEY)) {
             countryKey = map.get(COUNTRY_KEY);
             map.remove(COUNTRY_KEY);
-        }
-
-        if(map.containsKey(APP_NAME)) {
-            map.remove(APP_NAME);
         }
 
         if(languageKey==null || countryKey==null) {

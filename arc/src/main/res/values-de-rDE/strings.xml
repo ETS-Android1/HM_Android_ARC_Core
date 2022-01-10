@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name">ARC 2.0</string>
 	<string name="key_native_language">Deutschland - Deutsche</string>
 	<string name="notification_monthbefore">Ihre nächste Woche mit Tests beginnt in einem Monat, und zwar am {DATE}. Sie können diesen Zeitplan um bis zu 7 Tage verschieben.</string>
 	<string name="notification_weekbefore">Zur Erinnerung: Ihr nächster Testzyklus beginnt in einer Woche. Tippen Sie hier, um dies zu bestätigen oder einen anderen Zeitraum festzulegen.</string>
@@ -96,9 +97,9 @@
 	<string name="availability_changedenied_test">Versuchen Sie es nach Ihrem Test erneut</string>
 	<string name="availability_changedates">Ich möchte die &lt;b>Daten&lt;/b> für meinen nächsten Testzyklus ändern.</string>
 	<string name="contact_call1">Ich möchte meinen Studienkoordinator &lt;b>anrufen&lt;/b>.</string>
-	<string name="contact_call2"></string>
+	<string name="contact_call2">+1-314-273-7112     </string>
 	<string name="contact_email1">Ich möchte meinem Studienkoordinator eine &lt;b>E-Mail&lt;/b> schicken.</string>
-	<string name="contact_email2"></string>
+	<string name="contact_email2">neuro-dianarc@email.wustl.edu     </string>
 	<string name="about_header">Über diese App</string>
 	<string name="about_body">Die App Ambulatory Research in Cognition (ARC) wurde vom Cognitive Technology Research Laboratory (CTRLab/Forschungslabor für kognitive Technologie) im Department of Neurology der Washington University (Abteilung für Neurologie der Washington-Universität) in St. Louis für Teilnehmer, die in die Studien des Netzwerks für die dominant vererbte Alzheimer-Krankheit (DIAN) aufgenommen wurden, entwickelt. Die ARC-App bewertet die Kognition mithilfe von häufig durchgeführten, jedoch kurzen, kognitiven Tests. Diese App soll ausschließlich von Teilnehmern der DIAN-Studien verwendet werden.</string>
 	<string name="faq_header">Häufig gestellte themenspezifische Fragen</string>
@@ -290,7 +291,7 @@
 	<string name="symbols_or">Oder</string>
 	<string name="symbols_complete">&lt;b>Symboltest abgeschlossen!&lt;/b></string>
 	<string name="grids_header">Raster</string>
-	<string name="grids_body">Schauen Sie sich das Raster eine Weile an und merken Sie sich, wo sich die drei Gegenstände befinden.</string>
+	<string name="grids_body">Schauen Sie sich das Raster eine Weile an und merken Sie sich, wo sich die Gegenstände befinden.</string>
 	<string name="grids_overlay1">Versuchen Sie, sich zu merken, wo die Gegenstände liegen.</string>
 	<string name="grids_overlay2">Weiter: Tippen Sie die „F“s an.</string>
 	<string name="grids_subheader_fs">Tippen Sie die „F“s an.</string>
@@ -300,7 +301,7 @@
 	<string name="grids_complete">&lt;b>Rastertest abgeschlossen!&lt;/b></string>
 	<string name="grids_vb_body">Bei dieser Aufgabe betrachten Sie 3 Gegenstände, die auf einem Raster angeordnet sind. Dann werden Sie aufgefordert, sich jeden Gegenstand und seine Position auf dem Raster zu merken.</string>
 	<string name="grids_tutorial_vb_step1">Dieser Test besteht aus drei Teilen.&lt;br>&lt;br>Im ersten Teil sehen Sie 3 Gegenstände, die auf einem Raster aus Kästchen angeordnet sind. Sie werden aufgefordert, sich &lt;b>jeden Gegenstand und seine Position auf dem Raster zu merken&lt;/b>. Ziel ist es, sich daran zu erinnern, wo jeder Gegenstand auf dem Raster platziert ist. Sie haben 3 Sekunden Zeit, um das Raster zu betrachten.</string>
-	<string name="grids_tutorial_vb_place">Platzieren Sie jeden Gegenstand in seine Position aus Teil eins.</string>
+	<string name="grids_tutorial_vb_place">Platzieren Sie jeden Gegenstand in seine Position&lt;br>aus Teil eins.</string>
 	<string name="grids_tutorial_vb_place_other">Sehr gut! Platzieren Sie nun die beiden anderen Gegenstände auf dem Raster.</string>
 	<string name="grids_tutorial_vb_change_mind">Haben Sie Ihre Meinung geändert? Wählen Sie einen anderen Gegenstand aus, den Sie ersetzen möchten, oder tippen Sie auf &lt;b>Gegenstand entfernen&lt;/b>, um ihn zu löschen.</string>
 	<string name="grids_tutorial_vb_mech1">&lt;b>Gut gemacht!&lt;/b>&lt;br>Es sieht so aus, als hätten Sie keine Hilfe bei der Platzierung benötigt, aber wir möchten sichergehen, dass wir Ihnen noch zeigen, wie man Gegenstände austauscht und entfernt, bevor Sie mit dem eigentlichen Test beginnen.</string>
@@ -405,7 +406,7 @@
 	<string name="popup_tutorial_greatjob">&lt;b>Gut gemacht!&lt;/b>\nVersuchen wir noch ein paar Tests zum Üben.</string>
 	<string name="popup_tutorial_nice">&lt;b>Gut gemacht!&lt;/b>\nNoch einer...</string>
 	<string name="popup_tutorial_grid_recall">In diesem dreiteiligen Test werden Sie aufgefordert, sich an &lt;b>die Stelle zu erinnern&lt;/b>, an der sich diese Gegenstände befinden.</string>
-	<string name="popup_tutorial_rememberbox">Die Gegenstände werden in ein Kästchenraster gelegt. &lt;b>Merken Sie sich, in welchem ​​Kästchen sich die einzelnen Gegenstände befinden.&lt;/b> Sie haben 3 Sekunden Zeit.</string>
+	<string name="popup_tutorial_rememberbox">Die Gegenstände werden in ein Kästchenraster gelegt. &lt;b>Merken Sie sich, in welchem </string>
 	<string name="popup_tutorial_ready">Ich bin bereit.</string>
 	<string name="popup_tutorial_part2">&lt;b>Großartig!&lt;/b>\nKommen wir zu Teil 2.</string>
 	<string name="popup_tutorial_tapf1">Tippen Sie auf diesen Buchstaben „F“.</string>
@@ -448,7 +449,7 @@
 	<string name="status_nonedone">Keine! Sie sind fertig!</string>
 	<string name="radio_yes">Ja</string>
 	<string name="radio_no">Nein</string>
-	<string name="radio_0">0</string>
+	<string name="radio_0"></string>
 	<string name="radio_1">1</string>
 	<string name="radio_2">2</string>
 	<string name="radio_3">3</string>
@@ -483,4 +484,11 @@
 	<string name="battery_optimization_overview">Ihr Telefon verfügt über eine Einstellung, mit der Sie die Akkulaufzeit verlängern können. Diese Einstellung wird als „Akkuoptimierung“ bezeichnet.&lt;br>&lt;br>Die {APP_NAME} App hat nur minimale Auswirkungen auf die Akkulaufzeit Ihres Telefons. Es wird empfohlen, die Batterieoptimierungseinstellung für die App {APP_NAME} zu deaktivieren. Auf diese Weise können Sie sicherstellen, dass Sie rechtzeitig Testbenachrichtigungen erhalten.</string>
 	<string name="battery_optimization_prompt">Als Nächstes wird Ihnen ein Popup-Fenster angezeigt, in dem Sie aufgefordert werden, die Batterieoptimierung zu deaktivieren, indem die App {APP_NAME} im Hintergrund ausgeführt werden darf. Bitte tippen Sie auf &lt;b> erlauben &lt;/ b>, um sicherzustellen, dass Ihre Benachrichtigungen ordnungsgemäß funktionieren.</string>
 	<string name="battery_optimization_reminder">Ihre Benachrichtigungen haben eine Verzögerung. Als Nächstes wird Ihnen ein Popup-Fenster angezeigt, in dem Sie aufgefordert werden, die Batterieoptimierung zu deaktivieren, indem die App {APP_NAME} im Hintergrund ausgeführt werden darf. Bitte tippen Sie auf &lt;b> erlauben &lt;/ b>, um sicherzustellen, dass Ihre Benachrichtigungen ordnungsgemäß funktionieren.</string>
+	<string name="button_install_update"></string>
+	<string name="legacy_migration_header"></string>
+	<string name="legacy_migration_body"></string>
+	<string name="legacy_migration_body2"></string>
+	<string name="legacy_migration_progress"></string>
+	<string name="legacy_migration_error"></string>
+	<string name="legacy_migration_contact"></string>
 </resources>

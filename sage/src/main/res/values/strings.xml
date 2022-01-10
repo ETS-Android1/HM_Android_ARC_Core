@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="osb_study_id" translatable="false">inv-arc</string>
+    <string name="osb_study_name" translatable="false">INV ARC</string>
     <string name="updating">Updating</string>
     <string name="error">Error</string>
     <string name="try_again">Try again</string>

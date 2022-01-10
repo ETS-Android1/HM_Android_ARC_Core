@@ -92,17 +92,6 @@ public class Setup2ParticipantConfirm extends Setup2Template {
                 if(!fragmentExists(path, Setup2AuthRater.class)){
                     path.fragments.add(new Setup2AuthRater(6));
                 }
-            } else if(authType.equals(AuthDetails.TYPE_CONFIRM_CODE)) {
-                if (!fragmentExists(path, Setup2Phone.class)) {
-                    Resources res = getResources();
-                    String header = res.getString(R.string.login_2FA_phone_text);
-                    Setup2Phone setup2Phone = new Setup2Phone(true,
-                            header, "", 20, regionCode);
-                    path.fragments.add(setup2Phone);
-                }
-                if (!fragmentExists(path, Setup2AuthConfirm.class)) {
-                    path.fragments.add(new Setup2AuthConfirm(authLength));
-                }
             } else if(authType.equals(AuthDetails.TYPE_MANUAL)) {
                 if(!fragmentExists(path,Setup2AuthManual.class)){
                     path.fragments.add(new Setup2AuthManual(authLength));

@@ -12,6 +12,7 @@ public class Locale {
 
     public static String COUNTRY_ARGENTINA = "AR";
     public static String COUNTRY_AUSTRALIA = "AU";
+    public static String COUNTRY_BRAZIL = "BR";
     public static String COUNTRY_CANADA = "CA";
     public static String COUNTRY_COLUMBIA = "CO";
     public static String COUNTRY_GERMANY = "DE";
@@ -25,6 +26,7 @@ public class Locale {
     public static String COUNTRY_UNITED_STATES = "US";
     public static String COUNTRY_EUROPE = "EU";
     public static String COUNTRY_JAPAN = "JP";
+    public static String COUNTRY_KOREA = "KR";
 
     public static String LANGUAGE_GERMAN = "de";
     public static String LANGUAGE_ENGLISH = "en";
@@ -32,7 +34,9 @@ public class Locale {
     public static String LANGUAGE_FRENCH = "fr";
     public static String LANGUAGE_ITALIAN = "it";
     public static String LANGUAGE_DUTCH = "nl";
+    public static String LANGUAGE_PORTUGUESE = "pt";
     public static String LANGUAGE_JAPANESE = "ja";
+    public static String LANGUAGE_KOREAN = "ko";
 
     private String country;
     private String language;

@@ -13,6 +13,7 @@ import com.healthymedium.arc.font.Fonts;
 import com.healthymedium.arc.library.R;
 import com.healthymedium.arc.misc.TransitionSet;
 import com.healthymedium.arc.navigation.NavigationManager;
+import com.healthymedium.arc.ui.BottomNavigationView;
 import com.healthymedium.arc.ui.FaqListItem;
 import com.healthymedium.arc.utilities.ViewUtil;
 
@@ -59,13 +60,17 @@ public class FAQScreen extends BaseFragment {
         });
 
         earnings = view.findViewById(R.id.earnings);
-        earnings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BaseFragment fragment = new FAQEarningsScreen();
-                NavigationManager.getInstance().open(fragment);
-            }
-        });
+        if (BottomNavigationView.shouldShowEarnings) {
+            earnings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    BaseFragment fragment = new FAQEarningsScreen();
+                    NavigationManager.getInstance().open(fragment);
+                }
+            });
+        } else {
+            earnings.setVisibility(View.GONE);
+        }
 
         technology = view.findViewById(R.id.technology);
         technology.setOnClickListener(new View.OnClickListener() {

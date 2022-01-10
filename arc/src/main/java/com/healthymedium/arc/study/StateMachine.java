@@ -931,6 +931,15 @@ public class StateMachine {
         cache.segments.add(segment);
     }
 
+    public void addPostTestProgress(){
+        List<BaseFragment> fragments = new ArrayList<>();
+
+        fragments.add(new DayProgressScreen());
+
+        PathSegment segment = new PathSegment(fragments);
+        cache.segments.add(segment);
+    }
+
     public void addCycleFinishedScreen(){
         List<BaseFragment> fragments = new ArrayList<>();
 

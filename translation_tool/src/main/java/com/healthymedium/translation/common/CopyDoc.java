@@ -1,4 +1,4 @@
-package com.healthymedium.translations.common;
+package com.healthymedium.translation.common;
 
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;

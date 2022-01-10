@@ -81,7 +81,8 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         selection = options.get((int)value);
 
         for(Locale locale : locales){
-            if(locale.getLabel().equals(selection)){
+            String languageTitle = locale.getLabel().replace("\n", "");
+            if(languageTitle.equals(selection)){
                 language = locale.getLanguage();
                 country = locale.getCountry();
                 break;
@@ -131,11 +132,11 @@ public class QuestionLanguagePreference extends QuestionRadioButtons {
         for(Locale locale : AllLocales) {
             if(hideUnsupportedLocales) {
                 if(locale.IsfullySupported()){
-                    options.add(locale.getLabel());
+                    options.add(locale.getLabel().replace("\n", ""));
                     locales.add(locale);
                 }
             } else {
-                options.add(locale.getLabel());
+                options.add(locale.getLabel().replace("\n", ""));
                 locales.add(locale);
             }
         }
