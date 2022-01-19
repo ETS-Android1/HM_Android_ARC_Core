@@ -30,7 +30,7 @@ public class Setup2LoginVerificationCode extends Setup2Template {
     public static final int DIGIT_COUNT = 9;
 
     public Setup2LoginVerificationCode() {
-        super(DIGIT_COUNT, 0, ViewUtil.getString(R.string.login_enter_2FA));
+        super(DIGIT_COUNT, 0, ViewUtil.getString(R.string.login_enter_raterID));
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
