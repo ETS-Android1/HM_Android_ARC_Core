@@ -48,7 +48,7 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
     protected TextView textViewPolicy;
 
     public Setup2LoginVerificationCodeAsian() {
-        this(true, ViewUtil.getString(R.string.login_enter_2FA),
+        this(true, ViewUtil.getString(R.string.login_enter_raterID),
                 null, 9, null);
     }
 
