@@ -453,6 +453,7 @@
                 android:layout_marginTop="29dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginRight="32dp"
+                android:gravity="center"
                 android:text="@string/button_viewfaq"
                 app:buttonTheme="light">
 
