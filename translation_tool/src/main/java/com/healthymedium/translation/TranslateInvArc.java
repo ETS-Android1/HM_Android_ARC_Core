@@ -81,6 +81,9 @@ public class TranslateInvArc {
             iOSResourceList.versions.add(language);
 
             Map<String, String> translations = localeMap.get(key);
+            // Android does not support the "app_name" translation key,
+            // as this is done in build.gradle instead
+            translations.remove(LocaleResource.APP_NAME);
             LocaleResource localeResource = new LocaleResource(translations);
 
             // A "0" is how the translation company marks a translation as
