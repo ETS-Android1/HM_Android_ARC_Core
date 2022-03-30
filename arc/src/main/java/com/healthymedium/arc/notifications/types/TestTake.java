@@ -19,6 +19,8 @@ public class TestTake extends NotificationType {
     private DateTime expirationTime;
     private String body;
 
+    public static int notification4_lastday = R.string.notification4_lastday;
+
     public TestTake(){
         super();
         id = 1;

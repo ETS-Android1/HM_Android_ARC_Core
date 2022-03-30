@@ -19,6 +19,8 @@ import com.healthymedium.arc.utilities.ViewUtil;
 
 public class AboutScreen extends BaseFragment {
 
+    public static int aboutBody = R.string.about_body;
+
     TextView textViewBack;
     TextView textViewHeader;
     TextView textViewSubHeader;
@@ -38,7 +40,7 @@ public class AboutScreen extends BaseFragment {
         textViewHeader.setTypeface(Fonts.robotoMedium);
 
         textViewSubHeader = view.findViewById(R.id.textViewSubHeader);
-        textViewSubHeader.setText(ViewUtil.getHtmlString(R.string.about_body));
+        textViewSubHeader.setText(ViewUtil.getHtmlString(aboutBody));
         textViewSubHeader.setLineSpacing(ViewUtil.dpToPx(3),1.0f);
 
         textViewBack = view.findViewById(R.id.textViewBack);

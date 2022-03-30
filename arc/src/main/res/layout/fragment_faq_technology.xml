@@ -109,13 +109,6 @@
                 <com.healthymedium.arc.ui.FaqListItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:question="@string/faq_tech_q5"
-                    app:answer="@string/faq_tech_a5"
-                    app:enableBorderBottom="true"/>
-
-                <com.healthymedium.arc.ui.FaqListItem
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     app:question="@string/faq_tech_q6"
                     app:answer="@string/faq_tech_a6"
                     app:enableBorderBottom="true"/>
