@@ -62,7 +62,8 @@ public class Locale {
         localeConfig.setLocale(new java.util.Locale(language,country));
 
         Context localeContext = context.createConfigurationContext(localeConfig);
-        String label = localeContext.getString(R.string.key_native_language);
+        String label = localeContext.getString(R.string.key_native_language)
+                .replace("\n", "");
 
         return label;
     }

@@ -27,6 +27,8 @@ import static com.healthymedium.arc.study.Study.TAG_CONTACT_INFO;
 
 public class ContactScreen extends BaseFragment {
 
+    public static int email1Text = R.string.contact_email1;
+
     String stringPhoneNumber;
     String stringEmail;
 
@@ -66,7 +68,7 @@ public class ContactScreen extends BaseFragment {
         textViewPhoneNumber.setText(stringPhoneNumber);
 
         textViewEmailHeader = view.findViewById(R.id.textViewEmailHeader);
-        textViewEmailHeader.setText(ViewUtil.getHtmlString(R.string.contact_email1));
+        textViewEmailHeader.setText(ViewUtil.getHtmlString(email1Text));
 
         textViewEmailAddress = view.findViewById(R.id.textViewEmailSubHeader);
         textViewEmailAddress.setText(stringEmail);

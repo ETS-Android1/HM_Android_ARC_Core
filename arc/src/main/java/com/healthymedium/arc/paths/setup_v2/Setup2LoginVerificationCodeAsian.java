@@ -47,8 +47,10 @@ public class Setup2LoginVerificationCodeAsian extends QuestionTemplate {
     protected TextView textViewPolicyLink;
     protected TextView textViewPolicy;
 
+    public static int titleText = R.string.login_enter_raterID;
+
     public Setup2LoginVerificationCodeAsian() {
-        this(true, ViewUtil.getString(R.string.login_enter_raterID),
+        this(true, ViewUtil.getString(titleText),
                 null, 9, null);
     }
 

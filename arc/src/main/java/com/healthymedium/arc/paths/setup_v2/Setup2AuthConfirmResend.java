@@ -86,7 +86,9 @@ public class Setup2AuthConfirmResend extends BaseFragment {
         textViewProblems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FAQAnswerScreen helpScreen = new FAQAnswerScreen(ViewUtil.getString(R.string.faq_tech_q5), ViewUtil.getString(R.string.faq_tech_a5));
+                FAQAnswerScreen helpScreen = new FAQAnswerScreen(
+                        ViewUtil.getString(R.string.faq_tech_q5),
+                        ViewUtil.getString(R.string.faq_tech_a5));
                 NavigationManager.getInstance().open(helpScreen);
             }
         });

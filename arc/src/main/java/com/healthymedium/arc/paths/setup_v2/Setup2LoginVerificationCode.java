@@ -29,8 +29,10 @@ public class Setup2LoginVerificationCode extends Setup2Template {
 
     public static final int DIGIT_COUNT = 9;
 
+    public static int titleText = R.string.login_enter_raterID;
+
     public Setup2LoginVerificationCode() {
-        super(DIGIT_COUNT, 0, ViewUtil.getString(R.string.login_enter_raterID));
+        super(DIGIT_COUNT, 0, ViewUtil.getString(titleText));
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

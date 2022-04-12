@@ -20,8 +20,10 @@ import com.healthymedium.arc.utilities.ViewUtil;
 @SuppressLint("ValidFragment")
 public class Setup2AuthRater extends Setup2Template {
 
+    public static int titleText = R.string.login_enter_raterID;
+
     public Setup2AuthRater(int digitCount) {
-        super(digitCount,0, ViewUtil.getString(R.string.login_enter_raterID));
+        super(digitCount,0, ViewUtil.getString(titleText));
         setTransitionSet(TransitionSet.getSlidingDefault());
     }
 
